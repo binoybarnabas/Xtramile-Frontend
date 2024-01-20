@@ -1,1 +1,46 @@
-<p>req-general-info works!</p>
+
+<div class="container">
+    <div class="box left_box">
+      <!-- Content for the first box goes here -->
+      <div class="flex_container">
+            <a class="link" *ngFor="let list of SublistData">
+                {{list}}
+            </a>
+      </div>
+    </div>
+
+   <div class="vertical_line mt-6">
+   </div>
+    
+        <div class="box right_box">
+            <h4>General information</h4>
+            <p>This is the basic information about you</p>
+            <div class="container mt-5 ">
+                <form>
+                <div class="row">
+                    <!-- First Column -->
+                    <div class="col-md-6" >
+                        <div class="mb-3" *ngFor="let item of LeftTextFields;">
+                            <label for={{item}} class="form-label">{{item}}</label>
+                            <input type="text" class="form-control" id="field1" name="field1" required>
+                        </div>
+                    <!-- Repeat for fields 2, 3, 4 -->
+                    </div>
+            
+                    <!-- Second Column -->
+                    <div class="col-md-6">
+                    <div class="mb-3" *ngFor="let item of RightTextFields;">
+                        <label for={{item}} class="form-label">{{item}}</label>
+                        <input type="text" class="form-control" id="field5" name="field1" required>
+                    </div>
+                    <!-- Repeat for fields 6, 7, 8 -->
+                    </div>
+                </div>
+            
+                <div class="text-end mt-6">
+                    <button type="submit" class="btn btn-primary">Next</button>
+                </div>
+                </form>
+            </div>
+        </div>
+ 

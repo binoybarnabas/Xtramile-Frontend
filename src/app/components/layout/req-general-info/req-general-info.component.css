@@ -1,0 +1,59 @@
+.container {
+    display: flex; /* Use flexbox */
+    justify-content:flex-start; /* Distribute space between items */
+    width:fit-content;
+}
+
+  .box {
+    width: 48%; /* Set a width for each box to leave some space between them */
+    height:70vh;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+
+  .left_box{
+    display:flex;
+    align-items:first baseline;
+    justify-content: center;
+    margin-top:3rem; 
+    flex:0.7;
+  }
+  .right_box{
+    flex:2;
+  }
+
+  .flex_container{
+    display: flex;
+    flex-direction: column; 
+  }
+  
+
+  ._trip_info{
+    display: flex;
+    /* background-color: red; */
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  ._trip_info_left{
+    display: flex;
+    flex-direction: column;
+    flex:0.5;
+  }
+  ._trip_info_right{
+    display: flex;
+    flex-direction: column;
+    flex:0.5;
+  }
+
+  .vertical_line{
+    height:50vh;
+    width: 1px;
+    margin-top: 10vh; 
+    border: 1px solid black;
+  }
+
+  .link{
+    text-decoration: none;
+    padding-top:1rem;
+  }
