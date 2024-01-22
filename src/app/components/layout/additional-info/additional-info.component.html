@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <!-- First Column -->
+        <div class="col-12">
+            <p class="h5">Additional information Information</p>
+            <p class="lead">
+                Please provide some additional information
+            </p>
+        </div>
+        <div class="col-md-6 form-column">
+            <form>
+                <div class="form-group mt-3">
+                    <label for="cab">Do you want cab service?</label>
+                    <input type="text" class="form-control" id="cab">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="cab">Preferred time of departure</label>
+                    <timepicker [(ngModel)]="mytime"></timepicker>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Second Column -->
+        <div class="col-md-6 form-column">
+            <form>
+                <div class="form-group mt-3">
+                    <label for="cab">Hotel Accomodation?</label>
+                    <input type="text" class="form-control" id="cab">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="travelreason">Reason for travel</label>
+                    <input type="text" class="form-control" id="travelreason">
+                </div>
+            </form>
+        </div>
+
+        <div class="col-12">
+                <label for="exampleTextarea">Comments:</label>
+                <textarea class="form-control" id="exampleTextarea" rows="4"></textarea>
+        </div>
+        <div class="d-flex justify-content-end pt-4">
+            <button type="button" class="btn btn-info custom-width-btn">Next</button>
+        </div>
+    </div>
+</div>

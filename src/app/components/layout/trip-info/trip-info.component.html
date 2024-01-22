@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="row">
+        <!-- First Column -->
+        <div class="col-12">
+            <p class="h6">General Information</p>
+            <p class="lead">
+                This is your peronal information
+            </p>
+        </div>
+        <div class="col-md-6 form-column">
+            <form>
+                <div class="form-group mt-3" >
+                    <p class="h6">Trip Information</p>
+                    <p class="lead pt-1">
+                        Add the details about your trip
+                    </p>
+                </div>
+
+                <div class="form-group mt-3" >
+                    <label for="departure">Departure Date</label>
+                    <input type="text"
+                        placeholder="Pick the date"
+                        class="form-control"
+                        bsDatepicker
+                        [bsConfig]="{ isAnimated: true }">
+                </div>
+
+                <div class="form-group mt-3" >
+                    <span class="badge text-bg-info">Source</span>
+                </div>
+
+                <div class="form-group mt-3" >
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city">
+                </div>
+                <div class="form-group mt-3" >
+                    <label for="state">State</label>
+                    <input type="text" class="form-control" id="stae">
+                </div>
+                <div class="form-group mt-3" >
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" id="country">
+                </div>
+            </form>
+        </div>
+
+        <!-- Second Column -->
+        <div class="col-md-6 form-column">
+            <form>
+                <div class="form-group mt-3" >
+                    <label for="return">Trip type</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Domestic</option>
+                        <option value="1">International</option>
+                      </select>
+                </div>
+
+                <div class="form-group mt-3" >
+                    <label for="return">Return Date</label>
+                    <input type="text"
+                        placeholder="Pick the date"
+                        class="form-control"
+                        bsDatepicker
+                        [bsConfig]="{ isAnimated: true }">
+                    </div>
+
+                <div class="form-group mt-3" >
+                    <span class="badge text-bg-info">Destination</span>
+                </div>
+                
+                <div class="form-group mt-3" >
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city">
+                </div>
+                <div class="form-group mt-3" >
+                    <label for="state">State</label>
+                    <input type="text" class="form-control" id="stae">
+                </div>
+                <div class="form-group mt-3" >
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" id="country">
+                </div>
+            </form>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-info custom-width-btn">Next</button>
+        </div>
+    </div>
+</div>
