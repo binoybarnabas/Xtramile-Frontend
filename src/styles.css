@@ -1,6 +1,118 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-:root {
+/* :root {
     --primary-color: #3498db;
     --secondary-color: #2ecc71;
     --accent-color: #e74c3c;
-  }
+  } */
+
+
+
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+/* To be Tested */
+:root {
+
+  /*========Main theme colors========*/
+  --first-color: #4F80E1;
+  --second-color: #0240BC;
+  --third-color: #9A4CFA;
+
+  /*==========Menu Item Colors======*/
+  --bullet-color: #171717;
+  --danger-color: #FF5053;
+  --success-color: #2ECC8C;
+  --warning-color: #FFD71D;
+
+  /*=========== Text Colors ==============*/
+  --primary-text-color: #000000;
+  --secondary-text-color: #222222;
+  --ternary-text-color: #8F8F8F;
+
+  /*============ Status ============Colors */
+  --primary-orange-color: #F86624;
+  --secondary-orange-color: #FFF0EA;
+  --primary-cyan-color: #2BB2FE;
+  --secondary-cyan-color: #EAF8FF;
+  --primary-green-color: #008951;
+  --secondary-green-color: #78ecbc;
+  --primary-blue-color: #0240BC;
+  --secondary-blue-color: #b8cffd;
+
+  /*========Hover colors========*/
+  --menu-hover-color: rgb(199, 203, 209)1;
+  --primary-btn-hover-color: #0b53e4;
+  --danger-btn-hover-color: #fc1f1f;
+
+  /*========Background colors========*/
+  --body-bg-color: #d8d6d6;
+  --card-bg-color: #fff;
+  --modal-bg-color: #fff;
+  --table-header-color: #fff;
+  --bg-transparent-color: rgba(0, 0, 0, 0.1);
+  --transparent-color-01: rgba(0, 0, 0, 0.1);
+  --transparent-color-02: rgba(106, 89, 209, 0.1);
+  --line-color: #aaa9a9;
+
+  /*========Color Filter========*/
+  --color-filter: invert(1);
+
+  /*========Box shadow========*/
+  --box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
+
+  /*========Font size========*/
+  --small-font-size: 0.9em;
+  --normal-font-size: 1em;
+  --medium-font-size: 1.5em;
+
+
+
+
+
+
+
+
+  /*========Scroll bar colors========*/
+  --scroll-bar-color: #c5cadf;
+  --scroll-thumb-color: #70768a;
+  --scroll-thumb-hover-color: #454f6b;
+
+  /*========Scroll bar colors========*/
+  --scroll-bar-color: #ffffff;
+  --scroll-thumb-color: rgb(60, 7, 174);
+  --scroll-thumb-hover-color: #454f6b;
+
+}
+
+/*========Scroll bar========*/
+::-webkit-scrollbar {
+  width: 5px;
+  background: var(--scroll-bar-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb-color);
+  border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scroll-thumb-hover-color);
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--body-bg-color);
+
+}

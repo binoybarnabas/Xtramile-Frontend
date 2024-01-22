@@ -1,0 +1,130 @@
+.top_bar_container {
+
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--card-bg-color);
+    padding: 0.5rem 2.3rem;
+    position: fixed;
+    width: 100%;
+    /* flex-wrap: wrap; */
+
+}
+
+
+.top_bar_container .left_section {
+    /* margin-left: 15rem; */
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 3%;
+    display: flex;
+}
+
+.top_bar_container .left_section .top_bar_logo_container {
+    margin-right: 8rem;
+    margin-left: 2.4rem;
+}
+
+
+
+.top_bar_container .left_section .top_bar_logo_container {
+    font-size: 1.2rem;
+}
+
+.top_bar_container .left_section .top_bar_logo_container .top_bar_logo i {
+    color: var(--first-color);
+
+}
+
+
+.top_bar_container .left_section .search_bar .text_box {
+
+
+    background-color: var(--body-bg-color);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    padding-left: 2rem;
+    border: transparent;
+    width: 20rem;
+    position: relative;
+    outline: none;
+}
+
+.top_bar_container .left_section .search_bar .icon {
+    position: absolute;
+    z-index: 999;
+    margin-left: 0.8rem;
+    margin-top: 0.7rem;
+    color: var(--ternary-text-color);
+    /* left: 5px; */
+
+}
+
+
+.top_bar_container .right_section {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.top_bar_container .right_section .calendar_section {
+    display: flex;
+    margin-right: 5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 530;
+    font-size: 0.9rem;
+}
+
+
+.top_bar_container .right_section .calendar_section .notification {
+    color: var(--second-color);
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 0.9rem;
+    font-size: 1.3rem;
+    transition: transform 0.3s;
+
+}
+
+
+.top_bar_container .right_section .calendar_section .notification:hover {
+    transform: rotate(-180deg);
+    color: var(--danger-color);
+
+}
+
+
+.top_bar_container .right_section .profile_info {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 1rem;
+    text-align: end;
+}
+
+.top_bar_container .right_section .profile_info .name {
+    font-size: 0.9rem;
+    font-weight: 550;
+}
+
+.top_bar_container .right_section .profile_info .designation {
+
+    font-size: 0.7rem;
+    color: var(--ternary-text-color);
+
+}
+
+.top_bar_container .right_section .profile_photo .profile_img {
+    width: 3.1rem;
+    height: 3.1rem;
+    border-radius: 50%;
+    flex-wrap: wrap;
+    border: 2px solid var(--second-color);
+    transition: 0.3s;
+
+}
+
+.top_bar_container .right_section .profile_photo .profile_img:hover {
+
+    border: 2px dashed var(--danger-color);
+
+}
