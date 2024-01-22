@@ -1,0 +1,10 @@
+.container {
+    margin-top: 50px;
+}
+
+.form-column {
+    margin-bottom: 20px;
+}
+.custom-width-btn {
+    width: 5rem; /* Set your desired width */
+}

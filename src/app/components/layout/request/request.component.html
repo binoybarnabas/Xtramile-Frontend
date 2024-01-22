@@ -1,0 +1,16 @@
+<div class="row col-11">
+  <!-- d-flex flex-row justify-content-end : for the below tag if needed to flex-->
+    <div class="col-3 nav_bar">
+        <ul class="nav flex-column">
+            <li class="nav-item" *ngFor="let item of SublistData; let i = index">
+              <a class="nav-link active" [routerLink]="EmployeeRequestRoutes[i]" aria-current="page" href="#">{{item}}</a>
+            </li>
+          </ul>          
+    </div>
+
+    <div class="col-1 vertical-line"></div>
+
+    <div class="col-6">     
+        <router-outlet></router-outlet>
+    </div>
+</div>
