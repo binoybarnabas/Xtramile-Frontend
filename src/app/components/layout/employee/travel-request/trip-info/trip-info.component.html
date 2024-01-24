@@ -22,7 +22,9 @@
                         placeholder="Pick the date"
                         class="form-control"
                         bsDatepicker
-                        [bsConfig]="{ isAnimated: true }">
+                        [bsConfig]="{ isAnimated: true }"
+                        #departure_date
+                        >
                 </div>
 
                 <div class="form-group mt-3" >
@@ -31,25 +33,25 @@
 
                 <div class="form-group mt-3" >
                     <label for="city">City</label>
-                    <input type="text" class="form-control" id="city">
+                    <input type="text" class="form-control" id="city" #source_city>
                 </div>
                 <div class="form-group mt-3" >
                     <label for="state">State</label>
-                    <input type="text" class="form-control" id="stae">
+                    <input type="text" class="form-control" id="stae" #source_state>
                 </div>
                 <div class="form-group mt-3" >
                     <label for="country">Country</label>
-                    <input type="text" class="form-control" id="country">
+                    <input type="text" class="form-control" id="country" #source_country>
                 </div>
             </form>
         </div>
 
         <!-- Second Column -->
         <div class="col-md-6 form-column">
-            <form>
+            <form >
                 <div class="form-group mt-3" >
                     <label for="return">Trip type</label>
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="Default select example" #trip_type>
                         <option selected>Domestic</option>
                         <option value="1">International</option>
                       </select>
@@ -61,7 +63,7 @@
                         placeholder="Pick the date"
                         class="form-control"
                         bsDatepicker
-                        [bsConfig]="{ isAnimated: true }">
+                        [bsConfig]="{ isAnimated: true }" #return_date>
                     </div>
 
                 <div class="form-group mt-3" >
@@ -70,21 +72,21 @@
                 
                 <div class="form-group mt-3" >
                     <label for="city">City</label>
-                    <input type="text" class="form-control" id="city">
+                    <input type="text" class="form-control" id="city" #destination_city>
                 </div>
                 <div class="form-group mt-3" >
                     <label for="state">State</label>
-                    <input type="text" class="form-control" id="stae">
+                    <input type="text" class="form-control" id="stae" #destination_city>
                 </div>
                 <div class="form-group mt-3" >
                     <label for="country">Country</label>
-                    <input type="text" class="form-control" id="country">
+                    <input type="text" class="form-control" id="country" #destination_country>
                 </div>
             </form>
         </div>
 
         <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-info custom-width-btn">Next</button>
+            <button type="button" class="btn btn-info custom-width-btn"> Next</button>
         </div>
     </div>
 </div>
