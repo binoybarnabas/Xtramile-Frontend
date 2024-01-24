@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SideNavBarService } from '../../../../services/layoutServices/side-nav-bar.service';
+import { SideNavBarService } from '../../../../../services/layoutServices/side-nav-bar.service';
 
 
 @Component({

@@ -1,0 +1,283 @@
+.middle_console_container {
+
+    position: absolute;
+    background-color: var(--card-bg-color);
+    width: 78%;
+    /* width: 100%; */
+    height: 81vh;
+    margin-left: 21%;
+    margin-top: 16vh;
+    border-radius: 10px;
+    z-index: -100;
+
+}
+
+
+
+
+.middle_console_container .main_heading_section {
+    padding: 1rem 1rem 0.5rem 1rem;
+    border-bottom: 2px solid var(--third-color);
+    border-top: 3px solid var(--third-color);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.middle_console_container .main_heading_section .main_heading {
+    font-size: 1.4rem;
+    font-weight: 550;
+}
+
+
+.middle_console_container .main_heading_section .btn_container {
+    display: flex;
+    font-size: 0.9rem;
+}
+
+.middle_console_container .main_heading_section .btn_container .prev_btn {
+    width: 6rem;
+    height: 2.4rem;
+
+    /* height: 2rem; */
+    color: var(--third-color);
+    border: 2px solid var(--third-color);
+    border-radius: 6px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 10px;
+}
+
+
+.middle_console_container .main_heading_section .btn_container .next_btn {
+    width: 6rem;
+    height: 2.4rem;
+    /* height: 2rem; */
+    color: var(--card-bg-color);
+    background-color: var(--third-color);
+    border-radius: 6px;
+    /* padding: 0.4rem 1.7rem; */
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.middle_console_container .main_heading_section .btn_container .prev_btn:hover {
+    cursor: pointer;
+}
+
+.middle_console_container .main_heading_section .btn_container .next_btn:hover {
+    cursor: pointer;
+}
+
+
+.middle_console_container .body_section {
+
+    background-color: var(--card-bg-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle_console_container .body_section .left_section {
+    width: 20%;
+    height: max-content;
+    padding: 1rem;
+}
+
+.middle_console_container .body_section .left_section .nav_items {
+    list-style: none;
+}
+
+
+.middle_console_container .body_section .left_section .nav_items .list_item {
+    margin: 5px;
+    padding: 5px;
+
+    font-size: 0.9rem;
+
+
+
+
+}
+
+.middle_console_container .body_section .left_section .nav_items .list_item:hover {
+    background-color: var(--menu-hover-color);
+    border-radius: 5px;
+    color: var(--second-color);
+    cursor: pointer;
+}
+
+
+.middle_console_container .body_section .right_section {
+    width: 80%;
+    padding: 1rem;
+    border-left: 1.5px dashed var(--ternary-text-color);
+
+}
+
+/* .middle_console_container .body_section .right_section .form_container {
+    border-radius: 6px;
+} */
+
+
+.middle_console_container .body_section .right_section .form_container {
+
+    border-radius: 0 0 6px 6px;
+    padding: 1.5rem;
+    box-shadow: rgba(0, 0, 0.15, 0.15) 2.95px 2.95px 2.6px;
+
+
+}
+
+.no_display {
+    display: none;
+}
+
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .general_info .form_title {
+    /* background-color: var(--menu-hover-color); */
+    border-radius: 6px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding-bottom: 8px;
+    border-radius: 6px 6px 0 0;
+    position: relative;
+
+}
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .general_info .form_title h4 {
+    font-size: 1.2rem;
+    color: var(--second-color);
+    border-bottom: 1.5px solid var(--ternary-text-color);
+
+}
+
+
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .general_info .form_title .navigators {
+    position: absolute;
+    right: 0;
+}
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .general_info .form_title .navigators i {
+    padding: 5px;
+    background-color: var(--card-bg-color);
+    margin: 5px;
+    border-radius: 10%;
+    color: var(--second-color);
+    font-size: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 5px;
+    transition: 0.3s;
+}
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .general_info .form_title .navigators i:hover {
+    cursor: pointer;
+    background-color: var(--second-color);
+    color: var(--card-bg-color);
+
+}
+
+
+
+
+
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .general_info .form_elements {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 15px;
+    grid-column-gap: 15px;
+    font-size: 0.8rem;
+}
+
+.middle_console_container .body_section .right_section .form_container .new_req_form {
+    /* max-width: 400px; */
+    margin: auto;
+}
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .form_error {
+    color: var(--danger-color);
+    font-size: 0.6rem;
+}
+
+
+
+
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .form_input {
+    width: 100%;
+    padding: 8px;
+    /* margin-bottom: 10px; */
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 2px solid var(--menu-hover-color);
+    outline: none;
+
+}
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .form_input:disabled {
+    cursor: not-allowed;
+    /* border: 2px solid var(--danger-color); */
+}
+
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .form_error {
+    color: red;
+    font-size: 12px;
+}
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .form_submit_container {
+
+    position: relative;
+
+}
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .form_submit_container .btn_container {
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .form_submit_container .btn_container .cancel_btn {
+
+    width: 6rem;
+    height: 2.4rem;
+    color: var(--second-color);
+    border: 2px solid var(--second-color);
+    border-radius: 6px;
+    background-color: var(--card-bg-color);
+
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 10px;
+
+
+}
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .form_submit_container .btn_container .submit_btn {
+
+    width: 6rem;
+    height: 2.4rem;
+    color: var(--card-bg-color);
+    background-color: var(--second-color);
+    border-radius: 6px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.middle_console_container .body_section .right_section .form_container .new_req_form .form_submit_container .btn_container .submit_btn:disabled:hover {
+    background-color: #ff0000;
+    cursor: not-allowed;
+}
