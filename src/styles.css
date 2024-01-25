@@ -72,8 +72,6 @@
 
 
 
-
-
   /*========Scroll bar colors========*/
   --scroll-bar-color: #c5cadf;
   --scroll-thumb-color: #70768a;
@@ -100,6 +98,8 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--scroll-thumb-hover-color);
 }
+
+
 
 
 html {

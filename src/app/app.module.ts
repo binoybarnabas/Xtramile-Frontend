@@ -14,6 +14,7 @@ import { SideNavBarComponent } from './components/layout/employee/employee-home/
 import { TopBarComponent } from './components/layout/employee/employee-home/top-bar/top-bar.component';
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
+import { NewTravelRequestComponent } from './features/employee/myRequests/new-travel-request/new-travel-request.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { EmployeeHomeComponent } from './components/layout/employee/employee-hom
     TopBarComponent,
     MiddleConsoleComponent,
     EmployeeHomeComponent,
+    NewTravelRequestComponent,
 
   ],
   imports: [
