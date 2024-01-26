@@ -15,6 +15,9 @@ export class MiddleConsoleComponent {
   isSideNavBarOpen: any;
   newReqFormSubMenuValue: number;
 
+  //main heading of middle console 
+  mainHeading = "New Travel Request"
+
   constructor(private sideNavBarService: SideNavBarService) {
     this.newReqFormSubMenuValue = 1;
   }

@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-// import { SideNavBarComponent } from '../side-nav-bar/side-nav-bar.component';
-import { SideNavBarService } from '../../../../../services/employeeServices/layoutServices/side-nav-bar.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -13,11 +11,9 @@ import { SideNavBarService } from '../../../../../services/employeeServices/layo
 export class TopBarComponent {
 
 
-  constructor(private sideNavBarService: SideNavBarService) {
+  constructor() {
 
   }
-
-
 
 
 }

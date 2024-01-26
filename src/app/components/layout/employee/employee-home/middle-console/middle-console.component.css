@@ -4,12 +4,14 @@
     background-color: var(--card-bg-color);
     width: 78%;
     /* width: 100%; */
-    height: 81vh;
+    /* sus */
+    height: 97vh;
+    /* max-height: fit-content; */
     margin-left: 21%;
-    margin-top: 16vh;
-    border-radius: 10px;
+    margin-top: 13vh;
+    border-radius: 6px;
     z-index: -100;
-    box-shadow: rgba(0, 0, 0, 0.35) 3px 3px 3px;
+    /* box-shadow: rgba(0, 0, 0, 0.35) 3px 3px 3px; */
     transition: 0.6s;
 
 }
@@ -21,28 +23,23 @@
 }
 
 
-
 .middle_console_container .main_heading_section {
     padding: 1rem 1rem 0.5rem 1rem;
-    border-bottom: 2px solid var(--ternary-text-color);
-    /* border-top: 3px solid var(--ternary-text-color); */
-    border-radius: 10px 10px 0 0;
-    display: flex;
-    justify-content: space-between;
+    border-bottom: 2.5px solid var(--body-bg-color);
+    /* border-top: 3px solid var(--first-color); */
+    border-radius: 5px 5px 0 0;
 }
 
 
 .middle_console_container .main_heading_section .main_heading {
-    font-size: 1.4rem;
-    font-weight: 550;
+    font-size: var(--h4-font-size);
+    font-weight: var(--extra-font-weight);
 }
 
 
 
 .middle_console_container .body_section {
     background-color: var(--card-bg-color);
-    display: flex;
-    justify-content: space-between;
     transition: 0.6s;
 }
 

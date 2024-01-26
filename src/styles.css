@@ -1,11 +1,4 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-/* :root {
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
-    --accent-color: #e74c3c;
-  } */
-
-
 
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
@@ -24,6 +17,7 @@
   --danger-color: #FF5053;
   --success-color: #2ECC8C;
   --warning-color: #FFD71D;
+  --error-color: #eb1c1c;
 
   /*=========== Text Colors ==============*/
   --primary-text-color: #000000;
@@ -47,7 +41,7 @@
   --danger-btn-hover-color: #fc1f1f;
 
   /*========Background colors========*/
-  --body-bg-color: #d8d6d6;
+  --body-bg-color: #F6F8FF;
   --card-bg-color: #fff;
   --modal-bg-color: #fff;
   --table-header-color: #fff;
@@ -63,13 +57,48 @@
   --box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
 
   /*========Font size========*/
+  --extra-small-font-size: 0.7rem;
+
+  --form-label-font-size: 0.8em;
+
   --small-font-size: 0.9em;
   --normal-font-size: 1em;
-  --medium-font-size: 1.5em;
+  --medium-font-size: 1.2em;
+  --large-font-size: 1.4em;
+  --extra-large-font-size: 1.6em;
+
+  --h2-font-size: 1.3em;
+  --h3-font-size: 1.5em;
+  --h4-font-size: 1.28em;
+  --p-font-size: 0.9em;
+  --span-font-size: 0.8em;
+
+
+  /*========Font Weight========*/
+  --light-font-weight: 450;
+  --normal-font-weight: 500;
+  --active-font-weight: 520;
+  --extra-font-weight: 550;
+
+
+  /*========Border Radius========*/
+  --extra-small-border-radius: 5px;
+  --small-border-radius: 6px;
+  --medium-border-radius: 8px;
+  --normal-border-radius: 10px;
+  --large-border-radius: 12px;
+  --extra-large-border-radius: 15px;
+  --circular-border-radius: 50%;
 
 
 
+  /*========Button Properties========*/
+  --normal-button-width: 6rem;
+  --normal-button-height: 2.4rem;
+  --normal-button-border-size: 2px;
 
+
+  --normal-form-input-border-size: 1.8px;
 
 
   /*========Scroll bar colors========*/
@@ -81,6 +110,9 @@
   --scroll-bar-color: #ffffff;
   --scroll-thumb-color: rgb(60, 7, 174);
   --scroll-thumb-hover-color: #454f6b;
+
+
+
 
 }
 
