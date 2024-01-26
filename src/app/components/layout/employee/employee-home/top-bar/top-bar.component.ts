@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 // import { SideNavBarComponent } from '../side-nav-bar/side-nav-bar.component';
-import { SideNavBarService } from '../../../../services/layoutServices/side-nav-bar.service';
+import { SideNavBarService } from '../../../../../services/employeeServices/layoutServices/side-nav-bar.service';
 
 @Component({
   selector: 'app-top-bar',

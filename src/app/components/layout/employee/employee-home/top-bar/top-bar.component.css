@@ -15,13 +15,13 @@
     /* margin-left: 15rem; */
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 3%;
+    margin-left: 2.7%;
     display: flex;
 }
 
 .top_bar_container .left_section .top_bar_logo_container {
     margin-right: 8rem;
-    margin-left: 2.4rem;
+    margin-left: 2.1rem;
 }
 
 
@@ -41,7 +41,7 @@
 
     background-color: var(--body-bg-color);
     border-radius: 6px;
-    padding: 0.8rem 1rem;
+    padding: 0.6rem 1rem;
     padding-left: 2rem;
     border: transparent;
     width: 20rem;
@@ -69,10 +69,16 @@
 .top_bar_container .right_section .calendar_section {
     display: flex;
     margin-right: 5rem;
-    margin-top: auto;
-    margin-bottom: auto;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: auto; */
+    /* margin-bottom: auto; */
     font-weight: 530;
     font-size: 0.9rem;
+}
+
+.top_bar_container .right_section .calendar_section .date {
+    margin-bottom: 0;
 }
 
 
@@ -104,6 +110,7 @@
 .top_bar_container .right_section .profile_info .name {
     font-size: 0.9rem;
     font-weight: 550;
+    margin-bottom: 0;
 }
 
 .top_bar_container .right_section .profile_info .designation {
