@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
+import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
+import { EmployeeDetail } from './request';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -8,36 +10,52 @@ import { SideNavBarService } from 'src/app/services/employeeServices/layoutServi
   styleUrls: ['./new-travel-request.component.css']
 })
 export class NewTravelRequestComponent {
+  //Employee id
+  empId : number = 15
+  //Employee details from api
+  employeeDetail?: EmployeeDetail
 
   isSideNavBarOpen: any;
   newReqFormSubMenuValue: number;
 
   leftSectionNavItems = ["General Informations", "Trip Informations", "Additional Informations"];
 
-  constructor(private sideNavBarService: SideNavBarService) {
+  constructor(private sideNavBarService: SideNavBarService,private requestService:RequestService) {
     this.newReqFormSubMenuValue = 0;
 
   }
 
-
   //sus
   ngDoCheck() {
+
     this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
+
+
+    this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarOpen;
 
   }
 
   changeNewReqFormSubMenuValue(value: number) {
     this.newReqFormSubMenuValue = value;
-  }
+  }  
 
 
   form!: FormGroup;
 
 
   ngOnInit() {
+   
+    // debugger;
+    this.requestService.getEmployeeDataById(this.empId).subscribe({
+      next:(data)=>{
+      this.employeeDetail = data;
+      console.log(this.employeeDetail)},
+      error:(error:Error)=>{console.log("problems in fetching data")},
+      complete:()=>{console.log("get employee by id is done")}
+    });
+
 
     this.form = new FormGroup({
-
       // phone: new FormControl('', Validators.required),
 
       //Trip Info
