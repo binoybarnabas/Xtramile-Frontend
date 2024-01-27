@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class SideNavBarService {
 
   isSideNavBarOpen: any;
+  
   constructor() {
     this.isSideNavBarOpen = 1;
   }
