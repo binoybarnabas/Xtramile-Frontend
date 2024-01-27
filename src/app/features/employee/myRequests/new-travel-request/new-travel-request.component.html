@@ -1,46 +1,30 @@
 <div class="req_forms_main_container">
 
-
     <div class="left_section">
     
-    <div class="nav_items">
+        <div class="nav_items">
 
-        <li (click) = "changeNewReqFormSubMenuValue(1)" [ngClass]="newReqFormSubMenuValue !== 1 ? 'list_item': 'list_item active' ">General Informations</li>
-        <li (click) = "changeNewReqFormSubMenuValue(2)" [ngClass]="newReqFormSubMenuValue !== 2 ? 'list_item': 'list_item active' ">Trip Informations</li>
-        <li (click) = "changeNewReqFormSubMenuValue(3)" [ngClass]="newReqFormSubMenuValue !== 3 ? 'list_item': 'list_item active' ">Additional Informations</li>
+            <ng-container *ngFor="let item of leftSectionNavItems;
+                let i = index">
 
-        <!-- <li (click) = "changeNewReqFormSubMenuValue(1)" class="list_item active">General Informations</li> -->
-        <!-- <li (click) = "changeNewReqFormSubMenuValue(2)" class="list_item">Trip Informations</li> -->
-        <!-- <li (click) = "changeNewReqFormSubMenuValue(3)" class="list_item">Additional Informations</li> -->
-    </div>
+                <li (click) = "changeNewReqFormSubMenuValue(i)" [ngClass]="newReqFormSubMenuValue !== i ? 'list_item': 'list_item active' ">{{item}}</li>
+            </ng-container>
+
+        </div>
 
     </div>
 
     <div class="right_section">
     
-
-
-    <div class="form_container">
-
-        <!-- <div class="form_heading">
-            <h4>General Informations</h4>
-        </div> -->
-
-        <!-- <div class="form_body"> -->
+        <div class="form_container">
 
             <form (ngSubmit) = "onSubmit()" [formGroup]="form" class="new_req_form">
 
-            
-                <div *ngIf="newReqFormSubMenuValue === 1" class="general_info" >
+                <!-- general info section -->
+                <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group" >
 
                     <div class="form_title">
                         <h4>General Informations</h4>
-
-                        <div class="navigators">
-                            <!-- <i (click) = "changeNewReqFormSubMenuValue(2)" class="ri-arrow-right-circle-line"></i> -->
-                            <span  (click) = "changeNewReqFormSubMenuValue(2)" class="next_btn">Next</span>
-                        </div>
-
                     </div>
 
                     <div class="form_elements">
@@ -48,19 +32,19 @@
                         <div class="form_input_container">
                             <label for="firstName">First Name</label>
                             <input class="form_input" type="text" disabled value="Abhijit" />
-                            <input  type="hidden"  value="Abhijit" />
+                            <!-- <input  type="hidden" value="Abhijit" /> -->
                         </div>
 
                         <div class="form_input_container">
                             <label for="lastName">Last Name</label>
                             <input class="form_input" type="text" disabled value="Thankachan" />
-                            <input  type="hidden" value="Thankachan" />
+                            <!-- <input  type="hidden" value="Thankachan" /> -->
                         </div>
 
                         <div class="form_input_container">
                             <label for="email">Email</label>
                             <input class="form_input" type="email" disabled value="abhijit.thankchan.@experionglobal.com" />
-                            <input  type="hidden" value="abhijit.thankchan@gmail.com" />
+                            <!-- <input  type="hidden" value="abhijit.thankchan@gmail.com" /> -->
 
                         </div>
 
@@ -72,56 +56,62 @@
                         <div class="form_input_container">
                             <label for="department">Department</label>
                             <input class="form_input" type="text"   value="DU1" disabled />
-                            <input  type="hidden" value="DU1" />
+                            <!-- <input  type="hidden" value="DU1" /> -->
                         </div>
 
                         <div class="form_input_container">
                             <label for="reportsTo">Reports To</label>
                             <input class="form_input" type="text"   value="John Doe" disabled />
-                            <input  type="hidden" value="John Doe" />
+                            <!-- <input  type="hidden" value="John Doe" /> -->
                         </div>
 
                         <div class="form_input_container">
                             <label for="projectId">Project ID</label>
                             <input class="form_input" type="text"   value="PRJ001" disabled />
-                            <input  type="hidden" value="PRJ001" />
+                            <!-- <input  type="hidden" value="PRJ001" /> -->
                         </div>
 
                         <div class="form_input_container">
                             <label for="projectName">Project Name</label>
                             <input class="form_input" type="text"   value="XtraMile - Travel Req Tool" disabled />
-                            <input  type="hidden" value="XtraMile - Travel Req Tool" />
+                            <!-- <input  type="hidden" value="XtraMile - Travel Req Tool" /> -->
                         </div>
 
+                    </div>
+
+                    <div class="form_input_group_navigator">
+                        <div class="btn_container">
+                            <button (click) = "changeNewReqFormSubMenuValue(1)" class="next_btn"> Next</button>
+                        </div>
                     </div>
 
                 </div>  
         
-
-                <!-- //trip info section -->
-                <div   *ngIf="newReqFormSubMenuValue === 2" class="general_info"  >
+                <!-- trip info section -->
+                <div   *ngIf="newReqFormSubMenuValue === 1" class="form_input_group"  >
 
                     <div class="form_title">
                         <h4>Trip Informations</h4>
-                        <div class="navigators">
-                            <!-- <i (click) = "changeNewReqFormSubMenuValue(1)" class="ri-arrow-left-circle-line"></i> -->
-                            <!-- <i (click) = "changeNewReqFormSubMenuValue(3)" class="ri-arrow-right-circle-line"></i> -->
+                        <!-- <div class="navigators">
                       
-                            <span  (click) = "changeNewReqFormSubMenuValue(1)" class="prev_btn">Back</span>
-                            <span  (click) = "changeNewReqFormSubMenuValue(3)" class="next_btn">Next</span>
+                            <span  (click) = "changeNewReqFormSubMenuValue(0)" class="prev_btn">Back</span>
+                            <span  (click) = "changeNewReqFormSubMenuValue(2)" class="next_btn">Next</span>
 
-                        </div>
+                        </div> -->
                     </div>
-
 
                     <div class="form_elements">
 
                         <div class="form_input_container">
                             <label for="tripType">Trip Type</label>
                             <select  formControlName="tripType"  class="form_input">
-                                <option value="domestic" selected>Domestic</option>
-                                <option value="international" >International</option>
+                                <option value="domestic">Domestic</option>
+                                <option value="international" selected>International</option>
                             </select>
+                            <span class="form_error"
+                            *ngIf="form.get('tripType')?.invalid && form.get('tripType')?.touched">
+                               Choose a trip type
+                           </span>
                         </div>
 
                         <div class="form_input_container">
@@ -144,7 +134,6 @@
                         </div>
 
                                                 
-
                         <div class="form_input_container">
                             <label for="returnDate">Return Date</label>
                             <input class="form_input" formControlName="returnDate" type="date"  />
@@ -155,7 +144,6 @@
                         </div>    
                         
                     
-
                         <div class="form_input_container">
                             <label for="sourceCityZipCode">Source City Zip Code</label>
                             <input class="form_input" type="text" formControlName="sourceCityZipCode" placeholder="Enter the zip code of your source city" />
@@ -230,24 +218,31 @@
                             *ngIf="form.get('destinationCountry')?.invalid && form.get('destinationCountry')?.touched">
                                Enter the destination country
                            </span>
-                        </div>                                
-
-
+                        </div> 
+                                                    
+                    <!-- form input elements ends -->
                     </div>
+
+                        <div class="form_input_group_navigator">
+                            <div class="btn_container">
+                                <button (click) = "changeNewReqFormSubMenuValue(0)" class="back_btn"> Back</button>
+                                <button (click) = "changeNewReqFormSubMenuValue(2)" class="next_btn"> Next</button>
+                            </div>
+                        </div>
 
                 
                 </div>  
 
-
-
-                <div *ngIf="newReqFormSubMenuValue === 3" class="general_info"  >
+                <!-- additional info section -->
+                <div *ngIf="newReqFormSubMenuValue === 2" class="form_input_group"  >
 
                     <div class="form_title">
                         <h4>Additional Informations</h4>
-                        <div class="navigators">
-                            <span  (click) = "changeNewReqFormSubMenuValue(2)" class="prev_btn">Back</span>
-                        </div>
+                        <!-- <div class="navigators">
+                            <span  (click) = "changeNewReqFormSubMenuValue(1)" class="prev_btn">Back</span>
+                        </div> -->
                     </div>
+
                     <div class="form_elements">
 
 
@@ -281,9 +276,9 @@
                             <select class="form_input" formControlName="prefDepartureTime">
                                 <option value="00.00 - 04.00">00.00 - 04.00</option>
                                 <option value="04.00 - 08.00">04.00 - 08.00</option>
-                                <option>08.00 - 12.00</option>
-                                <option>12.00 - 16.00</option>
-                                <option>16.00 - 20.00</option>
+                                <option value="08.00 - 12.00">08.00 - 12.00</option>
+                                <option value="12.00 - 16.00">12.00 - 16.00</option>
+                                <option value="16.00 - 20.00">16.00 - 20.00</option>
 
                             </select>
                             <span class="form_error"
@@ -324,42 +319,29 @@
                     
                         <div class="form_input_container">
                             <label for="additionalComments">Additional Comments</label>
-                            <textarea class="form_input" formControlName="additionalComments" id="" cols="30" rows="4"></textarea>
+                            <textarea class="form_input" name="additionalComments" id="" cols="30" rows="4"></textarea>
                         </div>    
                         
-                        <div class="form_submit_container">
 
-                            <div class="btn_container">
-                                <button class="cancel_btn"> Cancel</button>
-                                <input class="submit_btn" type="submit" [disabled]="form.invalid" Value="Submit">
-                            </div>
 
-                     
+                    </div>
+
+                    <div class="form_submit_container">
+
+                        <div class="btn_container">
+                            <button (click) = "changeNewReqFormSubMenuValue(1)" class="cancel_btn"> Back</button>
+                            <input class="submit_btn" type="submit" [disabled]="form.invalid" Value="Submit">
                         </div>
 
                     </div>
 
-
-                    
-
-
+                    <!-- form input group ends -->
                 </div>
-
-
-
-
 
             </form> 
 
-        <!-- </div> -->
-
-
-
-    </div>
-
-
-
-
+            <!-- form container ends -->
+        </div>
 
     </div>
 

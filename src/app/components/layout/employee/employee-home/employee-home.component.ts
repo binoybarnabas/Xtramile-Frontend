@@ -1,8 +1,5 @@
 import { Component, NgModule } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-// import { SideNavBarComponent } from '../side-nav-bar/side-nav-bar.component';
-// import { TopBarComponent } from '../top-bar/top-bar.component';
-
 
 @Component({
   selector: 'app-employee-home',
@@ -10,45 +7,23 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./employee-home.component.css']
 })
 
-// @NgModule({
-//   declarations: [
-//     SideNavBarComponent,
-//     TopBarComponent
-//   ]
-
-// })
-
-
 export class EmployeeHomeComponent {
 
   subscription: any;
   router: any;
   requestData = new Map();
 
-
-
-
   ngOnDestroy() {
     this.subscription.unSubscribe();
     console.log("UNSUBSCRIBED")
   }
 
-
-
   form!: FormGroup;
-
-
-
-
-
 
   onSubmit() {
     console.log(this.form)
     //  this.postData(this.form.value);
   }
-
-
-
 
 
 

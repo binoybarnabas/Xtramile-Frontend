@@ -5,7 +5,7 @@
     padding: 1.5rem;
     position: relative;
     height: 100vh;
-    font-size: 0.9rem;
+    font-size: var(--normal-font-size);
     transition: 0.6s;
     position: fixed;
 }
@@ -36,7 +36,6 @@
 }
 
 .side_bar_collapsed .side_bar_main .collapsed_icon {
-    font-size: 1.3vw;
     color: var(--third-color);
 }
 
@@ -54,9 +53,7 @@
 }
 
 .side_bar_collapsed .side_bar_logout_section .collapsed_icon {
-    font-size: 1.3vw;
-    color: var(--danger-color);
-
+    display: none;
 }
 
 
@@ -71,9 +68,10 @@
     background-color: var(--card-bg-color);
     width: 19%;
     padding: 1.5rem;
+    padding-top: 11vh;
     position: relative;
     height: 100vh;
-    font-size: 0.9rem;
+    font-size: var(--p-font-size);
     transition: 0.6s;
     position: fixed;
 
@@ -91,29 +89,16 @@
 
 
 .side_bar_container .toggle .icon {
-    font-size: 1rem;
-    font-weight: 550;
+    font-size: var(--medium-font-size);
+    font-weight: var(--extra-font-weight);
 }
 
 
 
+.side_bar_container .side_bar_main {
 
-
-.side_bar_container .side_bar_logo_section {
-
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    margin-bottom: 1.7rem;
-    font-size: 1.2rem;
-
+    transition: 0.4s;
 }
-
-.side_bar_container .side_bar_logo_section .side_bar_logo i {
-    color: var(--first-color);
-    margin-right: 0.3rem;
-
-}
-
 
 .side_bar_container .side_bar_main .main_title {
     margin: 0.6rem 0.5rem;
@@ -121,18 +106,27 @@
     padding: 0.5rem;
     /* width: 11.5rem; */
     width: 100%;
-    transition: 0.3s;
     position: relative;
+    color: var(--primary-text-color);
+
     /* font-weight: 520; */
 
+}
+
+.side_bar_container .side_bar_main .main_title .left_icon {
+
+    font-size: var(--medium-font-size);
+    font-weight: var(--extra-font-weight);
+    /* color: var(--second-color); */
 }
 
 
 .side_bar_container .side_bar_main .right_icon {
     position: absolute;
     right: 0.5rem;
-    font-size: 1.3rem;
-    font-weight: 550;
+    font-size: var(--large-font-size);
+    font-weight: var(--extra-font-weight);
+
 }
 
 
@@ -140,14 +134,14 @@
     position: relative;
 } */
 
-.side_bar_main .main_title.active {
+.side_bar_container .side_bar_main .main_title.active {
     background-color: var(--first-color);
-    color: var(--card-bg-color);
-    width: 9rem;
+    color: var(--card-bg-color) !important;
+    /* width: 9rem; */
     flex-shrink: 0;
     border-radius: 0.3rem;
+    font-weight: var(--active-font-weight);
 }
-
 
 
 
@@ -155,6 +149,8 @@
     background-color: var(--menu-hover-color);
     border-radius: 0.3rem;
     cursor: pointer;
+    font-weight: var(--active-font-weight);
+    color: var(--second-color) !important;
 }
 
 
@@ -184,7 +180,7 @@
     margin-top: 0.5rem;
     margin-left: 1rem;
     list-style: none;
-    transition: 0.3s;
+    transition: 0.6s;
 }
 
 .side_bar_sub_list .list_item {
@@ -192,6 +188,7 @@
     margin: 0.9rem;
     color: var(--secondary-text-color);
     position: relative;
+    font-size: var(--normal-font-size);
 
 }
 

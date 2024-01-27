@@ -9,22 +9,22 @@
         <i class="icon ri-draggable"></i>
     </div>
 
-    <div class="side_bar_logo_section">
+    <!-- <div class="side_bar_logo_section">
         <h3 class="side_bar_logo"> <i class="ri-road-map-fill"></i> XtraMile</h3>
-    </div>
+    </div> -->
  
 
     <div class="side_bar_main">
 
         <i *ngIf="isSideNavBarOpen===0" class="collapsed_icon ri-dashboard-line"></i>
 
-        <p class="main_title active"> <i class="ri-dashboard-line"></i>  Dashboard  </p>
+        <p class="main_title active"> <i class="left_icon ri-dashboard-line"></i>  Dashboard  </p>
     </div>
 
     <div class="side_bar_main" (click)="toggleSubMenu('1')">
         <i *ngIf="isSideNavBarOpen===0" class="collapsed_icon ri-sticky-note-add-line"></i>
 
-        <p class="main_title"> <i class="ri-sticky-note-add-line"></i> My Requests <i  [ngClass] = "subMenu1ToggleValue === 1 ? 'right_icon ri-arrow-down-s-line' :  'right_icon ri-arrow-right-s-line'" ></i> </p>
+        <p class="main_title"> <i class="left_icon ri-sticky-note-add-line"></i> My Requests <i  [ngClass] = "subMenu1ToggleValue === 1 ? 'right_icon ri-arrow-down-s-line' :  'right_icon ri-arrow-right-s-line'" ></i> </p>
 
         <div  (click)="doNothing()"  *ngIf ="subMenu1ToggleValue === 1;" class="side_bar_sub_list">
                          
@@ -39,7 +39,7 @@
     <div class="side_bar_main" (click)="toggleSubMenu('2')">
         <i *ngIf="isSideNavBarOpen===0" class="collapsed_icon ri-bill-line"></i>
 
-        <p class="main_title"> <i class="ri-bill-line"></i> My Settlements <i  [ngClass] = "subMenu2ToggleValue === 1 ? 'right_icon ri-arrow-down-s-line' :  'right_icon ri-arrow-right-s-line'" ></i> </p>
+        <p class="main_title"> <i class="left_icon ri-bill-line"></i> My Settlements <i  [ngClass] = "subMenu2ToggleValue === 1 ? 'right_icon ri-arrow-down-s-line' :  'right_icon ri-arrow-right-s-line'" ></i> </p>
 
         <div  (click)="doNothing()"  *ngIf ="subMenu2ToggleValue === 1;" class="side_bar_sub_list">
                          
@@ -53,7 +53,7 @@
 
     <div class="side_bar_main">
         <i *ngIf="isSideNavBarOpen===0" class="collapsed_icon ri-user-line"></i>
-        <p class="main_title"> <i class="ri-user-line"></i> Profile </p>
+        <p class="main_title"> <i class="left_icon ri-user-line"></i> Profile </p>
     </div>
 
     <div class="side_bar_logout_section">

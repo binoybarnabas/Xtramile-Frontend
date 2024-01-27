@@ -9,15 +9,16 @@ import { SideNavBarService } from 'src/app/services/employeeServices/layoutServi
 })
 export class NewTravelRequestComponent {
 
-
-
-
   isSideNavBarOpen: any;
   newReqFormSubMenuValue: number;
 
+  leftSectionNavItems = ["General Informations", "Trip Informations", "Additional Informations"];
+
   constructor(private sideNavBarService: SideNavBarService) {
-    this.newReqFormSubMenuValue = 1;
+    this.newReqFormSubMenuValue = 0;
+
   }
+
 
   //sus
   ngDoCheck() {
@@ -30,7 +31,6 @@ export class NewTravelRequestComponent {
   }
 
 
-
   form!: FormGroup;
 
 
@@ -39,7 +39,6 @@ export class NewTravelRequestComponent {
     this.form = new FormGroup({
 
       // phone: new FormControl('', Validators.required),
-
 
       //Trip Info
       tripType: new FormControl('', Validators.required),
@@ -55,7 +54,6 @@ export class NewTravelRequestComponent {
       sourceCountry: new FormControl('', Validators.required),
       destinationCountry: new FormControl('', Validators.required),
 
-
       //Additional Info
       cabService: new FormControl('', Validators.required),
       hotelAccomodation: new FormControl('', Validators.required),
@@ -63,7 +61,6 @@ export class NewTravelRequestComponent {
       mailAttachment: new FormControl('', Validators.required),
       passportAttachment: new FormControl('', Validators.required),
       idCardAttachment: new FormControl('', Validators.required),
-
 
     })
 
@@ -73,14 +70,6 @@ export class NewTravelRequestComponent {
     console.log(this.form)
     // this.postData(this.form.value);
   }
-
-  // postData(data: any) {
-  //   this.apiService.postData(data).subscribe((data) => {
-  //     console.log(data);
-  //     this.goToMain();
-  //   })
-  // }
-
 
 
 }

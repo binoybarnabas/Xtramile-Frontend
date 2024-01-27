@@ -18,14 +18,13 @@ export class SideNavBarComponent {
 
   isSideNavBarOpen: any;
 
-
   constructor(private sideNavBarService: SideNavBarService) {
 
     this.isSideNavBarOpen = 1;
 
     //myRequestsMap contains values for My Requests sub menu
     this.myRequestsMap.set('new ri-add-line', "New Requests");
-    this.myRequestsMap.set('ri-draft-line', "Draft Requests");
+    // this.myRequestsMap.set('ri-draft-line', "Draft Requests");
     this.myRequestsMap.set('ri-loader-line', "Pending Approval ");
     this.myRequestsMap.set('ri-arrow-up-circle-line', "Ongoing Travel")
     this.myRequestsMap.set('ri-history-line', "Request History ")
@@ -33,7 +32,7 @@ export class SideNavBarComponent {
 
     //mySettlementsMap contains values for My Settlements sub menu
     this.mySettlementsMap.set('new ri-add-line', "New Bill");
-    this.mySettlementsMap.set('ri-draft-line', "Draft Bills");
+    // this.mySettlementsMap.set('ri-draft-line', "Draft Bills");
     this.mySettlementsMap.set('ri-loader-line', "Pending Bills");
     this.mySettlementsMap.set('ri-history-line', "Closed Bills")
 
@@ -82,7 +81,6 @@ export class SideNavBarComponent {
     }
 
   }
-
 
 
   controlSideBar() {
