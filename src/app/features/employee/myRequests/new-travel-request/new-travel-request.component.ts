@@ -22,7 +22,7 @@ export class NewTravelRequestComponent {
 
   //sus
   ngDoCheck() {
-    this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarOpen;
+    this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
 
   }
 

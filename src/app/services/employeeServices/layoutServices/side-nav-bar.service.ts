@@ -5,18 +5,27 @@ import { Injectable } from '@angular/core';
 })
 export class SideNavBarService {
 
-  isSideNavBarOpen: any;
+  isSideNavBarCollapsed: any;
   constructor() {
-    this.isSideNavBarOpen = 1;
+    this.isSideNavBarCollapsed = 1;
   }
 
 
+  //collapse
   controlSideBar() {
-    if (this.isSideNavBarOpen === 1) {
-      this.isSideNavBarOpen = 0;
+    if (this.isSideNavBarCollapsed === 1) {
+      this.isSideNavBarCollapsed = 0;
     } else {
-      this.isSideNavBarOpen = 1;
+      this.isSideNavBarCollapsed = 1;
     }
   }
+
+
+
+
+
+
+
+
 
 }

@@ -73,10 +73,6 @@
 }
 
 
-
-
-
-
 .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_title {
     /* background-color: var(--menu-hover-color); */
     /* border-radius: 6px; */
@@ -99,44 +95,6 @@
 
     border-bottom: 1.5px solid var(--ternary-text-color);
 }
-
-
-
-
-/* .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_title .navigators {
-    position: absolute;
-    right: -12px;
-    top: -10px;
-}
-
-
-.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_title .navigators .prev_btn {
-    padding: 0.2rem 1rem;
-    margin: 5px;
-    border: 1.5px solid var(--second-color);
-    color: var(--second-color);
-    font-size: var(--extra-small-font-size);
-    transition: 0.3s;
-}
-
-
-.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_title .navigators .next_btn {
-    padding: 0.2rem 1rem;
-    margin: 5px;
-    background-color: var(--second-color);
-    border: 1.5px solid var(--second-color);
-    color: var(--card-bg-color);
-    font-size: var(--extra-small-font-size);
-    transition: 0.3s;
-}
-
-.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_title .navigators .next_btn:hover,
-.req_forms_main_container .body_section .right_section .form_container .new_req_form .form_input_group .form_title .navigators .prev_btn:hover {
-    cursor: pointer;
-} */
-
-
-
 
 
 .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_elements {
@@ -194,12 +152,6 @@
 }
 
 
-
-
-
-
-
-
 .req_forms_main_container .right_section .form_container .new_req_form {
     /* max-width: 400px; */
     margin: auto;
@@ -227,9 +179,6 @@
     font-size: var(--extra-small-font-size);
 }
 
-
-
-
 .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container {
 
     position: relative;
@@ -240,14 +189,8 @@
 
     position: absolute;
     margin-top: 20px;
-
     right: 0;
-
-    /* bottom: 0; */
-    /* right: 0; */
 }
-
-
 
 .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .cancel_btn {
 
@@ -288,3 +231,112 @@
 }
 
 /* ------------------------------------------------ */
+
+@media screen and (max-width: 860px) {
+
+    .req_forms_main_container {
+        display: block;
+        position: relative;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group_navigator .btn_container {
+        position: relative;
+    }
+
+    .req_forms_main_container .right_section .form_container .form_input_group_navigator .btn_container .back_btn {
+        position: absolute;
+        left: 0;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_input_group_navigator .btn_container .next_btn {
+        right: 0;
+        position: absolute;
+    }
+
+
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container {
+        position: relative;
+    }
+
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .cancel_btn {
+
+        left: 0;
+        position: absolute;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .submit_btn {
+        right: 0;
+        position: absolute;
+
+    }
+
+
+}
+
+
+
+@media screen and (max-width: 460px) {
+
+    .req_forms_main_container {
+        display: block;
+        position: relative;
+        justify-content: space-between;
+    }
+
+    .req_forms_main_container .left_section {
+        display: none;
+    }
+
+    .req_forms_main_container .right_section {
+        width: 100%;
+        position: absolute;
+        border: none;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_elements {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row-gap: 10px;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group_navigator .btn_container {
+        position: relative;
+    }
+
+    .req_forms_main_container .right_section .form_container .form_input_group_navigator .btn_container .back_btn {
+        position: absolute;
+        left: 0;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_input_group_navigator .btn_container .next_btn {
+        right: 0;
+        position: absolute;
+    }
+
+
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container {
+        position: relative;
+    }
+
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .cancel_btn {
+
+        left: 0;
+        position: absolute;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .submit_btn {
+        right: 0;
+        position: absolute;
+
+    }
+
+
+}

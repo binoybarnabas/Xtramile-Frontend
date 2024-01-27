@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -11,9 +12,14 @@ import { Component } from '@angular/core';
 export class TopBarComponent {
 
 
-  constructor() {
+  isSideNavBarCollapsed: any;
+  constructor(private sideNavBarService: SideNavBarService) {
+
+    this.isSideNavBarCollapsed = sideNavBarService.isSideNavBarCollapsed;
 
   }
+
+
 
 
 }
