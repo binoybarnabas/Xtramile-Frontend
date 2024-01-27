@@ -31,49 +31,49 @@
 
                         <div class="form_input_container">
                             <label for="firstName">First Name</label>
-                            <input class="form_input" type="text" disabled value="Abhijit" />
+                            <input class="form_input" type="text" disabled [value]="employeeDetail?.firstName" />
                             <!-- <input  type="hidden" value="Abhijit" /> -->
                         </div>
 
                         <div class="form_input_container">
                             <label for="lastName">Last Name</label>
-                            <input class="form_input" type="text" disabled value="Thankachan" />
+                            <input class="form_input" type="text" disabled [value]="employeeDetail?.lastName" />
                             <!-- <input  type="hidden" value="Thankachan" /> -->
                         </div>
 
                         <div class="form_input_container">
                             <label for="email">Email</label>
-                            <input class="form_input" type="email" disabled value="abhijit.thankchan.@experionglobal.com" />
+                            <input class="form_input" type="email" disabled [value]="employeeDetail?.email" />
                             <!-- <input  type="hidden" value="abhijit.thankchan@gmail.com" /> -->
 
                         </div>
 
                         <div class="form_input_container">
                             <label for="phone">Phone</label>
-                            <input class="form_input" type="text" name="phone" placeholder="phone number" value="9876567887" />
+                            <input class="form_input" type="text" name="phone" placeholder="phone number" [value]="employeeDetail?.contactNumber" />
                         </div>
 
                         <div class="form_input_container">
                             <label for="department">Department</label>
-                            <input class="form_input" type="text"   value="DU1" disabled />
+                            <input class="form_input" type="text"   [value]="employeeDetail?.departmentName" disabled />
                             <!-- <input  type="hidden" value="DU1" /> -->
                         </div>
 
                         <div class="form_input_container">
                             <label for="reportsTo">Reports To</label>
-                            <input class="form_input" type="text"   value="John Doe" disabled />
+                            <input class="form_input" type="text"   [value]="employeeDetail?.reportsTo" disabled />
                             <!-- <input  type="hidden" value="John Doe" /> -->
                         </div>
 
                         <div class="form_input_container">
                             <label for="projectId">Project ID</label>
-                            <input class="form_input" type="text"   value="PRJ001" disabled />
+                            <input class="form_input" type="text"  [value]="employeeDetail?.projectCode" disabled />
                             <!-- <input  type="hidden" value="PRJ001" /> -->
                         </div>
 
                         <div class="form_input_container">
                             <label for="projectName">Project Name</label>
-                            <input class="form_input" type="text"   value="XtraMile - Travel Req Tool" disabled />
+                            <input class="form_input" type="text"   [value]="employeeDetail?.projectName" disabled />
                             <!-- <input  type="hidden" value="XtraMile - Travel Req Tool" /> -->
                         </div>
 
