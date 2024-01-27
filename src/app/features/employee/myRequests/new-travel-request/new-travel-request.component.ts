@@ -27,7 +27,12 @@ export class NewTravelRequestComponent {
 
   //sus
   ngDoCheck() {
+
+    this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
+
+
     this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarOpen;
+
   }
 
   changeNewReqFormSubMenuValue(value: number) {

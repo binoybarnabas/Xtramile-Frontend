@@ -16,11 +16,11 @@ export class SideNavBarComponent {
   subMenu1ToggleValue = 0;
   subMenu2ToggleValue = 0;
 
-  isSideNavBarOpen: any;
+  isSideNavBarCollapsed: any;
 
   constructor(private sideNavBarService: SideNavBarService) {
 
-    this.isSideNavBarOpen = 1;
+    this.isSideNavBarCollapsed = 1;
 
     //myRequestsMap contains values for My Requests sub menu
     this.myRequestsMap.set('new ri-add-line', "New Requests");
@@ -54,7 +54,7 @@ export class SideNavBarComponent {
 
   toggleSubMenu(menuNumber: string) {
 
-    if (this.isSideNavBarOpen === 1) {
+    if (this.isSideNavBarCollapsed === 0) {
 
       if (menuNumber === '1') {
 
@@ -87,7 +87,7 @@ export class SideNavBarComponent {
     this.subMenu1ToggleValue = 0;
     this.subMenu2ToggleValue = 0;
     this.sideNavBarService.controlSideBar();
-    this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarOpen;
+    this.isSideNavBarCollapsed = this.sideNavBarService.isSideNavBarCollapsed;
   }
 
 

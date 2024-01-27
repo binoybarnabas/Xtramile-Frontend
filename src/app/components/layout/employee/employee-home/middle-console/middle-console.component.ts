@@ -12,7 +12,7 @@ export class MiddleConsoleComponent {
   subscription: any;
   router: any;
 
-  isSideNavBarOpen: any;
+  isSideNavBarCollapsed: any;
   newReqFormSubMenuValue: number;
 
   //main heading of middle console 
@@ -20,11 +20,13 @@ export class MiddleConsoleComponent {
 
   constructor(private sideNavBarService: SideNavBarService) {
     this.newReqFormSubMenuValue = 1;
+
   }
 
   //sus
   ngDoCheck() {
-    this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarOpen;
+
+    this.isSideNavBarCollapsed = this.sideNavBarService.isSideNavBarCollapsed;
 
   }
 
