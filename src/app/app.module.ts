@@ -23,6 +23,10 @@ import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel
 import { TravelAdminSideNavBarComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-side-nav-bar/travel-admin-side-nav-bar.component';
 import { TravelAdminTopBarComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-top-bar/travel-admin-top-bar.component';
 import { TravelAdminMiddleConsoleComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-middle-console/travel-admin-middle-console.component';
+import { FinancePersonnelHomeComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-home.component';
+import { FinancePersonnelSideNavBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
+import { FinancePersonnelTopBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-top-bar/finance-personnel-top-bar.component';
+import { FinancePersonnelMiddleConsoleComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-middle-console/finance-personnel-middle-console.component';
 
 
 @NgModule({
@@ -43,7 +47,11 @@ import { TravelAdminMiddleConsoleComponent } from './components/layout/travelAdm
     TravelAdminHomeComponent,
     TravelAdminSideNavBarComponent,
     TravelAdminTopBarComponent,
-    TravelAdminMiddleConsoleComponent
+    TravelAdminMiddleConsoleComponent,
+    FinancePersonnelHomeComponent,
+    FinancePersonnelSideNavBarComponent,
+    FinancePersonnelTopBarComponent,
+    FinancePersonnelMiddleConsoleComponent
 
   ],
   imports: [
