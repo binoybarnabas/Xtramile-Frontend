@@ -11,7 +11,7 @@ import { EmployeeDetail } from './request';
 })
 export class NewTravelRequestComponent {
   //Employee id
-  empId : number = 15
+  empId: number = 15
   //Employee details from api
   employeeDetail?: EmployeeDetail
 
@@ -20,7 +20,7 @@ export class NewTravelRequestComponent {
 
   leftSectionNavItems = ["General Informations", "Trip Informations", "Additional Informations"];
 
-  constructor(private sideNavBarService: SideNavBarService,private requestService:RequestService) {
+  constructor(private sideNavBarService: SideNavBarService, private requestService: RequestService) {
     this.newReqFormSubMenuValue = 0;
 
   }
@@ -31,27 +31,28 @@ export class NewTravelRequestComponent {
     this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
 
 
-    this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarOpen;
+    // this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarOpen;
 
   }
 
   changeNewReqFormSubMenuValue(value: number) {
     this.newReqFormSubMenuValue = value;
-  }  
+  }
 
 
   form!: FormGroup;
 
 
   ngOnInit() {
-   
+
     // debugger;
     this.requestService.getEmployeeDataById(this.empId).subscribe({
-      next:(data)=>{
-      this.employeeDetail = data;
-      console.log(this.employeeDetail)},
-      error:(error:Error)=>{console.log("problems in fetching data")},
-      complete:()=>{console.log("get employee by id is done")}
+      next: (data) => {
+        this.employeeDetail = data;
+        console.log(this.employeeDetail)
+      },
+      error: (error: Error) => { console.log("problems in fetching data") },
+      complete: () => { console.log("get employee by id is done") }
     });
 
 

@@ -15,6 +15,10 @@ import { TopBarComponent } from './components/layout/employee/employee-home/top-
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
 import { NewTravelRequestComponent } from './features/employee/myRequests/new-travel-request/new-travel-request.component';
+import { ManagerSideNavBarComponent } from './components/layout/manager/manager-home/manager-side-nav-bar/manager-side-nav-bar.component';
+import { ManagerTopBarComponent } from './components/layout/manager/manager-home/manager-top-bar/manager-top-bar.component';
+import { ManagerMiddleConsoleComponent } from './components/layout/manager/manager-home/manager-middle-console/manager-middle-console.component';
+import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
 
 
 @NgModule({
@@ -28,6 +32,10 @@ import { NewTravelRequestComponent } from './features/employee/myRequests/new-tr
     MiddleConsoleComponent,
     EmployeeHomeComponent,
     NewTravelRequestComponent,
+    ManagerHomeComponent,
+    ManagerSideNavBarComponent,
+    ManagerTopBarComponent,
+    ManagerMiddleConsoleComponent,
 
   ],
   imports: [
