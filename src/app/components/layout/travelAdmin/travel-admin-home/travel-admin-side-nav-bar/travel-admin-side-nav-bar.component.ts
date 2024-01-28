@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 
 @Component({
-  selector: 'app-manager-side-nav-bar',
-  templateUrl: './manager-side-nav-bar.component.html',
-  styleUrls: ['./manager-side-nav-bar.component.css']
+  selector: 'app-travel-admin-side-nav-bar',
+  templateUrl: './travel-admin-side-nav-bar.component.html',
+  styleUrls: ['./travel-admin-side-nav-bar.component.css']
 })
-export class ManagerSideNavBarComponent {
+export class TravelAdminSideNavBarComponent {
 
   travelRequestsMap = new Map<string, string>();
   travelSettlementsMap = new Map<string, string>();
@@ -25,10 +25,11 @@ export class ManagerSideNavBarComponent {
     this.isSideNavBarCollapsed = 1;
 
     //travelRequestsMap contains values for Travel Requests sub menu
-    this.travelRequestsMap.set('new ri-mail-download-line', "Incoming Requests");
-    this.travelRequestsMap.set('new ri-chat-forward-line', "Forwarded");
+    this.travelRequestsMap.set('new ri-mail-download-line', "Incoming");
+    this.travelRequestsMap.set('new ri-pass-pending-line', "Pending");
+    this.travelRequestsMap.set('new ri-check-double-line', "Approved");
     this.travelRequestsMap.set('new ri-arrow-up-circle-line', "Ongoing Travel");
-    this.travelRequestsMap.set('new ri-history-line', "Closed Requests");
+    this.travelRequestsMap.set('new ri-history-line', "Request History");
 
     //travelSettlementsMap contains values for Travel Settlements sub menu
     this.travelSettlementsMap.set('new ri-import-line', "Incoming Bills");
@@ -129,6 +130,5 @@ export class ManagerSideNavBarComponent {
     this.subMenu4ToggleValue = 0;
 
   }
-
 
 }
