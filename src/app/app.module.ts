@@ -19,6 +19,10 @@ import { ManagerSideNavBarComponent } from './components/layout/manager/manager-
 import { ManagerTopBarComponent } from './components/layout/manager/manager-home/manager-top-bar/manager-top-bar.component';
 import { ManagerMiddleConsoleComponent } from './components/layout/manager/manager-home/manager-middle-console/manager-middle-console.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
+import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-home.component';
+import { TravelAdminSideNavBarComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-side-nav-bar/travel-admin-side-nav-bar.component';
+import { TravelAdminTopBarComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-top-bar/travel-admin-top-bar.component';
+import { TravelAdminMiddleConsoleComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-middle-console/travel-admin-middle-console.component';
 
 
 @NgModule({
@@ -36,6 +40,10 @@ import { ManagerHomeComponent } from './components/layout/manager/manager-home/m
     ManagerSideNavBarComponent,
     ManagerTopBarComponent,
     ManagerMiddleConsoleComponent,
+    TravelAdminHomeComponent,
+    TravelAdminSideNavBarComponent,
+    TravelAdminTopBarComponent,
+    TravelAdminMiddleConsoleComponent
 
   ],
   imports: [

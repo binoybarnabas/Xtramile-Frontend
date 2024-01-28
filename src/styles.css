@@ -118,17 +118,23 @@
 
 /*========Scroll bar========*/
 ::-webkit-scrollbar {
-  width: 5px;
-  background: var(--scroll-bar-color);
+  width: 1px;
+  background-color: transparent;
+
+  /* background: var(--scroll-bar-color); */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--scroll-thumb-color);
+  /* background: var(--scroll-thumb-color); */
+  background-color: transparent;
+
   border-radius: 2em;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--scroll-thumb-hover-color);
+  /* background: var(--scroll-thumb-hover-color); */
+  background-color: transparent;
+
 }
 
 
@@ -147,6 +153,9 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   background-color: var(--body-bg-color);
+  scrollbar-width: none;
+
+
 
 }
 
@@ -404,6 +413,11 @@ body {
   font-size: var(--p-font-size);
   transition: 0.6s;
   position: fixed;
+
+  /* overflow-x: hidden;
+  overflow-y: scroll; */
+
+
 }
 
 
@@ -493,16 +507,16 @@ body {
 
 
 .side_bar_logout_section {
-
   transition: 0.4s;
   position: absolute;
-  bottom: 0;
+  /* bottom: 0; */
 }
 
 
 .side_bar_container .side_bar_logout_section .main_title {
 
   margin: 0.6rem 0.5rem;
+  margin-top: 0;
   position: relative;
   padding: 0.5rem;
   /* width: 11.5rem; */
