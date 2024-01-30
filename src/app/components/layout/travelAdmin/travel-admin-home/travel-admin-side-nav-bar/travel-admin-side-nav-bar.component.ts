@@ -25,11 +25,11 @@ export class TravelAdminSideNavBarComponent {
     this.isSideNavBarCollapsed = 1;
 
     //travelRequestsMap contains values for Travel Requests sub menu
-    this.travelRequestsMap.set('new ri-mail-download-line', "Incoming");
-    this.travelRequestsMap.set('new ri-pass-pending-line', "Pending");
-    this.travelRequestsMap.set('new ri-check-double-line', "Approved");
+    this.travelRequestsMap.set('new ri-mail-download-line', "Incoming Requests");
+    this.travelRequestsMap.set('new ri-loader-3-line', "Waiting Options");
+    this.travelRequestsMap.set('new ri-check-double-line', "Selected Options ");
     this.travelRequestsMap.set('new ri-arrow-up-circle-line', "Ongoing Travel");
-    this.travelRequestsMap.set('new ri-history-line', "Request History");
+    this.travelRequestsMap.set('new ri-history-line', "Closed Requests");
 
     //travelSettlementsMap contains values for Travel Settlements sub menu
     this.travelSettlementsMap.set('new ri-import-line', "Incoming Bills");

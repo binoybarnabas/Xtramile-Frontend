@@ -27,7 +27,54 @@ import { FinancePersonnelHomeComponent } from './components/layout/financePerson
 import { FinancePersonnelSideNavBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
 import { FinancePersonnelTopBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-top-bar/finance-personnel-top-bar.component';
 import { FinancePersonnelMiddleConsoleComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-middle-console/finance-personnel-middle-console.component';
-
+import { EmployeeDashboardComponent } from './features/employee/employee-dashboard/employee-dashboard.component';
+import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
+import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
+import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
+import { EmployeeNewBillComponent } from './features/employee/mySettlements/employee-new-bill/employee-new-bill.component';
+import { EmployeePendingBillComponent } from './features/employee/mySettlements/employee-pending-bill/employee-pending-bill.component';
+import { EmployeeClosedBillsComponent } from './features/employee/mySettlements/employee-closed-bills/employee-closed-bills.component';
+import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
+import { ManagerProfileComponent } from './features/manager/manager-profile/manager-profile.component';
+import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
+import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
+import { ManagerOngoingTravelRequestsComponent } from './features/manager/travelRequests/manager-ongoing-travel-requests/manager-ongoing-travel-requests.component';
+import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
+import { ManagerIncomingTravelSettlementsComponent } from './features/manager/travelSettlements/manager-incoming-travel-settlements/manager-incoming-travel-settlements.component';
+import { ManagerForwardedTravelSettlementsComponent } from './features/manager/travelSettlements/manager-forwarded-travel-settlements/manager-forwarded-travel-settlements.component';
+import { ManagerClosedTravelSettlementsComponent } from './features/manager/travelSettlements/manager-closed-travel-settlements/manager-closed-travel-settlements.component';
+import { ManagerNewRequestComponent } from './features/manager/myRequests/manager-new-request/manager-new-request.component';
+import { ManagerPendingRequestsComponent } from './features/manager/myRequests/manager-pending-requests/manager-pending-requests.component';
+import { ManagerOngoingTravelComponent } from './features/manager/myRequests/manager-ongoing-travel/manager-ongoing-travel.component';
+import { ManagerTravelHistoryComponent } from './features/manager/myRequests/manager-travel-history/manager-travel-history.component';
+import { ManagerNewBillComponent } from './features/manager/mySettlements/manager-new-bill/manager-new-bill.component';
+import { ManagerPendingBillsComponent } from './features/manager/mySettlements/manager-pending-bills/manager-pending-bills.component';
+import { ManagerClosedBillsComponent } from './features/manager/mySettlements/manager-closed-bills/manager-closed-bills.component';
+import { TravelAdminDashboardComponent } from './features/travelAdmin/travel-admin-dashboard/travel-admin-dashboard.component';
+import { TravelAdminProfileComponent } from './features/travelAdmin/travel-admin-profile/travel-admin-profile.component';
+import { TravelAdminIncomingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-incoming-travel-requests/travel-admin-incoming-travel-requests.component';
+import { TravelAdminWaitingOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-options-travel-requests.component';
+import { TravelAdminSelectedOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-options-travel-requests.component';
+import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-ongoing-travel-requests/travel-admin-ongoing-travel-requests.component';
+import { TravelAdminClosedTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-closed-travel-requests/travel-admin-closed-travel-requests.component';
+import { TravelAdminIncomingTravelSettlementsComponent } from './features/travelAdmin/travelSettlements/travel-admin-incoming-travel-settlements/travel-admin-incoming-travel-settlements.component';
+import { TravelAdminForwardedTravelSettlementsComponent } from './features/travelAdmin/travelSettlements/travel-admin-forwarded-travel-settlements/travel-admin-forwarded-travel-settlements.component';
+import { TravelAdminClosedTravelSettlementsComponent } from './features/travelAdmin/travelSettlements/travel-admin-closed-travel-settlements/travel-admin-closed-travel-settlements.component';
+import { TravelAdminNewRequestComponent } from './features/travelAdmin/myRequests/travel-admin-new-request/travel-admin-new-request.component';
+import { TravelAdminPendingRequestsComponent } from './features/travelAdmin/myRequests/travel-admin-pending-requests/travel-admin-pending-requests.component';
+import { TravelAdminOngoingTravelComponent } from './features/travelAdmin/myRequests/travel-admin-ongoing-travel/travel-admin-ongoing-travel.component';
+import { TravelAdminTravelHistoryComponent } from './features/travelAdmin/myRequests/travel-admin-travel-history/travel-admin-travel-history.component';
+import { FinancePersonnelDashboardComponent } from './features/financePersonnel/finance-personnel-dashboard/finance-personnel-dashboard.component';
+import { FinancePersonnelProfileComponent } from './features/financePersonnel/finance-personnel-profile/finance-personnel-profile.component';
+import { FinancePersonnelPendingTravelSettlementsComponent } from './features/financePersonnel/settlements/finance-personnel-pending-travel-settlements/finance-personnel-pending-travel-settlements.component';
+import { FinancePersonnelClosedTravelSettlementsComponent } from './features/financePersonnel/settlements/finance-personnel-closed-travel-settlements/finance-personnel-closed-travel-settlements.component';
+import { FinancePersonnelNewRequestComponent } from './features/financePersonnel/myRequests/finance-personnel-new-request/finance-personnel-new-request.component';
+import { FinancePersonnelPendingRequestsComponent } from './features/financePersonnel/myRequests/finance-personnel-pending-requests/finance-personnel-pending-requests.component';
+import { FinancePersonnelOngoingTravelComponent } from './features/financePersonnel/myRequests/finance-personnel-ongoing-travel/finance-personnel-ongoing-travel.component';
+import { FinancePersonnelTravelHistoryComponent } from './features/financePersonnel/myRequests/finance-personnel-travel-history/finance-personnel-travel-history.component';
+import { FinancePersonnelNewBillComponent } from './features/financePersonnel/mySettlements/finance-personnel-new-bill/finance-personnel-new-bill.component';
+import { FinancePersonnelPendingBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-pending-bills/finance-personnel-pending-bills.component';
+import { FinancePersonnelClosedBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-closed-bills/finance-personnel-closed-bills.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +98,55 @@ import { FinancePersonnelMiddleConsoleComponent } from './components/layout/fina
     FinancePersonnelHomeComponent,
     FinancePersonnelSideNavBarComponent,
     FinancePersonnelTopBarComponent,
-    FinancePersonnelMiddleConsoleComponent
+    FinancePersonnelMiddleConsoleComponent,
+    EmployeeDashboardComponent,
+    EmployeeProfileComponent,
+    EmployeeClosedRequestsComponent,
+    EmployeeOngoingRequestsComponent,
+    EmployeeNewBillComponent,
+    EmployeePendingBillComponent,
+    EmployeeClosedBillsComponent,
+    ManagerDashboardComponent,
+    ManagerProfileComponent,
+    ManagerIncomingTravelRequestsComponent,
+    ManagerForwardedTravelRequestsComponent,
+    ManagerOngoingTravelRequestsComponent,
+    ManagerClosedTravelRequestsComponent,
+    ManagerIncomingTravelSettlementsComponent,
+    ManagerForwardedTravelSettlementsComponent,
+    ManagerClosedTravelSettlementsComponent,
+    ManagerNewRequestComponent,
+    ManagerPendingRequestsComponent,
+    ManagerOngoingTravelComponent,
+    ManagerTravelHistoryComponent,
+    ManagerNewBillComponent,
+    ManagerPendingBillsComponent,
+    ManagerClosedBillsComponent,
+    TravelAdminDashboardComponent,
+    TravelAdminProfileComponent,
+    TravelAdminIncomingTravelRequestsComponent,
+    TravelAdminWaitingOptionsTravelRequestsComponent,
+    TravelAdminSelectedOptionsTravelRequestsComponent,
+    TravelAdminOngoingTravelRequestsComponent,
+    TravelAdminClosedTravelRequestsComponent,
+    TravelAdminIncomingTravelSettlementsComponent,
+    TravelAdminForwardedTravelSettlementsComponent,
+    TravelAdminClosedTravelSettlementsComponent,
+    TravelAdminNewRequestComponent,
+    TravelAdminPendingRequestsComponent,
+    TravelAdminOngoingTravelComponent,
+    TravelAdminTravelHistoryComponent,
+    FinancePersonnelDashboardComponent,
+    FinancePersonnelProfileComponent,
+    FinancePersonnelPendingTravelSettlementsComponent,
+    FinancePersonnelClosedTravelSettlementsComponent,
+    FinancePersonnelNewRequestComponent,
+    FinancePersonnelPendingRequestsComponent,
+    FinancePersonnelOngoingTravelComponent,
+    FinancePersonnelTravelHistoryComponent,
+    FinancePersonnelNewBillComponent,
+    FinancePersonnelPendingBillsComponent,
+    FinancePersonnelClosedBillsComponent
 
   ],
   imports: [
