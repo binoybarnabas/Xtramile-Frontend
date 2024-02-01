@@ -32,6 +32,7 @@ export class EmployeeProfileComponent {
     idCard: new FormControl(''),
   });
   ngOnInit() {
+    this.form.disable();
     this.fetchEmployeeData();
   }
   // to enable the form when the user click on edit button and disable the form when the user click on the save button
@@ -148,7 +149,8 @@ export class EmployeeProfileComponent {
 
   //uploading file
   onFileSelected(event: any, fileType: string) {
-    const file: File = event.target.files[0];
+    if(this.editMode){
+      const file: File = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = (e) => {
@@ -157,6 +159,7 @@ export class EmployeeProfileComponent {
     };
 
     reader.readAsDataURL(file);
+    }
   }
 
   uploadPassport(file: File, fileType: string, fileContent: string) {
