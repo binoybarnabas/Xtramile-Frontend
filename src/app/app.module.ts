@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { InputFieldComponent } from './components/ui/input-field/input-field.component';
 import { EmployeeComponent } from './features/employee/employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
@@ -31,6 +32,7 @@ import { EmployeeDashboardComponent } from './features/employee/employee-dashboa
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
 import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
+import { EmployeePendingRequestsComponent } from './features/employee/myRequests/employee-pending-requests/employee-pending-requests.component';
 import { EmployeeNewBillComponent } from './features/employee/mySettlements/employee-new-bill/employee-new-bill.component';
 import { EmployeePendingBillComponent } from './features/employee/mySettlements/employee-pending-bill/employee-pending-bill.component';
 import { EmployeeClosedBillsComponent } from './features/employee/mySettlements/employee-closed-bills/employee-closed-bills.component';
@@ -108,6 +110,7 @@ import { DataTableComponent } from './components/ui/data-table/data-table.compon
     EmployeeDashboardComponent,
     EmployeeProfileComponent,
     EmployeeClosedRequestsComponent,
+    EmployeePendingRequestsComponent,
     EmployeeOngoingRequestsComponent,
     EmployeeNewBillComponent,
     EmployeePendingBillComponent,
@@ -158,6 +161,7 @@ import { DataTableComponent } from './components/ui/data-table/data-table.compon
     DataTableComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -166,7 +170,7 @@ import { DataTableComponent } from './components/ui/data-table/data-table.compon
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

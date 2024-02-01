@@ -1,0 +1,47 @@
+.view_cards {
+  display: flex;
+}
+.request_card {
+  margin: 20px;
+  box-shadow: 5px 5px 5px 5px lightgray;
+  border-radius: 15px;
+  display: flex;
+  width: 22rem;
+  background-image: linear-gradient(to bottom right, #b8cffd, white, #b8cffd);
+}
+.status .card-title {
+  color: black;
+}
+.left_border {
+  width: 5rem;
+  background: linear-gradient();
+  border-radius: 15px 0 0 15px;
+}
+
+.card-title {
+  color: gray;
+  font-size: small;
+}
+
+.card-text {
+  font-size: medium;
+  font-weight: 500;
+}
+
+.card_details {
+  margin-left: 2rem;
+  height: 100%;
+  width: 100%;
+}
+
+.status,
+.header_details,
+.travel_reason,
+.bottom_row {
+  padding-bottom: 15px;
+}
+
+.btn {
+  background-color: lightgreen;
+  font-size: small;
+}

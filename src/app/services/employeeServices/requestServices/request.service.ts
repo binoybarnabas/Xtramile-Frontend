@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PendingRequest } from 'src/app/features/employee/myRequests/employee-pending-requests/pending-request';
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +29,10 @@ export class RequestService {
       console.log(body)
       return this.http.post('http://localhost:5190/api/requestmapping/add/option', body);
     }
+
+    getRequestsPendingStatus(empId: number): Observable<PendingRequest[]> {
+      return this.http.get<PendingRequest[]>(
+        `http://localhost:5190/api/employee/viewpendingrequest/${empId}`
+      );
+}
 }
