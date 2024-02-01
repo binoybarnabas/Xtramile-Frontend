@@ -1,0 +1,18 @@
+<div class="container"> 
+    
+    <div>
+        <table class="dynamic_table">
+            <thead>
+            <tr>
+            <th *ngFor="let header of headers">{{ header }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of data" (click)="onRowClick(row)">
+            <td *ngFor="let prop of displayedProperties">{{ row[prop] }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
