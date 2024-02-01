@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class ManagerSideNavBarComponent {
 
   isSideNavBarCollapsed: any;
 
-  constructor(private sideNavBarService: SideNavBarService) {
+  constructor(private sideNavBarService: SideNavBarService, private router:Router) {
 
     this.isSideNavBarCollapsed = 1;
 
@@ -130,5 +131,19 @@ export class ManagerSideNavBarComponent {
 
   }
 
+  navigateToRequest(routeDestination : string) {
+    console.log("inside navigate" + routeDestination);
+    switch(routeDestination){
+      case 'Incoming Requests': this.router.navigate(['/manager/newrequests']);
+                            break;
+      case 'Forwarded': this.router.navigate(['/manager/forwarded']);
+                            break;
+      case 'Ongoing Travel': this.router.navigate(['/manager/ongoing']);
+                            break;
+      case 'Closed Requests': this.router.navigate(['/manager/closed']);
+                            break;
+
+    }
+  }
 
 }

@@ -30,7 +30,7 @@
         <div  (click)="doNothing()"  *ngIf ="subMenu1ToggleValue === 1;" class="side_bar_sub_list">
                          
                 <ng-container *ngFor="let entry of myRequestsMapEntries()">
-                    <li class="list_item"><i [ngClass]="entry[0]" ></i> {{entry[1]}} <span class="dot"> </span> </li>
+                    <li (click)="navigateToRequest(entry[1])" class="list_item"><i [ngClass]="entry[0]" ></i> {{entry[1]}} <span class="dot"> </span> </li>
                 </ng-container>
 
         </div>
