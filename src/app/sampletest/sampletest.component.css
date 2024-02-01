@@ -1,0 +1,30 @@
+.my_form {
+    max-width: 400px;
+    margin: auto;
+}
+
+.form_input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.form_error {
+    color: red;
+    font-size: 12px;
+}
+
+.submit_button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit_button:disabled {
+    background-color: #0c56e0;
+    cursor: not-allowed;
+}
