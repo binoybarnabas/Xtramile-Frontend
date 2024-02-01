@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { InputFieldComponent } from './components/ui/input-field/input-field.component';
 import { EmployeeComponent } from './features/employee/employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
@@ -164,7 +166,8 @@ import { DataTableComponent } from './components/ui/data-table/data-table.compon
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    PaginationModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
