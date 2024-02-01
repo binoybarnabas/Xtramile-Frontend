@@ -75,7 +75,12 @@ import { FinancePersonnelTravelHistoryComponent } from './features/financePerson
 import { FinancePersonnelNewBillComponent } from './features/financePersonnel/mySettlements/finance-personnel-new-bill/finance-personnel-new-bill.component';
 import { FinancePersonnelPendingBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-pending-bills/finance-personnel-pending-bills.component';
 import { FinancePersonnelClosedBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-closed-bills/finance-personnel-closed-bills.component';
+
+import { OptionCardComponent } from './components/ui/option-card/option-card.component';
+import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
+
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
+
 
 @NgModule({
   declarations: [
@@ -148,8 +153,9 @@ import { DataTableComponent } from './components/ui/data-table/data-table.compon
     FinancePersonnelNewBillComponent,
     FinancePersonnelPendingBillsComponent,
     FinancePersonnelClosedBillsComponent,
+    OptionCardComponent,
+    OptionviewCardComponent,
     DataTableComponent
-
   ],
   imports: [
     BrowserModule,
