@@ -12,6 +12,7 @@ import { ManagerOngoingTravelComponent } from './features/manager/myRequests/man
 import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
 import { EmployeeDashboardComponent } from './features/employee/employee-dashboard/employee-dashboard.component';
 import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
+import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 
   const routes: Routes = [
     { path: 'employee', component: EmployeeHomeComponent, children: [
@@ -20,6 +21,7 @@ import { ManagerDashboardComponent } from './features/manager/manager-dashboard/
       {path:'pending',component:EmployeePendingRequestsComponent},
       {path:'ongoing',component:EmployeeOngoingRequestsComponent},
       {path:'history',component:EmployeeClosedRequestsComponent},
+      {path:'profile',component:EmployeeProfileComponent}
     ]},
     { path: 'manager', component: ManagerHomeComponent, children: [
       {path:'dashboard',component:ManagerDashboardComponent},

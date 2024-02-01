@@ -54,7 +54,7 @@
 
     <div class="side_bar_main">
         <i *ngIf="isSideNavBarCollapsed===1" class="left_icon collapsed_icon ri-user-line"></i>
-        <p class="main_title"> <i class="left_icon ri-user-line"></i> Profile </p>
+        <p class="main_title" (click)="navigateToRequest('profile')"> <i class="left_icon ri-user-line"></i> Profile </p>
     </div>
 
     <div class="side_bar_logout_section">

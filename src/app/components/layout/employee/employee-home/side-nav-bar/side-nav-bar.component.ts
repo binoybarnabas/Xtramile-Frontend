@@ -112,6 +112,8 @@ export class SideNavBarComponent {
                             break;
       case 'Request History': this.router.navigate(['/employee/history']);
                             break;
+      case 'profile': this.router.navigate(['/employee/profile']);
+                      break;
 
     }
     
