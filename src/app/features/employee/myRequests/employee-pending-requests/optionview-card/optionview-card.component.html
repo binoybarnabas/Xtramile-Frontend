@@ -1,0 +1,3 @@
+<p>optionview-card works!</p>
+<app-option-card [options]="optionsFromEmployee" (optionSelected)="handleOptionSelected($event)"></app-option-card>
+<button (click)="postSelection()" [disabled]="!selectedOption" class="blue-rounded-button">Submit</button>
