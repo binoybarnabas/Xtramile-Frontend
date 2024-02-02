@@ -82,14 +82,13 @@ import { OptionCardComponent } from './components/ui/option-card/option-card.com
 import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
 
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputFieldComponent,
     EmployeeComponent,
-
     SideNavBarComponent,
     TopBarComponent,
     MiddleConsoleComponent,
@@ -168,7 +167,8 @@ import { DataTableComponent } from './components/ui/data-table/data-table.compon
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    PaginationModule.forRoot(),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
