@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+=======
+/* @import '@angular/material/prebuilt-themes/deeppurple-amber.css'; */
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
 
 
 .container {
@@ -14,7 +18,11 @@
   margin-bottom: 0;
 }
 
+<<<<<<< HEAD
 .div_header{
+=======
+.div_header {
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
   display: flex;
 }
 
@@ -24,7 +32,14 @@
 
 
 
+<<<<<<< HEAD
 .search, .form-control, .filter_button, .see_all_button {
+=======
+.search,
+.form-control,
+.filter_button,
+.see_all_button {
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ddd;
@@ -36,14 +51,23 @@
   margin-right: 0.8rem;
 }
 
+<<<<<<< HEAD
 .filter_button{
   font-size: 1rem; 
+=======
+.filter_button {
+  font-size: 1rem;
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
   padding: 0.33rem 0.8rem;
 }
 
 .filter_button mat-icon {
   margin-right: 0.5rem;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
 }
 
 .see_all_button {
@@ -61,6 +85,7 @@
   border-style: none;
 }
 
+<<<<<<< HEAD
 .custom_table th{
   background: #F0F1F3;
   line-height: 45vdh;
@@ -68,16 +93,34 @@
 .custom_table th, .custom_table td {
   border: none;
   border-bottom:  1px solid #ddd;
+=======
+.custom_table th {
+  background: #F0F1F3;
+  line-height: 45vdh;
+}
+
+.custom_table th,
+.custom_table td {
+  border: none;
+  border-bottom: 1px solid #ddd;
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
   padding: 0.5rem;
   text-align: left;
 }
 
 .table_responsive {
   overflow-x: auto;
+<<<<<<< HEAD
  
 }
 
 .button_status{
+=======
+
+}
+
+.button_status {
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
   border: none;
   border-radius: .5rem;
   background: #E9E9FA;
@@ -87,25 +130,45 @@
 
 
 @media (max-width: 576px) {
+<<<<<<< HEAD
   .search, .form-control, .filter-button, .see-all-button {
+=======
+
+  .search,
+  .form-control,
+  .filter-button,
+  .see-all-button {
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
     margin-right: 0;
     margin-left: 0;
   }
 
   .table_responsive {
     overflow-x: auto;
+<<<<<<< HEAD
     
   }
 }
 
 .employee_div{
+=======
+
+  }
+}
+
+.employee_div {
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
   display: flex;
   flex-direction: column;
   padding: 2px;
   justify-content: space-around;
 }
 
+<<<<<<< HEAD
 .date_icon{
+=======
+.date_icon {
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
   position: absolute;
   transform: translateY(-50%);
   top: 46%;
@@ -113,6 +176,7 @@
   left: 85%;
 }
 
+<<<<<<< HEAD
  .search_bar_container{
   width: 100%;
 } 
@@ -126,6 +190,21 @@
 } 
 
 .search_icon{
+=======
+.search_bar_container {
+  width: 100%;
+}
+
+.search_bar {
+  width: 100%;
+  position: relative;
+  padding: 0.5rem;
+  padding-left: 1.7rem;
+
+}
+
+.search_icon {
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
   position: absolute;
   color: #1A3D98;
   z-index: 999;
@@ -133,6 +212,10 @@
 }
 
 
+<<<<<<< HEAD
 .sort_menu{
+=======
+.sort_menu {
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
   width: 12rem;
 }

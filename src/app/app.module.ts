@@ -5,8 +5,12 @@ import { AppComponent } from './app.component';
 import { InputFieldComponent } from './components/ui/input-field/input-field.component';
 import { EmployeeComponent } from './features/employee/employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+<<<<<<< HEAD
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
+=======
+import { CommonModule, DatePipe } from '@angular/common';
+>>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
@@ -33,6 +37,7 @@ import { EmployeeDashboardComponent } from './features/employee/employee-dashboa
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
 import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
+import { EmployeePendingRequestsComponent } from './features/employee/myRequests/employee-pending-requests/employee-pending-requests.component';
 import { EmployeeNewBillComponent } from './features/employee/mySettlements/employee-new-bill/employee-new-bill.component';
 import { EmployeePendingBillComponent } from './features/employee/mySettlements/employee-pending-bill/employee-pending-bill.component';
 import { EmployeeClosedBillsComponent } from './features/employee/mySettlements/employee-closed-bills/employee-closed-bills.component';
@@ -82,14 +87,13 @@ import { OptionCardComponent } from './components/ui/option-card/option-card.com
 import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
 
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
     InputFieldComponent,
     EmployeeComponent,
-
     SideNavBarComponent,
     TopBarComponent,
     MiddleConsoleComponent,
@@ -110,6 +114,7 @@ import { DataTableComponent } from './components/ui/data-table/data-table.compon
     EmployeeDashboardComponent,
     EmployeeProfileComponent,
     EmployeeClosedRequestsComponent,
+    EmployeePendingRequestsComponent,
     EmployeeOngoingRequestsComponent,
     EmployeeNewBillComponent,
     EmployeePendingBillComponent,
@@ -160,6 +165,7 @@ import { DataTableComponent } from './components/ui/data-table/data-table.compon
     DataTableComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -169,7 +175,7 @@ import { DataTableComponent } from './components/ui/data-table/data-table.compon
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
