@@ -83,6 +83,7 @@ import { OptionviewCardComponent } from './features/employee/myRequests/employee
 
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ChangeStatusButtonComponent } from './change-status-button/change-status-button.component';
 
 @NgModule({
   declarations: [
@@ -157,7 +158,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     FinancePersonnelClosedBillsComponent,
     OptionCardComponent,
     OptionviewCardComponent,
-    DataTableComponent
+    DataTableComponent,
+    ChangeStatusButtonComponent
   ],
   imports: [
     CommonModule,
