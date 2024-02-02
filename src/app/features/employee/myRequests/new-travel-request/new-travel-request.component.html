@@ -244,13 +244,13 @@
                         </div>
 
                         <div class="form_input_container">
-                            <label for="accomodationRequired">Do you want hotel accomodatiion ? </label>
-                            <select class="form_input" formControlName="accomodationRequired">
+                            <label for="accommodationRequired">Do you want hotel accomodatiion ? </label>
+                            <select class="form_input" formControlName="accommodationRequired">
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>
                             <span class="form_error"
-                            *ngIf="travelRequestForm.get('accomodationRequired')?.invalid && travelRequestForm.get('accomodationRequired')?.touched">
+                            *ngIf="travelRequestForm.get('accommodationRequired')?.invalid && travelRequestForm.get('accommodationRequired')?.touched">
                                Choose a value
                            </span>
                         </div>

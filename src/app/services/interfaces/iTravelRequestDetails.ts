@@ -15,7 +15,7 @@ export interface travelRequestDetails {
     sourceCountry: string;
     destinationCountry: string;
     cabRequired: string;
-    accomodationRequired: string;
+    accommodationRequired: string;
     prefDepartureTime: string;
 
     mailAttachment: File;

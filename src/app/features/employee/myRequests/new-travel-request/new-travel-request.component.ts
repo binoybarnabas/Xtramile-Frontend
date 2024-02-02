@@ -90,7 +90,7 @@ export class NewTravelRequestComponent {
 
       //Additional Info
       cabRequired: new FormControl('no', Validators.required),
-      accomodationRequired: new FormControl('no', Validators.required),
+      accommodationRequired: new FormControl('no', Validators.required),
       prefDepartureTime: new FormControl('00.00 - 04.00', Validators.required),
 
       mailAttachment: new FormControl(null, Validators.required),

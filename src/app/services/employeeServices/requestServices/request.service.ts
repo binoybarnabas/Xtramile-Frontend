@@ -43,7 +43,6 @@ export class RequestService {
       }
     });
 
-
     //console.log(formData)
     // Make the HTTP request with the correct headers
     const headers = new HttpHeaders();
