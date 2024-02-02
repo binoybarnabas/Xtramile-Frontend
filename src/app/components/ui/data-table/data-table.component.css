@@ -1,32 +1,33 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
+ @import '~bootstrap/dist/css/bootstrap.min.css';
 
-.container{
-    width: 100rem;
-    padding: 0.95rem;
-}
+ .container {
+     width: 100rem;
+     padding: 0.95rem;
+ }
 
-.header{
-    display: flex;
-    justify-content: space-between;
-    background: #F0F1F3;
-    padding: 0.9rem 1rem;
-    }
+ .header {
+     display: flex;
+     justify-content: space-between;
+     background: #F0F1F3;
+     padding: 0.9rem 1rem;
+ }
 
-.dynamic_table{
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    border-style: none;
-}
+ .dynamic_table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 1rem;
+     border-style: none;
+ }
 
-.dynamic_table th{
-    background: #F0F1F3;
-    line-height: 45vdh;
-  }
+ .dynamic_table th {
+     background: #F0F1F3;
+     line-height: 45vdh;
+ }
 
-.dynamic_table th, .dynamic_table td {
-    border: none;
-    border-bottom:  1px solid #ddd;
-    padding: 0.5rem;
-    text-align: left;
-}
+ .dynamic_table th,
+ .dynamic_table td {
+     border: none;
+     border-bottom: 1px solid #ddd;
+     padding: 0.5rem;
+     text-align: left;
+ }

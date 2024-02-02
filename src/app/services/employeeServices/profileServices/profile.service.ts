@@ -8,12 +8,17 @@ import { Observable } from 'rxjs';
 export class ProfileService {
 
   constructor(private http: HttpClient) { }
+
+
   //Patch the employee details
-  patchData(employeeId: number, editedData: { [key: string]: any }): Observable<any> {
-    return this.http.patch(`http://localhost:5190/api/employee/edit/profile/details/${employeeId}`,editedData);
+  updateProfile(employeeId: number, editedData: { [key: string]: any }): Observable<any> {
+    return this.http.patch(`http://localhost:5190/api/employee/edit/profile/details/${employeeId}`, editedData);
   }
- //get the employee details
-  getEmployeeData(employeeId: number): Observable<any>{
+
+
+
+  //get the employee details
+  getEmployeeData(employeeId: number): Observable<any> {
     return this.http.get(`http://localhost:5190/api/employee/profile/details/${employeeId}`)
   }
   //save the details of the uploaded file
