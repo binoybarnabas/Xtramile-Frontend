@@ -9,24 +9,24 @@ import { ProfileService } from 'src/app/services/employeeServices/profileService
 })
 export class EmployeeProfileComponent {
   editMode: boolean = false;
-  employeeId:number=3;
-  initialValue:{ [key: string]: any } = {}; //to store the initial value of contact and address
-  initialData:{ [key: string]: any } = {}; // to store the initial value of all other data
+  employeeId: number = 3;
+  initialValue: { [key: string]: any } = {}; //to store the initial value of contact and address
+  initialData: { [key: string]: any } = {}; // to store the initial value of all other data
   constructor(private service: ProfileService) { }
   form = new FormGroup({
     firstName: new FormControl({ value: '', disabled: true }, Validators.required),
     lastName: new FormControl({ value: '', disabled: true }, Validators.required),
     email: new FormControl({ value: '', disabled: true }, Validators.email),
-    contactNumber: new FormControl('',[
+    contactNumber: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^[0-9]+$/), 
-      Validators.maxLength(10)  
+      Validators.pattern(/^[0-9]+$/),
+      Validators.maxLength(10)
     ]),
     department: new FormControl({ value: '', disabled: true }),
     reportsTo: new FormControl({ value: '', disabled: true }),
     projectId: new FormControl({ value: '', disabled: true }),
     projectName: new FormControl({ value: '', disabled: true }),
-    address: new FormControl('',Validators.required),
+    address: new FormControl('', Validators.required),
     pincode: new FormControl(''),
     passport: new FormControl(''),
     idCard: new FormControl(''),
@@ -51,8 +51,8 @@ export class EmployeeProfileComponent {
       next: (data: any) => {
         console.log(data);
         //store the initial data of the employee
-        this.initialValue={contactNumber:data.contactNumber, address: data.address}
-        this.initialData={
+        this.initialValue = { contactNumber: data.contactNumber, address: data.address }
+        this.initialData = {
           firstName: data.firstName,
           lastName: data.lastName,
           email: data.email,
@@ -84,81 +84,81 @@ export class EmployeeProfileComponent {
   }
   //to patch the values after the user click on the save button
   onSubmit() {
-  //making the initial values as empty
- let updatedData:{contactNumber?:String; address?: String}={
-  contactNumber:'',
-  address:''
- };
- 
- console.log('upadted Data',updatedData)
- console.log('initial value',this.initialValue)
+    //making the initial values as empty
+    let updatedData: { contactNumber?: String; address?: String } = {
+      contactNumber: '',
+      address: ''
+    };
 
-//  check if the initially stored value is same as the value in the form after the user click on save button.
-//  if the value is same make updatedData value as undefined otherwise assign the new value to the updated.
- 
-  this.initialValue['contactNumber']===this.form.get('contactNumber')?.value
-  ?(updatedData.contactNumber=undefined)
-  :(updatedData.contactNumber=this.form.get('contactNumber')?.value ?? undefined);
+    console.log('upadted Data', updatedData)
+    console.log('initial value', this.initialValue)
 
-  this.initialValue['address']===this.form.get('address')?.value
-  ?(updatedData.address=undefined)
-  :(updatedData.address=this.form.get('address')?.value ?? undefined);
+    //  check if the initially stored value is same as the value in the form after the user click on save button.
+    //  if the value is same make updatedData value as undefined otherwise assign the new value to the updated.
 
-  //store the values in form as the initial value, it is for to not to make API call.
-  this.initialValue={contactNumber:this.form.get('contactNumber')?.value, address: this.form.get('address')?.value}
-   
-  //if the updatedData is undefined for both contactNumber and address dont need to patch the value
-  //so this condition is to avoid unnecessary API call
-  if((updatedData.contactNumber !== undefined || updatedData.address !== undefined))
-  {
-    //only allow to patch the data when the form is dirty, touched and valid.
-    //whenever user click on edit and save button unnecessary API call won't go
-    if(this.form.dirty && this.form.touched && this.form.valid)
-    {
-      console.log('updated value',updatedData)
-      this.service.patchData(this.employeeId, updatedData).subscribe(() => {
-        console.log('PATCH request successful');
-        this.toggleEditMode();
+    this.initialValue['contactNumber'] === this.form.get('contactNumber')?.value
+      ? (updatedData.contactNumber = undefined)
+      : (updatedData.contactNumber = this.form.get('contactNumber')?.value ?? undefined);
 
-        //to reset the form state, make it empty
-        this.form.reset();  
+    this.initialValue['address'] === this.form.get('address')?.value
+      ? (updatedData.address = undefined)
+      : (updatedData.address = this.form.get('address')?.value ?? undefined);
 
-        //assign the values in the initialData and initialValue to the formcontrol name
-        //this is to avoid API call
-        this.form.patchValue({
-          firstName: this.initialData['firstName'],
-          lastName: this.initialData['lastName'],
-          email: this.initialData['email'],
-          reportsTo: this.initialData['reportsTo'],
-          contactNumber:this.initialValue['contactNumber'],
-          address: this.initialValue['address'],
-          department: this.initialData['department'],
-          projectId: this.initialData['projectId'],
-          projectName: this.initialData['projectName']
+
+
+    //store the values in form as the initial value, it is for to not to make API call.
+    this.initialValue = { contactNumber: this.form.get('contactNumber')?.value, address: this.form.get('address')?.value }
+
+    //if the updatedData is undefined for both contactNumber and address dont need to patch the value
+    //so this condition is to avoid unnecessary API call
+    if ((updatedData.contactNumber !== undefined || updatedData.address !== undefined)) {
+      //only allow to patch the data when the form is dirty, touched and valid.
+      //whenever user click on edit and save button unnecessary API call won't go
+      if (this.form.dirty && this.form.touched && this.form.valid) {
+        console.log('updated value', updatedData)
+        this.service.updateProfile(this.employeeId, updatedData).subscribe(() => {
+          console.log('PATCH request successful');
+          this.toggleEditMode();
+
+          //to reset the form state, make it empty
+          this.form.reset();
+
+          //assign the values in the initialData and initialValue to the formcontrol name
+          //this is to avoid API call
+          this.form.patchValue({
+            firstName: this.initialData['firstName'],
+            lastName: this.initialData['lastName'],
+            email: this.initialData['email'],
+            reportsTo: this.initialData['reportsTo'],
+            contactNumber: this.initialValue['contactNumber'],
+            address: this.initialValue['address'],
+            department: this.initialData['department'],
+            projectId: this.initialData['projectId'],
+            projectName: this.initialData['projectName']
+          });
+        }, (error) => {
+          console.error('Error in PATCH request:', error);
         });
-      }, (error) => {
-        console.error('Error in PATCH request:', error);
-      });
+      } else {
+        alert('The data you have entered is not valid!!!');
+      }
     } else {
-      alert('The data you have entered is not valid!!!');
-    }  
-  }else{
-    this.toggleEditMode();
-  }
+      this.toggleEditMode();
+    }
   }
 
   //uploading file
   onFileSelected(event: any, fileType: string) {
-    if(this.editMode){
+    if (this.editMode) {
       const file: File = event.target.files[0];
-    const reader = new FileReader();
+      const reader = new FileReader();
 
-    reader.onload = (e) => {
-      const fileContent = (e.target as any).result;
-      this.uploadPassport(file, fileType, fileContent);
-    };
+      reader.onload = (e) => {
+        const fileContent = (e.target as any).result;
+        this.uploadPassport(file, fileType, fileContent);
+      };
 
-    reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
     }
   }
 
@@ -174,7 +174,7 @@ export class EmployeeProfileComponent {
         fileContent: fileContent  // Include the file content as base64
       };
 
-  
+
       this.service.saveFileDetails(fileDetails).subscribe(response => {
         console.log(response);
       });
