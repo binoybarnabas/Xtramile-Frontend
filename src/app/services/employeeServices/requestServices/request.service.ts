@@ -34,5 +34,9 @@ export class RequestService {
       return this.http.get<PendingRequest[]>(
         `http://localhost:5190/api/employee/viewpendingrequest/${empId}`
       );
-}
+    }
+
+    getStatusName(requestId : number) : Observable<string>{
+      return this.http.get(`http://localhost:5190/api/requeststatus/name/${requestId}`, { responseType: 'text' })
+    }
 }

@@ -13,12 +13,14 @@ import { ManagerClosedTravelRequestsComponent } from './features/manager/travelR
 import { EmployeeDashboardComponent } from './features/employee/employee-dashboard/employee-dashboard.component';
 import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
+import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
 
   const routes: Routes = [
     { path: 'employee', component: EmployeeHomeComponent, children: [
       {path:'dashboard',component:EmployeeDashboardComponent},
       {path:'request',component:NewTravelRequestComponent},
-      {path:'pending',component:EmployeePendingRequestsComponent},
+      {path:'pending',component:EmployeePendingRequestsComponent },
+      {path: 'available_options',component: OptionviewCardComponent},
       {path:'ongoing',component:EmployeeOngoingRequestsComponent},
       {path:'history',component:EmployeeClosedRequestsComponent},
       {path:'profile',component:EmployeeProfileComponent}
