@@ -30,7 +30,7 @@
         <div  (click)="doNothing()"  *ngIf ="subMenu1ToggleValue === 1;" class="side_bar_sub_list">
                          
                 <ng-container *ngFor="let entry of myRequestsMapEntries()">
-                    <li class="list_item"><i [ngClass]="entry[0]" ></i> {{entry[1]}} <span class="dot"> </span> </li>
+                    <li (click)="navigateToRequest(entry[1])" class="list_item"><i [ngClass]="entry[0]" ></i> {{entry[1]}} <span class="dot"> </span> </li>
                 </ng-container>
 
         </div>
@@ -54,7 +54,7 @@
 
     <div class="side_bar_main">
         <i *ngIf="isSideNavBarCollapsed===1" class="left_icon collapsed_icon ri-user-line"></i>
-        <p class="main_title"> <i class="left_icon ri-user-line"></i> Profile </p>
+        <p class="main_title" (click)="navigateToRequest('profile')"> <i class="left_icon ri-user-line"></i> Profile </p>
     </div>
 
     <div class="side_bar_logout_section">

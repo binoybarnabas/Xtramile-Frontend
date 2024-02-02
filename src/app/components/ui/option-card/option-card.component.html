@@ -1,0 +1,96 @@
+<p>option-card works!</p>
+<div class="options_container">
+    <ng-container *ngFor="let option of options" >
+      <div
+        class="card_selection shadow-lg option_card my-3"
+        (click)="selectOption(option)"
+        [ngClass]="{ selected: selectedOption === option }"
+      >
+        <div class="selected-header" *ngIf="selectedOption === option">
+          <h3 class="fw-bold">SELECTED</h3>
+        </div>
+        <div class="card-body dashed_border card_body text-center">
+          <div class="row">
+            <div class="col-4">
+              <div class="row text-secondary">
+                <h6>{{ option.sourceCity }}</h6>
+              </div>
+              <div class="row">
+                <h5>
+                  {{
+                    option.TravelTypeName === "Domestic"
+                      ? option.sourceState
+                      : option.sourceCountryCode
+                  }}
+                </h5>
+              </div>
+              <div class="row">
+                <p>{{ formatDateTime(option.startTime) }}</p>
+              </div>
+            </div>
+            <div class="col-4">
+                <div>
+                    <i
+                      *ngIf="option.modeName === 'Flight'"
+                      class="ri-flight-takeoff-line"
+                    ></i>
+                    <i *ngIf="option.modeName === 'Train'" class="ri-train-line"></i>
+                    <i *ngIf="option.modeName === 'Bus'" class="ri-bus-2-line"></i>
+                    <i *ngIf="option.modeName === 'Cab'" class="ri-taxi-line"></i>
+                  </div>
+              <h6 class="text-secondary">{{ calculateDuration(option.startTime,option.endTime) }}</h6>
+            </div>
+            <div class="col-4">
+              <div class="row text-secondary">
+                <h6>{{ option.destinationCity }}</h6>
+              </div>
+              <div class="row">
+                <h5>
+                  {{
+                    option.TravelTypeName === "Domestic"
+                      ? option.destinationState
+                      : option.destinationCountryCode
+                  }}
+                </h5>
+              </div>
+              <div class="row">
+                <p>{{ formatDateTime(option.endTime) }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body card_body dashed_border text-center">
+          <div class="row">
+            <div class="col-4">
+              <div class="row text-secondary"><h6>Mode</h6></div>
+              <div class="row">
+                <h5>{{ option.modeName }}</h5>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row text-secondary"><h6>Offered By</h6></div>
+              <div class="row">
+                <h5>{{ option.serviceOfferedBy }}</h5>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row text-secondary"><h6>Class</h6></div>
+              <div class="row">
+                <h5>{{ option.class }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center card_body">
+          <div class="img_row">
+            <img
+              class="logo_img"
+              src="assets\images\exp_logo.png"
+              alt=""
+              srcset=""
+            />
+          </div>
+        </div>
+      </div>
+    </ng-container>
+</div>

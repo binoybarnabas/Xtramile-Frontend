@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SideNavBarService } from '../../../../../services/employeeServices/layoutServices/side-nav-bar.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,21 +14,23 @@ export class SideNavBarComponent {
   myRequestsMap = new Map<string, string>();
   mySettlementsMap = new Map<string, string>();
 
+
+
   subMenu1ToggleValue = 0;
   subMenu2ToggleValue = 0;
 
   isSideNavBarCollapsed: any;
 
-  constructor(private sideNavBarService: SideNavBarService) {
+  constructor(private sideNavBarService: SideNavBarService, private router:Router) {
 
     this.isSideNavBarCollapsed = 1;
 
     //myRequestsMap contains values for My Requests sub menu
     this.myRequestsMap.set('new ri-add-line', "New Requests");
     // this.myRequestsMap.set('ri-draft-line', "Draft Requests");
-    this.myRequestsMap.set('ri-loader-line', "Pending Approval ");
+    this.myRequestsMap.set('ri-loader-line', "Pending Approval");
     this.myRequestsMap.set('ri-arrow-up-circle-line', "Ongoing Travel")
-    this.myRequestsMap.set('ri-history-line', "Request History ")
+    this.myRequestsMap.set('ri-history-line', "Request History")
 
 
     //mySettlementsMap contains values for My Settlements sub menu
@@ -97,6 +100,23 @@ export class SideNavBarComponent {
     this.subMenu2ToggleValue = 0;
   }
 
+  /// routing based on the values from the keys in myRequest map
+  navigateToRequest(destination : string) {
+    console.log("inside navigate" + destination);
+    switch(destination){
+      case 'New Requests': this.router.navigate(['/employee/request']);
+                            break;
+      case 'Pending Approval': this.router.navigate(['/employee/pending']);
+                            break;
+      case 'Ongoing Travel': this.router.navigate(['/employee/ongoing']);
+                            break;
+      case 'Request History': this.router.navigate(['/employee/history']);
+                            break;
+      case 'profile': this.router.navigate(['/employee/profile']);
+                      break;
 
+    }
+    
+  }
 
 }

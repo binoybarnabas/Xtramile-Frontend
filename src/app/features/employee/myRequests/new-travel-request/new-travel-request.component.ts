@@ -76,27 +76,27 @@ export class NewTravelRequestComponent {
 
       //Trip Info
       travelTypeId: new FormControl(0, Validators.required),
-      tripPurpose: new FormControl('D', Validators.required),
+      tripPurpose: new FormControl('Business Meet', Validators.required),
       departureDate: new FormControl('', Validators.required),
       returnDate: new FormControl('', Validators.required),
-      sourceCityZipCode: new FormControl('D', Validators.required),
-      destinationCityZipCode: new FormControl('D', Validators.required),
-      sourceCity: new FormControl('D', Validators.required),
-      destinationCity: new FormControl('D', Validators.required),
-      sourceState: new FormControl('D', Validators.required),
-      destinationState: new FormControl('D', Validators.required),
-      sourceCountry: new FormControl('D', Validators.required),
-      destinationCountry: new FormControl('D', Validators.required),
+      sourceCityZipCode: new FormControl('890678', Validators.required),
+      destinationCityZipCode: new FormControl('890765', Validators.required),
+      sourceCity: new FormControl('Trivandrum', Validators.required),
+      destinationCity: new FormControl('Austin', Validators.required),
+      sourceState: new FormControl('Kerala', Validators.required),
+      destinationState: new FormControl('Texas', Validators.required),
+      sourceCountry: new FormControl('India', Validators.required),
+      destinationCountry: new FormControl('USA', Validators.required),
 
       //Additional Info
-      cabRequired: new FormControl('no', Validators.required),
-      accommodationRequired: new FormControl('no', Validators.required),
+      cabRequired: new FormControl('yes', Validators.required),
+      accommodationRequired: new FormControl('yes', Validators.required),
       prefDepartureTime: new FormControl('00.00 - 04.00', Validators.required),
 
       mailAttachment: new FormControl(null, Validators.required),
       passportAttachment: new FormControl(null, Validators.required),
       idCardAttachment: new FormControl(null, Validators.required),
-      additionalComments: new FormControl('D', Validators.required),
+      additionalComments: new FormControl('Nill', Validators.required),
 
     })
 
