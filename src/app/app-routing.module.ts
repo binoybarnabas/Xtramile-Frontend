@@ -14,6 +14,9 @@ import { EmployeeDashboardComponent } from './features/employee/employee-dashboa
 import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
+import { TravelAdminOngoingTravelComponent } from './features/travelAdmin/myRequests/travel-admin-ongoing-travel/travel-admin-ongoing-travel.component';
+import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-home.component';
+import { ManagerOngoingTravelRequestsComponent } from './features/manager/travelRequests/manager-ongoing-travel-requests/manager-ongoing-travel-requests.component';
 
   const routes: Routes = [
     { path: 'employee', component: EmployeeHomeComponent, children: [
@@ -29,7 +32,7 @@ import { OptionviewCardComponent } from './features/employee/myRequests/employee
       {path:'dashboard',component:ManagerDashboardComponent},
       {path:'newrequests',component:ManagerIncomingTravelRequestsComponent},
       {path:'forwarded',component:ManagerForwardedTravelRequestsComponent},
-      {path:'ongoing',component:ManagerOngoingTravelComponent},
+      {path:'ongoing',component:ManagerOngoingTravelRequestsComponent},
       {path:'closed',component:ManagerClosedTravelRequestsComponent},
     ]}
   ];

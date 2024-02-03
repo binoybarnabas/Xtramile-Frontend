@@ -77,4 +77,9 @@ export class RequestService {
     getStatusName(requestId : number) : Observable<string>{
       return this.http.get(`http://localhost:5190/api/requeststatus/name/${requestId}`, { responseType: 'text' })
     }
+
+    //get employee data that show in ongoing page
+    getEmployeeOngoingRequest(employeeId: number): Observable<any> {
+      return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`);
+    }
 }
