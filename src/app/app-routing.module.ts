@@ -15,6 +15,7 @@ import { ManagerDashboardComponent } from './features/manager/manager-dashboard/
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
 import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-home.component';
+
 import { TravelAdminDashboardComponent } from './features/travelAdmin/travel-admin-dashboard/travel-admin-dashboard.component';
 import { TravelAdminIncomingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-incoming-travel-requests/travel-admin-incoming-travel-requests.component';
 import { TravelAdminWaitingOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-options-travel-requests.component';
@@ -47,6 +48,9 @@ import { ManagerOngoingTravelRequestsComponent } from './features/manager/travel
       {path:'forwarded',component:ManagerForwardedTravelRequestsComponent},
       {path:'ongoing',component:ManagerOngoingTravelRequestsComponent},
       {path:'closed',component:ManagerClosedTravelRequestsComponent},
+    ]},
+    {path:'traveladmin',component:TravelAdminHomeComponent}
+
       {path: 'profile', component: ManagerProfileComponent}
     ]},
     { path: 'traveladmin', component: TravelAdminHomeComponent, children: [
@@ -65,6 +69,7 @@ import { ManagerOngoingTravelRequestsComponent } from './features/manager/travel
       {path: 'closed', component: FinancePersonnelClosedTravelSettlementsComponent},
       {path: 'profile', component: FinancePersonnelProfileComponent}
     ]}
+
   ];
 
   @NgModule({
