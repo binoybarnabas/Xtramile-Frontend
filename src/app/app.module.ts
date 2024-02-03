@@ -82,7 +82,11 @@ import { OptionviewCardComponent } from './features/employee/myRequests/employee
 
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 import { TableFilterComponent } from './components/ui/table-filter/table-filter.component';
+
+import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component'; 
+
 
 @NgModule({
   declarations: [
@@ -159,6 +163,7 @@ import { TableFilterComponent } from './components/ui/table-filter/table-filter.
     OptionviewCardComponent,
     DataTableComponent,
     TableFilterComponent
+    ChangeStatusButtonComponent
   ],
   imports: [
     CommonModule,

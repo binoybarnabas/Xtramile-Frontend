@@ -1,18 +1,24 @@
-<div class="container"> 
-    
-    <div>
-        <table class="dynamic_table">
-            <thead>
-            <tr>
-            <th *ngFor="let header of headers">{{ header }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let row of data" (click)="onRowClick(row)">
-            <td *ngFor="let prop of displayedProperties">{{ row[prop] }}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container">
+  <div>
+    <table class="dynamic_table col-10 col-md-3 mb-2">
+      <thead>
+        <tr>
+          <th *ngFor="let header of headers">{{ header }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of data" (click)="onRowClick(row)">
+          <td *ngFor="let prop of displayedProperties">
+            <ng-container *ngIf="isMultilineProperty(prop); else singleLine">
+              <!-- split the data using \n -->
+              <div *ngFor="let line of row[prop].split('\n')">{{ line }}</div>
+            </ng-container>
+            <ng-template #singleLine>
+              {{ row[prop] }}
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-

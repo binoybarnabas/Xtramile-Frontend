@@ -45,5 +45,7 @@ export class ManagerTravelRequestsService {
      const params= new HttpParams().set('managerId',managerId).set('employeename',employeeName);
      return this.http.get<any>(url,{params})
    }
-   
+   getManagerOngoingTravelRequest(managerId: number): Observable<any> {
+    return this.http.get(`http://localhost:5190/api/reportingmanager/ongoing/travel/request/${managerId}`);
+  }
 }

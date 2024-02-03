@@ -142,6 +142,8 @@ export class ManagerSideNavBarComponent {
                             break;
       case 'Closed Requests': this.router.navigate(['/manager/closed']);
                             break;
+      case 'profile': this.router.navigate(['/manager/profile']);
+                            break;
 
     }
   }

@@ -91,6 +91,7 @@
 
                     <div class="form_elements">
 
+                        <!-- Trip Type -->
                         <div class="form_input_container">
                             <label for="travelTypeId">Trip Type</label>
                             <select  formControlName="travelTypeId"  class="form_input">
@@ -103,6 +104,7 @@
                            </span>
                         </div>
 
+                        <!-- Trip Purpose -->
                         <div class="form_input_container">
                             <label for="tripPurpose">Purpose of Trip</label>
                             <input class="form_input" type="text" formControlName="tripPurpose"  placeholder="Enter the purpose" />
@@ -112,27 +114,78 @@
                            </span>
                         </div>
 
+                        <!-- Departure Date -->
+                        <div class="form_input_container">
 
-                         <div class="form_input_container">
                             <label for="departureDate">Departure Date</label>
                             <input class="form_input" formControlName="departureDate" type="date" />
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('departureDate')?.invalid && travelRequestForm.get('departureDate')?.touched">
-                               Select departure date
-                           </span>
+                         
+                           <span class="form_error"
+                           *ngIf="travelRequestForm.get('departureDate')?.hasError('required') && travelRequestForm.get('departureDate')?.touched">
+                            Select departure date 
+                            </span>
+
+                            <span class="form_error" 
+                           *ngIf="!travelRequestForm.get('departureDate')?.hasError('required') && travelRequestForm.get('departureDate')?.hasError('invalidDateFormat') && travelRequestForm.get('departureDate')?.touched">
+                            Invalid date format
+                            </span>
+
+                            <span class="form_error" 
+                            *ngIf="!travelRequestForm.get('departureDate')?.hasError('required') && travelRequestForm.get('departureDate')?.hasError('futureDate') && travelRequestForm.get('departureDate')?.touched">
+                             Departure date must be a future a date
+                             </span>
+
                         </div>
 
-                                                
+                        <!-- Return Date -->
                          <div class="form_input_container">
+
                             <label for="returnDate">Return Date</label>
                             <input class="form_input" formControlName="returnDate" type="date"  />
+                           
                             <span class="form_error"
-                            *ngIf="travelRequestForm.get('returnDate')?.invalid && travelRequestForm.get('returnDate')?.touched">
+                            *ngIf="travelRequestForm.get('returnDate')?.hasError('required') && travelRequestForm.get('returnDate')?.touched">
                                Select return date
-                           </span>
+                            </span>
+
+                            <span class="form_error" 
+                            *ngIf="!travelRequestForm.get('returnDate')?.hasError('required') && travelRequestForm.get('returnDate')?.hasError('invalidDateFormat') && travelRequestForm.get('returnDate')?.touched">
+                             Invalid date format
+                            </span>
+
+                             <span class="form_error" 
+                             *ngIf="!travelRequestForm.get('returnDate')?.hasError('required') && travelRequestForm.get('returnDate')?.hasError('futureDate') && travelRequestForm.get('returnDate')?.touched">
+                               Return date must be a future a date
+                            </span>
+
+                            <span class="form_error" 
+                            *ngIf="!travelRequestForm.get('returnDate')?.hasError('required') && !travelRequestForm.get('returnDate')?.hasError('futureDate')  && travelRequestForm.get('returnDate')?.hasError('dateRange') && travelRequestForm.get('returnDate')?.touched">
+                            Return date must not be equal to or earlier than the departure date!
+                            </span>
+
                         </div>     
                         
-                    
+                        <!-- Source Country -->
+                        <div class="form_input_container">
+                            <label for="sourceCountry">Source Country</label>
+                            <input class="form_input" type="text" formControlName="sourceCountry"  placeholder="country" />
+                            <span class="form_error"
+                            *ngIf="travelRequestForm.get('sourceCountry')?.invalid && travelRequestForm.get('sourceCountry')?.touched">
+                               Enter the source country
+                           </span>
+                        </div>    
+                        
+                        <!-- Destination Country -->
+                        <div class="form_input_container">
+                            <label for="destinationCountry">Destination Country</label>
+                            <input class="form_input" formControlName="destinationCountry"  type="text"  placeholder="country" />
+                            <span class="form_error"
+                            *ngIf="travelRequestForm.get('destinationCountry')?.invalid && travelRequestForm.get('destinationCountry')?.touched">
+                               Enter the destination country
+                           </span>
+                        </div> 
+                                
+                        <!-- Source Zip Code -->
                         <div class="form_input_container">
                             <label for="sourceCityZipCode">Source City Zip Code</label>
                             <input class="form_input" type="text" formControlName="sourceCityZipCode" placeholder="Enter the zip code of your source city" />
@@ -142,6 +195,7 @@
                            </span>
                         </div>               
                 
+                        <!-- Destination Zip Code -->
                         <div class="form_input_container">
                             <label for="destinationCityZipCode">Destination City Zip Code</label>
                             <input class="form_input" type="text" formControlName="destinationCityZipCode"  placeholder="Enter the zip code of your destination city" />
@@ -151,7 +205,7 @@
                            </span>
                         </div>     
 
-                        
+                        <!-- Source City -->
                         <div class="form_input_container">
                             <label for="sourceCity">Source City</label>
                             <input class="form_input" type="text" formControlName="sourceCity"  placeholder="source city" />
@@ -161,7 +215,7 @@
                            </span>
                         </div>      
 
-
+                        <!-- Destination City -->
                         <div class="form_input_container">
                             <label for="destinationCity">Destination City</label>
                             <input class="form_input" type="text" formControlName="destinationCity"  placeholder="destination city" />
@@ -171,7 +225,7 @@
                            </span>
                         </div>      
 
-                        
+                        <!-- Source State -->                     
                         <div class="form_input_container">
                             <label for="sourceState">Source State</label>
                             <input class="form_input" type="text" formControlName="sourceState"  placeholder="state / province" />
@@ -179,8 +233,9 @@
                             *ngIf="travelRequestForm.get('sourceState')?.invalid && travelRequestForm.get('sourceState')?.touched">
                                Enter the source state
                            </span>
-                        </div>                
-                    
+                        </div>             
+
+                        <!-- Destination State -->
                         <div class="form_input_container">
                             <label for="destinationState">Destination State</label>
                             <input class="form_input" type="text" formControlName="destinationState"  placeholder="state / province" />
@@ -190,25 +245,6 @@
                            </span>
                         </div>               
 
-                         
-                        <div class="form_input_container">
-                            <label for="sourceCountry">Source Country</label>
-                            <input class="form_input" type="text" formControlName="sourceCountry"  placeholder="country" />
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('sourceCountry')?.invalid && travelRequestForm.get('sourceCountry')?.touched">
-                               Enter the source country
-                           </span>
-                        </div>               
-                    
-                        <div class="form_input_container">
-                            <label for="destinationCountry">Destination Country</label>
-                            <input class="form_input" formControlName="destinationCountry"  type="text"  placeholder="country" />
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('destinationCountry')?.invalid && travelRequestForm.get('destinationCountry')?.touched">
-                               Enter the destination country
-                           </span>
-                        </div> 
-                                                    
                     <!-- form input elements ends -->
                     </div>
 
@@ -222,6 +258,7 @@
                 
                 </div>  
 
+
                 <!-- additional info section -->
                 <div *ngIf="newReqFormSubMenuValue === 2" class="form_input_group"  >
 
@@ -231,6 +268,7 @@
 
                     <div class="form_elements">
 
+                        <!-- Cab Service -->
                         <div class="form_input_container">
                             <label for="cabRequired">Do you want cab service ? </label>
                             <select class="form_input" formControlName="cabRequired">
@@ -243,6 +281,7 @@
                            </span>
                         </div>
 
+                        <!-- Accomodation -->
                         <div class="form_input_container">
                             <label for="accommodationRequired">Do you want hotel accomodatiion ? </label>
                             <select class="form_input" formControlName="accommodationRequired">
@@ -255,6 +294,7 @@
                            </span>
                         </div>
 
+                        <!-- Pref Departure Time -->
                         <div class="form_input_container">
                             <label for="prefDepartureTime">Prefrerred Departure Time</label>
                             <select class="form_input" formControlName="prefDepartureTime">
@@ -271,48 +311,48 @@
                            </span>
                         </div>
 
+                        <!-- Travel Authorization -->
                         <div class="form_input_container">
-                            <label for="mailAttachment">Mail Screenshot Attachment</label>
-                            <input class="form_input" type="file"  formControlName="mailAttachment" (change)="onFileChange($event, 'mailAttachment')" placeholder="attach" />
+                            <label for="travelAuthorizationEmailCapture">Travel Authorization Email Capture</label>
+                            <input class="form_input" type="file"  formControlName="travelAuthorizationEmailCapture" (change)="onFileChange($event, 'travelAuthorizationEmailCapture')" />
                             <span class="form_error"
-                            *ngIf="travelRequestForm.get('mailAttachment')?.invalid && travelRequestForm.get('mailAttachment')?.touched">
+                            *ngIf="travelRequestForm.get('travelAuthorizationEmailCapture')?.invalid && travelRequestForm.get('travelAuthorizationEmailCapture')?.touched">
                                Choose a file
                            </span>
                         </div>
 
-
+                        <!-- Passport -->
                         <div class="form_input_container">
                             <label for="passportAttachment">Passport</label>
 
-                            <input class="form_input" type="file"  formControlName="passportAttachment" (change)="onFileChange($event, 'passportAttachment')" />
+                            <input class="form_input" type="file"  formControlName="passportAttachment" (change)="onFileChange($event, 'passportAttachment')"/>
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('passportAttachment')?.invalid && travelRequestForm.get('passportAttachment')?.touched">
                                Choose a file
                            </span>
+
                         </div>
 
+                        <!-- Id Card -->
                         <div class="form_input_container">
                             <label for="idCardAttachment">ID Card</label>
-                            <input class="form_input" type="file"  formControlName="idCardAttachment" (change)="onFileChange($event, 'idCardAttachment')"  />
+                            <input class="form_input" type="file"  formControlName="idCardAttachment"  (change)="onFileChange($event, 'idCardAttachment')"/>
 
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('idCardAttachment')?.invalid && travelRequestForm.get('idCardAttachment')?.touched">
                                Choose a file
                            </span>
                         </div>
-                          
-                         
-                    
+ 
+                        <!-- Additional Comments -->
                         <div class="form_input_container">
                             <label for="additionalComments">Additional Comments</label>
                             <textarea class="form_input" formControlName="additionalComments" id="" cols="30" rows="4"></textarea>
-                            <span class="form_error"
+                            <!-- <span class="form_error"
                             *ngIf="travelRequestForm.get('additionalComments')?.invalid && travelRequestForm.get('additionalComments')?.touched">
                                Enter Something
-                           </span>
+                           </span> -->
                         </div>   
-
-                    
 
                     </div>
 
@@ -330,13 +370,10 @@
                     <!-- form input group ends -->
                 </div>
 
-
             </form> 
 
             <!-- form container ends -->
         </div>
-
-        
 
     </div>
 
