@@ -7,8 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class TravelAdminTravelRequestsService {
 
+  private apiURL = 'http://localhost:5190/api'
   constructor(private http : HttpClient) { }
   getIncomingRequests():Observable<any>{
-    return this.http.get('http://localhost:5190/api/traveladmin/incomingrequests');
+    return this.http.get(this.apiURL + '/traveladmin/incomingrequests');
   }
 }

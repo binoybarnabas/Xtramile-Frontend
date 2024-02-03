@@ -14,6 +14,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
     
   }
   ngOnInit(){
+    //api service to receive all incoming requests.
     this.apiservice.getIncomingRequests().subscribe((data: any[]) => {
       this.incomingRequestdata = data;
     });
