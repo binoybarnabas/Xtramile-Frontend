@@ -49,11 +49,7 @@ import { ManagerOngoingTravelRequestsComponent } from './features/manager/travel
       {path:'ongoing',component:ManagerOngoingTravelRequestsComponent},
       {path:'closed',component:ManagerClosedTravelRequestsComponent},
     ]},
-    {path:'traveladmin',component:TravelAdminHomeComponent}
-
-      {path: 'profile', component: ManagerProfileComponent}
-    ]},
-    { path: 'traveladmin', component: TravelAdminHomeComponent, children: [
+      { path: 'traveladmin', component: TravelAdminHomeComponent, children: [
       {path: 'dashboard', component: TravelAdminDashboardComponent},
       {path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent},
       {path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent},

@@ -162,7 +162,7 @@ import { ChangeStatusButtonComponent } from './components/ui/change-status-butto
     OptionCardComponent,
     OptionviewCardComponent,
     DataTableComponent,
-    TableFilterComponent
+    TableFilterComponent,
     ChangeStatusButtonComponent
   ],
   imports: [
