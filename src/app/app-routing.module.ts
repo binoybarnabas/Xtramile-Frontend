@@ -14,6 +14,7 @@ import { EmployeeDashboardComponent } from './features/employee/employee-dashboa
 import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
+import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-home.component';
 
   const routes: Routes = [
     { path: 'employee', component: EmployeeHomeComponent, children: [
@@ -31,7 +32,8 @@ import { OptionviewCardComponent } from './features/employee/myRequests/employee
       {path:'forwarded',component:ManagerForwardedTravelRequestsComponent},
       {path:'ongoing',component:ManagerOngoingTravelComponent},
       {path:'closed',component:ManagerClosedTravelRequestsComponent},
-    ]}
+    ]},
+    {path:'traveladmin',component:TravelAdminHomeComponent}
   ];
 
   @NgModule({

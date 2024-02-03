@@ -6,7 +6,6 @@ import { InputFieldComponent } from './components/ui/input-field/input-field.com
 import { EmployeeComponent } from './features/employee/employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe } from '@angular/common';
-
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -83,6 +82,7 @@ import { OptionviewCardComponent } from './features/employee/myRequests/employee
 
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TableFilterComponent } from './components/ui/table-filter/table-filter.component';
 
 @NgModule({
   declarations: [
@@ -157,14 +157,16 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     FinancePersonnelClosedBillsComponent,
     OptionCardComponent,
     OptionviewCardComponent,
-    DataTableComponent
+    DataTableComponent,
+    TableFilterComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule, 
+    ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
