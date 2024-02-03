@@ -7,10 +7,7 @@
   border-radius: 15px;
   display: flex;
   width: 22rem;
-  background-image: linear-gradient(to bottom right, #b8cffd, white, #b8cffd);
-}
-.status .card-title {
-  color: black;
+  background-image: linear-gradient(to bottom right, #b8cffd, white);
 }
 .left_border {
   width: 5rem;
@@ -42,6 +39,6 @@
 }
 
 .btn {
-  background-color: lightgreen;
+  background-color: #c59df5;
   font-size: small;
 }

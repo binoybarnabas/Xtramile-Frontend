@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { PendingRequest } from './pending-request';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-pending-requests',
@@ -13,16 +14,31 @@ export class EmployeePendingRequestsComponent {
     requestData : PendingRequest[] = [];
       empId: number = 15;
 
-  constructor(private requestService: RequestService) {}
+  constructor(private requestService: RequestService, private router: Router, private activatedRoute : ActivatedRoute) {}
 
   ngOnInit() {
     this.getRequests(this.empId);
   }
 
-  getRequests(empId: number) {
+  //function to get the requests that have status pending for employee screen
+  getRequests(empId: number){
     this.subscription = this.requestService.getRequestsPendingStatus(empId).subscribe({
       next: (data) => {
-        console.log(data);
+        // Fetch status name for each request
+        data.forEach((request) => {
+          this.requestService.getStatusName(request.requestId).subscribe({
+            next: (statusName) => {
+              // Store the status name in the request object
+              console.log(statusName)
+              request.statusName = statusName;
+            },
+            error: (error: Error) => {
+              console.log(`Error fetching status name for request ${request.requestId}: ${error.message}`);
+            },
+          });
+        });
+
+        // Update the component's requestData array
         this.requestData = data;
       },
       error: (error: Error) => {
@@ -30,8 +46,15 @@ export class EmployeePendingRequestsComponent {
       },
       complete: () => {
         console.log("Completed");
-      }      
+      }
     });
+  }
+
+  navigateToOption(requestId : number){
+    this.router.navigate(['available_options'],{
+      relativeTo: this.activatedRoute.parent,
+      queryParams: {requestId : requestId}
+    })    
   }
 
   ngOnDestroy() {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 
 @Component({
@@ -10,10 +11,15 @@ export class OptionviewCardComponent {
   optionsFromEmployee: any[] = [];
   selectedOption: any | null = null;
   employeeId: number = 1;
-  reqId : number = 3;
-  constructor(private apiservice: RequestService) {}
+  reqId : number = 0
+  constructor(private apiservice: RequestService, private activatedRoute : ActivatedRoute) {}
 
   ngOnInit() {
+    this.activatedRoute.queryParamMap.subscribe((query) => {
+      if(query.get('requestId')){
+        this.reqId = parseInt(query.get('requestId')!,10)
+      }
+    })
     this.apiservice.getDataFromAvailOptions(this.reqId).subscribe((data: any[]) => {
       this.optionsFromEmployee = data;
     });
