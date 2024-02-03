@@ -2,11 +2,11 @@
 <div class="options_container">
   <ng-container *ngFor="let option of options">
     <div
-      class="card_selection shadow-lg option_card my-3"
+      class="card_selection shadow-lg option_card"
       (click)="selectOption(option)"
       [ngClass]="{ selected: selectedOption === option }"
     >
-      <div class="selected-header" *ngIf="selectedOption === option">
+      <div class="selected_header" *ngIf="selectedOption === option">
         <h3 class="fw-bold">SELECTED</h3>
       </div>
       <div class="card-body dashed_border card_body text-center">
