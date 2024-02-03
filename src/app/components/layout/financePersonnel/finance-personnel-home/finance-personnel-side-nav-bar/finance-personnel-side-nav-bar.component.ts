@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class FinancePersonnelSideNavBarComponent {
 
   isSideNavBarCollapsed: any;
 
-  constructor(private sideNavBarService: SideNavBarService) {
+  constructor(private sideNavBarService: SideNavBarService, private router: Router) {
 
     this.isSideNavBarCollapsed = 1;
 
@@ -128,5 +129,22 @@ export class FinancePersonnelSideNavBarComponent {
     this.subMenu4ToggleValue = 0;
 
   }
+
+    /// routing based on the values from the keys in myRequest map
+    navigateToRequest(destination : string) {
+      console.log("inside navigate" + destination);
+      switch(destination){
+        case 'Incoming': this.router.navigate(['/finance/incoming']);
+                              break;
+        case 'Pending': this.router.navigate(['/finance/pending']);
+                              break;
+        case 'Closed': this.router.navigate(['/finance/closed']);
+                              break;
+        case 'profile': this.router.navigate(['/finance/profile']);
+                              break;
+  
+      }
+      
+    }
 
 }
