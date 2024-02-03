@@ -11,8 +11,13 @@ export class OptionviewCardComponent {
   optionsFromEmployee: any[] = [];
   selectedOption: any | null = null;
   employeeId: number = 1;
+<<<<<<< HEAD
   reqId : number = 0
   constructor(private apiservice: RequestService, private activatedRoute : ActivatedRoute) {}
+=======
+  reqId : number = 1;
+  constructor(private apiservice: RequestService) {}
+>>>>>>> a0fe5c1 (fix:updated code)
 
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe((query) => {
