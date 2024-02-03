@@ -40,6 +40,9 @@ export class TableFilterComponent {
   }
 
   onSeeAllClick(): void {
+    this.selectedDate = null;
+    this.selectedSortOption = 'select';
+    this.searchName = '' 
     this.seeAllClicked.emit();
   }
 

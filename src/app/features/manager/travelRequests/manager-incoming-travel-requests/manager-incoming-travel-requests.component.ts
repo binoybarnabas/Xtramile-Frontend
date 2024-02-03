@@ -12,10 +12,12 @@ export class ManagerIncomingTravelRequestsComponent {
   selectedDate!:Date;
   searchByName!:string;
   sqlDatetimeFormat!: string;
-  sortedData : any
+  selectedSortOption! : string;
+
   employeeRequest: any[] | undefined;
+
   // Manager ID for fetching employee requests
-  managerId = 2;
+  managerId = 2; // to check the data
   itemsPerPage = 10;
   totalItems = 0;
   currentPage = 1;
@@ -26,8 +28,7 @@ export class ManagerIncomingTravelRequestsComponent {
     this.sqlDatetimeFormat = selectedDate.toISOString().slice(0, 10);
     this.apiservice.getEmployeeRequestByDate(this.managerId,this.sqlDatetimeFormat).subscribe({
       next: (data) => {
-        this.sortedData = data;
-        this.employeeRequest = this.sortedData;
+        this.employeeRequest = data;
       },
       error: (err) => {
         // Handle the error
@@ -79,9 +80,8 @@ export class ManagerIncomingTravelRequestsComponent {
   handleSortOptionSelection(selectedSortOption: string): void {
     // Handle the selected sort option
     console.log('Selected Sort Option:', selectedSortOption);
-
-    
-
+    this.selectedSortOption = selectedSortOption;
+    this.sortData(selectedSortOption);
   }
 
   // Load all the employee request while initializing
@@ -119,42 +119,30 @@ export class ManagerIncomingTravelRequestsComponent {
 
   // Selected sort option for sorting employee requests
 
-  // Set the selected sort option
-  // setSortOption(option: string): void {
-  //   this.selectedSortOption = option;
-  //   this.sortData(option);
-  // }
 
-  // Sort employee requests based on the selected option
-  // sortData(option: string): void {
-  //   if (option == "") {
-  //     this.apiservice.getEmployeeRequestSortByEmail(this.managerId).subscribe({
-  //       next: (data: any[]) => {
-  //         this.employeeRequest = data;
-  //       },
-  //       error: (error: any) => {
-  //         console.log("Error fetching the requests")
-  //       }
-  //     });
-  //   } else if (option == "Date") {
-  //     this.apiservice.getEmployeeRequestSortByDate(this.managerId).subscribe({
-  //       next: (data: any[]) => {
-  //         this.employeeRequest = data;
-  //       },
-  //       error: (error: any) => {
-  //         console.log("Error fetching the requests")
-  //       }
-  //     });
-  //   } else if (option == "RequestId") {
-  //     this.apiservice.getEmployeeRequestSortByRequestCode(this.managerId).subscribe({
-  //       next: (data: any[]) => {
-  //         this.employeeRequest = data;
-  //       },
-  //       error: (error: any) => {
-  //         console.log("Error fetching the requests")
-  //       }
-  //     });
-  //   }
-  // }
+
+  //Sort employee requests based on the selected option
+  sortData(option: string): void {
+    if (option == "name") {
+      this.apiservice.getEmployeeRequestSortByEmployeeName(this.managerId).subscribe({
+        next: (data: any[]) => {
+          this.employeeRequest = data;
+        },
+        error: (error: any) => {
+          console.log("Error fetching the requests",error)
+        }
+      });
+    } 
+    if (option == "date") {
+      this.apiservice.getEmployeeRequestSortByDate(this.managerId).subscribe({
+        next: (data: any[]) => {
+          this.employeeRequest = data;
+        },
+        error: (error: any) => {
+          console.log("Error fetching the requests",error)
+        }
+      });
+    }
+  }
  
 }
