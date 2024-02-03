@@ -44,7 +44,8 @@ export class RequestService {
       }
     });
 
-    //console.log(formData)
+
+    console.log(formData)
     // Make the HTTP request with the correct headers
     const headers = new HttpHeaders();
     // Note: No need to set Content-Type, it will be set automatically by FormData

@@ -85,6 +85,7 @@ import { DataTableComponent } from './components/ui/data-table/data-table.compon
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component'; 
 
+
 @NgModule({
   declarations: [
     AppComponent,
