@@ -86,11 +86,11 @@ export class NewTravelRequestComponent {
       accommodationRequired: new FormControl('yes', Validators.required),
       prefDepartureTime: new FormControl('00.00 - 04.00', Validators.required),
 
-      travelAuthorizationEmailCapture: new FormControl(null, Validators.required),
-      passportAttachment: new FormControl(null, Validators.required),
-      idCardAttachment: new FormControl(null, Validators.required),
+      travelAuthorizationEmailCapture: new FormControl(Validators.required),
+      passportAttachment: new FormControl(Validators.required),
+      idCardAttachment: new FormControl(Validators.required),
 
-      additionalComments: new FormControl(null, Validators.required)
+      additionalComments: new FormControl(null, Validators.nullValidator)
 
     })
 
