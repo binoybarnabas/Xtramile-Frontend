@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RequestStatus } from 'src/app/request-status';
+import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status'; 
 
 @Injectable({
   providedIn: 'root'
