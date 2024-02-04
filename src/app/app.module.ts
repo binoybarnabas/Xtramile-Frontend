@@ -6,7 +6,6 @@ import { InputFieldComponent } from './components/ui/input-field/input-field.com
 import { EmployeeComponent } from './features/employee/employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe } from '@angular/common';
-
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -83,8 +82,16 @@ import { OptionviewCardComponent } from './features/employee/myRequests/employee
 
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+<<<<<<< HEAD
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
 import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component'; 
+=======
+
+import { TableFilterComponent } from './components/ui/table-filter/table-filter.component';
+
+import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component'; 
+>>>>>>> 1d3ce8b58763e2b3b6989e4f21a570e6c44ff8ce
+
 
 @NgModule({
   declarations: [
@@ -160,15 +167,21 @@ import { EmployeeViewCardComponent } from './components/ui/employee-view-card/em
     OptionCardComponent,
     OptionviewCardComponent,
     DataTableComponent,
+<<<<<<< HEAD
     ChangeStatusButtonComponent,
     EmployeeViewCardComponent
+=======
+    TableFilterComponent,
+    ChangeStatusButtonComponent
+>>>>>>> 1d3ce8b58763e2b3b6989e4f21a570e6c44ff8ce
   ],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule, 
+    ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),

@@ -1,7 +1,7 @@
 .options_container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 5px;
+  grid-gap: 25px;
 }
 
 .options_container .option_card {
@@ -11,7 +11,6 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
-  box-sizing: border-box;
   flex: 1;
 }
 
@@ -86,7 +85,7 @@
 }
 
 @media (max-width: 450px) {
-  W .options_container {
+  .options_container {
     display: block;
   }
 }

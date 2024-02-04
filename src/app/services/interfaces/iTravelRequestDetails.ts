@@ -18,9 +18,9 @@ export interface travelRequestDetails {
     accommodationRequired: string;
     prefDepartureTime: string;
 
-    mailAttachment: File;
-    passportAttachment: File;
-    idCardAttachment: File;
+    travelAuthorizationEmailCapture: File | undefined;
+    passportAttachment: File | undefined;
+    idCardAttachment: File | undefined;
 
     additionalComments: string;
 
