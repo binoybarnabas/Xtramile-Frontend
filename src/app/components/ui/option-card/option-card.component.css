@@ -1,7 +1,7 @@
 .options_container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 25px;
+  grid-gap: 5px;
 }
 
 .options_container .option_card {
