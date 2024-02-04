@@ -1,0 +1,23 @@
+<div class="container mx-auto">
+  <div class="row mb-3 div_header">
+    <div class="col-12 col-md-3 mb-3" style="position: relative;">
+      <input type="text" placeholder="Select Date" class="form-control" bsDatepicker [(ngModel)]="selectedDate" (ngModelChange)="onDateSelected()">
+    </div>
+
+    <div class="col-12 col-md-2 mb-2">
+      <select class="form-control" [(ngModel)]="selectedSortOption" (change)="onSortOptionSelected()">
+        <option value="select">choose to sort</option>
+        <option value="name">Employee Name </option>
+        <option value="date">Date</option>
+      </select>
+    </div>
+
+    <div class="col-12 col-md-2 mb-2">
+      <input type="text" class="form-control" [(ngModel)]="searchName" (ngModelChange)="OnNameSearch()" placeholder="search by name">
+    </div>
+
+    <div class="col-3 col-md-2 mb-2">
+      <button class="btn btn-primary see_all_button" (click)="onSeeAllClick()">See all List</button>
+    </div>
+  </div>
+</div>

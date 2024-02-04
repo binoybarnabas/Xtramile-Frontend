@@ -44,7 +44,8 @@ export class RequestService {
       }
     });
 
-    //console.log(formData)
+
+    console.log(formData)
     // Make the HTTP request with the correct headers
     const headers = new HttpHeaders();
     // Note: No need to set Content-Type, it will be set automatically by FormData
@@ -57,8 +58,7 @@ export class RequestService {
 
   ///Get all available options with reqId
   getDataFromAvailOptions(reqId: number): Observable<any> {
-    const apiUrl = `http://localhost:5190/api/employee/viewoptions/request/${reqId}`;
-    return this.http.get(apiUrl);
+    return this.http.get(this.apiURL+ `/employee/viewoptions/request/${reqId}`);
   }
 
   //Post a selected option with optionId, employeeId, requestId

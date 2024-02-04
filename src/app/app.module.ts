@@ -6,7 +6,6 @@ import { InputFieldComponent } from './components/ui/input-field/input-field.com
 import { EmployeeComponent } from './features/employee/employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe } from '@angular/common';
-
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -83,7 +82,11 @@ import { OptionviewCardComponent } from './features/employee/myRequests/employee
 
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+
+import { TableFilterComponent } from './components/ui/table-filter/table-filter.component';
+
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component'; 
+
 
 @NgModule({
   declarations: [
@@ -159,6 +162,7 @@ import { ChangeStatusButtonComponent } from './components/ui/change-status-butto
     OptionCardComponent,
     OptionviewCardComponent,
     DataTableComponent,
+    TableFilterComponent,
     ChangeStatusButtonComponent
   ],
   imports: [
@@ -166,7 +170,8 @@ import { ChangeStatusButtonComponent } from './components/ui/change-status-butto
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule, 
+    ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
