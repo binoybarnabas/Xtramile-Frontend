@@ -164,7 +164,9 @@ import { ChangeStatusButtonComponent } from './components/ui/change-status-butto
     DataTableComponent,
     TableFilterComponent,
     ChangeStatusButtonComponent
-  ],
+  ]
+  ,
+
   imports: [
     CommonModule,
     BrowserModule,
