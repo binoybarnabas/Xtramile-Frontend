@@ -31,6 +31,7 @@ import { FinancePersonnelPendingTravelSettlementsComponent } from './features/fi
 import { FinancePersonnelClosedTravelSettlementsComponent } from './features/financePersonnel/settlements/finance-personnel-closed-travel-settlements/finance-personnel-closed-travel-settlements.component';
 import { FinancePersonnelProfileComponent } from './features/financePersonnel/finance-personnel-profile/finance-personnel-profile.component';
 import { ManagerOngoingTravelRequestsComponent } from './features/manager/travelRequests/manager-ongoing-travel-requests/manager-ongoing-travel-requests.component';
+import { ReqFormComponent } from './features/manager/req-form/req-form.component';
 
   const routes: Routes = [
     { path: 'employee', component: EmployeeHomeComponent, children: [
@@ -48,6 +49,7 @@ import { ManagerOngoingTravelRequestsComponent } from './features/manager/travel
       {path:'forwarded',component:ManagerForwardedTravelRequestsComponent},
       {path:'ongoing',component:ManagerOngoingTravelRequestsComponent},
       {path:'closed',component:ManagerClosedTravelRequestsComponent},
+      {path:'requestdetail',component:ReqFormComponent}
     ]},
       { path: 'traveladmin', component: TravelAdminHomeComponent, children: [
       {path: 'dashboard', component: TravelAdminDashboardComponent},
