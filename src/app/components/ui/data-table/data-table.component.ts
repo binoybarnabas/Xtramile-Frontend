@@ -9,9 +9,12 @@ export class DataTableComponent {
 
   @Input() headers: string[] = [];
   @Input() data: any[] = [];
+
   @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
+  
   @Input() displayedProperties: string[] = [];
   @Input() sortOptions: string[]=[]
+
   onRowClick(row: any): void {
     this.rowClick.emit(row);
   }

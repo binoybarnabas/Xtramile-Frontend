@@ -9,6 +9,7 @@
 (sortOptionSelected)="handleSortOptionSelection($event)" 
 (searchByName)="handleSearchByName($event)"
 (seeAllClicked)="handleSeeAllClick()">
+
 </app-table-filter>
 
 
@@ -26,7 +27,7 @@
       </thead>
       
         <tbody>
-          <tr *ngFor="let req of employeeRequest">
+          <tr *ngFor="let req of employeeRequest" (click)="selectRow(req.requestId)">
             <td>{{req.requestId}} </td>
             <td><div class="employee_div">
               {{req.employeeName}}

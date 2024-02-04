@@ -85,7 +85,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { TableFilterComponent } from './components/ui/table-filter/table-filter.component';
 
-import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component'; 
+import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
+import { ReqFormComponent } from './features/manager/req-form/req-form.component'; 
 
 
 @NgModule({
@@ -163,8 +164,11 @@ import { ChangeStatusButtonComponent } from './components/ui/change-status-butto
     OptionviewCardComponent,
     DataTableComponent,
     TableFilterComponent,
-    ChangeStatusButtonComponent
-  ],
+    ChangeStatusButtonComponent,
+    ReqFormComponent
+  ]
+  ,
+
   imports: [
     CommonModule,
     BrowserModule,
