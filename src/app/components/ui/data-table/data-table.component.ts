@@ -23,5 +23,4 @@ export class DataTableComponent {
     //it is used to give two values in a same cell
     return property === 'employeeNameAndEmail';
   }
-
 }
