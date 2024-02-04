@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { PendingRequest } from './pending-request';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-employee-pending-requests',
@@ -11,10 +12,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EmployeePendingRequestsComponent {
     private subscription: Subscription | any;
+    titles : string[] = ['Request Id', 'Status','Project Name', 'Reason for travel','Start Date','Destination' ]
     requestData : PendingRequest[] = [];
       empId: number = 15;
 
-  constructor(private requestService: RequestService, private router: Router, private activatedRoute : ActivatedRoute) {}
+  constructor(private requestService: RequestService, private router: Router, private activatedRoute : ActivatedRoute, private datepipe: DatePipe) {}
 
   ngOnInit() {
     this.getRequests(this.empId);
@@ -36,6 +38,8 @@ export class EmployeePendingRequestsComponent {
               console.log(`Error fetching status name for request ${request.requestId}: ${error.message}`);
             },
           });
+              // Format the date to show only the date part
+              request.dateOfTravel = this.datepipe.transform(request.dateOfTravel, 'dd/LL/yyyy') || '';
         });
 
         // Update the component's requestData array
@@ -51,6 +55,7 @@ export class EmployeePendingRequestsComponent {
   }
 
   navigateToOption(requestId : number){
+    console.log("Clicked")
     this.router.navigate(['available_options'],{
       relativeTo: this.activatedRoute.parent,
       queryParams: {requestId : requestId}
