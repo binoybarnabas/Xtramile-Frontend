@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Subscription, firstValueFrom } from 'rxjs';
 import { RequestStatus } from './request-status';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
@@ -16,6 +16,7 @@ export class ChangeStatusButtonComponent {
   @Input() requestId: number = 0;
   @Input() primaryStatusCode: string = '';
   @Input() secondaryStatusCode: string = '';
+  @Output() externalpostTriggered = new EventEmitter<void>();
 
   private subscription : Subscription | any
 
@@ -35,6 +36,10 @@ export class ChangeStatusButtonComponent {
   }
 
   async updateRequestStatus() {
+
+    if(this.externalpostTriggered)
+    this.externalpostTriggered.emit()
+  
     this.requestStatus.requestId = this.requestId
     this.requestStatus.empId = this.empId;
     //await and firstValueFrom are used to first get the id from the asynchronous function
