@@ -10,10 +10,11 @@ primaryStatusCode: string = 'OP';
 secondaryStatusCode: string = 'PE' -->
 
 <!-- parent.html
-<app-change-status-button>
+<app-change-status-button
     [name]="name"
     [empId]="empId"
     [requestId]="requestId"
     [primaryStatusCode]="primaryStatusCode"
     [secondaryStatusCode]="secondaryStatusCode"
+    (externalpostTriggered)="yourpostfunction()"
 </app-change-status-button> -->

@@ -65,7 +65,7 @@ export class RequestService {
   postSelection(requestId: number, employeeId: number, optionId: number): Observable<any> {
     const body = { requestId: requestId, empId: employeeId, optionId: optionId };
     console.log(body)
-    return this.http.post('http://localhost:5190/api/requestmapping/add/option', body);
+    return this.http.post(this.apiURL + '/employee/add/option', body);
   }
 
     getRequestsPendingStatus(empId: number): Observable<PendingRequest[]> {
