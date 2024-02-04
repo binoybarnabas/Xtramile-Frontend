@@ -8,6 +8,12 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
   styleUrls: ['./optionview-card.component.css']
 })
 export class OptionviewCardComponent {
+
+  name: string = 'Submit';
+  requestId: number = 0;
+  primaryStatusCode: string = 'SD';
+  secondaryStatusCode: string = 'SD'
+
   optionsFromEmployee: any[] = [];
   selectedOption: any | null = null;
   employeeId: number = 1;
@@ -18,6 +24,7 @@ export class OptionviewCardComponent {
     this.activatedRoute.queryParamMap.subscribe((query) => {
       if(query.get('requestId')){
         this.reqId = parseInt(query.get('requestId')!,10)
+        this.requestId = this.reqId
       }
     })
     this.apiservice.getDataFromAvailOptions(this.reqId).subscribe((data: any[]) => {

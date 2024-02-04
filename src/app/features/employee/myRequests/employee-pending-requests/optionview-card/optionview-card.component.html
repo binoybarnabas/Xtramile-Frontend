@@ -1,4 +1,16 @@
 <p>optionview-card works!</p>
-<!-- Binding options data from parent to child component -->
-<app-option-card [options]="optionsFromEmployee" (optionSelected)="handleOptionSelected($event)"></app-option-card>
-<button (click)="postSelection()" [disabled]="!selectedOption" class="blue_rounded_button">Submit</button>
+
+<app-option-card
+  [options]="optionsFromEmployee"
+  (optionSelected)="handleOptionSelected($event)"
+></app-option-card>
+<!-- <button (click)="postSelection()" [disabled]="!selectedOption" class="blue-rounded-button">Submit</button> -->
+<app-change-status-button
+  [name]="name"
+  [empId]="employeeId"
+  [requestId]="requestId"
+  [primaryStatusCode]="primaryStatusCode"
+  [secondaryStatusCode]="secondaryStatusCode"
+  (externalpostTriggered)="postSelection()"
+></app-change-status-button>
+
