@@ -90,7 +90,9 @@ export class ManagerIncomingTravelRequestsComponent {
   }
 
   // Constructor to inject services
-  constructor(private apiservice: ManagerTravelRequestsService,private router:Router) {}
+  constructor(private apiservice: ManagerTravelRequestsService,private router:Router) {
+    this.apiservice.managerId = this.managerId;
+  }
 
 
   // Fetch all the employee requests
