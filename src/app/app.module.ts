@@ -86,8 +86,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TableFilterComponent } from './components/ui/table-filter/table-filter.component';
 
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
-import { ReqFormComponent } from './features/manager/req-form/req-form.component'; 
-
+import { ReqFormComponent } from './features/manager/req-form/req-form.component';
+import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
 
 @NgModule({
   declarations: [
@@ -165,7 +165,8 @@ import { ReqFormComponent } from './features/manager/req-form/req-form.component
     DataTableComponent,
     TableFilterComponent,
     ChangeStatusButtonComponent,
-    ReqFormComponent
+    ReqFormComponent,
+    EmployeeViewCardComponent
   ]
   ,
 
