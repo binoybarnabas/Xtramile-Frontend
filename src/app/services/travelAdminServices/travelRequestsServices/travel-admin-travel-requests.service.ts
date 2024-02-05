@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { WaitingOrSelectedRequests } from './waiting-or-selected-requests';
+import { WaitingOrSelectedRequests } from '../../interfaces/iwaiting-or-selected-requests';
 
 @Injectable({
   providedIn: 'root'
