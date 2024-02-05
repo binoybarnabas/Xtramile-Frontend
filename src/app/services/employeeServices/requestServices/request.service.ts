@@ -78,19 +78,8 @@ export class RequestService {
       return this.http.get(`http://localhost:5190/api/requeststatus/name/${requestId}`, { responseType: 'text' })
     }
 
-<<<<<<< HEAD
-
-    // get the closed requests for the employee
-    getRequestHistory(empId : number): Observable<any>{
-
-      const url="http://localhost:5190/api/employee/request/history"
-      const params= new HttpParams()
-      .set('empId', empId)
-      return this.http.get(url,{params})
-=======
     //get employee data that show in ongoing page
     getEmployeeOngoingRequest(employeeId: number): Observable<any> {
       return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`);
->>>>>>> e1fb2199f114a3db8c091da8f1ddafdc86dcbe48
     }
 }
