@@ -92,6 +92,8 @@ import { ModalComponent } from './components/ui/modal/modal.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -186,7 +188,15 @@ import { EmployeeViewCardComponent } from './components/ui/employee-view-card/em
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
+
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-center', // Set to center of the screen
+      preventDuplicates: true,
+    }),
+
     ModalModule.forRoot()
+
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
