@@ -91,6 +91,7 @@ import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-
 import { ModalComponent } from './components/ui/modal/modal.component'; 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -169,7 +170,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ChangeStatusButtonComponent,
     ReqFormComponent,
     TraveladminReqformComponent,
-    ModalComponent
+    ModalComponent,
+    EmployeeViewCardComponent
   ]
   ,
 
