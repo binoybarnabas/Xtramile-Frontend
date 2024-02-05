@@ -93,6 +93,9 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequests/view-available-options/view-available-options.component';
+import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
+import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 
 @NgModule({
   declarations: [
@@ -174,6 +177,10 @@ import { ToastrModule } from 'ngx-toastr';
     TraveladminReqformComponent,
     ModalComponent,
     EmployeeViewCardComponent
+    EmployeeViewCardComponent,
+    ViewAvailableOptionsComponent,
+    TravelAdminWaitingRequestsComponent,
+    TravelAdminSelectedRequestsComponent
   ]
   ,
 

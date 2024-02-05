@@ -34,6 +34,9 @@ import { ManagerOngoingTravelRequestsComponent } from './features/manager/travel
 import { ReqFormComponent } from './features/manager/req-form/req-form.component';
 import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component';
 
+import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequests/view-available-options/view-available-options.component';
+import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
+import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 
   const routes: Routes = [
     { path: 'employee', component: EmployeeHomeComponent, children: [
@@ -53,12 +56,18 @@ import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-
       {path:'closed',component:ManagerClosedTravelRequestsComponent},
       {path:'requestdetail',component:ReqFormComponent}
     ]},
-      { path: 'traveladmin', component: TravelAdminHomeComponent, children: [
+    { path: 'traveladmin', component: TravelAdminHomeComponent, children: [
       {path: 'dashboard', component: TravelAdminDashboardComponent},
       {path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent},
       {path :'requestdetail',component:TraveladminReqformComponent},
-      {path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent},
-      {path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent},
+      {path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
+        {path:'', component:TravelAdminWaitingRequestsComponent},
+        {path: 'available_options', component: ViewAvailableOptionsComponent}
+      ]},
+      {path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
+        {path:'',component: TravelAdminSelectedRequestsComponent},
+        {path: 'available_options', component: ViewAvailableOptionsComponent}
+      ]},
       {path: 'ongoing', component: TravelAdminOngoingTravelComponent},
       {path: 'closed', component: TravelAdminClosedTravelRequestsComponent},
       {path: 'profile', component: TravelAdminProfileComponent}
