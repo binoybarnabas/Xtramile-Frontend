@@ -44,7 +44,8 @@ export class RequestService {
       }
     });
 
-    //console.log(formData)
+
+    console.log(formData)
     // Make the HTTP request with the correct headers
     const headers = new HttpHeaders();
     // Note: No need to set Content-Type, it will be set automatically by FormData
@@ -57,15 +58,14 @@ export class RequestService {
 
   ///Get all available options with reqId
   getDataFromAvailOptions(reqId: number): Observable<any> {
-    const apiUrl = `http://localhost:5190/api/employee/viewoptions/request/${reqId}`;
-    return this.http.get(apiUrl);
+    return this.http.get(this.apiURL+ `/employee/viewoptions/request/${reqId}`);
   }
 
   //Post a selected option with optionId, employeeId, requestId
   postSelection(requestId: number, employeeId: number, optionId: number): Observable<any> {
     const body = { requestId: requestId, empId: employeeId, optionId: optionId };
     console.log(body)
-    return this.http.post('http://localhost:5190/api/requestmapping/add/option', body);
+    return this.http.post(this.apiURL + '/employee/add/option', body);
   }
 
     getRequestsPendingStatus(empId: number): Observable<PendingRequest[]> {
@@ -78,6 +78,7 @@ export class RequestService {
       return this.http.get(`http://localhost:5190/api/requeststatus/name/${requestId}`, { responseType: 'text' })
     }
 
+<<<<<<< HEAD
 
     // get the closed requests for the employee
     getRequestHistory(empId : number): Observable<any>{
@@ -86,5 +87,10 @@ export class RequestService {
       const params= new HttpParams()
       .set('empId', empId)
       return this.http.get(url,{params})
+=======
+    //get employee data that show in ongoing page
+    getEmployeeOngoingRequest(employeeId: number): Observable<any> {
+      return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`);
+>>>>>>> e1fb2199f114a3db8c091da8f1ddafdc86dcbe48
     }
 }

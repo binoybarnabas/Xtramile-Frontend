@@ -673,7 +673,8 @@
    width: 78%;
    /* width: 100%; */
    /* sus */
-   height: 97vh;
+   height: 97vh; 
+   /* height: max-content; */
    /* max-height: fit-content; */
    margin-left: 21%;
    margin-top: 13vh;
@@ -681,11 +682,15 @@
    z-index: -100;
    box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 3px 0px;
    transition: 0.6s;
+   
+   padding: 2vw;
  }
 
  .middle_console_container.collapsed {
    width: 93%;
    margin-left: 5.5%;
+   padding: 2vw;
+
  }
 
 

@@ -1,0 +1,20 @@
+<button class="btn btn-primary" (click)="updateRequestStatus()">
+  {{ name }}
+</button>
+
+<!-- parent.ts export
+name: string = 'Submit';
+empId: number = 15;
+requestId: number = 1002;
+primaryStatusCode: string = 'OP';
+secondaryStatusCode: string = 'PE' -->
+
+<!-- parent.html
+<app-change-status-button
+    [name]="name"
+    [empId]="empId"
+    [requestId]="requestId"
+    [primaryStatusCode]="primaryStatusCode"
+    [secondaryStatusCode]="secondaryStatusCode"
+    (externalpostTriggered)="yourpostfunction()"
+</app-change-status-button> -->

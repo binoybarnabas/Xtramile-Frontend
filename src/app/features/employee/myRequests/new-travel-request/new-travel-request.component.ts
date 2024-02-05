@@ -1,5 +1,5 @@
 import { Component, ɵsetAlternateWeakRefImpl } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { EmployeeDetails } from './request';
@@ -15,9 +15,6 @@ export class NewTravelRequestComponent {
   //Employee details from api
   employeeDetails?: EmployeeDetails
 
-
-  //dummyRequestCode: string = 'REQ000'
-
   isSideNavBarOpen: any;
   newReqFormSubMenuValue: number;
 
@@ -32,9 +29,6 @@ export class NewTravelRequestComponent {
   ngDoCheck() {
 
     this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
-
-
-    // this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarOpen;
 
   }
 
@@ -73,12 +67,11 @@ export class NewTravelRequestComponent {
       projectCode: new FormControl(this.employeeDetails?.projectCode, Validators.nullValidator),
       projectName: new FormControl(this.employeeDetails?.projectName, Validators.nullValidator),
 
-
       //Trip Info
       travelTypeId: new FormControl(0, Validators.required),
       tripPurpose: new FormControl('Business Meet', Validators.required),
-      departureDate: new FormControl('', Validators.required),
-      returnDate: new FormControl('', Validators.required),
+      departureDate: new FormControl('', [Validators.required, this.dateFormatValidator, this.futureDateValidator]),
+      returnDate: new FormControl('', [Validators.required, this.dateFormatValidator, this.futureDateValidator, this.dateRangeValidator]),
       sourceCityZipCode: new FormControl('890678', Validators.required),
       destinationCityZipCode: new FormControl('890765', Validators.required),
       sourceCity: new FormControl('Trivandrum', Validators.required),
@@ -93,15 +86,63 @@ export class NewTravelRequestComponent {
       accommodationRequired: new FormControl('yes', Validators.required),
       prefDepartureTime: new FormControl('00.00 - 04.00', Validators.required),
 
-      mailAttachment: new FormControl(null, Validators.required),
-      passportAttachment: new FormControl(null, Validators.required),
-      idCardAttachment: new FormControl(null, Validators.required),
-      additionalComments: new FormControl('Nill', Validators.required),
+      travelAuthorizationEmailCapture: new FormControl(Validators.required),
+      passportAttachment: new FormControl(Validators.required),
+      idCardAttachment: new FormControl(Validators.required),
+
+      additionalComments: new FormControl(null, Validators.nullValidator)
 
     })
 
   }
 
+
+  //Validating Date Format
+  dateFormatValidator(control: FormControl): ValidationErrors | null {
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+
+    if (!control.value.match(dateRegex)) {
+      return { invalidDateFormat: true }; // Validation failed
+    }
+
+    return null; // Validation passed
+  }
+
+
+  //Validator for checking the given date is a future date or not
+  futureDateValidator(control: FormControl): ValidationErrors | null {
+    const currentDate = new Date();
+    const enteredDate = new Date(control.value);
+
+    if (enteredDate <= currentDate) {
+      return { futureDate: true }; // Validation failed
+    }
+
+    return null; // Validation passed
+  }
+
+
+
+  //Need some Bug Fixes!!!!!!!!!!!!!!!
+  //Validator for checking the given return date is earlier than the departure date
+  dateRangeValidator(formGroup: FormGroup): ValidationErrors | null {
+
+    const departureDate = formGroup.get('departureDate')?.value;
+    const returnDate = formGroup.get('returnDate')?.value;
+
+    if (departureDate && returnDate && returnDate <= departureDate) {
+      return { dateRange: true }; // Validation failed
+    }
+
+    return null; // Validation passed
+  }
+
+
+
+
+
+
+  //Validator for file size - not used yet - need testing
   fileValidator(control: FormControl): { [key: string]: any } | null {
     const file = control.value;
     if (file) {
@@ -114,22 +155,28 @@ export class NewTravelRequestComponent {
   }
 
 
+
+  //Handling File Changes
   onFileChange(event: any, controlName: string): void {
-    const file = (event.target as HTMLInputElement).files?.[0];
+    // const file = (event.target as HTMLInputElement).files?.[0];
+    const file = event.target.files[0];
     this.travelRequestForm.get(controlName)?.setValue(file);
     this.travelRequestForm.get(controlName)?.updateValueAndValidity();
     console.log('Form Validity:', this.travelRequestForm.valid);
   }
 
 
-  //Send Request Form Data!
 
+
+
+  //Send Request Form Data!
   onEmployeeTravelRequestFormSubmit() {
 
+    console.log(this.travelRequestForm.value)
     this.requestService.sendEmployeeNewTravelRequest(this.travelRequestForm.value).subscribe({
 
       next: (response) => {
-        //     console.log(response)
+        console.log(response)
         alert("Request Submitted Successfully!")
       },
       error: (error: Error) => {
@@ -140,6 +187,7 @@ export class NewTravelRequestComponent {
       }
 
     });
+
   }
 
 
@@ -149,4 +197,3 @@ export class NewTravelRequestComponent {
 
 
 }
-

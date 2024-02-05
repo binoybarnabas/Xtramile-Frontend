@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 
 @Component({
@@ -20,14 +21,14 @@ export class TravelAdminSideNavBarComponent {
 
   isSideNavBarCollapsed: any;
 
-  constructor(private sideNavBarService: SideNavBarService) {
+  constructor(private sideNavBarService: SideNavBarService, private router: Router) {
 
     this.isSideNavBarCollapsed = 1;
 
     //travelRequestsMap contains values for Travel Requests sub menu
     this.travelRequestsMap.set('new ri-mail-download-line', "Incoming Requests");
     this.travelRequestsMap.set('new ri-loader-3-line', "Waiting Options");
-    this.travelRequestsMap.set('new ri-check-double-line', "Selected Options ");
+    this.travelRequestsMap.set('new ri-check-double-line', "Selected Options");
     this.travelRequestsMap.set('new ri-arrow-up-circle-line', "Ongoing Travel");
     this.travelRequestsMap.set('new ri-history-line', "Closed Requests");
 
@@ -130,5 +131,26 @@ export class TravelAdminSideNavBarComponent {
     this.subMenu4ToggleValue = 0;
 
   }
+
+    /// routing based on the values from the keys in myRequest map
+    navigateToRequest(destination : string) {
+      console.log("inside navigate:" + destination);
+      switch(destination){
+        case 'Incoming Requests': this.router.navigate(['/traveladmin/incomingrequests']);
+                              break;
+        case 'Waiting Options': this.router.navigate(['/traveladmin/waiting']);
+                              break;
+        case 'Selected Options': this.router.navigate(['/traveladmin/selected']);
+                              break;
+        case 'Ongoing Travel': this.router.navigate(['/traveladmin/ongoing']);
+                              break;
+        case 'Closed Requests': this.router.navigate(['/traveladmin/closed']);
+                              break;
+        case 'profile': this.router.navigate(['/traveladmin/profile']);
+                              break;
+  
+      }
+      
+    }
 
 }
