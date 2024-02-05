@@ -87,8 +87,11 @@ import { TableFilterComponent } from './components/ui/table-filter/table-filter.
 
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
 import { ReqFormComponent } from './features/manager/req-form/req-form.component';
+import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component';
+import { ModalComponent } from './components/ui/modal/modal.component'; 
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -166,6 +169,8 @@ import { EmployeeViewCardComponent } from './components/ui/employee-view-card/em
     TableFilterComponent,
     ChangeStatusButtonComponent,
     ReqFormComponent,
+    TraveladminReqformComponent,
+    ModalComponent,
     EmployeeViewCardComponent
   ]
   ,
@@ -181,6 +186,7 @@ import { EmployeeViewCardComponent } from './components/ui/employee-view-card/em
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
