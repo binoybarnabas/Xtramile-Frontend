@@ -1,1 +1,7 @@
-<p>travel-admin-waiting-options-travel-requests works!</p>
+<p>travel-admin-incoming-travel-requests works!</p>
+<!-- binding headers,data,displayedProperties(fields to be displayed in table) to child component -->
+<app-data-table
+  [headers]="tableHeaders"
+  [data]="incomingRequestdata"
+  [displayedProperties]="fieldsToDisplay"
+></app-data-table>
