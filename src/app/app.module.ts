@@ -87,9 +87,10 @@ import { TableFilterComponent } from './components/ui/table-filter/table-filter.
 
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
 import { ReqFormComponent } from './features/manager/req-form/req-form.component';
-import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component'; 
-
-
+import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component';
+import { ModalComponent } from './components/ui/modal/modal.component'; 
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -167,7 +168,8 @@ import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-
     TableFilterComponent,
     ChangeStatusButtonComponent,
     ReqFormComponent,
-    TraveladminReqformComponent
+    TraveladminReqformComponent,
+    ModalComponent
   ]
   ,
 
@@ -182,6 +184,7 @@ import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

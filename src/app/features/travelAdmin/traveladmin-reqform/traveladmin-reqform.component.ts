@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 
@@ -16,13 +18,16 @@ export class TraveladminReqformComponent {
   formattedPreferredDepartureTime!: string
   formattedPreferredDepartureDate!: string
   formattedPreferredReturnDate!: string
+  bsModalRef!: BsModalRef;
+  requestId!: number;
 
   leftSectionNavItems = ["General Informations", "Trip Informations", "Additional Informations"];
 
   constructor(private sideNavBarService: SideNavBarService,
     private route: ActivatedRoute,
     private travedladminservice : TravelAdminTravelRequestsService,
-    private datePipe:DatePipe) 
+    private datePipe:DatePipe,
+    private modalService: BsModalService) 
     {
     this.newReqFormSubMenuValue = 0;
   }
@@ -47,10 +52,10 @@ export class TraveladminReqformComponent {
 
   ngOnInit(){
     this.route.queryParams.subscribe(params => {
-      const requestId = params['requestId'];
-      console.log(requestId)
+      this.requestId = params['requestId'];
+      console.log(this.requestId )
       
-      this.travedladminservice.getTravelRequest(requestId).subscribe({
+      this.travedladminservice.getTravelRequest(this.requestId ).subscribe({
         next:(data)=>{
           this.employeeRequestData = data
           this.formattedPreferredDepartureTime = this.formatDateTime(this.employeeRequestData?.prefDepartureTime);
@@ -69,4 +74,22 @@ export class TraveladminReqformComponent {
     });
     
   }
+
+  @ViewChild(ModalComponent)
+  modalComponent!: ModalComponent;
+
+  //to open modal on click of the add options button
+  openModal() {
+    const initialState = {
+      requestId: this.requestId 
+    };
+    
+    this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
+    this.bsModalRef.content.onClose.subscribe((result: any) => {
+      // Handle the result from the modal if needed
+      console.log('Modal result:', result);
+      // You can perform actions with the result data here
+    });
+  }
+  
 }
