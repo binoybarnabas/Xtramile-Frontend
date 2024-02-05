@@ -88,6 +88,7 @@ import { TableFilterComponent } from './components/ui/table-filter/table-filter.
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
 import { ReqFormComponent } from './features/manager/req-form/req-form.component';
 import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -181,6 +182,11 @@ import { EmployeeViewCardComponent } from './components/ui/employee-view-card/em
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-center', // Set to center of the screen
+      preventDuplicates: true,
+    }),
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

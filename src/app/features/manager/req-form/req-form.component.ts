@@ -3,9 +3,10 @@ import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/f
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { EmployeeDetails } from '../../employee/myRequests/new-travel-request/request';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-req-form',
@@ -15,7 +16,7 @@ import { DatePipe } from '@angular/common';
 })
 export class ReqFormComponent {
 
-  //Employee request data
+  //Employee request data : a single travel request data 
   employeeRequestData : any
   
   //navbar and submenu
@@ -33,7 +34,10 @@ export class ReqFormComponent {
   constructor(private sideNavBarService: SideNavBarService,
     private route: ActivatedRoute,
     private managerTravelRequest : ManagerTravelRequestsService,
-    private datePipe:DatePipe,) 
+    private datePipe:DatePipe,
+    private toastr: ToastrService,
+    private router: Router
+    ) 
     {
     this.newReqFormSubMenuValue = 0;
   }
@@ -65,9 +69,10 @@ export class ReqFormComponent {
   
 
   ngOnInit(){
+
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
-      
+      console.log(requestId);
       this.managerTravelRequest.GetTravelRequest(requestId).subscribe({
         next:(data)=>{
           this.employeeRequestData = data
@@ -105,14 +110,34 @@ export class ReqFormComponent {
       {
         next:(data)=>{
           console.log(data);
+           // Redirect to another page
+          this.router.navigate(['/manager/dashboard']);
+        },
+        complete:()=>{
+
+          this.toastr.success('Request approved!', 'Success');
         }
       }
     );
   }
 
   RejectRequest(){
+    this.managerTravelRequest.cancelRequest(this.employeeRequestData.requestId).subscribe(
+      {
+        next:(data)=>{
+          console.log(data);
+          // Redirect to another page
+         this.router.navigate(['/manager/dashboard']);
+        },
+        complete:()=>{
+          this.toastr.warning('Request Rejected!', 'Warning');
+        }
+      }
+    );
 
+    // this.toastr.warning('Request Rejected!', 'Success');
+    // Redirect to another page
+    this.router.navigate(['/manager/dashboard']);
   }
-
 
 }
