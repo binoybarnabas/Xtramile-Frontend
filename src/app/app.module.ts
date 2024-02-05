@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
 import { TopBarComponent } from './components/layout/employee/employee-home/top-bar/top-bar.component';
@@ -92,7 +92,8 @@ import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequ
 import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
-import { FormsModule } from '@angular/forms';
+import { LoginPageComponent } from './components/layout/login-page/login-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -175,7 +176,8 @@ import { FormsModule } from '@angular/forms';
     EmployeeViewCardComponent,
     ViewAvailableOptionsComponent,
     TravelAdminWaitingRequestsComponent,
-    TravelAdminSelectedRequestsComponent
+    TravelAdminSelectedRequestsComponent,
+    LoginPageComponent
   ]
   ,
 
@@ -190,7 +192,6 @@ import { FormsModule } from '@angular/forms';
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
-
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-center', // Set to center of the screen

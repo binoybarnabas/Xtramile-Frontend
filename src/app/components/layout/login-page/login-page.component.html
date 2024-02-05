@@ -1,12 +1,24 @@
+<!-- login-reactive.component.html -->
+
 <div class="login-container">
-    <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <label for="email">Email:</label>
-      <input type="email" formControlName="email">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-container">
   
-      <label for="password">Password:</label>
-      <input type="password" formControlName="password">
+      <label for="email">Email </label>
+      <input type="email" formControlName="email" class="form-control">
+    
+      <div *ngIf="isLoading" class="loader-container">
+        <div class="loader"></div>
+      </div>
+      
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" class="form-control">
   
-      <button type="submit">Login</button>
+      <button type="submit" class="submit-button">Login</button>
+    
+      <div *ngIf="invalidCredentials" class="error-message">
+        Invalid credentials. Please check your email and password.
+      </div>
+
     </form>
   </div>
   
