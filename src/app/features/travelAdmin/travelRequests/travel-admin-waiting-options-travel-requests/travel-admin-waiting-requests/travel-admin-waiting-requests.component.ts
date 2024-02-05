@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
+import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 
 @Component({
   selector: 'app-travel-admin-waiting-requests',
@@ -18,8 +19,9 @@ export class TravelAdminWaitingRequestsComponent {
   incomingRequestdata:any[] = [];
   requestId: number = 0;
   row: any;
+  clickable: boolean = false
 
-  constructor(private travelAdminTravelRequestService: TravelAdminTravelRequestsService, 
+  constructor(private travelAdminTravelRequestService: TravelAdminTravelRequestsService, private commonService: CommonAPIService,
     private datePipe : DatePipe, 
     private router: Router,
     private activatedRoute: ActivatedRoute) {}
@@ -40,6 +42,7 @@ export class TravelAdminWaitingRequestsComponent {
         console.log("Requests fetching completed")
       }
     })
+    this.setClickable();
   }
 
   selectedRow(row: any){
@@ -49,6 +52,10 @@ export class TravelAdminWaitingRequestsComponent {
       relativeTo: this.activatedRoute,
       queryParams: {requestId: this.requestId}
     })
+  }
+
+  setClickable(){
+    this.commonService.setDataInService(this.clickable);
   }
 
   ngOnDestroy(){

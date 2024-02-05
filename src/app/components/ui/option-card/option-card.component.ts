@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 
 @Component({
   selector: 'app-option-card',
@@ -11,7 +13,10 @@ export class OptionCardComponent {
 
   selectedOption: any | null = null;
 
-  constructor() {}
+  constructor(private commonService: CommonAPIService) {}
+
+  clickable: boolean = this.commonService.getDataFromService();
+
 
   ngOnDestroy() {}
 

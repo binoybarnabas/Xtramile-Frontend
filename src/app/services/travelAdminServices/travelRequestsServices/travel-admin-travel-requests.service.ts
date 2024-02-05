@@ -42,5 +42,4 @@ export class TravelAdminTravelRequestsService {
   getTravelRequest(requestId:number):Observable<any>{
     return this.http.get(this.apiURL+ `/traveladmin/travel/request/${requestId}`);
   }
-
 }

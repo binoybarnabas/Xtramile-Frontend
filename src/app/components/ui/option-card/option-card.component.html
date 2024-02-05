@@ -2,6 +2,7 @@
   <ng-container *ngFor="let option of options">
     <div
       class="card_selection shadow-lg option_card"
+      [ngStyle]="{ 'pointer-events': clickable ? 'auto' : 'none' }"
       (click)="selectOption(option)"
       [ngClass]="{ selected: selectedOption === option }"
     >
