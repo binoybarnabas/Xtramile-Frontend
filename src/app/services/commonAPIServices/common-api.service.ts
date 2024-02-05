@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status'; 
+import { LoginService } from '../loginService/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,11 @@ import { RequestStatus } from 'src/app/components/ui/change-status-button/reques
 export class CommonAPIService {
 
 
+  userData :any
+  
   constructor(private http: HttpClient) { }
 
+ 
   apiURL = 'http://localhost:5190/api/'
 
 

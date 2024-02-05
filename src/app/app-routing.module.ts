@@ -3,8 +3,8 @@
   import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
   import { NewTravelRequestComponent } from './features/employee/myRequests/new-travel-request/new-travel-request.component';
   import { EmployeePendingRequestsComponent } from './features/employee/myRequests/employee-pending-requests/employee-pending-requests.component';
-  import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
-  import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
+import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
+import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
 import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
@@ -37,6 +37,8 @@ import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-
 import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequests/view-available-options/view-available-options.component';
 import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
+import { LoginPageComponent } from './components/layout/login-page/login-page.component';
+
 
   const routes: Routes = [
     { path: 'employee', component: EmployeeHomeComponent, children: [
@@ -78,7 +80,8 @@ import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/tra
       {path: 'pending', component: FinancePersonnelPendingTravelSettlementsComponent},
       {path: 'closed', component: FinancePersonnelClosedTravelSettlementsComponent},
       {path: 'profile', component: FinancePersonnelProfileComponent}
-    ]}
+    ]},
+    {path:"login",component:LoginPageComponent}
 
   ];
 

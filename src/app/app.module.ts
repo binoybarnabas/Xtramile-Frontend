@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
 import { TopBarComponent } from './components/layout/employee/employee-home/top-bar/top-bar.component';
@@ -76,26 +76,23 @@ import { FinancePersonnelTravelHistoryComponent } from './features/financePerson
 import { FinancePersonnelNewBillComponent } from './features/financePersonnel/mySettlements/finance-personnel-new-bill/finance-personnel-new-bill.component';
 import { FinancePersonnelPendingBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-pending-bills/finance-personnel-pending-bills.component';
 import { FinancePersonnelClosedBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-closed-bills/finance-personnel-closed-bills.component';
-
 import { OptionCardComponent } from './components/ui/option-card/option-card.component';
 import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
-
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-
 import { TableFilterComponent } from './components/ui/table-filter/table-filter.component';
-
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
 import { ReqFormComponent } from './features/manager/req-form/req-form.component';
 import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component';
 import { ModalComponent } from './components/ui/modal/modal.component'; 
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequests/view-available-options/view-available-options.component';
 import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
+import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
+import { LoginPageComponent } from './components/layout/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -176,11 +173,11 @@ import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/tra
     ReqFormComponent,
     TraveladminReqformComponent,
     ModalComponent,
-    EmployeeViewCardComponent
     EmployeeViewCardComponent,
     ViewAvailableOptionsComponent,
     TravelAdminWaitingRequestsComponent,
-    TravelAdminSelectedRequestsComponent
+    TravelAdminSelectedRequestsComponent,
+    LoginPageComponent
   ]
   ,
 
@@ -189,13 +186,12 @@ import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/tra
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
-
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-center', // Set to center of the screen
