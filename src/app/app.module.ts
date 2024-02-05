@@ -87,7 +87,8 @@ import { TableFilterComponent } from './components/ui/table-filter/table-filter.
 
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
 import { ReqFormComponent } from './features/manager/req-form/req-form.component';
-import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
+import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component'; 
+
 
 @NgModule({
   declarations: [
@@ -166,7 +167,7 @@ import { EmployeeViewCardComponent } from './components/ui/employee-view-card/em
     TableFilterComponent,
     ChangeStatusButtonComponent,
     ReqFormComponent,
-    EmployeeViewCardComponent
+    TraveladminReqformComponent
   ]
   ,
 

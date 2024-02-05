@@ -18,6 +18,7 @@ export class DataTableComponent {
   onRowClick(row: any): void {
     this.rowClick.emit(row);
   }
+  
   isMultilineProperty(property: string): boolean {
     // Customize this logic based on your requirements
     //it is used to give two values in a same cell
