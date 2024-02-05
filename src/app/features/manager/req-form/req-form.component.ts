@@ -15,20 +15,25 @@ import { DatePipe } from '@angular/common';
 })
 export class ReqFormComponent {
 
-  //Employee id
+  //Employee request data
   employeeRequestData : any
+  
+  //navbar and submenu
   isSideNavBarOpen: any;
   newReqFormSubMenuValue: number;
+
+  //date formatting
   formattedPreferredDepartureTime!: string
   formattedPreferredDepartureDate!: string
   formattedPreferredReturnDate!: string
 
-  leftSectionNavItems = ["General Informations", "Trip Informations", "Additional Informations"];
+  //navbar left section
+  leftSectionNavItems = ["General Informations", "Trip Informations", "Additional Informations"];  
 
   constructor(private sideNavBarService: SideNavBarService,
     private route: ActivatedRoute,
     private managerTravelRequest : ManagerTravelRequestsService,
-    private datePipe:DatePipe) 
+    private datePipe:DatePipe,) 
     {
     this.newReqFormSubMenuValue = 0;
   }
@@ -44,14 +49,20 @@ export class ReqFormComponent {
   }
 
   ngDoCheck() {
-
     this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
-
   }
 
   changeNewReqFormSubMenuValue(value: number) {
     this.newReqFormSubMenuValue = value;
   }
+
+    selectedPriority:number = 0
+
+    //priority
+    priorityForm = new FormGroup({
+      selectedPriority: new FormControl('1') // Set the default value to '1' (High)
+    });
+  
 
   ngOnInit(){
     this.route.queryParams.subscribe(params => {
@@ -70,11 +81,37 @@ export class ReqFormComponent {
         complete:()=>{
           console.log("completed")
         }
-
       });
-      // Use the requestId as needed in your component
     });
+
+    const selectedPriorityControl = this.priorityForm.get('selectedPriority');
+
+    if (selectedPriorityControl) {
+      selectedPriorityControl.valueChanges.subscribe(value => {
+        // Handle the selected value here
+        console.log('Selected Priority:', value);
+        this.selectedPriority = Number(value);
+        console.log("******************",this.selectedPriority);
+        // You can now use the value as needed
+      });
+    }
     
+  }
+
+
+  ApproveRequest(){
+    console.log(this.selectedPriority);
+    this.managerTravelRequest.setRequestPriorityAndApprove(this.employeeRequestData.requestId,this.selectedPriority).subscribe(
+      {
+        next:(data)=>{
+          console.log(data);
+        }
+      }
+    );
+  }
+
+  RejectRequest(){
+
   }
 
 
