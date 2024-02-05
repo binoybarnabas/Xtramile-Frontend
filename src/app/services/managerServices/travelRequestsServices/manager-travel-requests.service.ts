@@ -6,14 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ManagerTravelRequestsService {
+  managerId!:number;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+  }
 
   getEmployeeRequest(managerId: number): Observable<any>{
-
     const url='http://localhost:5190/api/reportingmanager/request';
     const params = new HttpParams().set('managerId', managerId);
-   
    return this.http.get<any>(url,{params});
    }
    
@@ -49,6 +49,15 @@ export class ManagerTravelRequestsService {
 
   GetTravelRequest(requestId:number):Observable<any>{
     return this.http.get(`http://localhost:5190/api/reportingmanager/travel/request/${requestId}`);
+  }
+
+  setRequestPriorityAndApprove(requestId:number,priorityId:number):Observable<any>{
+    const body = {
+      requestId: requestId,
+      priorityId: priorityId,
+      managerId:this.managerId
+    };
+    return this.http.patch('http://localhost:5190/api/reportingmanager/travel/request/approve',body);
   }
   
 }

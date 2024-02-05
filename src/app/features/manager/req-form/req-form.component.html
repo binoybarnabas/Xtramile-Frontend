@@ -18,7 +18,7 @@
     
         <div class="form_container">
 
-            <form class="new_req_form" >
+            <form class="new_req_form" [formGroup]="priorityForm">
 
                 <!-- general info section -->
                 <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group" >
@@ -217,46 +217,50 @@
                         <!-- Travel Authorization -->
                         <div class="form_input_container">
                             <label for="travelAuthorizationEmailCapture">Travel Authorization Email Capture</label>
-                            <input class="form_input" type="file"  formControlName="travelAuthorizationEmailCapture" />
+                            <input class="form_input" type="file"   />
                         </div>
 
                         <!-- Passport -->
                         <div class="form_input_container">
                             <label for="passportAttachment">Passport</label>
 
-                            <input class="form_input" type="file"  formControlName="passportAttachment" />
+                            <input class="form_input" type="file" />
                           
                         </div>
 
                         <!-- Id Card -->
                         <div class="form_input_container">
                             <label for="idCardAttachment">ID Card</label>
-                            <input class="form_input" type="file"  formControlName="idCardAttachment" />
+                            <input class="form_input" type="file" />
                         </div>
  
                         <!-- Additional Comments -->
                         <div class="form_input_container">
                             <label for="additionalComments">Additional Comments</label>
                             <textarea class="form_input" id="" cols="30" rows="4" value={{employeeRequestData?.additionalComments}} disabled></textarea>
-                            <!-- <span class="form_error"
-                            *ngIf="travelRequestForm.get('additionalComments')?.invalid && travelRequestForm.get('additionalComments')?.touched">
-                               Enter Something
-                           </span> -->
-                        </div>   
+                            
+                        </div>  
+                        
+                        
+
+                            <div class="form_input_container">
+                              <label for="Priority">Set the Priority </label>
+                              <select class="form_input" formControlName="selectedPriority">
+                                <option value="1" selected>Low</option>
+                                <option value="2">Medium</option>
+                                <option value="3">High</option>
+                              </select>
+                            </div>
 
                     </div>
 
                     <div class="form_submit_container form_input_group_navigator">
-
                         <div class="btn_container">
                             <button (click) = "changeNewReqFormSubMenuValue(1)" class="back_btn"> Back</button>&nbsp;&nbsp;
-                            <Button class="submit_btn" type="submit">Approve</Button>&nbsp;&nbsp;
-                            <Button class="cancel_btn" type="submit">Cancel</Button>&nbsp;&nbsp;
-
+                            <Button class="submit_btn" (click)="ApproveRequest()">Approve</Button>&nbsp;&nbsp;
+                            <Button class="cancel_btn" (click)="RejectRequest()">Cancel</Button>&nbsp;&nbsp;
                         </div>
-
                     </div>
-
                     <!-- form input group ends -->
                 </div>
 
