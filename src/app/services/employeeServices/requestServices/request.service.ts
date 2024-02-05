@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { travelRequestDetails } from '../../interfaces/iTravelRequestDetails';
@@ -76,5 +76,15 @@ export class RequestService {
 
     getStatusName(requestId : number) : Observable<string>{
       return this.http.get(`http://localhost:5190/api/requeststatus/name/${requestId}`, { responseType: 'text' })
+    }
+
+
+    // get the closed requests for the employee
+    getRequestHistory(empId : number): Observable<any>{
+
+      const url="http://localhost:5190/api/employee/request/history"
+      const params= new HttpParams()
+      .set('empId', empId)
+      return this.http.get(url,{params})
     }
 }

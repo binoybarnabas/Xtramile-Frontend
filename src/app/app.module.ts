@@ -5,12 +5,7 @@ import { AppComponent } from './app.component';
 import { InputFieldComponent } from './components/ui/input-field/input-field.component';
 import { EmployeeComponent } from './features/employee/employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-<<<<<<< HEAD
-import { PaginationModule } from 'ngx-bootstrap/pagination';
-
-=======
 import { CommonModule, DatePipe } from '@angular/common';
->>>>>>> e8cb97c0660fcc3d8f523f9cf129b65b8a654520
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
