@@ -56,6 +56,7 @@ const routes: Routes = [
   {
     path: 'manager', component: ManagerHomeComponent, children: [
       { path: 'dashboard', component: ManagerDashboardComponent },
+      {path:'requestdetail',component:NewTravelRequestComponent},
       { path: 'newrequests', component: ManagerIncomingTravelRequestsComponent },
       { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
       { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
