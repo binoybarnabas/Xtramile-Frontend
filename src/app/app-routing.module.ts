@@ -1,8 +1,8 @@
-  import { NgModule } from '@angular/core';
-  import { RouterModule, Routes } from '@angular/router';
-  import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
-  import { NewTravelRequestComponent } from './features/employee/myRequests/new-travel-request/new-travel-request.component';
-  import { EmployeePendingRequestsComponent } from './features/employee/myRequests/employee-pending-requests/employee-pending-requests.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
+import { NewTravelRequestComponent } from './features/travelRequest/new-travel-request/new-travel-request.component';
+import { EmployeePendingRequestsComponent } from './features/employee/myRequests/employee-pending-requests/employee-pending-requests.component';
 import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
@@ -41,53 +41,52 @@ import { LoginPageComponent } from './components/layout/login-page/login-page.co
 import { authGuardEmployee, authGuardFinanceDepartment, authGuardManager, authGuardTravelAdmin } from './auth.guard';
 
 
-  const routes: Routes = [
-    { path: 'employee', component: EmployeeHomeComponent,canActivate:[authGuardEmployee], children: [
-      {path:'dashboard',component:EmployeeDashboardComponent},
-      {path:'request',component:NewTravelRequestComponent},
-      {path:'pending',component:EmployeePendingRequestsComponent },
-      {path: 'available_options',component: OptionviewCardComponent},
-      {path:'ongoing',component:EmployeeOngoingRequestsComponent},
-      {path:'history',component:EmployeeClosedRequestsComponent},
-      {path:'profile',component:EmployeeProfileComponent}
-    ]},
-    { path: 'manager', component: ManagerHomeComponent,canActivate:[authGuardManager],children: [
-      {path:'dashboard',component:ManagerDashboardComponent},
-      {path:'newrequests',component:ManagerIncomingTravelRequestsComponent},
-      {path:'forwarded',component:ManagerForwardedTravelRequestsComponent},
-      {path:'ongoing',component:ManagerOngoingTravelRequestsComponent},
-      {path:'closed',component:ManagerClosedTravelRequestsComponent},
-      {path:'requestdetail',component:ReqFormComponent}
-    ]},
-    { path: 'traveladmin', component: TravelAdminHomeComponent, canActivate:[authGuardTravelAdmin],children: [
-      {path: 'dashboard', component: TravelAdminDashboardComponent},
-      {path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent},
-      {path :'requestdetail',component:TraveladminReqformComponent},
-      {path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
-        {path:'', component:TravelAdminWaitingRequestsComponent},
-        {path: 'available_options', component: ViewAvailableOptionsComponent}
-      ]},
-      {path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
-        {path:'',component: TravelAdminSelectedRequestsComponent},
-        {path: 'available_options', component: ViewAvailableOptionsComponent}
-      ]},
-      {path: 'ongoing', component: TravelAdminOngoingTravelComponent},
-      {path: 'closed', component: TravelAdminClosedTravelRequestsComponent},
-      {path: 'profile', component: TravelAdminProfileComponent}
-    ]},
-    {path: 'finance', component: FinancePersonnelHomeComponent,canActivate:[authGuardFinanceDepartment], children: [
-      {path: 'dashboard', component: FinancePersonnelDashboardComponent},
-      {path: 'incoming',component: FinancePersonnelIncomingTravelSettlementsComponent},
-      {path: 'pending', component: FinancePersonnelPendingTravelSettlementsComponent},
-      {path: 'closed', component: FinancePersonnelClosedTravelSettlementsComponent},
-      {path: 'profile', component: FinancePersonnelProfileComponent}
-    ]},
-    {path:"login",component:LoginPageComponent}
+const routes: Routes = [
+  {
+    path: 'employee', component: EmployeeHomeComponent, children: [
+      { path: 'dashboard', component: EmployeeDashboardComponent },
+      { path: 'request', component: NewTravelRequestComponent },
+      { path: 'pending', component: EmployeePendingRequestsComponent },
+      { path: 'available_options', component: OptionviewCardComponent },
+      { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
+      { path: 'history', component: EmployeeClosedRequestsComponent },
+      { path: 'profile', component: EmployeeProfileComponent }
+    ]
+  },
+  {
+    path: 'manager', component: ManagerHomeComponent, children: [
+      { path: 'dashboard', component: ManagerDashboardComponent },
+      { path: 'newrequests', component: ManagerIncomingTravelRequestsComponent },
+      { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
+      { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
+      { path: 'closed', component: ManagerClosedTravelRequestsComponent },
+    ]
+  },
+  {
+    path: 'traveladmin', component: TravelAdminHomeComponent, children: [
+      { path: 'dashboard', component: TravelAdminDashboardComponent },
+      { path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent },
+      { path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent },
+      { path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent },
+      { path: 'ongoing', component: TravelAdminOngoingTravelComponent },
+      { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },
+      { path: 'profile', component: TravelAdminProfileComponent }
+    ]
+  },
+  {
+    path: 'finance', component: FinancePersonnelHomeComponent, children: [
+      { path: 'dashboard', component: FinancePersonnelDashboardComponent },
+      { path: 'incoming', component: FinancePersonnelIncomingTravelSettlementsComponent },
+      { path: 'pending', component: FinancePersonnelPendingTravelSettlementsComponent },
+      { path: 'closed', component: FinancePersonnelClosedTravelSettlementsComponent },
+      { path: 'profile', component: FinancePersonnelProfileComponent }
+    ]
+  }
 
-  ];
+];
 
-  @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
-  })
-  export class AppRoutingModule { }
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

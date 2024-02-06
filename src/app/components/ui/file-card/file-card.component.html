@@ -1,0 +1,26 @@
+<div class="file_container">
+
+    <div *ngFor="let item of fileCard" class="file_card">
+
+        <div class="file_name_section">
+            <h4 class="file_name">{{item.fileName}} <i class="ri-checkbox-circle-fill"></i></h4>
+        </div>
+
+        <div class="description_section">
+            <span>{{item.fileDescription}}</span>
+            <span>{{item.fileSize}}</span>
+        </div>
+
+        <div class="actions">
+
+            <div class="download_btn_container">
+                <div class="download_btn">
+                    <span><i class="icon ri-file-download-line"></i> Download</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

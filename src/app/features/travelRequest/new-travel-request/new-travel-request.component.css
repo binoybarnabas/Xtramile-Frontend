@@ -106,6 +106,81 @@
 
 }
 
+/* View Mode Styles */
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_data_view_container {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 1px;
+    grid-column-gap: 15px;
+    font-size: var(--form-label-font-size);
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_data_view_container .item_card .item_title {
+    font-weight: var(--active-font-weight);
+    margin-bottom: 3px;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_data_view_container .item_card .item_value {
+    font-size: var(--normal-font-size);
+    padding: 0.5rem;
+    border-radius: 3.5px;
+    border: 1px solid var(--menu-hover-color);
+    background-color: var(--body-bg-color);
+    height: 2.3rem;
+
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .priority_slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 20px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .priority_slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: var(--second-color);
+    cursor: pointer;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .priority_slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: var(--second-color);
+    cursor: pointer;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .priority_level {
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .priority_container {
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .priority_container label {
+    font-weight: var(--active-font-weight);
+}
+
+
+
+
+
+
 .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_input_group_navigator {
     position: relative;
 
@@ -179,20 +254,48 @@
     font-size: var(--extra-small-font-size);
 }
 
-.req_forms_main_container .right_section .form_container .new_req_form .form_submit_container {
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_submit_container {
 
     position: relative;
 
 }
 
-.req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container {
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_submit_container .btn_container {
 
     position: absolute;
     margin-top: 20px;
     right: 0;
 }
 
-.req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .cancel_btn {
+
+/* Reject Button */
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_submit_container .reject_btn_container {
+
+    position: absolute;
+    margin-top: 20px;
+    left: 0;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_submit_container .reject_btn_container .reject_btn {
+
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--card-bg-color);
+    background-color: var(--danger-color);
+    border-radius: var(--small-border-radius);
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 10px; */
+    font-weight: var(--active-font-weight);
+    border: var(--normal-button-border-size) solid var(--danger-color);
+    font-size: var(--span-font-size);
+
+}
+
+
+
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_submit_container .btn_container .cancel_btn {
 
     width: var(--normal-button-width);
     height: var(--normal-button-height);
@@ -207,7 +310,7 @@
     font-size: var(--span-font-size);
 }
 
-.req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .submit_btn {
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_submit_container .btn_container .submit_btn {
 
     width: var(--normal-button-width);
     height: var(--normal-button-height);
@@ -223,7 +326,7 @@
 
 }
 
-.req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .submit_btn:disabled:hover {
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_submit_container .btn_container .submit_btn:disabled:hover {
     background-color: var(--error-color);
     cursor: not-allowed;
     border: var(--normal-button-border-size) solid var(--error-color);
@@ -304,6 +407,17 @@
         grid-template-columns: 1fr;
         grid-row-gap: 10px;
     }
+
+
+    /* View Mode Styles */
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_data_view_container {
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row-gap: 10px;
+        font-size: var(--form-label-font-size);
+    }
+
 
     .req_forms_main_container .right_section .form_container .new_req_form .form_input_group_navigator .btn_container {
         position: relative;

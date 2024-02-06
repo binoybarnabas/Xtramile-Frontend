@@ -577,6 +577,10 @@ body {
 
 /*=========================== Side Bar Styles Ends ==================================*/
 
+
+
+
+
 /*=========================== Middle Console Styles Starts ==============================*/
 .middle_console_container {
   position: absolute;
@@ -584,9 +588,10 @@ body {
   width: 78%;
   /* width: 100%; */
   /* sus */
-  height: 97vh;
+  /* height: 97vh; */
   /* height: max-content; */
-  /* max-height: fit-content; */
+  /* height: fit-content; */
+  height: 100vh;
   margin-left: 21%;
   margin-top: 13vh;
   border-radius: 6px;
@@ -601,7 +606,9 @@ body {
   width: 93%;
   margin-left: 5.5%;
   padding: 2vw;
+
 }
+
 
 .middle_console_container .main_heading_section {
   padding: 1rem 1rem 0.5rem 1rem;
@@ -620,11 +627,37 @@ body {
   transition: 0.6s;
 }
 
+/* Common Button Styles */
+.add_btn_container {
+  position: absolute;
+  right: 0;
+}
+
+.add_btn_container .add_btn {
+  width: var(--normal-button-width);
+  height: var(--normal-button-height);
+  color: var(--card-bg-color);
+  background-color: var(--second-color);
+  border-radius: var(--small-border-radius);
+  justify-content: center;
+  align-items: center;
+  font-weight: var(--active-font-weight);
+  font-size: var(--span-font-size);
+  border: var(--normal-button-border-size) solid var(--second-color);
+
+}
+
+
 /* ---main ends */
+
+
+
+
 
 /* Tab Screen */
 
 @media screen and (max-width: 860px) {
+
   .middle_console_container {
     width: 91.5vw;
     margin-left: 7vw;
@@ -640,11 +673,14 @@ body {
     margin-right: 1vw;
     transition: 0.6s;
   }
+
 }
+
 
 /* Mobile Screen */
 
 @media screen and (max-width: 460px) {
+
   .middle_console_container {
     margin-top: 9vh;
     width: 82.5vw;
@@ -660,6 +696,8 @@ body {
     margin-right: 0.5vw;
     transition: 0.6s;
   }
+
+
 }
 
 /*=========================== Middle Console Styles Ends ==================================*/

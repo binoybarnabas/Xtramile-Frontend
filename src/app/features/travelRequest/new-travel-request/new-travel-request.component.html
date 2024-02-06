@@ -6,7 +6,6 @@
 
             <ng-container *ngFor="let item of leftSectionNavItems;
                 let i = index">
-
                 <li (click) = "changeNewReqFormSubMenuValue(i)" [ngClass]="newReqFormSubMenuValue !== i ? 'list_item': 'list_item active' ">{{item}}</li>
             </ng-container>
 
@@ -18,7 +17,7 @@
     
         <div class="form_container">
 
-            <form (ngSubmit) = "onEmployeeTravelRequestFormSubmit()" [formGroup]="travelRequestForm" class="new_req_form" >
+            <form (ngSubmit) = "travelRequestFormSubmitFunction()" [formGroup]="travelRequestForm" class="new_req_form" >
 
                 <!-- general info section -->
                 <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group" >
@@ -27,7 +26,7 @@
                         <h4>General Informations</h4>
                     </div>
 
-                     <div class="form_elements">
+                     <div *ngIf="currentLoggedInUserRole === 'employee'" class="form_elements">
 
                         <input type="hidden" formControlName="createdBy"  value="{{employeeDetails?.empId}}" />
 
@@ -73,6 +72,18 @@
                         </div>
 
                     </div>
+                    
+                    <!-- View Mode  -->
+                    <div *ngIf="currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'financePersonnel'"  class="form_data_view_container">
+
+                        <ng-container *ngFor="let entry of getGeneralInfoMapEntries()">
+                            <div class="item_card">
+                                <p class="item_title">{{entry[0]}}</p>
+                                <p class="item_value">{{entry[1]}}</p>
+                            </div>
+                        </ng-container>
+
+                    </div>
 
                     <div class="form_input_group_navigator">
                         <div class="btn_container">
@@ -89,7 +100,7 @@
                         <h4>Trip Informations</h4>
                     </div>
 
-                    <div class="form_elements">
+                    <div *ngIf="currentLoggedInUserRole === 'employee'" class="form_elements">
 
                         <!-- Trip Type -->
                         <div class="form_input_container">
@@ -107,7 +118,7 @@
                         <!-- Trip Purpose -->
                         <div class="form_input_container">
                             <label for="tripPurpose">Purpose of Trip</label>
-                            <input class="form_input" type="text" formControlName="tripPurpose"  placeholder="Enter the purpose" />
+                            <input class="form_input" type="text" formControlName="tripPurpose"  placeholder="Enter the purpose"  />
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('tripPurpose')?.invalid && travelRequestForm.get('tripPurpose')?.touched">
                                Enter Purpose of Trip
@@ -141,7 +152,7 @@
                          <div class="form_input_container">
 
                             <label for="returnDate">Return Date</label>
-                            <input class="form_input" formControlName="returnDate" type="date"  />
+                            <input class="form_input" formControlName="returnDate" type="date" />
                            
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('returnDate')?.hasError('required') && travelRequestForm.get('returnDate')?.touched">
@@ -178,7 +189,7 @@
                         <!-- Destination Country -->
                         <div class="form_input_container">
                             <label for="destinationCountry">Destination Country</label>
-                            <input class="form_input" formControlName="destinationCountry"  type="text"  placeholder="country" />
+                            <input class="form_input" formControlName="destinationCountry"  type="text"  placeholder="country"  />
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('destinationCountry')?.invalid && travelRequestForm.get('destinationCountry')?.touched">
                                Enter the destination country
@@ -188,7 +199,7 @@
                         <!-- Source Zip Code -->
                         <div class="form_input_container">
                             <label for="sourceCityZipCode">Source City Zip Code</label>
-                            <input class="form_input" type="text" formControlName="sourceCityZipCode" placeholder="Enter the zip code of your source city" />
+                            <input class="form_input" type="text" formControlName="sourceCityZipCode" placeholder="Enter the zip code of your source city"  />
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('sourceCityZipCode')?.invalid && travelRequestForm.get('sourceCityZipCode')?.touched">
                                Enter the zipcode
@@ -218,7 +229,7 @@
                         <!-- Destination City -->
                         <div class="form_input_container">
                             <label for="destinationCity">Destination City</label>
-                            <input class="form_input" type="text" formControlName="destinationCity"  placeholder="destination city" />
+                            <input class="form_input" type="text" formControlName="destinationCity"  placeholder="destination city"  />
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('destinationCity')?.invalid && travelRequestForm.get('destinationCity')?.touched">
                                Enter the destination
@@ -228,7 +239,7 @@
                         <!-- Source State -->                     
                         <div class="form_input_container">
                             <label for="sourceState">Source State</label>
-                            <input class="form_input" type="text" formControlName="sourceState"  placeholder="state / province" />
+                            <input class="form_input" type="text" formControlName="sourceState"  placeholder="state / province"  />
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('sourceState')?.invalid && travelRequestForm.get('sourceState')?.touched">
                                Enter the source state
@@ -238,7 +249,7 @@
                         <!-- Destination State -->
                         <div class="form_input_container">
                             <label for="destinationState">Destination State</label>
-                            <input class="form_input" type="text" formControlName="destinationState"  placeholder="state / province" />
+                            <input class="form_input" type="text" formControlName="destinationState"  placeholder="state / province"  />
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('destinationState')?.invalid && travelRequestForm.get('destinationState')?.touched">
                                Enter the destination state
@@ -248,30 +259,40 @@
                     <!-- form input elements ends -->
                     </div>
 
-                        <div class="form_input_group_navigator">
+                    <!-- View Mode  -->
+                    <div *ngIf="currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'financePersonnel'"  class="form_data_view_container">
+
+                        <ng-container *ngFor="let entry of getTripInfoMapEntries()">
+                            <div class="item_card">
+                                <p class="item_title">{{entry[0]}}</p>
+                                <p class="item_value">{{entry[1]}}</p>
+                            </div>
+                        </ng-container>
+
+                    </div>
+
+                    <div class="form_input_group_navigator">
                             <div class="btn_container">
                                 <button (click) = "changeNewReqFormSubMenuValue(0)" class="back_btn"> Back</button>
                                 <button (click) = "changeNewReqFormSubMenuValue(2)" class="next_btn"> Next</button>
                             </div>
-                        </div>
+                    </div>
 
-                
                 </div>  
-
 
                 <!-- additional info section -->
                 <div *ngIf="newReqFormSubMenuValue === 2" class="form_input_group"  >
+                    
 
                     <div class="form_title">
                         <h4>Additional Informations</h4>
                     </div>
 
-                    <div class="form_elements">
+                    <div *ngIf="currentLoggedInUserRole === 'employee' " class="form_elements">
 
-                        <!-- Cab Service -->
                         <div class="form_input_container">
                             <label for="cabRequired">Do you want cab service ? </label>
-                            <select class="form_input" formControlName="cabRequired">
+                            <select class="form_input" formControlName="cabRequired" >
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>
@@ -281,10 +302,9 @@
                            </span>
                         </div>
 
-                        <!-- Accomodation -->
                         <div class="form_input_container">
                             <label for="accommodationRequired">Do you want hotel accomodatiion ? </label>
-                            <select class="form_input" formControlName="accommodationRequired">
+                            <select class="form_input" formControlName="accommodationRequired" >
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>
@@ -294,10 +314,9 @@
                            </span>
                         </div>
 
-                        <!-- Pref Departure Time -->
                         <div class="form_input_container">
                             <label for="prefDepartureTime">Prefrerred Departure Time</label>
-                            <select class="form_input" formControlName="prefDepartureTime">
+                            <select class="form_input" formControlName="prefDepartureTime" >
                                 <option value="00.00 - 04.00">00.00 - 04.00</option>
                                 <option value="04.00 - 08.00">04.00 - 08.00</option>
                                 <option value="08.00 - 12.00">08.00 - 12.00</option>
@@ -311,18 +330,19 @@
                            </span>
                         </div>
 
-                        <!-- Travel Authorization -->
-                        <div class="form_input_container">
+                        <!-- File Inputs -->
+                        <ng-container *ngIf="currentLoggedInUserRole === 'employee'">
+
+                            <div class="form_input_container">
                             <label for="travelAuthorizationEmailCapture">Travel Authorization Email Capture</label>
                             <input class="form_input" type="file"  formControlName="travelAuthorizationEmailCapture" (change)="onFileChange($event, 'travelAuthorizationEmailCapture')" />
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('travelAuthorizationEmailCapture')?.invalid && travelRequestForm.get('travelAuthorizationEmailCapture')?.touched">
                                Choose a file
                            </span>
-                        </div>
+                            </div> 
 
-                        <!-- Passport -->
-                        <div class="form_input_container">
+                            <div class="form_input_container">
                             <label for="passportAttachment">Passport</label>
 
                             <input class="form_input" type="file"  formControlName="passportAttachment" (change)="onFileChange($event, 'passportAttachment')"/>
@@ -331,10 +351,9 @@
                                Choose a file
                            </span>
 
-                        </div>
+                            </div>
 
-                        <!-- Id Card -->
-                        <div class="form_input_container">
+                            <div class="form_input_container">
                             <label for="idCardAttachment">ID Card</label>
                             <input class="form_input" type="file"  formControlName="idCardAttachment"  (change)="onFileChange($event, 'idCardAttachment')"/>
 
@@ -342,37 +361,188 @@
                             *ngIf="travelRequestForm.get('idCardAttachment')?.invalid && travelRequestForm.get('idCardAttachment')?.touched">
                                Choose a file
                            </span>
-                        </div>
- 
-                        <!-- Additional Comments -->
+                            </div>
+
+                        </ng-container>
+                     
+
                         <div class="form_input_container">
                             <label for="additionalComments">Additional Comments</label>
                             <textarea class="form_input" formControlName="additionalComments" id="" cols="30" rows="4"></textarea>
-                            <!-- <span class="form_error"
-                            *ngIf="travelRequestForm.get('additionalComments')?.invalid && travelRequestForm.get('additionalComments')?.touched">
-                               Enter Something
-                           </span> -->
-                        </div>   
+                        
+                        </div>
+
+                        
+                    </div>
+                    
+                    <!-- View Mode  -->
+                    <div *ngIf="currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'financePersonnel'"  class="form_data_view_container">
+
+                        <ng-container *ngFor="let entry of getAdditionalInfoMapEntries()">
+                            <div class="item_card">
+                                <p class="item_title">{{entry[0]}}</p>
+                                <p class="item_value">{{entry[1]}}</p>
+                            </div>
+                        </ng-container>
+
+                        <!-- Priority - Visisble for manager -->
+                        <div *ngIf="currentLoggedInUserRole === 'manager' " class="form_input_container">
+
+                            <div class="priority_container">
+
+                                    <label for="priority">Priority</label>
+
+                                    <input type="range" formControlName="priority" min="1" max="3" [(ngModel)]="priority" class="priority-slider" id="priority" (input)="updatePriority($event)">
+
+                                    <div class="priority-level" id="priorityLevel">{{ priority }}</div>
+
+                                    <span class="form_error"
+                                    *ngIf="travelRequestForm.get('priority')?.invalid && travelRequestForm.get('priority')?.touched">
+                                    Choose a value
+                                    </span>
+
+                            </div>  
+
+                        </div>
 
                     </div>
-
-                    <div class="form_submit_container">
+                    
+                    <!-- If Employee or manager then submit -->
+                    <div *ngIf="currentLoggedInUserRole === 'employee' " class="form_submit_container" >
 
                         <div class="btn_container">
                             <button (click) = "changeNewReqFormSubMenuValue(1)" class="cancel_btn"> Back</button>
                             <input class="submit_btn" type="submit" [disabled]="travelRequestForm.invalid" Value="Submit">
-                            <!-- <input class="submit_btn" type="submit" Value="Submit"> -->
+                        </div>
+
+                    </div>
+                 
+                    <!-- If TA or FNP Navigate  -->
+                    <div *ngIf="currentLoggedInUserRole ==='manager' || currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole ==='financePersonnel'" class="form_input_group_navigator">
+                        <div class="btn_container">
+                            <button (click) = "changeNewReqFormSubMenuValue(1)" type="button" class="back_btn"> Back</button>
+                            <button (click) = "changeNewReqFormSubMenuValue(3)" type="button" class="next_btn"> Next</button>
                         </div>
                     </div>
 
                     <!-- form input group ends -->
                 </div>
 
+                <!-- Docs Attached -->
+                <div *ngIf="newReqFormSubMenuValue === 3 && (currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole === 'manager')" class="form_input_group"  >
+
+                    <div class="form_title">
+                        <h4>Documents Attached</h4>
+                    </div>
+
+                    <div class="form_elements">
+                    <!-- form input elements ends -->
+                    </div>
+
+                    <div class="files_section">
+                        <app-file-card>
+
+                        </app-file-card>
+                    </div>
+
+                    <div *ngIf="currentLoggedInUserRole === 'travelAdmin' " class="form_input_group_navigator">
+                            <div class="btn_container">
+                                <button type="button" (click) = "changeNewReqFormSubMenuValue(2)" class="back_btn"> Back</button>
+                                <button type="button" (click) = "changeNewReqFormSubMenuValue(4)" class="next_btn"> Next</button>
+                            </div>
+                    </div>
+
+                    
+                    <!-- If  Manager then submit -->
+                    <div *ngIf="currentLoggedInUserRole === 'manager' " class="form_submit_container" >
+                        <div class="reject_btn_container">
+                            <button type="button" class="reject_btn"> Reject</button>
+                        </div>
+                        <div class="btn_container">
+                            <button (click) = "changeNewReqFormSubMenuValue(1)" class="cancel_btn"> Back</button>
+                            <input class="submit_btn" type="submit" [disabled]="travelRequestForm.invalid" Value="Submit">
+                        </div>
+
+                    </div>
+
+                </div> 
+
+                <!--TA- add available options  section -->
+                <div *ngIf="currentLoggedInUserRole==='travelAdmin' && newReqFormSubMenuValue === 4" class="form_input_group"  >
+
+                    <div class="form_title">
+                        <h4>Add Available Options</h4>
+                        <div class="add_btn_container">
+                            <button type="button"  class="add_btn"> Add </button>
+                        </div>
+                    </div>
+
+                    <div class="form_elements">
+          
+                    </div>
+
+                 
+
+                    <div class="form_submit_container">
+
+                        <div class="reject_btn_container">
+                            <button type="button" class="reject_btn"> Reject</button>
+                        </div>
+
+                        <div class="btn_container">
+                            <button (click) = "changeNewReqFormSubMenuValue(3)" class="cancel_btn"> Back</button>
+                            <input class="submit_btn" type="submit" [disabled]="travelRequestForm.invalid" Value="Send">
+                        </div>
+
+                    </div>
+
+                    <!-- form input group ends -->
+                </div>
+
+                <!-- FNP - PerDiem Allocation section -->
+                <div *ngIf="currentLoggedInUserRole==='financePersonnel' && newReqFormSubMenuValue === 3" class="form_input_group"  >
+
+                    <div class="form_title">
+                        <h4>Per Diem Allocations</h4>
+                        
+                        <div class="add_btn_container">
+                            <button type="button"  class="add_btn"> Add </button>
+                        </div>
+
+                    </div>
+
+                    <div class="form_elements">
+                        <!-- Modal -->
+                    </div>
+
+                    <div class="perdiem_section">
+
+                        <app-perdiem-card>
+                            
+                        </app-perdiem-card>
+                         
+                    </div>
+            
+
+                    <div class="form_submit_container">
+
+                        <div class="btn_container">
+                            <button type="button" (click) = "changeNewReqFormSubMenuValue(2)" class="cancel_btn"> Back</button>
+                            <input class="submit_btn" type="submit" [disabled]="travelRequestForm.invalid" Value="Send">
+                        </div>
+
+                    </div>
+
+                    <!-- form input group ends -->
+                </div>
+
+
             </form> 
 
             <!-- form container ends -->
         </div>
 
+        <!-- right section ends -->
     </div>
 
 <!-- req form main container ends -->

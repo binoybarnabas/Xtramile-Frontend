@@ -8,12 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
-import { NewTravelRequestComponent } from './features/employee/myRequests/new-travel-request/new-travel-request.component';
+import { NewTravelRequestComponent } from './features/travelRequest/new-travel-request/new-travel-request.component';
 import { ManagerSideNavBarComponent } from './components/layout/manager/manager-home/manager-side-nav-bar/manager-side-nav-bar.component';
 import { ManagerMiddleConsoleComponent } from './components/layout/manager/manager-home/manager-middle-console/manager-middle-console.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
@@ -80,10 +80,10 @@ import { TableFilterComponent } from './components/ui/table-filter/table-filter.
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
 import { ReqFormComponent } from './features/manager/req-form/req-form.component';
 import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component';
-import { ModalComponent } from './components/ui/modal/modal.component'; 
+import { ModalComponent } from './components/ui/modal/modal.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ToastrModule } from 'ngx-toastr';
+//import { ToastrModule } from 'ngx-toastr';
 import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequests/view-available-options/view-available-options.component';
 import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
@@ -91,6 +91,12 @@ import { EmployeeViewCardComponent } from './components/ui/employee-view-card/em
 import { LoginPageComponent } from './components/layout/login-page/login-page.component';
 import { TopBarUserComponent } from './components/ui/top-bar-user/top-bar-user.component';
 import { CustomDatePipe } from './pipes/CustomDate/custom-date.pipe';
+
+//import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
+import { PerdiemCardComponent } from './components/ui/perdiem-card/perdiem-card.component';
+import { FileCardComponent } from './components/ui/file-card/file-card.component';
+import { LoginComponent } from './components/ui/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -164,6 +170,9 @@ import { CustomDatePipe } from './pipes/CustomDate/custom-date.pipe';
     DataTableComponent,
     TableFilterComponent,
     ChangeStatusButtonComponent,
+    PerdiemCardComponent,
+    FileCardComponent,
+    LoginComponent,
     ReqFormComponent,
     TraveladminReqformComponent,
     ModalComponent,
@@ -183,16 +192,17 @@ import { CustomDatePipe } from './pipes/CustomDate/custom-date.pipe';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-center', // Set to center of the screen
-      preventDuplicates: true,
-    }),
+    // ToastrModule.forRoot({
+    //   timeOut: 3000,
+    //   positionClass: 'toast-center', // Set to center of the screen
+    //   preventDuplicates: true,
+    // }),
 
     ModalModule.forRoot()
 
