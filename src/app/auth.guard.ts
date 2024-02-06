@@ -2,13 +2,14 @@ import { inject } from "@angular/core"
 import { LoginService } from "./services/loginService/login.service";
 import { Router } from "@angular/router";
 
+// To activate employee route for logging in
 export const authGuardEmployee = ()=>{
 
-    const loginService = inject(LoginService);
+    // const loginService = inject(LoginService);
     const router = inject(Router);
 
-    if(Boolean(localStorage.getItem('isEmployeeAuthenticated'))){
-        return true
+    if(Boolean(sessionStorage.getItem('isEmployeeAuthenticated'))){
+        return true;
     }
     else{
     router.navigate(['/login'])
@@ -16,10 +17,11 @@ export const authGuardEmployee = ()=>{
     }
 }
 
+// To activate manager route for logging in
 export const authGuardManager = ()=>{
-    const loginService = inject(LoginService);
+  
     const router = inject(Router);
-    if(Boolean(localStorage.getItem('isManagerAuthenticated')))
+    if(Boolean(sessionStorage.getItem('isManagerAuthenticated')))
     {
         return true
     }
@@ -30,12 +32,12 @@ export const authGuardManager = ()=>{
     
 }
 
+// To activate travel admin route for logging in
 export const authGuardTravelAdmin = ()=>{
-
-    const loginService = inject(LoginService);
+   
     const router = inject(Router);
 
-    if(Boolean(localStorage.getItem('isTravelAdminAuthenticated'))){
+    if(Boolean(sessionStorage.getItem('isTravelAdminAuthenticated'))){
         return true
     }
     else{
@@ -45,12 +47,12 @@ export const authGuardTravelAdmin = ()=>{
     
 }
 
+// To activate Finance department route for logging in
 export const authGuardFinanceDepartment = ()=>{
-
-    const loginService = inject(LoginService);
+   
     const router = inject(Router);
 
-    if(Boolean(localStorage.getItem('isFinanceDepartmentAuthenticated'))){
+    if(Boolean(sessionStorage.getItem('isFinanceDepartmentAuthenticated'))){
         return true
     }
     else{

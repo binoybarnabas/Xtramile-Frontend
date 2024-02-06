@@ -11,21 +11,17 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
-import { TopBarComponent } from './components/layout/employee/employee-home/top-bar/top-bar.component';
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
 import { NewTravelRequestComponent } from './features/employee/myRequests/new-travel-request/new-travel-request.component';
 import { ManagerSideNavBarComponent } from './components/layout/manager/manager-home/manager-side-nav-bar/manager-side-nav-bar.component';
-import { ManagerTopBarComponent } from './components/layout/manager/manager-home/manager-top-bar/manager-top-bar.component';
 import { ManagerMiddleConsoleComponent } from './components/layout/manager/manager-home/manager-middle-console/manager-middle-console.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
 import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-home.component';
 import { TravelAdminSideNavBarComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-side-nav-bar/travel-admin-side-nav-bar.component';
-import { TravelAdminTopBarComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-top-bar/travel-admin-top-bar.component';
 import { TravelAdminMiddleConsoleComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-middle-console/travel-admin-middle-console.component';
 import { FinancePersonnelHomeComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-home.component';
 import { FinancePersonnelSideNavBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
-import { FinancePersonnelTopBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-top-bar/finance-personnel-top-bar.component';
 import { FinancePersonnelMiddleConsoleComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-middle-console/finance-personnel-middle-console.component';
 import { EmployeeDashboardComponent } from './features/employee/employee-dashboard/employee-dashboard.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
@@ -93,6 +89,8 @@ import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/trav
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
 import { LoginPageComponent } from './components/layout/login-page/login-page.component';
+import { TopBarUserComponent } from './components/ui/top-bar-user/top-bar-user.component';
+import { CustomDatePipe } from './pipes/CustomDate/custom-date.pipe';
 
 @NgModule({
   declarations: [
@@ -100,21 +98,17 @@ import { LoginPageComponent } from './components/layout/login-page/login-page.co
     InputFieldComponent,
     EmployeeComponent,
     SideNavBarComponent,
-    TopBarComponent,
     MiddleConsoleComponent,
     EmployeeHomeComponent,
     NewTravelRequestComponent,
     ManagerHomeComponent,
     ManagerSideNavBarComponent,
-    ManagerTopBarComponent,
     ManagerMiddleConsoleComponent,
     TravelAdminHomeComponent,
     TravelAdminSideNavBarComponent,
-    TravelAdminTopBarComponent,
     TravelAdminMiddleConsoleComponent,
     FinancePersonnelHomeComponent,
     FinancePersonnelSideNavBarComponent,
-    FinancePersonnelTopBarComponent,
     FinancePersonnelMiddleConsoleComponent,
     EmployeeDashboardComponent,
     EmployeeProfileComponent,
@@ -177,7 +171,9 @@ import { LoginPageComponent } from './components/layout/login-page/login-page.co
     ViewAvailableOptionsComponent,
     TravelAdminWaitingRequestsComponent,
     TravelAdminSelectedRequestsComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    TopBarUserComponent,
+    CustomDatePipe
   ]
   ,
 

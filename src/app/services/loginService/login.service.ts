@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-
+  
   isLoggedIn = false;
 
   private URL = "http://localhost:5190/api/Auth/login"

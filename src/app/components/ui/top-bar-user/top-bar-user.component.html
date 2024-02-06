@@ -1,7 +1,15 @@
+<!-- <p>top-bar works!</p> -->
+
+
 <div class="top_bar_container">
 
+
     <div class="left_section">
-     
+
+        <!-- <div class="side_bar_controller">
+            <i (click)="controlSideBar()" class="icon ri-menu-line"></i>
+        </div> -->
+        
         <div class="top_bar_logo_container">
             <h3 class="top_bar_logo"> <i class="ri-git-pr-draft-fill"></i> XtraMile</h3>
         </div>
@@ -12,14 +20,15 @@
 
             <div class="calendar_section">
             
-                <p class="date"><i class="cal_icon ri-calendar-2-line"></i> Thursday, 11th January </p>
+                <p class="date"><i class="cal_icon ri-calendar-2-line"></i>{{date | customDate}}</p>
                 <i class="notification  ri-notification-2-line"></i>
 
             </div>
 
+
             <div class="profile_info">
-                <p class="name">Abhijit Thankachan</p>
-                <span class="designation">Finance Admin</span>
+                <p class="name">{{employeeName}}</p>
+                <span class="designation">{{designation}}</span>
             </div>
 
             <div class="profile_photo">
