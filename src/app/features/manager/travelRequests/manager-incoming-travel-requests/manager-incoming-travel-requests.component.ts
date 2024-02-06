@@ -15,7 +15,7 @@ export class ManagerIncomingTravelRequestsComponent {
   sqlDatetimeFormat!: string;
   selectedSortOption! : string;
 
-  employeeRequest: any[] | undefined;
+  employeeRequest?: any[];
 
   // Manager ID for fetching employee requests
   managerId = 7; // to check the data

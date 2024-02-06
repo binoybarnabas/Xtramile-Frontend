@@ -97,6 +97,8 @@ import { PerdiemCardComponent } from './components/ui/perdiem-card/perdiem-card.
 import { FileCardComponent } from './components/ui/file-card/file-card.component';
 import { LoginComponent } from './components/ui/login/login.component';
 
+import {MatTableModule} from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon'; 
 
 @NgModule({
   declarations: [
@@ -206,6 +208,8 @@ import { LoginComponent } from './components/ui/login/login.component';
 
     ModalModule.forRoot()
 
+    MatTableModule,
+    MatIconModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
