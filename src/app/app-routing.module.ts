@@ -40,6 +40,7 @@ import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/tra
 import { LoginPageComponent } from './components/layout/login-page/login-page.component';
 import { authGuardEmployee, authGuardFinanceDepartment, authGuardManager, authGuardTravelAdmin } from './auth.guard';
 
+import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-ongoing-travel-requests/travel-admin-ongoing-travel-requests.component';
 
   const routes: Routes = [
     { path: 'employee', component: EmployeeHomeComponent,canActivate:[authGuardEmployee], children: [
@@ -71,7 +72,7 @@ import { authGuardEmployee, authGuardFinanceDepartment, authGuardManager, authGu
         {path:'',component: TravelAdminSelectedRequestsComponent},
         {path: 'available_options', component: ViewAvailableOptionsComponent}
       ]},
-      {path: 'ongoing', component: TravelAdminOngoingTravelComponent},
+      {path: 'ongoing', component: TravelAdminOngoingTravelRequestsComponent},
       {path: 'closed', component: TravelAdminClosedTravelRequestsComponent},
       {path: 'profile', component: TravelAdminProfileComponent}
     ]},

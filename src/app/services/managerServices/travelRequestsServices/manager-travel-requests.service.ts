@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -68,4 +69,15 @@ export class ManagerTravelRequestsService {
     return this.http.patch('http://localhost:5190/api/reportingmanager/travel/request/cancel',body);
   }
 
+  private apiUrl= 'http://localhost:5190/api'
+  postReasonToCancel(requestId:number,empId:number,description:string):Observable<any>{
+    const body ={
+      reasonCode:"",
+      description:description,
+      createdBy :empId,
+      createdOn: new Date()
+    }
+    console.log(body)
+    return this.http.post(this.apiUrl+`/reportingmanager/travel/request/deny?reqId=${requestId}`, body);
+  }
 }

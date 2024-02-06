@@ -4,5 +4,6 @@ export interface WaitingOrSelectedRequests {
     employeeName: string,
     createdOn: string,
     travelTypeName: string,
-    priorityName: string
+    priorityName: string,
+    approvalDate : Date
 }

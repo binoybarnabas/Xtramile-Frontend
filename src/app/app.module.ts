@@ -91,6 +91,7 @@ import { EmployeeViewCardComponent } from './components/ui/employee-view-card/em
 import { LoginPageComponent } from './components/layout/login-page/login-page.component';
 import { TopBarUserComponent } from './components/ui/top-bar-user/top-bar-user.component';
 import { CustomDatePipe } from './pipes/CustomDate/custom-date.pipe';
+import { DescriptionModalComponent } from './components/ui/description-modal/description-modal.component';
 
 @NgModule({
   declarations: [
@@ -173,7 +174,8 @@ import { CustomDatePipe } from './pipes/CustomDate/custom-date.pipe';
     TravelAdminSelectedRequestsComponent,
     LoginPageComponent,
     TopBarUserComponent,
-    CustomDatePipe
+    CustomDatePipe,
+    DescriptionModalComponent
   ]
   ,
 

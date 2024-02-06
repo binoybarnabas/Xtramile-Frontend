@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h4 class="modal-title">Reason</h4>
+  <button
+    type="button"
+    class="exit_button"
+    aria-label="Close"
+    (click)="closeModal()"
+  >
+    <span aria-hidden="true"><i class="ri-close-fill"></i></span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="optionForm" (ngSubmit)="submitModal()">
+    <div class="form-group">
+      <label for="description">Reason</label>
+      <textarea
+        class="form-control"
+        id="description"
+        formControlName="description"
+      ></textarea>
+      <div
+        *ngIf="
+          optionForm.get('description')?.hasError('required') &&
+          optionForm.get('description')?.touched
+        "
+        class="validation_message"
+      >
+        *Description is required
+      </div>
+    </div>
+    <button
+      type="submit"
+      [ngClass]="{ disabled_btn: optionForm.invalid }"
+      class="btn btn-primary mt-3"
+    >
+      Submit
+    </button>
+  </form>
+</div>

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
@@ -13,15 +14,19 @@ export class TravelAdminIncomingTravelRequestsComponent {
   incomingRequestdata:any[] = [];
   selectedRow:any | null = null;
   requestId: number = 0;
-  constructor(private apiservice: TravelAdminTravelRequestsService, private router: Router){
+  constructor(private apiservice: TravelAdminTravelRequestsService, private router: Router, private datePipe: DatePipe){
     
   }
   ngOnInit(){
     //api service to receive all incoming requests.
     this.apiservice.getIncomingRequests().subscribe((data: any[]) => {
+      data.forEach((request) => {
+        request.createdOn = this.datePipe.transform(request.createdOn,'dd/LL/yyyy')
+      })
       this.incomingRequestdata = data;
     });
   }
+  //to handle the row emitted from child component and add requestId as query parameter
   handleSelectedRow(row:any){
     this.selectedRow = row;
     console.log(this.selectedRow.requestId)
@@ -29,10 +34,4 @@ export class TravelAdminIncomingTravelRequestsComponent {
     const queryParams = {requestId:this.requestId}
     this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
   }
-  // selectRow(requestId:number){
-  //   this.selectedRow[requestId] = requestId;
-  //   console.log(requestId);
-  //   const queryParams = {requestId:requestId}
-  //   this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
-  // }
 }

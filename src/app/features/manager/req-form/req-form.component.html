@@ -258,7 +258,8 @@
                         <div class="btn_container">
                             <button (click) = "changeNewReqFormSubMenuValue(1)" class="back_btn"> Back</button>&nbsp;&nbsp;
                             <Button class="submit_btn" (click)="ApproveRequest()">Approve</Button>&nbsp;&nbsp;
-                            <Button class="cancel_btn" (click)="RejectRequest()">Cancel</Button>&nbsp;&nbsp;
+                            <!-- <Button class="cancel_btn" (click)="RejectRequest()">Cancel</Button>&nbsp;&nbsp; -->
+                            <button type="button" class="btn btn-primary mx-3" (click)="openModal()">Deny</button>
                         </div>
                     </div>
                     <!-- form input group ends -->

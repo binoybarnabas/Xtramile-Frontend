@@ -22,7 +22,6 @@ export class TravelAdminTravelRequestsService {
   getWaitingOrSelectedRequests(statusCode: string): Observable<WaitingOrSelectedRequests[]>{
     return this.http.get<WaitingOrSelectedRequests[]>(this.apiURL + `/traveladmin/requestsView/${statusCode}`)
   } 
-  
 
   // to post the available options for request from modal
   postAvailOptionData(data: any): Observable<any> {
@@ -44,6 +43,10 @@ export class TravelAdminTravelRequestsService {
     return this.http.get(this.apiURL+ `/traveladmin/travel/request/${requestId}`);
   }
 
+  getOngoingTravelRequest():Observable<any>{
+    return this.http.get(this.apiURL+ '/traveladmin/ongoing')
+  }
+  
   getSelectedOption(requestId: number): Observable<AvailableOptions>{
     return this.http.get<AvailableOptions>(this.apiURL+ `/traveladmin/options/selected?reqId=${requestId}`)
   }

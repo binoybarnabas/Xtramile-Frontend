@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { DescriptionModalComponent } from 'src/app/components/ui/description-modal/description-modal.component';
 
 @Component({
   selector: 'app-req-form',
@@ -27,16 +29,18 @@ export class ReqFormComponent {
   formattedPreferredDepartureTime!: string
   formattedPreferredDepartureDate!: string
   formattedPreferredReturnDate!: string
+  requestID!: number;
 
   //navbar left section
   leftSectionNavItems = ["General Informations", "Trip Informations", "Additional Informations"];  
-
+  bsModalRef!: BsModalRef;
   constructor(private sideNavBarService: SideNavBarService,
     private route: ActivatedRoute,
     private managerTravelRequest : ManagerTravelRequestsService,
     private datePipe:DatePipe,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private modalService: BsModalService
     ) 
     {
     this.newReqFormSubMenuValue = 0;
@@ -72,6 +76,7 @@ export class ReqFormComponent {
 
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
+      this.requestID = requestId
       console.log(requestId);
       this.managerTravelRequest.GetTravelRequest(requestId).subscribe({
         next:(data)=>{
@@ -139,5 +144,16 @@ export class ReqFormComponent {
     // Redirect to another page
     this.router.navigate(['/manager/dashboard']);
   }
-
+  openModal() {
+    const initialState = {
+      requestId: this.requestID
+    };
+    
+    this.bsModalRef = this.modalService.show(DescriptionModalComponent, { initialState });
+    this.bsModalRef.content.onClose.subscribe((result: any) => {
+      // Handle the result from the modal if needed
+      console.log('Modal result:', result);
+      // You can perform actions with the result data here
+    });
+  }
 }

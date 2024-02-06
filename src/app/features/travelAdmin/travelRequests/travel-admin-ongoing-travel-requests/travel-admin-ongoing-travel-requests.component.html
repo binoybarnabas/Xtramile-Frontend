@@ -1,1 +1,8 @@
 <p>travel-admin-ongoing-travel-requests works!</p>
+
+<app-data-table
+[headers]="tableHeaders" 
+[data]="ongoingRequestData"
+[displayedProperties]="fieldsToDisplay"
+(rowClick)="selectedRow($event)">
+</app-data-table>
