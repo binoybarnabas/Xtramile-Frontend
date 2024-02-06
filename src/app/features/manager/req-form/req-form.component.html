@@ -1,0 +1,275 @@
+<div class="req_forms_main_container">
+
+    <div class="left_section">
+    
+        <div class="nav_items">
+
+            <ng-container *ngFor="let item of leftSectionNavItems;
+                let i = index">
+
+                <li (click) = "changeNewReqFormSubMenuValue(i)" [ngClass]="newReqFormSubMenuValue !== i ? 'list_item': 'list_item active' ">{{item}}</li>
+            </ng-container>
+
+        </div>
+
+    </div>
+
+    <div class="right_section">
+    
+        <div class="form_container">
+
+            <form class="new_req_form" [formGroup]="priorityForm">
+
+                <!-- general info section -->
+                <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group" >
+
+                    <div class="form_title">
+                        <h4>General Informations</h4>
+                    </div>
+
+                     <div class="form_elements">
+
+                        <input type="hidden" formControlName="createdBy"  value="{{employeeRequestData?.empId}}" />
+
+                        <div class="form_input_container">
+                            <label for="firstName">First Name</label>
+                            <input class="form_input" type="text"  value="{{employeeRequestData.firstName}}" disabled/>
+                        </div>
+
+                        <div class="form_input_container">
+                            <label for="lastName">Last Name</label>
+                            <input class="form_input" type="text"   value="{{employeeRequestData.lastName}}" disabled/>
+                        </div>
+
+                        <div class="form_input_container">
+                            <label for="email">Email</label>
+                            <input class="form_input" type="email"     value="{{employeeRequestData?.email}}" disabled/>
+
+                        </div>
+
+                        <div class="form_input_container">
+                            <label for="contactNumber">Phone</label>
+                            <input class="form_input" type="text"    value="{{employeeRequestData?.contactNumber}}" disabled/>
+                        </div>
+
+                        <div class="form_input_container">
+                            <label for="departmentName">Department</label>
+                            <input class="form_input" type="text"  value="{{employeeRequestData?.departmentName}}" disabled/>
+                        </div>
+
+                        <div class="form_input_container">
+                            <label for="reportsTo">Reports To</label>
+                            <input class="form_input" type="text" value="{{employeeRequestData?.reportsTo}}" disabled/>
+                        </div>
+
+                        <div class="form_input_container">
+                            <label for="projectCode">Project Code</label>
+                            <input class="form_input" type="text"  value="{{employeeRequestData?.projectCode}}" disabled/>
+                        </div>
+
+                        <div class="form_input_container">
+                            <label for="projectName">Project Name</label>
+                            <input class="form_input" type="text"  value="{{employeeRequestData?.projectName}}" disabled />
+                        </div>
+
+                    </div>
+
+                    <div class="form_input_group_navigator">
+                        <div class="btn_container">
+                            <button (click) = "changeNewReqFormSubMenuValue(1)" class="next_btn"> Next</button>
+                        </div>
+                    </div>
+
+                </div>  
+         
+                <!-- trip info section -->
+                <div   *ngIf="newReqFormSubMenuValue === 1" class="form_input_group"  >
+
+                    <div class="form_title">
+                        <h4>Trip Informations</h4>
+                    </div>
+
+                    <div class="form_elements">
+
+                        <!-- Trip Type -->
+                        <div class="form_input_container">
+                            <label for="travelTypeId">Trip Type</label>
+                            <select  formControlName="travelTypeId"  class="form_input" >
+                                <option disabled selected>{{employeeRequestData?.travelType}}</option>
+                            </select>
+                        </div>      
+
+                        <!-- Trip Purpose -->
+                        <div class="form_input_container">
+                            <label for="tripPurpose">Purpose of Trip</label>
+                        <input class="form_input" type="text" placeholder="Enter the purpose" value={{employeeRequestData?.tripPurpose}} disabled/>
+                        </div>
+
+                        <!-- Departure Date -->
+                        <div class="form_input_container">
+
+                            <label for="departureDate">Departure Date</label>
+                            <input class="form_input" type="text" value={{formattedPreferredDepartureDate}} disabled/>
+
+                        </div>
+
+                        <!-- Return Date -->
+                         <div class="form_input_container">
+
+                            <label for="returnDate">Return Date</label>
+                            <input class="form_input" type="text"  value={{formattedPreferredReturnDate}} disabled/>
+        
+
+                        </div>     
+                        
+                        <!-- Source Country -->
+                        <div class="form_input_container">
+                            <label for="sourceCountry">Source Country</label>
+                            <input class="form_input" type="text"  placeholder="country" value={{employeeRequestData?.sourceCountry}} disabled />
+                          
+                        </div>    
+                        
+                        <!-- Destination Country -->
+                        <div class="form_input_container">
+                            <label for="destinationCountry">Destination Country</label>
+                            <input class="form_input" type="text"  placeholder="country" value={{employeeRequestData?.destinationCountry}} disabled/>
+                        </div> 
+                                
+                        <!-- Source Zip Code -->
+                        <div class="form_input_container">
+                            <label for="sourceCityZipCode">Source City Zip Code</label>
+                            <input class="form_input" type="text"  placeholder="Enter the zip code of your source city" value={{employeeRequestData?.sourceCityZipCode}} disabled />
+                        </div>               
+                
+                        <!-- Destination Zip Code -->
+                        <div class="form_input_container">
+                            <label for="destinationCityZipCode">Destination City Zip Code</label>
+                            <input class="form_input" type="text"  placeholder="Enter the zip code of your destination city" value={{employeeRequestData?.destinationCityZipCode}} disabled />
+                        </div>     
+
+                        <!-- Source City -->
+                        <div class="form_input_container">
+                            <label for="sourceCity">Source City</label>
+                            <input class="form_input" type="text" placeholder="source city" value={{employeeRequestData?.sourceCity}} disabled />
+                        </div>      
+
+                        <!-- Destination City -->
+                        <div class="form_input_container">
+                            <label for="destinationCity">Destination City</label>
+                            <input class="form_input"  placeholder="destination city" value={{employeeRequestData?.destinationCity}} disabled />
+                        </div>      
+
+                        <!-- Source State -->                     
+                        <div class="form_input_container">
+                            <label for="sourceState">Source State</label>
+                            <input class="form_input" type="text"  placeholder="state / province" value={{employeeRequestData?.sourceState}} disabled />
+                        </div>             
+
+                        <!-- Destination State -->
+                        <div class="form_input_container">
+                            <label for="destinationState">Destination State</label>
+                            <input class="form_input" type="text"  placeholder="state / province" value={{employeeRequestData?.destinationState}} disabled />
+                        </div>               
+
+                    <!-- form input elements ends -->
+                    </div>
+
+                        <div class="form_input_group_navigator">
+                            <div class="btn_container">
+                                <button (click) = "changeNewReqFormSubMenuValue(0)" class="back_btn"> Back</button>
+                                <button (click) = "changeNewReqFormSubMenuValue(2)" class="next_btn"> Next</button>
+                            </div>
+                        </div>
+
+                
+                </div>  
+
+
+                <!-- additional info section -->
+                <div *ngIf="newReqFormSubMenuValue === 2" class="form_input_group"  >
+
+                    <div class="form_title">
+                        <h4>Additional Informations</h4>
+                    </div>
+
+                    <div class="form_elements">
+
+                        <!-- Cab Service -->
+                        <div class="form_input_container">
+                            <label for="cabRequired">Do you want cab service ? </label>
+                            <input class="form_input" value={{employeeRequestData?.cabRequired}} disabled>
+                        </div>
+
+                        <!-- Accomodation -->
+                        <div class="form_input_container">
+                            <label for="accommodationRequired">Do you want hotel accomodatiion ? </label>
+                            <input class="form_input" value={{employeeRequestData?.accommodationRequired}} disabled>
+                     
+                        </div>
+
+                        <!-- Pref Departure Time -->
+                        <div class="form_input_container">
+                            <label for="prefDepartureTime">Prefrerred Departure Time</label>
+                            <input class="form_input" value={{formattedPreferredDepartureTime}} disabled>
+                                
+                        </div>
+
+                        <!-- Travel Authorization -->
+                        <div class="form_input_container">
+                            <label for="travelAuthorizationEmailCapture">Travel Authorization Email Capture</label>
+                            <input class="form_input" type="file"   />
+                        </div>
+
+                        <!-- Passport -->
+                        <div class="form_input_container">
+                            <label for="passportAttachment">Passport</label>
+
+                            <input class="form_input" type="file" />
+                          
+                        </div>
+
+                        <!-- Id Card -->
+                        <div class="form_input_container">
+                            <label for="idCardAttachment">ID Card</label>
+                            <input class="form_input" type="file" />
+                        </div>
+ 
+                        <!-- Additional Comments -->
+                        <div class="form_input_container">
+                            <label for="additionalComments">Additional Comments</label>
+                            <textarea class="form_input" id="" cols="30" rows="4" value={{employeeRequestData?.additionalComments}} disabled></textarea>
+                            
+                        </div>  
+                        
+                        
+
+                            <div class="form_input_container">
+                              <label for="Priority">Set the Priority </label>
+                              <select class="form_input" formControlName="selectedPriority">
+                                <option value="1" selected>Low</option>
+                                <option value="2">Medium</option>
+                                <option value="3">High</option>
+                              </select>
+                            </div>
+
+                    </div>
+
+                    <div class="form_submit_container form_input_group_navigator">
+                        <div class="btn_container">
+                            <button (click) = "changeNewReqFormSubMenuValue(1)" class="back_btn"> Back</button>&nbsp;&nbsp;
+                            <Button class="submit_btn" (click)="ApproveRequest()">Approve</Button>&nbsp;&nbsp;
+                            <Button class="cancel_btn" (click)="RejectRequest()">Cancel</Button>&nbsp;&nbsp;
+                        </div>
+                    </div>
+                    <!-- form input group ends -->
+                </div>
+
+            </form> 
+
+            <!-- form container ends -->
+        </div>
+
+    </div>
+
+<!-- req form main container ends -->
+</div>

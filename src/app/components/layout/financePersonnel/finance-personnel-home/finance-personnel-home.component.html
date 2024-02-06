@@ -1,6 +1,8 @@
-<app-finance-personnel-top-bar>
+<!-- <app-finance-personnel-top-bar>
 
-</app-finance-personnel-top-bar>
+</app-finance-personnel-top-bar> -->
+
+<app-top-bar-user [employeeName]="employeeName" [designation]="designation" (logoutEvent)="logout($event)"></app-top-bar-user>
 
 <app-finance-personnel-side-nav-bar>
 

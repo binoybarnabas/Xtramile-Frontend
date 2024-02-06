@@ -1,44 +1,14 @@
-<div class="view_cards">
-  <ng-container *ngIf="requestData && requestData.length > 0; else noRequests">
-    <div *ngFor="let request of requestData" class="request_card">
-      <div class="card_details">
-        <div class="col-sm-12 status">
-          <p class="card-title">Status</p>
-          <p class="card-text">{{ request.statusName }}</p>
-        </div>
-        <div class="row header_details">
-          <div class="col-sm-12 col-md-6">
-            <p class="card-title">Request Id</p>
-            <p class="card-text">{{ request.requestId }}</p>
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <p class="card-title">Project Name</p>
-            <p class="card-text">{{ request.projectName }}</p>
-          </div>
-        </div>
-        <div class="col-sm-12 travel_reason">
-          <p class="card-title">Reason for travel</p>
-          <p class="card-text">{{ request.reasonOfTravel }}</p>
-        </div>
-        <div class="bottom_row">
-          <div class="row">
-            <div class="col-sm-12 col-md-6 date">
-              <p class="card-title">Start Date</p>
-              <p class="card-text">
-                {{ request.dateOfTravel | date : "dd/LL/yyyy" }}
-              </p>
-            </div>
-            <div class="col-sm-12 col-md-6 view_option_button">
-              <button class="btn" (click)="navigateToOption(request.requestId)">
-                View Options
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-container>
-  <ng-template #noRequests>
-    <h3>No pending requests</h3>
-  </ng-template>
-</div>
+<app-employee-view-card
+  [titles]="titles"
+  [data]="requestData"
+  [titlePropertyMappings]="{
+    Status: 'statusName',
+    'Request Id': 'requestId',
+    'Project Name': 'projectName',
+    'Reason for travel': 'reasonOfTravel',
+    'Start Date': 'dateOfTravel',
+    Destination: 'destination'
+  }"
+  [buttonNeeded]="true"
+  (buttonClickEvent)="navigateToOption($event)"
+></app-employee-view-card>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
+import { OptionCard } from './optionview-card';
+import { AvailableOptions } from 'src/app/services/interfaces/iavailable-options';
 
 @Component({
   selector: 'app-optionview-card',
@@ -14,7 +16,7 @@ export class OptionviewCardComponent {
   primaryStatusCode: string = 'SD';
   secondaryStatusCode: string = 'SD'
 
-  optionsFromEmployee: any[] = [];
+  optionsFromEmployee: AvailableOptions[] = [];
   selectedOption: any | null = null;
   employeeId: number = 1;
   reqId : number = 0

@@ -8,24 +8,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule, DatePipe } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
-import { TopBarComponent } from './components/layout/employee/employee-home/top-bar/top-bar.component';
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
 import { NewTravelRequestComponent } from './features/travelRequest/new-travel-request/new-travel-request.component';
 import { ManagerSideNavBarComponent } from './components/layout/manager/manager-home/manager-side-nav-bar/manager-side-nav-bar.component';
-import { ManagerTopBarComponent } from './components/layout/manager/manager-home/manager-top-bar/manager-top-bar.component';
 import { ManagerMiddleConsoleComponent } from './components/layout/manager/manager-home/manager-middle-console/manager-middle-console.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
 import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-home.component';
 import { TravelAdminSideNavBarComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-side-nav-bar/travel-admin-side-nav-bar.component';
-import { TravelAdminTopBarComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-top-bar/travel-admin-top-bar.component';
 import { TravelAdminMiddleConsoleComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-middle-console/travel-admin-middle-console.component';
 import { FinancePersonnelHomeComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-home.component';
 import { FinancePersonnelSideNavBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
-import { FinancePersonnelTopBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-top-bar/finance-personnel-top-bar.component';
 import { FinancePersonnelMiddleConsoleComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-middle-console/finance-personnel-middle-console.component';
 import { EmployeeDashboardComponent } from './features/employee/employee-dashboard/employee-dashboard.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
@@ -76,16 +72,27 @@ import { FinancePersonnelTravelHistoryComponent } from './features/financePerson
 import { FinancePersonnelNewBillComponent } from './features/financePersonnel/mySettlements/finance-personnel-new-bill/finance-personnel-new-bill.component';
 import { FinancePersonnelPendingBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-pending-bills/finance-personnel-pending-bills.component';
 import { FinancePersonnelClosedBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-closed-bills/finance-personnel-closed-bills.component';
-
 import { OptionCardComponent } from './components/ui/option-card/option-card.component';
 import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
-
 import { DataTableComponent } from './components/ui/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-
 import { TableFilterComponent } from './components/ui/table-filter/table-filter.component';
-
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
+import { ReqFormComponent } from './features/manager/req-form/req-form.component';
+import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component';
+import { ModalComponent } from './components/ui/modal/modal.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap/modal';
+//import { ToastrModule } from 'ngx-toastr';
+import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequests/view-available-options/view-available-options.component';
+import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
+import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
+import { EmployeeViewCardComponent } from './components/ui/employee-view-card/employee-view-card.component';
+import { LoginPageComponent } from './components/layout/login-page/login-page.component';
+import { TopBarUserComponent } from './components/ui/top-bar-user/top-bar-user.component';
+import { CustomDatePipe } from './pipes/CustomDate/custom-date.pipe';
+
+//import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
 import { PerdiemCardComponent } from './components/ui/perdiem-card/perdiem-card.component';
 import { FileCardComponent } from './components/ui/file-card/file-card.component';
 import { LoginComponent } from './components/ui/login/login.component';
@@ -97,21 +104,17 @@ import { LoginComponent } from './components/ui/login/login.component';
     InputFieldComponent,
     EmployeeComponent,
     SideNavBarComponent,
-    TopBarComponent,
     MiddleConsoleComponent,
     EmployeeHomeComponent,
     NewTravelRequestComponent,
     ManagerHomeComponent,
     ManagerSideNavBarComponent,
-    ManagerTopBarComponent,
     ManagerMiddleConsoleComponent,
     TravelAdminHomeComponent,
     TravelAdminSideNavBarComponent,
-    TravelAdminTopBarComponent,
     TravelAdminMiddleConsoleComponent,
     FinancePersonnelHomeComponent,
     FinancePersonnelSideNavBarComponent,
-    FinancePersonnelTopBarComponent,
     FinancePersonnelMiddleConsoleComponent,
     EmployeeDashboardComponent,
     EmployeeProfileComponent,
@@ -169,19 +172,40 @@ import { LoginComponent } from './components/ui/login/login.component';
     ChangeStatusButtonComponent,
     PerdiemCardComponent,
     FileCardComponent,
-    LoginComponent
-  ],
+    LoginComponent,
+    ReqFormComponent,
+    TraveladminReqformComponent,
+    ModalComponent,
+    EmployeeViewCardComponent,
+    ViewAvailableOptionsComponent,
+    TravelAdminWaitingRequestsComponent,
+    TravelAdminSelectedRequestsComponent,
+    LoginPageComponent,
+    TopBarUserComponent,
+    CustomDatePipe
+  ]
+  ,
+
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
+    // ToastrModule.forRoot({
+    //   timeOut: 3000,
+    //   positionClass: 'toast-center', // Set to center of the screen
+    //   preventDuplicates: true,
+    // }),
+
+    ModalModule.forRoot()
+
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

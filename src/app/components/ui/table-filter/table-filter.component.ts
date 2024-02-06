@@ -45,5 +45,4 @@ export class TableFilterComponent {
     this.searchName = '' 
     this.seeAllClicked.emit();
   }
-
 }

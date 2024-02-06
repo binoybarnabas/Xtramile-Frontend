@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ManagerIncomingTravelRequestsComponent {
   employeeRequest: any[] | undefined;
 
   // Manager ID for fetching employee requests
-  managerId = 2; // to check the data
+  managerId = 7; // to check the data
   itemsPerPage = 10;
   totalItems = 0;
   currentPage = 1;
@@ -75,7 +76,6 @@ export class ManagerIncomingTravelRequestsComponent {
     this.fetchEmployeeRequest();
   }
 
-
   //needs to be done
   handleSortOptionSelection(selectedSortOption: string): void {
     // Handle the selected sort option
@@ -90,7 +90,9 @@ export class ManagerIncomingTravelRequestsComponent {
   }
 
   // Constructor to inject services
-  constructor(private apiservice: ManagerTravelRequestsService) {}
+  constructor(private apiservice: ManagerTravelRequestsService,private router:Router) {
+    this.apiservice.managerId = this.managerId;
+  }
 
 
   // Fetch all the employee requests
@@ -117,10 +119,6 @@ export class ManagerIncomingTravelRequestsComponent {
     this.fetchEmployeeRequest();
   }
 
-  // Selected sort option for sorting employee requests
-
-
-
   //Sort employee requests based on the selected option
   sortData(option: string): void {
     if (option == "name") {
@@ -143,6 +141,14 @@ export class ManagerIncomingTravelRequestsComponent {
         }
       });
     }
+  }
+
+
+  // select an option
+  selectRow(requestId:number){
+    console.log(requestId);
+    const queryParams = {requestId:requestId}
+    this.router.navigate(['manager/requestdetail'],{ queryParams: queryParams });
   }
  
 }

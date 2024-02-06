@@ -1,0 +1,20 @@
+export interface OptionCard{
+    optionId: number,
+    class: string,
+    serviceOfferedBy: string,
+    startTime: Date,
+    endTime: Date,
+    requestId: number,
+    sourceCity: string,
+    sourceState: string,
+    sourceCountry: string,
+    destinationCity: string,
+    destinationState: string,
+    destinationCountry: string,
+    modeId: number,
+    modeName: string,
+    travelTypeId: number,
+    travelTypeName: string,
+    destinationCountryCode: string,
+    "sourceCountryCode": string
+}

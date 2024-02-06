@@ -1,0 +1,43 @@
+<!-- <p>top-bar works!</p> -->
+
+
+<div class="top_bar_container">
+
+
+    <div class="left_section">
+
+        <!-- <div class="side_bar_controller">
+            <i (click)="controlSideBar()" class="icon ri-menu-line"></i>
+        </div> -->
+        
+        <div class="top_bar_logo_container">
+            <h3 class="top_bar_logo"> <i class="ri-git-pr-draft-fill"></i> XtraMile</h3>
+        </div>
+
+    </div>
+
+    <div class="right_section">
+
+            <div class="calendar_section">
+            
+                <p class="date"><i class="cal_icon ri-calendar-2-line"></i>{{date | customDate}}</p>
+                <i class="notification  ri-notification-2-line"></i>
+
+            </div>
+
+
+            <div class="profile_info">
+                <p class="name">{{employeeName}}</p>
+                <span class="designation">{{designation}}</span>
+            </div>
+
+            <div class="profile_photo" (click)="toggleDropdown($event)">
+                <img class="profile_img" src="data:image/jpeg;base64,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" alt="">
+                <div class="dropdown" *ngIf="showDropdown">
+                    <button (click)="logout()">Logout</button>
+                </div>
+            </div>
+
+    </div>
+
+</div>
