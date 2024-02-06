@@ -46,8 +46,6 @@ export class LoginPageComponent {
 
   constructor(private loginService:LoginService,private userDataService:CommonAPIService,private router:Router){
 
-
-
   }
 
   credentialData: CredentialData = {
