@@ -3,13 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status'; 
 import { LoginService } from '../loginService/login.service';
+import { UserData } from '../interfaces/iuserData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonAPIService {
 
-  userData : any
+  // initial data - reason why I kept it here and not in the login service is because once the login is done we don't need to initialze that class for other
+  // functionality.
+  userData? : UserData
 
   constructor(private http: HttpClient) { }
 
