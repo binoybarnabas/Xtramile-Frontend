@@ -9,7 +9,6 @@ import { LoginService } from '../loginService/login.service';
 })
 export class CommonAPIService {
 
-
   userData : any
   
   constructor(private http: HttpClient) { }
@@ -34,6 +33,5 @@ export class CommonAPIService {
   updateRequestStatus(requestStatus: RequestStatus) : Observable<RequestStatus> {
     return this.http.post<RequestStatus>(this.apiURL+'requeststatus/add', requestStatus)
   }
-
 }
 

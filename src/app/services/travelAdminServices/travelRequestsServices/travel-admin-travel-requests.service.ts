@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WaitingOrSelectedRequests } from '../../interfaces/iwaiting-or-selected-requests';
+import { AvailableOptions } from '../../interfaces/iavailable-options';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,10 @@ export class TravelAdminTravelRequestsService {
 
   getTravelRequest(requestId:number):Observable<any>{
     return this.http.get(this.apiURL+ `/traveladmin/travel/request/${requestId}`);
+  }
+
+  getSelectedOption(requestId: number): Observable<AvailableOptions>{
+    return this.http.get<AvailableOptions>(this.apiURL+ `/traveladmin/options/selected?reqId=${requestId}`)
   }
 
 }

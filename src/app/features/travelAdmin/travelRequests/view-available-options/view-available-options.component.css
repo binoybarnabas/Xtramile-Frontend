@@ -1,0 +1,10 @@
+.selected_option {
+  display: inline-block;
+  margin: 10px;
+  border: 2px solid rgb(54, 54, 240);
+  box-sizing: border-box;
+}
+.selected_option .title {
+  text-align: center;
+  color: rgb(54, 54, 240);
+}

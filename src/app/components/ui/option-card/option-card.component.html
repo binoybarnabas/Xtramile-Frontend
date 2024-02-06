@@ -2,6 +2,7 @@
   <ng-container *ngFor="let option of options">
     <div
       class="card_selection shadow-lg option_card"
+      [ngStyle]="{ 'pointer-events': clickable ? 'auto' : 'none' }"
       (click)="selectOption(option)"
       [ngClass]="{ selected: selectedOption === option }"
     >
@@ -17,7 +18,7 @@
             <div class="row">
               <h5>
                 {{
-                  option.TravelTypeName === "Domestic"
+                  option.travelTypeName === "Domestic"
                     ? option.sourceState
                     : option.sourceCountryCode
                 }}
@@ -48,7 +49,7 @@
             <div class="row">
               <h5>
                 {{
-                  option.TravelTypeName === "Domestic"
+                  option.travelTypeName === "Domestic"
                     ? option.destinationState
                     : option.destinationCountryCode
                 }}
