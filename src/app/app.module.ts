@@ -14,7 +14,7 @@ import { SideNavBarComponent } from './components/layout/employee/employee-home/
 import { TopBarComponent } from './components/layout/employee/employee-home/top-bar/top-bar.component';
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
-import { NewTravelRequestComponent } from './features/employee/myRequests/new-travel-request/new-travel-request.component';
+import { NewTravelRequestComponent } from './features/travelRequest/new-travel-request/new-travel-request.component';
 import { ManagerSideNavBarComponent } from './components/layout/manager/manager-home/manager-side-nav-bar/manager-side-nav-bar.component';
 import { ManagerTopBarComponent } from './components/layout/manager/manager-home/manager-top-bar/manager-top-bar.component';
 import { ManagerMiddleConsoleComponent } from './components/layout/manager/manager-home/manager-middle-console/manager-middle-console.component';
@@ -85,7 +85,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { TableFilterComponent } from './components/ui/table-filter/table-filter.component';
 
-import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component'; 
+import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
+import { PerdiemCardComponent } from './components/ui/perdiem-card/perdiem-card.component';
+import { FileCardComponent } from './components/ui/file-card/file-card.component';
+import { LoginComponent } from './components/ui/login/login.component';
 
 
 @NgModule({
@@ -163,14 +166,17 @@ import { ChangeStatusButtonComponent } from './components/ui/change-status-butto
     OptionviewCardComponent,
     DataTableComponent,
     TableFilterComponent,
-    ChangeStatusButtonComponent
+    ChangeStatusButtonComponent,
+    PerdiemCardComponent,
+    FileCardComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BsDatepickerModule.forRoot(),

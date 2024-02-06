@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { travelRequestDetails } from '../../interfaces/iTravelRequestDetails';
+import { TravelRequestDetails } from '../../interfaces/iTravelRequestDetails';
 import { PendingRequest } from 'src/app/features/employee/myRequests/employee-pending-requests/pending-request';
 
 @Injectable({
@@ -30,7 +30,7 @@ export class RequestService {
 
 
   //Send Rrequest Data
-  sendEmployeeNewTravelRequest(travelRequestData: travelRequestDetails): Observable<any> {
+  sendEmployeeNewTravelRequest(travelRequestData: TravelRequestDetails): Observable<any> {
     // Create a FormData object
     const formData = new FormData();
 
@@ -58,7 +58,7 @@ export class RequestService {
 
   ///Get all available options with reqId
   getDataFromAvailOptions(reqId: number): Observable<any> {
-    return this.http.get(this.apiURL+ `/employee/viewoptions/request/${reqId}`);
+    return this.http.get(this.apiURL + `/employee/viewoptions/request/${reqId}`);
   }
 
   //Post a selected option with optionId, employeeId, requestId
@@ -68,18 +68,18 @@ export class RequestService {
     return this.http.post(this.apiURL + '/employee/add/option', body);
   }
 
-    getRequestsPendingStatus(empId: number): Observable<PendingRequest[]> {
-      return this.http.get<PendingRequest[]>(
-        `http://localhost:5190/api/employee/viewpendingrequest/${empId}`
-      );
-    }
+  getRequestsPendingStatus(empId: number): Observable<PendingRequest[]> {
+    return this.http.get<PendingRequest[]>(
+      `http://localhost:5190/api/employee/viewpendingrequest/${empId}`
+    );
+  }
 
-    getStatusName(requestId : number) : Observable<string>{
-      return this.http.get(`http://localhost:5190/api/requeststatus/name/${requestId}`, { responseType: 'text' })
-    }
+  getStatusName(requestId: number): Observable<string> {
+    return this.http.get(`http://localhost:5190/api/requeststatus/name/${requestId}`, { responseType: 'text' })
+  }
 
-    //get employee data that show in ongoing page
-    getEmployeeOngoingRequest(employeeId: number): Observable<any> {
-      return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`);
-    }
+  //get employee data that show in ongoing page
+  getEmployeeOngoingRequest(employeeId: number): Observable<any> {
+    return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`);
+  }
 }

@@ -1,5 +1,5 @@
 
-export interface travelRequestDetails {
+export interface TravelRequestDetails {
 
     createdBy: string;
     travelTypeId: string;
@@ -23,6 +23,8 @@ export interface travelRequestDetails {
     idCardAttachment: File | undefined;
 
     additionalComments: string;
+
+    priority?: string
 
 }
 

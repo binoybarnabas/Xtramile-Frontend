@@ -1,0 +1,77 @@
+.file_container {
+    display: flex;
+}
+
+
+.file_container .file_card {
+
+    background-color: var(--card-bg-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 1rem;
+    border-radius: var(--normal-border-radius);
+    height: 9rem;
+    position: relative;
+    width: 18rem;
+    margin: 1rem;
+
+}
+
+
+.file_container .file_card .file_name_section .file_name {
+    font-size: var(--normal-font-size);
+    font-weight: var(--active-font-weight);
+    color: var(--secondary-text-color);
+    margin-bottom: 0;
+}
+
+
+.file_container .file_card .file_name_section .file_name i {
+    color: var(--ternary-text-color);
+}
+
+
+.file_container .file_card .description_section {
+    display: flex;
+    flex-direction: column;
+}
+
+.file_container .file_card .description_section span {
+    font-size: var(--extra-small-font-size);
+    color: var(--ternary-text-color);
+    margin: 2.5px;
+}
+
+
+
+.file_container .file_card .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.file_container .file_card .download_btn_container {
+    position: absolute;
+    bottom: 1rem;
+    display: flex;
+}
+
+.file_container .file_card .download_btn_container .download_btn {
+    background-color: var(--menu-hover-color);
+    color: var(--second-color);
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    font-size: var(--form-label-font-size);
+    font-weight: var(--active-font-weight);
+    text-align: center;
+    transition: 0.3s;
+    width: fit-content;
+
+}
+
+.file_container .file_card .download_btn_container .download_btn:hover {
+    cursor: pointer;
+    background-color: var(--second-color);
+    color: var(--card-bg-color);
+}
