@@ -60,7 +60,7 @@ import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmi
       {path:'closed',component:ManagerClosedTravelRequestsComponent},
       {path:'requestdetail',component:ReqFormComponent}
     ]},
-    { path: 'traveladmin', component: TravelAdminHomeComponent, canActivate:[authGuardTravelAdmin],children: [
+    { path: 'traveladmin', component: TravelAdminHomeComponent,canActivate:[authGuardTravelAdmin],children: [
       {path: 'dashboard', component: TravelAdminDashboardComponent},
       {path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent},
       {path :'requestdetail',component:TraveladminReqformComponent},
