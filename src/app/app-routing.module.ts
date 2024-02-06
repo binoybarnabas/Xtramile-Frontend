@@ -38,10 +38,11 @@ import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequ
 import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { LoginPageComponent } from './components/layout/login-page/login-page.component';
+import { authGuardEmployee, authGuardFinanceDepartment, authGuardManager, authGuardTravelAdmin } from './auth.guard';
 
 
   const routes: Routes = [
-    { path: 'employee', component: EmployeeHomeComponent, children: [
+    { path: 'employee', component: EmployeeHomeComponent,canActivate:[authGuardEmployee], children: [
       {path:'dashboard',component:EmployeeDashboardComponent},
       {path:'request',component:NewTravelRequestComponent},
       {path:'pending',component:EmployeePendingRequestsComponent },
@@ -50,7 +51,7 @@ import { LoginPageComponent } from './components/layout/login-page/login-page.co
       {path:'history',component:EmployeeClosedRequestsComponent},
       {path:'profile',component:EmployeeProfileComponent}
     ]},
-    { path: 'manager', component: ManagerHomeComponent, children: [
+    { path: 'manager', component: ManagerHomeComponent,canActivate:[authGuardManager],children: [
       {path:'dashboard',component:ManagerDashboardComponent},
       {path:'newrequests',component:ManagerIncomingTravelRequestsComponent},
       {path:'forwarded',component:ManagerForwardedTravelRequestsComponent},
@@ -58,7 +59,7 @@ import { LoginPageComponent } from './components/layout/login-page/login-page.co
       {path:'closed',component:ManagerClosedTravelRequestsComponent},
       {path:'requestdetail',component:ReqFormComponent}
     ]},
-    { path: 'traveladmin', component: TravelAdminHomeComponent, children: [
+    { path: 'traveladmin', component: TravelAdminHomeComponent, canActivate:[authGuardTravelAdmin],children: [
       {path: 'dashboard', component: TravelAdminDashboardComponent},
       {path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent},
       {path :'requestdetail',component:TraveladminReqformComponent},
@@ -74,7 +75,7 @@ import { LoginPageComponent } from './components/layout/login-page/login-page.co
       {path: 'closed', component: TravelAdminClosedTravelRequestsComponent},
       {path: 'profile', component: TravelAdminProfileComponent}
     ]},
-    {path: 'finance', component: FinancePersonnelHomeComponent, children: [
+    {path: 'finance', component: FinancePersonnelHomeComponent,canActivate:[authGuardFinanceDepartment], children: [
       {path: 'dashboard', component: FinancePersonnelDashboardComponent},
       {path: 'incoming',component: FinancePersonnelIncomingTravelSettlementsComponent},
       {path: 'pending', component: FinancePersonnelPendingTravelSettlementsComponent},
