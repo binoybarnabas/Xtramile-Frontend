@@ -10,7 +10,7 @@ import { LoginService } from '../loginService/login.service';
 export class CommonAPIService {
 
 
-  userData :any
+  userData : any
   
   constructor(private http: HttpClient) { }
 

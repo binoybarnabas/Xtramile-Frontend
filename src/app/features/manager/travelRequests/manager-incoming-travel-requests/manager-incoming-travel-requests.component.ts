@@ -144,7 +144,6 @@ export class ManagerIncomingTravelRequestsComponent {
   }
 
 
-
   // select an option
   selectRow(requestId:number){
     console.log(requestId);

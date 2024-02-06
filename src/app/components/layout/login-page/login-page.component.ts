@@ -13,6 +13,7 @@ export class LoginPageComponent {
 
   isLoading: boolean = false;
   invalidCredentials: boolean = false;
+
   loginForm!:FormGroup
 
   ngOnInit(){
@@ -24,10 +25,29 @@ export class LoginPageComponent {
    this.loginForm.valueChanges.subscribe((value) => {
     console.log('Form values:', value);
   });
+
+  if(Boolean(localStorage.getItem('isEmployeeAuthenticated'))){
+    this.router.navigate(['employee/dashboard']);
+  }
+
+  if(Boolean(localStorage.getItem('isManagerAuthenticated'))){
+    this.router.navigate(['manager/dashboard']);
+  }
+
+  if(Boolean(localStorage.getItem('isTravelAdminAuthenticated'))){
+    this.router.navigate(['traveladmin/dashboard']);
+  }
+
+  if(Boolean(localStorage.getItem('isFinanceDepartmentAuthenticated'))){
+    this.router.navigate(['finance/dashboard']);
+  }
+
   }
 
   constructor(private loginService:LoginService,private userDataService:CommonAPIService,private router:Router){
-  
+
+
+
   }
 
   credentialData: CredentialData = {
@@ -51,14 +71,22 @@ export class LoginPageComponent {
         this.invalidCredentials = true;
       }
       else{
+
         this.userDataService.userData = data;
-        
+
+        if(this.userDataService.userData){
+          console.log(this.loginService.isLoggedIn);          
+          this.loginService.isLoggedIn = !this.loginService.isLoggedIn;
+          console.log(this.loginService.isLoggedIn);
+
+
         if((data.department == 'FD' && data.role == 'Employee') || 
         (data.department == 'TA' && data.role == 'Employee') ||
         (data.department == 'HR' && data.role == 'Employee') ||
         (data.department == 'DU1'|| data.department == 'DU2' || data.department == 'DU3' || data.department == 'DU4' || data.department == 'DU5' && data.role == 'Employee')
         )
         {
+          localStorage.setItem('isEmployeeAuthenticated',this.loginService.isLoggedIn.toString())
           this.router.navigate(['employee/dashboard']);
         }
 
@@ -66,20 +94,23 @@ export class LoginPageComponent {
           (data.department == 'DU1'|| data.department == 'DU2' || data.department == 'DU3' || data.department == 'DU4' || data.department == 'DU5' && data.role == 'Manager')
         )
         {
+          localStorage.setItem('isManagerAuthenticated',this.loginService.isLoggedIn.toString())
           this.router.navigate(['manager/dashboard']);
         }
 
         if(data.department == 'TA' && data.role == 'Manager'){
+          localStorage.setItem('isTravelAdminAuthenticated',this.loginService.isLoggedIn.toString())
           this.router.navigate(['traveladmin/dashboard']);
         }
 
         if(data.department == 'FD' && data.role == 'Manager'){
+          localStorage.setItem('isFinanceDepartmentAuthenticated',this.loginService.isLoggedIn.toString())
           this.router.navigate(['finance/dashboard']);
         }
-
         localStorage.setItem('JwtToken',data.token)
         this.invalidCredentials = false;
       }
+    }
     },
     error:(error:Error)=>{
       console.log("error hit",error)
