@@ -9,8 +9,6 @@ import { LoginService } from '../loginService/login.service';
 })
 export class CommonAPIService {
 
-  private clickable: boolean = true
-
   userData : any
   
   constructor(private http: HttpClient) { }
@@ -35,14 +33,5 @@ export class CommonAPIService {
   updateRequestStatus(requestStatus: RequestStatus) : Observable<RequestStatus> {
     return this.http.post<RequestStatus>(this.apiURL+'requeststatus/add', requestStatus)
   }
-
-  setDataInService(value: boolean){
-    this.clickable = value;
-  }
-
-  getDataFromService(){
-    return this.clickable;
-  }
-
 }
 

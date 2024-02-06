@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { AvailableOptions } from 'src/app/services/interfaces/iavailable-options';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 
 @Component({
@@ -8,15 +10,24 @@ import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminSe
   styleUrls: ['./option-card.component.css']
 })
 export class OptionCardComponent {
-  @Input() options: any[] = [];
+  @Input() options: AvailableOptions[] = [];
   @Output() optionSelected: EventEmitter<any> = new EventEmitter<any>();
+
+  clickable: boolean = true
 
   selectedOption: any | null = null;
 
-  constructor(private commonService: CommonAPIService) {}
+  constructor(private activatedRoute: ActivatedRoute) {}
 
-  clickable: boolean = this.commonService.getDataFromService();
+  ngOnInit(){
+    if(this.activatedRoute!.parent!.snapshot.url.some((segment) => segment.path === 'waiting')){
+      this.clickable = false
+    }
+  }
 
+  ngOnChanges(){
+    console.log(this.options)
+  }
 
   ngOnDestroy() {}
 
@@ -35,7 +46,7 @@ export class OptionCardComponent {
     // Convert duration to hours and minutes
     const hours = Math.floor(durationInMilliseconds / (60 * 60 * 1000));
     const minutes = Math.floor((durationInMilliseconds % (60 * 60 * 1000)) / (60 * 1000));
-
+    
     return `${hours}h ${minutes}m`;
   }
 

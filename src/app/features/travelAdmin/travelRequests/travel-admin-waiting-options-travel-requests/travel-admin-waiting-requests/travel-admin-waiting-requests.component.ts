@@ -42,7 +42,6 @@ export class TravelAdminWaitingRequestsComponent {
         console.log("Requests fetching completed")
       }
     })
-    this.setClickable();
   }
 
   selectedRow(row: any){
@@ -52,10 +51,6 @@ export class TravelAdminWaitingRequestsComponent {
       relativeTo: this.activatedRoute,
       queryParams: {requestId: this.requestId}
     })
-  }
-
-  setClickable(){
-    this.commonService.setDataInService(this.clickable);
   }
 
   ngOnDestroy(){
