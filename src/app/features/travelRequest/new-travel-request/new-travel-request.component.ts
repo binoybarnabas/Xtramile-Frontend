@@ -3,7 +3,10 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators }
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { EmployeeDetails } from './request';
-import { TravelRequestDetails } from 'src/app/services/interfaces/iTravelRequestDetails';
+import { TravelRequestDetailViewModel, TravelRequestDetails } from 'src/app/services/interfaces/iTravelRequestDetails';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -19,9 +22,9 @@ export class NewTravelRequestComponent {
   employeeDetails?: EmployeeDetails
 
   //Get Request Details
-  travelRequestDetails?: TravelRequestDetails;
+  travelRequestDetails!: TravelRequestDetails;
 
-
+  travelRequestDetailViewModel!:TravelRequestDetailViewModel
   //Map to keep data by differenct sections of Travel Request Form
   //Can be used to provide a view to those users who do not want to edit it
   generalInformationsMap = new Map<string, any>();
@@ -55,33 +58,20 @@ export class NewTravelRequestComponent {
 
   travelRequestFormSubmitFunction: () => void = this.onEmployeeTravelRequestFormSubmit.bind(this);
 
-  constructor(private sideNavBarService: SideNavBarService, private requestService: RequestService) {
+  constructor(private sideNavBarService: SideNavBarService, 
+    private requestService: RequestService,
+    private route:ActivatedRoute,
+    private datePipe:DatePipe,
+    private managerTravelRequest: ManagerTravelRequestsService,
+    private router:Router
+    ) {
     this.newReqFormSubMenuValue = 0;
 
-    //Getting the current Logegdin user
-    this.currentLoggedInUserRole = 'financePersonnel';
+    //Getting the current Loggedin user
+    this.currentLoggedInUserRole = 'manager';
 
 
-    //Get Request Details For Display - USE IT WITH GET METHOD OF TRAVEL REQ BY ID
-    //Initializing the Trip Info Map
-    this.tripInformationsMap.set('Trip Type', this.travelRequestDetails?.travelTypeId);
-    this.tripInformationsMap.set('Purpose of Trip', this.travelRequestDetails?.tripPurpose);
-    this.tripInformationsMap.set('Departure Date', this.travelRequestDetails?.departureDate);
-    this.tripInformationsMap.set('Return Date', this.travelRequestDetails?.returnDate);
-    this.tripInformationsMap.set('Source Country', this.travelRequestDetails?.sourceCountry);
-    this.tripInformationsMap.set('Destination Country', this.travelRequestDetails?.destinationCountry);
-    this.tripInformationsMap.set('Source State', this.travelRequestDetails?.sourceState);
-    this.tripInformationsMap.set('Destination State', this.travelRequestDetails?.destinationState);
-    this.tripInformationsMap.set('Source City', this.travelRequestDetails?.sourceCity);
-    this.tripInformationsMap.set('Destination City', this.travelRequestDetails?.destinationCity);
-    this.tripInformationsMap.set('Source City Zip Code', this.travelRequestDetails?.sourceCityZipCode);
-    this.tripInformationsMap.set('Destination City Zip Code', this.travelRequestDetails?.destinationCityZipCode);
-
-    //Additional Informations
-    this.additionalInformationsMap.set('Cab Service Requested', this.travelRequestDetails?.cabRequired);
-    this.additionalInformationsMap.set('Accommodation Requested', this.travelRequestDetails?.accommodationRequired);
-    this.additionalInformationsMap.set('Preferred Departure Time', this.travelRequestDetails?.prefDepartureTime);
-
+    
     //Priority field is editable for manager only
     if (this.currentLoggedInUserRole !== 'manager') {
       this.additionalInformationsMap.set('Priority', this.travelRequestDetails?.priority);
@@ -127,7 +117,22 @@ export class NewTravelRequestComponent {
     }
 
   }
+  // format date from request info
+  formatDateTime(dateString: string | undefined): string {
+    const formattedDate = this.datePipe.transform(dateString, 'yyyy-MM-dd HH:mm:ss');
+    return formattedDate || ''; // Handle potential null value
+  }
 
+  //format datetime format for preferred departure time
+  formatDate(dateString: string | undefined): string {
+    const formattedDate = this.datePipe.transform(dateString, 'yyyy-MM-dd');
+    return formattedDate || ''; // Handle potential null value
+  }
+
+  //date formatting
+  formattedPreferredDepartureTime!: string
+  formattedPreferredDepartureDate!: string
+  formattedPreferredReturnDate!: string
 
   travelRequestForm!: FormGroup;
 
@@ -161,6 +166,47 @@ export class NewTravelRequestComponent {
       error: (error: Error) => { console.log("problems in fetching data") },
       complete: () => { console.log("get employee by id is done") }
     });
+
+    
+
+
+    //get and employee request based on an request Id
+    this.route.queryParams.subscribe(params => {
+      const requestId = params['requestId'];
+      console.log(requestId);
+      this.managerTravelRequest.GetTravelRequest(requestId).subscribe({
+        next: (data) => {
+          this.travelRequestDetailViewModel = data
+          //Get Request Details For Display - USE IT WITH GET METHOD OF TRAVEL REQ BY ID
+          //Initializing the Trip Info Map
+          this.tripInformationsMap.set('Trip Type', this.travelRequestDetailViewModel?.travelType);
+          this.tripInformationsMap.set('Purpose of Trip', this.travelRequestDetailViewModel?.tripPurpose);
+          this.tripInformationsMap.set('Departure Date', this.formatDate(this.travelRequestDetailViewModel?.departureDate));
+          this.tripInformationsMap.set('Return Date', this.formatDate(this.travelRequestDetailViewModel?.returnDate));
+          this.tripInformationsMap.set('Source Country', this.travelRequestDetailViewModel?.sourceCountry);
+          this.tripInformationsMap.set('Destination Country', this.travelRequestDetailViewModel?.destinationCountry);
+          this.tripInformationsMap.set('Source State', this.travelRequestDetailViewModel?.sourceState);
+          this.tripInformationsMap.set('Destination State', this.travelRequestDetailViewModel?.destinationState);
+          this.tripInformationsMap.set('Source City', this.travelRequestDetailViewModel?.sourceCity);
+          this.tripInformationsMap.set('Destination City', this.travelRequestDetailViewModel?.destinationCity);
+          this.tripInformationsMap.set('Source City Zip Code', this.travelRequestDetailViewModel?.sourceCityZipCode);
+          this.tripInformationsMap.set('Destination City Zip Code', this.travelRequestDetailViewModel?.destinationCityZipCode);
+
+          //Additional Informations
+          this.additionalInformationsMap.set('Cab Service Requested', this.travelRequestDetailViewModel?.cabRequired);
+          this.additionalInformationsMap.set('Accommodation Requested', this.travelRequestDetailViewModel?.accommodationRequired);
+          this.additionalInformationsMap.set('Preferred Departure Time', this.travelRequestDetailViewModel?.prefDepartureTime);
+          this.additionalInformationsMap.set('Additional Comments',this.travelRequestDetailViewModel?.additionalComments);
+        },
+        error: (error: Error) => {
+          console.log(error);
+        },
+        complete: () => {
+          console.log("completed")
+        }
+      });
+    });
+
 
 
     //Validation for employee editable fields
@@ -215,7 +261,6 @@ export class NewTravelRequestComponent {
 
     }
 
-
   }
 
 
@@ -267,7 +312,6 @@ export class NewTravelRequestComponent {
     if (enteredDate <= currentDate) {
       return { futureDate: true }; // Validation failed
     }
-
     return null; // Validation passed
   }
 
@@ -357,8 +401,25 @@ export class NewTravelRequestComponent {
 
   //Manager forwarding the travel request form
   onManagerForwardTravelRequestForm() {
-    //Should call a PATCH method to set priority of the reqesu
-    alert("MANAGER")
+    //Should call a PATCH method to set priority of the request
+    // alert("MANAGER")
+    // console.log(this.selectedPriority);
+
+    this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId, this.travelRequestForm.value.priority).subscribe(
+      {
+        next: (data) => {
+          console.log(data);
+          window.alert(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
+          console.log(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
+          // Redirect to another page
+          this.router.navigate(['/manager/dashboard']);
+        },
+        complete: () => {
+
+          //this.toastr.success('Request approved!', 'Success');
+        }
+      }
+    );
   }
 
   //Travel Admin forwarding the travel request form
@@ -376,9 +437,6 @@ export class NewTravelRequestComponent {
     alert("FINANCE")
 
   }
-
-
-
 
   //EOF
 }
