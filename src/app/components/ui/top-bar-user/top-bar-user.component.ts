@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 import { CustomDatePipe } from 'src/app/pipes/CustomDate/custom-date.pipe';
 @Component({
@@ -9,13 +9,26 @@ import { CustomDatePipe } from 'src/app/pipes/CustomDate/custom-date.pipe';
 export class TopBarUserComponent {
   date:any
   isSideNavBarCollapsed: any;
+  showDropdown: boolean = false;
+  @Output() logoutEvent: EventEmitter<string> = new EventEmitter<string>();
+  
+  @Input() employeeName:string = ''
+  @Input() designation: string =''
+
+
   constructor(private sideNavBarService: SideNavBarService) {
     this.isSideNavBarCollapsed = sideNavBarService.isSideNavBarCollapsed;
     this.date = Date.now();
   }
 
+  toggleDropdown(event: MouseEvent) {
+    event.stopPropagation(); // Prevent click event from bubbling up to the document
+    this.showDropdown = !this.showDropdown;
+  }
 
-  @Input() employeeName:string = ''
-  @Input() designation: string =''
+  logout() {
+    this.showDropdown = false; // Hide dropdown after logout
+    this.logoutEvent.emit("logout"); // Emit logout event
+  }
 
 }

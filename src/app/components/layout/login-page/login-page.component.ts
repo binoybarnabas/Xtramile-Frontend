@@ -4,6 +4,7 @@ import { LoginService } from 'src/app/services/loginService/login.service';
 import { CredentialData } from './Credential';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { Router } from '@angular/router';
+import { UserData } from 'src/app/services/interfaces/iuserData';
 
 @Component({
   selector: 'app-login-page',
@@ -69,7 +70,7 @@ export class LoginPageComponent {
     //sending the login data to the backend.
    this.loginService.postData(this.credentialData).subscribe({
 
-    next:(data)=>{
+    next:(data : UserData)=>{
       console.log(data);
       if(data.token == null){
         this.invalidCredentials = true;
@@ -119,9 +120,9 @@ export class LoginPageComponent {
           console.log(sessionStorage.getItem('isFinanceDepartmentAuthenticated'))
           this.router.navigate(['finance/dashboard']);
         }
-
-        localStorage.setItem('JwtToken',data.token)
         this.invalidCredentials = false;
+        // a fix is required for jwt token handling
+        localStorage.setItem('JwtToken',data.token)
       }
     }
     },

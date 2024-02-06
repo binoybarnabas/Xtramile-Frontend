@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { LoginService } from 'src/app/services/loginService/login.service';
 
 @Component({
   selector: 'app-finance-personnel-home',
@@ -12,6 +14,9 @@ export class FinancePersonnelHomeComponent {
   designation!:string 
   userData : any
 
+  constructor(private loginService:LoginService,private router:Router){
+
+  }
   
   ngOnInit(){
     // Retrieve user data from sessionStorage
@@ -21,6 +26,17 @@ export class FinancePersonnelHomeComponent {
       this.employeeName = this.userData.employeeName;
       this.designation = this.userData.role;
     }
+  }
+
+  //logging out from the finance personnel module
+  logout(message :string){
+    console.log(message);
+    //clearing the session.
+    // const logoutData = Object.keys(sessionStorage);
+    // Remove an item from session storage
+    sessionStorage.removeItem('financePersonnelData');
+    sessionStorage.removeItem('isFinanceDepartmentAuthenticated');
+     this.router.navigate(['login']);
   }
 
 }
