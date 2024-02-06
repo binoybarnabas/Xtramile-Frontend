@@ -4,6 +4,7 @@ import { LoginService } from 'src/app/services/loginService/login.service';
 import { CredentialData } from './Credential';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -13,7 +14,6 @@ export class LoginPageComponent {
 
   isLoading: boolean = false;
   invalidCredentials: boolean = false;
-
   loginForm!:FormGroup
 
   ngOnInit(){
@@ -26,19 +26,20 @@ export class LoginPageComponent {
     console.log('Form values:', value);
   });
 
-  if(Boolean(localStorage.getItem('isEmployeeAuthenticated'))){
+  //to check whether the user already authenticated is true then skip the login and redirect to the page
+  if(Boolean(sessionStorage.getItem('isEmployeeAuthenticated'))){
     this.router.navigate(['employee/dashboard']);
   }
 
-  if(Boolean(localStorage.getItem('isManagerAuthenticated'))){
+  if(Boolean(sessionStorage.getItem('isManagerAuthenticated'))){
     this.router.navigate(['manager/dashboard']);
   }
 
-  if(Boolean(localStorage.getItem('isTravelAdminAuthenticated'))){
+  if(Boolean(sessionStorage.getItem('isTravelAdminAuthenticated'))){
     this.router.navigate(['traveladmin/dashboard']);
   }
 
-  if(Boolean(localStorage.getItem('isFinanceDepartmentAuthenticated'))){
+  if(Boolean(sessionStorage.getItem('isFinanceDepartmentAuthenticated'))){
     this.router.navigate(['finance/dashboard']);
   }
 
@@ -53,23 +54,30 @@ export class LoginPageComponent {
     Password: ''
   };
 
+  //login using email and password
   login(){
   if (this.loginForm.valid) {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
 
+    //setting credential data
     this.credentialData = {Email:email,Password:password};
     
+    //loading spinner
     this.isLoading = true;
-   this.loginService.postData(this.credentialData).subscribe({
-    next:(data)=>{
 
+    //sending the login data to the backend.
+   this.loginService.postData(this.credentialData).subscribe({
+
+    next:(data)=>{
       console.log(data);
       if(data.token == null){
         this.invalidCredentials = true;
       }
-      else{
 
+      else
+      {
+        //user data which contains employeeName, role, department, token, empId
         this.userDataService.userData = data;
 
         if(this.userDataService.userData){
@@ -77,14 +85,16 @@ export class LoginPageComponent {
           this.loginService.isLoggedIn = !this.loginService.isLoggedIn;
           console.log(this.loginService.isLoggedIn);
 
-
+        //routing based in roles
+        //on each routign before entering the page the authenticated status should be set based on the type of user that have entered.
         if((data.department == 'FD' && data.role == 'Employee') || 
         (data.department == 'TA' && data.role == 'Employee') ||
         (data.department == 'HR' && data.role == 'Employee') ||
         (data.department == 'DU1'|| data.department == 'DU2' || data.department == 'DU3' || data.department == 'DU4' || data.department == 'DU5' && data.role == 'Employee')
         )
         {
-          localStorage.setItem('isEmployeeAuthenticated',this.loginService.isLoggedIn.toString())
+          sessionStorage.setItem('employeeData', JSON.stringify(data));
+          sessionStorage.setItem('isEmployeeAuthenticated',this.loginService.isLoggedIn.toString())
           this.router.navigate(['employee/dashboard']);
         }
 
@@ -92,19 +102,24 @@ export class LoginPageComponent {
           (data.department == 'DU1'|| data.department == 'DU2' || data.department == 'DU3' || data.department == 'DU4' || data.department == 'DU5' && data.role == 'Manager')
         )
         {
-          localStorage.setItem('isManagerAuthenticated',this.loginService.isLoggedIn.toString())
+          sessionStorage.setItem('managerData', JSON.stringify(data));
+          sessionStorage.setItem('isManagerAuthenticated',this.loginService.isLoggedIn.toString())
           this.router.navigate(['manager/dashboard']);
         }
 
         if(data.department == 'TA' && data.role == 'Manager'){
-          localStorage.setItem('isTravelAdminAuthenticated',this.loginService.isLoggedIn.toString())
+          sessionStorage.setItem('travelAdminData', JSON.stringify(data));
+          sessionStorage.setItem('isTravelAdminAuthenticated',this.loginService.isLoggedIn.toString())
           this.router.navigate(['traveladmin/dashboard']);
         }
 
         if(data.department == 'FD' && data.role == 'Manager'){
-          localStorage.setItem('isFinanceDepartmentAuthenticated',this.loginService.isLoggedIn.toString())
+          sessionStorage.setItem('financePersonnelData', JSON.stringify(data));
+          sessionStorage.setItem('isFinanceDepartmentAuthenticated',this.loginService.isLoggedIn.toString())
+          console.log(sessionStorage.getItem('isFinanceDepartmentAuthenticated'))
           this.router.navigate(['finance/dashboard']);
         }
+
         localStorage.setItem('JwtToken',data.token)
         this.invalidCredentials = false;
       }
@@ -126,6 +141,5 @@ export class LoginPageComponent {
     console.log('Form is invalid. Please check the fields.');
   }
 }
-
  
 }

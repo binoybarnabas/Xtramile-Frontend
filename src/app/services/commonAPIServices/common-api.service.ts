@@ -11,7 +11,7 @@ export class CommonAPIService {
 
 
   userData : any
-  
+
   constructor(private http: HttpClient) { }
 
  
