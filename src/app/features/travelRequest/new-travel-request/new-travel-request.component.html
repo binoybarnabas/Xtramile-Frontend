@@ -456,7 +456,7 @@
                     <!-- If  Manager then submit -->
                     <div *ngIf="currentLoggedInUserRole === 'manager' " class="form_submit_container" >
                         <div class="reject_btn_container">
-                            <button type="button" class="reject_btn"> Reject</button>
+                            <button type="button" class="reject_btn" (click)="openRejectionReasonModal()"> Reject</button>
                         </div>
                         <div class="btn_container">
                             <button (click) = "changeNewReqFormSubMenuValue(1)" class="cancel_btn"> Back</button>

@@ -105,22 +105,22 @@
 
 /*========Scroll bar========*/
 ::-webkit-scrollbar {
-  width: 1px;
-  background-color: transparent;
+  width: 3px;
+  /* background-color: transparent; */
 
-  /* background: var(--scroll-bar-color); */
+  background: var(--scroll-bar-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  /* background: var(--scroll-thumb-color); */
-  background-color: transparent;
+  background: var(--scroll-thumb-color);
+  /* background-color: transparent; */
 
   border-radius: 2em;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  /* background: var(--scroll-thumb-hover-color); */
-  background-color: transparent;
+  background: var(--scroll-thumb-hover-color);
+  /* background-color: transparent; */
 }
 
 html {
@@ -600,6 +600,7 @@ body {
   transition: 0.6s;
 
   padding: 2vw;
+  overflow: scroll;
 }
 
 .middle_console_container.collapsed {
@@ -625,6 +626,7 @@ body {
 .middle_console_container .body_section {
   background-color: var(--card-bg-color);
   transition: 0.6s;
+
 }
 
 /* Common Button Styles */

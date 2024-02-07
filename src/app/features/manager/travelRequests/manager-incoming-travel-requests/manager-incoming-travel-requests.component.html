@@ -1,10 +1,10 @@
 
-<div class="container">
-  <h1>Pending Approval</h1>
-  <h4>Incoming Requests Forwarded</h4>
-  
+<div class="table_container">
+  <!-- <h4 class="title_2">Pending Approval</h4> -->
+  <!-- <span>Incoming Travel Requests</span>   -->
 <!-- Include the component in your parent component -->
 <app-table-filter
+
 (dateSelected)="handleDateSelection($event)" 
 (sortOptionSelected)="handleSortOptionSelection($event)" 
 (searchByName)="handleSearchByName($event)"
@@ -14,8 +14,11 @@
 
 
   <div class="table_responsive">
+
     <table class="table custom_table">
+
       <thead>
+
         <tr>
           <th>Request ID</th>
           <th>Employee</th>
@@ -24,9 +27,11 @@
           <!-- <th>Mode</th> -->
           <th>Status</th>
         </tr>
+
       </thead>
       
         <tbody>
+
           <tr *ngFor="let req of employeeRequest" (click)="selectRow(req.requestId)">
             <td>{{req.requestId}} </td>
             <td><div class="employee_div">
@@ -38,9 +43,12 @@
             <!-- <td><button class="button-mode">{{req.mode}} </button></td> -->
             <td><button class="button_status">{{req.status}}</button> </td>
           </tr>
+
         </tbody>
+
     </table>
     
   </div>
+
   <pagination [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" ></pagination>
 </div>

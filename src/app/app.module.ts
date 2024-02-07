@@ -96,6 +96,7 @@ import { CustomDatePipe } from './pipes/CustomDate/custom-date.pipe';
 import { PerdiemCardComponent } from './components/ui/perdiem-card/perdiem-card.component';
 import { FileCardComponent } from './components/ui/file-card/file-card.component';
 import { LoginComponent } from './components/ui/login/login.component';
+import { DescriptionModalComponent } from './components/ui/description-modal/description-modal.component';
 
 
 @NgModule({
@@ -182,7 +183,8 @@ import { LoginComponent } from './components/ui/login/login.component';
     TravelAdminSelectedRequestsComponent,
     LoginPageComponent,
     TopBarUserComponent,
-    CustomDatePipe
+    CustomDatePipe,
+    DescriptionModalComponent
   ]
   ,
 

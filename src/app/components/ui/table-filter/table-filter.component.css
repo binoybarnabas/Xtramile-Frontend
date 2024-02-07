@@ -1,0 +1,103 @@
+.table_filter_container {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    padding-top: 1rem;
+    padding-bottom: 0;
+    background-color: var(--menu-hover-color);
+    border-radius: var(--normal-border-radius);
+
+}
+
+
+.table_filter_container .filter_items_section {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.table_filter_container .filter_items_section .date_picker_section {
+    display: flex;
+    width: 12rem;
+
+}
+
+
+.table_filter_container .filter_items_section .date_picker_section .icon {
+
+    position: absolute;
+    z-index: 999;
+    left: 3rem;
+    top: 0.57rem;
+    color: var(--ternary-text-color);
+    font-weight: var(--active-font-weight);
+    font-size: var(--normal-font-size);
+
+}
+
+
+.table_filter_container .filter_items_section .date_picker_section .filter_item {
+    position: relative;
+    height: 2.7rem;
+
+    padding-left: 3.5rem;
+    font-size: var(--small-font-size);
+    font-weight: var(--active-font-weight);
+    outline: none;
+}
+
+
+.table_filter_container .filter_items_section .sort_section {
+    display: flex;
+}
+
+
+.table_filter_container .filter_items_section .sort_section .filter_item {
+    /* position: relative; */
+    /* padding: 7px; */
+    padding-left: 2rem;
+    height: 2.7rem;
+    font-size: var(--small-font-size);
+    font-weight: var(--active-font-weight);
+    outline: none;
+    color: var(--ternary-text-color);
+
+}
+
+/* .table_filter_container .filter_items_section .sort_section .filter_item .selector option {
+    position: relative;
+}
+
+.table_filter_container .filter_items_section .sort_section .filter_item .selector .icon {
+    z-index: 999;
+    position: absolute;
+ 
+} */
+
+
+.table_filter_container .filter_items_section .search_section {
+    /* padding: 7px; */
+    width: 20rem;
+    margin-left: 0;
+    /* margin-right: 1.5rem; */
+}
+
+.table_filter_container .filter_items_section .search_section .filter_item {
+
+    padding-left: 1rem;
+    height: 2.7rem;
+    font-size: var(--small-font-size);
+    font-weight: var(--active-font-weight);
+    outline: none;
+    color: var(--ternary-text-color);
+
+}
+
+
+.table_filter_container .filter_items_section .see_all_btn_section .btn {
+    background-color: transparent;
+    color: var(--second-color);
+    border: none;
+    font-weight: var(--active-font-weight);
+    font-size: var(--small-font-size);
+}
