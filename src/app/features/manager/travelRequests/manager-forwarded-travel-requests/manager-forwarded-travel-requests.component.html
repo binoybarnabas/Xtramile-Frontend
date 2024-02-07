@@ -1,26 +1,11 @@
 <h2>Forwarded Requests</h2>
 
-<div>
-  <table mat-table>
-    <thead>
-      <tr matHeaderRowDef>
-        <th>Request ID</th>
-        <th>Employee</th>
-        <th>Project Code</th>
-        <th>Date</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let request of travelRequest">
-        <td>{{ request.requestCode }}</td>
-        <td>{{ request.employeeName }}</td>
-        <td>{{ request.projectCode }}</td>
-        <td>{{ request.date }}</td>
-        <td><div>{{ request.status }}</div></td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngIf="travelRequest?.length">
+  
+  <app-data-table [headers]="tableHeaders"
+  [data]="travelRequest"
+  [displayedProperties]="dataHeaders"></app-data-table>
+
 
   <pagination [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" ></pagination></div>
 

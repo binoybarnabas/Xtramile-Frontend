@@ -9,12 +9,14 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
 })
 export class ManagerForwardedTravelRequestsComponent {
 
-  travelRequest: any[] | undefined
+  travelRequest= []
 
   managerId = 9; // to check the data
   itemsPerPage = 10;
   totalItems = 0;
   currentPage = 1;
+  tableHeaders=['RequestID','Employee','ProjectCode','Date','Status'] ;
+  dataHeaders=['requestId','employee','projectCode','date','status'] ;
   constructor( private apiService: ManagerTravelRequestsService,private router:Router)
   {}
 
@@ -24,9 +26,10 @@ export class ManagerForwardedTravelRequestsComponent {
 
 
   getManagerForwardRequests(){
+    console.log("inside get forward req")
     this.apiService.getManagerForwardedRequest(this.managerId,this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.travelRequest = data.employee;
+        this.travelRequest = data.employeeRequest;
         this.totalItems= data.totalCount;
 
         console.log(data);

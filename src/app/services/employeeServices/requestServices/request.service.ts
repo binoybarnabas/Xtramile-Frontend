@@ -78,8 +78,17 @@ export class RequestService {
     return this.http.get(`http://localhost:5190/api/requeststatus/name/${requestId}`, { responseType: 'text' })
   }
 
-  //get employee data that show in ongoing page
-  getEmployeeOngoingRequest(employeeId: number): Observable<any> {
-    return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`);
-  }
+    //get employee data that show in ongoing page
+    getEmployeeOngoingRequest(employeeId: number): Observable<any> {
+      return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`);
+    }
+
+    getEmployeeRequestHisory(empId: number,pageIndex: number,pageSize: number): Observable<any> {
+      const url="http://localhost:5190/api/employee/request/history"
+      const params = new HttpParams() 
+      .set("empId", empId)
+      .set('pageIndex',pageIndex)
+      .set('pageSize',pageSize)
+      return this.http.get(url,{params})
+    }
 }
