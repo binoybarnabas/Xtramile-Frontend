@@ -4,8 +4,8 @@
       <div class="card_details">
         <div class="row">
           <div *ngFor="let title of titles" class="col-xs-6 col-sm-6 data">
-            <p class="card-title">{{ title }}</p>
-            <p class="card-text">{{ getPropertyByTitle(item, title) }}</p>
+            <p class="card_title">{{ title }}</p>
+            <p class="card_text">{{ getPropertyByTitle(item, title) }}</p>
           </div>
         </div>
         <div *ngIf="buttonNeeded" class="view_option_button">
