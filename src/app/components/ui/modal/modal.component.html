@@ -60,8 +60,8 @@
       </div>
       <button type="submit" [ngClass]="{ 'disabled_btn': optionForm.invalid }"
         class="btn btn-primary mt-3">Submit</button>
-      <div *ngIf="optionForm.invalid && optionForm.touched" class="validation_message">
-        *Please fill in all required fields.
+      <div *ngIf="optionForm.invalid && optionForm.touched" >
+          <p class="validation_message">*Please fill in all required fields.</p>
       </div>
     </form>
   </div>

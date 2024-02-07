@@ -71,7 +71,8 @@ const routes: Routes = [
       { path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent },
       { path: 'ongoing', component: TravelAdminOngoingTravelComponent },
       { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },
-      { path: 'profile', component: TravelAdminProfileComponent }
+      { path: 'profile', component: TravelAdminProfileComponent },
+      {path:'requestdetail',component:NewTravelRequestComponent}
     ]
   },
   {

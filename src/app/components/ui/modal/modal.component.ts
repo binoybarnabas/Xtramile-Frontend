@@ -57,6 +57,7 @@ export class ModalComponent {
     this.travelAdminService.getTravelModes().subscribe({
       next: (data:any)=>{
         this.travelModes = data;
+        console.log(this.travelModes)
       },
       error: (error: Error) => {
         alert('Error has occurred' + error.message);
@@ -97,6 +98,7 @@ export class ModalComponent {
         next: (response) => {
           console.log('Data posted successfully', response);
           // You can handle success here
+          alert('The option have been added successfully')
           this.bsModalRef.hide();
         },
         error: (error) => {

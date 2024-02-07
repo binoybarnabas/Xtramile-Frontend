@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ɵsetAlternateWeakRefImpl } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild, ɵsetAlternateWeakRefImpl } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
@@ -7,6 +7,10 @@ import { TravelRequestDetailViewModel, TravelRequestDetails } from 'src/app/serv
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
+import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -31,6 +35,11 @@ export class NewTravelRequestComponent {
   tripInformationsMap = new Map<string, any>();
   additionalInformationsMap = new Map<string, any>();
 
+
+  //sus
+   requestStatus!: RequestStatus
+  
+  bsModalRef!: BsModalRef;
 
   // Function to convert the Map into an array of key-value pairs
   getGeneralInfoMapEntries(): [string, any][] {
@@ -63,12 +72,15 @@ export class NewTravelRequestComponent {
     private route:ActivatedRoute,
     private datePipe:DatePipe,
     private managerTravelRequest: ManagerTravelRequestsService,
-    private router:Router
+    private router:Router,
+    private modalService: BsModalService,
+    private commonApiService: CommonAPIService
+
     ) {
     this.newReqFormSubMenuValue = 0;
 
     //Getting the current Loggedin user
-    this.currentLoggedInUserRole = 'manager';
+    this.currentLoggedInUserRole = 'travelAdmin';
 
 
     
@@ -431,6 +443,37 @@ export class NewTravelRequestComponent {
 
   }
 
+  //Travel Admin Send Options
+  //There by status changes
+  onTravelAdminOptionsSend() {
+  
+    const requestStatus: RequestStatus = {
+      requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
+      empId: 10,     // Assign the employee ID
+      primaryStatusId: 10, // Assign the primary status ID
+      date: new Date(),  // Assign the current date
+      secondaryStatusId: 10 // Assign the secondary status ID
+
+  };
+  
+   this.commonApiService.updateRequestStatus(requestStatus).subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (error: Error) => {
+        console.log("Error in posting request status");
+        console.log(error.message);
+      },
+      complete: () => {
+        console.log("Posting Request Status Complete");
+        alert("Posting Request Status Complete");
+      }
+    });
+  }
+
+
+
+
   //Finance Person Allocating the perdiem
   onFinancePersonnelAllocatePerDiem() {
     //should call a post method to approve perdiem 
@@ -445,4 +488,24 @@ export class NewTravelRequestComponent {
     console.log("clicked");
   }
   //EOF
+
+
+@ViewChild(ModalComponent)
+modalComponent!: ModalComponent;
+// TRAVEL ADMIN
+openAddOptionModal() {
+  const initialState = {
+    requestId: this.travelRequestDetailViewModel.requestId
+  };
+  
+  this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
+  this.bsModalRef.content.onClose.subscribe((result: any) => {
+    // Handle the result from the modal if needed
+    console.log('Modal result:', result);
+    // You can perform actions with the result data here
+  });
+}
+
+
+
 }

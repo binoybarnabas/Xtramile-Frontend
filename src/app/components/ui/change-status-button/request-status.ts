@@ -5,3 +5,5 @@ export interface RequestStatus {
     date: Date,
     secondaryStatusId: number
 }
+
+

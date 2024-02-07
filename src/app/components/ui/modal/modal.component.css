@@ -1,14 +1,14 @@
 .modal-header {
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--second-color);
+    color: var(--card-bg-color);
     border-bottom: none;
   }
   
   .modal-header .exit_button{
-      background-color: #007bff;
+      background-color: var(--second-color);
       border-radius: 1rem;
       border-color: #fff;
-      color: #fff;
+      color: var(--card-bg-color);
   }
   
   .modal-body {
@@ -16,8 +16,8 @@
   }
   
   .modal-body .form-group .validation_message {
-    color: rgb(0, 0, 0);
-    font-size: 0.7em;
+    color: var(--error-color);
+    font-size: var(--extra-small-font-size);
     margin-block: 0.1em;
   }
   
