@@ -61,5 +61,13 @@ export class ManagerTravelRequestsService {
     };
     return this.http.patch('http://localhost:5190/api/reportingmanager/travel/request/approve',body);
   }
-  
+
+  cancelRequest(requestId:number):Observable<any>{
+    const body = {
+      requestId: requestId,
+      managerId:this.managerId
+    };
+    return this.http.patch('http://localhost:5190/api/reportingmanager/travel/request/cancel',body);
+  }
+
 }

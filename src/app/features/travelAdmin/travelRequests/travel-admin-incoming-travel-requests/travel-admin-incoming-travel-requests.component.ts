@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 
 @Component({
@@ -10,7 +11,9 @@ export class TravelAdminIncomingTravelRequestsComponent {
   tableHeaders: string[] = ['Request ID', 'Employee', 'Project Code', 'Date','Mode','Priority','Status'];
   fieldsToDisplay: string[] = ['requestId', 'employeeName', 'projectCode','createdOn','travelTypeName','priorityName','statusName'];
   incomingRequestdata:any[] = [];
-  constructor(private apiservice: TravelAdminTravelRequestsService){
+  selectedRow:any | null = null;
+  requestId: number = 0;
+  constructor(private apiservice: TravelAdminTravelRequestsService, private router: Router){
     
   }
   ngOnInit(){
@@ -19,4 +22,17 @@ export class TravelAdminIncomingTravelRequestsComponent {
       this.incomingRequestdata = data;
     });
   }
+  handleSelectedRow(row:any){
+    this.selectedRow = row;
+    console.log(this.selectedRow.requestId)
+    this.requestId = this.selectedRow.requestId
+    const queryParams = {requestId:this.requestId}
+    this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
+  }
+  // selectRow(requestId:number){
+  //   this.selectedRow[requestId] = requestId;
+  //   console.log(requestId);
+  //   const queryParams = {requestId:requestId}
+  //   this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
+  // }
 }

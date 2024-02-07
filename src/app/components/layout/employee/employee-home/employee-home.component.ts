@@ -1,5 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 
 @Component({
   selector: 'app-employee-home',
@@ -10,8 +12,24 @@ import { FormGroup } from '@angular/forms';
 export class EmployeeHomeComponent {
 
   subscription: any;
-  router: any;
   requestData = new Map();
+
+  employeeName!:string 
+  designation!:string 
+  userData : any
+
+  constructor(private router:Router){}
+
+  ngOnInit(){
+    // Retrieve user data from sessionStorage
+    const storedUserDataString = sessionStorage.getItem('employeeData');
+    if (storedUserDataString) {
+      this.userData = JSON.parse(storedUserDataString);
+      this.employeeName = this.userData.employeeName;
+      this.designation = this.userData.role;
+    }
+  }
+
 
   ngOnDestroy() {
     this.subscription.unSubscribe();
@@ -25,6 +43,16 @@ export class EmployeeHomeComponent {
     //  this.postData(this.form.value);
   }
 
+    //logging out from the employee module
+    logout(message :string){
+      console.log(message);
+      //clearing the session.
+      // const logoutData = Object.keys(sessionStorage);
+      // Remove an item from session storage
+      sessionStorage.removeItem('employeeData');
+      sessionStorage.removeItem('isEmployeeAuthenticated');
+      this.router.navigate(['login']);
+    }
 
 
 }

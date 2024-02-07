@@ -1,0 +1,6 @@
+<p>Available Options</p>
+<div class="selected_option" *ngIf="selectedOption.at(0)">
+  <p class="title">Selected Option</p>
+  <app-option-card [options]="selectedOption"></app-option-card>
+</div>
+<app-option-card [options]="optionsData"></app-option-card>

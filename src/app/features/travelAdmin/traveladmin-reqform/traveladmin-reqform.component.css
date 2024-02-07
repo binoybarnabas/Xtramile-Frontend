@@ -1,0 +1,342 @@
+.req_forms_main_container {
+    display: flex;
+    margin: 0;
+    background-color: var(--card-bg-color);
+    /* position: absolute; */
+    /* height: max-content; */
+}
+
+.req_forms_main_container .left_section {
+    width: 20%;
+    height: max-content;
+    padding: 1rem;
+    transition: 0.6s;
+    position: absolute;
+    background-color: var(--card-bg-color);
+
+}
+
+.req_forms_main_container .left_section .nav_items {
+    list-style: none;
+}
+
+.req_forms_main_container .left_section .nav_items .list_item {
+    margin: 5px;
+    padding: 5px;
+    font-size: var(--span-font-size);
+}
+
+.req_forms_main_container .left_section .nav_items .list_item.active {
+    background-color: var(--menu-hover-color);
+    border-radius: var(--extra-small-border-radius);
+    color: var(--second-color);
+    cursor: pointer;
+    font-weight: var(--active-font-weight);
+
+}
+
+.req_forms_main_container .left_section .nav_items .list_item:hover {
+    background-color: var(--menu-hover-color);
+    border-radius: var(--extra-small-border-radius);
+    color: var(--second-color);
+    cursor: pointer;
+    font-weight: var(--active-font-weight);
+
+}
+
+
+.req_forms_main_container .right_section {
+
+    position: absolute;
+    right: 0;
+    width: 80%;
+    height: fit-content;
+    /* padding: 1rem; */
+    border-left: 1.5px dashed var(--ternary-text-color);
+    transition: 0.6s;
+
+    background-color: var(--card-bg-color);
+
+}
+
+.req_forms_main_container .right_section .form_container {
+
+    border-radius: 0 0 6px 6px;
+    padding: 1.5rem;
+    /* box-shadow: rgba(0, 0, 0.15, 0.15) 2.95px 2.95px 2.6px; */
+    transition: 0.6s;
+
+}
+
+.no_display {
+    display: none;
+}
+
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_title {
+    /* background-color: var(--menu-hover-color); */
+    /* border-radius: 6px; */
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    /* border-radius: 6px 6px 0 0; */
+    position: relative;
+
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_title h4 {
+    font-size: var(--normal-font-size);
+    color: var(--second-color);
+
+    /* background-color: var(--menu-hover-color);
+    padding: 7px;
+    border-radius: 5px; */
+
+    border-bottom: 1.5px solid var(--ternary-text-color);
+}
+
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_elements {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 15px;
+    grid-column-gap: 15px;
+    font-size: var(--form-label-font-size);
+
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_input_group_navigator {
+    position: relative;
+
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group_navigator .btn_container {
+
+    position: absolute;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* bottom: 0; */
+    right: 0;
+}
+
+.req_forms_main_container .right_section .form_container .form_input_group_navigator .btn_container .back_btn {
+
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--second-color);
+    border: var(--normal-button-border-size) solid var(--second-color);
+    border-radius: var(--small-border-radius);
+    background-color: var(--card-bg-color);
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    font-weight: var(--active-font-weight);
+    font-size: var(--span-font-size);
+
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_input_group_navigator .btn_container .next_btn {
+
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--card-bg-color);
+    background-color: var(--second-color);
+    border-radius: var(--small-border-radius);
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 10px; */
+    font-weight: var(--active-font-weight);
+    font-size: var(--span-font-size);
+    border: var(--normal-button-border-size) solid var(--second-color);
+}
+
+
+.req_forms_main_container .right_section .form_container .new_req_form {
+    /* max-width: 400px; */
+    margin: auto;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input {
+    width: 100%;
+    padding: 10px;
+    /* margin-bottom: 10px; */
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: var(--normal-form-input-border-size) solid var(--menu-hover-color);
+    outline: none;
+
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input:disabled {
+    cursor: not-allowed;
+    /* border: 2px solid var(--danger-color); */
+}
+
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_error {
+    color: var(--error-color);
+    font-size: var(--extra-small-font-size);
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_submit_container {
+
+    position: relative;
+
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container {
+
+    position: absolute;
+    margin-top: 20px;
+    right: 0;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .cancel_btn {
+
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--card-bg-color);
+    border: var(--normal-button-border-size) solid var(--danger-color);
+    border-radius: var(--small-border-radius);
+    background-color: var(--danger-color);
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    font-weight: var(--active-font-weight);
+    font-size: var(--span-font-size);
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .submit_btn {
+
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--card-bg-color);
+    background-color: var(--second-color);
+    border-radius: var(--small-border-radius);
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 10px; */
+    font-weight: var(--active-font-weight);
+    border: var(--normal-button-border-size) solid var(--second-color);
+    font-size: var(--span-font-size);
+
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .submit_btn:disabled:hover {
+    background-color: var(--error-color);
+    cursor: not-allowed;
+    border: var(--normal-button-border-size) solid var(--error-color);
+
+}
+
+/* ------------------------------------------------ */
+
+@media screen and (max-width: 860px) {
+
+    .req_forms_main_container {
+        display: block;
+        position: relative;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group_navigator .btn_container {
+        position: relative;
+    }
+
+    .req_forms_main_container .right_section .form_container .form_input_group_navigator .btn_container .back_btn {
+        position: absolute;
+        left: 0;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_input_group_navigator .btn_container .next_btn {
+        right: 0;
+        position: absolute;
+    }
+
+
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container {
+        position: relative;
+    }
+
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .cancel_btn {
+
+        left: 0;
+        position: absolute;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .submit_btn {
+        right: 0;
+        position: absolute;
+
+    }
+
+
+}
+
+
+
+@media screen and (max-width: 460px) {
+
+    .req_forms_main_container {
+        display: block;
+        position: relative;
+        justify-content: space-between;
+    }
+
+    .req_forms_main_container .left_section {
+        display: none;
+    }
+
+    .req_forms_main_container .right_section {
+        width: 100%;
+        position: absolute;
+        border: none;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_elements {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row-gap: 10px;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group_navigator .btn_container {
+        position: relative;
+    }
+
+    .req_forms_main_container .right_section .form_container .form_input_group_navigator .btn_container .back_btn {
+        position: absolute;
+        left: 0;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_input_group_navigator .btn_container .next_btn {
+        right: 0;
+        position: absolute;
+    }
+
+
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container {
+        position: relative;
+    }
+
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .cancel_btn {
+
+        left: 0;
+        position: absolute;
+    }
+
+    .req_forms_main_container .right_section .form_container .new_req_form .form_submit_container .btn_container .submit_btn {
+        right: 0;
+        position: absolute;
+
+    }
+
+
+}

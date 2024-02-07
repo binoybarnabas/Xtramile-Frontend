@@ -18,7 +18,7 @@ export class ManagerIncomingTravelRequestsComponent {
   employeeRequest: any[] | undefined;
 
   // Manager ID for fetching employee requests
-  managerId = 9; // to check the data
+  managerId = 7; // to check the data
   itemsPerPage = 10;
   totalItems = 0;
   currentPage = 1;
@@ -142,7 +142,6 @@ export class ManagerIncomingTravelRequestsComponent {
       });
     }
   }
-
 
 
   // select an option

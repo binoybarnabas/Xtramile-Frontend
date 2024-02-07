@@ -1,0 +1,45 @@
+<div class="perdiem_container">
+
+
+    <ng-container *ngFor="let item of perdiemCard;">
+
+        <div class="perdiem_card">
+
+            <div class="top_section">
+    
+                <div class="top_left">
+                    <span class="currency">INR</span>
+                    <h3 class="amount">₹{{item.inrAmount}}</h3>
+                </div>
+    
+                <div class="top_right">
+                    <span class="currency">{{item.destinationCurrency}}</span>
+                    <h3 class="amount">${{item.destinationAmount}}</h3>
+                </div>
+    
+            </div>
+    
+            <div class="bottom_section">
+    
+                <div class="bottom_left">
+                    <span class="date_title">VALID FROM</span>
+                    <p class="date">{{item.validFrom}}</p>
+                </div>
+                <div class="bottom_middle">
+                    <span class="date_title">VALID THRU</span>
+                    <p class="date">{{item.validThru}}</p>
+                </div>
+                <div class="bottom_right">
+                    <p class="days_count">{{item.totalDays}}</p>
+                </div>
+    
+            </div>
+    
+    
+    
+        </div>
+    </ng-container>
+
+
+
+</div>

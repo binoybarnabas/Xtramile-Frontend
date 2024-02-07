@@ -1,5 +1,5 @@
 .blue_rounded_button {
-    background-color: #007bff; 
+    background-color: #ff0000; 
     color: #fff; 
     border: none;
     padding: 0.5rem 1.25rem; 
@@ -7,6 +7,7 @@
     cursor: pointer;
     font-size: 1rem; 
     position: absolute;
-    right: 2vw;
+    right: 5vw;
     bottom: 2vw;
+    top : 3px
 }

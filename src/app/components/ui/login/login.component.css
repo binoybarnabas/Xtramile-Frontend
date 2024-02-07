@@ -1,0 +1,125 @@
+.login_container {
+    display: flex;
+}
+
+.login_container .left_section {
+    width: 60%;
+    background-color: var(--card-bg-color);
+    height: 100vh;
+    position: relative;
+}
+
+.login_container .right_section {
+    width: 40%;
+    /* background-color: var(--second-color); */
+    background: linear-gradient(179.4deg, rgb(12, 20, 69) -16.9%, rgb(71, 30, 84) 119.9%);
+    height: 100vh;
+}
+
+
+.login_container .left_section .login_form_container {
+    position: absolute;
+    margin: 7vw;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 2rem;
+    border-radius: var(--normal-border-radius);
+    transition: 0.3s;
+}
+
+
+.login_container .left_section .login_form_container:hover {
+    box-shadow: var(--second-color) 0px 1px 1px;
+
+}
+
+.login_container .left_section .login_form_container .main_heading_section h4 {
+    font-size: var(--large-font-size);
+    font-weight: var(--extra-font-weight);
+}
+
+.login_container .left_section .login_form_container .main_heading_section p {
+    font-size: var(--extra-small-font-size);
+    color: var(--ternary-text-color);
+}
+
+
+.login_container .left_section .login_form_container .form_section .login_form {
+    margin-top: 3rem;
+}
+
+.login_container .left_section .login_form_container .form_section .login_form .form_input_container {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+
+}
+
+
+.login_container .left_section .login_form_container .form_section .login_form .form_input_container .label {
+    font-size: var(--small-font-size);
+    font-weight: var(--active-font-weight);
+}
+
+
+.login_container .left_section .login_form_container .form_section .login_form .form_input_container .input_field {
+    margin: 0.4rem 0;
+    padding: 0.6rem;
+    border: 0.5px solid var(--ternary-text-color);
+    border-radius: 3px;
+    outline: none;
+    color: var(--secondary-text-color);
+    font-size: var(--small-font-size);
+
+}
+
+.login_container .left_section .login_form_container .form_section .login_form .form_input_container .input_field:focus {
+    border-bottom: 2.5px solid;
+    border-bottom-color: var(--second-color);
+}
+
+
+
+.login_container .left_section .login_form_container .form_section .login_form .forgot_password_section {
+
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--extra-small-font-size);
+    color: var(--ternary-text-color);
+    margin-bottom: 1.2rem;
+}
+
+.login_container .left_section .login_form_container .form_section .login_form .forgot_password_section .checkbox {
+    font-size: var(--extra-small-font-size);
+}
+
+
+.login_container .left_section .login_form_container .form_section .login_form .form_submit_container .btn_container .login_btn {
+    background-color: var(--second-color);
+    padding: 0.5rem;
+    border-radius: 3px;
+    color: var(--card-bg-color);
+    font-size: var(--small-font-size);
+    font-weight: var(--active-font-weight);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+
+.login_container .right_section {
+    padding: 5vw;
+    position: relative;
+}
+
+
+.login_container .right_section .img_container img {
+
+    height: 80vh;
+    border-radius: 1rem;
+    position: absolute;
+    left: -13rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
