@@ -1,23 +1,31 @@
-<div class="container mx-auto">
-  <div class="row mb-3 div_header">
-    <div class="col-12 col-md-3 mb-3" style="position: relative;">
-      <input type="text" placeholder="Select Date" class="form-control" bsDatepicker [(ngModel)]="selectedDate" (ngModelChange)="onDateSelected()">
+<div class="container mx-auto table_filter_container">
+
+  <div class="row mb-3 div_header filter_items_section">
+
+    <div class="col-12 col-md-3 mb-3 date_picker_section" style="position: relative;">
+      <i class="icon ri-calendar-2-line"></i>
+      <input type="text" placeholder="Select Date" class="filter_item form-control" bsDatepicker [(ngModel)]="selectedDate" (ngModelChange)="onDateSelected()">
     </div>
 
-    <div class="col-12 col-md-2 mb-2">
-      <select class="form-control" [(ngModel)]="selectedSortOption" (change)="onSortOptionSelected()">
-        <option value="select">choose to sort</option>
+    <div class="col-12 col-md-2 mb-2 sort_section">
+      <!-- <i class="icon ri-equalizer-fill"></i> -->
+
+      <select class="selector filter_item form-control" [(ngModel)]="selectedSortOption" (change)="onSortOptionSelected()">
+        
+        <option value="select">Choose to sort</option>
         <option value="name">Employee Name </option>
         <option value="date">Date</option>
       </select>
     </div>
 
-    <div class="col-12 col-md-2 mb-2">
-      <input type="text" class="form-control" [(ngModel)]="searchName" (ngModelChange)="OnNameSearch()" placeholder="search by name">
+    <div class="col-12 col-md-2 mb-2 search_section">
+      <input type="text" class="filter_item form-control" [(ngModel)]="searchName" (ngModelChange)="OnNameSearch()" placeholder="Search by name">
     </div>
 
-    <div class="col-3 col-md-2 mb-2">
-      <button class="btn btn-primary see_all_button" (click)="onSeeAllClick()">See all List</button>
+    <div class="col-3 col-md-2 mb-2 see_all_btn_section">
+      <button class="btn btn-primary see_all_button" (click)="onSeeAllClick()">See All</button>
     </div>
+
   </div>
+
 </div>
