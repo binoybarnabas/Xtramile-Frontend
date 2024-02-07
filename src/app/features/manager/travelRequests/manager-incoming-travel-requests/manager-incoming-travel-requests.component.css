@@ -1,7 +1,7 @@
 /* @import '@angular/material/prebuilt-themes/deeppurple-amber.css'; */
 
 
-.container {
+.table_container {
   max-width: 120rem;
   margin: 0 auto;
 }

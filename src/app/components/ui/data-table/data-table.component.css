@@ -1,30 +1,47 @@
  @import '~bootstrap/dist/css/bootstrap.min.css';
 
- .container {
+ .data_table_container {
      width: 100%;
      padding: 0.95rem;
  }
 
- .header {
+
+ .data_table_container .table_heading {
+
+     font-size: var(--small-font-size);
+     font-weight: var(--active-font-weight);
+
+ }
+
+
+ .data_table_container .header {
      display: flex;
      justify-content: space-between;
-     background: #F0F1F3;
+     /* background: #F0F1F3; */
      padding: 0.9rem 1rem;
  }
 
- .dynamic_table {
+ .data_table_container .dynamic_table {
      width: 100%;
      border-collapse: collapse;
      margin-top: 1rem;
      border-style: none;
  }
 
- .dynamic_table th {
-     background: #F0F1F3;
-     line-height: 45vdh;
+ .data_table_container .dynamic_table .table_row {
+     font-size: var(--small-font-size);
  }
 
- .dynamic_table th,
+
+ .data_table_container .dynamic_table th {
+     /* background: #F0F1F3; */
+     background-color: var(--ternary-text-color);
+     /* line-height: 50vdh; */
+     color: var(--card-bg-color);
+     height: 3rem;
+ }
+
+ .data_table_container .dynamic_table th,
  .dynamic_table td {
      border: none;
      border-bottom: 1px solid #ddd;
