@@ -80,7 +80,7 @@ export class NewTravelRequestComponent {
     this.newReqFormSubMenuValue = 0;
 
     //Getting the current Loggedin user
-    this.currentLoggedInUserRole = 'manager';
+    this.currentLoggedInUserRole = 'employee';
 
 
 
