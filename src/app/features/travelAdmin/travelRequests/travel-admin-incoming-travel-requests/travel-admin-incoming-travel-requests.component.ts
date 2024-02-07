@@ -13,15 +13,33 @@ export class TravelAdminIncomingTravelRequestsComponent {
   incomingRequestdata:any[] = [];
   selectedRow:any | null = null;
   requestId: number = 0;
+  currentPage=1;
+  pageSize=10;
+  totalItems=0;
   constructor(private apiservice: TravelAdminTravelRequestsService, private router: Router){
     
   }
   ngOnInit(){
     //api service to receive all incoming requests.
-    this.apiservice.getIncomingRequests().subscribe((data: any[]) => {
-      this.incomingRequestdata = data;
+        
+        this.apiservice.getIncomingRequests(this.currentPage,this.pageSize).subscribe((data: any) =>
+        {
+          this.incomingRequestdata = data.travelRequest;
+          this.totalItems= data.totalCount();
+        });
+     
+  }
+
+  pageChanged(event: any): void {
+    this.currentPage = event.page;
+    this.apiservice.getIncomingRequests(this.currentPage,this.pageSize).subscribe((data: any) =>
+    {
+      this.incomingRequestdata = data.travelRequest;
+      this.totalItems= data.totalCount();
     });
   }
+ 
+
   handleSelectedRow(row:any){
     this.selectedRow = row;
     console.log(this.selectedRow.requestId)

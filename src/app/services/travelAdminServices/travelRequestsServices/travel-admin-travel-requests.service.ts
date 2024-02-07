@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WaitingOrSelectedRequests } from '../../interfaces/iwaiting-or-selected-requests';
@@ -13,10 +13,16 @@ export class TravelAdminTravelRequestsService {
   constructor(private http : HttpClient) { }
 
   //to get incoming requests for travel admin
-  getIncomingRequests():Observable<any>{
-    return this.http.get(this.apiURL + '/traveladmin/incomingrequests');
+   //to get incoming requests for travel admin
+   getIncomingRequests(pageIndex: number,pageSize: number):Observable<any>{
+
+    const url= this.apiURL + '/traveladmin/incomingrequests';
+    const params= new HttpParams().set('pageIndex',pageIndex)
+    .set('pageSize',pageSize);
+    return this.http.get(url,{params});
   }
 
+  
   //to get travel request details of a particular request id
 
   getWaitingOrSelectedRequests(statusCode: string): Observable<WaitingOrSelectedRequests[]>{

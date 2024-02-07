@@ -1,1 +1,14 @@
-<p>manager-forwarded-travel-requests works!</p>
+<h2>Forwarded Requests</h2>
+ 
+<div *ngIf="travelRequest?.length">
+ 
+  <app-data-table [headers]="tableHeaders"
+  [data]="travelRequest"
+  [displayedProperties]="dataHeaders"></app-data-table>
+ 
+ 
+  <pagination [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" ></pagination></div>
+ 
+<div *ngIf="travelRequest?.length === 0">
+    <p>No data available</p>
+</div>

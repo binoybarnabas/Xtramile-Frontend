@@ -66,8 +66,25 @@ export class ManagerTravelRequestsService {
       requestId: requestId,
       managerId:this.managerId
     };
-   
     return this.http.patch('http://localhost:5190/api/reportingmanager/travel/request/cancel',body);
   }
+
+  getManagerForwardedRequest(managerId: number, offset: number, pageSize: number):Observable<any>{
+    const url="http://localhost:5190/api/reportingmanager/travel/request/forwarded"
+    const params = new HttpParams()
+    .set('managerId',managerId)
+    .set('offset',offset)
+    .set('pageSize',pageSize)
+    return this.http.get(url,{params})
+   }
+  
+   getManagerClosedRequest(managerId: number, offset: number, pageSize: number):Observable<any>{
+     const url="http://localhost:5190/api/reportingmanager/travel/request/closed"
+     const params = new HttpParams()
+     .set('managerId',managerId)
+     .set('offset',offset)
+     .set('pageSize',pageSize)
+     return this.http.get(url,{params})
+    }
 
 }

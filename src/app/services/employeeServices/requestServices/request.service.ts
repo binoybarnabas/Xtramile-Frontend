@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TravelRequestDetails } from '../../interfaces/iTravelRequestDetails';
@@ -82,4 +82,14 @@ export class RequestService {
   getEmployeeOngoingRequest(employeeId: number): Observable<any> {
     return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`);
   }
+
+  getEmployeeRequestHisory(empId: number,pageIndex: number,pageSize: number): Observable<any> {
+    const url="http://localhost:5190/api/employee/request/history"
+    const params = new HttpParams() 
+    .set("empId", empId)
+    .set('pageIndex',pageIndex)
+    .set('pageSize',pageSize)
+    return this.http.get(url,{params})
+  }
+  
 }

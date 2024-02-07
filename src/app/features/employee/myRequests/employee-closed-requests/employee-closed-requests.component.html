@@ -1,1 +1,13 @@
-<p>employee-closed-requests works!</p>
+<h3>Closed Requests</h3>
+<div *ngIf="requestData.length > 0">
+ 
+<app-data-table [headers]="tableHeaders"
+[data]="requestData"
+[displayedProperties]="dataHeaders"
+></app-data-table>
+<pagination [(ngModel)]="currentPage" [itemsPerPage]="pageSize" (pageChange)="pageChanged($event)"></pagination>
+</div>
+ 
+<div *ngIf="requestData.length ===0">
+<p>No Data Available</p>
+</div>
