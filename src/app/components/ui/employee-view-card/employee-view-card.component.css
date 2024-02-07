@@ -3,40 +3,57 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 5px;
 }
+
 .view_cards .request_card {
   margin: 20px;
-  box-shadow: 5px 5px 5px 5px lightgray;
-  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 5px;
+  border-radius: var(--normal-border-radius);
   display: flex;
   max-width: max-content;
   box-sizing: border-box;
-  background-image: linear-gradient(to bottom right, #b8cffd, white);
+  /* background-image: linear-gradient(315deg, #130f40 0%, #000000 74%); */
+  background-color: var(--card-bg-color);
+  border-top: 2px solid var(--ternary-text-color);
+  border-bottom: 2px solid var(--ternary-text-color);
+
+  transition: 0.3s;
+
 }
+
+.view_cards .request_card:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
 
 .view_cards .request_card .card_details {
   margin-left: 2rem;
   width: 100%;
 }
+
 .view_cards .request_card .card_details .data {
   padding: 10px;
 }
 
-.view_cards .request_card .card_details .card-title {
-  color: gray;
-  font-size: small;
+.view_cards .request_card .card_details .card_title {
+  color: var(--ternary-text-color);
+  font-size: var(--small-font-size);
+  font-weight: var(--active-font-weight);
+  margin-bottom: 0;
 }
 
-.view_cards .request_card .card_details .card-text {
-  font-size: medium;
-  font-weight: 500;
+.view_cards .request_card .card_details .card_text {
+  font-size: var(--small-font-size);
+  margin-top: 0;
 }
 
 .view_cards .request_card .view_option_button {
   padding: 10px 0 10px 0;
   margin-left: 5.5rem;
 }
+
 .view_cards .request_card .view_option_button .btn {
-  background-color: lightgreen;
+  background-color: var(--second-color);
   font-size: small;
 }
 
@@ -46,6 +63,7 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 5px;
   }
+
   .view_cards .request_card .view_option_button {
     padding: 10px 0 10px 0;
     margin-left: 0;

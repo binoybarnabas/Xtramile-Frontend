@@ -7,10 +7,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class EmployeeViewCardComponent {
 
-  @Input() titles : string[] = []
-  @Input() data : any[] = []
+  @Input() titles: string[] = []
+  @Input() data: any[] = []
   @Input() titlePropertyMappings: { [key: string]: string } = {};
-  @Input() buttonNeeded : boolean = false;
+  @Input() buttonNeeded: boolean = false;
   @Output() buttonClickEvent = new EventEmitter<number>();
 
   getPropertyByTitle(item: any, title: string): any {
@@ -18,8 +18,13 @@ export class EmployeeViewCardComponent {
     return item[propertyName];
   }
 
-  onButtonClick(requestId: number){
+  onButtonClick(requestId: number) {
     this.buttonClickEvent.emit(requestId);
+  }
+
+  onRequestCardClick(requestId: number) {
+    this.buttonClickEvent.emit(requestId);
+
   }
 
 }

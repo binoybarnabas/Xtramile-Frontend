@@ -1,22 +1,36 @@
 <div class="view_cards">
+
   <ng-container *ngIf="data && data.length > 0; else noRequests">
+
     <div *ngFor="let item of data" class="request_card">
+
       <div class="card_details">
+
         <div class="row">
-          <div *ngFor="let title of titles" class="col-xs-6 col-sm-6 data">
-            <p class="card-title">{{ title }}</p>
-            <p class="card-text">{{ getPropertyByTitle(item, title) }}</p>
+
+          <div (click)="onRequestCardClick(item.requestId)" *ngFor="let title of titles" class="col-xs-6 col-sm-6 data">
+            <p class="card_title">{{ title }}</p>
+            <p class="card_text">{{ getPropertyByTitle(item, title) }}</p>
           </div>
+
         </div>
-        <div *ngIf="buttonNeeded" class="view_option_button">
+
+        <!-- <div *ngIf="buttonNeeded" class="view_option_button">
+
           <button class="btn" (click)="onButtonClick(item.requestId)">
             View Options
           </button>
-        </div>
+          
+        </div> -->
+
       </div>
+
     </div>
+
   </ng-container>
+
   <ng-template #noRequests>
     <h3>No requests to display</h3>
   </ng-template>
+
 </div>
