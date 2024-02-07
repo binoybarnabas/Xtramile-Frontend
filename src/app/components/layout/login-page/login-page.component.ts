@@ -28,21 +28,6 @@ export class LoginPageComponent {
   });
 
   //to check whether the user already authenticated is true then skip the login and redirect to the page
-  if(Boolean(sessionStorage.getItem('isEmployeeAuthenticated'))){
-    this.router.navigate(['employee/dashboard']);
-  }
-
-  if(Boolean(sessionStorage.getItem('isManagerAuthenticated'))){
-    this.router.navigate(['manager/dashboard']);
-  }
-
-  if(Boolean(sessionStorage.getItem('isTravelAdminAuthenticated'))){
-    this.router.navigate(['traveladmin/dashboard']);
-  }
-
-  if(Boolean(sessionStorage.getItem('isFinanceDepartmentAuthenticated'))){
-    this.router.navigate(['finance/dashboard']);
-  }
 
   }
 
@@ -80,46 +65,31 @@ export class LoginPageComponent {
       {
         //user data which contains employeeName, role, department, token, empId
         this.userDataService.userData = data;
-
         if(this.userDataService.userData){
           console.log(this.loginService.isLoggedIn);          
           this.loginService.isLoggedIn = !this.loginService.isLoggedIn;
           console.log(this.loginService.isLoggedIn);
+          localStorage.setItem('userData',JSON.stringify(data));
+          localStorage.setItem('isAuthenticated','true');
 
-        //routing based in roles
-        //on each routign before entering the page the authenticated status should be set based on the type of user that have entered.
-        if((data.department == 'FD' && data.role == 'Employee') || 
-        (data.department == 'TA' && data.role == 'Employee') ||
-        (data.department == 'HR' && data.role == 'Employee') ||
-        (data.department == 'DU1'|| data.department == 'DU2' || data.department == 'DU3' || data.department == 'DU4' || data.department == 'DU5' && data.role == 'Employee')
-        )
-        {
-          sessionStorage.setItem('employeeData', JSON.stringify(data));
-          sessionStorage.setItem('isEmployeeAuthenticated',this.loginService.isLoggedIn.toString())
-          this.router.navigate(['employee/dashboard']);
-        }
+        switch(data.role){
+          case 'Employee': this.router.navigate(['employee/dashboard'])
+                           break;
 
-        if(
-          (data.department == 'DU1'|| data.department == 'DU2' || data.department == 'DU3' || data.department == 'DU4' || data.department == 'DU5' && data.role == 'Manager')
-        )
-        {
-          sessionStorage.setItem('managerData', JSON.stringify(data));
-          sessionStorage.setItem('isManagerAuthenticated',this.loginService.isLoggedIn.toString())
-          this.router.navigate(['manager/dashboard']);
-        }
+          case 'Manager': if(data.department == 'TA'){
+                             this.router.navigate(['traveladmin/dashboard'])
+                            break;
+                          }
+                          else if(data.department == 'FD'){
+                            this.router.navigate(['finance/dashboard'])
+                            break;
+                          }
+                          else{
+                            this.router.navigate(['manager/dashboard'])
+                            break;
+                          }
+          }
 
-        if(data.department == 'TA' && data.role == 'Manager'){
-          sessionStorage.setItem('travelAdminData', JSON.stringify(data));
-          sessionStorage.setItem('isTravelAdminAuthenticated',this.loginService.isLoggedIn.toString())
-          this.router.navigate(['traveladmin/dashboard']);
-        }
-
-        if(data.department == 'FD' && data.role == 'Manager'){
-          sessionStorage.setItem('financePersonnelData', JSON.stringify(data));
-          sessionStorage.setItem('isFinanceDepartmentAuthenticated',this.loginService.isLoggedIn.toString())
-          console.log(sessionStorage.getItem('isFinanceDepartmentAuthenticated'))
-          this.router.navigate(['finance/dashboard']);
-        }
         this.invalidCredentials = false;
         // a fix is required for jwt token handling
         localStorage.setItem('JwtToken',data.token)

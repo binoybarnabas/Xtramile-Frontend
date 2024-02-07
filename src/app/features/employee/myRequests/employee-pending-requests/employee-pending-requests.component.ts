@@ -4,6 +4,7 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
 import { PendingRequest } from './pending-request';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { UserData } from 'src/app/services/interfaces/iuserData';
 
 @Component({
   selector: 'app-employee-pending-requests',
@@ -14,9 +15,16 @@ export class EmployeePendingRequestsComponent {
   private subscription: Subscription | any;
   titles : string[] = ['Request Id', 'Status','Project Name', 'Reason for travel','Start Date','Destination' ]
   requestData : PendingRequest[] = [];
-    empId: number = 15;
+    empId: number ;
+    userData : UserData
 
-constructor(private requestService: RequestService, private router: Router, private activatedRoute : ActivatedRoute, private datepipe: DatePipe) {}
+
+constructor(private requestService: RequestService, private router: Router, private activatedRoute : ActivatedRoute, private datepipe: DatePipe) {
+  const storedUserData = localStorage.getItem('userData');
+  this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
+  this.empId = this.userData?.empId
+
+}
 
 ngOnInit() {
   this.getRequests(this.empId);

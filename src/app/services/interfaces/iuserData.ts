@@ -1,5 +1,5 @@
 export interface UserData {
-    emoId: number;
+    empId: number;
     employeeName: string;
     department: string;
     role: string;

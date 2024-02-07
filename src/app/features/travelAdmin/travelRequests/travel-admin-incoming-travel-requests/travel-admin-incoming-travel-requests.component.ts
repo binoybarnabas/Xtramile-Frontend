@@ -25,7 +25,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
         this.apiservice.getIncomingRequests(this.currentPage,this.pageSize).subscribe((data: any) =>
         {
           this.incomingRequestdata = data.travelRequest;
-          this.totalItems= data.totalCount();
+          this.totalItems= data.pageCount();
         });
      
   }
@@ -35,7 +35,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
     this.apiservice.getIncomingRequests(this.currentPage,this.pageSize).subscribe((data: any) =>
     {
       this.incomingRequestdata = data.travelRequest;
-      this.totalItems= data.totalCount();
+      this.totalItems= data.pageCount();
     });
   }
  

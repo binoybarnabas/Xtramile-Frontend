@@ -11,6 +11,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
+import { UserData } from 'src/app/services/interfaces/iuserData';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -21,9 +22,14 @@ import { RequestStatus } from 'src/app/components/ui/change-status-button/reques
 
 export class NewTravelRequestComponent {
   //Employee id
-  empId: number = 15
+  empId : number 
+  
   //Employee details from api
   employeeDetails?: EmployeeDetails
+
+  //userData based on session values
+  userData: UserData
+ 
 
   //Get Request Details
   travelRequestDetails!: TravelRequestDetails;
@@ -56,8 +62,6 @@ export class NewTravelRequestComponent {
     return Array.from(this.additionalInformationsMap.entries());
   }
 
-
-
   isSideNavBarOpen: any;
   newReqFormSubMenuValue: number;
 
@@ -75,15 +79,42 @@ export class NewTravelRequestComponent {
     private router:Router,
     private modalService: BsModalService,
     private commonApiService: CommonAPIService
-
     ) {
+
+    const storedUserData = localStorage.getItem('userData');
+    this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
+
+    this.empId = this.userData?.empId
+
     this.newReqFormSubMenuValue = 0;
 
-    //Getting the current Loggedin user
-    this.currentLoggedInUserRole = 'travelAdmin';
+    //Getting the current Loggedin user based on session value
+    this.currentLoggedInUserRole = '';
 
+    const userData = localStorage.getItem('userData')
 
-    
+    if(userData!=null){
+      this.userData = JSON.parse(userData);
+      console.log("userdata" + this.userData);
+
+      switch(this.userData.role){
+
+        case 'Employee': this.currentLoggedInUserRole = 'employee';
+                         break;
+
+        case 'Manager': if(this.userData.department == 'TA'){
+                          this.currentLoggedInUserRole = 'travelAdmin';
+                        }
+                        else if(this.userData.department == 'FD'){
+                          this.currentLoggedInUserRole = 'financePersonnel';
+                        }
+                        else{
+                          this.currentLoggedInUserRole = 'manager';
+                        }
+                        break;
+      }
+    }
+
     //Priority field is editable for manager only
     if (this.currentLoggedInUserRole !== 'manager') {
       this.additionalInformationsMap.set('Priority', this.travelRequestDetails?.priority);
@@ -156,39 +187,60 @@ export class NewTravelRequestComponent {
     //Different role has different submit functions
     this.changeSubmitFunction();
 
-    // Getting the employee profile info
+    // let argsForGetEmployeeDataById = this.empId;
+
     this.requestService.getEmployeeDataById(this.empId).subscribe({
 
       next: (data) => {
         this.employeeDetails = data;
         console.log(this.employeeDetails)
-
-
         //Initializing the Travel Info Maps
-        this.generalInformationsMap.set('FirstName', this.employeeDetails?.firstName);
-        this.generalInformationsMap.set('LastName', this.employeeDetails?.lastName);
-        this.generalInformationsMap.set('Email', this.employeeDetails?.email);
-        this.generalInformationsMap.set('Contact No', this.employeeDetails?.contactNumber);
-        this.generalInformationsMap.set('Department', this.employeeDetails?.departmentName);
-        this.generalInformationsMap.set('Reports To', this.employeeDetails?.reportsTo);
-        this.generalInformationsMap.set('Project Code', this.employeeDetails?.projectCode);
-        this.generalInformationsMap.set('Project Name', this.employeeDetails?.projectName);
+        // this.generalInformationsMap.set('FirstName', this.employeeDetails?.firstName);
+        // this.generalInformationsMap.set('LastName', this.employeeDetails?.lastName);
+        // this.generalInformationsMap.set('Email', this.employeeDetails?.email);
+        // this.generalInformationsMap.set('Contact No', this.employeeDetails?.contactNumber);
+        // this.generalInformationsMap.set('Department', this.employeeDetails?.departmentName);
+        // this.generalInformationsMap.set('Reports To', this.employeeDetails?.reportsTo);
+        // this.generalInformationsMap.set('Project Code', this.employeeDetails?.projectCode);
+        // this.generalInformationsMap.set('Project Name', this.employeeDetails?.projectName);
 
       },
       error: (error: Error) => { console.log("problems in fetching data") },
       complete: () => { console.log("get employee by id is done") }
     });
 
-    
-
-
-    //get and employee request based on an request Id
+    //get an employee request based on an request Id
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
       console.log(requestId);
       this.managerTravelRequest.GetTravelRequest(requestId).subscribe({
         next: (data) => {
           this.travelRequestDetailViewModel = data
+              // Getting the employee profile info
+          
+           if(this.currentLoggedInUserRole != 'employee'){
+
+            this.requestService.getEmployeeDataById(Number(this.travelRequestDetailViewModel.createdBy)).subscribe({
+
+                      next: (data) => {
+                          this.employeeDetails = data;
+                          console.log(this.employeeDetails)
+                          //Initializing the Travel Info Maps
+                          this.generalInformationsMap.set('FirstName', this.employeeDetails?.firstName);
+                          this.generalInformationsMap.set('LastName', this.employeeDetails?.lastName);
+                          this.generalInformationsMap.set('Email', this.employeeDetails?.email);
+                          this.generalInformationsMap.set('Contact No', this.employeeDetails?.contactNumber);
+                          this.generalInformationsMap.set('Department', this.employeeDetails?.departmentName);
+                          this.generalInformationsMap.set('Reports To', this.employeeDetails?.reportsTo);
+                          this.generalInformationsMap.set('Project Code', this.employeeDetails?.projectCode);
+                          this.generalInformationsMap.set('Project Name', this.employeeDetails?.projectName);
+
+                        },
+                        error: (error: Error) => { console.log("problems in fetching data") },
+                        complete: () => { console.log("get employee by id is done") }
+                      });
+                            }
+
           //Get Request Details For Display - USE IT WITH GET METHOD OF TRAVEL REQ BY ID
           //Initializing the Trip Info Map
           this.tripInformationsMap.set('Trip Type', this.travelRequestDetailViewModel?.travelType);
@@ -218,6 +270,30 @@ export class NewTravelRequestComponent {
         }
       });
     });
+
+
+     // To separate the user detail when a request detail is picked by the manager to get the corresponding employee details
+    //who raised the requests.
+    // this.requestService.getEmployeeDataById(Number(this.travelRequestDetailViewModel.createdBy)).subscribe({
+    //   next: (data) => {
+    //     this.employeeDetails = data;
+    //     console.log(this.employeeDetails)
+    //     alert(this.employeeDetails);
+    //     //Initializing the Travel Info Maps
+    //     this.generalInformationsMap.set('FirstName', this.employeeDetails?.firstName);
+    //     this.generalInformationsMap.set('LastName', this.employeeDetails?.lastName);
+    //     this.generalInformationsMap.set('Email', this.employeeDetails?.email);
+    //     this.generalInformationsMap.set('Contact No', this.employeeDetails?.contactNumber);
+    //     this.generalInformationsMap.set('Department', this.employeeDetails?.departmentName);
+    //     this.generalInformationsMap.set('Reports To', this.employeeDetails?.reportsTo);
+    //     this.generalInformationsMap.set('Project Code', this.employeeDetails?.projectCode);
+    //     this.generalInformationsMap.set('Project Name', this.employeeDetails?.projectName);
+
+    //   },
+    //   error: (error: Error) => { console.log("problems in fetching data") },
+    //   complete: () => { console.log("get employee by id is done") }
+    // });
+
 
 
 
