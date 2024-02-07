@@ -247,7 +247,6 @@ export class NewTravelRequestComponent {
         travelAuthorizationEmailCapture: new FormControl(Validators.required),
         passportAttachment: new FormControl(Validators.required),
         idCardAttachment: new FormControl(Validators.required),
-
         additionalComments: new FormControl(null, Validators.nullValidator)
 
       })
@@ -256,22 +255,25 @@ export class NewTravelRequestComponent {
 
     //validation for manager editable field
     if (this.currentLoggedInUserRole === 'manager') {
-
-      this.travelRequestForm.get('priority')?.setValidators([Validators.required]);
-
+      this.travelRequestForm = new FormGroup({
+        priority:new FormControl('',Validators.required)
+      });
+    
     }
 
   }
 
 
   //Handling the priority slider
-  priority: string = "Medium"; // Default priority value
-
+  priorityLevelText: string = "Medium" ; // Default priority value
   updatePriority(event: Event): void {
     const value = (event.target as HTMLInputElement)?.value;
+    console.log("value",value,typeof(value));
     if (value !== null && value !== undefined) {
       const priorityTexts = ["Low", "Medium", "High"];
-      this.priority = priorityTexts[parseInt(value) - 1];
+      this.priorityLevelText = priorityTexts[parseInt(value) - 1];
+
+      console.log("priority",this.priorityLevelText);
     }
   }
 
@@ -402,8 +404,8 @@ export class NewTravelRequestComponent {
   //Manager forwarding the travel request form
   onManagerForwardTravelRequestForm() {
     //Should call a PATCH method to set priority of the request
-    // alert("MANAGER")
-    // console.log(this.selectedPriority);
+     alert("MANAGER")
+     console.log(this.travelRequestForm.value.priority);
 
     this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId, this.travelRequestForm.value.priority).subscribe(
       {
@@ -438,5 +440,9 @@ export class NewTravelRequestComponent {
 
   }
 
+
+  clicked(){
+    console.log("clicked");
+  }
   //EOF
 }

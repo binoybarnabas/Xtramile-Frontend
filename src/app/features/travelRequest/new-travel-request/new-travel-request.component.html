@@ -17,7 +17,7 @@
     
         <div class="form_container">
 
-            <form (ngSubmit) = "travelRequestFormSubmitFunction()" [formGroup]="travelRequestForm" class="new_req_form" >
+            <form (ngSubmit)="travelRequestFormSubmitFunction()" [formGroup]="travelRequestForm" class="new_req_form" >
 
                 <!-- general info section -->
                 <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group" >
@@ -392,9 +392,9 @@
 
                                     <label for="priority">Priority</label>
 
-                                    <input type="range" formControlName="priority" min="1" max="3" [(ngModel)]="priority" class="priority-slider" id="priority" (input)="updatePriority($event)">
+                                    <input type="range" formControlName="priority" min="1" max="3" class="priority-slider" id="priority" (input)="updatePriority($event)">
 
-                                    <div class="priority-level" id="priorityLevel">{{ priority }}</div>
+                                    <div class="priority-level" id="priorityLevel">{{ priorityLevelText }}</div>
 
                                     <span class="form_error"
                                     *ngIf="travelRequestForm.get('priority')?.invalid && travelRequestForm.get('priority')?.touched">
@@ -407,7 +407,7 @@
 
                     </div>
                     
-                    <!-- If Employee or manager then submit -->
+                    <!-- If Employee then submit -->
                     <div *ngIf="currentLoggedInUserRole === 'employee' " class="form_submit_container" >
 
                         <div class="btn_container">

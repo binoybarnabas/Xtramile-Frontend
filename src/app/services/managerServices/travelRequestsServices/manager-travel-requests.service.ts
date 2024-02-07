@@ -59,6 +59,7 @@ export class ManagerTravelRequestsService {
       priorityId: priorityId,
       managerId:this.managerId
     };
+    console.log("manager id" + body.managerId);
     return this.http.patch('http://localhost:5190/api/reportingmanager/travel/request/approve',body);
   }
 
@@ -67,6 +68,7 @@ export class ManagerTravelRequestsService {
       requestId: requestId,
       managerId:this.managerId
     };
+   
     return this.http.patch('http://localhost:5190/api/reportingmanager/travel/request/cancel',body);
   }
 
