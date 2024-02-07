@@ -28,7 +28,7 @@ export class NewTravelRequestComponent {
   //Get Request Details
   travelRequestDetails!: TravelRequestDetails;
 
-  travelRequestDetailViewModel!:TravelRequestDetailViewModel
+  travelRequestDetailViewModel!: TravelRequestDetailViewModel
   //Map to keep data by differenct sections of Travel Request Form
   //Can be used to provide a view to those users who do not want to edit it
   generalInformationsMap = new Map<string, any>();
@@ -37,8 +37,8 @@ export class NewTravelRequestComponent {
 
 
   //sus
-   requestStatus!: RequestStatus
-  
+  requestStatus!: RequestStatus
+
   bsModalRef!: BsModalRef;
 
   // Function to convert the Map into an array of key-value pairs
@@ -67,23 +67,23 @@ export class NewTravelRequestComponent {
 
   travelRequestFormSubmitFunction: () => void = this.onEmployeeTravelRequestFormSubmit.bind(this);
 
-  constructor(private sideNavBarService: SideNavBarService, 
+  constructor(private sideNavBarService: SideNavBarService,
     private requestService: RequestService,
-    private route:ActivatedRoute,
-    private datePipe:DatePipe,
+    private route: ActivatedRoute,
+    private datePipe: DatePipe,
     private managerTravelRequest: ManagerTravelRequestsService,
-    private router:Router,
+    private router: Router,
     private modalService: BsModalService,
     private commonApiService: CommonAPIService
 
-    ) {
+  ) {
     this.newReqFormSubMenuValue = 0;
 
     //Getting the current Loggedin user
-    this.currentLoggedInUserRole = 'travelAdmin';
+    this.currentLoggedInUserRole = 'manager';
 
 
-    
+
     //Priority field is editable for manager only
     if (this.currentLoggedInUserRole !== 'manager') {
       this.additionalInformationsMap.set('Priority', this.travelRequestDetails?.priority);
@@ -179,7 +179,7 @@ export class NewTravelRequestComponent {
       complete: () => { console.log("get employee by id is done") }
     });
 
-    
+
 
 
     //get and employee request based on an request Id
@@ -208,7 +208,7 @@ export class NewTravelRequestComponent {
           this.additionalInformationsMap.set('Cab Service Requested', this.travelRequestDetailViewModel?.cabRequired);
           this.additionalInformationsMap.set('Accommodation Requested', this.travelRequestDetailViewModel?.accommodationRequired);
           this.additionalInformationsMap.set('Preferred Departure Time', this.travelRequestDetailViewModel?.prefDepartureTime);
-          this.additionalInformationsMap.set('Additional Comments',this.travelRequestDetailViewModel?.additionalComments);
+          this.additionalInformationsMap.set('Additional Comments', this.travelRequestDetailViewModel?.additionalComments);
         },
         error: (error: Error) => {
           console.log(error);
@@ -268,24 +268,24 @@ export class NewTravelRequestComponent {
     //validation for manager editable field
     if (this.currentLoggedInUserRole === 'manager') {
       this.travelRequestForm = new FormGroup({
-        priority:new FormControl('',Validators.required)
+        priority: new FormControl('', Validators.required)
       });
-    
+
     }
 
   }
 
 
   //Handling the priority slider
-  priorityLevelText: string = "Medium" ; // Default priority value
+  priorityLevelText: string = "Medium"; // Default priority value
   updatePriority(event: Event): void {
     const value = (event.target as HTMLInputElement)?.value;
-    console.log("value",value,typeof(value));
+    console.log("value", value, typeof (value));
     if (value !== null && value !== undefined) {
       const priorityTexts = ["Low", "Medium", "High"];
       this.priorityLevelText = priorityTexts[parseInt(value) - 1];
 
-      console.log("priority",this.priorityLevelText);
+      console.log("priority", this.priorityLevelText);
     }
   }
 
@@ -416,8 +416,8 @@ export class NewTravelRequestComponent {
   //Manager forwarding the travel request form
   onManagerForwardTravelRequestForm() {
     //Should call a PATCH method to set priority of the request
-     alert("MANAGER")
-     console.log(this.travelRequestForm.value.priority);
+    alert("MANAGER")
+    console.log(this.travelRequestForm.value.priority);
 
     this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId, this.travelRequestForm.value.priority).subscribe(
       {
@@ -446,7 +446,7 @@ export class NewTravelRequestComponent {
   //Travel Admin Send Options
   //There by status changes
   onTravelAdminOptionsSend() {
-  
+
     const requestStatus: RequestStatus = {
       requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
       empId: 10,     // Assign the employee ID
@@ -454,9 +454,9 @@ export class NewTravelRequestComponent {
       date: new Date(),  // Assign the current date
       secondaryStatusId: 10 // Assign the secondary status ID
 
-  };
-  
-   this.commonApiService.updateRequestStatus(requestStatus).subscribe({
+    };
+
+    this.commonApiService.updateRequestStatus(requestStatus).subscribe({
       next: (data) => {
         console.log(data);
       },
@@ -484,27 +484,27 @@ export class NewTravelRequestComponent {
   }
 
 
-  clicked(){
+  clicked() {
     console.log("clicked");
   }
   //EOF
 
 
-@ViewChild(ModalComponent)
-modalComponent!: ModalComponent;
-// TRAVEL ADMIN
-openAddOptionModal() {
-  const initialState = {
-    requestId: this.travelRequestDetailViewModel.requestId
-  };
-  
-  this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
-  this.bsModalRef.content.onClose.subscribe((result: any) => {
-    // Handle the result from the modal if needed
-    console.log('Modal result:', result);
-    // You can perform actions with the result data here
-  });
-}
+  @ViewChild(ModalComponent)
+  modalComponent!: ModalComponent;
+  // TRAVEL ADMIN
+  openAddOptionModal() {
+    const initialState = {
+      requestId: this.travelRequestDetailViewModel.requestId
+    };
+
+    this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
+    this.bsModalRef.content.onClose.subscribe((result: any) => {
+      // Handle the result from the modal if needed
+      console.log('Modal result:', result);
+      // You can perform actions with the result data here
+    });
+  }
 
 
 
