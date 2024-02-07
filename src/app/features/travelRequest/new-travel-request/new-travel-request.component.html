@@ -473,7 +473,7 @@
                     <div class="form_title">
                         <h4>Add Available Options</h4>
                         <div class="add_btn_container">
-                            <button type="button"  class="add_btn"> Add </button>
+                            <button type="button"  (click)="openAddOptionModal()" class="add_btn"> Add </button>
                         </div>
                     </div>
 
@@ -491,7 +491,7 @@
 
                         <div class="btn_container">
                             <button (click) = "changeNewReqFormSubMenuValue(3)" class="cancel_btn"> Back</button>
-                            <input class="submit_btn" type="submit" [disabled]="travelRequestForm.invalid" Value="Send">
+                            <input (click)=" onTravelAdminOptionsSend()" class="submit_btn" type="button"  Value="Send">
                         </div>
 
                     </div>
