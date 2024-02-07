@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserData } from 'src/app/services/interfaces/iuserData';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class ManagerIncomingTravelRequestsComponent {
   employeeRequest: any[] | undefined;
 
   // Manager ID for fetching employee requests
-  managerId = 7; // to check the data
+  managerId : number; // to check the data
+  userData : UserData
   itemsPerPage = 10;
   totalItems = 0;
   currentPage = 1;
@@ -91,6 +93,9 @@ export class ManagerIncomingTravelRequestsComponent {
 
   // Constructor to inject services
   constructor(private apiservice: ManagerTravelRequestsService,private router:Router) {
+    const storedUserData = localStorage.getItem('userData');
+    this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
+    this.managerId = this.userData.empId;
     this.apiservice.managerId = this.managerId;
   }
 

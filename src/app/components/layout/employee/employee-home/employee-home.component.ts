@@ -22,7 +22,7 @@ export class EmployeeHomeComponent {
 
   ngOnInit(){
     // Retrieve user data from sessionStorage
-    const storedUserDataString = sessionStorage.getItem('employeeData');
+    const storedUserDataString = localStorage.getItem('userData');
     if (storedUserDataString) {
       this.userData = JSON.parse(storedUserDataString);
       this.employeeName = this.userData.employeeName;
@@ -49,8 +49,9 @@ export class EmployeeHomeComponent {
       //clearing the session.
       // const logoutData = Object.keys(sessionStorage);
       // Remove an item from session storage
-      sessionStorage.removeItem('employeeData');
-      sessionStorage.removeItem('isEmployeeAuthenticated');
+      localStorage.removeItem('userData');
+      localStorage.removeItem('isAuthenticated');
+      localStorage.removeItem('JwtToken')
       this.router.navigate(['login']);
     }
 

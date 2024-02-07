@@ -11,7 +11,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
-import { DescriptionModalComponent } from 'src/app/components/ui/description-modal/description-modal.component';
+import { UserData } from 'src/app/services/interfaces/iuserData';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -22,14 +22,19 @@ import { DescriptionModalComponent } from 'src/app/components/ui/description-mod
 
 export class NewTravelRequestComponent {
   //Employee id
-  empId: number = 15
+  empId : number 
+  
   //Employee details from api
   employeeDetails?: EmployeeDetails
+
+  //userData based on session values
+  userData: UserData
+ 
 
   //Get Request Details
   travelRequestDetails!: TravelRequestDetails;
 
-  travelRequestDetailViewModel!: TravelRequestDetailViewModel
+  travelRequestDetailViewModel!:TravelRequestDetailViewModel
   //Map to keep data by differenct sections of Travel Request Form
   //Can be used to provide a view to those users who do not want to edit it
   generalInformationsMap = new Map<string, any>();
@@ -38,8 +43,8 @@ export class NewTravelRequestComponent {
 
 
   //sus
-  requestStatus!: RequestStatus
-
+   requestStatus!: RequestStatus
+  
   bsModalRef!: BsModalRef;
 
   // Function to convert the Map into an array of key-value pairs
@@ -57,8 +62,6 @@ export class NewTravelRequestComponent {
     return Array.from(this.additionalInformationsMap.entries());
   }
 
-
-
   isSideNavBarOpen: any;
   newReqFormSubMenuValue: number;
 
@@ -68,22 +71,49 @@ export class NewTravelRequestComponent {
 
   travelRequestFormSubmitFunction: () => void = this.onEmployeeTravelRequestFormSubmit.bind(this);
 
-  constructor(private sideNavBarService: SideNavBarService,
+  constructor(private sideNavBarService: SideNavBarService, 
     private requestService: RequestService,
-    private route: ActivatedRoute,
-    private datePipe: DatePipe,
+    private route:ActivatedRoute,
+    private datePipe:DatePipe,
     private managerTravelRequest: ManagerTravelRequestsService,
-    private router: Router,
+    private router:Router,
     private modalService: BsModalService,
     private commonApiService: CommonAPIService
+    ) {
 
-  ) {
+    const storedUserData = localStorage.getItem('userData');
+    this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
+
+    this.empId = this.userData?.empId
+
     this.newReqFormSubMenuValue = 0;
 
+    //Getting the current Loggedin user based on session value
+    this.currentLoggedInUserRole = '';
 
-    this.currentLoggedInUserRole = 'manager';
+    const userData = localStorage.getItem('userData')
 
+    if(userData!=null){
+      this.userData = JSON.parse(userData);
+      console.log("userdata" + this.userData);
 
+      switch(this.userData.role){
+
+        case 'Employee': this.currentLoggedInUserRole = 'employee';
+                         break;
+
+        case 'Manager': if(this.userData.department == 'TA'){
+                          this.currentLoggedInUserRole = 'travelAdmin';
+                        }
+                        else if(this.userData.department == 'FD'){
+                          this.currentLoggedInUserRole = 'financePersonnel';
+                        }
+                        else{
+                          this.currentLoggedInUserRole = 'manager';
+                        }
+                        break;
+      }
+    }
 
     //Priority field is editable for manager only
     if (this.currentLoggedInUserRole !== 'manager') {
@@ -157,39 +187,60 @@ export class NewTravelRequestComponent {
     //Different role has different submit functions
     this.changeSubmitFunction();
 
-    // Getting the employee profile info
+    // let argsForGetEmployeeDataById = this.empId;
+
     this.requestService.getEmployeeDataById(this.empId).subscribe({
 
       next: (data) => {
         this.employeeDetails = data;
         console.log(this.employeeDetails)
-
-
         //Initializing the Travel Info Maps
-        this.generalInformationsMap.set('FirstName', this.employeeDetails?.firstName);
-        this.generalInformationsMap.set('LastName', this.employeeDetails?.lastName);
-        this.generalInformationsMap.set('Email', this.employeeDetails?.email);
-        this.generalInformationsMap.set('Contact No', this.employeeDetails?.contactNumber);
-        this.generalInformationsMap.set('Department', this.employeeDetails?.departmentName);
-        this.generalInformationsMap.set('Reports To', this.employeeDetails?.reportsTo);
-        this.generalInformationsMap.set('Project Code', this.employeeDetails?.projectCode);
-        this.generalInformationsMap.set('Project Name', this.employeeDetails?.projectName);
+        // this.generalInformationsMap.set('FirstName', this.employeeDetails?.firstName);
+        // this.generalInformationsMap.set('LastName', this.employeeDetails?.lastName);
+        // this.generalInformationsMap.set('Email', this.employeeDetails?.email);
+        // this.generalInformationsMap.set('Contact No', this.employeeDetails?.contactNumber);
+        // this.generalInformationsMap.set('Department', this.employeeDetails?.departmentName);
+        // this.generalInformationsMap.set('Reports To', this.employeeDetails?.reportsTo);
+        // this.generalInformationsMap.set('Project Code', this.employeeDetails?.projectCode);
+        // this.generalInformationsMap.set('Project Name', this.employeeDetails?.projectName);
 
       },
       error: (error: Error) => { console.log("problems in fetching data") },
       complete: () => { console.log("get employee by id is done") }
     });
 
-
-
-
-    //get and employee request based on an request Id
+    //get an employee request based on an request Id
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
       console.log(requestId);
       this.managerTravelRequest.GetTravelRequest(requestId).subscribe({
         next: (data) => {
           this.travelRequestDetailViewModel = data
+              // Getting the employee profile info
+          
+           if(this.currentLoggedInUserRole != 'employee'){
+
+            this.requestService.getEmployeeDataById(Number(this.travelRequestDetailViewModel.createdBy)).subscribe({
+
+                      next: (data) => {
+                          this.employeeDetails = data;
+                          console.log(this.employeeDetails)
+                          //Initializing the Travel Info Maps
+                          this.generalInformationsMap.set('FirstName', this.employeeDetails?.firstName);
+                          this.generalInformationsMap.set('LastName', this.employeeDetails?.lastName);
+                          this.generalInformationsMap.set('Email', this.employeeDetails?.email);
+                          this.generalInformationsMap.set('Contact No', this.employeeDetails?.contactNumber);
+                          this.generalInformationsMap.set('Department', this.employeeDetails?.departmentName);
+                          this.generalInformationsMap.set('Reports To', this.employeeDetails?.reportsTo);
+                          this.generalInformationsMap.set('Project Code', this.employeeDetails?.projectCode);
+                          this.generalInformationsMap.set('Project Name', this.employeeDetails?.projectName);
+
+                        },
+                        error: (error: Error) => { console.log("problems in fetching data") },
+                        complete: () => { console.log("get employee by id is done") }
+                      });
+                            }
+
           //Get Request Details For Display - USE IT WITH GET METHOD OF TRAVEL REQ BY ID
           //Initializing the Trip Info Map
           this.tripInformationsMap.set('Trip Type', this.travelRequestDetailViewModel?.travelType);
@@ -209,7 +260,7 @@ export class NewTravelRequestComponent {
           this.additionalInformationsMap.set('Cab Service Requested', this.travelRequestDetailViewModel?.cabRequired);
           this.additionalInformationsMap.set('Accommodation Requested', this.travelRequestDetailViewModel?.accommodationRequired);
           this.additionalInformationsMap.set('Preferred Departure Time', this.travelRequestDetailViewModel?.prefDepartureTime);
-          this.additionalInformationsMap.set('Additional Comments', this.travelRequestDetailViewModel?.additionalComments);
+          this.additionalInformationsMap.set('Additional Comments',this.travelRequestDetailViewModel?.additionalComments);
         },
         error: (error: Error) => {
           console.log(error);
@@ -219,6 +270,30 @@ export class NewTravelRequestComponent {
         }
       });
     });
+
+
+     // To separate the user detail when a request detail is picked by the manager to get the corresponding employee details
+    //who raised the requests.
+    // this.requestService.getEmployeeDataById(Number(this.travelRequestDetailViewModel.createdBy)).subscribe({
+    //   next: (data) => {
+    //     this.employeeDetails = data;
+    //     console.log(this.employeeDetails)
+    //     alert(this.employeeDetails);
+    //     //Initializing the Travel Info Maps
+    //     this.generalInformationsMap.set('FirstName', this.employeeDetails?.firstName);
+    //     this.generalInformationsMap.set('LastName', this.employeeDetails?.lastName);
+    //     this.generalInformationsMap.set('Email', this.employeeDetails?.email);
+    //     this.generalInformationsMap.set('Contact No', this.employeeDetails?.contactNumber);
+    //     this.generalInformationsMap.set('Department', this.employeeDetails?.departmentName);
+    //     this.generalInformationsMap.set('Reports To', this.employeeDetails?.reportsTo);
+    //     this.generalInformationsMap.set('Project Code', this.employeeDetails?.projectCode);
+    //     this.generalInformationsMap.set('Project Name', this.employeeDetails?.projectName);
+
+    //   },
+    //   error: (error: Error) => { console.log("problems in fetching data") },
+    //   complete: () => { console.log("get employee by id is done") }
+    // });
+
 
 
 
@@ -269,24 +344,24 @@ export class NewTravelRequestComponent {
     //validation for manager editable field
     if (this.currentLoggedInUserRole === 'manager') {
       this.travelRequestForm = new FormGroup({
-        priority: new FormControl('', Validators.required)
+        priority:new FormControl('',Validators.required)
       });
-
+    
     }
 
   }
 
 
   //Handling the priority slider
-  priorityLevelText: string = "Medium"; // Default priority value
+  priorityLevelText: string = "Medium" ; // Default priority value
   updatePriority(event: Event): void {
     const value = (event.target as HTMLInputElement)?.value;
-    console.log("value", value, typeof (value));
+    console.log("value",value,typeof(value));
     if (value !== null && value !== undefined) {
       const priorityTexts = ["Low", "Medium", "High"];
       this.priorityLevelText = priorityTexts[parseInt(value) - 1];
 
-      console.log("priority", this.priorityLevelText);
+      console.log("priority",this.priorityLevelText);
     }
   }
 
@@ -417,8 +492,8 @@ export class NewTravelRequestComponent {
   //Manager forwarding the travel request form
   onManagerForwardTravelRequestForm() {
     //Should call a PATCH method to set priority of the request
-    alert("MANAGER")
-    console.log(this.travelRequestForm.value.priority);
+     alert("MANAGER")
+     console.log(this.travelRequestForm.value.priority);
 
     this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId, this.travelRequestForm.value.priority).subscribe(
       {
@@ -447,7 +522,7 @@ export class NewTravelRequestComponent {
   //Travel Admin Send Options
   //There by status changes
   onTravelAdminOptionsSend() {
-
+  
     const requestStatus: RequestStatus = {
       requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
       empId: 10,     // Assign the employee ID
@@ -455,9 +530,9 @@ export class NewTravelRequestComponent {
       date: new Date(),  // Assign the current date
       secondaryStatusId: 10 // Assign the secondary status ID
 
-    };
-
-    this.commonApiService.updateRequestStatus(requestStatus).subscribe({
+  };
+  
+   this.commonApiService.updateRequestStatus(requestStatus).subscribe({
       next: (data) => {
         console.log(data);
       },
@@ -485,13 +560,14 @@ export class NewTravelRequestComponent {
   }
 
 
-  clicked() {
+  clicked(){
     console.log("clicked");
   }
   //EOF
 
 
-
+@ViewChild(ModalComponent)
+modalComponent!: ModalComponent;
 // TRAVEL ADMIN
 openAddOptionModal() {
   const initialState = {
@@ -506,37 +582,6 @@ openAddOptionModal() {
   });
 }
 
-  @ViewChild(ModalComponent)
-  modalComponent!: ModalComponent;
-  // TRAVEL ADMIN
-  openAddOptionModal() {
-    const initialState = {
-      requestId: this.travelRequestDetailViewModel.requestId
-    };
-
-    this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
-    this.bsModalRef.content.onClose.subscribe((result: any) => {
-      // Handle the result from the modal if needed
-      console.log('Modal result:', result);
-      // You can perform actions with the result data here
-    });
-  }
-
-
-
-//MANAGER REJECT REASON MODAL
-openRejectionReasonModal(){
-  const initialState = {
-    requestId: this.travelRequestDetailViewModel.requestId
-  };
-  
-  this.bsModalRef = this.modalService.show(DescriptionModalComponent, { initialState });
-  this.bsModalRef.content.onClose.subscribe((result: any) => {
-    // Handle the result from the modal if needed
-    console.log('Modal result:', result);
-    // You can perform actions with the result data here
-  });
-}
 
 
 }
