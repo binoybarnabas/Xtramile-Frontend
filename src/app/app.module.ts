@@ -206,8 +206,7 @@ import { MatIconModule } from '@angular/material/icon';
     //   preventDuplicates: true,
     // }),
 
-    ModalModule.forRoot()
-
+    ModalModule.forRoot(),
     MatTableModule,
     MatIconModule,
   ],
