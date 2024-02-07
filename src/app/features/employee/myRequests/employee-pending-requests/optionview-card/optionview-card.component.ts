@@ -31,6 +31,8 @@ export class OptionviewCardComponent {
     })
     this.apiservice.getDataFromAvailOptions(this.reqId).subscribe((data: any[]) => {
       this.optionsFromEmployee = data;
+      console.log("init")
+      console.log(this.optionsFromEmployee)
     });
   }
 

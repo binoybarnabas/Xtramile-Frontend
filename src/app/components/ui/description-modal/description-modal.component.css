@@ -1,0 +1,26 @@
+.modal-header {
+    background-color: #007bff;
+    color: #fff;
+    border-bottom: none;
+  }
+  
+  .modal-header .exit_button{
+      background-color: #007bff;
+      border-radius: 1rem;
+      border-color: #fff;
+      color: #fff;
+  }
+  
+  .modal-body {
+    padding: 1rem;
+  }
+  
+  .modal-body .form-group .validation_message {
+    color: rgb(0, 0, 0);
+    font-size: 0.7em;
+    margin-block: 0.1em;
+  }
+  
+  .modal-body .disabled_btn {
+    opacity: 0.5; 
+  }

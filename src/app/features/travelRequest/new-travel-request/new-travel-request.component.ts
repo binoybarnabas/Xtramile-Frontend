@@ -11,6 +11,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
+import { DescriptionModalComponent } from 'src/app/components/ui/description-modal/description-modal.component';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -79,8 +80,8 @@ export class NewTravelRequestComponent {
   ) {
     this.newReqFormSubMenuValue = 0;
 
-    //Getting the current Loggedin user
-    this.currentLoggedInUserRole = 'employee';
+
+    this.currentLoggedInUserRole = 'manager';
 
 
 
@@ -490,6 +491,21 @@ export class NewTravelRequestComponent {
   //EOF
 
 
+
+// TRAVEL ADMIN
+openAddOptionModal() {
+  const initialState = {
+    requestId: this.travelRequestDetailViewModel.requestId
+  };
+  
+  this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
+  this.bsModalRef.content.onClose.subscribe((result: any) => {
+    // Handle the result from the modal if needed
+    console.log('Modal result:', result);
+    // You can perform actions with the result data here
+  });
+}
+
   @ViewChild(ModalComponent)
   modalComponent!: ModalComponent;
   // TRAVEL ADMIN
@@ -506,6 +522,21 @@ export class NewTravelRequestComponent {
     });
   }
 
+
+
+//MANAGER REJECT REASON MODAL
+openRejectionReasonModal(){
+  const initialState = {
+    requestId: this.travelRequestDetailViewModel.requestId
+  };
+  
+  this.bsModalRef = this.modalService.show(DescriptionModalComponent, { initialState });
+  this.bsModalRef.content.onClose.subscribe((result: any) => {
+    // Handle the result from the modal if needed
+    console.log('Modal result:', result);
+    // You can perform actions with the result data here
+  });
+}
 
 
 }

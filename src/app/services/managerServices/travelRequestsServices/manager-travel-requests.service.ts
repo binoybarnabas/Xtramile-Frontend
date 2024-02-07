@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ManagerTravelRequestsService {
-  managerId!:number;
+  managerId:number = 4;
 
   constructor(private http: HttpClient) { 
   }
@@ -86,5 +86,19 @@ export class ManagerTravelRequestsService {
      .set('pageSize',pageSize)
      return this.http.get(url,{params})
     }
+
+  //Api service to post reason for cancellation and patch the corresponding reasonId to TBL_REQUEST
+  private apiUrl= 'http://localhost:5190/api'
+  postReasonToCancel(requestId:number,empId:number,description:string):Observable<any>{
+    const body ={
+      reasonCode:"",
+      description:description,
+      createdBy :empId,
+      createdOn: new Date()
+    }
+    console.log(body)
+    return this.http.post(this.apiUrl+`/reportingmanager/travel/request/deny?reqId=${requestId}`, body);
+  }
+
 
 }
