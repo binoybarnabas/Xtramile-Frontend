@@ -20,7 +20,6 @@ export class ModalComponent {
     return this._requestId;
   }
   private _requestId!: number;
-  @Output() onClose: EventEmitter<any> = new EventEmitter();
   optionForm: FormGroup;
   travelModes: any[] = [];
   categoryData : any[] =[];
@@ -53,7 +52,6 @@ export class ModalComponent {
 
   ngOnInit(){
     //ApiService to get travel modes
-    console.log(this.requestId);
     this.travelAdminService.getTravelModes().subscribe({
       next: (data:any)=>{
         this.travelModes = data;
