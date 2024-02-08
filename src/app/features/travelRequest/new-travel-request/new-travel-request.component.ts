@@ -12,6 +12,7 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
 import { UserData } from 'src/app/services/interfaces/iuserData';
+import { DescriptionModalComponent } from 'src/app/components/ui/description-modal/description-modal.component';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -318,14 +319,14 @@ export class NewTravelRequestComponent {
         tripPurpose: new FormControl('Business Meet', Validators.required),
         departureDate: new FormControl('', [Validators.required, this.dateFormatValidator, this.futureDateValidator]),
         returnDate: new FormControl('', [Validators.required, this.dateFormatValidator, this.futureDateValidator, this.dateRangeValidator]),
-        sourceCityZipCode: new FormControl('890678', Validators.required),
-        destinationCityZipCode: new FormControl('890765', Validators.required),
-        sourceCity: new FormControl('Trivandrum', Validators.required),
-        destinationCity: new FormControl('Austin', Validators.required),
-        sourceState: new FormControl('Kerala', Validators.required),
-        destinationState: new FormControl('Texas', Validators.required),
-        sourceCountry: new FormControl('India', Validators.required),
-        destinationCountry: new FormControl('USA', Validators.required),
+        sourceCityZipCode: new FormControl('', Validators.required),
+        destinationCityZipCode: new FormControl('', Validators.required),
+        sourceCity: new FormControl('', Validators.required),
+        destinationCity: new FormControl('', Validators.required),
+        sourceState: new FormControl('', Validators.required),
+        destinationState: new FormControl('', Validators.required),
+        sourceCountry: new FormControl('', Validators.required),
+        destinationCountry: new FormControl('', Validators.required),
 
         //Additional Info
         cabRequired: new FormControl('yes', Validators.required),
@@ -445,7 +446,6 @@ export class NewTravelRequestComponent {
   changeSubmitFunction() {
 
     switch (this.currentLoggedInUserRole) {
-
       case 'manager':
         this.travelRequestFormSubmitFunction = this.onManagerForwardTravelRequestForm.bind(this);
         break;
@@ -492,20 +492,20 @@ export class NewTravelRequestComponent {
   //Manager forwarding the travel request form
   onManagerForwardTravelRequestForm() {
     //Should call a PATCH method to set priority of the request
-     alert("MANAGER")
+     alert("Approved")
      console.log(this.travelRequestForm.value.priority);
 
     this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId, this.travelRequestForm.value.priority).subscribe(
       {
         next: (data) => {
           console.log(data);
-          window.alert(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
+          // window.alert(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
           console.log(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
           // Redirect to another page
           this.router.navigate(['/manager/dashboard']);
         },
         complete: () => {
-
+          alert("Approved");
           //this.toastr.success('Request approved!', 'Success');
         }
       }
@@ -566,8 +566,7 @@ export class NewTravelRequestComponent {
   //EOF
 
 
-@ViewChild(ModalComponent)
-modalComponent!: ModalComponent;
+
 // TRAVEL ADMIN
 openAddOptionModal() {
   const initialState = {
@@ -582,6 +581,18 @@ openAddOptionModal() {
   });
 }
 
+openRejectionReasonModal(){
+  const initialState = {
+    requestId: this.travelRequestDetailViewModel.requestId
+  };
+ 
+  this.bsModalRef = this.modalService.show(DescriptionModalComponent, { initialState });
+  this.bsModalRef.content.onClose.subscribe((result: any) => {
+    // Handle the result from the modal if needed
+    console.log('Modal result:', result);
+    // You can perform actions with the result data here
+  });
+}
 
 
 }

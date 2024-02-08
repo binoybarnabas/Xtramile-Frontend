@@ -52,16 +52,20 @@ export class LoginPageComponent {
     //loading spinner
     this.isLoading = true;
 
+    if(email == "" || password==""){
+      this.invalidCredentials = true;
+    }
     //sending the login data to the backend.
    this.loginService.postData(this.credentialData).subscribe({
 
     next:(data : UserData)=>{
       console.log(data);
-      if(data.token == null){
+      if(data== null){
         this.invalidCredentials = true;
+        console.log("illa");
       }
 
-      else
+      else  
       {
         //user data which contains employeeName, role, department, token, empId
         this.userDataService.userData = data;
