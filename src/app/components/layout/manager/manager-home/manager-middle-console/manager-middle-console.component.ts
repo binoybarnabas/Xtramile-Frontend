@@ -15,7 +15,7 @@ export class ManagerMiddleConsoleComponent {
   newReqFormSubMenuValue: number;
 
   //main heading of middle console 
-  mainHeading = "Incomig Travel Request"
+  mainHeading = "Incoming Travel Request"
 
   constructor(private sideNavBarService: SideNavBarService) {
     this.newReqFormSubMenuValue = 1;

@@ -196,25 +196,30 @@
                            </span>
                         </div> 
                                 
-                        Source Zip Code
-                        <!-- <div class="form_input_container">
-                            <label for="sourceCityZipCode">Source City Zip Code</label>
-                            <input class="form_input" type="text" formControlName="sourceCityZipCode" placeholder="Enter the zip code of your source city"  />
+
+
+
+                        <!-- Source State -->                     
+                        <div class="form_input_container">
+                            <label for="sourceState">Source State</label>
+                            <input class="form_input" type="text" formControlName="sourceState"  placeholder="state / province"  />
                             <span class="form_error"
-                           // *ngIf="travelRequestForm.get('sourceCityZipCode')?.invalid && travelRequestForm.get('sourceCityZipCode')?.touched">
-                               Enter the zipcode
+                            *ngIf="travelRequestForm.get('sourceState')?.invalid && travelRequestForm.get('sourceState')?.touched">
+                               Enter the source state
                            </span>
-                        </div>                -->
-                
-                        <!-- Destination Zip Code -->
-                        <!-- <div class="form_input_container">
-                            <label for="destinationCityZipCode">Destination City Zip Code</label>
-                            <input class="form_input" type="text" formControlName="destinationCityZipCode"  placeholder="Enter the zip code of your destination city" />
+                        </div>             
+
+                        <!-- Destination State -->
+                        <div class="form_input_container">
+                            <label for="destinationState">Destination State</label>
+                            <input class="form_input" type="text" formControlName="destinationState"  placeholder="state / province"  />
                             <span class="form_error"
-                           // *ngIf="travelRequestForm.get('destinationCityZipCode')?.invalid && travelRequestForm.get('destinationCityZipCode')?.touched">
-                               Enter the zipcode
+                            *ngIf="travelRequestForm.get('destinationState')?.invalid && travelRequestForm.get('destinationState')?.touched">
+                               Enter the destination state
                            </span>
-                        </div>      -->
+                        </div>   
+
+   
 
                         <!-- Source City -->
                         <div class="form_input_container">
@@ -235,26 +240,25 @@
                                Enter the destination
                            </span>
                         </div>      
-
-                        <!-- Source State -->                     
-                        <div class="form_input_container">
-                            <label for="sourceState">Source State</label>
-                            <input class="form_input" type="text" formControlName="sourceState"  placeholder="state / province"  />
+                          <!-- Source Zip Code -->
+                          <div class="form_input_container">
+                            <label for="sourceCityZipCode">Source City Zip Code</label>
+                            <input class="form_input" type="text" formControlName="sourceCityZipCode" placeholder="Enter the zip code of your source city"  />
                             <span class="form_error"
-                            *ngIf="travelRequestForm.get('sourceState')?.invalid && travelRequestForm.get('sourceState')?.touched">
-                               Enter the source state
-                           </span>
-                        </div>             
-
-                        <!-- Destination State -->
-                        <div class="form_input_container">
-                            <label for="destinationState">Destination State</label>
-                            <input class="form_input" type="text" formControlName="destinationState"  placeholder="state / province"  />
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('destinationState')?.invalid && travelRequestForm.get('destinationState')?.touched">
-                               Enter the destination state
+                           *ngIf="travelRequestForm.get('sourceCityZipCode')?.invalid && travelRequestForm.get('sourceCityZipCode')?.touched">
+                               Enter the zipcode
                            </span>
                         </div>               
+<!--                 
+                        Destination Zip Code  -->
+                         <div class="form_input_container">
+                            <label for="destinationCityZipCode">Destination City Zip Code</label>
+                            <input class="form_input" type="text" formControlName="destinationCityZipCode"  placeholder="Enter the zip code of your destination city" />
+                            <span class="form_error"
+                            *ngIf="travelRequestForm.get('destinationCityZipCode')?.invalid && travelRequestForm.get('destinationCityZipCode')?.touched">
+                               Enter the zipcode
+                           </span>
+                        </div>            
 
                     <!-- form input elements ends -->
                     </div>
