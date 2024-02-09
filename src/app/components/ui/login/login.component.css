@@ -9,6 +9,23 @@
     position: relative;
 }
 
+
+
+.login_container .left_section .logo_container {
+    margin: 2rem 0 0 2rem;
+}
+
+.login_container .left_section .logo_container .logo {
+    font-weight: var(--active-font-weight);
+}
+
+
+.login_container .left_section .logo_container .icon {
+    color: var(--second-color);
+}
+
+
+
 .login_container .right_section {
     width: 40%;
     /* background-color: var(--second-color); */
@@ -19,18 +36,19 @@
 
 .login_container .left_section .login_form_container {
     position: absolute;
-    margin: 7vw;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-top: 4vw;
+    margin-left: 6vw;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
     padding: 2rem;
     border-radius: var(--normal-border-radius);
     transition: 0.3s;
 }
 
 
-.login_container .left_section .login_form_container:hover {
+/* .login_container .left_section .login_form_container:hover {
     box-shadow: var(--second-color) 0px 1px 1px;
 
-}
+} */
 
 .login_container .left_section .login_form_container .main_heading_section h4 {
     font-size: var(--large-font-size);
@@ -64,7 +82,7 @@
 .login_container .left_section .login_form_container .form_section .login_form .form_input_container .input_field {
     margin: 0.4rem 0;
     padding: 0.6rem;
-    border: 0.5px solid var(--ternary-text-color);
+    border: 1px solid var(--ternary-text-color);
     border-radius: 3px;
     outline: none;
     color: var(--secondary-text-color);
@@ -74,7 +92,7 @@
 
 .login_container .left_section .login_form_container .form_section .login_form .form_input_container .input_field:focus {
     border-bottom: 2.5px solid;
-    border-bottom-color: var(--second-color);
+    border-bottom-color: var(--success-color);
 }
 
 
@@ -95,7 +113,7 @@
 
 .login_container .left_section .login_form_container .form_section .login_form .form_submit_container .btn_container .login_btn {
     background-color: var(--second-color);
-    padding: 0.5rem;
+    padding: 0.7rem;
     border-radius: 3px;
     color: var(--card-bg-color);
     font-size: var(--small-font-size);
@@ -121,5 +139,23 @@
     position: absolute;
     left: -13rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    animation: slide 4s infinite;
+    /* Adjust the animation duration as needed */
+}
 
+
+
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(100px);
+        /* Adjust the distance to slide */
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }

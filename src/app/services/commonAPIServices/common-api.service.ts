@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status'; 
+import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
 import { LoginService } from '../loginService/login.service';
-import { UserData } from '../interfaces/iuserData';
+// import { UserData } from '../interfaces/iuserData';
+import { UserData } from 'src/app/services/interfaces/iuserData';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,19 @@ export class CommonAPIService {
 
   // initial data - reason why I kept it here and not in the login service is because once the login is done we don't need to initialze that class for other
   // functionality.
-  userData? : UserData
+  userData?: UserData
 
-  constructor(private http: HttpClient) { }
+  currentLoggedInUserRole: string;
 
- 
+  constructor(private http: HttpClient) {
+
+    //Getting the current Loggedin user based on session value
+    this.currentLoggedInUserRole = 'manager';
+
+
+  }
+
+
   apiURL = 'http://localhost:5190/api/'
 
 
@@ -29,12 +38,19 @@ export class CommonAPIService {
     return this.http.post('http://localhost:5190/api/country/add', data);
   }
 
-  getStatusIdByCode(statusCode : string) : Observable<number>{
-    return this.http.get<number>(this.apiURL+`status/staustId/${statusCode}`)
+  getStatusIdByCode(statusCode: string): Observable<number> {
+    return this.http.get<number>(this.apiURL + `status/staustId/${statusCode}`)
   }
 
-  updateRequestStatus(requestStatus: RequestStatus) : Observable<RequestStatus> {
-    return this.http.post<RequestStatus>(this.apiURL+'requeststatus/add', requestStatus)
+  updateRequestStatus(requestStatus: RequestStatus): Observable<RequestStatus> {
+    return this.http.post<RequestStatus>(this.apiURL + 'requeststatus/add', requestStatus)
   }
+
+
+
+
+
+
+
 }
 

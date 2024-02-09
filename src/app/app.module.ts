@@ -97,6 +97,7 @@ import { PerdiemCardComponent } from './components/ui/perdiem-card/perdiem-card.
 import { FileCardComponent } from './components/ui/file-card/file-card.component';
 import { LoginComponent } from './components/ui/login/login.component';
 import { DescriptionModalComponent } from './components/ui/description-modal/description-modal.component';
+import { TravelRequestCardComponent } from './components/ui/travel-request-card/travel-request-card.component';
 
 
 @NgModule({
@@ -184,7 +185,8 @@ import { DescriptionModalComponent } from './components/ui/description-modal/des
     LoginPageComponent,
     TopBarUserComponent,
     CustomDatePipe,
-    DescriptionModalComponent
+    DescriptionModalComponent,
+    TravelRequestCardComponent
   ]
   ,
 

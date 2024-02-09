@@ -38,7 +38,9 @@
   --danger-btn-hover-color: #fc1f1f;
 
   /*========Background colors========*/
-  --body-bg-color: #f6f8ff;
+  /* --body-bg-color: #f6f8ff; */
+  --body-bg-color: #c3cef7;
+
   --card-bg-color: #fff;
   --modal-bg-color: #fff;
   --table-header-color: #fff;
