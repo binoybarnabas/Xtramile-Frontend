@@ -38,14 +38,19 @@ import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequ
 import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { LoginPageComponent } from './components/layout/login-page/login-page.component';
-import { authGuard} from './auth.guard';
+import { authGuard } from './auth.guard';
+import { LoginComponent } from './components/ui/login/login.component';
 
 
 const routes: Routes = [
-  {path:'',component:LoginPageComponent},
-  {path:'login',component:LoginPageComponent},
+  { path: '', component: LoginComponent },
+  // { path: 'login', component: LoginPageComponent },
+  { path: 'login', component: LoginComponent },
+
   {
-    path: 'employee', component: EmployeeHomeComponent,canActivate:[authGuard], children: [
+    // path: 'employee', component: EmployeeHomeComponent,canActivate:[authGuard], children: [
+    path: 'employee', component: EmployeeHomeComponent, canActivate: [authGuard], children: [
+
       { path: 'dashboard', component: EmployeeDashboardComponent },
       { path: 'request', component: NewTravelRequestComponent },
       { path: 'pending', component: EmployeePendingRequestsComponent },
@@ -56,9 +61,9 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'manager', component: ManagerHomeComponent, canActivate:[authGuard],children: [
+    path: 'manager', component: ManagerHomeComponent, canActivate: [authGuard], children: [
       { path: 'dashboard', component: ManagerDashboardComponent },
-      {path:'requestdetail',component:NewTravelRequestComponent},
+      { path: 'requestdetail', component: NewTravelRequestComponent },
       { path: 'newrequests', component: ManagerIncomingTravelRequestsComponent },
       { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
       { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
@@ -66,7 +71,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'traveladmin', component: TravelAdminHomeComponent, canActivate:[authGuard],children: [
+    path: 'traveladmin', component: TravelAdminHomeComponent, canActivate: [authGuard], children: [
       { path: 'dashboard', component: TravelAdminDashboardComponent },
       { path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent },
       { path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent },
@@ -74,11 +79,11 @@ const routes: Routes = [
       { path: 'ongoing', component: TravelAdminOngoingTravelComponent },
       { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },
       { path: 'profile', component: TravelAdminProfileComponent },
-      {path:'requestdetail',component:NewTravelRequestComponent}
+      { path: 'requestdetail', component: NewTravelRequestComponent }
     ]
   },
   {
-    path: 'finance', component: FinancePersonnelHomeComponent, canActivate:[authGuard],children: [
+    path: 'finance', component: FinancePersonnelHomeComponent, canActivate: [authGuard], children: [
       { path: 'dashboard', component: FinancePersonnelDashboardComponent },
       { path: 'incoming', component: FinancePersonnelIncomingTravelSettlementsComponent },
       { path: 'pending', component: FinancePersonnelPendingTravelSettlementsComponent },
