@@ -45,6 +45,12 @@
 }
 
 
+.login_container .left_section .login_form_container .form_error {
+    color: var(--error-color);
+    font-size: var(--extra-small-font-size);
+}
+
+
 /* .login_container .left_section .login_form_container:hover {
     box-shadow: var(--second-color) 0px 1px 1px;
 
@@ -96,6 +102,12 @@
 }
 
 
+/* /Invalid form */
+.login_container .left_section .login_form_container .form_section .login_form .form_input_container .input_field.invalid {
+    border-bottom: 2.5px solid;
+    border-bottom-color: var(--danger-color);
+}
+
 
 .login_container .left_section .login_form_container .form_section .login_form .forgot_password_section {
 
@@ -111,6 +123,11 @@
 }
 
 
+.login_container .left_section .login_form_container .form_section .login_form .form_submit_container .btn_container {
+    width: 100%;
+}
+
+
 .login_container .left_section .login_form_container .form_section .login_form .form_submit_container .btn_container .login_btn {
     background-color: var(--second-color);
     padding: 0.7rem;
@@ -122,6 +139,8 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    border: none;
+    width: 100%;
 }
 
 

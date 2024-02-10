@@ -39,11 +39,14 @@ import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/trav
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { LoginPageComponent } from './components/layout/login-page/login-page.component';
 import { authGuard } from './auth.guard';
+import { LoginComponent } from './components/ui/login/login.component';
 
 
 const routes: Routes = [
-  { path: '', component: LoginPageComponent },
-  { path: 'login', component: LoginPageComponent },
+  { path: '', component: LoginComponent },
+  // { path: 'login', component: LoginPageComponent },
+  { path: 'login', component: LoginComponent },
+
   {
     // path: 'employee', component: EmployeeHomeComponent,canActivate:[authGuard], children: [
     path: 'employee', component: EmployeeHomeComponent, canActivate: [authGuard], children: [
