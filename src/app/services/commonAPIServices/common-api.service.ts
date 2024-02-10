@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
 import { LoginService } from '../loginService/login.service';
 // import { UserData } from '../interfaces/iuserData';
@@ -47,9 +47,24 @@ export class CommonAPIService {
   }
 
 
+  searchCities(value: string) {
+    if (!value || value.length < 3) {
+      return [];
+    }
+    const apiUrl = `http://api.geonames.org/searchJSON?name_startsWith=${value}&maxRows=5&username=demo`;
+    return this.http.get(apiUrl).pipe(
+      map((data: any) => data.geonames)
+    );
+  }
 
 
 
+  //Get Project Codes by emp id
+  getAllProjectCodesByEmployeeId(empId: number): Observable<any> {
+
+    return this.http.get<any>(this.apiURL + `project/getprojectcodes/${empId}`)
+
+  }
 
 
 }
