@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.
 })
 export class TravelRequestCardComponent {
 
+  @Input() data: any[] = []
+
 
   currentLoggedInUserRole: string;
 
@@ -16,5 +18,9 @@ export class TravelRequestCardComponent {
     this.currentLoggedInUserRole = commonAPIService.currentLoggedInUserRole;
 
   }
+
+
+
+
 
 }

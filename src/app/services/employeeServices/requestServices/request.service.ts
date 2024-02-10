@@ -83,13 +83,23 @@ export class RequestService {
     return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`);
   }
 
-  getEmployeeRequestHisory(empId: number,pageIndex: number,pageSize: number): Observable<any> {
-    const url="http://localhost:5190/api/employee/request/history"
-    const params = new HttpParams() 
-    .set("empId", empId)
-    .set('pageIndex',pageIndex)
-    .set('pageSize',pageSize)
-    return this.http.get(url,{params})
+  getEmployeeRequestHisory(empId: number, pageIndex: number, pageSize: number): Observable<any> {
+    const url = "http://localhost:5190/api/employee/request/history"
+    const params = new HttpParams()
+      .set("empId", empId)
+      .set('pageIndex', pageIndex)
+      .set('pageSize', pageSize)
+    return this.http.get(url, { params })
   }
-  
+
+
+  //change any to api view model
+  getEmployeePendingRequestsByEmployeeId(empId: number): Observable<any> {
+    return this.http.get<any>(
+      `http://localhost:5190/api/employee/viewpendingrequest/${empId}`
+    );
+  }
+
+
+
 }

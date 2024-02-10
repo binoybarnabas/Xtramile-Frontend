@@ -1,5 +1,6 @@
 .req_card_container {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .req_card_container .req_card {
@@ -15,6 +16,7 @@
     height: fit-content;
     border-top: 2px solid var(--second-color);
     transition: 0.3s;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .req_card_container .req_card:hover {

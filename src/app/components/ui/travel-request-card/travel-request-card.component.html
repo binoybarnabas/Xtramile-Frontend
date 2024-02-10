@@ -1,10 +1,10 @@
-<div class="req_card_container">
+<div  class="req_card_container">
 
-    <div class="req_card">
+    <div *ngFor="let item of data" class="req_card">
 
         <div class="section_1 general_info">
 
-            <span class="left_dot"></span>
+            <!-- <span class="left_dot"></span> -->
             
             <div class="left">
                 <span class="title">Requested By</span>
@@ -13,10 +13,10 @@
 
             <div class="right">
                 <span class="title">Project ID</span>
-                <p class="value">PRJ001</p>
+                <p class="value">{{item.projectCode}}</p>
             </div>
 
-            <span class="right_dot"></span>
+            <!-- <span class="right_dot"></span> -->
 
         </div>
 
@@ -26,15 +26,15 @@
 
             <div class="origin_destination_section">
                 <div class="origin">
-                    <span class="city">Trivandrum</span>
-                    <p class="country">India</p>
+                    <span class="city">{{item.sourceCity}}</span>
+                    <p class="country">{{item.sourceCountry}}</p>
                 </div>
                 <div class="travel_mode">
                     <i class="icon ri-plane-line"></i>
                 </div>
                 <div class="destination">
-                    <span class="city">Austin</span>
-                    <p class="country">USA</p>
+                    <span class="city">{{item.destinationCity}}</span>
+                    <p class="country">{{item.destinationCountry}}</p>
                 </div>
             </div>
 
@@ -43,13 +43,13 @@
                 <div class="departure_date">
                     <i class="icon ri-calendar-line"></i>
                     <span>Departure</span>
-                    <p class="date"> 10-01-2024 </p>
+                    <p class="date"> {{item.departureDate | timestampToDate}}  </p>
                 </div>
 
                 <div class="return_date">
                     <i class="icon ri-calendar-line"></i>
                     <span>Return</span>
-                    <p class="date">15-01-2024</p>
+                    <p class="date">{{item.returnDate | timestampToDate}}</p>
                 </div>
 
             </div>
@@ -59,7 +59,7 @@
 
                 <div class="info">
                     <span class="title">Request ID</span>
-                    <p class="value">REQ001</p>
+                    <p class="value">{{item.requestCode}}</p>
                 </div>
 
                 <div class="info">
@@ -69,7 +69,7 @@
 
                 <div class="info">
                     <span class="title">Status</span>
-                    <p class="value status">Pending</p>
+                    <p class="value status">{{item.statusName}}</p>
                 </div>               
                 <!-- <span class="right_dot"></span> -->
 
