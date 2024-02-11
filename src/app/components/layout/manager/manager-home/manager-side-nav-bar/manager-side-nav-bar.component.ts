@@ -38,9 +38,9 @@ export class ManagerSideNavBarComponent {
 
     //myRequestsMap contains values for My Requests sub menu
     this.myRequestsMap.set('new ri-add-line', "New Request");
-    this.myRequestsMap.set('ri-loader-line', "Pending Approval ");
+    this.myRequestsMap.set('ri-loader-line', "Pending Approval");
     this.myRequestsMap.set('ri-arrow-up-circle-line', "Ongoing Travel")
-    this.myRequestsMap.set('ri-history-line', "Request History ")
+    this.myRequestsMap.set('ri-history-line', "Request History")
 
     //mySettlementsMap contains values for My Settlements sub menu
     this.mySettlementsMap.set('new ri-add-line', "New Bill");
@@ -142,8 +142,16 @@ export class ManagerSideNavBarComponent {
                             break;
       case 'Closed Requests': this.router.navigate(['/manager/closed']);
                             break;
-      case 'profile': this.router.navigate(['/manager/profile']);
+      case 'New Request': this.router.navigate(['/manager/request']);
                             break;
+      case 'Pending Approval': this.router.navigate(['/manager/pending']);
+                            break;
+      case 'Ongoing Travel': this.router.navigate(['/manager/ongoing']);
+                            break;
+      case 'Request History': this.router.navigate(['/manager/history']);
+                            break;
+      case 'profile': this.router.navigate(['/manager/profile']);
+                      break;
 
     }
   }
