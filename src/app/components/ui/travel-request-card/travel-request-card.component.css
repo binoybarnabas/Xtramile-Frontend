@@ -1,6 +1,7 @@
 .req_card_container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .req_card_container .req_card {

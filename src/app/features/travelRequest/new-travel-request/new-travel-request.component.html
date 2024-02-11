@@ -61,28 +61,6 @@
                             <input class="form_input" type="text" value="{{employeeDetails?.reportsTo}}" readonly/>
                         </div>
 
-                        <!-- Project Code -->
-                        <div class="form_input_container">
-                            <label for="projectCode">Project Code</label>
-
-                            <select class="form_input" formControlName="projectCode" >
-                                <ng-container *ngFor="let code of projectCodes" >
-                                    <option [value]="code">{{ code.projectCode }}</option>
-                                </ng-container>
-                            </select>
-
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('projectCode')?.invalid && travelRequestForm.get('projectCode')?.touched">
-                               Choose a project code
-                           </span>
-                            <!-- <input class="form_input" type="text"  value="{{employeeDetails?.projectCode}}" readonly/> -->
-                        </div>
-
-                        <div class="form_input_container">
-                            <label for="projectName">Project Name</label>
-                            <input class="form_input" type="text"  value="{{employeeDetails?.projectName}}" readonly />
-                        </div>
-
                     </div>
                     
                     <!-- View Mode  -->
@@ -129,21 +107,20 @@
 
                         <!-- Travel Mode -->
                         <div class="form_input_container">
-                            <label for="travelMode">Travel Mode</label>
-                            <select  formControlName="travelMode"  class="form_input">
-                                <option value= "flight" >Flight</option>
-                                <option value= "train" selected> Train </option>
-                                <option value= "bus" selected> Bus </option>
-                                <option value= "car" selected> Car </option>
+                            <label for="travelModeId">Travel Mode</label>
+                            <select  formControlName="travelModeId"  class="form_input">
+                                <ng-container *ngFor="let mode of travelModes" >
+                                    <option [value]="mode.modeId">{{ mode.modeName}}</option>
+                                </ng-container>
                                
                             </select>
                             <span class="form_error"
-                            *ngIf="travelRequestForm.get('travelMode')?.invalid && travelRequestForm.get('travelMode')?.touched">
+                            *ngIf="travelRequestForm.get('travelModeId')?.invalid && travelRequestForm.get('travelModeId')?.touched">
                                Choose a travel mode
                            </span>
                         </div>
                         
-                        <!-- origin.component.html -->
+                        <!-- Origin -->
                         <div class="form_input_container">
 
                             <label for="sourceCity">Origin</label>
@@ -300,12 +277,30 @@
 
                         </div>
 
+                        <!-- Project Code -->
+                        <div class="form_input_container">
+                            <label for="projectId">Project Code</label>
+
+                            <select class="form_input" formControlName="projectId"  >
+                                <ng-container *ngFor="let code of projectCodes" >
+                                    <option [value]="code.projectId">{{ code.projectCode}} - {{code.projectName}}</option>
+                                </ng-container>
+                            </select>
+
+                            <span class="form_error"
+                            *ngIf="travelRequestForm.get('projectId')?.invalid && travelRequestForm.get('projectId')?.touched">
+                               Choose a project code
+                           </span>
+                            <!-- <input class="form_input" type="text"  value="{{employeeDetails?.projectCode}}" readonly/> -->
+                        </div>
+
+
                         <!-- Travel Type Dom/Int -->
                         <div class="form_input_container">
                             <label for="travelTypeId">Travel Type</label>
                             <select  formControlName="travelTypeId"  class="form_input">
-                                <option value=0 >Domestic</option>
-                                <option value=1 selected>International</option>
+                                <option value="1">International</option>
+                                <option value="2" selected>Domestic</option>
                             </select>
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('travelTypeId')?.invalid && travelRequestForm.get('travelTypeId')?.touched">

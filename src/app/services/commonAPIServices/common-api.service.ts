@@ -66,6 +66,10 @@ export class CommonAPIService {
 
   }
 
+  getAllTravelModes(): Observable<any> {
+    return this.http.get<any>(this.apiURL + 'travelmode/modes')
+  }
+
 
 }
 
