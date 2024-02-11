@@ -1,0 +1,25 @@
+<div class="cherry-blossom-tour">
+  <h5>Upcoming trip</h5>
+  <div class="tour-card">
+    <div class="tour-image">
+      <img
+        [src]="currentImageUrl"
+        [alt]="countryName"
+        [ngStyle]="{ 'max-width.px': 200, 'max-height.px': 120 }"
+      />
+    </div>
+    <div class="tour-details">
+      <h3>{{ tripPurpose }}</h3>
+      <p>
+        Embark on an exciting journey from {{ sourceCity }}, {{ sourceState }},
+        {{ sourceCountry }} to {{ destinationCity }}, {{ destinationState }},
+        {{ destinationCountry }} unfolding from
+        {{ startDate | date : "shortDate" }} to
+        {{ endDate | date : "shortDate" }}
+      </p>
+      <div class="tour-info">
+        <button class="button">View detail</button>
+      </div>
+    </div>
+  </div>
+</div>
