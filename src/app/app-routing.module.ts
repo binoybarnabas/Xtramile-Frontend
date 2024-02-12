@@ -84,7 +84,7 @@ const routes: Routes = [
       { path: 'ongoing', component: TravelAdminOngoingTravelComponent },
       { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },
       // { path: 'profile', component: TravelAdminProfileComponent },
-      // { path: 'requestdetail', component: NewTravelRequestComponent },
+      { path: 'requestdetail', component: NewTravelRequestComponent },
       { path: 'request', component: NewTravelRequestComponent},
       { path: 'pending', component: EmployeePendingRequestsComponent},
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },

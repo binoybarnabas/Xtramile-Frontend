@@ -1,8 +1,17 @@
 
 <!-- binding headers,data,displayedProperties(fields to be displayed in table) to child component -->
+<app-table-filter
+
+(dateSelected)="handleDateSelection($event)" 
+(sortOptionSelected)="handleSortOptionSelection($event)" 
+(searchByName)="handleSearchByName($event)"
+(seeAllClicked)="handleSeeAllClick()">
+
+</app-table-filter>
+
 <app-data-table 
 [headers]="tableHeaders" 
-[data]="incomingRequestdata"
+[data]="requestData"
 [displayedProperties]="fieldsToDisplay"
 (rowClick) = "handleSelectedRow($event)"
 ></app-data-table>
