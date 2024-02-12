@@ -1,6 +1,7 @@
 .req_card_container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .req_card_container .req_card {
@@ -265,6 +266,14 @@
     color: var(--primary-orange-color);
 }
 
+.req_card_container .req_card .travel_info .info .value.status_forwarded {
+    color: var(--first-color);
+}
+
+.req_card_container .req_card .travel_info .info .value.status_denied {
+    color: var(--danger-color);
+}
+
 
 .req_card_container .req_card .file_attachment_section {
     display: flex;
@@ -280,11 +289,16 @@
     font-size: var(--form-label-font-size);
     color: var(--ternary-text-color);
     cursor: pointer;
+    transition: 0.3s;
 }
 
 
 .req_card_container .req_card .file_attachment_section .file_section .icon {
     margin-right: 2px;
+}
+
+.req_card_container .req_card .file_attachment_section .file_section:hover {
+    color: var(--first-color);
 }
 
 

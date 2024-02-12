@@ -2,25 +2,31 @@
 export interface TravelRequestDetails {
 
     createdBy: string;
-    travelTypeId: string;
+    projectId: string;
+
+    tripType: string;
+    travelModeId: string;
     tripPurpose: string;
-    departureDate: string ;
+    departureDate: string;
     returnDate: string;
-    sourceCityZipCode: string;
-    destinationCityZipCode: string;
+
     sourceCity: string;
     destinationCity: string;
-    sourceState: string;
-    destinationState: string;
+
     sourceCountry: string;
     destinationCountry: string;
+
+    travelTypeId: number;
+    projectCode: string;
+
     cabRequired: string;
+    prefPickUpTime: string;
+
     accommodationRequired: string;
     prefDepartureTime: string | undefined;
 
     travelAuthorizationEmailCapture: File | undefined;
     passportAttachment: File | undefined;
-    idCardAttachment: File | undefined;
 
     additionalComments: string;
 
@@ -31,26 +37,29 @@ export interface TravelRequestDetails {
 
 
 export interface TravelRequestDetailViewModel {
-    requestId : number;
+    requestId: number;
     createdBy: string;
+
+    requestCode: string;
+    projectCode: string;
+    tripType: string;
+    travelMode: string;
     travelType: string;
-    tripPurpose: string;
-    departureDate: string ;
-    returnDate: string ;
-    sourceCityZipCode: string;
-    destinationCityZipCode: string;
     sourceCity: string;
-    destinationCity: string;
-    sourceState: string;
-    destinationState: string;
     sourceCountry: string;
+    destinationCity: string;
     destinationCountry: string;
+    departureDate: string;
+    returnDate: string;
+    tripPurpose: string;
+    prefDepartureTime: string;
+
     cabRequired: string;
+    prefPickUpTime: string;
     accommodationRequired: string;
-    prefDepartureTime: string ;
+
     travelAuthorizationEmailCapture: File | undefined;
     passportAttachment: File | undefined;
-    idCardAttachment: File | undefined;
 
     additionalComments: string;
 

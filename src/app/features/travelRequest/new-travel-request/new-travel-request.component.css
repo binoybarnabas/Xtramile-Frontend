@@ -454,3 +454,24 @@
 
 
 }
+
+
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .autocomplete_container {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    border-radius: 6px;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .autocomplete_item {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .autocomplete_item:hover {
+    background-color: #f0f0f0;
+}

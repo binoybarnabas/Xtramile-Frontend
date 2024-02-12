@@ -30,7 +30,8 @@
                     <p class="country">{{item.sourceCountry}}</p>
                 </div>
                 <div class="travel_mode">
-                    <i class="icon ri-plane-line"></i>
+                    <i [ngClass]=" item.travelMode ==='Cab'  ? 'icon ri-car-line' :'icon ri-plane-line' "></i>
+
                 </div>
                 <div class="destination">
                     <span class="city">{{item.destinationCity}}</span>
@@ -42,6 +43,7 @@
                 
                 <div class="departure_date">
                     <i class="icon ri-calendar-line"></i>
+                    
                     <span>Departure</span>
                     <p class="date"> {{item.departureDate | timestampToDate}}  </p>
                 </div>
@@ -64,12 +66,12 @@
 
                 <div class="info">
                     <span class="title">Mode</span>
-                    <p class="value">Flight</p>
+                    <p class="value">{{item.travelMode}}</p>
                 </div>
 
                 <div class="info">
                     <span class="title">Status</span>
-                    <p class="value status">{{item.statusName}}</p>
+                    <p [ngClass]=" item.statusName === 'Forwarded' ? 'value status_forwarded' :'value status' ">{{item.statusName}}</p>
                 </div>               
                 <!-- <span class="right_dot"></span> -->
 
