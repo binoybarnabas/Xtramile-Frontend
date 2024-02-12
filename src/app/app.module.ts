@@ -99,6 +99,7 @@ import { LoginComponent } from './components/ui/login/login.component';
 import { DescriptionModalComponent } from './components/ui/description-modal/description-modal.component';
 import { TravelRequestCardComponent } from './components/ui/travel-request-card/travel-request-card.component';
 import { TimestampToDatePipe } from './pipes/timeStampToDate/timestamp-to-date.pipe';
+import { ForgotPasswordModalComponent } from './components/layout/login-page/forgot-password-modal/forgot-password-modal.component';
 
 
 @NgModule({
@@ -188,7 +189,8 @@ import { TimestampToDatePipe } from './pipes/timeStampToDate/timestamp-to-date.p
     CustomDatePipe,
     DescriptionModalComponent,
     TravelRequestCardComponent,
-    TimestampToDatePipe
+    TimestampToDatePipe,
+    ForgotPasswordModalComponent
   ]
   ,
 
