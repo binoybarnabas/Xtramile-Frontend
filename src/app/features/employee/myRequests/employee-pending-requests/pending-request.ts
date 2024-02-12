@@ -1,7 +1,8 @@
 export interface PendingRequest {
-        statusName : string,
+        statusName: string,
         requestId: number;
         projectName: string;
         reasonOfTravel: string;
         dateOfTravel: string;
+        travelMode: string;
 }

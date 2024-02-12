@@ -29,7 +29,7 @@ export class ManagerIncomingTravelRequestsComponent {
   handleDateSelection(selectedDate: Date): void {
     //To convert date from standard js Date format to YYYY-MM-DD format
     this.sqlDatetimeFormat = selectedDate.toISOString().slice(0, 10);
-    this.apiservice.getEmployeeRequestByDate(this.managerId,this.sqlDatetimeFormat).subscribe({
+    this.apiservice.getEmployeeRequestByDate(this.managerId,this.sqlDatetimeFormat,this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
         this.employeeRequest = data;
       },
@@ -54,9 +54,9 @@ export class ManagerIncomingTravelRequestsComponent {
       this.fetchEmployeeRequest();
     }
 
-    this.apiservice.getEmployeeRequestByEmployeeName(searchByName, this.managerId).subscribe({
+    this.apiservice.getEmployeeRequestByEmployeeName(searchByName, this.managerId,this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.employeeRequest = data;
+        this.employeeRequest = data.EmployeeRequest;
         console.log("employee request search by name list");
         console.log(data);
         console.log(this.employeeRequest);
@@ -102,10 +102,11 @@ export class ManagerIncomingTravelRequestsComponent {
 
   // Fetch all the employee requests
   fetchEmployeeRequest() {
-    this.apiservice.getEmployeeRequest(this.managerId).subscribe({
-      next: (data: any[]) => {
-        this.employeeRequest = data;
-        this.totalItems = data.length;
+    this.apiservice.getEmployeeRequest(this.managerId,this.currentPage,this.itemsPerPage).subscribe({
+      next: (data: any) => {
+        this.employeeRequest = data.employeeRequest;
+        this.totalItems = data.totalCount;
+        
       },
       error: (error: any) => {
         console.error('Error fetching employee requests', error);
@@ -127,9 +128,10 @@ export class ManagerIncomingTravelRequestsComponent {
   //Sort employee requests based on the selected option
   sortData(option: string): void {
     if (option == "name") {
-      this.apiservice.getEmployeeRequestSortByEmployeeName(this.managerId).subscribe({
-        next: (data: any[]) => {
-          this.employeeRequest = data;
+      this.apiservice.getEmployeeRequestSortByEmployeeName(this.managerId,this.currentPage,this.itemsPerPage).subscribe({
+        next: (data: any) => {
+          this.employeeRequest = data.employeeRequest;
+          this.totalItems=data.totalCount;
         },
         error: (error: any) => {
           console.log("Error fetching the requests",error)
@@ -137,9 +139,10 @@ export class ManagerIncomingTravelRequestsComponent {
       });
     } 
     if (option == "date") {
-      this.apiservice.getEmployeeRequestSortByDate(this.managerId).subscribe({
-        next: (data: any[]) => {
-          this.employeeRequest = data;
+      this.apiservice.getEmployeeRequestSortByDate(this.managerId,this.currentPage,this.itemsPerPage).subscribe({
+        next: (data: any) => {
+          this.employeeRequest = data.employeeRequest;
+          this.totalItems=data.totalCount;
         },
         error: (error: any) => {
           console.log("Error fetching the requests",error)

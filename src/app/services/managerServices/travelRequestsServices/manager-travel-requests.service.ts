@@ -11,38 +11,50 @@ export class ManagerTravelRequestsService {
   constructor(private http: HttpClient) { 
   }
 
-  getEmployeeRequest(managerId: number): Observable<any>{
+  getEmployeeRequest(managerId: number,offset: number,pageSize: number): Observable<any>{
     const url='http://localhost:5190/api/reportingmanager/request';
-    const params = new HttpParams().set('managerId', managerId);
+    const params = new HttpParams().set('managerId', managerId)
+    .set('offset',offset)
+    .set('pageSize',pageSize);
+
    return this.http.get<any>(url,{params});
    }
    
-   getEmployeeRequestByDate(managerId: number, date: string): Observable<any> {
+   getEmployeeRequestByDate(managerId: number, date: string,offset: number,pageSize: number): Observable<any> {
      const url='http://localhost:5190/api/reportingmanager/date';
      var dateString= date.toString();
      const params = new HttpParams().set('managerId', managerId)
-     .set('date', encodeURIComponent(date) );  
+     .set('date', encodeURIComponent(date) )
+     .set('offset',offset)
+    .set('pageSize',pageSize);;  
      console.log(encodeURI(date))
      return this.http.get<any>(url,{params});
     }
    
-    getEmployeeRequestSortByEmployeeName(managerId: number) : Observable<any> {
+    getEmployeeRequestSortByEmployeeName(managerId: number,offset:number,pageSize:number) : Observable<any> {
       const url="http://localhost:5190/api/reportingmanager/sort/employeename";
       const params= new HttpParams().set('managerId',managerId)
+      .set('offset',offset)
+      .set('pageSize',pageSize);
       return this.http.get<any>(url,{params})
     }
    
-   getEmployeeRequestSortByDate(managerId: number) : Observable<any> {
+   getEmployeeRequestSortByDate(managerId: number,offset:number,pageSize: number) : Observable<any> {
      const url="http://localhost:5190/api/reportingmanager/sort/date";
      const params= new HttpParams().set('managerId',managerId)
+     .set('offset',offset)
+     .set('pageSize',pageSize);
      return this.http.get<any>(url,{params})
    }
    
-   getEmployeeRequestByEmployeeName(employeeName : string,managerId:number) : Observable<any> {
+   getEmployeeRequestByEmployeeName(employeeName : string,managerId:number,offset:number,pageSize:number) : Observable<any> {
      const url="http://localhost:5190/api/reportingmanager/search/employeename";
-     const params= new HttpParams().set('managerId',managerId).set('employeename',employeeName);
+     const params= new HttpParams().set('managerId',managerId).set('employeename',employeeName)
+     .set('offset',offset)
+    .set('pageSize',pageSize);
      return this.http.get<any>(url,{params})
    }
+   
    getManagerOngoingTravelRequest(managerId: number): Observable<any> {
     return this.http.get(`http://localhost:5190/api/reportingmanager/ongoing/travel/request/${managerId}`);
   }
