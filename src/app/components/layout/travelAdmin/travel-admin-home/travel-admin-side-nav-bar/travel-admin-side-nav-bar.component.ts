@@ -39,9 +39,9 @@ export class TravelAdminSideNavBarComponent {
 
     //myRequestsMap contains values for My Requests sub menu
     this.myRequestsMap.set('new ri-add-line', "New Request");
-    this.myRequestsMap.set('ri-loader-line', "Pending Approval ");
+    this.myRequestsMap.set('ri-loader-line', "Pending Approval");
     this.myRequestsMap.set('ri-arrow-up-circle-line', "Ongoing Travel")
-    this.myRequestsMap.set('ri-history-line', "Request History ")
+    this.myRequestsMap.set('ri-history-line', "Request History")
 
     //mySettlementsMap contains values for My Settlements sub menu
     this.mySettlementsMap.set('new ri-add-line', "New Bill");
@@ -146,8 +146,16 @@ export class TravelAdminSideNavBarComponent {
                               break;
         case 'Closed Requests': this.router.navigate(['/traveladmin/closed']);
                               break;
-        case 'profile': this.router.navigate(['/traveladmin/profile']);
+        case 'New Request': this.router.navigate(['/traveladmin/request']);
                               break;
+        case 'Pending Approval': this.router.navigate(['/traveladmin/pending']);
+                              break;
+        case 'Ongoing Travel': this.router.navigate(['/traveladmin/ongoing']);
+                              break;
+        case 'Request History': this.router.navigate(['/traveladmin/history']);
+                              break;
+        case 'profile': this.router.navigate(['/traveladmin/profile']);
+                        break;
   
       }
       

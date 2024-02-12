@@ -102,7 +102,7 @@
       class="side_bar_sub_list"
     >
       <ng-container *ngFor="let entry of myRequestsMapEntries()">
-        <li class="list_item">
+        <li class="list_item" (click)="navigateToRequest(entry[1])">
           <i [ngClass]="entry[0]"></i> {{ entry[1] }} <span class="dot"> </span>
         </li>
       </ng-container>
