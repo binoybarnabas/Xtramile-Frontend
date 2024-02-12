@@ -40,10 +40,11 @@ export interface TravelRequestDetailViewModel {
     requestId: number;
     createdBy: string;
 
-    projectId: string;
+    requestCode: string;
+    projectCode: string;
     tripType: string;
-    travelModeId: string;
-    travelTypeId: string;
+    travelMode: string;
+    travelType: string;
     sourceCity: string;
     sourceCountry: string;
     destinationCity: string;

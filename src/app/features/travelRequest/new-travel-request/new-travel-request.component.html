@@ -28,7 +28,6 @@
 
                      <div *ngIf="currentLoggedInUserRole === 'employee'" class="form_elements">
 
-                        <input type="hidden" formControlName="createdBy"  value="{{employeeDetails?.empId}}" />
 
                         <div class="form_input_container">
                             <label for="firstName">First Name</label>
@@ -92,12 +91,14 @@
 
                     <div *ngIf="currentLoggedInUserRole === 'employee'" class="form_elements">
 
+                        <input type="hidden" formControlName="createdBy"  value="{{employeeDetails?.empId}}" />
+
                         <!-- Trip Type -->
                         <div class="form_input_container">
                             <label for="tripType">Trip Type</label>
-                            <select  formControlName="tripType"  class="form_input">
-                                <option value='one_way' >One Way </option>
-                                <option value= 'round_trip'>Round Trip</option>
+                            <select  formControlName="tripType"  class="form_input" (change)="toggleReturnDate()">
+                                <option value='One way' >One Way </option>
+                                <option value= 'Round Trip'>Round Trip</option>
                             </select>
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('tripType')?.invalid && travelRequestForm.get('tripType')?.touched">
@@ -195,7 +196,7 @@
                          <div class="form_input_container">
 
                             <label for="returnDate">Return Date</label>
-                            <input class="form_input" formControlName="returnDate" type="date" />
+                            <input class="form_input" formControlName="returnDate" type="date"/>
                            
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('returnDate')?.hasError('required') && travelRequestForm.get('returnDate')?.touched">
@@ -299,8 +300,8 @@
                         <div class="form_input_container">
                             <label for="travelTypeId">Travel Type</label>
                             <select  formControlName="travelTypeId"  class="form_input">
-                                <option value="1">International</option>
-                                <option value="2" selected>Domestic</option>
+                                <option value="1" >International</option>
+                                <option value="2" >Domestic</option>
                             </select>
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('travelTypeId')?.invalid && travelRequestForm.get('travelTypeId')?.touched">
@@ -346,7 +347,7 @@
                         <!-- Cab Service -->
                         <div class="form_input_container">
                             <label for="cabRequired">Do you want cab service ? </label>
-                            <select class="form_input" formControlName="cabRequired" >
+                            <select class="form_input" formControlName="cabRequired" (change)="togglePickUpTime()">
                                 <option value="yes">Yes</option>
                                 <option value="no">No</option>
                             </select>
@@ -359,7 +360,7 @@
                         <!-- pref pickup time -->
                         <div class="form_input_container">
                             <label for="prefPickUpTime">Prefrerred PickUp Time</label>
-                           <input type="time" class="form_input" formControlName="prefPickUpTime">
+                           <input type="time" class="form_input" formControlName="prefPickUpTime"  [disabled]="isPickUpTimeDisabled()">
                             <span class="form_error"
                             *ngIf="travelRequestForm.get('prefPickUpTime')?.invalid && travelRequestForm.get('prefPickUpTime')?.touched">
                                Choose a value

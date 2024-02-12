@@ -228,6 +228,8 @@ export class NewTravelRequestComponent {
           this.travelRequestDetailViewModel = data
           // Getting the employee profile info
 
+          console.log(data)
+
           if (this.currentLoggedInUserRole != 'employee') {
 
             this.requestService.getEmployeeDataById(Number(this.travelRequestDetailViewModel.createdBy)).subscribe({
@@ -252,10 +254,10 @@ export class NewTravelRequestComponent {
           //Get Request Details For Display - USE IT WITH GET METHOD OF TRAVEL REQ BY ID
           //Initializing the Trip Info Map
 
-          this.tripInformationsMap.set('Project Code', this.travelRequestDetailViewModel?.projectId);
-          this.tripInformationsMap.set('Travel Type', this.travelRequestDetailViewModel?.travelTypeId);
+          this.tripInformationsMap.set('Project Code', this.travelRequestDetailViewModel?.projectCode);
+          this.tripInformationsMap.set('Travel Type', this.travelRequestDetailViewModel?.travelType);
           this.tripInformationsMap.set('Trip Type', this.travelRequestDetailViewModel?.tripType);
-          this.tripInformationsMap.set('Travel Mode', this.travelRequestDetailViewModel?.travelModeId);
+          this.tripInformationsMap.set('Travel Mode', this.travelRequestDetailViewModel?.travelMode);
 
           this.tripInformationsMap.set('Source City', this.travelRequestDetailViewModel?.sourceCity);
           this.tripInformationsMap.set('Source Country', this.travelRequestDetailViewModel?.sourceCountry);
@@ -322,7 +324,7 @@ export class NewTravelRequestComponent {
         reportsTo: new FormControl(this.employeeDetails?.reportsTo, Validators.nullValidator),
 
         //Trip Info
-        tripType: new FormControl('one_way', Validators.required),
+        tripType: new FormControl('One Way', Validators.required),
         travelModeId: new FormControl(1, Validators.required),
         tripPurpose: new FormControl('Business Meet', Validators.required),
         departureDate: new FormControl('', [Validators.required, this.dateFormatValidator, this.futureDateValidator]),
@@ -336,7 +338,7 @@ export class NewTravelRequestComponent {
 
         //Domestic / International
         travelTypeId: new FormControl(1, Validators.required),
-        projectId: new FormControl('1', Validators.required),
+        projectId: new FormControl(1, Validators.required),
 
         //Additional Info
         cabRequired: new FormControl('yes', Validators.required),
@@ -361,7 +363,8 @@ export class NewTravelRequestComponent {
 
     }
 
-
+    // Subscribe to value changes in source and destination fields
+    this.subscribeToOriginAndDestinationChanges();
     //end of ngOnInit()
   }
 
@@ -648,4 +651,68 @@ export class NewTravelRequestComponent {
   }
 
 
+
+
+  subscribeToOriginAndDestinationChanges() {
+    const sourceCityControl = this.travelRequestForm.get('sourceCity');
+    const destinationCityControl = this.travelRequestForm.get('destinationCity');
+
+    if (sourceCityControl && destinationCityControl) {
+      this.travelRequestForm.get('sourceCountry')?.valueChanges.subscribe(() => {
+        this.updateTravelType();
+      });
+
+      this.travelRequestForm.get('destinationCountry')?.valueChanges.subscribe(() => {
+        this.updateTravelType();
+      });
+    }
+  }
+
+  updateTravelType() {
+    const originCountry = this.travelRequestForm.get('sourceCountry')?.value;
+    const destinationCountry = this.travelRequestForm.get('destinationCountry')?.value;
+    const travelTypeControl = this.travelRequestForm.get('travelTypeId');
+
+    // If origin and destination countries are the same, set travel type to "Domestic"
+    if (originCountry && destinationCountry && originCountry === destinationCountry) {
+      travelTypeControl?.setValue('2'); // Domestic
+    } else {
+      // Reset to default value if countries are different
+      travelTypeControl?.setValue('1'); // International
+    }
+  }
+
+
+  //If Trip Type is One Way then return date field should be disabled
+  toggleReturnDate() {
+    const tripTypeControl = this.travelRequestForm.get('tripType');
+    if (tripTypeControl?.value === 'One Way') {
+      this.travelRequestForm.get('returnDate')?.disable();
+      this.travelRequestForm.get('returnDate')?.reset(); // Reset the value if disabled
+    } else {
+      this.travelRequestForm.get('returnDate')?.enable();
+    }
+  }
+
+  isReturnDateDisabled() {
+    return this.travelRequestForm.get('tripType')?.value === 'One Way';
+  }
+
+
+
+  togglePickUpTime() {
+    const cabRequiredControl = this.travelRequestForm.get('cabRequired');
+    if (cabRequiredControl?.value === 'no') {
+      this.travelRequestForm.get('prefPickUpTime')?.disable();
+      this.travelRequestForm.get('prefPickUpTime')?.reset(); // Reset the value if disabled
+    } else {
+      this.travelRequestForm.get('prefPickUpTime')?.enable();
+    }
+  }
+
+  isPickUpTimeDisabled() {
+    return this.travelRequestForm.get('cabRequired')?.value === 'no';
+  }
+
+  //EOF 
 }

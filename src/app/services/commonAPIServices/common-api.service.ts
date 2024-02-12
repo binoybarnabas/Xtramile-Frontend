@@ -20,7 +20,7 @@ export class CommonAPIService {
   constructor(private http: HttpClient) {
 
     //Getting the current Loggedin user based on session value
-    this.currentLoggedInUserRole = 'manager';
+    this.currentLoggedInUserRole = 'employee';
 
 
   }
