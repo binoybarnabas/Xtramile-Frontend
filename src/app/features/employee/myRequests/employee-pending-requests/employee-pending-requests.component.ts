@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { PendingRequest } from './pending-request';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, RouteReuseStrategy, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 
@@ -35,11 +35,12 @@ export class EmployeePendingRequestsComponent {
     this.subscription = this.requestService.getRequestsPendingStatus(empId).subscribe({
       next: (data) => {
         // Fetch status name for each request
+        console.log("Data" + data[0].requestId)
         data.forEach((request) => {
           this.requestService.getStatusName(request.requestId).subscribe({
             next: (statusName) => {
               // Store the status name in the request object
-              console.log(statusName)
+
               request.statusName = statusName;
             },
             error: (error: Error) => {
@@ -52,6 +53,9 @@ export class EmployeePendingRequestsComponent {
 
         // Update the component's requestData array
         this.requestData = data;
+
+        console.log("REq" + this.requestData[0].statusName);
+
       },
       error: (error: Error) => {
         console.log("Error has occurred, " + error.message);
