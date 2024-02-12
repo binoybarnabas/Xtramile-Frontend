@@ -79,8 +79,12 @@ const routes: Routes = [
     path: 'traveladmin', component: TravelAdminHomeComponent, canActivate: [authGuard], children: [
       { path: 'dashboard', component: TravelAdminDashboardComponent },
       { path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent },
-      { path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent },
-      { path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent },
+      {path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
+        {path:'', component:TravelAdminWaitingRequestsComponent},
+      ]},
+      {path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
+        {path:'',component: TravelAdminSelectedRequestsComponent},
+      ]},
       { path: 'ongoing', component: TravelAdminOngoingTravelComponent },
       { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },
       // { path: 'profile', component: TravelAdminProfileComponent },
