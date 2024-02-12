@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./employee-dashboard.component.css']
 })
 export class EmployeeDashboardComponent {
-
+  employeeId:number=3;
 }

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, Input } from '@angular/core';
 import { EmployeeDashboardService } from 'src/app/services/employeeServices/dashboardServices/employee-dashboard.service';
 
 @Component({
@@ -8,9 +7,13 @@ import { EmployeeDashboardService } from 'src/app/services/employeeServices/dash
   styleUrls: ['./dashboard-upcoming-trip.component.css']
 })
 export class DashboardUpcomingTripComponent {
+  
+  // Input property to receive employeeId from parent component
+  @Input() employeeId: number = 0;
+
+  // Properties to store trip details
   countryName!: string;
   currentImageUrl!: string;
-  employeeId: number=3;
   tripPurpose: string='';
   startDate: any;
   endDate: any;
@@ -21,11 +24,15 @@ export class DashboardUpcomingTripComponent {
   destinationState: string='';
   destinationCountry: string='';
 
-  constructor(private http: HttpClient, private service:EmployeeDashboardService) {}
+  constructor(private service: EmployeeDashboardService) {}
 
   ngOnInit() {
+    // Fetch upcoming trip details using the employeeId
     this.service.getUpcomingTripDetails(this.employeeId).subscribe((data: any) => {
+      // Log the fetched data
       console.log(data);
+
+      // Assign fetched data to component properties
       this.tripPurpose = data[0].tripPurpose;
       this.startDate = data[0].startDate;
       this.endDate = data[0].endDate;
@@ -35,7 +42,8 @@ export class DashboardUpcomingTripComponent {
       this.destinationCity = data[0].destinationCity;
       this.destinationState = data[0].destinationState;
       this.destinationCountry = data[0].destinationCountry;
-      console.log('destination country',this.destinationCountry);
+
+      // Fetch country image data
       this.service.getCountryImage().subscribe((data: any) => {
         // Find the specific country in the data
         const countryData = data.find((country: { countryName: string; }) => country.countryName === this.destinationCountry);
@@ -47,5 +55,5 @@ export class DashboardUpcomingTripComponent {
         }
       });
     });  
-}
+  }
 }

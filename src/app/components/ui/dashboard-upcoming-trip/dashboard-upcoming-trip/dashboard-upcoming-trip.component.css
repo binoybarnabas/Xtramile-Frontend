@@ -1,4 +1,4 @@
-.cherry-blossom-tour {
+.main_container {
     background-color: #f8f8f8;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -7,7 +7,7 @@
     padding: 5px; /* Adjust padding if needed */
   }
   
-  .tour-card {
+  .main_container .trip_card {
     display: flex;
     align-items: center;
     margin: 5px;
@@ -15,50 +15,50 @@
     background-color: #fff;
   }
   
-  .tour-image {
+  .main_container .trip_card .trip_image {
     flex: 1;
     margin-right: 10px; /* Adjust margin as needed */
     width: 100%; /* Example width */
     height: auto; /* Let content determine height */
   }
   
-  .tour-image img {
+  .main_container .trip_card .trip_image img {
     width: 100%;
     height: auto;
     border-radius: 5px;
   }
   
-  .tour-details {
+  .main_container .trip_card .trip_details {
     flex: 1;
     width: 50%; /* Example width */
     height: auto; /* Let content determine height */
   }
   
-  .tour-details h3 {
+  .main_container .trip_card .trip_details h3 {
     font-size: 16px; /* Adjust font-size as needed */
   }
   
-  .tour-details p {
+  .main_container .trip_card .trip_details p {
     line-height: 1.5;
     font-size: 12px; /* Adjust font-size as needed */
   }
   
-  .tour-info {
+  .main_container .trip_card .trip-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   
-  .button {
+  .main_container .trip_card .trip-info .trip_button {
     background-color: rgb(82, 178, 210);
     color: white;
-    padding: 8px 12px; /* Adjust padding as needed */
+    padding: 6px 10px; /* Adjust padding as needed */
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
   
-  .button:hover {
+  .main_container .trip_card .trip-info .trip_button:hover {
     background-color: rgb(45, 180, 224);
   }
   
