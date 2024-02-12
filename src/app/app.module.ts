@@ -220,4 +220,5 @@ import { HttpInterceptService } from './http-intercept.service';
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
