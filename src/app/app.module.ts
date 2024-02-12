@@ -107,7 +107,7 @@ import { DashboardCardComponent } from './components/ui/dashboard-card/dashboard
 import { StatusPipe } from './pipes/Status/status.pipe';
 import { NotificationsComponent } from './components/ui/notifications/notifications.component';
 import { DashboardMapComponent } from './components/ui/dashboard-map/dashboard-map/dashboard-map.component';
-
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @NgModule({
   declarations: [
@@ -219,6 +219,7 @@ import { DashboardMapComponent } from './components/ui/dashboard-map/dashboard-m
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
+    TypeaheadModule.forRoot(),
     // ToastrModule.forRoot({
     //   timeOut: 3000,
     //   positionClass: 'toast-center', // Set to center of the screen
