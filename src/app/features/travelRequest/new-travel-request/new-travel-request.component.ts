@@ -54,6 +54,9 @@ export class NewTravelRequestComponent {
 
   travelModes: any[] = [];
 
+  isReturnDateDisabled: boolean = true;
+
+
   cities = cities;//Fetch Data From Any External API
   sourceFilteredCities: any[] = []; // Separate filtered list for source field
   destinationFilteredCities: any[] = []; // Separate filtered list for destination field
@@ -365,7 +368,11 @@ export class NewTravelRequestComponent {
 
     // Subscribe to value changes in source and destination fields
     this.subscribeToOriginAndDestinationChanges();
+
+    this.subscribeToTripTypeChanges();
+
     //end of ngOnInit()
+
   }
 
 
@@ -683,22 +690,6 @@ export class NewTravelRequestComponent {
   }
 
 
-  //If Trip Type is One Way then return date field should be disabled
-  toggleReturnDate() {
-    const tripTypeControl = this.travelRequestForm.get('tripType');
-    if (tripTypeControl?.value === 'One Way') {
-      this.travelRequestForm.get('returnDate')?.disable();
-      this.travelRequestForm.get('returnDate')?.reset(); // Reset the value if disabled
-    } else {
-      this.travelRequestForm.get('returnDate')?.enable();
-    }
-  }
-
-  isReturnDateDisabled() {
-    return this.travelRequestForm.get('tripType')?.value === 'One Way';
-  }
-
-
 
   togglePickUpTime() {
     const cabRequiredControl = this.travelRequestForm.get('cabRequired');
@@ -713,6 +704,53 @@ export class NewTravelRequestComponent {
   isPickUpTimeDisabled() {
     return this.travelRequestForm.get('cabRequired')?.value === 'no';
   }
+
+
+
+
+
+
+
+  subscribeToTripTypeChanges() {
+
+    const tripTypeControl = this.travelRequestForm.get('tripType');
+
+
+    if (tripTypeControl) {
+      this.travelRequestForm.get('tripType')?.valueChanges.subscribe(() => {
+        // console.log("Control" + tripTypeControl)
+
+        this.toggleReturnDate();
+      });
+
+    }
+
+  }
+
+
+
+  toggleReturnDate() {
+    const tripType = this.travelRequestForm.get('tripType')?.value;
+
+    if (tripType === 'One Way') {
+
+      this.isReturnDateDisabled = true;
+
+      console.log(this.isReturnDateDisabled);
+
+    } else {
+      this.isReturnDateDisabled = false;
+      console.log(this.isReturnDateDisabled);
+
+    }
+
+
+  }
+
+
+
+
+
 
   //EOF 
 }
