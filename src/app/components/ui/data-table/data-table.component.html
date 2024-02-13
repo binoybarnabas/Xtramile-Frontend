@@ -1,23 +1,28 @@
 <div class="data_table_container">
-
   <div>
-
     <table class="dynamic_table col-10 col-md-3 mb-2">
-
       <thead>
-
         <tr class="table_heading">
           <th *ngFor="let header of headers">{{ header }}</th>
         </tr>
-
       </thead>
 
       <tbody>
-
         <tr *ngFor="let row of data" (click)="onRowClick(row)">
-
-          <td class="table_row" *ngFor="let prop of displayedProperties">
-
+          <td
+            class="table_row"
+            *ngFor="let prop of displayedProperties; let i = index"
+            [ngClass]="{
+              status_pending: headers[i] === 'Status' && row[prop] === 'Open',
+              status_approved:
+                headers[i] === 'Status' && row[prop] === 'Forwarded',
+              status_rejected:
+                headers[i] === 'Status' && row[prop] === 'Denied',
+              mode_domestic: headers[i] === 'Mode' && row[prop] === 'Domestic',
+              mode_international:
+                headers[i] === 'Mode' && row[prop] === 'International'
+            }"
+          >
             <ng-container *ngIf="isMultilineProperty(prop); else singleLine">
               <!-- split the data using \n -->
               <div *ngFor="let line of row[prop].split('\n')">{{ line }}</div>
@@ -26,15 +31,9 @@
             <ng-template #singleLine>
               {{ row[prop] }}
             </ng-template>
-
           </td>
-
         </tr>
-
       </tbody>
-
     </table>
-
   </div>
-
 </div>

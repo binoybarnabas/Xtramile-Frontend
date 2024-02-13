@@ -30,12 +30,12 @@ export class ManagerOngoingTravelRequestsComponent {
   formatData(data: any[]): any[] {
     //using DatePipe to convert the date into dd/LL/yyyy format
     const datePipe = new DatePipe('en-US');
-    return data.map(item => ({
-      ...item,
-      createdOn: datePipe.transform(item.createdOn, 'dd/LL/yyyy'),
-      //concatinating the employeeName and employeeemail, we can split the data using \n
-      //this is to show two data in a single cell,
-      employeeNameAndEmail: `${item.employeeName}\n${item.employeeEmail}`
-    }));
+      return data.map(item => ({
+        ...item,
+        createdOn: datePipe.transform(item.createdOn, 'dd/LL/yyyy'),
+        //concatinating the employeeName and employeeemail, we can split the data using \n
+        //this is to show two data in a single cell,
+        employeeNameAndEmail: `${item.employeeName}\n${item.employeeEmail}`
+      }));
   }
 }
