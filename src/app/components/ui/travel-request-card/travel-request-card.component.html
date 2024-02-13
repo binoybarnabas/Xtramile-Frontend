@@ -115,9 +115,9 @@
     </div>
 
     <div class="section_3 action_section">
-      <div class="reject_btn">
+      <div class="reject_btn" (click)="cancelRequest(item.requestId)">
         <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label"
-          >Withdraw</span
+          >Cancel</span
         >
         <span *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label"
           >Reject</span
