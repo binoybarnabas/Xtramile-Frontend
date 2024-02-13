@@ -1,0 +1,20 @@
+<div class="progress_bar_container">
+  <!-- Loop through each step to display progress bar components -->
+  <div class="progress_bar_step" *ngFor="let step of steps; let i = index">
+    <!-- Circle representing each step with dynamic classes for completion and in-progress state -->
+    <div
+      class="progress_bar_circle"
+      [class.completed]="i < currentStep"
+      [class.in-progress]="i === currentStep"
+    >
+      {{ i + 1 }}
+      <!-- Display step number inside the circle -->
+    </div>
+
+    <!-- Line connecting circles with dynamic width based on progress -->
+    <div class="progress_bar_line" [style.width]="getLineWidth(i)"></div>
+
+    <!-- Display step title below the circle -->
+    <span class="progress_bar_step_title">{{ step.title }}</span>
+  </div>
+</div>
