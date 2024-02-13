@@ -9,10 +9,17 @@ import { ProfileService } from 'src/app/services/employeeServices/profileService
 })
 export class EmployeeProfileComponent {
   editMode: boolean = false;
-  employeeId: number = 3;
+  employeeId!: number;
   initialValue: { [key: string]: any } = {}; //to store the initial value of contact and address
   initialData: { [key: string]: any } = {}; // to store the initial value of all other data
-  constructor(private service: ProfileService) { }
+  constructor(private service: ProfileService) { 
+
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parsedUserData = JSON.parse(userData);
+      this.employeeId = parsedUserData.empId;
+    }
+  }
   form = new FormGroup({
     firstName: new FormControl({ value: '', disabled: true }, Validators.required),
     lastName: new FormControl({ value: '', disabled: true }, Validators.required),
@@ -27,7 +34,6 @@ export class EmployeeProfileComponent {
     projectId: new FormControl({ value: '', disabled: true }),
     projectName: new FormControl({ value: '', disabled: true }),
     address: new FormControl('', Validators.required),
-    pincode: new FormControl(''),
     passport: new FormControl(''),
     idCard: new FormControl(''),
   });
