@@ -8,7 +8,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let row of data" (click)="onRowClick(row)">
+        <tr *ngFor="let row of data" (click)="onRowClick(row.requestId)">
           <td
             class="table_row"
             *ngFor="let prop of displayedProperties; let i = index"
