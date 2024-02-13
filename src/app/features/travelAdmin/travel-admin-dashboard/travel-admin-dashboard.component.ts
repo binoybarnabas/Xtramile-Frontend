@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TravelAdminDashboardService } from 'src/app/services/travelAdminServices/dashboardServices/travel-admin-dashboard.service';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-travel-admin-dashboard',
@@ -14,6 +15,8 @@ export class TravelAdminDashboardComponent {
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   projectReportUrl: string | undefined;
   selectedProject: any;
+  completedTripsData :any;
+  
   constructor(private apiservice: TravelAdminDashboardService, private router: Router){}
   ngOnInit(){
     //api service to receive all projects.    
@@ -22,7 +25,17 @@ export class TravelAdminDashboardComponent {
           console.log(this.projectCodes)      
         })
 
+    //api service to get requests for each month
+        this.apiservice.getAllRequestsMonthly().subscribe((data: any) =>
+        {
+          this.completedTripsData = data;
+          console.log(this.completedTripsData )
+        });
+    
+    
   }
+
+  //to generate a report by inputting a month
   generateMonthlyModeReport() {
     this.apiservice.generateMonthlyModeReport(this.selectedMonth).subscribe(
       (response) => {
@@ -33,13 +46,14 @@ export class TravelAdminDashboardComponent {
     );
   }
 
+  //to bind the project id of selected project code and call generateProjectModeReport()
   onProjectSelect(selectedProject: any) {
    
         const projectId = selectedProject.item.projectId; // Access projectId property 
         this.generateProjectModeReport(projectId);      
   }
 
-  
+  //to generate a report based on the input projectId 
   generateProjectModeReport(projectId: number){
     console.log(projectId)
     this.apiservice.generateProjectModeReport(projectId).subscribe(
@@ -50,4 +64,5 @@ export class TravelAdminDashboardComponent {
       },
     );
   }
+
 }
