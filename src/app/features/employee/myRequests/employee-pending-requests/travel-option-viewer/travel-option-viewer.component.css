@@ -25,7 +25,7 @@
 }
 
 .travel_options_container .option_card.selected {
-    border: 2px solid blue;
+    border: 3px solid var(--first-color);
     /* or any other border style you prefer */
 }
 

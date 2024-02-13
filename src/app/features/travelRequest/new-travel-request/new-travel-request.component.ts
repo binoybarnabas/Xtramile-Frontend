@@ -14,6 +14,7 @@ import { RequestStatus } from 'src/app/components/ui/change-status-button/reques
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { DescriptionModalComponent } from 'src/app/components/ui/description-modal/description-modal.component';
 import { cities } from 'src/app/services/commonAPIServices/cities';
+import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 
 
 @Component({
@@ -55,6 +56,8 @@ export class NewTravelRequestComponent {
   travelModes: any[] = [];
 
   isReturnDateDisabled: boolean = true;
+
+  travelOptionsData: TravelOptionDetails[] = [];
 
 
   cities = cities;//Fetch Data From Any External API
@@ -224,6 +227,7 @@ export class NewTravelRequestComponent {
       complete: () => { console.log("get employee by id is done") }
     });
 
+
     //get an employee request based on an request Id
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
@@ -232,6 +236,8 @@ export class NewTravelRequestComponent {
         next: (data) => {
           this.travelRequestDetailViewModel = data
           // Getting the employee profile info
+
+          this.getTravelOptionsByReqId(data.requestId)
 
           console.log(data)
 
@@ -372,6 +378,8 @@ export class NewTravelRequestComponent {
     this.subscribeToOriginAndDestinationChanges();
 
     this.subscribeToTripTypeChanges();
+
+
 
     //end of ngOnInit()
 
@@ -583,10 +591,15 @@ export class NewTravelRequestComponent {
       requestId: this.travelRequestDetailViewModel.requestId
     };
 
+    // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
+
+
     this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
       console.log('Modal result:', result);
+
+
       // You can perform actions with the result data here
     });
   }
@@ -751,7 +764,24 @@ export class NewTravelRequestComponent {
 
 
 
+  //Get Travel Options By Req Id
+  getTravelOptionsByReqId(reqId: number) {
 
+    this.requestService.getTravelOptionsByReqId(reqId).subscribe({
+      next: (data) => {
+
+        this.travelOptionsData = data;
+        console.log(this.travelOptionsData)
+
+      },
+      error: (error: Error) => {
+        console.log("Error has occurred, " + error.message);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
+  }
 
 
   //EOF 

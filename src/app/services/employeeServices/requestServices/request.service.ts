@@ -112,4 +112,12 @@ export class RequestService {
 
 
 
+  //Submit selected option with optionId, employeeId, requestId
+  submitSelectedOption(requestId: number, employeeId: number, optionId: number): Observable<any> {
+    const body = { requestId: requestId, empId: employeeId, optionId: optionId };
+    console.log(body)
+    return this.http.post(this.apiURL + '/employee/submit_selected_travel_option', body);
+  }
+
+
 }

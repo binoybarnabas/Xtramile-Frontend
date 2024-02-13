@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { ActivatedRoute } from '@angular/router';
+import { UserData } from 'src/app/services/interfaces/iuserData';
 
 @Component({
   selector: 'app-travel-option-viewer',
@@ -18,8 +19,13 @@ export class TravelOptionViewerComponent {
   selectedOption: any;
   selectedOptionId: any;
 
-  constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute) {
+  empId: number;
+  userData: UserData
 
+  constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute) {
+    const storedUserData = localStorage.getItem('userData');
+    this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
+    this.empId = this.userData?.empId
   }
 
   ngOnInit() {
@@ -30,8 +36,8 @@ export class TravelOptionViewerComponent {
         this.reqId = parseInt(query.get('requestId')!, 10)
       }
     })
-    // this.getTravelOptionsByReqId(this.reqId)
-    this.getTravelOptionsByReqId(96)
+    this.getTravelOptionsByReqId(this.reqId)
+    // this.getTravelOptionsByReqId(96)
 
   }
 
@@ -59,6 +65,30 @@ export class TravelOptionViewerComponent {
     this.selectedOption = option;
     this.selectedOptionId = option.optionId;
   }
+
+
+  //To handle the selected option and perform the POST request
+  postSelection(): void {
+    if (this.selectedOptionId) {
+
+      //alert(this.selectedOptionId);
+
+      this.requestService.submitSelectedOption(this.reqId, this.empId, this.selectedOptionId).subscribe({
+        next: (response: any) => {
+          console.log('Post successful:', response);
+          // Reset the selectedOption after a successful post
+          this.selectedOption = null;
+        },
+        error: (error: any) => {
+          console.error('Post failed:', error);
+        },
+        complete: () => {
+          console.log('Post request completed.');
+        }
+      });
+    }
+  }
+
 
 
 

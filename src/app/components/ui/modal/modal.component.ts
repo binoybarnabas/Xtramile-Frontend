@@ -50,6 +50,7 @@ export class ModalComponent {
 
   closeModal() {
     this.bsModalRef.hide();
+
   }
 
 
@@ -87,6 +88,7 @@ export class ModalComponent {
       next: (response) => {
         console.log(response)
         alert("Travel Option Added!")
+        this.closeModal()
         // this.router.navigate(['employee/pending']);
       },
       error: (error: Error) => {
