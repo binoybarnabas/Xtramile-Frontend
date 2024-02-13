@@ -108,7 +108,7 @@ import { StatusPipe } from './pipes/Status/status.pipe';
 import { NotificationsComponent } from './components/ui/notifications/notifications.component';
 import { DashboardMapComponent } from './components/ui/dashboard-map/dashboard-map/dashboard-map.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { BarChartComponent } from './components/ui/bar-chart/bar-chart.component';
+// import { BarChartComponent } from './components/ui/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -199,7 +199,7 @@ import { BarChartComponent } from './components/ui/bar-chart/bar-chart.component
     TravelRequestCardComponent,
     TimestampToDatePipe,
     ForgotPasswordModalComponent,
-    BarChartComponent,
+    // BarChartComponent,
     DashboardUpcomingTripComponent,
     DashboardProgressComponent,
     DashboardCardComponent,

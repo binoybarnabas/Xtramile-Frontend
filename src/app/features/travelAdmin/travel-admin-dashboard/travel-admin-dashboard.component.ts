@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TravelAdminDashboardService } from 'src/app/services/travelAdminServices/dashboardServices/travel-admin-dashboard.service';
-import Chart from 'chart.js/auto';
+// import Chart from 'chart.js/auto';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-travel-admin-dashboard',
   templateUrl: './travel-admin-dashboard.component.html',
   styleUrls: ['./travel-admin-dashboard.component.css']
 })
-export class TravelAdminDashboardComponent {
+export class TravelAdminDashboardComponent{
   projectCodes:any[] =[];
   monthReportUrl: string | undefined;
   selectedMonth: string = '';
@@ -16,8 +17,10 @@ export class TravelAdminDashboardComponent {
   projectReportUrl: string | undefined;
   selectedProject: any;
   completedTripsData :any;
+  private subscription: Subscription | any
   
-  constructor(private apiservice: TravelAdminDashboardService, private router: Router){}
+  constructor(private apiservice: TravelAdminDashboardService, private router: Router){
+  }
   ngOnInit(){
     //api service to receive all projects.    
         this.apiservice.getAllProjects().subscribe((data:any)=>{
@@ -26,7 +29,7 @@ export class TravelAdminDashboardComponent {
         })
 
     //api service to get requests for each month
-        this.apiservice.getAllRequestsMonthly().subscribe((data: any) =>
+        this.subscription = this.apiservice.getAllRequestsMonthly().subscribe((data: any) =>
         {
           this.completedTripsData = data;
           console.log(this.completedTripsData )
@@ -63,6 +66,10 @@ export class TravelAdminDashboardComponent {
         this.projectReportUrl = url;
       },
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

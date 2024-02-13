@@ -9,9 +9,13 @@ import { ManagerDashboardService } from 'src/app/services/managerServices/dashbo
 export class ManagerDashboardComponent {
 
   completedTripsData :any;
-  empId:number =7;
+  empId!:number;
   constructor(private apiservice: ManagerDashboardService){
-
+    const userData = localStorage.getItem('userData');
+    if(userData){
+      const userParsedData = JSON.parse(userData);
+      this.empId = userParsedData.empId;
+    }
   }
   ngOnInit(){
     this.apiservice.getAllRequestsMonthly(this.empId).subscribe((data: any) =>
