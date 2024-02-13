@@ -11,8 +11,15 @@ export class ManagerOngoingTravelRequestsComponent {
   tableHeaders: string[] = ['Request ID', 'Employee', 'Project Code', 'Date','Mode','Priority','Status'];
   fieldsToDisplay: string[] = ['requestId', 'employeeNameAndEmail', 'projectCode','createdOn','travelTypeName','priorityName','statusName'];
   incomingRequestdata:any[] = [];
-  constructor(private apiservice: ManagerTravelRequestsService){}
-  managerId: number = 2;  
+  managerId!: number; 
+  constructor(private apiservice: ManagerTravelRequestsService){
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parsedUserData = JSON.parse(userData);
+      this.managerId = parsedUserData.empId;
+    }
+  }
+ 
   ngOnInit() {
     //get employee ongoing data such as requestId, employeeNameAndEmail, projectCode, createdOn, travelTypeName, priorityName, statusName
     this.apiservice.getManagerOngoingTravelRequest(this.managerId).subscribe((data: any[]) => {

@@ -4,8 +4,25 @@
       <!-- <span class="left_dot"></span> -->
 
       <div class="left">
-        <span class="title">Requested By</span>
-        <p class="value">Muhammed</p>
+        <div *ngIf="item.statusName =='Open'">
+          <span class="title">Requested By</span>
+        <p class="value">{{item.statusModifiedBy}}</p>
+        </div>
+
+        <div *ngIf="item.statusName =='Forwarded'">
+          <span class="title">Approved By</span>
+        <p class="value">{{item.statusModifiedBy}}</p>
+        </div>
+
+        <div *ngIf="item.statusName =='Closed'">
+          <span class="title">closed By</span>
+        <p class="value">{{item.statusModifiedBy}}</p>
+        </div>
+
+        <div *ngIf="item.statusName =='Selected'">
+          <span class="title">Selected By</span>
+        <p class="value">{{item.statusModifiedBy}}</p>
+        </div>
       </div>
 
       <div class="right">
@@ -76,7 +93,7 @@
                 : 'value status'
             "
           >
-            {{ item.statusName }}
+            {{ item.statusName | status }}
           </p>
         </div>
         <!-- <span class="right_dot"></span> -->

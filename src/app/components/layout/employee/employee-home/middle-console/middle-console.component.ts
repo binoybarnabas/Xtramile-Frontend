@@ -30,8 +30,7 @@ export class MiddleConsoleComponent {
   ngDoCheck() {
     this.isSideNavBarCollapsed = this.sideNavBarService.isSideNavBarCollapsed;
     this.currentRoutePath = this.router.url;
-    console.log('Current path:', this.currentRoutePath);
-    console.log('Current path:', this.currentRoutePath);
+   
     if(this.currentRoutePath == '/employee/request'){
       this.mainHeading = 'New Travel Request'
     }

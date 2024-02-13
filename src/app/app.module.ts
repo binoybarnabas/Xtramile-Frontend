@@ -104,6 +104,8 @@ import { HttpInterceptService } from './http-intercept.service';
 import { DashboardUpcomingTripComponent } from './components/ui/dashboard-upcoming-trip/dashboard-upcoming-trip/dashboard-upcoming-trip.component';
 import { DashboardProgressComponent } from './components/ui/dashboard-progress/dashboard-progress/dashboard-progress.component';
 import { DashboardCardComponent } from './components/ui/dashboard-card/dashboard-card/dashboard-card.component';
+import { StatusPipe } from './pipes/Status/status.pipe';
+import { NotificationsComponent } from './components/ui/notifications/notifications.component';
 import { DashboardMapComponent } from './components/ui/dashboard-map/dashboard-map/dashboard-map.component';
 
 
@@ -199,6 +201,8 @@ import { DashboardMapComponent } from './components/ui/dashboard-map/dashboard-m
     DashboardUpcomingTripComponent,
     DashboardProgressComponent,
     DashboardCardComponent,
+    StatusPipe,
+    NotificationsComponent,
     DashboardMapComponent
   ]
   ,
