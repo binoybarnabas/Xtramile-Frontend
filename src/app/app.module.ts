@@ -99,6 +99,8 @@ import { LoginComponent } from './components/ui/login/login.component';
 import { DescriptionModalComponent } from './components/ui/description-modal/description-modal.component';
 import { TravelRequestCardComponent } from './components/ui/travel-request-card/travel-request-card.component';
 import { TimestampToDatePipe } from './pipes/timeStampToDate/timestamp-to-date.pipe';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { TravelRequestCardModalComponent } from './components/ui/travel-request-card-modal/travel-request-card-modal.component';
 
 
 @NgModule({
@@ -188,7 +190,9 @@ import { TimestampToDatePipe } from './pipes/timeStampToDate/timestamp-to-date.p
     CustomDatePipe,
     DescriptionModalComponent,
     TravelRequestCardComponent,
-    TimestampToDatePipe
+    TimestampToDatePipe,
+    FileUploadComponent,
+    TravelRequestCardModalComponent
   ]
   ,
 

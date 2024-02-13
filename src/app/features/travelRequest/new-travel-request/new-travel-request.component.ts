@@ -119,6 +119,8 @@ export class NewTravelRequestComponent {
 
         case 'Manager': if (this.userData.department == 'TA') {
           this.currentLoggedInUserRole = 'travelAdmin';
+          this.newReqFormSubMenuValue = 4;
+
         }
         else if (this.userData.department == 'FD') {
           this.currentLoggedInUserRole = 'financePersonnel';

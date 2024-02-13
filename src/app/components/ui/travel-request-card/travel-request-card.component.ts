@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 
 @Component({
@@ -13,13 +14,11 @@ export class TravelRequestCardComponent {
 
   currentLoggedInUserRole: string;
 
-  constructor(private commonAPIService: CommonAPIService) {
+  constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService) {
 
     this.currentLoggedInUserRole = commonAPIService.currentLoggedInUserRole;
 
   }
-
-
 
 
 

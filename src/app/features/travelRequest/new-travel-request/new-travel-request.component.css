@@ -333,6 +333,68 @@
 
 }
 
+
+/* Travel Options */
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .options_container {
+    margin-top: 0.6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .options_container .option_card {
+    background-color: var(--card-bg-color);
+    width: 100%;
+    border-radius: var(--normal-border-radius);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 3px;
+    /* margin: 0.5rem; */
+    transition: 0.3s;
+
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .options_container .option_card:hover {
+    transform: scale(1.01);
+}
+
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .options_container .option_card .option_file {
+    width: 100%;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .options_container .option_card .option_file .img {
+    width: 100%;
+    border-radius: var(--normal-border-radius) var(--normal-border-radius) 0 0;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .options_container .option_card .description {
+    width: 100%;
+    padding-left: 0.6rem;
+    padding-top: 0.6rem;
+    padding-right: 0.6rem;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .options_container .option_card .description p {
+    font-size: var(--form-label-font-size);
+    color: var(--ternary-text-color);
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .options_container .option_card .description .del_icon {
+    font-size: var(--medium-font-size);
+    color: var(--danger-color);
+    font-weight: var(--active-font-weight);
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .form_input_group .options_container .option_card .description .del_icon:hover {
+    cursor: pointer;
+}
+
+
 /* ------------------------------------------------ */
 
 @media screen and (max-width: 860px) {
