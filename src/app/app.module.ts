@@ -105,6 +105,7 @@ import { DashboardUpcomingTripComponent } from './components/ui/dashboard-upcomi
 import { DashboardProgressComponent } from './components/ui/dashboard-progress/dashboard-progress/dashboard-progress.component';
 import { DashboardCardComponent } from './components/ui/dashboard-card/dashboard-card/dashboard-card.component';
 import { StatusPipe } from './pipes/Status/status.pipe';
+import { NotificationsComponent } from './components/ui/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -198,7 +199,8 @@ import { StatusPipe } from './pipes/Status/status.pipe';
     DashboardUpcomingTripComponent,
     DashboardProgressComponent,
     DashboardCardComponent,
-    StatusPipe
+    StatusPipe,
+    NotificationsComponent,
   ]
   ,
 

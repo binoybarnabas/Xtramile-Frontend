@@ -6,6 +6,7 @@ import { NotificationsComponent } from '../notifications/notifications.component
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
+
 @Component({
   selector: 'app-top-bar-user',
   templateUrl: './top-bar-user.component.html',
