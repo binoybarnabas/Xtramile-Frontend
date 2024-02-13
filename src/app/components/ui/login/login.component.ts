@@ -5,6 +5,8 @@ import { CredentialData } from 'src/app/components/ui/login/Credential';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent {
   isLoading: boolean = false;
   invalidCredentials: boolean = false;
   loginForm!: FormGroup
+  bsModalRef!: BsModalRef;
 
   ngOnInit() {
 
@@ -33,7 +36,7 @@ export class LoginComponent {
 
   }
 
-  constructor(private loginService: LoginService, private userDataService: CommonAPIService, private router: Router) {
+  constructor(private loginService: LoginService, private userDataService: CommonAPIService, private router: Router, private modalService: BsModalService) {
 
   }
 
@@ -118,6 +121,10 @@ export class LoginComponent {
     else {
       console.log('Form is invalid. Please check the fields.');
     }
+  }
+
+  openForgotPasswordModal() {
+    this.bsModalRef = this.modalService.show(ForgotPasswordModalComponent);
   }
 
 }

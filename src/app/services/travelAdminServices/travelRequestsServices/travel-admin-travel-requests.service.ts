@@ -23,7 +23,6 @@ export class TravelAdminTravelRequestsService {
     return this.http.get(url, { params });
   }
 
-
   //to get travel request details of a particular request id
 
   getWaitingOrSelectedRequests(statusCode: string): Observable<WaitingOrSelectedRequests[]> {
@@ -53,6 +52,45 @@ export class TravelAdminTravelRequestsService {
 
   getSelectedOption(requestId: number): Observable<AvailableOptions> {
     return this.http.get<AvailableOptions>(this.apiURL + `/traveladmin/options/selected?reqId=${requestId}`)
+  }
+
+
+  //app bar functionalities
+  //get all the travel request based on a given date
+  getAllRequestByDate(date: string): Observable<any> {
+    const url = 'http://localhost:5190/api/traveladmin/date';
+    var dateString = date.toString();
+    const params = new HttpParams()
+      .set('date', encodeURIComponent(dateString));
+    console.log(encodeURI(date))
+    return this.http.get<any>(url, { params });
+  }
+
+  //get all the travel request based on a given employee name
+  getAllRequestSortByEmployeeName(currentPage: number, pageSize: number): Observable<any> {
+    const url = "http://localhost:5190/api/traveladmin/incomingrequest/sort";
+    const params = new HttpParams().set('pageIndex', currentPage).set('pageSize', pageSize).set('employeeName', false).set('date', true);
+    return this.http.get<any>(url, { params })
+  }
+
+  // get all the employee request sorted by date
+  getAllRequestSortByDate(currentPage: number, pageSize: number): Observable<any> {
+    const url = "http://localhost:5190/api/traveladmin/incomingrequest/sort";
+    const params = new HttpParams().set('pageIndex', currentPage).set('pageSize', pageSize).set('employeeName', true).set('date', false);
+    return this.http.get<any>(url, { params });
+  }
+
+  //get the request by searching an employeename
+  getAllRequestByEmployeeName(employeeName: string): Observable<any> {
+    const url = "http://localhost:5190/api/traveladmin/search/employeename";
+    const params = new HttpParams().set('employeename', employeeName);
+    return this.http.get<any>(url, { params })
+  }
+
+  // get all the requests
+  getEmployeeRequest(): Observable<any> {
+    const url = 'http://localhost:5190/api/traveladmin/request';
+    return this.http.get<any>(url);
   }
 
   //Send Rrequest Data

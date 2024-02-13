@@ -1,0 +1,45 @@
+<!-- main_container: Container for the upcoming trip details -->
+<div class="main_container">
+  <h5>Upcoming trip</h5>
+
+  <!-- trip_card: Card displaying the upcoming trip information -->
+  <div class="trip_card" *ngIf="tripDetailsAvailable">
+    <!-- trip_image: Container for the trip image -->
+    <div class="trip_image">
+      <!-- The trip image dynamically binds its source, alt text, and applies styling for maximum width and height. -->
+      <img
+        [src]="currentImageUrl"
+        [alt]="countryName"
+        [ngStyle]="{ 'max-width.px': 200, 'max-height.px': 120 }"
+      />
+    </div>
+
+    <!-- trip_details: Container for the trip details -->
+    <div class="trip_details">
+      <!-- tripPurpose: Heading displaying the purpose of the trip -->
+      <h3>{{ tripPurpose }}</h3>
+
+      <!-- Trip information paragraph displaying details such as source city, state, country, destination city, state, country, and the date range of the trip. -->
+      <p>
+        Embark on an exciting journey from {{ sourceCity }}, {{ sourceState }},
+        {{ sourceCountry }} to {{ destinationCity }}, {{ destinationState }},
+        {{ destinationCountry }} unfolding from
+        {{ startDate | date : "shortDate" }} to
+        {{ endDate | date : "shortDate" }}
+      </p>
+
+      <!-- trip-info: Container for additional trip information and actions -->
+      <div class="trip-info">
+        <!-- trip_button: Button to view detailed information about the upcoming trip. This button can trigger an action or navigate to a detailed view. -->
+        <button class="trip_button" (click)="viewOngoingDetails()">
+          View detail
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Show a message when there is no upcoming trip data -->
+  <div *ngIf="!tripDetailsAvailable">
+    <p>No upcoming trip data available.</p>
+  </div>
+</div>

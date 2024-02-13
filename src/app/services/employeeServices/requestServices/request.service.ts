@@ -118,6 +118,23 @@ export class RequestService {
     console.log(body)
     return this.http.post(this.apiURL + '/employee/submit_selected_travel_option', body);
   }
+  getEmployeeRequestNotification(empId: number): Observable<any> {
+    const url = "http://localhost:5190/api/employee/request/notification"
+    const params = new HttpParams().set('empId', empId);
+    return this.http.get(url, { params });
+  }
 
+  employeeCancelRequest(requestId: number): Observable<any> {
+    const url = "http://localhost:5190/api/employee/request/cancel";
+    const userData = localStorage.getItem('userData');
+    let userDataParsed: any
+    if (userData) {
+      userDataParsed = JSON.parse(userData);
+    }
 
+    const empId = userDataParsed.empId;
+    console.log(requestId + " " + empId);
+    return this.http.post<any>(url,
+      { requestId, empId });
+  }
 }

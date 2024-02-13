@@ -1,0 +1,49 @@
+.modal_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  
+  .modal_container .created_modal {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 3;
+    width: 538px; /* Adjust the width as needed */
+  }
+  
+  .modal_container .created_modal .close_button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background-color: #2196f3; 
+    color: #fff; 
+    padding: 5px 10px; 
+    border: none;
+    border-radius: 3px; 
+  }
+  .dashboard_container {
+    display: flex;
+  }
+  
+  app-dashboard-upcoming-trip {
+    width: 40%;
+  }
+  app-dashboard-card {
+    margin-left: 1em;
+  }
+app-dashboard-map {
+  width: 100%;
+}
+
+  

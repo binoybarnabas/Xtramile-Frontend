@@ -34,28 +34,13 @@ export class EmployeePendingRequestsComponent {
   getRequests(empId: number) {
     this.subscription = this.requestService.getRequestsPendingStatus(empId).subscribe({
       next: (data) => {
-        // Fetch status name for each request
-        console.log("Data" + data[0].requestId)
-        data.forEach((request) => {
-          this.requestService.getStatusName(request.requestId).subscribe({
-            next: (statusName) => {
-              // Store the status name in the request object
-
-              request.statusName = statusName;
-            },
-            error: (error: Error) => {
-              console.log(`Error fetching status name for request ${request.requestId}: ${error.message}`);
-            },
-          });
-          // Format the date to show only the date part
-          request.dateOfTravel = this.datepipe.transform(request.dateOfTravel, 'dd/LL/yyyy') || '';
-        });
-
-        // Update the component's requestData array
+        data.forEach((request)=>{
+          const returnDate = request.returnDate === null ? ' ' : request.returnDate;
+          request.departureDate = this.datepipe.transform(request.departureDate, 'dd/LL/yyyy') || '';
+          request.returnDate = this.datepipe.transform(request.returnDate, 'dd/LL/yyyy') || '';
+        })
         this.requestData = data;
-
-        console.log("REq" + this.requestData[0].statusName);
-
+        console.log(this.requestData);
       },
       error: (error: Error) => {
         console.log("Error has occurred, " + error.message);

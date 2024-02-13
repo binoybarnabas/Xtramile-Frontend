@@ -1,81 +1,98 @@
 <div class="login_container">
-
-    <div class="left_section">
-
-        <div class="logo_container">
-                <h3 class="logo"> <i class="icon ri-git-pr-draft-fill"></i> XtraMile</h3>
-        </div>
-
-        <div class="login_form_container">
-
-            <div class="main_heading_section">
-                <h4>Login With XtraMile</h4>
-                <p>Lorem Ipsum is simple dummy text</p>
-            </div>
-            <div class="form_section">
-                
-                <form [formGroup]="loginForm" (ngSubmit)="login()" class="login_form">
-
-                    <div class="form_input_container">
-
-                        <label class="label">UserName</label>
-                        <input formControlName="email" [ngClass]= " invalidCredentials ? 'input_field invalid' : 'input_field'"  type="text" placeholder="enter username">
-                       
-                        <span class="form_error"
-                        *ngIf="!invalidCredentials && loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-                           Enter a valid username
-                       </span>
-
-                    </div>
-                   
-                    <div class="form_input_container">
-
-                        <label class="label">Password</label>
-                        <input formControlName="password" [ngClass]= " invalidCredentials ? 'input_field invalid' : 'input_field'" type="password" placeholder="enter password">
-                        
-                        <span class="form_error"
-                        *ngIf="!invalidCredentials && loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-                           Enter a valid password
-                        </span>
-
-                    </div>
-
-                    <div class="forgot_password_section">
-                        <span class="remember"><input class="checkbox" type="checkbox"> Remember Me</span>
-                        <span class="forgot">Forgot Password ? </span>
-                    </div>
-
-                    <div class="form_submit_container">
-
-                        <div class="btn_container">
-                            <button type="submit" class="login_btn" [disabled] = 'loginForm.invalid'>
-                                LogIn
-                            </button>
-                        </div>
-
-                        <span class="form_error"
-                        *ngIf="invalidCredentials" >
-                           Invalid Credentials!
-                        </span>
-
-                    </div>
-
-
-                </form>
-
-            </div>
-
-        </div>
-        
+  <div class="left_section">
+    <div class="logo_container">
+      <h3 class="logo"><i class="icon ri-git-pr-draft-fill"></i> XtraMile</h3>
     </div>
 
-    <div class="right_section">
-        
-        <div class="img_container">
+    <div class="login_form_container">
+      <div class="main_heading_section">
+        <h4>Login to XtraMile</h4>
+        <p>Welcome to Xtramile, your travel partner...</p>
+      </div>
+      <div class="form_section">
+        <div *ngIf="isLoading" class="loader"></div>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="login_form">
+          <div class="form_input_container">
+            <label class="label">Email</label>
+            <input
+              formControlName="email"
+              [ngClass]="
+                invalidCredentials ? 'input_field invalid' : 'input_field'
+              "
+              type="text"
+              placeholder="enter email"
+            />
 
-            <img src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
-        </div>
+            <span
+              class="form_error"
+              *ngIf="
+                !invalidCredentials &&
+                loginForm.get('email')?.invalid &&
+                loginForm.get('email')?.touched
+              "
+            >
+              Enter a valid username
+            </span>
+          </div>
 
+          <div class="form_input_container">
+            <label class="label">Password</label>
+            <input
+              formControlName="password"
+              [ngClass]="
+                invalidCredentials ? 'input_field invalid' : 'input_field'
+              "
+              type="password"
+              placeholder="enter password"
+            />
+
+            <span
+              class="form_error"
+              *ngIf="
+                !invalidCredentials &&
+                loginForm.get('password')?.invalid &&
+                loginForm.get('password')?.touched
+              "
+            >
+              Enter a valid password
+            </span>
+          </div>
+
+          <div class="forgot_password_section">
+            <span class="remember"
+              ><input class="checkbox" type="checkbox" /> Remember Me</span
+            >
+            <span class="forgot" (click)="openForgotPasswordModal()"
+              >Forgot Password ?
+            </span>
+          </div>
+
+          <div class="form_submit_container">
+            <div class="btn_container">
+              <button
+                type="submit"
+                class="login_btn"
+                [disabled]="loginForm.invalid"
+              >
+                LogIn
+              </button>
+            </div>
+
+            <span class="form_error" *ngIf="invalidCredentials">
+              Invalid Credentials!
+            </span>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 
+  <div class="right_section">
+    <div class="img_container">
+      <img
+        src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg"
+        alt=""
+      />
+    </div>
+  </div>
 </div>

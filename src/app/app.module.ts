@@ -9,7 +9,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
@@ -99,9 +99,19 @@ import { LoginComponent } from './components/ui/login/login.component';
 import { DescriptionModalComponent } from './components/ui/description-modal/description-modal.component';
 import { TravelRequestCardComponent } from './components/ui/travel-request-card/travel-request-card.component';
 import { TimestampToDatePipe } from './pipes/timeStampToDate/timestamp-to-date.pipe';
-import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ForgotPasswordModalComponent } from './components/ui/login/forgot-password-modal/forgot-password-modal.component';
+import { HttpInterceptService } from './http-intercept.service';
+import { DashboardUpcomingTripComponent } from './components/ui/dashboard-upcoming-trip/dashboard-upcoming-trip/dashboard-upcoming-trip.component';
+import { DashboardProgressComponent } from './components/ui/dashboard-progress/dashboard-progress/dashboard-progress.component';
+import { DashboardCardComponent } from './components/ui/dashboard-card/dashboard-card/dashboard-card.component';
+import { StatusPipe } from './pipes/Status/status.pipe';
+import { NotificationsComponent } from './components/ui/notifications/notifications.component';
+import { DashboardMapComponent } from './components/ui/dashboard-map/dashboard-map/dashboard-map.component';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+// import { BarChartComponent } from './components/ui/bar-chart/bar-chart.component';import { FileUploadComponent } from './file-upload/file-upload.component';
 import { TravelRequestCardModalComponent } from './components/ui/travel-request-card-modal/travel-request-card-modal.component';
 import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 
 @NgModule({
@@ -194,7 +204,15 @@ import { TravelOptionViewerComponent } from './features/employee/myRequests/empl
     TimestampToDatePipe,
     FileUploadComponent,
     TravelRequestCardModalComponent,
-    TravelOptionViewerComponent
+    TravelOptionViewerComponent,
+    ForgotPasswordModalComponent,
+    // BarChartComponent,
+    DashboardUpcomingTripComponent,
+    DashboardProgressComponent,
+    DashboardCardComponent,
+    StatusPipe,
+    NotificationsComponent,
+    DashboardMapComponent
   ]
   ,
 
@@ -210,6 +228,7 @@ import { TravelOptionViewerComponent } from './features/employee/myRequests/empl
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
+    TypeaheadModule.forRoot(),
     // ToastrModule.forRoot({
     //   timeOut: 3000,
     //   positionClass: 'toast-center', // Set to center of the screen
@@ -219,7 +238,9 @@ import { TravelOptionViewerComponent } from './features/employee/myRequests/empl
     ModalModule.forRoot()
 
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

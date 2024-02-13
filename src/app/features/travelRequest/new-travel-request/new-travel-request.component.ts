@@ -485,28 +485,36 @@ export class NewTravelRequestComponent {
 
 
   }
-
+  isLoading: boolean = false;
 
   //Send Request Form Data!
   onEmployeeTravelRequestFormSubmit() {
+    // Show loader
+    this.isLoading = true;
 
-    console.log("Val" + this.travelRequestForm.value)
+    console.log("Val" + this.travelRequestForm.value);
     this.requestService.sendEmployeeNewTravelRequest(this.travelRequestForm.value).subscribe({
-
       next: (response) => {
-        console.log(response)
-        alert("Request Submitted Successfully!")
+        // Hide loader
+        this.isLoading = false;
+
+        console.log(response);
+        alert("Request Submitted Successfully!");
         this.router.navigate(['employee/pending']);
       },
       error: (error: Error) => {
-        alert("Error has occured" + error.message);
+        // Hide loader
+        this.isLoading = false;
+
+        alert("Error has occurred: " + error.message);
       },
       complete: () => {
+        // Hide loader
+        this.isLoading = false;
+
         console.log("COMPLETED");
       }
-
     });
-
   }
 
   //Manager forwarding the travel request form

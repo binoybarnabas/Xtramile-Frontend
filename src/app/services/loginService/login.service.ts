@@ -23,4 +23,9 @@ export class LoginService {
     return this.isLoggedIn;
   }
 
+  updatePassword(email: string, password: string): Observable<any>{
+    const body = {email: email, password: password}
+    return this.httpClient.patch('http://localhost:5190/api/employee/update/password', body)
+  }
+
 }

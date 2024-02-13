@@ -1,0 +1,12 @@
+.card {
+    width: 22em; /* Adjust width of the card */
+    height: 15em; /* Adjust height of the card */
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+  }
+  
+.card-body {
+    padding: 1.25em;
+}

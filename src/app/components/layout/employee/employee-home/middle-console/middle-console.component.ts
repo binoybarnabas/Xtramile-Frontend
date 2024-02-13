@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 
 
@@ -10,25 +11,45 @@ import { SideNavBarService } from 'src/app/services/employeeServices/layoutServi
 export class MiddleConsoleComponent {
 
   subscription: any;
-  router: any;
+  
 
   isSideNavBarCollapsed: any;
   newReqFormSubMenuValue: number;
 
+  currentRoutePath? : string 
   //main heading of middle console 
-  mainHeading = "New Travel Request"
+  mainHeading = ""
 
-  constructor(private sideNavBarService: SideNavBarService) {
-    this.newReqFormSubMenuValue = 1;
+  constructor(private sideNavBarService: SideNavBarService, private router:Router) {
+    this.newReqFormSubMenuValue = 1;  
 
+    
   }
 
   //sus
   ngDoCheck() {
-
     this.isSideNavBarCollapsed = this.sideNavBarService.isSideNavBarCollapsed;
-
+    this.currentRoutePath = this.router.url;
+   
+    if(this.currentRoutePath == '/employee/request'){
+      this.mainHeading = 'New Travel Request'
+    }
+    else if(this.currentRoutePath == '/employee/pending'){
+      this.mainHeading = 'Pending approval'
+    }
+    else if(this.currentRoutePath == '/employee/ongoing'){
+      this.mainHeading = 'Ongoing Travel'
+    }
+    else if(this.currentRoutePath == '/employee/history'){
+      this.mainHeading = 'Request History'
+    }
+    
   }
+
+  ngOnInit(){
+   
+  }
+
 
 
 

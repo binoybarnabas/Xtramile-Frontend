@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
@@ -13,17 +14,36 @@ export class TravelRequestCardComponent {
 
   @Input() data: any[] = []
 
-
+  statusChangeUser!: string
   currentLoggedInUserRole: string;
 
-  constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService, private router: Router, private activatedRoute: ActivatedRoute,
+    private requestService: RequestService) {
 
     this.currentLoggedInUserRole = commonAPIService.currentLoggedInUserRole;
-
   }
 
 
-  //View Travel Options send by travel admin
+  cancelRequest(requestId: number) {
+    console.log(this.currentLoggedInUserRole);
+    if (this.currentLoggedInUserRole === 'employee') {
+      this.requestService.employeeCancelRequest(requestId).subscribe({
+        next: (data) => {
+          console.log(data)
+          console.log("success");
+        },
+        error: (error: Error) => {
+          console.log(error)
+        },
+        complete: () => {
+          console.log("done");
+        }
+      });
+    }
+    else if (this.currentLoggedInUserRole == 'manager') {
+
+    }
+  }  //View Travel Options send by travel admin
   viewTravelOptions(requestId: number) {
 
     const queryParams = { requestId: requestId }
