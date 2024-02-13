@@ -101,6 +101,8 @@ import { TravelRequestCardComponent } from './components/ui/travel-request-card/
 import { TimestampToDatePipe } from './pipes/timeStampToDate/timestamp-to-date.pipe';
 import { ForgotPasswordModalComponent } from './components/ui/login/forgot-password-modal/forgot-password-modal.component';
 import { DashboardUpcomingTripComponent } from './components/ui/dashboard-upcoming-trip/dashboard-upcoming-trip/dashboard-upcoming-trip.component';
+import { DashboardProgressComponent } from './components/ui/dashboard-progress/dashboard-progress/dashboard-progress.component';
+import { DashboardCardComponent } from './components/ui/dashboard-card/dashboard-card/dashboard-card.component';
 
 
 @NgModule({
@@ -192,7 +194,9 @@ import { DashboardUpcomingTripComponent } from './components/ui/dashboard-upcomi
     TravelRequestCardComponent,
     TimestampToDatePipe,
     ForgotPasswordModalComponent,
-    DashboardUpcomingTripComponent
+    DashboardUpcomingTripComponent,
+    DashboardProgressComponent,
+    DashboardCardComponent
   ]
   ,
 

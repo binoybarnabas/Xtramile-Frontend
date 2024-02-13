@@ -15,4 +15,7 @@ export class EmployeeDashboardService {
   getUpcomingTripDetails(employeeId: number): Observable<any> {
     return this.http.get(`http://localhost:5190/api/employee/dashboard/upcoming/trip/${employeeId}`);
   }
+  getRequestProgress(employeeId: number): Observable<any> {
+    return this.http.get(`http://localhost:5190/api/employee/dashboard/employee/progress/${employeeId}`);
+  }
 }
