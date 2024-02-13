@@ -34,11 +34,14 @@ export class TravelAdminIncomingTravelRequestsComponent {
     this.apiservice.getAllRequestByDate(this.sqlDatetimeFormat).subscribe({
       next: (data) => {
         this.requestData = data.map((request: any) => {
+          const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
           return {
             ...request,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+            priorityName: priorityName            
           };
         }); 
+        console.log(this.requestData)
       },
       error: (err) => {
         // Handle the error
@@ -65,9 +68,11 @@ export class TravelAdminIncomingTravelRequestsComponent {
     this.apiservice.getAllRequestByEmployeeName(searchByName).subscribe({
       next: (data : any) => {
         this.requestData = data.map((request: any) => {
+          const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
           return {
             ...request,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+            priorityName: priorityName
           };
         });
         console.log("employee request search by name list");
@@ -91,9 +96,11 @@ export class TravelAdminIncomingTravelRequestsComponent {
     this.apiservice.getIncomingRequests(this.currentPage,this.pageSize).subscribe((data: any) =>
         {
           this.requestData = data.travelRequest.map((request: any) => {
+            const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
             return {
               ...request,
               createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+              priorityName: priorityName
             };
           });          
           this.totalItems= data.pageCount;
@@ -119,9 +126,11 @@ export class TravelAdminIncomingTravelRequestsComponent {
         next: (data:any) => {
           console.log(data);
           this.requestData = data.travelRequest.map((request: any) => {
+            const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
             return {
               ...request,
               createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+              priorityName: priorityName
             };
           });
           this.totalItems = data.totalPages;
@@ -136,9 +145,11 @@ export class TravelAdminIncomingTravelRequestsComponent {
         next: (data:any) => {
           console.log(data);
           this.requestData = data.travelRequest.map((request: any) => {
+            const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
             return {
               ...request,
               createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+              priorityName: priorityName
             };
           });
           this.totalItems = data.totalPages;
@@ -170,11 +181,15 @@ export class TravelAdminIncomingTravelRequestsComponent {
         this.apiservice.getIncomingRequests(this.currentPage,this.pageSize).subscribe((data: any) =>
         {
           this.requestData = data.travelRequest.map((request: any) => {
+            const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
             return {
               ...request,
               createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+              priorityName: priorityName
+
             };
-          });   
+          }); 
+          console.log(this.requestData)  
           this.totalItems= data.pageCount;
         });
      
@@ -185,9 +200,11 @@ export class TravelAdminIncomingTravelRequestsComponent {
     this.apiservice.getIncomingRequests(this.currentPage,this.pageSize).subscribe((data: any) =>
     {
       this.requestData = data.travelRequest.map((request: any) => {
+        const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
         return {
           ...request,
           createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+          priorityName: priorityName
         };
       });
       this.totalItems= data.pageCount;

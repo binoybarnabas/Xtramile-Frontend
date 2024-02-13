@@ -35,8 +35,13 @@ export class ManagerIncomingTravelRequestsComponent {
     this.sqlDatetimeFormat = selectedDate.toISOString().slice(0, 10);
     this.apiservice.getEmployeeRequestByDate(this.managerId,this.sqlDatetimeFormat,this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.employeeRequest = data;
-      },
+        this.employeeRequest = data.employeeRequest.map((request: any) => {
+          return {
+            ...request,
+            date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+          };
+        });      },
       error: (err) => {
         // Handle the error
         console.error('Error:', err);
@@ -64,7 +69,7 @@ export class ManagerIncomingTravelRequestsComponent {
           return {
             ...request,
             date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
-            employeeNameAndEmail: `${request.employeeName}\n${request.employeeEmail}`
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
           };
         });
         console.log("employee request search by name list");
@@ -118,7 +123,7 @@ export class ManagerIncomingTravelRequestsComponent {
           return {
             ...request,
             date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
-            employeeNameAndEmail: `${request.employeeName}\n${request.employeeEmail}`
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
           };
         });
         console.log(this.employeeRequest)
@@ -150,7 +155,7 @@ export class ManagerIncomingTravelRequestsComponent {
             return {
               ...request,
               date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
-              employeeNameAndEmail: `${request.employeeName}\n${request.employeeEmail}`
+              employeeNameAndEmail: `${request.employeeName}\n${request.email}`
             };
           });
           this.totalItems=data.totalCount;
@@ -167,7 +172,7 @@ export class ManagerIncomingTravelRequestsComponent {
             return {
               ...request,
               date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
-              employeeNameAndEmail: `${request.employeeName}\n${request.employeeEmail}`
+              employeeNameAndEmail: `${request.employeeName}\n${request.email}`
             };
           });
           this.totalItems=data.totalCount;

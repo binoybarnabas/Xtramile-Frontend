@@ -29,7 +29,15 @@
             </ng-container>
 
             <ng-template #singleLine>
-              {{ row[prop] }}
+              <!-- Apply the pipe to transform the status value -->
+              <ng-container
+                *ngIf="headers[i] === 'Status'; else defaultContent"
+              >
+                {{ row[prop] | status }}
+              </ng-container>
+              <ng-template #defaultContent>
+                {{ row[prop] }}
+              </ng-template>
             </ng-template>
           </td>
         </tr>

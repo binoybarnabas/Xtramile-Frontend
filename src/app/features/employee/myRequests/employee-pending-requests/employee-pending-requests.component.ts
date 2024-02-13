@@ -35,7 +35,9 @@ export class EmployeePendingRequestsComponent {
     this.subscription = this.requestService.getRequestsPendingStatus(empId).subscribe({
       next: (data) => {
         data.forEach((request)=>{
-          request.dateOfTravel = this.datepipe.transform(request.dateOfTravel, 'dd/LL/yyyy') || '';
+          const returnDate = request.returnDate === null ? ' ' : request.returnDate;
+          request.departureDate = this.datepipe.transform(request.departureDate, 'dd/LL/yyyy') || '';
+          request.returnDate = this.datepipe.transform(request.returnDate, 'dd/LL/yyyy') || '';
         })
         this.requestData = data;
         console.log(this.requestData);
