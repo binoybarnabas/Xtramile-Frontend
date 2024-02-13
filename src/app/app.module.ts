@@ -106,6 +106,8 @@ import { DashboardProgressComponent } from './components/ui/dashboard-progress/d
 import { DashboardCardComponent } from './components/ui/dashboard-card/dashboard-card/dashboard-card.component';
 import { StatusPipe } from './pipes/Status/status.pipe';
 import { NotificationsComponent } from './components/ui/notifications/notifications.component';
+import { DashboardMapComponent } from './components/ui/dashboard-map/dashboard-map/dashboard-map.component';
+
 
 @NgModule({
   declarations: [
@@ -201,6 +203,7 @@ import { NotificationsComponent } from './components/ui/notifications/notificati
     DashboardCardComponent,
     StatusPipe,
     NotificationsComponent,
+    DashboardMapComponent
   ]
   ,
 
