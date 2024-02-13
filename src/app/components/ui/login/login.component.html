@@ -6,20 +6,21 @@
 
     <div class="login_form_container">
       <div class="main_heading_section">
-        <h4>Login With XtraMile</h4>
-        <p>Lorem Ipsum is simple dummy text</p>
+        <h4>Login to XtraMile</h4>
+        <p>Welcome to Xtramile, your travel partner...</p>
       </div>
       <div class="form_section">
+        <div *ngIf="isLoading" class="loader"></div>
         <form [formGroup]="loginForm" (ngSubmit)="login()" class="login_form">
           <div class="form_input_container">
-            <label class="label">UserName</label>
+            <label class="label">Email</label>
             <input
               formControlName="email"
               [ngClass]="
                 invalidCredentials ? 'input_field invalid' : 'input_field'
               "
               type="text"
-              placeholder="enter username"
+              placeholder="enter email"
             />
 
             <span

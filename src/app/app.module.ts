@@ -9,7 +9,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
@@ -100,6 +100,7 @@ import { DescriptionModalComponent } from './components/ui/description-modal/des
 import { TravelRequestCardComponent } from './components/ui/travel-request-card/travel-request-card.component';
 import { TimestampToDatePipe } from './pipes/timeStampToDate/timestamp-to-date.pipe';
 import { ForgotPasswordModalComponent } from './components/ui/login/forgot-password-modal/forgot-password-modal.component';
+import { HttpInterceptService } from './http-intercept.service';
 import { DashboardUpcomingTripComponent } from './components/ui/dashboard-upcoming-trip/dashboard-upcoming-trip/dashboard-upcoming-trip.component';
 import { DashboardProgressComponent } from './components/ui/dashboard-progress/dashboard-progress/dashboard-progress.component';
 import { DashboardCardComponent } from './components/ui/dashboard-card/dashboard-card/dashboard-card.component';
@@ -221,7 +222,9 @@ import { DashboardCardComponent } from './components/ui/dashboard-card/dashboard
     ModalModule.forRoot()
 
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
