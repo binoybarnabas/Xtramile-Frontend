@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
@@ -32,7 +33,15 @@ export class TravelAdminIncomingTravelRequestsComponent {
     this.sqlDatetimeFormat = selectedDate.toISOString().slice(0, 10);
     this.apiservice.getAllRequestByDate(this.sqlDatetimeFormat).subscribe({
       next: (data) => {
-        this.requestData = data;
+        this.requestData = data.map((request: any) => {
+          const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+          return {
+            ...request,
+            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+            priorityName: priorityName            
+          };
+        }); 
+        console.log(this.requestData)
       },
       error: (err) => {
         // Handle the error
@@ -58,7 +67,14 @@ export class TravelAdminIncomingTravelRequestsComponent {
 
     this.apiservice.getAllRequestByEmployeeName(searchByName).subscribe({
       next: (data : any) => {
-        this.requestData = data;
+        this.requestData = data.map((request: any) => {
+          const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+          return {
+            ...request,
+            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+            priorityName: priorityName
+          };
+        });
         console.log("employee request search by name list");
         console.log(data);
         console.log(this.requestData);
@@ -79,8 +95,15 @@ export class TravelAdminIncomingTravelRequestsComponent {
   fetchEmployeeRequest() {
     this.apiservice.getIncomingRequests(this.currentPage,this.pageSize).subscribe((data: any) =>
         {
-          this.requestData = data.travelRequest;
-          this.totalItems= data.pageCount();
+          this.requestData = data.travelRequest.map((request: any) => {
+            const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+            return {
+              ...request,
+              createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+              priorityName: priorityName
+            };
+          });          
+          this.totalItems= data.pageCount;
         });
   }
 
@@ -102,7 +125,14 @@ export class TravelAdminIncomingTravelRequestsComponent {
       this.apiservice.getAllRequestSortByEmployeeName(this.currentPage,this.pageSize).subscribe({
         next: (data:any) => {
           console.log(data);
-          this.requestData = data.travelRequest;
+          this.requestData = data.travelRequest.map((request: any) => {
+            const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+            return {
+              ...request,
+              createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+              priorityName: priorityName
+            };
+          });
           this.totalItems = data.totalPages;
         },
         error: (error: any) => {
@@ -114,7 +144,14 @@ export class TravelAdminIncomingTravelRequestsComponent {
       this.apiservice.getAllRequestSortByDate(this.currentPage,this.pageSize).subscribe({
         next: (data:any) => {
           console.log(data);
-          this.requestData = data.travelRequest;
+          this.requestData = data.travelRequest.map((request: any) => {
+            const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+            return {
+              ...request,
+              createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+              priorityName: priorityName
+            };
+          });
           this.totalItems = data.totalPages;
         },
         error: (error: any) => {
@@ -133,7 +170,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
   }
 
 
-  constructor(private apiservice: TravelAdminTravelRequestsService, private router: Router){
+  constructor(private apiservice: TravelAdminTravelRequestsService, private router: Router, private datePipe: DatePipe){
     
   }
 
@@ -143,8 +180,17 @@ export class TravelAdminIncomingTravelRequestsComponent {
         
         this.apiservice.getIncomingRequests(this.currentPage,this.pageSize).subscribe((data: any) =>
         {
-          this.requestData = data.travelRequest;
-          this.totalItems= data.pageCount();
+          this.requestData = data.travelRequest.map((request: any) => {
+            const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+            return {
+              ...request,
+              createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+              priorityName: priorityName
+
+            };
+          }); 
+          console.log(this.requestData)  
+          this.totalItems= data.pageCount;
         });
      
   }
@@ -153,8 +199,15 @@ export class TravelAdminIncomingTravelRequestsComponent {
     this.currentPage = event.page;
     this.apiservice.getIncomingRequests(this.currentPage,this.pageSize).subscribe((data: any) =>
     {
-      this.requestData = data.travelRequest;
-      this.totalItems= data.pageCount();
+      this.requestData = data.travelRequest.map((request: any) => {
+        const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+        return {
+          ...request,
+          createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+          priorityName: priorityName
+        };
+      });
+      this.totalItems= data.pageCount;
     });
   }
  

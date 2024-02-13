@@ -3,7 +3,8 @@ export interface PendingRequest {
         requestId: number;
         projectName: string;
         reasonOfTravel: string;
-        dateOfTravel: string;
+        departureDate: string;
         travelMode: string;
         statusModifiedBy:string;
+        returnDate: string
 }
