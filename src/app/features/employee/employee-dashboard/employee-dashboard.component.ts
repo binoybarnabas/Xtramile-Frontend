@@ -11,9 +11,11 @@ export class EmployeeDashboardComponent {
   cardTitles: string[] = [];
   cardData: string[] = [];
   showModal: boolean = false;
+  currentCountry: string='';
 
 constructor(private service: EmployeeDashboardService) {
   this.fetchProgress();
+  this.fetchCountryName();
 }
 
 fetchProgress() {
@@ -34,5 +36,15 @@ onClickCard() {
 closeModal() {
   // Set the flag to hide the modal
   this.showModal = false;
+}
+fetchCountryName() {
+  this.service.getUpcomingTripDetails(this.employeeId).subscribe((data: any) => {
+    if (data) {
+      this.currentCountry = data[0].destinationCountry;
+    } else {
+      // Set a default country or an empty string when there is no data
+      this.currentCountry = ''; 
+    }
+  });
 }
 }
