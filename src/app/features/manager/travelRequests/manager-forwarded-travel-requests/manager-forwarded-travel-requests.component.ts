@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
@@ -17,8 +18,8 @@ export class ManagerForwardedTravelRequestsComponent {
   totalItems = 0;
   currentPage = 1;
   tableHeaders=['RequestID','Employee','ProjectCode','Date','Status'] ;
-  dataHeaders=['requestId','employee','projectCode','date','status'] ;
-  constructor( private apiService: ManagerTravelRequestsService,private router:Router)
+  dataHeaders=['requestId','employeeNameAndEmail','projectCode','date','status'] ;
+  constructor( private apiService: ManagerTravelRequestsService,private router:Router, private datePipe: DatePipe)
   {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
@@ -36,7 +37,13 @@ export class ManagerForwardedTravelRequestsComponent {
     console.log("inside get forward req")
     this.apiService.getManagerForwardedRequest(this.managerId,this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.travelRequest = data.employeeRequest;
+        this.travelRequest = data.employeeRequest.map((request: any) => {
+          return {
+            ...request,
+            date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+          };
+        });
         this.totalItems= data.totalCount;
         
         console.log(data);

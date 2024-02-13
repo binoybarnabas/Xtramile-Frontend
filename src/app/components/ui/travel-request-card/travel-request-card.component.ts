@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-travel-request-card',
@@ -16,9 +17,11 @@ export class TravelRequestCardComponent {
 
   statusChangeUser!: string
   currentLoggedInUserRole: string;
+  // bsModalRef!: BsModalRef;
+
 
   constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService, private router: Router, private activatedRoute: ActivatedRoute,
-    private requestService: RequestService) {
+    private requestService: RequestService,private modalService: BsModalService) {
 
     this.currentLoggedInUserRole = commonAPIService.currentLoggedInUserRole;
   }
@@ -26,17 +29,22 @@ export class TravelRequestCardComponent {
 
   cancelRequest(requestId: number) {
     console.log(this.currentLoggedInUserRole);
-    if (this.currentLoggedInUserRole === 'employee') {
-      this.requestService.employeeCancelRequest(requestId).subscribe({
-        next: (data) => {
-          console.log(data)
-          console.log("success");
-        },
-        error: (error: Error) => {
-          console.log(error)
-        },
-        complete: () => {
-          console.log("done");
+    if(this.currentLoggedInUserRole === 'employee'){
+      this.bsModalRef = this.modalService.show(ConfirmationModalComponent);
+      this.bsModalRef.content.confirmed.subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          this.requestService.employeeCancelRequest(requestId).subscribe({
+            next: (data) => {
+              console.log(data);
+              console.log("success");
+            },
+            error: (error: Error) => {
+              console.log(error);
+            },
+            complete: () => {
+              console.log("done");
+            }
+          });
         }
       });
     }
