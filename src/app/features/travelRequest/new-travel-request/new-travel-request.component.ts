@@ -230,7 +230,7 @@ export class NewTravelRequestComponent {
         next: (data) => {
           this.travelRequestDetailViewModel = data
           // Getting the employee profile info
-
+          console.log(this.currentLoggedInUserRole + "current role");
           console.log(data)
 
           if (this.currentLoggedInUserRole != 'employee') {
