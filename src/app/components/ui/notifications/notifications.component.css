@@ -1,0 +1,17 @@
+
+.notification_container{
+    border-radius: 0.9rem;
+    display: flex;
+    width: 90%;
+    justify-content: space-around;
+    position: absolute;
+    border: none;
+    background-color: white;
+    padding: 0;
+}
+
+.notification_container .heading{
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
