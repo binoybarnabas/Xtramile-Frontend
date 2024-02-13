@@ -100,6 +100,10 @@ export class RequestService {
     );
   }
 
-
+  getEmployeeRequestNotification(empId: number): Observable <any>{
+    const url="http://localhost:5190/api/employee/request/notification"
+    const params= new HttpParams().set('empId',empId);
+    return this.http.get(url,{params});
+  }
 
 }

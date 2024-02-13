@@ -112,5 +112,10 @@ export class ManagerTravelRequestsService {
     return this.http.post(this.apiUrl+`/reportingmanager/travel/request/deny?reqId=${requestId}`, body);
   }
 
+  getManagerRequestNotification(empId: number): Observable <any>{
+    const url="http://localhost:5190/api/reportingmanager/request/notification"
+    const params= new HttpParams().set('empId',empId);
+    return this.http.get(url,{params});
+  }
 
 }

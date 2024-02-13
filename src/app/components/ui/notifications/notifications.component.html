@@ -1,0 +1,11 @@
+<div class="notification_container"  *ngIf="requestNotification.length > 0"> 
+    
+    <div class="heading" *ngFor="let not of requestNotification">
+        <h6>{{not.requestCode}} </h6>
+        <p>{{not.statusName}} &nbsp; &nbsp; {{not.date | date:'short'}} </p>
+    </div>
+
+</div>
+<div  *ngIf="requestNotification.length == 0">  
+    <p>No new notifications</p>
+</div>
