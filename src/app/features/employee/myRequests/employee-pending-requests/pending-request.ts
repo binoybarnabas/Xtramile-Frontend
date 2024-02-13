@@ -5,4 +5,5 @@ export interface PendingRequest {
         reasonOfTravel: string;
         dateOfTravel: string;
         travelMode: string;
+        statusModifiedBy:string;
 }
