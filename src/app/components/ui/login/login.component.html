@@ -10,6 +10,7 @@
         <p>Welcome to Xtramile, your travel partner...</p>
       </div>
       <div class="form_section">
+        <div *ngIf="isLoading" class="loader"></div>
         <form [formGroup]="loginForm" (ngSubmit)="login()" class="login_form">
           <div class="form_input_container">
             <label class="label">Email</label>
