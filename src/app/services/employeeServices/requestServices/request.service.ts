@@ -11,6 +11,7 @@ import { PendingRequest } from 'src/app/features/employee/myRequests/employee-pe
 
 export class RequestService {
 
+
   private apiURL = 'http://localhost:5190/api';
 
   private apiURL2 = 'http://localhost:5190/api/Employee/info';
@@ -100,23 +101,40 @@ export class RequestService {
     );
   }
 
-  getEmployeeRequestNotification(empId: number): Observable <any>{
-    const url="http://localhost:5190/api/employee/request/notification"
-    const params= new HttpParams().set('empId',empId);
-    return this.http.get(url,{params});
+
+  getTravelOptionsByReqId(reqId: number): Observable<any> {
+
+    return this.http.get<any>(
+      `http://localhost:5190/api/availableoptions/get_travel_options_by_request_id/${reqId}`
+    );
+
+  }
+
+
+
+  //Submit selected option with optionId, employeeId, requestId
+  submitSelectedOption(requestId: number, employeeId: number, optionId: number): Observable<any> {
+    const body = { requestId: requestId, empId: employeeId, optionId: optionId };
+    console.log(body)
+    return this.http.post(this.apiURL + '/employee/submit_selected_travel_option', body);
+  }
+  getEmployeeRequestNotification(empId: number): Observable<any> {
+    const url = "http://localhost:5190/api/employee/request/notification"
+    const params = new HttpParams().set('empId', empId);
+    return this.http.get(url, { params });
   }
 
   employeeCancelRequest(requestId: number): Observable<any> {
     const url = "http://localhost:5190/api/employee/request/cancel";
     const userData = localStorage.getItem('userData');
-    let userDataParsed : any
-    if(userData){
-       userDataParsed = JSON.parse(userData);
+    let userDataParsed: any
+    if (userData) {
+      userDataParsed = JSON.parse(userData);
     }
-   
+
     const empId = userDataParsed.empId;
-    console.log(requestId+" "+empId);
-    return this.http.post<any>(url, 
-      {requestId,empId});
+    console.log(requestId + " " + empId);
+    return this.http.post<any>(url,
+      { requestId, empId });
   }
 }

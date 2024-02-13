@@ -63,7 +63,13 @@ export interface TravelRequestDetailViewModel {
 
     additionalComments: string;
 
-    priority?: string
+    priority?: string;
+
+
+    primaryStatus: string;
+    employeeName: string;
+    passportFileUrl: string;
+    travelAuthMailFileUrl: string;
 
 }
 

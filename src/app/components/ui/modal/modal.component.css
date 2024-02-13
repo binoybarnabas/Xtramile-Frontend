@@ -1,26 +1,144 @@
 .modal-header {
-    background-color: var(--second-color);
-    color: var(--card-bg-color);
-    border-bottom: none;
-  }
-  
-  .modal-header .exit_button{
-      background-color: var(--second-color);
-      border-radius: 1rem;
-      border-color: #fff;
-      color: var(--card-bg-color);
-  }
-  
-  .modal-body {
-    padding: 1rem;
-  }
-  
-  .modal-body .form-group .validation_message {
-    color: var(--error-color);
-    font-size: var(--extra-small-font-size);
-    margin-block: 0.1em;
-  }
-  
-  .modal-body .disabled_btn {
-    opacity: 0.5; 
-  }
+  background-color: var(--second-color);
+  color: var(--card-bg-color);
+  border-bottom: none;
+}
+
+.modal-header .exit_button {
+  background-color: var(--second-color);
+  border-radius: 1rem;
+  border-color: #fff;
+  color: var(--card-bg-color);
+}
+
+.modal-body {
+  padding: 1rem;
+}
+
+.modal-body .form-group .validation_message {
+  color: var(--error-color);
+  font-size: var(--extra-small-font-size);
+  margin-block: 0.1em;
+}
+
+.modal-body .disabled_btn {
+  opacity: 0.5;
+}
+
+
+
+
+
+
+.file_drop_container {
+  display: flex;
+}
+
+
+.file_drop_container .form_container {
+  width: 100%;
+  background: var(--menu-hover-color);
+  padding: 0.5rem;
+  border-radius: var(--normal-border-radius);
+}
+
+.file_drop_container .form_container .form_input_container {
+  margin-top: 0.5rem;
+}
+
+.file_drop_container .form_container .form_input_container .text_input {
+  border-radius: var(--normal-border-radius);
+  height: 43px;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  font-size: var(--small-font-size);
+}
+
+
+
+.file_drop_container .form_container .file_input {
+  /* Your styles here */
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: var(--normal-border-radius);
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: var(--small-font-size);
+  width: 100%;
+  /* Add more styles as needed */
+}
+
+.file_drop_container .form_container .form_error {
+  color: var(--danger-color);
+  font-size: var(--extra-small-font-size);
+}
+
+
+.file_drop_container .form_container .img_preview_container {
+  margin: 0.5rem 0;
+  background-color: var();
+
+}
+
+.file_drop_container .form_container .img_preview_container .img_card {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
+
+
+
+.file_drop_container .form_container .img_preview_container .img_card .img {
+  max-width: 440px;
+  height: auto;
+  /* height: 250px; */
+  border-radius: var(--normal-border-radius);
+}
+
+
+.file_drop_container .form_container .file_submit_container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+}
+
+
+.file_drop_container .form_container .file_submit_container .cancel_btn_container .cancel_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--second-color);
+  background-color: transparent;
+  padding: 0.4rem;
+  width: 6rem;
+  font-size: var(--form-label-font-size);
+  border-radius: 5px;
+  color: var(--second-color);
+  font-weight: var(--active-font-weight);
+
+}
+
+.file_drop_container .form_container .file_submit_container .submit_btn_container .submit_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid var(--second-color);
+  background-color: var(--second-color);
+  padding: 0.4rem;
+  width: 6rem;
+  font-size: var(--form-label-font-size);
+  border-radius: 5px;
+  color: var(--card-bg-color);
+  font-weight: var(--active-font-weight);
+}
+
+
+.file_drop_container .form_container .file_submit_container .submit_btn_container .submit_btn:disabled:hover {
+  background-color: var(--error-color);
+  cursor: not-allowed;
+  border: var(--normal-button-border-size) solid var(--error-color);
+
+}

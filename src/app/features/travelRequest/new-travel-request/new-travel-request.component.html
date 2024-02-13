@@ -516,12 +516,26 @@
                         </div>
                     </div>
 
-                    <div class="form_elements">
-          
-                    </div>
+                  <div class="options_container">
 
-                 
+                    <ng-container *ngFor="let item of travelOptionsData">
 
+                        <div class="option_card">
+
+                            <div class="option_file">
+                                <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
+                            </div>
+                            <div class="description">
+                                <p>{{item.description}}</p>
+                                <!-- <i class="del_icon ri-delete-bin-line"></i> -->
+                            </div>
+
+                        </div>
+                    </ng-container>
+
+                  </div>
+
+                
                     <div class="form_submit_container">
 
                         <div class="reject_btn_container">
