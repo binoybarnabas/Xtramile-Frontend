@@ -33,7 +33,7 @@ export class TravelRequestCardModalComponent {
 
       next: (data) => {
         this.travelRequestDetailViewModel = data;
-
+        console.log(this.travelRequestDetailViewModel)
       },
       error: (error: Error) => { console.log("problems in fetching data") },
       complete: () => { console.log("get request by id is done") }

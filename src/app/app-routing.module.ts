@@ -41,6 +41,7 @@ import { LoginPageComponent } from './components/layout/login-page/login-page.co
 import { authGuard } from './auth.guard';
 import { LoginComponent } from './components/ui/login/login.component';
 
+import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -55,6 +56,7 @@ const routes: Routes = [
       { path: 'request', component: NewTravelRequestComponent },
       { path: 'pending', component: EmployeePendingRequestsComponent },
       { path: 'available_options', component: OptionviewCardComponent },
+      { path: 'view_travel_options', component: TravelOptionViewerComponent },
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },
       { path: 'profile', component: EmployeeProfileComponent }

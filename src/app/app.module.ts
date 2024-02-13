@@ -101,6 +101,7 @@ import { TravelRequestCardComponent } from './components/ui/travel-request-card/
 import { TimestampToDatePipe } from './pipes/timeStampToDate/timestamp-to-date.pipe';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { TravelRequestCardModalComponent } from './components/ui/travel-request-card-modal/travel-request-card-modal.component';
+import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 
 
 @NgModule({
@@ -192,7 +193,8 @@ import { TravelRequestCardModalComponent } from './components/ui/travel-request-
     TravelRequestCardComponent,
     TimestampToDatePipe,
     FileUploadComponent,
-    TravelRequestCardModalComponent
+    TravelRequestCardModalComponent,
+    TravelOptionViewerComponent
   ]
   ,
 

@@ -11,6 +11,7 @@ import { PendingRequest } from 'src/app/features/employee/myRequests/employee-pe
 
 export class RequestService {
 
+
   private apiURL = 'http://localhost:5190/api';
 
   private apiURL2 = 'http://localhost:5190/api/Employee/info';
@@ -98,6 +99,15 @@ export class RequestService {
     return this.http.get<any>(
       `http://localhost:5190/api/employee/viewpendingrequest/${empId}`
     );
+  }
+
+
+  getTravelOptionsByReqId(reqId: number): Observable<any> {
+
+    return this.http.get<any>(
+      `http://localhost:5190/api/availableoptions/get_travel_options_by_request_id/${reqId}`
+    );
+
   }
 
 
