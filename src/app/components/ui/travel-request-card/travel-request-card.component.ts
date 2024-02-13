@@ -10,13 +10,12 @@ export class TravelRequestCardComponent {
 
   @Input() data: any[] = []
 
-
+  statusChangeUser! : string
   currentLoggedInUserRole: string;
 
   constructor(private commonAPIService: CommonAPIService) {
 
     this.currentLoggedInUserRole = commonAPIService.currentLoggedInUserRole;
-
   }
 
 

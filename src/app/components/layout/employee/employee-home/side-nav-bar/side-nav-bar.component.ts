@@ -100,6 +100,8 @@ export class SideNavBarComponent {
     this.subMenu2ToggleValue = 0;
   }
 
+  dashboard = "dashboard";
+  
   /// routing based on the values from the keys in myRequest map
   navigateToRequest(destination : string) {
     console.log("inside navigate" + destination);
@@ -114,7 +116,8 @@ export class SideNavBarComponent {
                             break;
       case 'profile': this.router.navigate(['/employee/profile']);
                       break;
-
+      case 'dashboard':this.router.navigate(['/employee/dashboard'])
+                      break;
     }
     
   }
