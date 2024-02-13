@@ -38,7 +38,7 @@ export class ManagerForwardedTravelRequestsComponent {
       next: (data) => {
         this.travelRequest = data.employeeRequest;
         this.totalItems= data.totalCount;
- 
+        
         console.log(data);
         console.log(this.travelRequest);
       },
