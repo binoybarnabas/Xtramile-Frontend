@@ -16,7 +16,7 @@ export class DataTableComponent {
   @Input() sortOptions: string[]=[]
 
   onRowClick(row: any): void {
-    this.rowClick.emit(row);
+    this.rowClick.emit(row.requestId);
   }
   
   isMultilineProperty(property: string): boolean {
