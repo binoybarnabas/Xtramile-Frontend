@@ -11,7 +11,7 @@ export class TravelAdminDashboardService {
   constructor(private http : HttpClient) { }
   //to generate report based on input month
   generateMonthlyModeReport(month: string): Observable<any> {
-    return this.http.get<any>(this.apiURL+`/traveladmin/generatemontlhlymodecountreport?monthName=${month}`,{ responseType: 'blob' as 'json' });
+    return this.http.get<any>(this.apiURL+`/traveladmin/generateReport/${month}`,{ responseType: 'blob' as 'json' });
   }
 
   //to get all project codes and id
