@@ -1,3 +1,4 @@
+
 .modal_container {
     position: fixed;
     top: 0;
@@ -42,6 +43,3 @@
   app-dashboard-card {
     margin-left: 1em;
   }
-
-
-  

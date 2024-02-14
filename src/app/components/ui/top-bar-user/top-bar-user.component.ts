@@ -56,6 +56,7 @@ export class TopBarUserComponent {
     this.notificationModalRef= this.modalService.show(NotificationsComponent,{
       backdrop: false,
       initialState: {requestNotification: this.requestNotification},
+      class: 'modal-sm'
     } )
     
   }
