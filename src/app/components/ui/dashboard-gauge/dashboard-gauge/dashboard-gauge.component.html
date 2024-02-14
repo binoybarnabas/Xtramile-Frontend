@@ -9,21 +9,21 @@
     ></div>
   </div>
   <div class="label">
-    <div class="value" *ngIf="remainingDays >= 0">
+    <div class="value" *ngIf="remainingDays > 0">
       {{ 0 }}
       <span class="day">Days</span>
     </div>
 
-    <div class="value" *ngIf="remainingDays >= 0">
+    <div class="value" *ngIf="remainingDays > 0">
       {{ remainingDays }}
       <span class="day">Days</span>
     </div>
 
-    <div class="value" *ngIf="remainingDays >= 0">
+    <div class="value" *ngIf="remainingDays > 0">
       {{ totalDays }}
       <span class="day">Days</span>
     </div>
 
-    <div *ngIf="remainingDays < 0">No current trip</div>
+    <div *ngIf="remainingDays <= 0" class="status">No current trip</div>
   </div>
 </div>

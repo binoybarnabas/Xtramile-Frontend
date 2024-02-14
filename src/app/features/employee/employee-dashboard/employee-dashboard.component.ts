@@ -7,7 +7,7 @@ import { EmployeeDashboardService } from 'src/app/services/employeeServices/dash
   styleUrls: ['./employee-dashboard.component.css']
 })
 export class EmployeeDashboardComponent {
-  employeeId:number=21;
+  employeeId!:number;
   cardTitles: string[] = [];
   cardData: string[] = [];
   showModal: boolean = false;
@@ -16,12 +16,21 @@ export class EmployeeDashboardComponent {
   remainingDays: number = 0;
   startDate: any;
   endDate: any;
-
-constructor(private service: EmployeeDashboardService) {
+  completedTrips:any[]=[]  
+ngOnInit(){
+  if(localStorage.getItem('userData')){
+    const userData= JSON.parse(localStorage.getItem('userData')!)
+    this.employeeId=userData.empId;
+  }
+  this.service.getCompletedTrips(this.employeeId).subscribe((data: any[]) =>{
+    this.completedTrips = data
+    console.log('completed',data)
+  })
   this.fetchProgress();
   this.fetchCountryName();
   this.fetchGaugeData();
 }
+constructor(private service: EmployeeDashboardService) {}
 
 fetchProgress() {
   // Fetch progress data from the service based on 'employeeId'
@@ -30,6 +39,7 @@ fetchProgress() {
       // Assuming 'status' and 'requestCode' are properties in the 'data' object
       this.cardTitles.push(data.requestCode);
       this.cardData.push(data.status);
+      console.log('progress',data)
     }
   });
 }
@@ -68,7 +78,7 @@ fetchGaugeData() {
       this.remainingDays = Math.ceil(remainingMilliseconds / (1000 * 60 * 60 * 24));
 
       // Check if remainingDays is less than 0 and set it to 0
-      if (this.remainingDays < 0) {
+      if (this.remainingDays <= 0) {
         this.remainingDays = 0;
         // Display an appropriate message or handle as needed
         console.log('The trip is already completed.');

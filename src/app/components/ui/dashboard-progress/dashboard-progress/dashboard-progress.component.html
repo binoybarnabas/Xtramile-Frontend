@@ -12,7 +12,11 @@
     </div>
 
     <!-- Line connecting circles with dynamic width based on progress -->
-    <div class="progress_bar_line" [style.width]="getLineWidth(i)"></div>
+    <div
+      *ngIf="i < steps.length - 1"
+      class="progress_bar_line"
+      [style.width]="getLineWidth(i)"
+    ></div>
 
     <!-- Display step title below the circle -->
     <span class="progress_bar_step_title">{{ step.title }}</span>

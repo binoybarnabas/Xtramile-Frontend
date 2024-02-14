@@ -1,7 +1,10 @@
+<!-- upcoming trip in dashboard -->
 <div class="dashboard_container">
   <app-dashboard-upcoming-trip
     [employeeId]="employeeId"
   ></app-dashboard-upcoming-trip>
+
+  <!-- card that show the request status -->
   <app-dashboard-card
     [titles]="cardTitles"
     [data]="cardData"
@@ -9,16 +12,25 @@
   ></app-dashboard-card>
 </div>
 
+<!-- progree of the report -->
 <div class="modal_container" *ngIf="showModal">
   <div class="created_modal">
     <button class="close_button" (click)="closeModal()">X</button>
     <app-dashboard-progress [employeeId]="employeeId"></app-dashboard-progress>
   </div>
 </div>
+
 <div class="dashboard_container">
+  <!-- dashboard map -->
   <app-dashboard-map [currentCountry]="currentCountry"></app-dashboard-map>
+  <!-- dashboard gauge -->
   <app-dashboard-gauge
     [totalDays]="totalDays"
     [remainingDays]="remainingDays"
   ></app-dashboard-gauge>
+</div>
+
+<!-- optioncard -->
+<div>
+  <app-option-card [options]="completedTrips"> </app-option-card>
 </div>

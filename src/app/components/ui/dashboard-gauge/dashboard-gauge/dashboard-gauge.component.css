@@ -65,4 +65,8 @@
   .day{
     font-size: 16px;
   }
-  
+  .outercontainer .label .status{
+    font-weight: bold;
+    font-size: 20px;
+    width: 30em;
+  }

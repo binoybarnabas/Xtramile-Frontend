@@ -18,4 +18,7 @@ export class EmployeeDashboardService {
   getRequestProgress(employeeId: number): Observable<any> {
     return this.http.get(`http://localhost:5190/api/employee/dashboard/employee/progress/${employeeId}`);
   }
+  getCompletedTrips(empId:number):Observable<any>{
+    return this.http.get(`http://localhost:5190/api/employee/completedtrips/${empId}`)
+  }
 }

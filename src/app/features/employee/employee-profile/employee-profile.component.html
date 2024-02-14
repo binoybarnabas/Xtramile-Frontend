@@ -3,6 +3,7 @@
   It includes a header with the title "Profile" and a main container containing a form for user details. 
   The page features:
   > a background image
+
   > a dynamic "Edit/Save" button 
   > displays a profile picture
   > full name 
@@ -33,12 +34,12 @@
                 class="button"
                 (click)="!editMode ? toggleEditMode() : onSubmit()"
               >
-                <span class="button-content">{{
+                <span class="button_content">{{
                   editMode ? "Save" : "Edit"
                 }}</span>
               </button>
             </div>
-            <div class="profile_details">
+            <div>
               <!-- profile picture of the employee -->
               <div class="profile_picture">
                 <img
