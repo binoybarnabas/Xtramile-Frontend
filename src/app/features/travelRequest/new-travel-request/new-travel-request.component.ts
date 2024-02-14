@@ -14,6 +14,7 @@ import { RequestStatus } from 'src/app/components/ui/change-status-button/reques
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { DescriptionModalComponent } from 'src/app/components/ui/description-modal/description-modal.component';
 import { cities } from 'src/app/services/commonAPIServices/cities';
+import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 
 
 @Component({
@@ -56,6 +57,8 @@ export class NewTravelRequestComponent {
 
   isReturnDateDisabled: boolean = true;
 
+  travelOptionsData: TravelOptionDetails[] = [];
+
 
   cities = cities;//Fetch Data From Any External API
   sourceFilteredCities: any[] = []; // Separate filtered list for source field
@@ -97,6 +100,7 @@ export class NewTravelRequestComponent {
   ) {
 
     const storedUserData = localStorage.getItem('userData');
+    console.log("error check"+ storedUserData);
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
 
     this.empId = this.userData?.empId
@@ -119,6 +123,8 @@ export class NewTravelRequestComponent {
 
         case 'Manager': if (this.userData.department == 'TA') {
           this.currentLoggedInUserRole = 'travelAdmin';
+          this.newReqFormSubMenuValue = 4;
+
         }
         else if (this.userData.department == 'FD') {
           this.currentLoggedInUserRole = 'financePersonnel';
@@ -222,6 +228,7 @@ export class NewTravelRequestComponent {
       complete: () => { console.log("get employee by id is done") }
     });
 
+
     //get an employee request based on an request Id
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
@@ -230,7 +237,9 @@ export class NewTravelRequestComponent {
         next: (data) => {
           this.travelRequestDetailViewModel = data
           // Getting the employee profile info
-          console.log(this.currentLoggedInUserRole + "current role");
+
+          this.getTravelOptionsByReqId(data.requestId)
+
           console.log(data)
 
           if (this.currentLoggedInUserRole != 'employee') {
@@ -371,6 +380,8 @@ export class NewTravelRequestComponent {
 
     this.subscribeToTripTypeChanges();
 
+
+
     //end of ngOnInit()
 
   }
@@ -501,7 +512,7 @@ export class NewTravelRequestComponent {
       complete: () => {
         // Hide loader
         this.isLoading = false;
-        
+
         console.log("COMPLETED");
       }
     });
@@ -589,10 +600,15 @@ export class NewTravelRequestComponent {
       requestId: this.travelRequestDetailViewModel.requestId
     };
 
+    // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
+
+
     this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
       console.log('Modal result:', result);
+
+
       // You can perform actions with the result data here
     });
   }
@@ -757,7 +773,24 @@ export class NewTravelRequestComponent {
 
 
 
+  //Get Travel Options By Req Id
+  getTravelOptionsByReqId(reqId: number) {
 
+    this.requestService.getTravelOptionsByReqId(reqId).subscribe({
+      next: (data) => {
+
+        this.travelOptionsData = data;
+        console.log(this.travelOptionsData)
+
+      },
+      error: (error: Error) => {
+        console.log("Error has occurred, " + error.message);
+      },
+      complete: () => {
+        console.log("Completed");
+      }
+    });
+  }
 
 
   //EOF 

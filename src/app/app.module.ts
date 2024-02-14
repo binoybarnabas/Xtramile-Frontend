@@ -106,6 +106,15 @@ import { DashboardProgressComponent } from './components/ui/dashboard-progress/d
 import { DashboardCardComponent } from './components/ui/dashboard-card/dashboard-card/dashboard-card.component';
 import { StatusPipe } from './pipes/Status/status.pipe';
 import { NotificationsComponent } from './components/ui/notifications/notifications.component';
+import { DashboardMapComponent } from './components/ui/dashboard-map/dashboard-map/dashboard-map.component';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+// import { BarChartComponent } from './components/ui/bar-chart/bar-chart.component';import { FileUploadComponent } from './file-upload/file-upload.component';
+import { TravelRequestCardModalComponent } from './components/ui/travel-request-card-modal/travel-request-card-modal.component';
+import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ConfirmationModalComponent } from './components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
+import { DashboardGaugeComponent } from './components/ui/dashboard-gauge/dashboard-gauge/dashboard-gauge.component';
+
 import { DashboardCalenderComponent } from './components/ui/dashboard-calender/dashboard-calender.component';
 
 @NgModule({
@@ -196,12 +205,20 @@ import { DashboardCalenderComponent } from './components/ui/dashboard-calender/d
     DescriptionModalComponent,
     TravelRequestCardComponent,
     TimestampToDatePipe,
+    FileUploadComponent,
+    TravelRequestCardModalComponent,
+    TravelOptionViewerComponent,
     ForgotPasswordModalComponent,
+    // BarChartComponent,
     DashboardUpcomingTripComponent,
     DashboardProgressComponent,
     DashboardCardComponent,
     StatusPipe,
     NotificationsComponent,
+    DashboardMapComponent,
+    ConfirmationModalComponent,
+    DashboardMapComponent,
+    DashboardGaugeComponent,
     DashboardCalenderComponent,
   ]
   ,
@@ -218,6 +235,7 @@ import { DashboardCalenderComponent } from './components/ui/dashboard-calender/d
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
+    TypeaheadModule.forRoot(),
     // ToastrModule.forRoot({
     //   timeOut: 3000,
     //   positionClass: 'toast-center', // Set to center of the screen

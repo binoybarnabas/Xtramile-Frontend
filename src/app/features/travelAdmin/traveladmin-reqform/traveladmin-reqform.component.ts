@@ -12,7 +12,7 @@ import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminSe
   styleUrls: ['./traveladmin-reqform.component.css']
 })
 export class TraveladminReqformComponent {
-  employeeRequestData : any;
+  employeeRequestData: any;
   isSideNavBarOpen: any;
   newReqFormSubMenuValue: number;
   formattedPreferredDepartureTime!: string
@@ -25,10 +25,9 @@ export class TraveladminReqformComponent {
 
   constructor(private sideNavBarService: SideNavBarService,
     private route: ActivatedRoute,
-    private travedladminservice : TravelAdminTravelRequestsService,
-    private datePipe:DatePipe,
-    private modalService: BsModalService) 
-    {
+    private travedladminservice: TravelAdminTravelRequestsService,
+    private datePipe: DatePipe,
+    private modalService: BsModalService) {
     this.newReqFormSubMenuValue = 0;
   }
 
@@ -50,29 +49,29 @@ export class TraveladminReqformComponent {
     this.newReqFormSubMenuValue = value;
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.requestId = params['requestId'];
-      console.log(this.requestId )
-      
-      this.travedladminservice.getTravelRequest(this.requestId ).subscribe({
-        next:(data)=>{
+      console.log(this.requestId)
+
+      this.travedladminservice.getTravelRequest(this.requestId).subscribe({
+        next: (data) => {
           this.employeeRequestData = data
           this.formattedPreferredDepartureTime = this.formatDateTime(this.employeeRequestData?.prefDepartureTime);
           this.formattedPreferredDepartureDate = this.formatDate(this.employeeRequestData?.departureDate);
           this.formattedPreferredReturnDate = this.formatDate(this.employeeRequestData?.returnDate);
         },
-        error:(error:Error)=>{
+        error: (error: Error) => {
           console.log(error);
         },
-        complete:()=>{
+        complete: () => {
           console.log("completed")
         }
 
       });
       // Use the requestId as needed in your component
     });
-    
+
   }
 
   @ViewChild(ModalComponent)
@@ -81,15 +80,15 @@ export class TraveladminReqformComponent {
   //to open modal on click of the add options button
   openModal() {
     const initialState = {
-      requestId: this.requestId 
+      requestId: this.requestId
     };
-    
-    this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
+
+    this.bsModalRef = this.modalService.show(ModalComponent);
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
       console.log('Modal result:', result);
       // You can perform actions with the result data here
     });
   }
-  
+
 }

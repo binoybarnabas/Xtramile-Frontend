@@ -1,0 +1,46 @@
+.container {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 467px;
+    height: 271px;
+    margin-top: 0.5em;
+    position: relative; 
+  }
+  
+  .container .current_country {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .container .map_container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .container .map_container svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .container .map_container .hoveredCountry {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 8px;
+    font-size: 14px;
+    pointer-events: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    line-height: 1.5;
+    display: none;
+    top: 75%; /* Adjust the distance from the top */
+    left: 5%; /* Adjust the distance from the left */
+  }
+  

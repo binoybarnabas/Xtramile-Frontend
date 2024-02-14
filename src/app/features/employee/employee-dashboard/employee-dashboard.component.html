@@ -12,11 +12,16 @@
 
 <div class="modal_container" *ngIf="showModal">
   <div class="created_modal">
-    <!-- Close button for the modal -->
     <button class="close_button" (click)="closeModal()">X</button>
-    <!-- Display the progress component in the modal -->
     <app-dashboard-progress [employeeId]="employeeId"></app-dashboard-progress>
   </div>
+</div>
+<div class="dashboard_container">
+  <app-dashboard-map [currentCountry]="currentCountry"></app-dashboard-map>
+  <app-dashboard-gauge
+    [totalDays]="totalDays"
+    [remainingDays]="remainingDays"
+  ></app-dashboard-gauge>
 </div>
 
 <app-dashboard-calender 
