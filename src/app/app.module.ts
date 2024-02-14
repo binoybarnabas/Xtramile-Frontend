@@ -117,6 +117,7 @@ import { DashboardGaugeComponent } from './components/ui/dashboard-gauge/dashboa
 import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/selected-option-travel-admin/selected-option-travel-admin.component';
 
 import { DashboardCalenderComponent } from './components/ui/dashboard-calender/dashboard-calender.component';
+import { CustomToastComponent } from './components/ui/custom-toast/custom-toast.component';
 
 @NgModule({
   declarations: [
@@ -222,6 +223,7 @@ import { DashboardCalenderComponent } from './components/ui/dashboard-calender/d
     DashboardGaugeComponent,
     DashboardCalenderComponent,
     SelectedOptionTravelAdminComponent,
+    CustomToastComponent,
   ]
   ,
 

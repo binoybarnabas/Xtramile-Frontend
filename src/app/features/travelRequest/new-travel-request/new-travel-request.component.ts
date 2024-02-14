@@ -152,6 +152,8 @@ export class NewTravelRequestComponent {
 
     this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
 
+    //console.log("Toast Testing")
+
   }
 
 
@@ -237,8 +239,8 @@ export class NewTravelRequestComponent {
       console.log(requestId);
       this.managerTravelRequest.GetTravelRequest(requestId).subscribe({
         next: (data) => {
-            data.departureDate = this.datePipe.transform(data.departureDate, "dd/MM/yyyy") || ' ';
-            data.returnDate = this.datePipe.transform(data.returnDate, "dd/MM/yyyy") || ' '
+          data.departureDate = this.datePipe.transform(data.departureDate, "dd/MM/yyyy") || ' ';
+          data.returnDate = this.datePipe.transform(data.returnDate, "dd/MM/yyyy") || ' '
           this.travelRequestDetailViewModel = data
           // Getting the employee profile info
 
@@ -504,7 +506,7 @@ export class NewTravelRequestComponent {
         this.isLoading = false;
 
         console.log(response);
-        alert("Request Submitted Successfully!");
+        //alert("Request Submitted Successfully!");
         this.router.navigate(['employee/pending']);
       },
       error: (error: Error) => {
@@ -516,7 +518,7 @@ export class NewTravelRequestComponent {
       complete: () => {
         // Hide loader
         this.isLoading = false;
-
+        this.commonApiService.showToast("Travel Request Submitted!");
         console.log("COMPLETED");
       }
     });
@@ -784,7 +786,7 @@ export class NewTravelRequestComponent {
       next: (data) => {
 
         this.travelOptionsData = data;
-        
+
         console.log("TRAVEL Options")
         console.log(this.travelOptionsData)
         console.log(data);

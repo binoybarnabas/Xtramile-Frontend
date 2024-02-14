@@ -31,8 +31,12 @@ export class EmployeeDashboardComponent {
     this.fetchProgress();
     this.fetchCountryName();
     this.fetchGaugeData();
+
   }
-  constructor(private service: EmployeeDashboardService) { }
+  constructor(private service: EmployeeDashboardService, private commonApiService: CommonAPIService) {
+    this.commonApiService.showToast("Welcome to XtraMile");
+
+  }
 
   fetchProgress() {
     // Fetch progress data from the service based on 'employeeId'

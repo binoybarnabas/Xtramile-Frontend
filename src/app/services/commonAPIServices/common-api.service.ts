@@ -5,6 +5,7 @@ import { RequestStatus } from 'src/app/components/ui/change-status-button/reques
 import { LoginService } from '../loginService/login.service';
 // import { UserData } from '../interfaces/iuserData';
 import { UserData } from 'src/app/services/interfaces/iuserData';
+import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CommonAPIService {
 
   currentLoggedInUserRole: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private toastService: CustomToastService) {
 
     //Getting the current Loggedin user based on session value
     this.currentLoggedInUserRole = 'employee';
@@ -56,7 +57,7 @@ export class CommonAPIService {
       map((data: any) => data.geonames)
     );
   }
-  
+
   //Get Project Codes by emp id
   getAllProjectCodesByEmployeeId(empId: number): Observable<any> {
 
@@ -68,10 +69,10 @@ export class CommonAPIService {
     return this.http.get<any>(this.apiURL + 'travelmode/modes')
   }
 
-  getCurrentRequestDates(empId: number): Observable<any>{
-    const url="http://localhost:5190/api/employee/current/request"
-    const params= new HttpParams().set('empId',empId);
-    return this.http.get(url,{params})
+  getCurrentRequestDates(empId: number): Observable<any> {
+    const url = "http://localhost:5190/api/employee/current/request"
+    const params = new HttpParams().set('empId', empId);
+    return this.http.get(url, { params })
   }
 
   //Get Travel Req By Id
@@ -79,6 +80,9 @@ export class CommonAPIService {
     return this.http.get(`http://localhost:5190/api/request/getbyid/${requestId}`);
   }
 
+  showToast(message: string) {
+    this.toastService.showToast(message);
+  }
 
 }
 
