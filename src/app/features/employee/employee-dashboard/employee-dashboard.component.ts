@@ -1,4 +1,6 @@
+import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
+import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { EmployeeDashboardService } from 'src/app/services/employeeServices/dashboardServices/employee-dashboard.service';
 
 @Component({
@@ -16,8 +18,9 @@ export class EmployeeDashboardComponent {
   remainingDays: number = 0;
   startDate: any;
   endDate: any;
+  empId= 0;
 
-constructor(private service: EmployeeDashboardService) {
+constructor(private service: EmployeeDashboardService, private commonService : CommonAPIService) {
   this.fetchProgress();
   this.fetchCountryName();
   this.fetchGaugeData();
@@ -77,4 +80,11 @@ fetchGaugeData() {
   });
 }
 
+
+ngOnInit(){
+  if(localStorage.getItem('userData')){
+    const userData= JSON.parse(localStorage.getItem('userData')!)
+    this.empId=userData.empId;
+  }
+}
 }

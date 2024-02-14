@@ -1,87 +1,97 @@
-<div  class="req_card_container">
+<div class="req_card_container">
+  <div class="req_card">
+    <div class="section_1 general_info">
+      <!-- <span class="left_dot"></span> -->
 
-    <div class="req_card">
+      <div class="left">
+        <span class="title">Requested By</span>
+        <p class="value">{{ travelRequestDetailViewModel.employeeName }}</p>
+      </div>
 
-        <div class="section_1 general_info">
+      <div class="right">
+        <span class="title">Project ID</span>
+        <p class="value">{{ travelRequestDetailViewModel.projectCode }}</p>
+      </div>
 
-            <!-- <span class="left_dot"></span> -->
-            
-            <div class="left">
-                <span class="title">Requested By</span>
-                <p class="value">{{travelRequestDetailViewModel.employeeName}}</p>
-            </div>
+      <!-- <span class="right_dot"></span> -->
+    </div>
 
-            <div class="right">
-                <span class="title">Project ID</span>
-                <p class="value">{{travelRequestDetailViewModel.projectCode}}</p>
-            </div>
+    <div class="section_2 travel_info">
+      <!-- <span class="left_dot"></span> -->
 
-            <!-- <span class="right_dot"></span> -->
+      <div class="origin_destination_section">
+        <div class="origin">
+          <span class="city">{{
+            travelRequestDetailViewModel.sourceCity
+          }}</span>
+          <p class="country">
+            {{ travelRequestDetailViewModel.sourceCountry }}
+          </p>
+        </div>
+        <div class="travel_mode">
+          <!-- <i [ngClass]=" item.travelMode ==='Cab'  ? 'icon ri-car-line' :'icon ri-plane-line' "></i> -->
+          <i class="icon ri-plane-line"></i>
+        </div>
+        <div class="destination">
+          <span class="city">{{
+            travelRequestDetailViewModel.destinationCity
+          }}</span>
+          <p class="country">
+            {{ travelRequestDetailViewModel.destinationCountry }}
+          </p>
+        </div>
+      </div>
 
+      <div class="date_section">
+        <div class="departure_date">
+          <i class="icon ri-calendar-line"></i>
+
+          <span>Departure</span>
+          <p class="date">
+            {{ travelRequestDetailViewModel.departureDate | timestampToDate }}
+          </p>
         </div>
 
-        <div class="section_2 travel_info">
-
-            <!-- <span class="left_dot"></span> -->
-
-            <div class="origin_destination_section">
-                <div class="origin">
-                    <span class="city">{{travelRequestDetailViewModel.sourceCity}}</span>
-                    <p class="country"> {{travelRequestDetailViewModel.sourceCountry}} </p>
-                </div>
-                <div class="travel_mode">
-                    <!-- <i [ngClass]=" item.travelMode ==='Cab'  ? 'icon ri-car-line' :'icon ri-plane-line' "></i> -->
-                    <i class="icon ri-plane-line"></i> 
-
-                </div>
-                <div class="destination">
-                    <span class="city">{{travelRequestDetailViewModel.destinationCity}}</span>
-                    <p class="country">{{travelRequestDetailViewModel.destinationCountry}}</p>
-                </div>
-            </div>
-
-            <div class="date_section">
-                
-                <div class="departure_date">
-                    <i class="icon ri-calendar-line"></i>
-                    
-                    <span>Departure</span>
-                    <p class="date">{{travelRequestDetailViewModel.departureDate  | timestampToDate}}</p>
-                </div>
-
-                <div class="return_date">
-                    <i class="icon ri-calendar-line"></i>
-                    <span>Return</span>
-                    <p class="date">{{travelRequestDetailViewModel.returnDate  | timestampToDate}}</p>
-                </div>
-
-            </div>
-
-            <div class="info_section">
-                <!-- <span class="left_dot"></span> -->
-
-                <div class="info">
-                    <span class="title">Request ID</span>
-                    <p class="value">{{travelRequestDetailViewModel.requestCode}}</p>
-                </div>
-
-                <div class="info">
-                    <span class="title">Mode</span>
-                    <p class="value">{{travelRequestDetailViewModel.travelMode}}</p>
-                </div>
-
-                <div class="info">
-                    <span class="title">Status</span>
-                    
-                     <p [ngClass]=" travelRequestDetailViewModel.primaryStatus === 'Forwarded' ? 'value status_forwarded' :'value status' ">{{travelRequestDetailViewModel.primaryStatus}}</p>
-                </div>               
-                <!-- <span class="right_dot"></span> -->
-
-            </div>
-
-            <!-- <span class="right_dot"></span> -->
-
+        <div class="return_date">
+          <i class="icon ri-calendar-line"></i>
+          <span>Return</span>
+          <p class="date">
+            {{ travelRequestDetailViewModel.returnDate | timestampToDate }}
+          </p>
         </div>
+      </div>
+
+      <div class="info_section">
+        <!-- <span class="left_dot"></span> -->
+
+        <div class="info">
+          <span class="title">Request ID</span>
+          <p class="value">{{ travelRequestDetailViewModel.requestCode }}</p>
+        </div>
+
+        <div class="info">
+          <span class="title">Mode</span>
+          <p class="value">{{ travelRequestDetailViewModel.travelMode }}</p>
+        </div>
+
+        <div class="info">
+          <span class="title">Status</span>
+
+          <p
+            [ngClass]="
+              travelRequestDetailViewModel.primaryStatus === 'Forwarded'
+                ? 'value status_forwarded'
+                : 'value status'
+            "
+          >
+            {{ travelRequestDetailViewModel.primaryStatus }}
+          </p>
+        </div>
+        <!-- <span class="right_dot"></span> -->
+      </div>
+
+      <!-- <span class="right_dot"></span> -->
+    </div>
 
         <div class="file_attachment_section">
 
@@ -100,25 +110,23 @@
 
         </div>
 
-        <div class="section_3 action_section">
+    <div class="section_3 action_section">
+      <div class="reject_btn">
+        <span class="btn_label">Reject</span>
 
+        <!-- <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label">Withdraw</span> -->
+        <!-- <span *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label">Reject</span> -->
+      </div>
 
-            <div class="reject_btn">
-                 <span class="btn_label">Reject</span> 
-
-                <!-- <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label">Withdraw</span> -->
-                <!-- <span *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label">Reject</span> -->
-            </div>
-
-            <div type="button" (click)="navigateToAddOptions()" class="approve_btn">
-                <span class="btn_label">Proceed</span> 
-                <!-- <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label">Edit</span> -->
-                <!-- <span  *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label">Approve</span> -->
-            </div>
-
-        </div>
-
+      <div
+        type="button"
+        (click)="navigateHandleUserSelection()"
+        class="approve_btn"
+      >
+        <span class="btn_label">Proceed</span>
+        <!-- <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label">Edit</span> -->
+        <!-- <span  *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label">Approve</span> -->
+      </div>
     </div>
-
-
+  </div>
 </div>

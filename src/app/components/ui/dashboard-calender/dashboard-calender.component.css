@@ -1,0 +1,38 @@
+
+  .calendar {
+    font-family: Arial, sans-serif;
+  }
+  .calendar-header{
+    display: flex;
+    width: 25%;
+    justify-content: space-around;
+  }
+  .calendar table {
+    width: 25%;
+  }
+  
+  .calendar th,
+
+  .calendar td {
+    /* border: 1px solid #ccc; */
+    padding: 0.5rem 0.3rem;
+    text-align: center;
+  }
+  
+  .calendar th {
+    background-color: #f2f2f2;
+  }
+   
+  .highlighted-departure {
+    background-color: cyan;
+    border-radius: 50%;
+  }
+  
+  .highlighted-return {
+    background-color: cyan;
+    border-radius: 50%;
+  }
+  
+  .highlighted-within-range {
+    background-color: lightcyan;
+  }

@@ -14,7 +14,7 @@
     [headers]="tableHeaders"
     [data]="employeeRequest"
     [displayedProperties]="fieldsToDisplay"
-    (rowClick)="selectRow($event)"
+    (rowClick)="handleSelectedRow($event)"
   ></app-data-table>
 
   <pagination
@@ -23,5 +23,4 @@
     [(ngModel)]="currentPage"
     (pageChanged)="pageChanged($event)"
   ></pagination>
-  
 </div>

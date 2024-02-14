@@ -115,6 +115,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ConfirmationModalComponent } from './components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
 import { DashboardGaugeComponent } from './components/ui/dashboard-gauge/dashboard-gauge/dashboard-gauge.component';
 
+import { DashboardCalenderComponent } from './components/ui/dashboard-calender/dashboard-calender.component';
 
 @NgModule({
   declarations: [
@@ -217,7 +218,8 @@ import { DashboardGaugeComponent } from './components/ui/dashboard-gauge/dashboa
     DashboardMapComponent,
     ConfirmationModalComponent,
     DashboardMapComponent,
-    DashboardGaugeComponent
+    DashboardGaugeComponent,
+    DashboardCalenderComponent,
   ]
   ,
 
