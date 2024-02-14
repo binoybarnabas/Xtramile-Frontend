@@ -5,6 +5,7 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
+import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 
 @Component({
   selector: 'app-travel-request-card',
@@ -19,7 +20,7 @@ export class TravelRequestCardComponent {
   currentLoggedInUserRole: string;
 
   constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService, private router: Router, private activatedRoute: ActivatedRoute,
-    private requestService: RequestService,private modalService: BsModalService) {
+    private requestService: RequestService, private modalService: BsModalService, private toastService: CustomToastService) {
 
     this.currentLoggedInUserRole = commonAPIService.currentLoggedInUserRole;
     console.log(this.currentLoggedInUserRole)
@@ -28,7 +29,7 @@ export class TravelRequestCardComponent {
 
   cancelRequest(requestId: number) {
     console.log(this.currentLoggedInUserRole);
-    if(this.currentLoggedInUserRole === 'employee'){
+    if (this.currentLoggedInUserRole === 'employee') {
       this.bsModalRef = this.modalService.show(ConfirmationModalComponent);
       this.bsModalRef.content.confirmed.subscribe((confirmed: boolean) => {
         if (confirmed) {
@@ -42,6 +43,7 @@ export class TravelRequestCardComponent {
             },
             complete: () => {
               console.log("done");
+              this.toastService.showToast("Travel Request Cancelled!")
             }
           });
         }
