@@ -63,6 +63,7 @@ export class NewTravelRequestComponent {
   cities = cities;//Fetch Data From Any External API
   sourceFilteredCities: any[] = []; // Separate filtered list for source field
   destinationFilteredCities: any[] = []; // Separate filtered list for destination field
+  optionFileUrl: string = "";
 
 
   // Function to convert the Map into an array of key-value pairs
@@ -781,7 +782,6 @@ export class NewTravelRequestComponent {
 
         this.travelOptionsData = data;
         //console.log(this.travelOptionsData)
-
         //console.log("OPTIONS DATA")
         //console.log(data);
 

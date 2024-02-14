@@ -6,5 +6,5 @@ export interface TravelOptionDetails {
     description: string;
     optionId: string;
 
-    optionFileURL: URL;
+    optionFileURL: string;
 }

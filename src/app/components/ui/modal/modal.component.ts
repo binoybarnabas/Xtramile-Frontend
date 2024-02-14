@@ -62,6 +62,7 @@ export class ModalComponent {
     return { invalidImage: true }; // Invalid
   }
 
+  //not used - has bugs
   previewImage(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -130,6 +131,7 @@ export class ModalComponent {
     this.travelOptionForm.get(controlName)?.setValue(file);
     this.travelOptionForm.get(controlName)?.updateValueAndValidity();
     console.log('Form Validity:', this.travelOptionForm.valid);
+
   }
 
 
