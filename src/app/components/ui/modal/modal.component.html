@@ -16,7 +16,7 @@
               <div class="file_input_container">
 
                 <input type="hidden" formControlName="requestId">
-                <input type="file" class="file_input" formControlName="optionFile" (change)="previewImage($event)" required/>
+                <input type="file" class="file_input" formControlName="optionFile"  (change)="onFileChange($event, 'optionFile')" required/>
 
                 <span class="form_error"
                 *ngIf="travelOptionForm.get('optionFile')?.invalid && travelOptionForm.get('optionFile')?.touched">
@@ -29,19 +29,19 @@
 
                 <input type="text" class="text_input" formControlName="description" placeholder="Description"/>
 
-                <!-- <span class="form_error"
-                *ngIf="travelOptionForm.get('image')?.invalid && travelOptionForm.get('image')?.touched">
-                   No file selected!
-               </span> -->
+                <span class="form_error"
+                *ngIf="travelOptionForm.get('description')?.invalid && travelOptionForm.get('description')?.touched">
+                   Enter a description
+               </span>
 
               </div>
             
-
-              <div class="img_preview_container">
+              <!-- <div class="img_preview_container">
                 <div class="img_card">
+
                   <img class="img" [src]="travelOptionForm.get('optionFile')?.value" alt="Choose an image">
                 </div>
-              </div>
+              </div> -->
             
               <div class="file_submit_container">
                 <div class="cancel_btn_container">
@@ -51,6 +51,7 @@
                   <button class="submit_btn" type="submit" [disabled]="travelOptionForm.invalid">Add</button>
                 </div>
               </div>
+
             </form>
             
         </div>

@@ -94,20 +94,35 @@ export class TravelAdminTravelRequestsService {
   }
 
   //Send Rrequest Data
-  addNewTravelOption(formData: FormData): Observable<any> {
+  // addNewTravelOption(travelOptionData: TravelOptionDetails): Observable<any> {
 
+  //   // Create a FormData object
+  //   const formData = new FormData();
 
+  //   // Iterate over the properties of travelRequestData and append them to FormData
+  //   Object.entries(travelOptionData).forEach(([key, value]) => {
+  //     // Check if the value is a File (for file attachments)
+  //     if (value instanceof File) {
+  //       formData.append(key, value);
+  //     } else {
+  //       formData.append(key, String(value));
+  //     }
+  //   });
 
-    console.log(formData)
-    // Make the HTTP request with the correct headers
+  //   console.log(formData)
+  //   // Make the HTTP request with the correct headers
+  //   const headers = new HttpHeaders();
+  //   // Note: No need to set Content-Type, it will be set automatically by FormData
+
+  //   return this.http.post(this.apiURL + '/availableoptions/addoption', formData, { headers, responseType: 'text' });
+
+  // }
+
+  //test mode
+  addNewTravelOption(travelOptionData: FormData): Observable<any> {
     const headers = new HttpHeaders();
-    // Note: No need to set Content-Type, it will be set automatically by FormData
-
-    // return this.http.post<any>(this.apiURL + '/availableoptions/addoption', formData, { responseType: 'json' });
-    return this.http.post(this.apiURL + '/availableoptions/addoption', formData, { headers, responseType: 'text' });
+    return this.http.post(this.apiURL + '/availableoptions/addoption', travelOptionData, { headers, responseType: 'text' });
   }
-
-
 
 
 

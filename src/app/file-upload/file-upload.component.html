@@ -1,8 +1,22 @@
 <form [formGroup]="fileUploadForm">
-    <div class="drop-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragenter)="onDragEnter($event)" (dragleave)="onDragLeave($event)">
-      <p>Drag & drop a file here or click to select</p>
-      <input type="file" formControlName="file" (change)="onFileSelected($event)">
-      <img *ngIf="previewUrl" [src]="previewUrl" class="preview-image" alt="File Preview">
-    </div>
-  </form>
-  
+  <div
+    class="drop-area"
+    (drop)="onDrop($event)"
+    (dragover)="onDragOver($event)"
+    (dragenter)="onDragEnter($event)"
+    (dragleave)="onDragLeave($event)"
+  >
+    <p>Drag & drop a file here or click to select</p>
+    <input
+      type="file"
+      formControlName="file"
+      (change)="onFileSelected($event)"
+    />
+    <img
+      *ngIf="previewUrl"
+      [src]="previewUrl"
+      class="preview-image"
+      alt="File Preview"
+    />
+  </div>
+</form>

@@ -25,12 +25,12 @@ export class FileCardComponent {
         fileSize: "20KB"
 
       },
-      {
-        fileName: "ID Card",
-        fileDescription: "emp_id_card.pdf",
-        fileSize: "20KB"
+      // {
+      //   fileName: "ID Card",
+      //   fileDescription: "emp_id_card.pdf",
+      //   fileSize: "20KB"
 
-      },
+      // },
 
     ]
 
