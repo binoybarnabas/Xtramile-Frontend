@@ -32,7 +32,8 @@ export class TravelAdminWaitingRequestsComponent {
         data.forEach((request) => {
           request.createdOn = this.datePipe.transform(request.createdOn, 'dd/LL/yyy') || '';
         });
-        this.incomingRequestdata = data;        
+        this.incomingRequestdata = data;  
+        console.log(this.incomingRequestdata)      
       },
       error: (error: Error) => {
         console.log("Error while fetching requests")
@@ -47,7 +48,7 @@ export class TravelAdminWaitingRequestsComponent {
   selectedRow(row: any){
     this.requestId = row.requestId;
     console.log('requestId:' + this.requestId)
-    this.router.navigate(['available_options'],{
+    this.router.navigate(['view_travel_options'],{
       relativeTo: this.activatedRoute,
       queryParams: {requestId: this.requestId}
     })

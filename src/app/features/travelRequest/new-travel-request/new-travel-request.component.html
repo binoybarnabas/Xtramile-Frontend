@@ -1,602 +1,935 @@
 <div class="req_forms_main_container">
+  <div class="left_section">
+    <div class="nav_items">
+      <ng-container *ngFor="let item of leftSectionNavItems; let i = index">
+        <li
+          (click)="changeNewReqFormSubMenuValue(i)"
+          [ngClass]="
+            newReqFormSubMenuValue !== i ? 'list_item' : 'list_item active'
+          "
+        >
+          {{ item }}
+        </li>
+      </ng-container>
+    </div>
+  </div>
 
-    <div class="left_section">
-    
-        <div class="nav_items">
+  <div class="right_section">
+    <div class="form_container">
+      <div *ngIf="isLoading" class="loader"></div>
+      <form
+        (ngSubmit)="travelRequestFormSubmitFunction()"
+        [formGroup]="travelRequestForm"
+        class="new_req_form"
+      >
+        <!-- general info section -->
+        <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group">
+          <div class="form_title">
+            <h4>General Informations</h4>
+          </div>
 
-            <ng-container *ngFor="let item of leftSectionNavItems;
-                let i = index">
-                <li (click) = "changeNewReqFormSubMenuValue(i)" [ngClass]="newReqFormSubMenuValue !== i ? 'list_item': 'list_item active' ">{{item}}</li>
+          <div
+            *ngIf="currentLoggedInUserRole === 'employee'"
+            class="form_elements"
+          >
+            <div class="form_input_container">
+              <label for="firstName">First Name</label>
+              <input
+                class="form_input"
+                type="text"
+                value="{{ employeeDetails?.firstName }}"
+                readonly
+              />
+            </div>
+
+            <div class="form_input_container">
+              <label for="lastName">Last Name</label>
+              <input
+                class="form_input"
+                type="text"
+                value="{{ employeeDetails?.lastName }}"
+                readonly
+              />
+            </div>
+
+            <div class="form_input_container">
+              <label for="email">Email</label>
+              <input
+                class="form_input"
+                type="email"
+                value="{{ employeeDetails?.email }}"
+                readonly
+              />
+            </div>
+
+            <div class="form_input_container">
+              <label for="contactNumber">Phone</label>
+              <input
+                class="form_input"
+                type="text"
+                value="{{ employeeDetails?.contactNumber }}"
+                readonly
+              />
+            </div>
+
+            <div class="form_input_container">
+              <label for="departmentName">Department</label>
+              <input
+                class="form_input"
+                type="text"
+                value="{{ employeeDetails?.departmentName }}"
+                readonly
+              />
+            </div>
+
+            <div class="form_input_container">
+              <label for="reportsTo">Reports To</label>
+              <input
+                class="form_input"
+                type="text"
+                value="{{ employeeDetails?.reportsTo }}"
+                readonly
+              />
+            </div>
+          </div>
+
+          <!-- View Mode  -->
+          <div
+            *ngIf="
+              currentLoggedInUserRole === 'travelAdmin' ||
+              currentLoggedInUserRole === 'manager' ||
+              currentLoggedInUserRole === 'financePersonnel'
+            "
+            class="form_data_view_container"
+          >
+            <ng-container *ngFor="let entry of getGeneralInfoMapEntries()">
+              <div class="item_card">
+                <p class="item_title">{{ entry[0] }}</p>
+                <p class="item_value">{{ entry[1] }}</p>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="form_input_group_navigator">
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(1)"
+                class="next_btn"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- trip info section -->
+        <div *ngIf="newReqFormSubMenuValue === 1" class="form_input_group">
+          <div class="form_title">
+            <h4>Trip Informations</h4>
+          </div>
+
+          <div
+            *ngIf="currentLoggedInUserRole === 'employee'"
+            class="form_elements"
+          >
+            <input
+              type="hidden"
+              formControlName="createdBy"
+              value="{{ employeeDetails?.empId }}"
+            />
+
+            <!-- Trip Type -->
+            <div class="form_input_container">
+              <label for="tripType">Trip Type</label>
+              <select formControlName="tripType" class="form_input">
+                <option value="One Way">One Way</option>
+                <option value="Round Trip">Round Trip</option>
+              </select>
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('tripType')?.invalid &&
+                  travelRequestForm.get('tripType')?.touched
+                "
+              >
+                Choose a trip type
+              </span>
+            </div>
+
+            <!-- Travel Mode -->
+            <div class="form_input_container">
+              <label for="travelModeId">Travel Mode</label>
+              <select formControlName="travelModeId" class="form_input">
+                <ng-container *ngFor="let mode of travelModes">
+                  <option [value]="mode.modeId">{{ mode.modeName }}</option>
+                </ng-container>
+              </select>
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('travelModeId')?.invalid &&
+                  travelRequestForm.get('travelModeId')?.touched
+                "
+              >
+                Choose a travel mode
+              </span>
+            </div>
+
+            <!-- Origin -->
+            <div class="form_input_container">
+              <label for="sourceCity">Origin</label>
+              <input
+                class="form_input"
+                type="text"
+                formControlName="sourceCity"
+                placeholder="Enter the origin"
+                (input)="filterCities($event, 'sourceCity')"
+              />
+
+              <div class="autocomplete_container">
+                <div
+                  *ngFor="let city of sourceFilteredCities"
+                  class="autocomplete_item"
+                  (click)="selectCity(city, 'sourceCity')"
+                >
+                  {{ city.name }}, {{ city.country }}
+                </div>
+              </div>
+
+              <input type="hidden" formControlName="sourceCountry" />
+              <!-- Hidden field for source country -->
+
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('sourceCity')?.invalid &&
+                  travelRequestForm.get('sourceCity')?.touched
+                "
+              >
+                Enter the origin
+              </span>
+            </div>
+
+            <!-- Destination -->
+            <div class="form_input_container">
+              <label for="destinationCity">Destination</label>
+
+              <input
+                class="form_input"
+                type="text"
+                formControlName="destinationCity"
+                placeholder="Enter the destination"
+                (input)="filterCities($event, 'destinationCity')"
+              />
+
+              <div class="autocomplete_container">
+                <div
+                  *ngFor="let city of destinationFilteredCities"
+                  class="autocomplete_item"
+                  (click)="selectCity(city, 'destinationCity')"
+                >
+                  {{ city.name }}, {{ city.country }}
+                </div>
+              </div>
+
+              <input type="hidden" formControlName="destinationCountry" />
+              <!-- Hidden field for destination country -->
+
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('destinationCity')?.invalid &&
+                  travelRequestForm.get('destinationCity')?.touched
+                "
+              >
+                Enter the destination
+              </span>
+            </div>
+
+            <!-- Departure Date -->
+            <div class="form_input_container">
+              <label for="departureDate">Departure Date</label>
+              <input
+                class="form_input"
+                formControlName="departureDate"
+                type="date"
+              />
+
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm
+                    .get('departureDate')
+                    ?.hasError('required') &&
+                  travelRequestForm.get('departureDate')?.touched
+                "
+              >
+                Select departure date
+              </span>
+
+              <span
+                class="form_error"
+                *ngIf="
+                  !travelRequestForm
+                    .get('departureDate')
+                    ?.hasError('required') &&
+                  travelRequestForm
+                    .get('departureDate')
+                    ?.hasError('invalidDateFormat') &&
+                  travelRequestForm.get('departureDate')?.touched
+                "
+              >
+                Invalid date format
+              </span>
+
+              <span
+                class="form_error"
+                *ngIf="
+                  !travelRequestForm
+                    .get('departureDate')
+                    ?.hasError('required') &&
+                  travelRequestForm
+                    .get('departureDate')
+                    ?.hasError('futureDate') &&
+                  travelRequestForm.get('departureDate')?.touched
+                "
+              >
+                Departure date must be a future a date
+              </span>
+            </div>
+
+            <!-- Return Date -->
+            <div
+              *ngIf="isReturnDateDisabled === false"
+              class="form_input_container"
+            >
+              <label for="returnDate">Return Date</label>
+              <input
+                class="form_input"
+                formControlName="returnDate"
+                type="date"
+              />
+
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('returnDate')?.hasError('required') &&
+                  travelRequestForm.get('returnDate')?.touched
+                "
+              >
+                Select return date
+              </span>
+
+              <span
+                class="form_error"
+                *ngIf="
+                  !travelRequestForm.get('returnDate')?.hasError('required') &&
+                  travelRequestForm
+                    .get('returnDate')
+                    ?.hasError('invalidDateFormat') &&
+                  travelRequestForm.get('returnDate')?.touched
+                "
+              >
+                Invalid date format
+              </span>
+
+              <span
+                class="form_error"
+                *ngIf="
+                  !travelRequestForm.get('returnDate')?.hasError('required') &&
+                  travelRequestForm.get('returnDate')?.hasError('futureDate') &&
+                  travelRequestForm.get('returnDate')?.touched
+                "
+              >
+                Return date must be a future a date
+              </span>
+
+              <span
+                class="form_error"
+                *ngIf="
+                  !travelRequestForm.get('returnDate')?.hasError('required') &&
+                  !travelRequestForm
+                    .get('returnDate')
+                    ?.hasError('futureDate') &&
+                  travelRequestForm.get('returnDate')?.hasError('dateRange') &&
+                  travelRequestForm.get('returnDate')?.touched
+                "
+              >
+                Return date must not be equal to or earlier than the departure
+                date!
+              </span>
+            </div>
+
+            <!-- pref dep time -->
+            <div class="form_input_container">
+              <label for="prefDepartureTime">Prefrerred Departure Time</label>
+
+              <select class="form_input" formControlName="prefDepartureTime">
+                <option value="00.00 - 01.00">00.00 - 01.00</option>
+                <option value="01.00 - 02.00">01.00 - 02.00</option>
+                <option value="02.00 - 03.00">02.00 - 03.00</option>
+                <option value="03.00 - 04.00">03.00 - 04.00</option>
+                <option value="04.00 - 05.00">04.00 - 05.00</option>
+                <option value="05.00 - 06.00">05.00 - 06.00</option>
+                <option value="06.00 - 07.00">06.00 - 07.00</option>
+                <option value="07.00 - 08.00">07.00 - 08.00</option>
+                <option value="08.00 - 09.00">08.00 - 09.00</option>
+                <option value="09.00 - 10.00">09.00 - 10.00</option>
+                <option value="10.00 - 11.00">10.00 - 11.00</option>
+                <option value="11.00 - 12.00">11.00 - 12.00</option>
+                <option value="12.00 - 13.00">12.00 - 13.00</option>
+                <option value="13.00 - 14.00">13.00 - 14.00</option>
+                <option value="14.00 - 15.00">14.00 - 15.00</option>
+                <option value="15.00 - 16.00">15.00 - 16.00</option>
+                <option value="16.00 - 17.00">16.00 - 17.00</option>
+                <option value="17.00 - 18.00">17.00 - 18.00</option>
+                <option value="18.00 - 19.00">18.00 - 19.00</option>
+                <option value="19.00 - 20.00">19.00 - 20.00</option>
+                <option value="20.00 - 21.00">20.00 - 21.00</option>
+                <option value="21.00 - 22.00">21.00 - 22.00</option>
+                <option value="22.00 - 23.00">22.00 - 23.00</option>
+                <option value="23.00 - 24.00">23.00 - 24.00</option>
+              </select>
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('prefDepartureTime')?.invalid &&
+                  travelRequestForm.get('prefDepartureTime')?.touched
+                "
+              >
+                Choose a value
+              </span>
+            </div>
+
+            <!-- Trip Purpose -->
+            <div class="form_input_container">
+              <label for="tripPurpose">Purpose of Trip</label>
+
+              <select formControlName="tripPurpose" class="form_input">
+                <option value="Business Meet">Business Meet</option>
+                <option value="p2" selected>Purpose 2</option>
+                <option value="p3" selected>Purpose 3</option>
+                <option value="p4" selected>Purpose 4</option>
+                <option value="p5" selected>Purpose 5</option>
+                <option value="Other" selected>Other</option>
+              </select>
+
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('tripPurpose')?.invalid &&
+                  travelRequestForm.get('tripPurpose')?.touched
+                "
+              >
+                Enter Purpose of Trip
+              </span>
+            </div>
+
+            <!-- Project Code -->
+            <div class="form_input_container">
+              <label for="projectId">Project Code</label>
+
+              <select class="form_input" formControlName="projectId">
+                <ng-container *ngFor="let code of projectCodes">
+                  <option [value]="code.projectId">
+                    {{ code.projectCode }} - {{ code.projectName }}
+                  </option>
+                </ng-container>
+              </select>
+
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('projectId')?.invalid &&
+                  travelRequestForm.get('projectId')?.touched
+                "
+              >
+                Choose a project code
+              </span>
+              <!-- <input class="form_input" type="text"  value="{{employeeDetails?.projectCode}}" readonly/> -->
+            </div>
+
+            <!-- Travel Type Dom/Int -->
+            <div class="form_input_container">
+              <label for="travelTypeId">Travel Type</label>
+              <select formControlName="travelTypeId" class="form_input">
+                <option value="1">International</option>
+                <option value="2">Domestic</option>
+              </select>
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('travelTypeId')?.invalid &&
+                  travelRequestForm.get('travelTypeId')?.touched
+                "
+              >
+                Choose a travel type
+              </span>
+            </div>
+
+            <!-- form input elements ends -->
+          </div>
+
+          <!-- View Mode  -->
+          <div
+            *ngIf="
+              currentLoggedInUserRole === 'travelAdmin' ||
+              currentLoggedInUserRole === 'manager' ||
+              currentLoggedInUserRole === 'financePersonnel'
+            "
+            class="form_data_view_container"
+          >
+            <ng-container *ngFor="let entry of getTripInfoMapEntries()">
+              <div class="item_card">
+                <p class="item_title">{{ entry[0] }}</p>
+                <p class="item_value">{{ entry[1] }}</p>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="form_input_group_navigator">
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(0)"
+                class="back_btn"
+              >
+                Back
+              </button>
+              <button
+                (click)="changeNewReqFormSubMenuValue(2)"
+                class="next_btn"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- additional info section -->
+        <div *ngIf="newReqFormSubMenuValue === 2" class="form_input_group">
+          <div class="form_title">
+            <h4>Additional Informations</h4>
+          </div>
+
+          <div
+            *ngIf="currentLoggedInUserRole === 'employee'"
+            class="form_elements"
+          >
+            <!-- Cab Service -->
+            <div class="form_input_container">
+              <label for="cabRequired">Do you want cab service ? </label>
+              <select
+                class="form_input"
+                formControlName="cabRequired"
+                (change)="togglePickUpTime()"
+              >
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('cabRequired')?.invalid &&
+                  travelRequestForm.get('cabRequired')?.touched
+                "
+              >
+                Choose a value
+              </span>
+            </div>
+
+            <!-- pref pickup time -->
+            <div class="form_input_container">
+              <label for="prefPickUpTime">Prefrerred PickUp Time</label>
+              <input
+                type="time"
+                class="form_input"
+                formControlName="prefPickUpTime"
+                [disabled]="isPickUpTimeDisabled()"
+              />
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('prefPickUpTime')?.invalid &&
+                  travelRequestForm.get('prefPickUpTime')?.touched
+                "
+              >
+                Choose a value
+              </span>
+            </div>
+
+            <!-- Accommodation -->
+            <div class="form_input_container">
+              <label for="accommodationRequired"
+                >Do you want hotel accommodatiion ?
+              </label>
+              <select
+                class="form_input"
+                formControlName="accommodationRequired"
+              >
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+              <span
+                class="form_error"
+                *ngIf="
+                  travelRequestForm.get('accommodationRequired')?.invalid &&
+                  travelRequestForm.get('accommodationRequired')?.touched
+                "
+              >
+                Choose a value
+              </span>
+            </div>
+
+            <!-- File Inputs -->
+            <ng-container *ngIf="currentLoggedInUserRole === 'employee'">
+              <div class="form_input_container">
+                <label for="travelAuthorizationEmailCapture"
+                  >Travel Authorization Email Capture</label
+                >
+                <input
+                  class="form_input"
+                  type="file"
+                  formControlName="travelAuthorizationEmailCapture"
+                  (change)="
+                    onFileChange($event, 'travelAuthorizationEmailCapture')
+                  "
+                />
+                <span
+                  class="form_error"
+                  *ngIf="
+                    travelRequestForm.get('travelAuthorizationEmailCapture')
+                      ?.invalid &&
+                    travelRequestForm.get('travelAuthorizationEmailCapture')
+                      ?.touched
+                  "
+                >
+                  Choose a file
+                </span>
+              </div>
+
+              <div class="form_input_container">
+                <label for="passportAttachment">Passport</label>
+
+                <input
+                  class="form_input"
+                  type="file"
+                  formControlName="passportAttachment"
+                  (change)="onFileChange($event, 'passportAttachment')"
+                />
+                <span
+                  class="form_error"
+                  *ngIf="
+                    travelRequestForm.get('passportAttachment')?.invalid &&
+                    travelRequestForm.get('passportAttachment')?.touched
+                  "
+                >
+                  Choose a file
+                </span>
+              </div>
             </ng-container>
 
+            <div class="form_input_container">
+              <label for="additionalComments">Additional Comments</label>
+              <textarea
+                class="form_input"
+                formControlName="additionalComments"
+                id=""
+                cols="30"
+                rows="4"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- View Mode  -->
+          <div
+            *ngIf="
+              currentLoggedInUserRole === 'travelAdmin' ||
+              currentLoggedInUserRole === 'manager' ||
+              currentLoggedInUserRole === 'financePersonnel'
+            "
+            class="form_data_view_container"
+          >
+            <ng-container *ngFor="let entry of getAdditionalInfoMapEntries()">
+              <div class="item_card">
+                <p class="item_title">{{ entry[0] }}</p>
+                <p class="item_value">{{ entry[1] }}</p>
+              </div>
+            </ng-container>
+
+            <!-- Priority - Visisble for manager -->
+            <div
+              *ngIf="currentLoggedInUserRole === 'manager'"
+              class="form_input_container"
+            >
+              <div class="priority_container">
+                <label for="priority">Priority</label>
+
+                <input
+                  type="range"
+                  formControlName="priority"
+                  min="1"
+                  max="3"
+                  class="priority-slider"
+                  id="priority"
+                  (input)="updatePriority($event)"
+                />
+
+                <div class="priority-level" id="priorityLevel">
+                  {{ priorityLevelText }}
+                </div>
+
+                <span
+                  class="form_error"
+                  *ngIf="
+                    travelRequestForm.get('priority')?.invalid &&
+                    travelRequestForm.get('priority')?.touched
+                  "
+                >
+                  Choose a value
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- If Employee then submit -->
+          <div
+            *ngIf="currentLoggedInUserRole === 'employee'"
+            class="form_submit_container"
+          >
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(1)"
+                class="cancel_btn"
+              >
+                Back
+              </button>
+              <input
+                class="submit_btn"
+                type="submit"
+                [disabled]="travelRequestForm.invalid"
+                Value="Submit"
+              />
+            </div>
+          </div>
+
+          <!-- If TA or FNP Navigate  -->
+          <div
+            *ngIf="
+              currentLoggedInUserRole === 'manager' ||
+              currentLoggedInUserRole === 'travelAdmin' ||
+              currentLoggedInUserRole === 'financePersonnel'
+            "
+            class="form_input_group_navigator"
+          >
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(1)"
+                type="button"
+                class="back_btn"
+              >
+                Back
+              </button>
+              <button
+                (click)="changeNewReqFormSubMenuValue(3)"
+                type="button"
+                class="next_btn"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+
+          <!-- form input group ends -->
         </div>
 
-    </div>
-
-    <div class="right_section">
-    
-        <div class="form_container">
-            <div *ngIf="isLoading" class="loader"></div>
-            <form (ngSubmit)="travelRequestFormSubmitFunction()" [formGroup]="travelRequestForm" class="new_req_form" >
-
-                <!-- general info section -->
-                <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group" >
-
-                    <div class="form_title">
-                        <h4>General Informations</h4>
-                    </div>
-
-                     <div *ngIf="currentLoggedInUserRole === 'employee'" class="form_elements">
-
-
-                        <div class="form_input_container">
-                            <label for="firstName">First Name</label>
-                            <input class="form_input" type="text"  value="{{employeeDetails?.firstName}}" readonly/>
-                        </div>
-
-                        <div class="form_input_container">
-                            <label for="lastName">Last Name</label>
-                            <input class="form_input" type="text"   value="{{employeeDetails?.lastName}}" readonly/>
-                        </div>
-
-                        <div class="form_input_container">
-                            <label for="email">Email</label>
-                            <input class="form_input" type="email"     value="{{employeeDetails?.email}}" readonly/>
-
-                        </div>
-
-                        <div class="form_input_container">
-                            <label for="contactNumber">Phone</label>
-                            <input class="form_input" type="text"    value="{{employeeDetails?.contactNumber}}" readonly/>
-                        </div>
-
-                        <div class="form_input_container">
-                            <label for="departmentName">Department</label>
-                            <input class="form_input" type="text"  value="{{employeeDetails?.departmentName}}" readonly/>
-                        </div>
-
-                        <div class="form_input_container">
-                            <label for="reportsTo">Reports To</label>
-                            <input class="form_input" type="text" value="{{employeeDetails?.reportsTo}}" readonly/>
-                        </div>
-
-                    </div>
-                    
-                    <!-- View Mode  -->
-                    <div *ngIf="currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'financePersonnel'"  class="form_data_view_container">
-
-                        <ng-container *ngFor="let entry of getGeneralInfoMapEntries()">
-                            <div class="item_card">
-                                <p class="item_title">{{entry[0]}}</p>
-                                <p class="item_value">{{entry[1]}}</p>
-                            </div>
-                        </ng-container>
-
-                    </div>
-
-                    <div class="form_input_group_navigator">
-                        <div class="btn_container">
-                            <button (click) = "changeNewReqFormSubMenuValue(1)" class="next_btn"> Next</button>
-                        </div>
-                    </div>
-
-                </div>  
-         
-                <!-- trip info section -->
-                <div   *ngIf="newReqFormSubMenuValue === 1" class="form_input_group"  >
-
-                    <div class="form_title">
-                        <h4>Trip Informations</h4>
-                    </div>
-
-                    <div *ngIf="currentLoggedInUserRole === 'employee'" class="form_elements">
-
-                        <input type="hidden" formControlName="createdBy"  value="{{employeeDetails?.empId}}" />
-
-                        <!-- Trip Type -->
-                        <div class="form_input_container">
-                            <label for="tripType">Trip Type</label>
-                            <select  formControlName="tripType"  class="form_input">
-                                <option value='One Way' >One Way </option>
-                                <option value= 'Round Trip'>Round Trip</option>
-                            </select>
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('tripType')?.invalid && travelRequestForm.get('tripType')?.touched">
-                               Choose a trip type
-                           </span>
-                        </div>
-
-                        <!-- Travel Mode -->
-                        <div class="form_input_container">
-                            <label for="travelModeId">Travel Mode</label>
-                            <select  formControlName="travelModeId"  class="form_input">
-                                <ng-container *ngFor="let mode of travelModes" >
-                                    <option [value]="mode.modeId">{{ mode.modeName}}</option>
-                                </ng-container>
-                               
-                            </select>
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('travelModeId')?.invalid && travelRequestForm.get('travelModeId')?.touched">
-                               Choose a travel mode
-                           </span>
-                        </div>
-                        
-                        <!-- Origin -->
-                        <div class="form_input_container">
-
-                            <label for="sourceCity">Origin</label>
-                            <input class="form_input" type="text" formControlName="sourceCity" placeholder="Enter the origin" (input)="filterCities($event, 'sourceCity')">
-                        
-                            <div class="autocomplete_container">
-                        
-                                <div *ngFor="let city of sourceFilteredCities" class="autocomplete_item" (click)="selectCity(city, 'sourceCity')">
-                                    {{ city.name }}, {{ city.country }}
-                                </div>
-                            </div>
-
-                            <input type="hidden" formControlName="sourceCountry"> <!-- Hidden field for source country -->
-                        
-                            <span class="form_error"
-                                *ngIf="travelRequestForm.get('sourceCity')?.invalid && travelRequestForm.get('sourceCity')?.touched">
-                                Enter the origin
-                            </span>
-
-                        </div>
-
-                        <!-- Destination -->
-                        <div class="form_input_container">
-
-                            <label for="destinationCity">Destination</label>
-
-                            <input class="form_input" type="text" formControlName="destinationCity" placeholder="Enter the destination" (input)="filterCities($event, 'destinationCity')">
-   
-                            <div class="autocomplete_container">
-   
-                            <div *ngFor="let city of destinationFilteredCities" class="autocomplete_item" (click)="selectCity(city, 'destinationCity')">
-   
-                                {{ city.name }}, {{ city.country }}
-   
-                            </div>
-   
-                            </div>
-   
-                            <input type="hidden" formControlName="destinationCountry"> <!-- Hidden field for destination country -->
-   
-                            <span class="form_error"
-                                *ngIf="travelRequestForm.get('destinationCity')?.invalid && travelRequestForm.get('destinationCity')?.touched">
-                                Enter the destination
-                             </span>
-
-                        </div>
-
-                        <!-- Departure Date -->
-                        <div class="form_input_container">
-
-                            <label for="departureDate">Departure Date</label>
-                            <input class="form_input" formControlName="departureDate" type="date" />
-                         
-                           <span class="form_error"
-                           *ngIf="travelRequestForm.get('departureDate')?.hasError('required') && travelRequestForm.get('departureDate')?.touched">
-                            Select departure date 
-                            </span>
-
-                            <span class="form_error" 
-                           *ngIf="!travelRequestForm.get('departureDate')?.hasError('required') && travelRequestForm.get('departureDate')?.hasError('invalidDateFormat') && travelRequestForm.get('departureDate')?.touched">
-                            Invalid date format
-                            </span>
-
-                            <span class="form_error" 
-                            *ngIf="!travelRequestForm.get('departureDate')?.hasError('required') && travelRequestForm.get('departureDate')?.hasError('futureDate') && travelRequestForm.get('departureDate')?.touched">
-                             Departure date must be a future a date
-                             </span>
-
-                        </div>
-
-                        <!-- Return Date -->
-                         <div *ngIf="isReturnDateDisabled === false" class="form_input_container">
-
-                            <label for="returnDate">Return Date</label>
-                            <input class="form_input" formControlName="returnDate" type="date"/>
-                           
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('returnDate')?.hasError('required') && travelRequestForm.get('returnDate')?.touched">
-                               Select return date
-                            </span>
-
-                            <span class="form_error" 
-                            *ngIf="!travelRequestForm.get('returnDate')?.hasError('required') && travelRequestForm.get('returnDate')?.hasError('invalidDateFormat') && travelRequestForm.get('returnDate')?.touched">
-                             Invalid date format
-                            </span>
-
-                             <span class="form_error" 
-                             *ngIf="!travelRequestForm.get('returnDate')?.hasError('required') && travelRequestForm.get('returnDate')?.hasError('futureDate') && travelRequestForm.get('returnDate')?.touched">
-                               Return date must be a future a date
-                            </span>
-
-                            <span class="form_error" 
-                            *ngIf="!travelRequestForm.get('returnDate')?.hasError('required') && !travelRequestForm.get('returnDate')?.hasError('futureDate')  && travelRequestForm.get('returnDate')?.hasError('dateRange') && travelRequestForm.get('returnDate')?.touched">
-                            Return date must not be equal to or earlier than the departure date!
-                            </span>
-
-                        </div>     
-                                 
-                        <!-- pref dep time -->
-                        <div class="form_input_container">
-                            <label for="prefDepartureTime">Prefrerred Departure Time</label>
-
-                            <select class="form_input" formControlName="prefDepartureTime" >
-
-                                <option value="00.00 - 01.00">00.00 - 01.00</option>
-                                <option value="01.00 - 02.00">01.00 - 02.00</option>
-                                <option value="02.00 - 03.00">02.00 - 03.00</option>
-                                <option value="03.00 - 04.00">03.00 - 04.00</option>
-                                <option value="04.00 - 05.00">04.00 - 05.00</option>
-                                <option value="05.00 - 06.00">05.00 - 06.00</option>
-                                <option value="06.00 - 07.00">06.00 - 07.00</option>
-                                <option value="07.00 - 08.00">07.00 - 08.00</option>
-                                <option value="08.00 - 09.00">08.00 - 09.00</option>
-                                <option value="09.00 - 10.00">09.00 - 10.00</option>
-                                <option value="10.00 - 11.00">10.00 - 11.00</option>
-                                <option value="11.00 - 12.00">11.00 - 12.00</option>
-                                <option value="12.00 - 13.00">12.00 - 13.00</option>
-                                <option value="13.00 - 14.00">13.00 - 14.00</option>
-                                <option value="14.00 - 15.00">14.00 - 15.00</option>
-                                <option value="15.00 - 16.00">15.00 - 16.00</option>
-                                <option value="16.00 - 17.00">16.00 - 17.00</option>
-                                <option value="17.00 - 18.00">17.00 - 18.00</option>
-                                <option value="18.00 - 19.00">18.00 - 19.00</option>
-                                <option value="19.00 - 20.00">19.00 - 20.00</option>
-                                <option value="20.00 - 21.00">20.00 - 21.00</option>
-                                <option value="21.00 - 22.00">21.00 - 22.00</option>
-                                <option value="22.00 - 23.00">22.00 - 23.00</option>
-                                <option value="23.00 - 24.00">23.00 - 24.00</option>
-
-                            </select>
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('prefDepartureTime')?.invalid && travelRequestForm.get('prefDepartureTime')?.touched">
-                               Choose a value
-                           </span>
-                        </div>
-                        
-                        <!-- Trip Purpose -->
-                        <div class="form_input_container">
-                            <label for="tripPurpose">Purpose of Trip</label>
-
-                            <select  formControlName="tripPurpose"  class="form_input">
-                                <option value="Business Meet" >Business Meet</option>
-                                <option value="p2" selected>Purpose 2</option>
-                                <option value="p3" selected>Purpose 3</option>
-                                <option value="p4" selected>Purpose 4</option>
-                                <option value="p5" selected>Purpose 5</option>
-                                <option value="Other" selected>Other</option>
-                            </select>
-
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('tripPurpose')?.invalid && travelRequestForm.get('tripPurpose')?.touched">
-                               Enter Purpose of Trip
-                           </span>
-
-                        </div>
-
-                        <!-- Project Code -->
-                        <div class="form_input_container">
-                            <label for="projectId">Project Code</label>
-
-                            <select class="form_input" formControlName="projectId"  >
-                                <ng-container *ngFor="let code of projectCodes" >
-                                    <option [value]="code.projectId">{{ code.projectCode}} - {{code.projectName}}</option>
-                                </ng-container>
-                            </select>
-
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('projectId')?.invalid && travelRequestForm.get('projectId')?.touched">
-                               Choose a project code
-                           </span>
-                            <!-- <input class="form_input" type="text"  value="{{employeeDetails?.projectCode}}" readonly/> -->
-                        </div>
-
-
-                        <!-- Travel Type Dom/Int -->
-                        <div class="form_input_container">
-                            <label for="travelTypeId">Travel Type</label>
-                            <select  formControlName="travelTypeId"  class="form_input" >
-                                <option value="1" >International</option>
-                                <option value="2" >Domestic</option>
-                            </select>
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('travelTypeId')?.invalid && travelRequestForm.get('travelTypeId')?.touched">
-                               Choose a travel type
-                           </span>
-                        </div>
-                        
-
-                    <!-- form input elements ends -->
-                    </div>
-
-                    <!-- View Mode  -->
-                    <div *ngIf="currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'financePersonnel'"  class="form_data_view_container">
-
-                        <ng-container *ngFor="let entry of getTripInfoMapEntries()">
-                            <div class="item_card">
-                                <p class="item_title">{{entry[0]}}</p>
-                                <p class="item_value">{{entry[1]}}</p>
-                            </div>
-                        </ng-container>
-
-                    </div>
-
-                    <div class="form_input_group_navigator">
-                            <div class="btn_container">
-                                <button (click) = "changeNewReqFormSubMenuValue(0)" class="back_btn"> Back</button>
-                                <button (click) = "changeNewReqFormSubMenuValue(2)" class="next_btn"> Next</button>
-                            </div>
-                    </div>
-
-                </div>  
-
-                <!-- additional info section -->
-                <div *ngIf="newReqFormSubMenuValue === 2" class="form_input_group"  >
-                    
-
-                    <div class="form_title">
-                        <h4>Additional Informations</h4>
-                    </div>
-
-                    <div *ngIf="currentLoggedInUserRole === 'employee' " class="form_elements">
-
-                        <!-- Cab Service -->
-                        <div class="form_input_container">
-                            <label for="cabRequired">Do you want cab service ? </label>
-                            <select class="form_input" formControlName="cabRequired" (change)="togglePickUpTime()">
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('cabRequired')?.invalid && travelRequestForm.get('cabRequired')?.touched">
-                               Choose a value
-                           </span>
-                        </div>
-                        
-                        <!-- pref pickup time -->
-                        <div class="form_input_container">
-                            <label for="prefPickUpTime">Prefrerred PickUp Time</label>
-                           <input type="time" class="form_input" formControlName="prefPickUpTime"  [disabled]="isPickUpTimeDisabled()">
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('prefPickUpTime')?.invalid && travelRequestForm.get('prefPickUpTime')?.touched">
-                               Choose a value
-                           </span>
-                        </div>
-
-                        <!-- Accommodation -->
-                        <div class="form_input_container">
-                            <label for="accommodationRequired">Do you want hotel accommodatiion ? </label>
-                            <select class="form_input" formControlName="accommodationRequired" >
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('accommodationRequired')?.invalid && travelRequestForm.get('accommodationRequired')?.touched">
-                               Choose a value
-                           </span>
-                        </div>
-
-                        <!-- File Inputs -->
-                        <ng-container *ngIf="currentLoggedInUserRole === 'employee'">
-
-                            <div class="form_input_container">
-                            <label for="travelAuthorizationEmailCapture">Travel Authorization Email Capture</label>
-                            <input class="form_input" type="file"  formControlName="travelAuthorizationEmailCapture" (change)="onFileChange($event, 'travelAuthorizationEmailCapture')" />
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('travelAuthorizationEmailCapture')?.invalid && travelRequestForm.get('travelAuthorizationEmailCapture')?.touched">
-                               Choose a file
-                           </span>
-                            </div> 
-
-                            <div class="form_input_container">
-                            <label for="passportAttachment">Passport</label>
-
-                            <input class="form_input" type="file"  formControlName="passportAttachment" (change)="onFileChange($event, 'passportAttachment')"/>
-                            <span class="form_error"
-                            *ngIf="travelRequestForm.get('passportAttachment')?.invalid && travelRequestForm.get('passportAttachment')?.touched">
-                               Choose a file
-                           </span>
-
-                            </div>
-
-
-                        </ng-container>
-                     
-                        <div class="form_input_container">
-                            <label for="additionalComments">Additional Comments</label>
-                            <textarea class="form_input" formControlName="additionalComments" id="" cols="30" rows="4"></textarea>
-                        
-                        </div>
-   
-                    </div>
-                    
-                    <!-- View Mode  -->
-                    <div *ngIf="currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'financePersonnel'"  class="form_data_view_container">
-
-                        <ng-container *ngFor="let entry of getAdditionalInfoMapEntries()">
-                            <div class="item_card">
-                                <p class="item_title">{{entry[0]}}</p>
-                                <p class="item_value">{{entry[1]}}</p>
-                            </div>
-                        </ng-container>
-
-                        <!-- Priority - Visisble for manager -->
-                        <div *ngIf="currentLoggedInUserRole === 'manager' " class="form_input_container">
-
-                            <div class="priority_container">
-
-                                    <label for="priority">Priority</label>
-
-                                    <input type="range" formControlName="priority" min="1" max="3" class="priority-slider" id="priority" (input)="updatePriority($event)">
-
-                                    <div class="priority-level" id="priorityLevel">{{ priorityLevelText }}</div>
-
-                                    <span class="form_error"
-                                    *ngIf="travelRequestForm.get('priority')?.invalid && travelRequestForm.get('priority')?.touched">
-                                    Choose a value
-                                    </span>
-
-                            </div>  
-
-                        </div>
-
-                    </div>
-                    
-                    <!-- If Employee then submit -->
-                    <div *ngIf="currentLoggedInUserRole === 'employee' " class="form_submit_container" >
-
-                        <div class="btn_container">
-                            <button (click) = "changeNewReqFormSubMenuValue(1)" class="cancel_btn"> Back</button>
-                            <input class="submit_btn" type="submit" [disabled]="travelRequestForm.invalid" Value="Submit">
-                        </div>
-
-                    </div>
-                 
-                    <!-- If TA or FNP Navigate  -->
-                    <div *ngIf="currentLoggedInUserRole ==='manager' || currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole ==='financePersonnel'" class="form_input_group_navigator">
-                        <div class="btn_container">
-                            <button (click) = "changeNewReqFormSubMenuValue(1)" type="button" class="back_btn"> Back</button>
-                            <button (click) = "changeNewReqFormSubMenuValue(3)" type="button" class="next_btn"> Next</button>
-                        </div>
-                    </div>
-
-                    <!-- form input group ends -->
-                </div>
-
-                <!-- Docs Attached -->
-                <div *ngIf="newReqFormSubMenuValue === 3 && (currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole === 'manager')" class="form_input_group"  >
-
-                    <div class="form_title">
-                        <h4>Documents Attached</h4>
-                    </div>
-
-                    <div class="form_elements">
-                    <!-- form input elements ends -->
-                    </div>
-
-                    <div class="files_section">
-                        <app-file-card>
-
-                        </app-file-card>
-                    </div>
-
-                    <div *ngIf="currentLoggedInUserRole === 'travelAdmin' " class="form_input_group_navigator">
-                            <div class="btn_container">
-                                <button type="button" (click) = "changeNewReqFormSubMenuValue(2)" class="back_btn"> Back</button>
-                                <button type="button" (click) = "changeNewReqFormSubMenuValue(4)" class="next_btn"> Next</button>
-                            </div>
-                    </div>
-
-                    
-                    <!-- If  Manager then submit -->
-                    <div *ngIf="currentLoggedInUserRole === 'manager' " class="form_submit_container" >
-                        <div class="reject_btn_container">
-                            <button type="button" class="reject_btn" (click)="openRejectionReasonModal()"> Reject</button>
-                        </div>
-                        <div class="btn_container">
-                            <button (click) = "changeNewReqFormSubMenuValue(1)" class="cancel_btn"> Back</button>
-                            <input class="submit_btn" type="submit" [disabled]="travelRequestForm.invalid" Value="Submit">
-                        </div>
-
-                    </div>
-
-                </div> 
-
-                <!--TA- add available options  section -->
-                <div *ngIf="currentLoggedInUserRole==='travelAdmin' && newReqFormSubMenuValue === 4" class="form_input_group"  >
-
-                    <div class="form_title">
-                        <h4>Add Available Options</h4>
-                        <div class="add_btn_container">
-                            <button type="button"  (click)="openAddOptionModal()" class="add_btn"> Add </button>
-                        </div>
-                    </div>
-
-                  <div class="options_container">
-
-                    <ng-container *ngFor="let item of travelOptionsData">
-
-                        <div class="option_card">
-
-                            <div class="option_file">
-                                <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
-                            </div>
-                            <div class="description">
-                                <p>{{item.description}}</p>
-                                <!-- <i class="del_icon ri-delete-bin-line"></i> -->
-                            </div>
-
-                        </div>
-                    </ng-container>
-
-                  </div>
-
-                
-                    <div class="form_submit_container">
-
-                        <div class="reject_btn_container">
-                            <button type="button" class="reject_btn"> Reject</button>
-                        </div>
-
-                        <div class="btn_container">
-                            <button (click) = "changeNewReqFormSubMenuValue(3)" class="cancel_btn"> Back</button>
-                            <input (click)=" onTravelAdminOptionsSend()" class="submit_btn" type="button"  Value="Send">
-                        </div>
-
-                    </div>
-
-                    <!-- form input group ends -->
-                </div>
-
-                <!-- FNP - PerDiem Allocation section -->
-                <div *ngIf="currentLoggedInUserRole==='financePersonnel' && newReqFormSubMenuValue === 3" class="form_input_group"  >
-
-                    <div class="form_title">
-                        <h4>Per Diem Allocations</h4>
-                        
-                        <div class="add_btn_container">
-                            <button type="button"  class="add_btn"> Add </button>
-                        </div>
-
-                    </div>
-
-                    <div class="form_elements">
-                        <!-- Modal -->
-                    </div>
-
-                    <div class="perdiem_section">
-
-                        <app-perdiem-card>
-                            
-                        </app-perdiem-card>
-                         
-                    </div>
-            
-
-                    <div class="form_submit_container">
-
-                        <div class="btn_container">
-                            <button type="button" (click)="changeNewReqFormSubMenuValue(2)" class="cancel_btn"> Back</button>
-                            <input class="submit_btn" type="submit" [disabled]="travelRequestForm.invalid" Value="Send">
-                        </div>
-
-                    </div>
-
-                    <!-- form input group ends -->
-                </div>
-
-
-            </form> 
-
-            <!-- form container ends -->
+        <!-- Docs Attached -->
+        <div
+          *ngIf="
+            newReqFormSubMenuValue === 3 &&
+            (currentLoggedInUserRole === 'travelAdmin' ||
+              currentLoggedInUserRole === 'manager')
+          "
+          class="form_input_group"
+        >
+          <div class="form_title">
+            <h4>Documents Attached</h4>
+          </div>
+
+          <div class="form_elements">
+            <!-- form input elements ends -->
+          </div>
+
+          <div class="files_section">
+            <app-file-card> </app-file-card>
+          </div>
+
+          <div
+            *ngIf="currentLoggedInUserRole === 'travelAdmin'"
+            class="form_input_group_navigator"
+          >
+            <div class="btn_container">
+              <button
+                type="button"
+                (click)="changeNewReqFormSubMenuValue(2)"
+                class="back_btn"
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                (click)="changeNewReqFormSubMenuValue(4)"
+                class="next_btn"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+
+          <!-- If  Manager then submit -->
+          <div
+            *ngIf="currentLoggedInUserRole === 'manager'"
+            class="form_submit_container"
+          >
+            <div class="reject_btn_container">
+              <button
+                type="button"
+                class="reject_btn"
+                (click)="openRejectionReasonModal()"
+              >
+                Reject
+              </button>
+            </div>
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(1)"
+                class="cancel_btn"
+              >
+                Back
+              </button>
+              <input
+                class="submit_btn"
+                type="submit"
+                [disabled]="travelRequestForm.invalid"
+                Value="Submit"
+              />
+            </div>
+          </div>
         </div>
 
-        <!-- right section ends -->
+        <!--TA- add available options  section -->
+        <div
+          *ngIf="
+            currentLoggedInUserRole === 'travelAdmin' &&
+            newReqFormSubMenuValue === 4
+          "
+          class="form_input_group"
+        >
+          <div class="form_title">
+            <h4>Add Available Options</h4>
+            <div class="add_btn_container">
+              <button
+                type="button"
+                (click)="openAddOptionModal()"
+                class="add_btn"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+
+          <div class="options_container">
+            <ng-container *ngFor="let item of travelOptionsData">
+              <div class="option_card">
+                <div class="option_file">
+                  <img
+                    class="img"
+                    src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg"
+                    alt=""
+                  />
+                </div>
+                <div class="description">
+                  <p>{{ item.description }}</p>
+                  <!-- <i class="del_icon ri-delete-bin-line"></i> -->
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="form_submit_container">
+            <div class="reject_btn_container">
+              <button type="button" class="reject_btn">Reject</button>
+            </div>
+
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(3)"
+                class="cancel_btn"
+              >
+                Back
+              </button>
+              <input
+                (click)="onTravelAdminOptionsSend()"
+                class="submit_btn"
+                type="button"
+                Value="Send"
+              />
+            </div>
+          </div>
+
+          <!-- form input group ends -->
+        </div>
+
+        <!-- FNP - PerDiem Allocation section -->
+        <div
+          *ngIf="
+            currentLoggedInUserRole === 'financePersonnel' &&
+            newReqFormSubMenuValue === 3
+          "
+          class="form_input_group"
+        >
+          <div class="form_title">
+            <h4>Per Diem Allocations</h4>
+
+            <div class="add_btn_container">
+              <button type="button" class="add_btn">Add</button>
+            </div>
+          </div>
+
+          <div class="form_elements">
+            <!-- Modal -->
+          </div>
+
+          <div class="perdiem_section">
+            <app-perdiem-card> </app-perdiem-card>
+          </div>
+
+          <div class="form_submit_container">
+            <div class="btn_container">
+              <button
+                type="button"
+                (click)="changeNewReqFormSubMenuValue(2)"
+                class="cancel_btn"
+              >
+                Back
+              </button>
+              <input
+                class="submit_btn"
+                type="submit"
+                [disabled]="travelRequestForm.invalid"
+                Value="Send"
+              />
+            </div>
+          </div>
+
+          <!-- form input group ends -->
+        </div>
+      </form>
+
+      <!-- form container ends -->
     </div>
 
-<!-- req form main container ends -->
+    <!-- right section ends -->
+  </div>
+
+  <!-- req form main container ends -->
 </div>

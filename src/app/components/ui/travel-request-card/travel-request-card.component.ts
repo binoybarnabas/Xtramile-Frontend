@@ -17,13 +17,12 @@ export class TravelRequestCardComponent {
 
   statusChangeUser!: string
   currentLoggedInUserRole: string;
-  // bsModalRef!: BsModalRef;
-
 
   constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService, private router: Router, private activatedRoute: ActivatedRoute,
     private requestService: RequestService,private modalService: BsModalService) {
 
     this.currentLoggedInUserRole = commonAPIService.currentLoggedInUserRole;
+    console.log(this.currentLoggedInUserRole)
   }
 
 

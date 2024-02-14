@@ -22,6 +22,10 @@ export class TravelOptionViewerComponent {
   empId: number;
   userData: UserData
 
+  name: string = 'Submit'
+  primaryStatusCode: string = 'SD'
+  secondaryStatusCode: string = 'SD'
+
   constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute) {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
@@ -71,7 +75,7 @@ export class TravelOptionViewerComponent {
   postSelection(): void {
     if (this.selectedOptionId) {
 
-      //alert(this.selectedOptionId);
+      // alert(this.selectedOptionId);
 
       this.requestService.submitSelectedOption(this.reqId, this.empId, this.selectedOptionId).subscribe({
         next: (response: any) => {
