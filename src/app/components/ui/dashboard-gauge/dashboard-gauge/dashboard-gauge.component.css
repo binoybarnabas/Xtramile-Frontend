@@ -2,21 +2,22 @@
     flex-direction: column;
     display: flex;
     margin-top: 1.2em;
-    margin-left: 0.5em;
-    padding: 0;
+    margin-left: 0.5em; 
+    margin: 0;
 }
-.gauge {
+.outercontainer .gauge {
     position: relative;
-    width: 300px;
-    height: 150px;
+    width: 270px;
+    height: 130px;
     background-color: #e0e0e0;
-    border-radius: 150px 150px 0 0;
+    border-radius: 160px 160px 0 0;
     margin-top: 1em;
     overflow: hidden;
+    margin-right: 0;
     
   }
   
-  .gauge .arc {
+  .outercontainer .gauge .arc {
     position: absolute;
     top: 0;
     left: 0;
@@ -24,17 +25,17 @@
     height: 100%;
   }
   
-  .gauge .inner_arc {
+  .outercontainer .gauge .inner_arc {
     position: absolute;
     top: 30%;
     left: 15%;
     width: 70%;
-    height: 70%;
+    height: 80%;
     background: #fff; 
     border-radius: 150px 150px 0 0;
   }
   
-  .gauge .needle {
+  .outercontainer .gauge .needle {
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -46,23 +47,26 @@
   }
   
 
-  .label {
+  .outercontainer .label {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 16px;
     display: flex;
     justify-content: space-between;
-    width: 27%;
     line-height: 100%;
   }
   
-  .label .value {
+  .outercontainer .label .value {
     display: flex;
     flex-direction: column;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 16px;
     margin-right: 4.3em;
   }
-  .day{
-    font-size: 16px;
+  .outercontainer .label .value .day{
+    font-size: 13px;
   }
-  
+  .outercontainer .label .status{
+    font-weight: bold;
+    font-size: 18px;
+    padding: 0;
+  }

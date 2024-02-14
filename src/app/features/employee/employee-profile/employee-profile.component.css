@@ -14,25 +14,25 @@
   border-radius: 0.5em;
 }
 
-.top_container {
+.main_container .inner_container .top_container {
   border-radius: 0.5em;
 }
 
-.background_image img {
+.main_container .inner_container .top_container .background_image img {
   width: 100%;
   margin: 0 auto;
   height: 150px;
   flex-wrap: wrap;
 }
 
-.background_image {
+.main_container .inner_container .top_container .background_image {
   position: relative;
   background-color: white;
   width: 100%;
   margin: 0 auto;
 }
 
-.black_container {
+.main_container .inner_container .top_container .background_image .black_container {
   position: absolute;
   bottom: 0;
   margin: 0 auto;
@@ -43,13 +43,13 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.inner_container {
+.main_container .inner_container {
   background-color: white;
   width: 100%;
   margin: 0 auto;
 }
 
-.profile_picture {
+.main_container .inner_container .top_container .background_image .profile_picture {
   position: absolute;
   bottom: 0.4em;
   left: 4em;
@@ -58,14 +58,14 @@
   margin-right: 1rem;
 }
 
-.profile_picture img {
+.main_container .inner_container .top_container .background_image .profile_picture img {
   width: 6em;
   max-width: 6em;
   border-radius: 6em;
   height: auto;
 }
 
-.button {
+.main_container .inner_container .top_container .background_image .black_container .button {
   position: relative;
   overflow: hidden;
   height: 2.5rem;
@@ -81,16 +81,16 @@
   transform: translateX(-50%);
 }
 
-.button:hover::before {
+.main_container .inner_container .top_container .background_image .black_container .button:hover::before {
   transform: scaleX(1);
 }
 
-.button-content {
+.main_container .inner_container .top_container .background_image .black_container .button_content {
   position: relative;
   z-index: 1;
 }
 
-.button::before {
+.main_container .inner_container .top_container .background_image .black_container .button::before {
   content: "";
   position: absolute;
   top: 0;
@@ -106,7 +106,7 @@
   transition: all 0.475s;
 }
 
-.text_details {
+.main_container .inner_container .top_container .background_image .text_details {
   position: absolute;
   bottom: 1em;
   left: 8rem;
@@ -115,12 +115,12 @@
   flex-grow: 1;
 }
 
-.text_details h3 {
+.main_container .inner_container .top_container .background_image .text_details h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
-.text_details p {
+.main_container .inner_container .top_container .background_image .text_details p {
   font-size: 1rem;
   margin: 0;
 }
@@ -161,7 +161,7 @@
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.profile_validation_color {
+.main_container .inner_container .profile_validation_color {
   color: rgb(246, 51, 51);
   font-size: 0.8em;
 }
