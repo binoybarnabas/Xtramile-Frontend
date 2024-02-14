@@ -20,8 +20,8 @@ export class SideNavBarComponent {
   subMenu2ToggleValue = 0;
 
   isSideNavBarCollapsed: any;
-
-  constructor(private sideNavBarService: SideNavBarService, private router:Router) {
+  activeItem: string = 'dashboard'; // Variable to store the active item
+  constructor(private sideNavBarService: SideNavBarService, private router: Router) {
 
     this.isSideNavBarCollapsed = 1;
 
@@ -101,25 +101,26 @@ export class SideNavBarComponent {
   }
 
   dashboard = "dashboard";
-  
+
   /// routing based on the values from the keys in myRequest map
-  navigateToRequest(destination : string) {
+  navigateToRequest(destination: string) {
+    this.activeItem = destination; // Update activeItem when an item is clicked
     console.log("inside navigate" + destination);
-    switch(destination){
+    switch (destination) {
       case 'New Requests': this.router.navigate(['/employee/request']);
-                            break;
+        break;
       case 'Pending Approval': this.router.navigate(['/employee/pending']);
-                            break;
+        break;
       case 'Ongoing Travel': this.router.navigate(['/employee/ongoing']);
-                            break;
+        break;
       case 'Request History': this.router.navigate(['/employee/history']);
-                            break;
+        break;
       case 'profile': this.router.navigate(['/employee/profile']);
-                      break;
-      case 'dashboard':this.router.navigate(['/employee/dashboard'])
-                      break;
+        break;
+      case 'dashboard': this.router.navigate(['/employee/dashboard'])
+        break;
     }
-    
+
   }
 
 }
