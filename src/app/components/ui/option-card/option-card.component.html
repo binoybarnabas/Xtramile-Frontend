@@ -1,76 +1,111 @@
-<div class="option_card shadow-lg my-3" *ngIf="selectedOption">
-  <div class="card-body dashed_border card_body text-center">
-    <div class="row">
-      <div class="col-4">
-        <div class="row text-secondary">
-          <h6>{{ selectedOption.sourceCity }}</h6>
+<div>
+  <h6><i class="ri-calendar-close-fill"></i>Previous Trips</h6>
+  <div class="option_card my-3" *ngIf="selectedOption; else noOption">
+    <div class="card-body dashed_border card_body text-center">
+      <div class="row">
+        <div class="col-4">
+          <div class="row text-secondary">
+            <h6>{{ selectedOption.sourceCity }}</h6>
+          </div>
+          <div class="row">
+            <h5>
+              {{
+                selectedOption.TravelTypeName === "Domestic"
+                  ? selectedOption.sourceState
+                  : selectedOption.sourceCountryCode
+              }}
+            </h5>
+          </div>
+          <div class="row">
+            <p>{{ formatDateTime(selectedOption.departureDate) }}</p>
+          </div>
         </div>
-        <div class="row">
-          <h5>
-            {{
-              selectedOption.TravelTypeName === "Domestic"
-                ? selectedOption.sourceState
-                : selectedOption.sourceCountryCode
-            }}
-          </h5>
+        <div class="col-4">
+          <div>
+            <i
+              *ngIf="selectedOption.modeName === 'Flight'"
+              class="ri-flight-takeoff-line"
+            ></i>
+            <i
+              *ngIf="selectedOption.modeName === 'Train'"
+              class="ri-train-line"
+            ></i>
+            <i
+              *ngIf="selectedOption.modeName === 'Bus'"
+              class="ri-bus-2-line"
+            ></i>
+            <i
+              *ngIf="selectedOption.modeName === 'Cab'"
+              class="ri-taxi-line"
+            ></i>
+          </div>
+          <h6 class="text-secondary">{{ selectedOption.requestCode }}</h6>
         </div>
-        <div class="row">
-          <p>{{ formatDateTime(selectedOption.departureDate) }}</p>
-        </div>
-      </div>
-      <div class="col-4">
-        <div>
-          <i *ngIf="selectedOption.modeName === 'Flight'" class="ri-flight-takeoff-line"></i>
-          <i *ngIf="selectedOption.modeName === 'Train'" class="ri-train-line"></i>
-          <i *ngIf="selectedOption.modeName === 'Bus'" class="ri-bus-2-line"></i>
-          <i *ngIf="selectedOption.modeName === 'Cab'" class="ri-taxi-line"></i>
-        </div>
-        <h6 class="text-secondary">{{ selectedOption.requestCode}}</h6>
-      </div>
-      <div class="col-4">
-        <div class="row text-secondary">
-          <h6>{{ selectedOption.destinationCity }}</h6>
-        </div>
-        <div class="row">
-          <h5>
-            {{
-              selectedOption.TravelTypeName === "Domestic"
-                ? selectedOption.destinationState
-                : selectedOption.destinationCountryCode
-            }}
-          </h5>
-        </div>
-        <div class="row">
-          <p>{{ formatDateTime(selectedOption.returnDate) }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card-body card_body dashed_border text-center">
-    <div class="row">
-      <div class="col-4">
-        <div class="row text-secondary"><h6>Mode</h6></div>
-        <div class="row">
-          <h5>{{ selectedOption.modeName }}</h5>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="row text-secondary"><h6>Purpose</h6></div>
-        <div class="row">
-          <h5>{{ selectedOption.tripPurpose }}</h5>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="row text-secondary"><h6>Project</h6></div>
-        <div class="row">
-          <h5>{{ selectedOption.projectCode }}</h5>
+        <div class="col-4">
+          <div class="row text-secondary">
+            <h6>{{ selectedOption.destinationCity }}</h6>
+          </div>
+          <div class="row">
+            <h5>
+              {{
+                selectedOption.TravelTypeName === "Domestic"
+                  ? selectedOption.destinationState
+                  : selectedOption.destinationCountryCode
+              }}
+            </h5>
+          </div>
+          <div class="row">
+            <p>{{ formatDateTime(selectedOption.returnDate) }}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="card-body text-center card_body">
-    <div class="img_row">
-      <img class="logo_img" src="assets/images/exp_logo.png" alt="" srcset="">
+    <div class="card-body card_body dashed_border text-center">
+      <div class="row">
+        <div class="col-4">
+          <div class="row text-secondary"><h6>Mode</h6></div>
+          <div class="row">
+            <h5>{{ selectedOption.modeName }}</h5>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="row text-secondary"><h6>Purpose</h6></div>
+          <div class="row">
+            <h5>{{ selectedOption.tripPurpose }}</h5>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="row text-secondary"><h6>Project</h6></div>
+          <div class="row">
+            <h5>{{ selectedOption.projectCode }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body text-center card_body">
+      <div class="img_row">
+        <img
+          class="logo_img"
+          src="assets/images/exp_logo.png"
+          alt=""
+          srcset=""
+        />
+      </div>
     </div>
   </div>
+  <ng-template #noOption>
+    <!-- Content when there is no selectedOption -->
+    <div
+      class="no-option-content text-center"
+      style="box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)"
+    >
+      <img
+        src="https://th.bing.com/th/id/OIP.VHs4g0HrSvjNVm-RN0I5FQHaFj?rs=1&pid=ImgDetMain"
+        alt="No trips selected"
+        style="max-width: 100%; max-height: 220px"
+      />
+      <p>No previous trips.</p>
+      <!-- Add any other content or message you want to show when there is no selectedOption -->
+    </div>
+  </ng-template>
 </div>

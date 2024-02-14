@@ -1,110 +1,15 @@
-/* .options_container{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 25px;
-} 
-  
-.options_container .option_card {
-    max-width: max-content;
-    height: 18rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 1rem;
-    flex: 1;
-    
-}
-  
-.options_container .card_selection {
-    transition: transform 0.3s;
-}
-  
-.options_container .card_selection:hover {
-    transform: scale(1.05);
-}
-  
-.options_container .card_body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 0.5rem;
-}
-  
-.options_container .selected {
-    border: 2px solid #2196F3;
-}
-  
-.options_container .selected .selected_header {
-    text-align: center;
-    color: #2196F3;
-  }
-
-.options_container .selected .selected_header h3{
-    font-size: 1em;
-}
-
-.options_container .card_selection .dashed_border {
-    border-bottom: 0.1em dashed #000;
-    position: relative;
-    margin-bottom: 0.5rem; 
-}
-
-.options_container .card_selection .card_body i {
-    font-size: 2em;
-}
-  
-.options_container .card_selection .card_body .row h6 {
-    font-size: 0.8em;
-}
-  
-.options_container .card_selection .card_body .row h5 {
-    font-size: 0.9em;
-}
-  
-.options_container .card_selection .card_body .row p{
-    font-size: 0.65em;
-}
-  
-.options_container .card_selection .card_body .logo_img{
-    width: 12em;
-}
-  
-.options_container .card_selection .card_body .img_row {
-    font-size: x-small;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-  
-@media (max-width:850px) {
-    
-    .options_container{
-      display: grid;
-      grid-template-columns: 1fr 1fr ;
-      grid-gap: 5px;
-    } 
-}
-  
-@media (max-width:450px) {
-    
-    .options_container{
-      display: block;
-    } 
-  
-} */
-
 /* 2 */
 
    .option_card {
-    width: 18rem;
-    height: 20rem;
+    width: 19rem;
+    height: 22rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 1rem;
     box-sizing: border-box;
     flex: 1;
+
   }
   
   .card_body {

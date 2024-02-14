@@ -34,11 +34,10 @@
   }
   
   .progress_bar_container .progress_bar_line {
-    width: 73px; /* Increase the width of the line */
     height: 4px; /* Increase the height of the line */
     background-color: #2bb2fe; /* Color of the line */
     position: absolute;
-    top: 50%;
+    top: 55%;
     transform: translateY(-22px); /* Adjust to center the line */
     left: calc(50% + 17px); /* Adjust the position to connect to the right edge of the circle */
     z-index: -1; /* Move the line behind the circles */

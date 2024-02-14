@@ -33,13 +33,22 @@
     border: none;
     border-radius: 3px; 
   }
+
+  .dashboard_outercontainer{
+    display: flex;
+    justify-content: space-around;
+  }
   .dashboard_container {
     display: flex;
+    flex-direction: column;
   }
   
   app-dashboard-upcoming-trip {
-    width: 40%;
+    height: 50%;
+    margin-left: 0.5em;
   }
-  app-dashboard-card {
-    margin-left: 1em;
-  }
+
+  /* app-dashboard-gauge{
+    margin: 0;
+    width: 30%;
+  } */

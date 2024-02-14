@@ -1,6 +1,8 @@
 <div class="container">
   <div class="current_country">
-    <h5><i class="ri-map-pin-line"></i>{{ currentCountry }}</h5>
+    <h5>
+      <i *ngIf="currentCountry" class="ri-map-pin-line"></i>{{ currentCountry }}
+    </h5>
   </div>
   <div class="map_container">
     <svg #mapSvg viewBox="150 400 1800 100"></svg>

@@ -1,28 +1,41 @@
+<div class="dashboard_outercontainer">
+  <div class="dashboard_container">
+    <!-- dashboard gauge -->
+    <app-dashboard-gauge
+      [totalDays]="totalDays"
+      [remainingDays]="remainingDays"
+    ></app-dashboard-gauge>
+    <!-- calender -->
+    <app-dashboard-calender [empId]="employeeId"></app-dashboard-calender>
+  </div>
 
-<div class="dashboard_container">
-  <app-dashboard-upcoming-trip
-    [employeeId]="employeeId"
-  ></app-dashboard-upcoming-trip>
-  <app-dashboard-card
-    [titles]="cardTitles"
-    [data]="cardData"
-    (cardClick)="onClickCard()"
-  ></app-dashboard-card>
+  <div class="dashboard_container">
+    <!-- card that show the request status -->
+    <app-dashboard-card
+      [titles]="cardTitles"
+      [data]="cardData"
+      (cardClick)="onClickCard()"
+    ></app-dashboard-card>
+
+    <!-- completedTrips -->
+    <app-option-card [options]="completedTrips"></app-option-card>
+  </div>
+
+  <div class="dashboard_container">
+    <!-- upcoming trip in dashboard -->
+    <app-dashboard-upcoming-trip
+      [employeeId]="employeeId"
+    ></app-dashboard-upcoming-trip>
+
+    <!-- dashboard map -->
+    <app-dashboard-map [currentCountry]="currentCountry"></app-dashboard-map>
+  </div>
 </div>
 
+<!-- progree of the report -->
 <div class="modal_container" *ngIf="showModal">
   <div class="created_modal">
     <button class="close_button" (click)="closeModal()">X</button>
     <app-dashboard-progress [employeeId]="employeeId"></app-dashboard-progress>
   </div>
 </div>
-<div class="dashboard_container">
-  <app-dashboard-map [currentCountry]="currentCountry"></app-dashboard-map>
-  <app-dashboard-gauge
-    [totalDays]="totalDays"
-    [remainingDays]="remainingDays"
-  ></app-dashboard-gauge>
-</div>
-
-<app-dashboard-calender 
-[empId]="empId"></app-dashboard-calender>
