@@ -10,7 +10,7 @@
       <img
         [src]="currentImageUrl"
         [alt]="countryName"
-        [ngStyle]="{ 'max-width.px': 200, 'max-height.px': 120 }"
+        [ngStyle]="{ 'max-width.px': 200, 'max-height.px': 170 }"
       />
     </div>
 
@@ -20,7 +20,7 @@
       <h3>{{ tripPurpose }}</h3>
 
       <!-- Trip information paragraph displaying details such as source city, state, country, destination city, state, country, and the date range of the trip. -->
-      <p>
+      <p *ngIf="startDate && endDate">
         Embark on an exciting journey from {{ sourceCity }}, {{ sourceState }},
         {{ sourceCountry }} to {{ destinationCity }}, {{ destinationState }},
         {{ destinationCountry }} unfolding from
@@ -37,9 +37,19 @@
       </div>
     </div>
   </div>
-
   <!-- Show a message when there is no upcoming trip data -->
   <div *ngIf="!tripDetailsAvailable">
-    <p>No upcoming trip data available.</p>
+    <div class="trip_card">
+      <div class="trip_image">
+        <img
+          src="https://bmsastech.com/wp-content/uploads/2020/05/ContentWritingVector.png"
+          alt="No Upcoming Trip Image"
+          [ngStyle]="{ 'max-width.px': 200, 'max-height.px': 170 }"
+        />
+      </div>
+      <div class="trip_details">
+        <p>No upcoming trip.</p>
+      </div>
+    </div>
   </div>
 </div>
