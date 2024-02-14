@@ -114,6 +114,7 @@ import { TravelOptionViewerComponent } from './features/employee/myRequests/empl
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ConfirmationModalComponent } from './components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
 import { DashboardGaugeComponent } from './components/ui/dashboard-gauge/dashboard-gauge/dashboard-gauge.component';
+import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/selected-option-travel-admin/selected-option-travel-admin.component';
 
 import { DashboardCalenderComponent } from './components/ui/dashboard-calender/dashboard-calender.component';
 
@@ -220,6 +221,7 @@ import { DashboardCalenderComponent } from './components/ui/dashboard-calender/d
     DashboardMapComponent,
     DashboardGaugeComponent,
     DashboardCalenderComponent,
+    SelectedOptionTravelAdminComponent,
   ]
   ,
 

@@ -19,6 +19,8 @@ export class TravelOptionViewerComponent {
   selectedOption: any;
   selectedOptionId: any;
 
+  travelOptionId: number[] = [];
+
   empId: number;
   userData: UserData
 
@@ -51,10 +53,9 @@ export class TravelOptionViewerComponent {
 
     this.requestService.getTravelOptionsByReqId(reqId).subscribe({
       next: (data) => {
-
         this.travelOptionsData = data;
         console.log(this.travelOptionsData)
-
+        
       },
       error: (error: Error) => {
         console.log("Error has occurred, " + error.message);
@@ -102,8 +103,19 @@ export class TravelOptionViewerComponent {
     }
   }
 
-
-
-
-
+  buttonActivate: boolean = this.checkRoleOfUser();
+  checkRoleOfUser(): boolean {
+    const userData = localStorage.getItem('userData');
+    if(userData){
+        const userDataParsed = JSON.parse(userData);
+ 
+        if(userDataParsed.role === 'Manager' &&  userDataParsed.department === 'TA'){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    // Return a default value if userData is falsy
+    return false;
+}
 }

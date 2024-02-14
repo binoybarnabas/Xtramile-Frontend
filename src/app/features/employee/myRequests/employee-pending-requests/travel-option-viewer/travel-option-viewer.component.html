@@ -19,13 +19,11 @@
       </div>
     </ng-container>
   </div>
-
-  <div class="actions_container">
+  <div class="actions_container" *ngIf="buttonActivate">
     <div class="cancel_btn_container">
       <button class="cancel_btn" type="button">Cancel</button>
     </div>
     <div class="submit_btn_container">
-      <!-- <button class="submit_btn" (click)="postSelection()" type="submit">Submit</button> -->
       <app-change-status-button
         [name]="name"
         [empId]="empId"

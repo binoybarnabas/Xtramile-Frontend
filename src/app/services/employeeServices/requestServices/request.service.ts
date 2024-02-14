@@ -139,4 +139,8 @@ export class RequestService {
     return this.http.post<any>(url,
       { requestId, empId });
   }
+
+  selectedOptionFromEmployee(requestId: number):Observable<any>{
+    return this.http.get(this.apiURL+ `/traveladmin/selectedoption/${requestId}`)
+  }
 }
