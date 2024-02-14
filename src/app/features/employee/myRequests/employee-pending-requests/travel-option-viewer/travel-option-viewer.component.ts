@@ -81,7 +81,7 @@ export class TravelOptionViewerComponent {
 
     if (this.selectedOptionId) {
 
-      //alert(this.selectedOptionId);
+      // alert(this.selectedOptionId);
 
       this.requestService.submitSelectedOption(this.reqId, this.empId, this.selectedOptionId).subscribe({
         next: (response: any) => {
