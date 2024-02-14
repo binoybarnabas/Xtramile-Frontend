@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-request-card-modal/travel-request-card-modal.component';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
@@ -15,6 +17,9 @@ export class ManagerIncomingTravelRequestsComponent {
   searchByName!:string;
   sqlDatetimeFormat!: string;
   selectedSortOption! : string;
+  selectedRow: any | null = null;
+  requestId: number = 0;
+  bsModalRef!: BsModalRef
 
   tableHeaders: string[] = ['Request', 'Employee', 'Project Code', 'Date','Status'];
   fieldsToDisplay: string[] = ['requestId', 'employeeNameAndEmail', 'projectCode','date','status'];
@@ -107,7 +112,7 @@ export class ManagerIncomingTravelRequestsComponent {
   }
 
   // Constructor to inject services
-  constructor(private apiservice: ManagerTravelRequestsService,private router:Router, private datePipe: DatePipe) {
+  constructor(private apiservice: ManagerTravelRequestsService,private router:Router, private datePipe: DatePipe, private modalService: BsModalService) {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
     this.managerId = this.userData.empId;
@@ -186,10 +191,24 @@ export class ManagerIncomingTravelRequestsComponent {
 
 
   // select an option
-  selectRow(userData:any){
-    console.log(userData.requestId);
-    const queryParams = {requestId:userData.requestId}
-    this.router.navigate(['manager/requestdetail'],{ queryParams: queryParams });
+  handleSelectedRow(row: any) {
+    this.selectedRow = row;
+    console.log(this.selectedRow.requestId)
+    this.requestId = this.selectedRow.requestId
+    //const queryParams = { requestId: this.requestId }
+    //this.router.navigate(['manager/requestdetail'],{ queryParams: queryParams });
+
+    const initialState = {
+      requestId: this.selectedRow.requestId
+    };
+
+    this.bsModalRef = this.modalService.show(TravelRequestCardModalComponent, { initialState });
+    this.bsModalRef.content.onClose.subscribe((result: any) => {
+      // Handle the result from the modal if needed
+      console.log('Modal result:', result);
+      // You can perform actions with the result data here
+    });
+
   }
  
 }
