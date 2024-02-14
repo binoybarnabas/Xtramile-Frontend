@@ -100,6 +100,7 @@ export class NewTravelRequestComponent {
   ) {
 
     const storedUserData = localStorage.getItem('userData');
+    console.log("error check"+ storedUserData);
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
 
     this.empId = this.userData?.empId

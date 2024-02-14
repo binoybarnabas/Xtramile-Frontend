@@ -36,8 +36,7 @@ export class EmployeePendingRequestsComponent {
       next: (data) => {
         data.forEach((request)=>{
           const returnDate = request.returnDate === null ? ' ' : request.returnDate;
-          request.departureDate = this.datepipe.transform(request.departureDate, 'dd/LL/yyyy') || '';
-          request.returnDate = this.datepipe.transform(request.returnDate, 'dd/LL/yyyy') || '';
+          request.returnDate = returnDate
         })
         this.requestData = data;
         console.log(this.requestData);

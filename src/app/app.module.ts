@@ -112,6 +112,8 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { TravelRequestCardModalComponent } from './components/ui/travel-request-card-modal/travel-request-card-modal.component';
 import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { ConfirmationModalComponent } from './components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
+import { DashboardGaugeComponent } from './components/ui/dashboard-gauge/dashboard-gauge/dashboard-gauge.component';
 
 
 @NgModule({
@@ -212,7 +214,10 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     DashboardCardComponent,
     StatusPipe,
     NotificationsComponent,
-    DashboardMapComponent
+    DashboardMapComponent,
+    ConfirmationModalComponent,
+    DashboardMapComponent,
+    DashboardGaugeComponent
   ]
   ,
 

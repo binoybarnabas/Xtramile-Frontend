@@ -26,17 +26,17 @@
   }
   
   .progress_bar_container .progress_bar_circle.completed {
-    background-color: #2196f3; /* Color for completed circles */
+    background-color: #2bb2fe; /* Color for completed circles */
   }
   
   .progress_bar_container .progress_bar_circle.in-progress {
-    background-color: #2196f3; /* Color for the circle in progress */
+    background-color: #2bb2fe; /* Color for the circle in progress */
   }
   
   .progress_bar_container .progress_bar_line {
     width: 73px; /* Increase the width of the line */
     height: 4px; /* Increase the height of the line */
-    background-color: #2196f3; /* Color of the line */
+    background-color: #2bb2fe; /* Color of the line */
     position: absolute;
     top: 50%;
     transform: translateY(-22px); /* Adjust to center the line */

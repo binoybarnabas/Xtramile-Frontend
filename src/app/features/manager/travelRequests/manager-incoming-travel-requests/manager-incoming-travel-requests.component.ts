@@ -186,9 +186,9 @@ export class ManagerIncomingTravelRequestsComponent {
 
 
   // select an option
-  selectRow(requestId:number){
-    console.log(requestId);
-    const queryParams = {requestId:requestId}
+  selectRow(userData:any){
+    console.log(userData.requestId);
+    const queryParams = {requestId:userData.requestId}
     this.router.navigate(['manager/requestdetail'],{ queryParams: queryParams });
   }
  
