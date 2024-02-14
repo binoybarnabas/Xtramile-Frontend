@@ -44,6 +44,7 @@ export interface TravelRequestDetailViewModel {
     projectCode: string;
     tripType: string;
     travelMode: string;
+    travelModeId:string;
     travelType: string;
     sourceCity: string;
     sourceCountry: string;

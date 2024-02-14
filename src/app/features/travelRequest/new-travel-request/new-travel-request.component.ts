@@ -63,6 +63,7 @@ export class NewTravelRequestComponent {
   cities = cities;//Fetch Data From Any External API
   sourceFilteredCities: any[] = []; // Separate filtered list for source field
   destinationFilteredCities: any[] = []; // Separate filtered list for destination field
+  optionFileUrl: string = "";
 
 
   // Function to convert the Map into an array of key-value pairs
@@ -96,11 +97,11 @@ export class NewTravelRequestComponent {
     private managerTravelRequest: ManagerTravelRequestsService,
     private router: Router,
     private modalService: BsModalService,
-    private commonApiService: CommonAPIService
+    private commonApiService: CommonAPIService,
   ) {
 
     const storedUserData = localStorage.getItem('userData');
-    console.log("error check"+ storedUserData);
+    console.log("error check" + storedUserData);
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
 
     this.empId = this.userData?.empId
@@ -131,6 +132,7 @@ export class NewTravelRequestComponent {
         }
         else {
           this.currentLoggedInUserRole = 'manager';
+          this.newReqFormSubMenuValue = 2;
         }
           break;
       }
@@ -235,6 +237,8 @@ export class NewTravelRequestComponent {
       console.log(requestId);
       this.managerTravelRequest.GetTravelRequest(requestId).subscribe({
         next: (data) => {
+            data.departureDate = this.datePipe.transform(data.departureDate, "dd/MM/yyyy") || ' ';
+            data.returnDate = this.datePipe.transform(data.returnDate, "dd/MM/yyyy") || ' '
           this.travelRequestDetailViewModel = data
           // Getting the employee profile info
 
@@ -357,9 +361,9 @@ export class NewTravelRequestComponent {
         prefPickUpTime: new FormControl('', Validators.nullValidator),
         accommodationRequired: new FormControl('yes', Validators.required),
 
-        travelAuthorizationEmailCapture: new FormControl(null, Validators.required),
-        passportAttachment: new FormControl(null, Validators.required),
-        additionalComments: new FormControl(null, Validators.nullValidator)
+        travelAuthorizationEmailCapture: new FormControl(Validators.required),
+        passportAttachment: new FormControl(Validators.required),
+        additionalComments: new FormControl('', Validators.nullValidator)
 
       })
 
@@ -780,7 +784,9 @@ export class NewTravelRequestComponent {
       next: (data) => {
 
         this.travelOptionsData = data;
-        console.log(this.travelOptionsData)
+        //console.log(this.travelOptionsData)
+        //console.log("OPTIONS DATA")
+        //console.log(data);
 
       },
       error: (error: Error) => {
