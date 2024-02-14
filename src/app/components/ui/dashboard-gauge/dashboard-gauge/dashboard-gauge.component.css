@@ -1,0 +1,65 @@
+.outercontainer{
+    flex-direction: column;
+    display: flex;
+}
+.gauge {
+    position: relative;
+    width: 300px;
+    height: 150px;
+    background-color: #e0e0e0;
+    border-radius: 150px 150px 0 0;
+    margin: 0;
+    overflow: hidden;
+    
+  }
+  
+  .gauge .arc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Your conic gradient or other styling here */
+  }
+  
+  .gauge .inner-arc {
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+    background: #fff; /* Adjust color as needed */
+    border-radius: 150px 150px 0 0;
+  }
+  
+  .gauge .needle {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    height: 65%;
+    background-color: black;
+    transform-origin: bottom;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+  
+
+  .label {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 27%;
+    line-height: 100%;
+  }
+  
+  .label .value {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .day{
+    font-size: 16px;
+  }
+  
