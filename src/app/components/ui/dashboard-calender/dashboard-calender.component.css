@@ -1,7 +1,7 @@
 .calendar {
   font-family: Arial, sans-serif;
-  max-width: 260px; /* Reduced by 25% */
-  margin: 0 auto;
+  max-width: 268px; /* Reduced by 25% */
+  margin: 0;
   border-radius: 6px; /* Reduced by 25% */
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
   background-color: #fff;

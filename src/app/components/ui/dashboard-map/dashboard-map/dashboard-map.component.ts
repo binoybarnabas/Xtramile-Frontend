@@ -29,6 +29,10 @@ export class DashboardMapComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     // Load the map when the component is initialized
     this.loadMap();
+    if(this.currentCountry=='')
+    {
+      this.currentCountry='India';
+    }
   }
 
   // Method to load the map using D3
