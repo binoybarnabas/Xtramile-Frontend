@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TravelRequestDetailViewModel } from 'src/app/services/interfaces/iTravelRequestDetails';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { local } from 'd3';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-travel-request-card-modal',
@@ -22,7 +23,7 @@ export class TravelRequestCardModalComponent {
 
   travelRequestDetailViewModel!: TravelRequestDetailViewModel
 
-  constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService) {
+  constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService, private datePipe: DatePipe) {
   }
 
 
