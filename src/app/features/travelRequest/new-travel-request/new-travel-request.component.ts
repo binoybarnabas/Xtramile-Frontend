@@ -525,7 +525,6 @@ export class NewTravelRequestComponent {
   //Manager forwarding the travel request form
   onManagerForwardTravelRequestForm() {
     //Should call a PATCH method to set priority of the request
-    alert("Approved")
     console.log(this.travelRequestForm.value.priority);
 
     this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId, this.travelRequestForm.value.priority).subscribe(
@@ -535,10 +534,11 @@ export class NewTravelRequestComponent {
           // window.alert(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
           console.log(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
           // Redirect to another page
+          alert("Approved");
           this.router.navigate(['/manager/dashboard']);
+         
         },
         complete: () => {
-          alert("Approved");
           //this.toastr.success('Request approved!', 'Success');
         }
       }
