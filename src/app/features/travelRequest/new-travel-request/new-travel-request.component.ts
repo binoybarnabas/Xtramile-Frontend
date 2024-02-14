@@ -132,6 +132,7 @@ export class NewTravelRequestComponent {
         }
         else {
           this.currentLoggedInUserRole = 'manager';
+          this.newReqFormSubMenuValue = 2;
         }
           break;
       }
