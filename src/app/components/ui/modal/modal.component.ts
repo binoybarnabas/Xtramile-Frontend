@@ -39,9 +39,9 @@ export class ModalComponent {
 
     this.travelOptionForm = new FormGroup({
 
-      optionFile: new FormControl(null, Validators.required),
+      optionFile: new FormControl(Validators.required),
       requestId: new FormControl(this._requestId, Validators.nullValidator),
-      description: new FormControl('', Validators.nullValidator)
+      description: new FormControl('', Validators.required)
 
     });
 
@@ -62,6 +62,7 @@ export class ModalComponent {
     return { invalidImage: true }; // Invalid
   }
 
+  //not used - has bugs
   previewImage(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -77,30 +78,61 @@ export class ModalComponent {
 
 
   //Submit Travel Option
-  addNewTravelOption() {
+  // addNewTravelOption() {
 
+  //   console.log("Form Values");
+  //   console.log(this.travelOptionForm.value);
+
+  //   this.travelAdminRequestService.addNewTravelOption(this.travelOptionForm.value).subscribe({
+  //     next: (response) => {
+  //       console.log(response)
+  //       alert("Travel Option Added!")
+  //       this.closeModal()
+  //       // this.router.navigate(['employee/pending']);
+  //     },
+  //     error: (error: Error) => {
+  //       alert("Error has occured" + error.message);
+  //     },
+  //     complete: () => {
+  //       console.log("COMPLETED");
+  //     }
+  //   });
+
+
+  // }
+
+  //Test mode
+  addNewTravelOption() {
     const formData = new FormData();
-    formData.append('requestId', String(this.travelOptionForm.get('requestId')?.value));
-    formData.append('description', String(this.travelOptionForm.get('description')?.value));
-    formData.append('optionFile', this.travelOptionForm.get('optionFile')?.value);
+    const file = this.travelOptionForm.get('optionFile')?.value;
+    formData.append('optionFile', file);
+    formData.append('requestId', String(this._requestId));
+    formData.append('description', this.travelOptionForm.get('description')?.value);
 
     this.travelAdminRequestService.addNewTravelOption(formData).subscribe({
       next: (response) => {
-        console.log(response)
-        alert("Travel Option Added!")
-        this.closeModal()
-        // this.router.navigate(['employee/pending']);
+        console.log(response);
+        alert("Travel Option Added!");
+        this.closeModal();
       },
       error: (error: Error) => {
-        alert("Error has occured" + error.message);
+        alert("Error has occurred" + error.message);
       },
       complete: () => {
         console.log("COMPLETED");
       }
     });
-
   }
 
+  //Handling File Changes
+  onFileChange(event: any, controlName: string): void {
+    // const file = (event.target as HTMLInputElement).files?.[0];
+    const file = event.target.files[0];
+    this.travelOptionForm.get(controlName)?.setValue(file);
+    this.travelOptionForm.get(controlName)?.updateValueAndValidity();
+    console.log('Form Validity:', this.travelOptionForm.valid);
+
+  }
 
 
 }

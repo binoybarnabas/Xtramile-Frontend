@@ -52,6 +52,8 @@ export class RequestService {
     // Note: No need to set Content-Type, it will be set automatically by FormData
 
     return this.http.post(this.apiURL + '/request/add', formData, { headers, responseType: 'text' });
+
+
   }
 
 
