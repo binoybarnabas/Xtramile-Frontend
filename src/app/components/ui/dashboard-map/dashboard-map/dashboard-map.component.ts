@@ -29,9 +29,8 @@ export class DashboardMapComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     // Load the map when the component is initialized
     this.loadMap();
-    if(this.currentCountry=='')
-    {
-      this.currentCountry='India';
+    if (this.currentCountry == '') {
+      this.currentCountry = 'India';
     }
   }
 
@@ -52,7 +51,7 @@ export class DashboardMapComponent implements OnInit, OnChanges {
         .append('path')
         .attr('d', (d: { getAttribute: (arg0: string) => any; }) => d.getAttribute('d'))
         .attr('fill', (d: { getAttribute: (arg0: string) => any; }) => {
-          return d.getAttribute('name') === this.currentCountry ? 'orange' : 'lightblue';
+          return d.getAttribute('name') === this.currentCountry ? '#0240bc' : 'lightblue';
         })
         // Mouseover event handling
         .on('mouseover', (event: { currentTarget: Element; pageX: number; pageY: number; }, d: { getAttribute: (arg0: string) => string; }) => {
@@ -82,7 +81,7 @@ export class DashboardMapComponent implements OnInit, OnChanges {
           if (d.getAttribute('name') !== this.currentCountry) {
             // Restore fill color on mouseout
             d3.select(event.currentTarget as Element).attr('fill', 'lightblue');
-            
+
             // Hide tooltip on mouseout
             d3.select('.hoveredCountry').style('display', 'none');
           }

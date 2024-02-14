@@ -11,18 +11,18 @@ export class DashboardUpcomingTripComponent {
   @Input() employeeId: number = 0;
   countryName!: string;
   currentImageUrl!: string;
-  tripPurpose: string = '';
+  tripPurpose: string = 'Visit';
   startDate: any;
   endDate: any;
-  sourceCity: string = '';
-  sourceState: string = '';
-  sourceCountry: string = '';
-  destinationCity: string = '';
-  destinationState: string = '';
-  destinationCountry: string = '';
+  sourceCity: string = 'Trivandrum';
+  sourceState: string = 'Kerala';
+  sourceCountry: string = 'India';
+  destinationCity: string = 'Austin';
+  destinationState: string = 'Texas';
+  destinationCountry: string = 'USA';
   tripDetailsAvailable: boolean = true; // Flag to check if trip details are available
 
-  constructor(private service: EmployeeDashboardService,private router: Router) {}
+  constructor(private service: EmployeeDashboardService, private router: Router) { }
 
   ngOnInit() {
     // Fetch upcoming trip details using the employeeId
@@ -31,7 +31,7 @@ export class DashboardUpcomingTripComponent {
         // Log the fetched data
         console.log(data);
 
-        if (data!=null) {
+        if (data != null) {
           // Assign fetched data to component properties
           this.tripPurpose = data[0].tripPurpose;
           this.startDate = data[0].startDate;
@@ -74,5 +74,5 @@ export class DashboardUpcomingTripComponent {
   }
   viewOngoingDetails() {
     this.router.navigate(['/employee/ongoing']);
-    }
+  }
 }

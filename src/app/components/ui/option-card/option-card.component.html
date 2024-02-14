@@ -1,5 +1,4 @@
-<div>
-  <h6><i class="ri-calendar-close-fill"></i>Previous Trips</h6>
+<div class="trip_card_container">
   <div class="option_card my-3" *ngIf="selectedOption; else noOption">
     <div class="card-body dashed_border card_body text-center">
       <div class="row">
@@ -108,4 +107,7 @@
       <!-- Add any other content or message you want to show when there is no selectedOption -->
     </div>
   </ng-template>
+
+  <p class="item_heading"><i class="ri-calendar-close-fill"></i>Previous Trips</p>
+
 </div>

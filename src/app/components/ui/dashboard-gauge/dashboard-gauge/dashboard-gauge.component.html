@@ -1,5 +1,4 @@
 <div class="outercontainer">
-  <h5><i class="ri-pie-chart-fill"></i>Remaining Days</h5>
   <div class="gauge">
     <div class="arc" [style.backgroundImage]="gaugeColor"></div>
     <div class="inner_arc"></div>
@@ -9,6 +8,10 @@
     ></div>
   </div>
   <div class="label">
+
+    <div class="value_section">
+
+
     <div class="value" *ngIf="remainingDays > 0">
       {{ 0 }}
       <span class="day">Days</span>
@@ -23,6 +26,9 @@
       {{ totalDays }}
       <span class="day">Days</span>
     </div>
+  </div>
+
+    <p class="item_heading">Remaining Days</p>
 
     <div *ngIf="remainingDays <= 0" class="value">No current trip</div>
   </div>
