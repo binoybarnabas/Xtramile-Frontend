@@ -107,6 +107,7 @@ import { DashboardCardComponent } from './components/ui/dashboard-card/dashboard
 import { StatusPipe } from './pipes/Status/status.pipe';
 import { NotificationsComponent } from './components/ui/notifications/notifications.component';
 import { DashboardMapComponent } from './components/ui/dashboard-map/dashboard-map/dashboard-map.component';
+import { DashboardGaugeComponent } from './components/ui/dashboard-gauge/dashboard-gauge/dashboard-gauge.component';
 
 
 @NgModule({
@@ -203,7 +204,8 @@ import { DashboardMapComponent } from './components/ui/dashboard-map/dashboard-m
     DashboardCardComponent,
     StatusPipe,
     NotificationsComponent,
-    DashboardMapComponent
+    DashboardMapComponent,
+    DashboardGaugeComponent
   ]
   ,
 
