@@ -568,6 +568,10 @@ export class NewTravelRequestComponent {
     this.commonApiService.updateRequestStatus(requestStatus).subscribe({
       next: (data) => {
         console.log(data);
+        //Pop-up when options are submitted
+        //Redirect to another page on submit click
+        this.router.navigate(['/traveladmin/waiting']);
+
       },
       error: (error: Error) => {
         console.log("Error in posting request status");
@@ -575,7 +579,7 @@ export class NewTravelRequestComponent {
       },
       complete: () => {
         console.log("Posting Request Status Complete");
-        alert("Posting Request Status Complete");
+        // alert("Posting Request Status Complete");
       }
     });
   }
