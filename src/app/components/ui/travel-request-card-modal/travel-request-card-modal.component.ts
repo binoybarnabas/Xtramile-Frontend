@@ -13,8 +13,6 @@ import { local } from 'd3';
 export class TravelRequestCardModalComponent {
   private _requestId!: number;
 
-  currentLoggedInUserRole: string;
-
 
   @Input()
   set requestId(value: number) {
@@ -25,8 +23,6 @@ export class TravelRequestCardModalComponent {
   travelRequestDetailViewModel!: TravelRequestDetailViewModel
 
   constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService) {
-    this.currentLoggedInUserRole = commonApiService.currentLoggedInUserRole;
-    console.log(this.currentLoggedInUserRole)
   }
 
 
@@ -51,7 +47,7 @@ export class TravelRequestCardModalComponent {
       if(userDataParsed.role=='Manager' &&  userDataParsed.department=='TA'){
         this.navigateToAddOptions();
       }
-      if(userDataParsed.role=='Manager'){
+      else if(userDataParsed.role=='Manager'){
         this.navigateToSetPriority();
       }
     }
