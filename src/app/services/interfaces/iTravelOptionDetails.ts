@@ -5,4 +5,6 @@ export interface TravelOptionDetails {
     optionFile: File | undefined;
     description: string;
     optionId: string;
+
+    optionFileURL: URL;
 }

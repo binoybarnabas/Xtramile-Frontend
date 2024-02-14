@@ -100,7 +100,7 @@ export class NewTravelRequestComponent {
   ) {
 
     const storedUserData = localStorage.getItem('userData');
-    console.log("error check"+ storedUserData);
+    console.log("error check" + storedUserData);
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
 
     this.empId = this.userData?.empId
@@ -357,9 +357,9 @@ export class NewTravelRequestComponent {
         prefPickUpTime: new FormControl('', Validators.nullValidator),
         accommodationRequired: new FormControl('yes', Validators.required),
 
-        travelAuthorizationEmailCapture: new FormControl(null, Validators.required),
-        passportAttachment: new FormControl(null, Validators.required),
-        additionalComments: new FormControl(null, Validators.nullValidator)
+        travelAuthorizationEmailCapture: new FormControl(Validators.required),
+        passportAttachment: new FormControl(Validators.required),
+        additionalComments: new FormControl('', Validators.nullValidator)
 
       })
 
@@ -780,7 +780,10 @@ export class NewTravelRequestComponent {
       next: (data) => {
 
         this.travelOptionsData = data;
-        console.log(this.travelOptionsData)
+        //console.log(this.travelOptionsData)
+
+        //console.log("OPTIONS DATA")
+        //console.log(data);
 
       },
       error: (error: Error) => {

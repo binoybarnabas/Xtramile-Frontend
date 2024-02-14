@@ -39,7 +39,7 @@ export class ModalComponent {
 
     this.travelOptionForm = new FormGroup({
 
-      optionFile: new FormControl(null, Validators.required),
+      optionFile: new FormControl(Validators.required),
       requestId: new FormControl(this._requestId, Validators.nullValidator),
       description: new FormControl('', Validators.nullValidator)
 
