@@ -1,11 +1,19 @@
 <div class="container">
-  <div class="current_country">
-    <h5>
-      <i *ngIf="currentCountry" class="ri-map-pin-line"></i>{{ currentCountry }}
-    </h5>
-  </div>
-  <div class="map_container">
+
+  <div class="map_card">
+
+    <div class="current_country">
+
+    </div>
+    <div class="map_container">
     <svg #mapSvg viewBox="150 400 1800 100"></svg>
     <div class="hoveredCountry" style="display: none"></div>
+  
+    </div>
+    <p class="country_name">
+      <i *ngIf="currentCountry" class="ri-map-pin-line"></i>{{ currentCountry }}
+    </p>
+
   </div>
+
 </div>

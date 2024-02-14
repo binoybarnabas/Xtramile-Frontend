@@ -1,64 +1,79 @@
 .main_container {
-    background-color: #f8f8f8;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Adjust width as needed */
-    height: auto; /* Auto height to adjust based on content */
-    padding: 5px; /* Adjust padding if needed */
-  }
-  
-  .main_container .trip_card {
-    display: flex;
-    align-items: center;
-    margin: 5px;
-    border-radius: 5px;
-    background-color: #fff;
-  }
-  
-  .main_container .trip_card .trip_image {
-    flex: 1;
-    margin-right: 10px; 
-    width: 100%; 
-    height: auto; 
-  }
-  
-  .main_container .trip_card .trip_image img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  .main_container .trip_card .trip_details {
-    flex: 1;
-    width: 100%; 
-    height: auto; 
-  }
-  
-  .main_container .trip_card .trip_details h3 {
-    font-size: 16px; 
-  }
-  
-  .main_container .trip_card .trip_details p {
-    line-height: 1.5;
-    font-size: 12px; 
-  }
-  
-  .main_container .trip_card .trip-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .main_container .trip_card .trip-info .trip_button {
-    background-color: #2bb2fe;
-    color: white;
-    padding: 6px 10px; 
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .main_container .trip_card .trip-info .trip_button:hover {
-    background-color: #2bb2fe;
-  }
-  
+  background-color: var(--card-bg-color);
+  border-radius: var(--normal-border-radius);
+  box-shadow: var(--normal-box-shadow);
+  /* width: fit-content; */
+  /* width: 100%; */
+  /* Adjust width as needed */
+  /* height: 40vh; */
+  /* Auto height to adjust based on content */
+  padding: 10px;
+  /* Adjust padding if needed */
+}
+
+
+.item_heading {
+  font-weight: var(--active-font-weight);
+  color: var(--secondary-text-color);
+  background: var(--dark-gradient-color);
+  color: var(--card-bg-color);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.main_container .trip_card {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: #fff;
+  height: 192px;
+
+}
+
+.main_container .trip_card .trip_image {
+  flex: 1;
+  margin-right: 10px;
+  width: 100%;
+  height: auto;
+}
+
+.main_container .trip_card .trip_image img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.main_container .trip_card .trip_details {
+  flex: 1;
+  width: 100%;
+  height: auto;
+}
+
+.main_container .trip_card .trip_details h3 {
+  font-size: 16px;
+}
+
+.main_container .trip_card .trip_details p {
+  line-height: 1.5;
+  font-size: 12px;
+}
+
+.main_container .trip_card .trip-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main_container .trip_card .trip-info .trip_button {
+  background-color: #2bb2fe;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.main_container .trip_card .trip-info .trip_button:hover {
+  background-color: #2bb2fe;
+}

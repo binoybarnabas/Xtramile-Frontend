@@ -49,11 +49,15 @@
   --transparent-color-02: rgba(106, 89, 209, 0.1);
   --line-color: #aaa9a9;
 
+  --dark-gradient-color: linear-gradient(179.4deg, rgb(12, 20, 69) -16.9%, rgb(71, 30, 84) 119.9%);
+
+
   /*========Color Filter========*/
   --color-filter: invert(1);
 
   /*========Box shadow========*/
   --box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
+  --normal-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
   /*========Font size========*/
   --extra-small-font-size: 0.7rem;

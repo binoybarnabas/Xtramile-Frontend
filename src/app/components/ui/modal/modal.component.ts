@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 
 @Component({
@@ -29,7 +30,7 @@ export class ModalComponent {
 
   travelOptionForm!: FormGroup;
 
-  constructor(public bsModalRef: BsModalRef, private travelAdminRequestService: TravelAdminTravelRequestsService,
+  constructor(public bsModalRef: BsModalRef, private travelAdminRequestService: TravelAdminTravelRequestsService, private toastService: CustomToastService
   ) {
 
   }
@@ -112,7 +113,7 @@ export class ModalComponent {
     this.travelAdminRequestService.addNewTravelOption(formData).subscribe({
       next: (response) => {
         console.log(response);
-        alert("Travel Option Added!");
+        // alert("Travel Option Added!");
         this.closeModal();
       },
       error: (error: Error) => {
@@ -120,6 +121,7 @@ export class ModalComponent {
       },
       complete: () => {
         console.log("COMPLETED");
+        this.toastService.showToast("Travel Option Added!")
       }
     });
   }

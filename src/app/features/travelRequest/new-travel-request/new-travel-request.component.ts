@@ -15,6 +15,7 @@ import { UserData } from 'src/app/services/interfaces/iuserData';
 import { DescriptionModalComponent } from 'src/app/components/ui/description-modal/description-modal.component';
 import { cities } from 'src/app/services/commonAPIServices/cities';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
+import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 
 
 @Component({
@@ -98,6 +99,7 @@ export class NewTravelRequestComponent {
     private router: Router,
     private modalService: BsModalService,
     private commonApiService: CommonAPIService,
+    private toastService: CustomToastService
   ) {
 
     const storedUserData = localStorage.getItem('userData');
@@ -151,6 +153,8 @@ export class NewTravelRequestComponent {
   ngDoCheck() {
 
     this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
+
+    //console.log("Toast Testing")
 
   }
 
@@ -237,8 +241,8 @@ export class NewTravelRequestComponent {
       console.log(requestId);
       this.managerTravelRequest.GetTravelRequest(requestId).subscribe({
         next: (data) => {
-            data.departureDate = this.datePipe.transform(data.departureDate, "dd/MM/yyyy") || ' ';
-            data.returnDate = this.datePipe.transform(data.returnDate, "dd/MM/yyyy") || ' '
+          data.departureDate = this.datePipe.transform(data.departureDate, "dd/MM/yyyy") || ' ';
+          data.returnDate = this.datePipe.transform(data.returnDate, "dd/MM/yyyy") || ' '
           this.travelRequestDetailViewModel = data
           // Getting the employee profile info
 
@@ -504,7 +508,7 @@ export class NewTravelRequestComponent {
         this.isLoading = false;
 
         console.log(response);
-        alert("Request Submitted Successfully!");
+        //alert("Request Submitted Successfully!");
         this.router.navigate(['employee/pending']);
       },
       error: (error: Error) => {
@@ -516,7 +520,7 @@ export class NewTravelRequestComponent {
       complete: () => {
         // Hide loader
         this.isLoading = false;
-
+        this.commonApiService.showToast("Travel Request Submitted!");
         console.log("COMPLETED");
       }
     });
@@ -534,12 +538,13 @@ export class NewTravelRequestComponent {
           // window.alert(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
           console.log(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
           // Redirect to another page
-          alert("Approved");
+          //alert("Approved");
           this.router.navigate(['/manager/dashboard']);
-         
+
         },
         complete: () => {
           //this.toastr.success('Request approved!', 'Success');
+          this.toastService.showToast("Travel Request Approved!")
         }
       }
     );
@@ -580,6 +585,7 @@ export class NewTravelRequestComponent {
       complete: () => {
         console.log("Posting Request Status Complete");
         // alert("Posting Request Status Complete");
+        this.toastService.showToast("Travel Options Send!")
       }
     });
   }
@@ -788,7 +794,7 @@ export class NewTravelRequestComponent {
       next: (data) => {
 
         this.travelOptionsData = data;
-        
+
         console.log("TRAVEL Options")
         console.log(this.travelOptionsData)
         console.log(data);

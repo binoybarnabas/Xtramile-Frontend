@@ -1,6 +1,5 @@
-<div>
+<div class="card_main_container">
   <!-- Header for the section -->
-  <h5><i class="ri-progress-5-fill"></i>Request Status</h5>
 
   <!-- Container for cards with optional scrollbar -->
   <div class="cards_wrapper" [ngClass]="{ show_scrollbar: showScrollbar }">
@@ -10,15 +9,22 @@
       *ngFor="let title of titles; let i = index"
       (click)="onCardClick()"
     >
-      <!-- Title section of the card -->
-      <div class="title">
-        <p>{{ title }}</p>
-      </div>
+
 
       <!-- Data section of the card, displayed if data is available -->
       <div class="data" *ngIf="data[i] !== undefined">
-        <p>{{ data[i] }}</p>
+        <p class="value">{{ data[i] }}</p>
       </div>
+
+      <!-- Title section of the card -->
+      <div class="title">
+        <p class="value">{{ title }}</p>
+      </div>
+
     </div>
+
+
   </div>
+  <p class="item_heading">Request Status</p>
+
 </div>

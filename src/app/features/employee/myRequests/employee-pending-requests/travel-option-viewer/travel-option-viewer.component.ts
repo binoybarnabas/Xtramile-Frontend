@@ -4,6 +4,7 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
+import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 
 @Component({
   selector: 'app-travel-option-viewer',
@@ -28,7 +29,7 @@ export class TravelOptionViewerComponent {
   primaryStatusCode: string = 'SD'
   secondaryStatusCode: string = 'SD'
 
-  constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute, private router: Router,
+  constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute, private router: Router, private toastService: CustomToastService
   ) {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
@@ -55,7 +56,7 @@ export class TravelOptionViewerComponent {
       next: (data) => {
         this.travelOptionsData = data;
         console.log(this.travelOptionsData)
-        
+
       },
       error: (error: Error) => {
         console.log("Error has occurred, " + error.message);
@@ -97,7 +98,7 @@ export class TravelOptionViewerComponent {
         complete: () => {
           console.log('Post request completed.');
           this.router.navigate(['employee/pending']);
-
+          this.toastService.showToast("Travel Option Selected!");
           // alert("Submitted!")
         }
       });
@@ -107,16 +108,16 @@ export class TravelOptionViewerComponent {
   buttonActivate: boolean = this.checkRoleOfUser();
   checkRoleOfUser(): boolean {
     const userData = localStorage.getItem('userData');
-    if(userData){
-        const userDataParsed = JSON.parse(userData);
- 
-        if(userDataParsed.role === 'Manager' &&  userDataParsed.department === 'TA'){
-            return false;
-        } else {
-            return true;
-        }
+    if (userData) {
+      const userDataParsed = JSON.parse(userData);
+
+      if (userDataParsed.role === 'Manager' && userDataParsed.department === 'TA') {
+        return false;
+      } else {
+        return true;
+      }
     }
     // Return a default value if userData is falsy
     return false;
-}
+  }
 }
