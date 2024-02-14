@@ -26,6 +26,9 @@ export class DashboardProgressComponent {
       this.fetchProgress();
     }
   }
+  ngOnInit(){
+    this.fetchProgress();
+  }
 
   fetchProgress() {
     this.service.getRequestProgress(this.employeeId).subscribe((data: any) => {

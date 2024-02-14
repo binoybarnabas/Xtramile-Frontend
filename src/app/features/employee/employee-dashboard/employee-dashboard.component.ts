@@ -1,4 +1,6 @@
+import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
+import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { EmployeeDashboardService } from 'src/app/services/employeeServices/dashboardServices/employee-dashboard.service';
 
 @Component({
@@ -86,5 +88,4 @@ fetchGaugeData() {
     }
   });
 }
-
 }

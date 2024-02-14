@@ -97,8 +97,8 @@
 /* 2 */
 
    .option_card {
-    width: 18rem;
-    height: 20rem;
+    width: 19rem;
+    height: 22rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -23,7 +23,6 @@ export class OptionCardComponent {
   ngOnInit(){
     console.log(this.options)
     this.startTimer();
-    console.log('optui')
   }
 
   ngOnDestroy() {

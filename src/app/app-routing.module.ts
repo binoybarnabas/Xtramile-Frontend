@@ -84,11 +84,13 @@ const routes: Routes = [
       {
         path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
           { path: '', component: TravelAdminWaitingRequestsComponent },
+          {path: 'view_travel_options', component: TravelOptionViewerComponent}
         ]
       },
       {
         path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
           { path: '', component: TravelAdminSelectedRequestsComponent },
+          {path: 'view_travel_options', component: TravelOptionViewerComponent}
         ]
       },
       { path: 'ongoing', component: TravelAdminOngoingTravelComponent },
