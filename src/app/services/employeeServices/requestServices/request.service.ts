@@ -120,6 +120,7 @@ export class RequestService {
     console.log(body)
     return this.http.post(this.apiURL + '/employee/submit_selected_travel_option', body);
   }
+  
   getEmployeeRequestNotification(empId: number): Observable<any> {
     const url = "http://localhost:5190/api/employee/request/notification"
     const params = new HttpParams().set('empId', empId);
