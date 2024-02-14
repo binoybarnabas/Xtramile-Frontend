@@ -124,13 +124,14 @@
         >
       </div>
 
-            <div  (click)="viewTravelOptions(item.requestId)" class="approve_btn">
-                <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label">View</span>
-                <span  *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label">Approve</span>
-            </div>
-
-        </div>
-
+      <div (click)="viewTravelOptions(item.requestId)" class="approve_btn">
+        <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label"
+          >View</span
+        >
+        <span *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label"
+          >Approve</span
+        >
+      </div>
     </div>
   </div>
 </div>
