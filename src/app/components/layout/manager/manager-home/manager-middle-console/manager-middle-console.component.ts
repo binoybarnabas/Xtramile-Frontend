@@ -15,9 +15,9 @@ export class ManagerMiddleConsoleComponent {
   newReqFormSubMenuValue: number;
 
   //main heading of middle console 
-  mainHeading = "Incoming Travel Request"
-  currentRoutePath?:string
-  constructor(private sideNavBarService: SideNavBarService,private router:Router) {
+  mainHeading = "Dashboard"
+  currentRoutePath?: string
+  constructor(private sideNavBarService: SideNavBarService, private router: Router) {
     this.newReqFormSubMenuValue = 1;
 
   }
@@ -28,16 +28,16 @@ export class ManagerMiddleConsoleComponent {
     this.isSideNavBarCollapsed = this.sideNavBarService.isSideNavBarCollapsed;
     this.currentRoutePath = this.router.url;
 
-    if(this.currentRoutePath == '/manager/newrequests'){
+    if (this.currentRoutePath == '/manager/newrequests') {
       this.mainHeading = 'Incoming Travel Request'
     }
-    else if(this.currentRoutePath == '/manager/forwarded'){
+    else if (this.currentRoutePath == '/manager/forwarded') {
       this.mainHeading = 'Approved Requests'
     }
-    else if(this.currentRoutePath == '/manager/ongoing'){
+    else if (this.currentRoutePath == '/manager/ongoing') {
       this.mainHeading = 'Ongoing Travel details'
     }
-    else if(this.currentRoutePath == '/manager/closed'){
+    else if (this.currentRoutePath == '/manager/closed') {
       this.mainHeading = 'Closed request History'
     }
   }

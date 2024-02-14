@@ -20,12 +20,13 @@
       class="collapsed_icon ri-dashboard-line"
     ></i>
 
-    <p class="main_title active"  (click)="navigateToRequest('dashboard')" >
+    <p class="main_title active" [ngClass]="{'active': activeItem === 'dashboard'}"
+    (click)="navigateToRequest('dashboard')" >
       <i class="left_icon ri-dashboard-line"></i> Dashboard
     </p>
   </div>
 
-  <div class="side_bar_main" (click)="toggleSubMenu('1')">
+  <div class="side_bar_main" [ngClass]="{'active': activeItem === 'myrequests'}" (click)="toggleSubMenu('1')">
     <i
       *ngIf="isSideNavBarCollapsed === 1"
       class="collapsed_icon ri-sticky-note-add-line"

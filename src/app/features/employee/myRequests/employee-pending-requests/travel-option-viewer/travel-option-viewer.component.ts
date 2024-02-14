@@ -2,7 +2,7 @@ import { query } from '@angular/animations';
 import { Component } from '@angular/core';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 
 @Component({
@@ -26,7 +26,8 @@ export class TravelOptionViewerComponent {
   primaryStatusCode: string = 'SD'
   secondaryStatusCode: string = 'SD'
 
-  constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute) {
+  constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute, private router: Router,
+  ) {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
     this.empId = this.userData?.empId
@@ -66,6 +67,7 @@ export class TravelOptionViewerComponent {
 
 
   selectOption(option: any): void {
+    // alert(this.selectedOptionId);
     this.selectedOption = option;
     this.selectedOptionId = option.optionId;
   }
@@ -73,13 +75,17 @@ export class TravelOptionViewerComponent {
 
   //To handle the selected option and perform the POST request
   postSelection(): void {
+
+    //  alert("Employee Submitted!" + this.selectedOptionId);
+
     if (this.selectedOptionId) {
 
-      // alert(this.selectedOptionId);
+      //alert(this.selectedOptionId);
 
       this.requestService.submitSelectedOption(this.reqId, this.empId, this.selectedOptionId).subscribe({
         next: (response: any) => {
           console.log('Post successful:', response);
+          alert("Submitted!");
           // Reset the selectedOption after a successful post
           this.selectedOption = null;
         },
@@ -88,6 +94,9 @@ export class TravelOptionViewerComponent {
         },
         complete: () => {
           console.log('Post request completed.');
+          this.router.navigate(['employee/pending']);
+
+          // alert("Submitted!")
         }
       });
     }
