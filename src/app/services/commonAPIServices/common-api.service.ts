@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
@@ -56,9 +56,7 @@ export class CommonAPIService {
       map((data: any) => data.geonames)
     );
   }
-
-
-
+  
   //Get Project Codes by emp id
   getAllProjectCodesByEmployeeId(empId: number): Observable<any> {
 
@@ -70,6 +68,11 @@ export class CommonAPIService {
     return this.http.get<any>(this.apiURL + 'travelmode/modes')
   }
 
+  getCurrentRequestDates(empId: number): Observable<any>{
+    const url="http://localhost:5190/api/employee/current/request"
+    const params= new HttpParams().set('empId',empId);
+    return this.http.get(url,{params})
+  }
 
 }
 
