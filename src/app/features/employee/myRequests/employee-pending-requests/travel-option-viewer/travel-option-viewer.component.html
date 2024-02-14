@@ -6,7 +6,7 @@
       <ng-container *ngFor="let item of travelOptionsData">
         <div (click)="selectOption(item)" [ngClass]="{'selected': item === selectedOption}" class="option_card">
           <div class="option_file">
-            <img class="img" src="{{item.optionFileURL}}" alt="img_not_found">
+            <img class="img" src="{{item.optionFileURL}}"  alt="img_not_found">
           </div>
           <div class="description">
             <p>{{item.description}}</p>
