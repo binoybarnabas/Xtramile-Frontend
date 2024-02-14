@@ -113,6 +113,8 @@ import { TravelRequestCardModalComponent } from './components/ui/travel-request-
 import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ConfirmationModalComponent } from './components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
+import { DashboardGaugeComponent } from './components/ui/dashboard-gauge/dashboard-gauge/dashboard-gauge.component';
+
 
 @NgModule({
   declarations: [
@@ -213,7 +215,9 @@ import { ConfirmationModalComponent } from './components/ui/travel-request-card/
     StatusPipe,
     NotificationsComponent,
     DashboardMapComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    DashboardMapComponent,
+    DashboardGaugeComponent
   ]
   ,
 

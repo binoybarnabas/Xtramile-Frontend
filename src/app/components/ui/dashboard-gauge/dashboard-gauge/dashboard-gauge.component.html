@@ -1,0 +1,29 @@
+<div class="outercontainer">
+  <h5><i class="ri-pie-chart-fill"></i>Remaining Days</h5>
+  <div class="gauge">
+    <div class="arc" [style.backgroundImage]="gaugeColor"></div>
+    <div class="inner_arc"></div>
+    <div
+      class="needle"
+      [style.transform]="'rotate(' + needleRotation + 'deg)'"
+    ></div>
+  </div>
+  <div class="label">
+    <div class="value" *ngIf="remainingDays >= 0">
+      {{ 0 }}
+      <span class="day">Days</span>
+    </div>
+
+    <div class="value" *ngIf="remainingDays >= 0">
+      {{ remainingDays }}
+      <span class="day">Days</span>
+    </div>
+
+    <div class="value" *ngIf="remainingDays >= 0">
+      {{ totalDays }}
+      <span class="day">Days</span>
+    </div>
+
+    <div *ngIf="remainingDays < 0">No current trip</div>
+  </div>
+</div>

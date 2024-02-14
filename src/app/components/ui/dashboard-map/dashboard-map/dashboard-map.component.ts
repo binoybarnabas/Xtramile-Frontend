@@ -55,7 +55,7 @@ export class DashboardMapComponent implements OnInit, OnChanges {
           // Check if the country is not the current country
           if (d.getAttribute('name') !== this.currentCountry) {
             // Change fill color on mouseover
-            d3.select(event.currentTarget as Element).attr('fill', 'blue');
+            d3.select(event.currentTarget as Element).attr('fill', '#2bb2fe');
 
             // Select the tooltip element
             const hoveredCountry = d3.select('.hoveredCountry');
