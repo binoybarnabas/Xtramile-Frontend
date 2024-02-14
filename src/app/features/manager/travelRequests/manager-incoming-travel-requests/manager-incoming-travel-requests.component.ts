@@ -16,7 +16,11 @@ export class ManagerIncomingTravelRequestsComponent {
   sqlDatetimeFormat!: string;
   selectedSortOption! : string;
 
-  employeeRequest: any[] | undefined;
+  tableHeaders: string[] = ['Request', 'Employee', 'Project Code', 'Date','Status'];
+  fieldsToDisplay: string[] = ['requestId', 'employeeNameAndEmail', 'projectCode','date','status'];
+
+
+  employeeRequest: any[] = [];
 
   // Manager ID for fetching employee requests
   managerId : number; // to check the data
@@ -31,8 +35,13 @@ export class ManagerIncomingTravelRequestsComponent {
     this.sqlDatetimeFormat = selectedDate.toISOString().slice(0, 10);
     this.apiservice.getEmployeeRequestByDate(this.managerId,this.sqlDatetimeFormat,this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.employeeRequest = data;
-      },
+        this.employeeRequest = data.employeeRequest.map((request: any) => {
+          return {
+            ...request,
+            date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+          };
+        });      },
       error: (err) => {
         // Handle the error
         console.error('Error:', err);
@@ -56,7 +65,13 @@ export class ManagerIncomingTravelRequestsComponent {
 
     this.apiservice.getEmployeeRequestByEmployeeName(searchByName, this.managerId,this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.employeeRequest = data.EmployeeRequest;
+        this.employeeRequest = data.employeeRequest.map((request: any) => {
+          return {
+            ...request,
+            date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+          };
+        });
         console.log("employee request search by name list");
         console.log(data);
         console.log(this.employeeRequest);
@@ -92,7 +107,7 @@ export class ManagerIncomingTravelRequestsComponent {
   }
 
   // Constructor to inject services
-  constructor(private apiservice: ManagerTravelRequestsService,private router:Router) {
+  constructor(private apiservice: ManagerTravelRequestsService,private router:Router, private datePipe: DatePipe) {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
     this.managerId = this.userData.empId;
@@ -104,9 +119,15 @@ export class ManagerIncomingTravelRequestsComponent {
   fetchEmployeeRequest() {
     this.apiservice.getEmployeeRequest(this.managerId,this.currentPage,this.itemsPerPage).subscribe({
       next: (data: any) => {
-        this.employeeRequest = data.employeeRequest;
+        this.employeeRequest = data.employeeRequest.map((request: any) => {
+          return {
+            ...request,
+            date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+          };
+        });
+        console.log(this.employeeRequest)
         this.totalItems = data.totalCount;
-        
       },
       error: (error: any) => {
         console.error('Error fetching employee requests', error);
@@ -130,7 +151,13 @@ export class ManagerIncomingTravelRequestsComponent {
     if (option == "name") {
       this.apiservice.getEmployeeRequestSortByEmployeeName(this.managerId,this.currentPage,this.itemsPerPage).subscribe({
         next: (data: any) => {
-          this.employeeRequest = data.employeeRequest;
+          this.employeeRequest = data.employeeRequest.map((request: any) => {
+            return {
+              ...request,
+              date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+              employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+            };
+          });
           this.totalItems=data.totalCount;
         },
         error: (error: any) => {
@@ -141,7 +168,13 @@ export class ManagerIncomingTravelRequestsComponent {
     if (option == "date") {
       this.apiservice.getEmployeeRequestSortByDate(this.managerId,this.currentPage,this.itemsPerPage).subscribe({
         next: (data: any) => {
-          this.employeeRequest = data.employeeRequest;
+          this.employeeRequest = data.employeeRequest.map((request: any) => {
+            return {
+              ...request,
+              date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+              employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+            };
+          });
           this.totalItems=data.totalCount;
         },
         error: (error: any) => {
@@ -153,9 +186,9 @@ export class ManagerIncomingTravelRequestsComponent {
 
 
   // select an option
-  selectRow(requestId:number){
-    console.log(requestId);
-    const queryParams = {requestId:requestId}
+  selectRow(userData:any){
+    console.log(userData.requestId);
+    const queryParams = {requestId:userData.requestId}
     this.router.navigate(['manager/requestdetail'],{ queryParams: queryParams });
   }
  

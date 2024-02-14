@@ -1,68 +1,62 @@
 <div class="modal-header">
-    <h4 class="modal-title">Add Option Details</h4>
+    <h4 class="modal-title">Add New Option</h4>
     <button type="button" class="exit_button" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true"><i class="ri-close-fill"></i></span>
     </button>
   </div>
+
   <div class="modal-body">
-    <form [formGroup]="optionForm" (ngSubmit)="submitModal()">
-      <div class="form-group">
-        <label for="categoryId">Category</label>
-        <select class="form-control custom-select" id="categoryId" formControlName="categoryId" required>
-          <option value=""selected disabled>Select Category</option>
-          <option *ngFor="let category of categoryData" [value]="category.categoryId">{{ category.categoryName }}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="travelMode">Travel Mode</label>
-        <select class="form-control custom-select" id="travelmode" formControlName="travelMode" required>
-          <option value=""selected disabled>Select Travel Mode</option>
-          <option *ngFor="let mode of travelModes" [value]="mode.modeId">{{ mode.modeName }}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea class="form-control" id="description" formControlName="description"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="class">Class</label>
-        <input type="text" class="form-control" id="class" formControlName="class" required>
-        <div *ngIf="optionForm.get('class')?.hasError('required') && optionForm.get('class')?.touched" class="validation_message">
-          *Class is required
+
+    <div class="file_drop_container">
+
+        <div class="form_container">
+
+            <form (ngSubmit)="addNewTravelOption()" [formGroup]="travelOptionForm" class="travelOptionForm">
+              
+              <div class="file_input_container">
+
+                <input type="hidden" formControlName="requestId">
+                <input type="file" class="file_input" formControlName="optionFile" (change)="previewImage($event)" required/>
+
+                <span class="form_error"
+                *ngIf="travelOptionForm.get('optionFile')?.invalid && travelOptionForm.get('optionFile')?.touched">
+                   No file selected!
+               </span>
+
+              </div>
+
+              <div class="form_input_container">
+
+                <input type="text" class="text_input" formControlName="description" placeholder="Description"/>
+
+                <!-- <span class="form_error"
+                *ngIf="travelOptionForm.get('image')?.invalid && travelOptionForm.get('image')?.touched">
+                   No file selected!
+               </span> -->
+
+              </div>
+            
+
+              <div class="img_preview_container">
+                <div class="img_card">
+                  <img class="img" [src]="travelOptionForm.get('optionFile')?.value" alt="Choose an image">
+                </div>
+              </div>
+            
+              <div class="file_submit_container">
+                <div class="cancel_btn_container">
+                  <button class="cancel_btn" type="reset">Cancel</button>
+                </div>
+                <div class="submit_btn_container">
+                  <button class="submit_btn" type="submit" [disabled]="travelOptionForm.invalid">Add</button>
+                </div>
+              </div>
+            </form>
+            
         </div>
-      </div>
-      <div class="form-group">
-        <label for="serviceOfferedBy">Service Offered By</label>
-        <input type="text" class="form-control" id="serviceOfferedBy" formControlName="serviceOfferedBy" required>
-        <div *ngIf="optionForm.get('serviceOfferedBy')?.hasError('required') && optionForm.get('serviceOfferedBy')?.touched" class="validation_message">
-          *Service is required
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="startTime">Start Time</label>
-          <input type="datetime-local" class="form-control" id="startTime" formControlName="startTime" required>
-          <div *ngIf="optionForm.get('startTime')?.hasError('dateNotBeforeToday') && optionForm.get('startTime')?.touched" class="validation_message">
-            *Date cannot be before today
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="endTime">End Time</label>
-          <input type="datetime-local" class="form-control" id="endTime" formControlName="endTime" required>
-          <div *ngIf="optionForm.get('endTime')?.hasError('endTimeAfterStartTime') && optionForm.get('endTime')?.touched" class="validation_message">
-            *Invalid End date
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="requestId">Request ID</label>
-        <input type="number" class="form-control" id="requestId" formControlName="requestId" required [readOnly]="true">
-      </div>
-      <button type="submit" [ngClass]="{ 'disabled_btn': optionForm.invalid }"
-        class="btn btn-primary mt-3">Submit</button>
-      <div *ngIf="optionForm.invalid && optionForm.touched" >
-          <p class="validation_message">*Please fill in all required fields.</p>
-      </div>
-    </form>
+
+    </div>
+
+
   </div>
   

@@ -15,8 +15,10 @@
     <app-dashboard-progress [employeeId]="employeeId"></app-dashboard-progress>
   </div>
 </div>
-<app-dashboard-map [currentCountry]="currentCountry"></app-dashboard-map>
-<app-dashboard-gauge
-  [totalDays]="totalDays"
-  [remainingDays]="remainingDays"
-></app-dashboard-gauge>
+<div class="dashboard_container">
+  <app-dashboard-map [currentCountry]="currentCountry"></app-dashboard-map>
+  <app-dashboard-gauge
+    [totalDays]="totalDays"
+    [remainingDays]="remainingDays"
+  ></app-dashboard-gauge>
+</div>

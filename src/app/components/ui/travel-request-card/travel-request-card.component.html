@@ -4,24 +4,24 @@
       <!-- <span class="left_dot"></span> -->
 
       <div class="left">
-        <div *ngIf="item.statusName =='Open'">
+        <div *ngIf="item.statusName == 'Open'">
           <span class="title">Requested By</span>
-        <p class="value">{{item.statusModifiedBy}}</p>
+          <p class="value">{{ item.statusModifiedBy }}</p>
         </div>
 
-        <div *ngIf="item.statusName =='Forwarded'">
+        <div *ngIf="item.statusName == 'Forwarded'">
           <span class="title">Approved By</span>
-        <p class="value">{{item.statusModifiedBy}}</p>
+          <p class="value">{{ item.statusModifiedBy }}</p>
         </div>
 
-        <div *ngIf="item.statusName =='Closed'">
+        <div *ngIf="item.statusName == 'Closed'">
           <span class="title">closed By</span>
-        <p class="value">{{item.statusModifiedBy}}</p>
+          <p class="value">{{ item.statusModifiedBy }}</p>
         </div>
 
-        <div *ngIf="item.statusName =='Selected'">
+        <div *ngIf="item.statusName == 'Selected'">
           <span class="title">Selected By</span>
-        <p class="value">{{item.statusModifiedBy}}</p>
+          <p class="value">{{ item.statusModifiedBy }}</p>
         </div>
       </div>
 
@@ -115,7 +115,7 @@
     </div>
 
     <div class="section_3 action_section">
-      <div class="reject_btn">
+      <div class="reject_btn" (click)="cancelRequest(item.requestId)">
         <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label"
           >Withdraw</span
         >
@@ -124,14 +124,13 @@
         >
       </div>
 
-      <div class="approve_btn">
-        <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label"
-          >Edit</span
-        >
-        <span *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label"
-          >Approve</span
-        >
-      </div>
+            <div class="approve_btn">
+                <span (click)="viewTravelOptions(item.requestId)" *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label">View</span>
+                <span  *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label">Approve</span>
+            </div>
+
+        </div>
+
     </div>
   </div>
-</div>
+

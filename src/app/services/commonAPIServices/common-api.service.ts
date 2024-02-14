@@ -71,5 +71,11 @@ export class CommonAPIService {
   }
 
 
+  //Get Travel Req By Id
+  GetTravelRequestById(requestId: number): Observable<any> {
+    return this.http.get(`http://localhost:5190/api/request/getbyid/${requestId}`);
+  }
+
+
 }
 

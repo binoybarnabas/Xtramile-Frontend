@@ -9,7 +9,7 @@ export class DashboardGaugeComponent implements OnChanges {
   @Input() totalDays: number = 0; // Set the total number of days
   @Input() remainingDays: number = 0; // Set the remaining number of days
 
-  gaugeColor: string = '#4f80e1'; // Initial color
+  gaugeColor: string = '#2bb2fe'; // Initial color
   needleRotation: number = 0; // Initial rotation
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -21,7 +21,7 @@ export class DashboardGaugeComponent implements OnChanges {
   updateGaugeColor(): void {
     const totalDays = this.totalDays;
     const remainingDays = this.remainingDays;
-    const color = '#4f80e1';
+    const color = '#2bb2fe';
     
     // Calculate the angle to be reduced per spent day
     const anglePerDay = 180 / totalDays;

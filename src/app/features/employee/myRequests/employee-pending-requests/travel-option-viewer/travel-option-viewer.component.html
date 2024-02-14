@@ -1,0 +1,27 @@
+
+
+
+<div class="travel_options_main_container">
+    <div class="travel_options_container">
+      <ng-container *ngFor="let item of travelOptionsData">
+        <div (click)="selectOption(item)" [ngClass]="{'selected': item === selectedOption}" class="option_card">
+          <div class="option_file">
+            <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
+          </div>
+          <div class="description">
+            <p>{{item.description}}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  
+    <div class="actions_container">
+      <div class="cancel_btn_container">
+        <button class="cancel_btn" type="button">Cancel</button>
+      </div>
+      <div class="submit_btn_container">
+        <button class="submit_btn" (click)="postSelection()" type="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+  

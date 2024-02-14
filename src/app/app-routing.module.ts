@@ -41,6 +41,7 @@ import { LoginPageComponent } from './components/layout/login-page/login-page.co
 import { authGuard } from './auth.guard';
 import { LoginComponent } from './components/ui/login/login.component';
 
+import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -55,6 +56,7 @@ const routes: Routes = [
       { path: 'request', component: NewTravelRequestComponent },
       { path: 'pending', component: EmployeePendingRequestsComponent },
       { path: 'available_options', component: OptionviewCardComponent },
+      { path: 'view_travel_options', component: TravelOptionViewerComponent },
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },
       { path: 'profile', component: EmployeeProfileComponent }
@@ -68,8 +70,8 @@ const routes: Routes = [
       { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
       { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
       { path: 'closed', component: ManagerClosedTravelRequestsComponent },
-      { path: 'request', component: NewTravelRequestComponent},
-      { path: 'pending', component: EmployeePendingRequestsComponent},
+      { path: 'request', component: NewTravelRequestComponent },
+      { path: 'pending', component: EmployeePendingRequestsComponent },
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },
       { path: 'profile', component: EmployeeProfileComponent }
@@ -79,18 +81,22 @@ const routes: Routes = [
     path: 'traveladmin', component: TravelAdminHomeComponent, canActivate: [authGuard], children: [
       { path: 'dashboard', component: TravelAdminDashboardComponent },
       { path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent },
-      {path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
-        {path:'', component:TravelAdminWaitingRequestsComponent},
-      ]},
-      {path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
-        {path:'',component: TravelAdminSelectedRequestsComponent},
-      ]},
+      {
+        path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
+          { path: '', component: TravelAdminWaitingRequestsComponent },
+        ]
+      },
+      {
+        path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
+          { path: '', component: TravelAdminSelectedRequestsComponent },
+        ]
+      },
       { path: 'ongoing', component: TravelAdminOngoingTravelComponent },
       { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },
       // { path: 'profile', component: TravelAdminProfileComponent },
       { path: 'requestdetail', component: NewTravelRequestComponent },
-      { path: 'request', component: NewTravelRequestComponent},
-      { path: 'pending', component: EmployeePendingRequestsComponent},
+      { path: 'request', component: NewTravelRequestComponent },
+      { path: 'pending', component: EmployeePendingRequestsComponent },
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },
       { path: 'profile', component: EmployeeProfileComponent }
