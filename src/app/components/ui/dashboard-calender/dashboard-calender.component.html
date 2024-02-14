@@ -1,0 +1,29 @@
+
+<div class="calendar">
+    <div class="calendar-header">
+      <button (click)="previousMonth()" class="ri-arrow-left-double-line"></button>
+      <h5>{{ getCurrentMonth() }} {{ getCurrentYear() }}</h5>
+      <button (click)="nextMonth()" class="ri-arrow-right-double-fill"></button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']">{{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let week of getWeeks()">
+          <td *ngFor="let day of week" [ngClass]="{
+            'highlighted-departure': isDepartureDate(day),
+            'highlighted-return': isReturnDate(day),
+            'highlighted-within-range': isWithinRange(day) && !isDepartureDate(day) && !isReturnDate(day)
+          }">
+            {{ day ? day.getDate() : '' }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  
