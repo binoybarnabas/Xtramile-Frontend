@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TravelRequestDetailViewModel } from 'src/app/services/interfaces/iTravelRequestDetails';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { local } from 'd3';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-travel-request-card-modal',
@@ -12,8 +13,6 @@ import { local } from 'd3';
 })
 export class TravelRequestCardModalComponent {
   private _requestId!: number;
-
-  currentLoggedInUserRole: string;
 
 
   @Input()
@@ -24,9 +23,7 @@ export class TravelRequestCardModalComponent {
 
   travelRequestDetailViewModel!: TravelRequestDetailViewModel
 
-  constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService) {
-    this.currentLoggedInUserRole = commonApiService.currentLoggedInUserRole;
-    console.log(this.currentLoggedInUserRole)
+  constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService, private datePipe: DatePipe) {
   }
 
 
@@ -51,7 +48,7 @@ export class TravelRequestCardModalComponent {
       if(userDataParsed.role=='Manager' &&  userDataParsed.department=='TA'){
         this.navigateToAddOptions();
       }
-      if(userDataParsed.role=='Manager'){
+      else if(userDataParsed.role=='Manager'){
         this.navigateToSetPriority();
       }
     }

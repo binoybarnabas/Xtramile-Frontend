@@ -61,13 +61,13 @@
           <i class="icon ri-calendar-line"></i>
 
           <span>Departure</span>
-          <p class="date">{{ item.departureDate | timestampToDate }}</p>
+          <p class="date">{{ item.departureDate }}</p>
         </div>
 
         <div class="return_date">
           <i class="icon ri-calendar-line"></i>
           <span>Return</span>
-          <p class="date">{{ item.returnDate | timestampToDate }}</p>
+          <p class="date">{{ item.returnDate }}</p>
         </div>
       </div>
 
@@ -124,13 +124,14 @@
         >
       </div>
 
-            <div  (click)="viewTravelOptions(item.requestId)" class="approve_btn">
-                <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label">View</span>
-                <span  *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label">Approve</span>
-            </div>
-
-        </div>
-
+      <div (click)="viewTravelOptions(item.requestId)" class="approve_btn">
+        <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label"
+          >View</span
+        >
+        <span *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label"
+          >Approve</span
+        >
+      </div>
     </div>
   </div>
-
+</div>
