@@ -44,7 +44,7 @@ export class TravelAdminSelectedRequestsComponent {
   selectedRow(row: any){
     this.requestId = row.requestId;
     console.log('requestId:' + this.requestId)
-    this.router.navigate(['view_travel_options'],{
+    this.router.navigate(['view_selected_options'],{
       relativeTo: this.activatedRoute,
       queryParams: {requestId: this.requestId}
     })

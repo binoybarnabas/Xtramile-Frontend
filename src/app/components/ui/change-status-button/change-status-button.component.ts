@@ -37,8 +37,10 @@ export class ChangeStatusButtonComponent {
 
   async updateRequestStatus() {
 
-    if(this.externalpostTriggered)
-    this.externalpostTriggered.emit()
+    if(this.externalpostTriggered){
+      this.externalpostTriggered.emit()
+    }
+
   
     this.requestStatus.requestId = this.requestId
     this.requestStatus.empId = this.empId;

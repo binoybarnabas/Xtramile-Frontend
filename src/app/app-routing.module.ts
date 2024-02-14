@@ -42,6 +42,7 @@ import { authGuard } from './auth.guard';
 import { LoginComponent } from './components/ui/login/login.component';
 
 import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
+import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/selected-option-travel-admin/selected-option-travel-admin.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -90,7 +91,7 @@ const routes: Routes = [
       {
         path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
           { path: '', component: TravelAdminSelectedRequestsComponent },
-          {path: 'view_travel_options', component: TravelOptionViewerComponent}
+          {path: 'view_selected_options', component: SelectedOptionTravelAdminComponent}
         ]
       },
       { path: 'ongoing', component: TravelAdminOngoingTravelComponent },

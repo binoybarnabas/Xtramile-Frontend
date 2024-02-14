@@ -19,6 +19,8 @@ export class TravelOptionViewerComponent {
   selectedOption: any;
   selectedOptionId: any;
 
+  travelOptionId: number[] = [];
+
   empId: number;
   userData: UserData
 
@@ -51,10 +53,9 @@ export class TravelOptionViewerComponent {
 
     this.requestService.getTravelOptionsByReqId(reqId).subscribe({
       next: (data) => {
-
         this.travelOptionsData = data;
         console.log(this.travelOptionsData)
-
+        
       },
       error: (error: Error) => {
         console.log("Error has occurred, " + error.message);
@@ -80,12 +81,12 @@ export class TravelOptionViewerComponent {
 
     if (this.selectedOptionId) {
 
-      //alert(this.selectedOptionId);
+      // alert(this.selectedOptionId);
 
       this.requestService.submitSelectedOption(this.reqId, this.empId, this.selectedOptionId).subscribe({
         next: (response: any) => {
           console.log('Post successful:', response);
-          alert("Submitted!");
+          alert("Option Submitted!")
           // Reset the selectedOption after a successful post
           this.selectedOption = null;
         },
@@ -102,8 +103,19 @@ export class TravelOptionViewerComponent {
     }
   }
 
-
-
-
-
+  buttonActivate: boolean = this.checkRoleOfUser();
+  checkRoleOfUser(): boolean {
+    const userData = localStorage.getItem('userData');
+    if(userData){
+        const userDataParsed = JSON.parse(userData);
+ 
+        if(userDataParsed.role === 'Manager' &&  userDataParsed.department === 'TA'){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    // Return a default value if userData is falsy
+    return false;
+}
 }
