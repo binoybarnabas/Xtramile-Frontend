@@ -156,6 +156,8 @@ export class TravelAdminSideNavBarComponent {
                               break;
         case 'profile': this.router.navigate(['/traveladmin/profile']);
                         break;
+        case 'dashboard': this.router.navigate(['/traveladmin/dashboard']);
+                         break;
   
       }
       

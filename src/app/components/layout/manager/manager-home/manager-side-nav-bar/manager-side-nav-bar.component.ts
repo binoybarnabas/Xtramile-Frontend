@@ -134,6 +134,7 @@ export class ManagerSideNavBarComponent {
   navigateToRequest(routeDestination : string) {
     console.log("inside navigate" + routeDestination);
     switch(routeDestination){
+      
       case 'Incoming Requests': this.router.navigate(['/manager/newrequests']);
                             break;
       case 'Forwarded': this.router.navigate(['/manager/forwarded']);

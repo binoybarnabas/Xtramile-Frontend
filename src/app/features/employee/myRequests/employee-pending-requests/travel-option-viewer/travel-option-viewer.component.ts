@@ -87,7 +87,7 @@ export class TravelOptionViewerComponent {
       this.requestService.submitSelectedOption(this.reqId, this.empId, this.selectedOptionId).subscribe({
         next: (response: any) => {
           console.log('Post successful:', response);
-          alert("Option Submitted!")
+          // alert("Option Submitted!")
           //Change Alert to PopUp
           // Reset the selectedOption after a successful post
           this.selectedOption = null;
