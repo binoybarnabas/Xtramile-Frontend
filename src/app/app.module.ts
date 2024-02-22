@@ -118,6 +118,7 @@ import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/trave
 
 import { DashboardCalenderComponent } from './components/ui/dashboard-calender/dashboard-calender.component';
 import { CustomToastComponent } from './components/ui/custom-toast/custom-toast.component';
+import { TravelRequestFormComponent } from './features/travel-request-form/travel-request-form.component';
 
 @NgModule({
   declarations: [
@@ -224,6 +225,7 @@ import { CustomToastComponent } from './components/ui/custom-toast/custom-toast.
     DashboardCalenderComponent,
     SelectedOptionTravelAdminComponent,
     CustomToastComponent,
+    TravelRequestFormComponent,
   ]
   ,
 

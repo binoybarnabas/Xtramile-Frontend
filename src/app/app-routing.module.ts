@@ -43,6 +43,7 @@ import { LoginComponent } from './components/ui/login/login.component';
 
 import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/selected-option-travel-admin/selected-option-travel-admin.component';
+import { TravelRequestFormComponent } from './features/travel-request-form/travel-request-form.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -54,7 +55,9 @@ const routes: Routes = [
     path: 'employee', component: EmployeeHomeComponent, canActivate: [authGuard], children: [
 
       { path: 'dashboard', component: EmployeeDashboardComponent },
-      { path: 'request', component: NewTravelRequestComponent },
+      { path: 'request', component: TravelRequestFormComponent },
+      // { path: 'request', component: NewTravelRequestComponent },
+
       { path: 'pending', component: EmployeePendingRequestsComponent },
       { path: 'available_options', component: OptionviewCardComponent },
       { path: 'view_travel_options', component: TravelOptionViewerComponent },
@@ -85,13 +88,13 @@ const routes: Routes = [
       {
         path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
           { path: '', component: TravelAdminWaitingRequestsComponent },
-          {path: 'view_travel_options', component: TravelOptionViewerComponent}
+          { path: 'view_travel_options', component: TravelOptionViewerComponent }
         ]
       },
       {
         path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
           { path: '', component: TravelAdminSelectedRequestsComponent },
-          {path: 'view_selected_options', component: SelectedOptionTravelAdminComponent}
+          { path: 'view_selected_options', component: SelectedOptionTravelAdminComponent }
         ]
       },
       { path: 'ongoing', component: TravelAdminOngoingTravelComponent },
