@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, interval, takeUntil } from 'rxjs';
 import { EmployeeDashboardService } from 'src/app/services/employeeServices/dashboardServices/employee-dashboard.service';
 
 @Component({
@@ -8,60 +9,46 @@ import { EmployeeDashboardService } from 'src/app/services/employeeServices/dash
   styleUrls: ['./dashboard-upcoming-trip.component.css']
 })
 export class DashboardUpcomingTripComponent {
+
   @Input() employeeId: number = 0;
   countryName!: string;
   currentImageUrl!: string;
-  tripPurpose: string = 'Visit';
+  tripPurpose: string = '';
   startDate: any;
   endDate: any;
-  sourceCity: string = 'Trivandrum';
-  sourceState: string = 'Kerala';
-  sourceCountry: string = 'India';
-  destinationCity: string = 'Austin';
-  destinationState: string = 'Texas';
-  destinationCountry: string = 'USA';
+  sourceCity: string = '';
+  sourceCountry: string = '';
+  destinationCity: string = '';
+  destinationCountry: string = '';
   tripDetailsAvailable: boolean = true; // Flag to check if trip details are available
-
+  trips: any[] = []; // Array to store upcoming trips
+  currentIndex: number = 0;
+  private destroy$ = new Subject<void>();
   constructor(private service: EmployeeDashboardService, private router: Router) { }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   ngOnInit() {
     // Fetch upcoming trip details using the employeeId
     this.service.getUpcomingTripDetails(this.employeeId).subscribe(
-      (data: any) => {
+      (data: any[]) => {
         // Log the fetched data
-        console.log(data);
+        console.log('upcoming trips:', data);
 
-        if (data != null) {
-          // Assign fetched data to component properties
-          this.tripPurpose = data[0].tripPurpose;
-          this.startDate = data[0].startDate;
-          this.endDate = data[0].endDate;
-          this.sourceCity = data[0].sourceCity;
-          this.sourceState = data[0].sourceState;
-          this.sourceCountry = data[0].sourceCountry;
-          this.destinationCity = data[0].destinationCity;
-          this.destinationState = data[0].destinationState;
-          this.destinationCountry = data[0].destinationCountry;
+        if (data.length > 0) {
+          // Assign fetched data to trips array
+          this.trips = data;
+          this.loadCurrentTrip(); // Load the current trip details
 
-          // Fetch country image data
-          this.service.getCountryImage().subscribe(
-            (countryData: any) => {
-              // Find the specific country in the data
-              const country = countryData.find(
-                (c: { countryName: string }) =>
-                  c.countryName === this.destinationCountry
-              );
-
-              // If the country is found, set the values for countryName and currentImageUrl
-              if (country) {
-                this.countryName = country.countryName;
-                this.currentImageUrl = country.touristPlaceImageUrl;
-              }
-            },
-            (error) => {
-              console.error('Error fetching country image data:', error);
-            }
-          );
+          // Automatically cycle through trips every 5 seconds
+          interval(15000)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(() => {
+              this.nextTrip();
+            });
         } else {
           // Set the flag to indicate that no trip details are available
           this.tripDetailsAvailable = false;
@@ -72,7 +59,63 @@ export class DashboardUpcomingTripComponent {
       }
     );
   }
+
+  loadCurrentTrip() {
+    const currentTrip = this.trips[this.currentIndex];
+    console.log('start date',currentTrip.startDate)
+    if (currentTrip && new Date(currentTrip.startDate) >= new Date()) {
+      this.tripPurpose = currentTrip.tripPurpose;
+      this.startDate = currentTrip.startDate;
+      this.endDate = currentTrip.endDate;
+      this.sourceCity = currentTrip.sourceCity;
+      this.sourceCountry = currentTrip.sourceCountry;
+      this.destinationCity = currentTrip.destinationCity;
+      this.destinationCountry = currentTrip.destinationCountry;
+
+      // Fetch country image data
+      this.service.getCountryImage().subscribe(
+        (countryData: any) => {
+          // Find the specific country in the data
+          const country = countryData.find(
+            (c: { countryName: string }) =>
+              c.countryName === this.destinationCountry
+          );
+
+          // If the country is found, set the values for countryName and currentImageUrl
+          if (country) {
+            this.countryName = country.countryName;
+            this.currentImageUrl = country.touristPlaceImageUrl;
+          }
+        },
+        (error) => {
+          console.error('Error fetching country image data:', error);
+        }
+      );
+    }
+    else{
+      this.tripDetailsAvailable = false;
+    }
+  }
+
+  // Function to navigate to the next trip
+  nextTrip() {
+    if (this.currentIndex < this.trips.length - 1) {
+      this.currentIndex++;
+    } else {
+      this.currentIndex = 0;  // Reset to the first trip when reaching the end
+    }
+    this.loadCurrentTrip();
+  }
+
+  // Function to navigate to the previous trip
+  previousTrip() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.loadCurrentTrip();
+    }
+  }
   viewOngoingDetails() {
     this.router.navigate(['/employee/ongoing']);
   }
+
 }

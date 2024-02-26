@@ -19,6 +19,7 @@ export class EmployeeDashboardComponent {
   startDate: any;
   endDate: any;
   completedTrips: any[] = []
+  modalRequestCode!: string;
   ngOnInit() {
     if (localStorage.getItem('userData')) {
       const userData = JSON.parse(localStorage.getItem('userData')!)
@@ -43,15 +44,20 @@ export class EmployeeDashboardComponent {
     this.service.getRequestProgress(this.employeeId).subscribe((data: any) => {
       if (data) {
         // Assuming 'status' and 'requestCode' are properties in the 'data' object
-        this.cardTitles.push(data.requestCode);
-        this.cardData.push(data.status);
+        data.forEach((progress: { requestCode: string; status: string; }) => {
+          this.cardTitles.push(progress.requestCode);
+          this.cardData.push(progress.status);
+        });
         console.log('progress', data)
       }
     });
   }
-  onClickCard() {
+  onClickCard(requestCode: string) {
     // Set the flag to show the modal
     this.showModal = true;
+  
+    // Pass the request code to the modal
+    this.modalRequestCode = requestCode;
   }
 
   closeModal() {
