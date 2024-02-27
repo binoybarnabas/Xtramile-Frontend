@@ -19,6 +19,8 @@
     height: fit-content;
     /* background: var(--dark-gradient-color); */
     position: relative;
+    background-color: var(--secondary-blue-color);
+    background-color: var(--menu-hover-color);
     /* transition: 6s; */
 }
 
@@ -801,11 +803,11 @@
         border-radius: 5px;
         margin: 0;
         position: absolute; */
-        top: 23.4rem;
+        top: 37.5rem;
 
-        right: 2.1rem;
+        right: 2rem;
         z-index: 9999;
-        width: 70%;
+        width: 80%;
 
         /* display: none; */
     }

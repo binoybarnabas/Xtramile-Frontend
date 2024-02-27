@@ -1,0 +1,60 @@
+ .notification_container {
+
+     display: flex;
+     flex-direction: column-reverse;
+     padding: 0.5rem;
+     overflow-x: hidden;
+     overflow-y: scroll;
+     height: 260px;
+ }
+
+ .notification_container .notification_card {
+     background-color: var(--secondary-cyan-color);
+     padding: 10px;
+     border-radius: 5px;
+     /* box-shadow: var(--normal-box-shadow); */
+     margin-bottom: 10px;
+     transition: 0.3s;
+
+ }
+
+ .notification_container .notification_card .date_time_section {
+     display: flex;
+     justify-content: space-between;
+     font-size: var(--extra-small-font-size);
+     color: var(--ternary-text-color);
+ }
+
+ .notification_container .notification_card .content_section {
+     font-size: var(--form-label-font-size);
+     color: var(--secondary-text-color);
+ }
+
+ .notification_container .notification_card:hover {
+     transform: scale(1.02);
+ }
+
+
+ @media screen and (max-width: 860px) {
+
+     .main_container .top_section .top_middle_section .notification_container {
+         overflow-x: hidden;
+         overflow-y: scroll;
+         /* height: 40vh; */
+         margin: 0;
+         height: 300px;
+     }
+
+ }
+
+ @media screen and (max-width: 460px) {
+     .main_container .top_section .top_middle_section .notification_container {
+
+         overflow-x: hidden;
+         overflow-y: scroll;
+         /* height: 40vh; */
+         margin: 0;
+         height: 300px;
+     }
+
+ }

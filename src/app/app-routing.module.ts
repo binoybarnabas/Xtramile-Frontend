@@ -44,6 +44,7 @@ import { LoginComponent } from './components/ui/login/login.component';
 import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/selected-option-travel-admin/selected-option-travel-admin.component';
 import { TravelRequestFormComponent } from './features/travel-request-form/travel-request-form.component';
+import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -54,7 +55,9 @@ const routes: Routes = [
     // path: 'employee', component: EmployeeHomeComponent,canActivate:[authGuard], children: [
     path: 'employee', component: EmployeeHomeComponent, canActivate: [authGuard], children: [
 
-      { path: 'dashboard', component: EmployeeDashboardComponent },
+      //  { path: 'dashboard', component: EmployeeDashboardComponent },
+      { path: 'dashboard', component: TravellerDashboardComponent },
+
       { path: 'request', component: TravelRequestFormComponent },
       // { path: 'request', component: NewTravelRequestComponent },
 

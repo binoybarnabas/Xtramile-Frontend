@@ -119,6 +119,11 @@ import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/trave
 import { DashboardCalenderComponent } from './components/ui/dashboard-calender/dashboard-calender.component';
 import { CustomToastComponent } from './components/ui/custom-toast/custom-toast.component';
 import { TravelRequestFormComponent } from './features/travel-request-form/travel-request-form.component';
+import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
+import { DashboardNotificationComponent } from './components/ui/dashboard-components/dashboard-notification/dashboard-notification.component';
+import { DashboardDoneTripsComponent } from './components/ui/dashboard-components/dashboard-done-trips/dashboard-done-trips.component';
+import { DashboardUpcomingTripsComponent } from './components/ui/dashboard-components/dashboard-upcoming-trips/dashboard-upcoming-trips.component';
+import { DashboardTableComponent } from './components/ui/dashboard-components/dashboard-table/dashboard-table.component';
 
 @NgModule({
   declarations: [
@@ -226,6 +231,11 @@ import { TravelRequestFormComponent } from './features/travel-request-form/trave
     SelectedOptionTravelAdminComponent,
     CustomToastComponent,
     TravelRequestFormComponent,
+    TravellerDashboardComponent,
+    DashboardNotificationComponent,
+    DashboardDoneTripsComponent,
+    DashboardUpcomingTripsComponent,
+    DashboardTableComponent
   ]
   ,
 

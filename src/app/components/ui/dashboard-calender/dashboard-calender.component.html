@@ -1,24 +1,28 @@
 <div class="calendar">
+
   <div class="calendar-header">
-    <button
-      (click)="previousMonth()"
-      class="ri-arrow-left-double-line"
-    ></button>
-    <h5>{{ getCurrentMonth() }} {{ getCurrentYear() }}</h5>
-    <button (click)="nextMonth()" class="ri-arrow-right-double-fill"></button>
+    <p class="month_year">{{ getCurrentMonth() }} {{ getCurrentYear() }}</p>
+
+    <div class="nav_btn_container">
+      <button (click)="previousMonth()" class="left_icon ri-arrow-left-s-line"></button>
+      <button (click)="nextMonth()" class="right_icon ri-arrow-right-s-line" ></button>
+    </div>
+    
   </div>
-  <table>
+
+  <table class="calendar_body">
+
     <thead>
-      <tr>
-        <th
-          *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
-        >
-          {{ day }}
-        </th>
+      <tr class="day_container">
+        <th class="day"
+          *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"> {{ day }} </th>
       </tr>
     </thead>
-    <tbody>
+
+    <tbody class="date_container">
+
       <tr *ngFor="let week of getWeeks()">
+
         <td
           *ngFor="let day of week"
           [ngClass]="{
@@ -30,7 +34,11 @@
         >
           {{ day ? day.getDate() : "" }}
         </td>
+
       </tr>
+
     </tbody>
+
   </table>
+
 </div>
