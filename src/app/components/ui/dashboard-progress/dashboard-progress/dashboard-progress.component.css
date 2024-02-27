@@ -1,51 +1,51 @@
 .progress_bar_container {
-    display: flex;
-    align-items: center;
-    width: 500px; /* Adjust the width as needed */
-  }
-  
-  .progress_bar_container .progress_bar_step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    margin-right: 20px; /* Adjust the margin between circles */
-  }
-  
-  .progress_bar_container .progress_bar_circle {
-    width: 40px; /* Adjust the size of the circle */
-    height: 40px; /* Adjust the size of the circle */
-    border-radius: 50%;
-    margin-bottom: 5px; /* Adjust the margin as needed */
-    background-color: #e0e0e0; /* Default color for circles */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem; /* Font size for the step number */
-    color: #555;
-  }
-  
-  .progress_bar_container .progress_bar_circle.completed {
-    background-color: #2bb2fe; /* Color for completed circles */
-  }
-  
-  .progress_bar_container .progress_bar_circle.in-progress {
-    background-color: #2bb2fe; /* Color for the circle in progress */
-  }
-  
-  .progress_bar_container .progress_bar_line {
-    height: 4px; /* Increase the height of the line */
-    background-color: #2bb2fe; /* Color of the line */
-    position: absolute;
-    top: 55%;
-    transform: translateY(-22px); /* Adjust to center the line */
-    left: calc(50% + 17px); /* Adjust the position to connect to the right edge of the circle */
-    z-index: -1; /* Move the line behind the circles */
-  }
-  
-  .progress_bar_container .progress_bar_step_title {
-    font-size: 0.6rem; /* Adjust the font size as needed */
-    color: #555;
-    margin-left: 1.5em;
-  }
+  display: flex;
+  align-items: center;
+  width: 500px; /* Adjust the width as needed */
+}
+
+.progress_bar_container .progress_bar_step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-right: 20px; /* Adjust the margin between circles */
+}
+
+.progress_bar_container .progress_bar_circle {
+  width: 40px; /* Adjust the size of the circle */
+  height: 40px; /* Adjust the size of the circle */
+  border-radius: 50%;
+  margin-bottom: 5px; /* Adjust the margin as needed */
+  background-color: #e0e0e0; /* Default color for circles */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem; /* Font size for the step number */
+  color: #555;
+}
+
+.progress_bar_container .progress_bar_circle.completed {
+  background-color: #2bb2fe; /* Color for completed circles */
+}
+
+.progress_bar_container .progress_bar_circle.in-progress {
+  background-color: #2bb2fe; /* Color for the circle in progress */
+}
+
+.progress_bar_container .progress_bar_line {
+  height: 4px; /* Increase the height of the line */
+  background-color: #2bb2fe; /* Color of the line */
+  position: absolute;
+  top: 55%;
+  transform: translateY(-22px); /* Adjust to center the line */
+  left: calc(50% + 17px); /* Adjust the position to connect to the right edge of the circle */
+  z-index: -1; /* Move the line behind the circles */
+}
+
+.progress_bar_container .progress_bar_step_title {
+  font-size: 0.6rem; /* Adjust the font size as needed */
+  color: #555;
+  margin-left: 1.5em;
+}
 

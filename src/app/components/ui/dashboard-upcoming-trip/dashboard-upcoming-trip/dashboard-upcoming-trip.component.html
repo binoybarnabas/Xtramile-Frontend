@@ -1,7 +1,6 @@
 <!-- main_container: Container for the upcoming trip details -->
 <div class="main_container">
-
-  <p class="item_heading">Upcoming trip</p>
+  <p class="item_heading">Upcoming trips</p>
 
   <!-- trip_card: Card displaying the upcoming trip information -->
   <div class="trip_card" *ngIf="tripDetailsAvailable">
@@ -22,8 +21,8 @@
 
       <!-- Trip information paragraph displaying details such as source city, state, country, destination city, state, country, and the date range of the trip. -->
       <p *ngIf="startDate && endDate">
-        Embark on an exciting journey from {{ sourceCity }}, {{ sourceState }},
-        {{ sourceCountry }} to {{ destinationCity }}, {{ destinationState }},
+        Embark on an exciting journey from {{ sourceCity }},
+        {{ sourceCountry }} to {{ destinationCity }},
         {{ destinationCountry }} unfolding from
         {{ startDate | date : "shortDate" }} to
         {{ endDate | date : "shortDate" }}
@@ -36,6 +35,11 @@
           View detail
         </button>
       </div>
+    </div>
+    <!-- Add previous and next buttons -->
+    <div class="navigation-buttons" *ngIf="trips.length > 1">
+      <button class="nav-button" (click)="previousTrip()"><</button>
+      <button class="nav-button" (click)="nextTrip()">></button>
     </div>
   </div>
 
@@ -54,5 +58,4 @@
       </div>
     </div>
   </div>
-
 </div>

@@ -30,6 +30,7 @@
 
 .cards_wrapper.show_scrollbar {
   overflow-y: scroll;
+  max-height: 4.5rem;
 }
 
 .cards_wrapper .card {
