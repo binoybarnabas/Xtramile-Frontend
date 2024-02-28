@@ -9,8 +9,15 @@ export class TravelRequestFormComponent {
 
 
   isProjectDetailsSectionOpen: boolean;
-  selectedFileName: any;
+  selectedPassportFileName: any;
+  selectedTravelAuthMailFileName: any;
 
+  selectedTripType: string = 'round_trip';
+
+  selectedTravelMode: string = 'flight';
+
+  selectedOrigin: string = 'Trivandrum';
+  selectedDestination: string = 'Kochi';
 
 
   constructor() {
@@ -27,9 +34,39 @@ export class TravelRequestFormComponent {
 
 
 
-  displayFileName(event: any) {
+  displayFileName(event: any, fileItem: string) {
     const fileInput = event.target;
-    this.selectedFileName = fileInput.files.length > 0 ? fileInput.files[0].name : '';
+    // this.selectedPassportFileName = fileInput.files.length > 0 ? fileInput.files[0].name : '';
+
+    if (fileItem === 'passport') {
+      this.selectedPassportFileName = fileInput.files.length > 0 ? fileInput.files[0].name : '';
+    } else {
+
+      this.selectedTravelAuthMailFileName = fileInput.files.length > 0 ? fileInput.files[0].name : '';
+
+    }
+
   }
+
+
+  //change trip type based on user seleciton
+  changeTripType(tripType: string) {
+    this.selectedTripType = tripType;
+  }
+
+  changeTravelMode(travelMode: string) {
+    this.selectedTravelMode = travelMode;
+  }
+
+
+  //function to swap entered origin and destinaiton
+  //invoked on a two way arrow button click
+  swapOriginAndDestination() {
+    const temp = this.selectedDestination;
+    this.selectedDestination = this.selectedOrigin;
+    this.selectedOrigin = temp;
+  }
+
+
   //eof
 }

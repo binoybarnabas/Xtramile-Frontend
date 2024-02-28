@@ -31,6 +31,9 @@
   --primary-blue-color: #0240bc;
   --secondary-blue-color: #b8cffd;
 
+  --primary-red-color: #ec0d0d;
+  --secondary-red-color: #ffeaee;
+
   /*========Hover colors========*/
   --menu-hover-color: rgb(223, 227, 231);
 
@@ -50,6 +53,8 @@
   --line-color: #aaa9a9;
 
   --dark-gradient-color: linear-gradient(179.4deg, rgb(12, 20, 69) -16.9%, rgb(71, 30, 84) 119.9%);
+
+
 
 
   /*========Color Filter========*/
@@ -611,16 +616,18 @@ body {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 3px 0px;
   transition: 0.6s;
 
-  background-image: url('https://images.pexels.com/photos/33041/antelope-canyon-lower-canyon-arizona.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  /* background-image: url('https://images.pexels.com/photos/33041/antelope-canyon-lower-canyon-arizona.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
   background-repeat: no-repeat;
+  object-fit: cover;
   /* background-position: center; */
   overflow-y: scroll;
-  background-image: url('https://images.pexels.com/photos/1933319/pexels-photo-1933319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  /* background-image: url('https://images.pexels.com/photos/1933319/pexels-photo-1933319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
 
-  background-image: url('https://images.pexels.com/photos/4245826/pexels-photo-4245826.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  /* background-image: url('https://images.pexels.com/photos/4245826/pexels-photo-4245826.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
   background-position: center;
   /* padding: 2vw; */
   /* overflow: scroll; */
+  background: var(--dark-gradient-color);
 }
 
 .middle_console_container.collapsed {

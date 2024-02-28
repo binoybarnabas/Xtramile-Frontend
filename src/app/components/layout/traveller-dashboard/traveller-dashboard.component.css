@@ -76,7 +76,6 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
-
 }
 
 .main_container .bottom_section .bottom_left_section .heading_container .heading_card.active {
@@ -106,9 +105,6 @@
 .no_display {
     display: none;
 }
-
-
-
 
 
 .main_container .bottom_section .bottom_right_section {

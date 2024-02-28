@@ -6,41 +6,40 @@
 
             <div class="trip_type_section">
               
-                <div class="trip_type_card active">
-                    <input class="radio" type="radio" id="tripType" name="tripType" value="one_way">
-                    <label for="one_way" class="label">One Way</label><br>
+                <div (click)="changeTripType('one_way')" [ngClass]=" selectedTripType === 'one_way'? 'trip_type_card active' : 'trip_type_card' " >
+                    <!-- <input class="radio" type="radio" id="tripType" name="tripType" value="one_way">
+                    <label for="one_way" class="label">One Way</label><br> -->
+                    <span class="trip_type">One Way</span>
                 </div>
 
-                <div class="trip_type_card">
-                    <input type="radio" id="tripType" name="tripType" value="round_trip">
-                    <label for="tripType" class="label">Round Trip</label><br>
+                <div (click)="changeTripType('round_trip')"  [ngClass]=" selectedTripType === 'round_trip'? 'trip_type_card active' : 'trip_type_card' ">
+                    <!-- <input type="radio" id="tripType" name="tripType" value="round_trip">
+                    <label for="tripType" class="label">Round Trip</label><br> -->
+                    <span class="trip_type">Round Trip</span>
                 </div>     
 
-                <div class="trip_type_card">
-                    <input type="radio" id="tripType" name="tripType" value="round_trip">
-                    <label for="tripType" class="label">Multi City</label><br>
-                </div>                                                
+            
             </div>
 
             <div class="travel_mode_container">
 
-                <div class="travel_mode_card active">
+                <div  (click)="changeTravelMode('flight')"  [ngClass]=" selectedTravelMode === 'flight'? 'travel_mode_card active':'travel_mode_card' ">
                     <i class="icon ri-plane-line"></i>
                     <p class="value" >Flight</p>
                 </div>
 
 
-                    <div class="travel_mode_card">
+                    <div (click)="changeTravelMode('bus')" [ngClass]=" selectedTravelMode === 'bus'? 'travel_mode_card active':'travel_mode_card'" >
                         <i class="icon ri-bus-fill"></i>
                         <p class="value" >Bus</p>
                     </div>
 
-                    <div class="travel_mode_card">
+                    <div (click)="changeTravelMode('car')" [ngClass]=" selectedTravelMode === 'car'? 'travel_mode_card active':'travel_mode_card' " >
                         <i class="icon ri-roadster-fill"></i>
                         <p class="value" >Car</p>
                     </div>
                     
-                    <div class="travel_mode_card">
+                    <div (click)="changeTravelMode('train')" [ngClass]=" selectedTravelMode === 'train'? 'travel_mode_card active':'travel_mode_card' " >
                         <i class="icon ri-train-line"></i>
                         <p class="value" >Train</p>
                     </div>                    
@@ -56,22 +55,33 @@
                     
                     <div class="origin_card">
                         <span class="label">From</span>
-                        <input type="text" class="form_text_input" value="Trivandrum" placeholder="From">
-                        <!-- <p class="country" >India</p> -->
+                        <input type="text" class="form_text_input" value={{selectedOrigin}} placeholder="From">
+              
+                      <!-- <p class="country" >India</p> -->
+
+                      <!-- <div class="form_error_container">
+                        <span class="form_error"> <i class="ri-error-warning-line"></i> Invalid</span>
+                        <i class="form_hook ri-triangle-fill"></i>
+                      </div> -->
+
                     </div>
 
-                    <div class="icon_section">
+                    <div (click)="swapOriginAndDestination()" class="icon_section">
                         <i class="icon ri-arrow-left-right-fill"></i>
                     </div>
 
                     <div class="destination_card">
                         <span class="label" >To</span>
-                        <input type="text" class="form_text_input" value="Kochi" placeholder="From">
+                        <input type="text" class="form_text_input" value={{selectedDestination}} placeholder="From">
                         <!-- <p class="country" >India</p> -->
+
+                        <!-- <div class="form_error_container">
+                            <span class="form_error"> <i class="ri-error-warning-line"></i> Invalid Input </span>
+                            <i class="form_hook ri-triangle-fill"></i>
+                        </div> -->
 
                     </div>
                     
-
                 </div>
                 
                 <div class="departure_return_section">
@@ -79,11 +89,25 @@
                     <div class="date_card">
                         <span class="label">Departure <i class="down_icon ri-arrow-down-s-fill"></i></span>
                        <input type="date" class="date_picker">
+
+                        <!-- <div class="form_error_container">
+                            <span class="form_error"> <i class="ri-error-warning-line"></i> Invalid Date </span>
+                            <i class="form_hook ri-triangle-fill"></i>
+                        </div> -->
+
                     </div>
 
                     <div class="return_date_card">
                         <span class="label">Return <i class="down_icon ri-arrow-down-s-fill"></i></span>
-                        <input type="date" class="date_picker"  >
+                        <input *ngIf="selectedTripType !== 'one_way'" type="date" class="date_picker" >
+
+                        <span (dblclick)="changeTripType('round_trip')" class="round_trip_message" *ngIf="selectedTripType === 'one_way'">Double Click to Add Return Date</span>
+                        
+                        <!-- <div class="form_error_container">
+                            <span class="form_error"> <i class="ri-error-warning-line"></i> Invalid Date </span>
+                            <i class="form_hook ri-triangle-fill"></i>
+                        </div> -->
+
                     </div>
                 
                 </div>
@@ -129,8 +153,13 @@
             </div>
 
             <div class="second_row">
-                
-                <div class="pref_dep_time_section">
+
+                <!-- <div class="dots_container"> -->
+                    <span class="dot left_dot"></span>
+                    <span class="dot right_dot"></span>
+                <!-- </div> -->
+
+                <div *ngIf="selectedTravelMode !== 'car' " class="pref_dep_time_section">
                  
                             <label class="form_label" for="prefDepTime">Preferred Departure Time:</label>
                             <select id="prefDepTime" name="prefDepTime">
@@ -159,7 +188,7 @@
 
                 </div>
 
-                <div class="cab_service_section">
+                <div *ngIf="selectedTravelMode !== 'car' " class="cab_service_section">
 
                     <div class="heading_section">
                         <span class="value">Cab Required</span>
@@ -192,9 +221,9 @@
                         </div>
 
                         <div class="selector">
-                            <input type="file" id="file" name="file" class="file-input" (change)="displayFileName($event)">
+                            <input type="file" id="file" name="file" class="file-input" (change)="displayFileName($event, 'passport')">
                             <label for="file" class="custom-file-input">Choose File</label>
-                            <div id="file-name">  {{ selectedFileName }}</div>
+                            <div id="passport-file-name">  {{ selectedPassportFileName }}</div>
                         </div>
 
                     </div>
@@ -206,9 +235,9 @@
                         </div>
 
                         <div class="selector">
-                            <input type="file" id="file" name="file" class="file-input" (change)="displayFileName($event)">
+                            <input type="file" id="file" name="file" class="file-input" (change)="displayFileName($event,'travel_auth_mail')">
                             <label for="file" class="custom-file-input">Choose File</label>
-                            <div id="file-name">  {{ selectedFileName }}</div>
+                            <div id="travel-auth-mail-file-name">  {{ selectedTravelAuthMailFileName }}</div>
                         </div>
 
                     </div>    
@@ -218,6 +247,7 @@
 
             </div>
 
+            <!-- submit btn -->
             <div class="third_row">
                  <div class="actions">
                     <div class="submit_btn_container">
