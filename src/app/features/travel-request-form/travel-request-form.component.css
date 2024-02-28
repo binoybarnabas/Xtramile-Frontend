@@ -3,6 +3,7 @@
     /* background-image: url('https://images.pexels.com/photos/33041/antelope-canyon-lower-canyon-arizona.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
     height: 100vh;
     justify-content: center;
+    transition: 0.3s;
 
 }
 
@@ -19,6 +20,7 @@
     height: fit-content;
     background-color: var(--body-bg-color);
     position: relative;
+    transition: 0.3s;
 }
 
 
@@ -59,6 +61,7 @@
     /* background-color: var(--card-bg-color); */
     padding: 1rem;
     justify-content: space-between;
+    transition: 0.3s;
 }
 
 .main_container .req_form_container .top_section .travel_mode_container {
@@ -339,7 +342,22 @@
     border: none;
     outline: none;
     background-color: transparent;
+}
 
+.main_container .req_form_container .bottom_section .first_row .departure_return_section .custom_datepicker {
+    border: none;
+    outline: none;
+    font-weight: var(--active-font-weight);
+    background-color: transparent;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.main_container .req_form_container .bottom_section .first_row .departure_return_section .custom_datepicker::placeholder {
+
+    opacity: 1;
+
+    /* Change the color to your desired color */
 }
 
 .main_container .req_form_container .bottom_section .first_row .departure_return_section .return_date_card {
@@ -580,7 +598,7 @@
     padding: 1rem;
     margin-left: auto;
     margin-right: auto;
-    border-top: 1px dashed var(--body-bg-color);
+    border-top: 1px dashed var(--ternary-text-color);
     /* border-top: 2px dotted var(--body-bg-color); */
     position: relative;
 
