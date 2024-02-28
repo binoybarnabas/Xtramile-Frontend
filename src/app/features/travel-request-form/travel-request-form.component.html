@@ -1,0 +1,263 @@
+<div class="main_container">
+
+    <div class="req_form_container">
+
+        <div class="top_section">
+
+            <div class="trip_type_section">
+              
+                <div (click)="changeTripType('one_way')" [ngClass]=" selectedTripType === 'one_way'? 'trip_type_card active' : 'trip_type_card' " >
+                    <!-- <input class="radio" type="radio" id="tripType" name="tripType" value="one_way">
+                    <label for="one_way" class="label">One Way</label><br> -->
+                    <span class="trip_type">One Way</span>
+                </div>
+
+                <div (click)="changeTripType('round_trip')"  [ngClass]=" selectedTripType === 'round_trip'? 'trip_type_card active' : 'trip_type_card' ">
+                    <!-- <input type="radio" id="tripType" name="tripType" value="round_trip">
+                    <label for="tripType" class="label">Round Trip</label><br> -->
+                    <span class="trip_type">Round Trip</span>
+                </div>     
+
+            
+            </div>
+
+            <div class="travel_mode_container">
+
+                <div  (click)="changeTravelMode('flight')"  [ngClass]=" selectedTravelMode === 'flight'? 'travel_mode_card active':'travel_mode_card' ">
+                    <i class="icon ri-plane-line"></i>
+                    <p class="value" >Flight</p>
+                </div>
+
+
+                    <div (click)="changeTravelMode('bus')" [ngClass]=" selectedTravelMode === 'bus'? 'travel_mode_card active':'travel_mode_card'" >
+                        <i class="icon ri-bus-fill"></i>
+                        <p class="value" >Bus</p>
+                    </div>
+
+                    <div (click)="changeTravelMode('car')" [ngClass]=" selectedTravelMode === 'car'? 'travel_mode_card active':'travel_mode_card' " >
+                        <i class="icon ri-roadster-fill"></i>
+                        <p class="value" >Car</p>
+                    </div>
+                    
+                    <div (click)="changeTravelMode('train')" [ngClass]=" selectedTravelMode === 'train'? 'travel_mode_card active':'travel_mode_card' " >
+                        <i class="icon ri-train-line"></i>
+                        <p class="value" >Train</p>
+                    </div>                    
+            </div>
+
+        </div>
+
+        <div class="bottom_section">
+
+            <div class="first_row">
+
+                <div class="origin_destination_section">
+                    
+                    <div class="origin_card">
+                        <span class="label">From</span>
+                        <input type="text" class="form_text_input" value={{selectedOrigin}} placeholder="From">
+              
+                      <!-- <p class="country" >India</p> -->
+
+                      <!-- <div class="form_error_container">
+                        <span class="form_error"> <i class="ri-error-warning-line"></i> Invalid</span>
+                        <i class="form_hook ri-triangle-fill"></i>
+                      </div> -->
+
+                    </div>
+
+                    <div (click)="swapOriginAndDestination()" class="icon_section">
+                        <i class="icon ri-arrow-left-right-fill"></i>
+                    </div>
+
+                    <div class="destination_card">
+                        <span class="label" >To</span>
+                        <input type="text" class="form_text_input" value={{selectedDestination}} placeholder="From">
+                        <!-- <p class="country" >India</p> -->
+
+                        <!-- <div class="form_error_container">
+                            <span class="form_error"> <i class="ri-error-warning-line"></i> Invalid Input </span>
+                            <i class="form_hook ri-triangle-fill"></i>
+                        </div> -->
+
+                    </div>
+                    
+                </div>
+                
+                <div class="departure_return_section">
+
+                    <div class="date_card">
+                        <span class="label">Departure <i class="down_icon ri-arrow-down-s-fill"></i></span>
+                       <input type="date" class="date_picker">
+
+                        <!-- <div class="form_error_container">
+                            <span class="form_error"> <i class="ri-error-warning-line"></i> Invalid Date </span>
+                            <i class="form_hook ri-triangle-fill"></i>
+                        </div> -->
+
+                    </div>
+
+                    <div class="return_date_card">
+                        <span class="label">Return <i class="down_icon ri-arrow-down-s-fill"></i></span>
+                        <input *ngIf="selectedTripType !== 'one_way'" type="date" class="date_picker" >
+
+                        <span (dblclick)="changeTripType('round_trip')" class="round_trip_message" *ngIf="selectedTripType === 'one_way'">Double Click to Add Return Date</span>
+                        
+                        <!-- <div class="form_error_container">
+                            <span class="form_error"> <i class="ri-error-warning-line"></i> Invalid Date </span>
+                            <i class="form_hook ri-triangle-fill"></i>
+                        </div> -->
+
+                    </div>
+                
+                </div>
+
+                <div (click)="toggleProjectDetailsSection('open')" class="other_info_section">
+
+                    <div class="other_info_card">
+                        <span class="label">Project Details <i class="down_icon ri-arrow-down-s-fill"></i> </span>
+                        <p class="project_code_view">PRJ001</p>
+                        <span class="travel_purpose_view">Business Meet</span>
+                    </div>
+
+                    <div *ngIf="isProjectDetailsSectionOpen" class="project_code_travel_purpose_container">
+
+                        <div class="project_code_section">
+
+                            <label class="form_label" for="cars">Project Code:</label>
+
+                            <select id="projectCode" name="projectCode">
+                                <option value="PRJ001">PRJ001</option>
+                                <option value="PRJ002">PRJ002</option>
+                                <option value="PRJ003">PRJ003</option>
+                                <option value="PRJ004">PRJ004</option>
+                            </select>
+
+                        </div>
+
+                        <div class="travel_purpose_section">
+                            <label class="form_label" for="cars">Travel Purpose:</label>
+                            <input type="text" class="form_text_input" placeholder="Enter the trip purpose">
+                        </div>
+
+                        <div class="btn_container">
+                            <div (click)="toggleProjectDetailsSection('close')"  class="apply_btn">
+                                <span>Apply</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div> 
+
+            </div>
+
+            <div class="second_row">
+
+                <!-- <div class="dots_container"> -->
+                    <span class="dot left_dot"></span>
+                    <span class="dot right_dot"></span>
+                <!-- </div> -->
+
+                <div *ngIf="selectedTravelMode !== 'car' " class="pref_dep_time_section">
+                 
+                            <label class="form_label" for="prefDepTime">Preferred Departure Time:</label>
+                            <select id="prefDepTime" name="prefDepTime">
+                                <option value="PRJ001">00.00 - 01.00</option>
+                                <option value="PRJ002">01.00 - 02.00</option>
+                                <option value="PRJ003">02.00 - 03.00</option>
+                                <option value="PRJ004">03.00 - 04.00</option>
+                            </select>
+
+                </div>
+
+                <div class="accommodation_service_section">
+
+                    <div class="heading_section">
+                        <span class="value">Accommodation Required</span>
+                    </div>
+
+                    <div class="selector_section">
+
+                        <label class="toggle_switch">
+                            <input type="checkbox">
+                            <span class="toggle_slider"></span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div *ngIf="selectedTravelMode !== 'car' " class="cab_service_section">
+
+                    <div class="heading_section">
+                        <span class="value">Cab Required</span>
+                    </div>
+
+                    <div class="selector_section">
+
+                        <label class="toggle_switch">
+                            <input type="checkbox">
+                            <span class="toggle_slider"></span>
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div class="pref_pickup_time_section">
+                 
+                    <label class="form_label" for="prefDepTime">Preferred PickUp Time:</label>
+                    <input class="form_time_input" type="time" id="time" name="time">
+
+                </div>
+
+                <div class="file_container">
+
+                    <div class="file_card">
+                            
+                        <div class="file_title">
+                            <span class="title"> <i class="ri-attachment-2"></i> Passport</span>
+                        </div>
+
+                        <div class="selector">
+                            <input type="file" id="file" name="file" class="file-input" (change)="displayFileName($event, 'passport')">
+                            <label for="file" class="custom-file-input">Choose File</label>
+                            <div id="passport-file-name">  {{ selectedPassportFileName }}</div>
+                        </div>
+
+                    </div>
+
+                    <div class="file_card">
+                        
+                        <div class="file_title">
+                            <span class="title"> <i class="ri-attachment-2"></i> Travel Auth Mail</span>
+                        </div>
+
+                        <div class="selector">
+                            <input type="file" id="file" name="file" class="file-input" (change)="displayFileName($event,'travel_auth_mail')">
+                            <label for="file" class="custom-file-input">Choose File</label>
+                            <div id="travel-auth-mail-file-name">  {{ selectedTravelAuthMailFileName }}</div>
+                        </div>
+
+                    </div>    
+                             
+                </div>
+
+
+            </div>
+
+            <!-- submit btn -->
+            <div class="third_row">
+                 <div class="actions">
+                    <div class="submit_btn_container">
+                        <button class="submit_btn" >Submit</button>
+                    </div>
+                 </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -9,30 +9,30 @@ import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.
 })
 export class DashboardCalenderComponent {
 
-constructor( private commonService : CommonAPIService) {}
-@Input()
-empId : any;
+  constructor(private commonService: CommonAPIService) { }
+  @Input()
+  empId: any;
 
-currentRequest : any;  
+  currentRequest: any;
 
-currentDate: Date = new Date();
-  deptDate: Date = new Date(); 
+  currentDate: Date = new Date();
+  deptDate: Date = new Date();
   returnDate: Date = new Date();
 
-ngOnInit(){
+  ngOnInit() {
     this.getCurrentTravelRequest();
   }
 
-getCurrentTravelRequest(){
-  this.commonService.getCurrentRequestDates(this.empId).subscribe({
-    next: (data) =>{
-      this.currentRequest= data;
-      this.deptDate= new Date(this.currentRequest.departureDate.split(/[-T]/));
-      this.returnDate= new Date(this.currentRequest.returnDate.split(/[-T]/));
-      console.log(data)
-    }
-  })
-}
+  getCurrentTravelRequest() {
+    this.commonService.getCurrentRequestDates(this.empId).subscribe({
+      next: (data) => {
+        this.currentRequest = data;
+        this.deptDate = new Date(this.currentRequest.departureDate.split(/[-T]/));
+        this.returnDate = new Date(this.currentRequest.returnDate.split(/[-T]/));
+        console.log(data)
+      }
+    })
+  }
 
   getWeeks(): Date[][] {
     const firstDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
@@ -52,7 +52,7 @@ getCurrentTravelRequest(){
     const firstDayOfWeek = weeks[0][0].getDay();
     if (firstDayOfWeek > 0) {
       const previousMonthLastDay = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 0).getDate();
-      for (let i = firstDayOfWeek - 1; i >= 0; i--) {
+      for (let i = 0; i <= firstDayOfWeek - 1; i++) {
         weeks[0].unshift(new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() - 1, previousMonthLastDay - i));
       }
     }
@@ -95,7 +95,7 @@ getCurrentTravelRequest(){
 
   isReturnDate(date: Date): boolean {
     return date.getTime() === this.returnDate.getTime();
-  } 
+  }
 
 }
 
