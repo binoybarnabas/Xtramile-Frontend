@@ -125,6 +125,7 @@ import { DashboardDoneTripsComponent } from './components/ui/dashboard-component
 import { DashboardUpcomingTripsComponent } from './components/ui/dashboard-components/dashboard-upcoming-trips/dashboard-upcoming-trips.component';
 import { DashboardTableComponent } from './components/ui/dashboard-components/dashboard-table/dashboard-table.component';
 import { ShortYearDateFormatPipe } from './pipes/ShortYearDate/short-year-date-format.pipe';
+import { CustomTimePickerComponent } from './components/ui/form-components/custom-time-picker/custom-time-picker.component';
 
 @NgModule({
   declarations: [
@@ -237,7 +238,8 @@ import { ShortYearDateFormatPipe } from './pipes/ShortYearDate/short-year-date-f
     DashboardDoneTripsComponent,
     DashboardUpcomingTripsComponent,
     DashboardTableComponent,
-    ShortYearDateFormatPipe
+    ShortYearDateFormatPipe,
+    CustomTimePickerComponent
   ]
   ,
 

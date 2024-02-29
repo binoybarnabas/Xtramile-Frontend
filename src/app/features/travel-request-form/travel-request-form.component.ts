@@ -35,6 +35,9 @@ export class TravelRequestFormComponent {
 
   selectedTripType: string;
   selectedTravelMode: string;
+
+  selectedTravelType: string;
+
   selectedOrigin: string;
   selectedDestination: string;
 
@@ -46,6 +49,18 @@ export class TravelRequestFormComponent {
 
   today: Date;
   tomorrow: Date;
+
+
+  isPrefDepTimeDetailsSectionOpen: boolean;
+
+  //without AM / PM
+  selectedPrefDepTimeSlot: string;
+
+  //AM / PM only
+  selectedPrefDepTimeUnit: string;
+
+  //combination of slot with Unit
+  selectedPrefDepTime: string;
 
   //Employee id
   empId: number
@@ -60,6 +75,8 @@ export class TravelRequestFormComponent {
   projectCodes: any[] = [];
 
   travelModes: any[] = [];
+
+  availableDepartureTimes: string[] = [];
 
   cities = cities;//Fetch Data From Any External API
   sourceFilteredCities: any[] = []; // Separate filtered list for source field
@@ -92,7 +109,12 @@ export class TravelRequestFormComponent {
     this.selectedTravelMode = 'flight';
     this.selectedOrigin = 'Trivandrum';
     this.selectedDestination = 'Kochi';
-    this.selectedTravelPurpose = 'Business Meet'
+    this.selectedTravelType = 'domestic'
+    this.selectedTravelPurpose = 'Business Meet';
+    this.isPrefDepTimeDetailsSectionOpen = false;
+    this.selectedPrefDepTimeSlot = '12.00 - 01.00';
+    this.selectedPrefDepTimeUnit = 'AM';
+    this.selectedPrefDepTime = '12.00 - 01.00 AM'
 
   }
 
@@ -147,9 +169,29 @@ export class TravelRequestFormComponent {
     this.selectedOrigin = temp;
   }
 
-  // ngDoCheck() {
-  //   this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
-  // }
+  changePrefDepTimeSlot(newTimeSlot: string) {
+    this.selectedPrefDepTimeSlot = newTimeSlot;
+  }
+
+  changePrefDepTimeUnit(newUnit: string) {
+    this.selectedPrefDepTimeUnit = newUnit;
+  }
+
+  //method toggle pref dep time container
+  togglePrefDepTimeContainer(action: string, event: Event) {
+    event.stopPropagation();
+    if (action === 'open') {
+      this.isPrefDepTimeDetailsSectionOpen = true;
+    }
+    else if (action === 'close') {
+
+      this.selectedPrefDepTime = this.selectedPrefDepTimeSlot + " " + this.selectedPrefDepTimeUnit;
+      this.isPrefDepTimeDetailsSectionOpen = false;
+
+    }
+
+  }
+
 
   ngOnInit() {
 
@@ -158,6 +200,8 @@ export class TravelRequestFormComponent {
 
     //Get All Travel Modes
     this.getAllTravelModes();
+
+    this.getAllDepartureTimes();
 
     //Get Employee Date
     this.requestService.getEmployeeDataById(this.empId).subscribe({
@@ -178,8 +222,8 @@ export class TravelRequestFormComponent {
       createdBy: new FormControl(this.empId, Validators.required),
 
       //Trip Info
-      tripType: new FormControl(this.selectedTripType, Validators.required),
-      travelMode: new FormControl(this.selectedTravelMode, Validators.required),
+      tripType: new FormControl(this.selectedTripType, Validators.nullValidator),
+      travelMode: new FormControl(this.selectedTravelMode, Validators.nullValidator),
       tripPurpose: new FormControl(this.selectedTravelPurpose, Validators.required),
       departureDate: new FormControl(this.today, Validators.required),
       returnDate: new FormControl(this.tomorrow, Validators.nullValidator),
@@ -188,10 +232,10 @@ export class TravelRequestFormComponent {
 
       sourceCountry: new FormControl('', Validators.nullValidator),
       destinationCountry: new FormControl('', Validators.nullValidator),
-      prefDepartureTime: new FormControl('00.00 - 01.00', Validators.required),
+      prefDepartureTime: new FormControl('', Validators.nullValidator),
 
       //Domestic / International
-      travelTypeId: new FormControl(1, Validators.required),
+      travelType: new FormControl(this.selectedTravelType, Validators.required),
       projectCode: new FormControl('', Validators.required),
 
       //Additional Info
@@ -199,8 +243,9 @@ export class TravelRequestFormComponent {
       prefPickUpTime: new FormControl('', Validators.nullValidator),
       accommodationRequired: new FormControl(false, Validators.required),
 
-      travelAuthorizationEmailCapture: new FormControl(Validators.required),
-      passportAttachment: new FormControl(Validators.required),
+      travelAuthorizationEmailCapture: new FormControl(Validators.nullValidator),
+      passportAttachment: new FormControl(Validators.nullValidator),
+      idCardAttachment: new FormControl(Validators.nullValidator)
       // additionalComments: new FormControl('', Validators.nullValidator)
 
     })
@@ -322,6 +367,7 @@ export class TravelRequestFormComponent {
 
   }
 
+  //listening to changes happening on origin and destination fields
   subscribeToOriginAndDestinationChanges() {
     const sourceCityControl = this.travelRequestForm.get('sourceCity');
     const destinationCityControl = this.travelRequestForm.get('destinationCity');
@@ -329,25 +375,43 @@ export class TravelRequestFormComponent {
     if (sourceCityControl && destinationCityControl) {
       this.travelRequestForm.get('sourceCountry')?.valueChanges.subscribe(() => {
         this.updateTravelType();
+
       });
 
       this.travelRequestForm.get('destinationCountry')?.valueChanges.subscribe(() => {
         this.updateTravelType();
       });
     }
+
+    if (sourceCityControl && destinationCityControl) {
+
+      this.travelRequestForm.get('sourceCity')?.valueChanges.subscribe((newCity: string) => {
+        this.selectedOrigin = newCity;
+      });
+
+      this.travelRequestForm.get('destinationCity')?.valueChanges.subscribe((newCity: string) => {
+        this.selectedDestination = newCity;
+      });
+
+
+    }
+
   }
 
+  //update travel type based on selected origin and destination
   updateTravelType() {
     const originCountry = this.travelRequestForm.get('sourceCountry')?.value;
     const destinationCountry = this.travelRequestForm.get('destinationCountry')?.value;
-    const travelTypeControl = this.travelRequestForm.get('travelTypeId');
+    const travelTypeControl = this.travelRequestForm.get('travelType');
 
     // If origin and destination countries are the same, set travel type to "Domestic"
     if (originCountry && destinationCountry && originCountry === destinationCountry) {
-      travelTypeControl?.setValue('2'); // Domestic
+      travelTypeControl?.setValue('domestic'); // Domestic
+      this.selectedTravelType = 'domestic';
     } else {
       // Reset to default value if countries are different
-      travelTypeControl?.setValue('1'); // International
+      travelTypeControl?.setValue('international'); // International
+      this.selectedTravelType = 'international'
     }
   }
 
@@ -365,9 +429,22 @@ export class TravelRequestFormComponent {
     return this.travelRequestForm.get('cabRequired')?.value === false;
   }
 
+  // Prevent user from typing into the input field
   onKeyDown(event: KeyboardEvent) {
-    // Prevent user from typing into the input field
     event.preventDefault();
+  }
+
+
+  //method to get available departure times
+  //can be used to connect with any third party API to get realtime data of flight / train / bus timings
+  getAllDepartureTimes(): void {
+
+    let departureTimes: string[] = ['12.00 - 01.00', '01.00 - 02.00',
+      '02.00 - 03.00', '03.00 - 04.00', '04.00 - 05.00', '05.00 - 06.00', '06.00 - 07.00',
+      '07.00 - 08.00', '08.00 - 09.00', '09.00 - 10.00', '10.00 - 11.00', '11.00 - 12.00'];
+
+    this.availableDepartureTimes.push(...departureTimes);
+
   }
 
   //subscribe to changes in departure date 
@@ -401,11 +478,15 @@ export class TravelRequestFormComponent {
 
     this.travelRequestForm.value.travelMode = this.selectedTravelMode;
     this.travelRequestForm.value.tripType = this.selectedTripType;
+    this.travelRequestForm.value.prefDepartureTime = this.selectedPrefDepTime;
 
     console.log(this.travelRequestForm.value);
     console.log("DONE");
 
   }
+
+
+
 
   //eof
 }

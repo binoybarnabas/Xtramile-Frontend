@@ -7,19 +7,15 @@
         <div class="top_section">
 
             <div class="trip_type_section">
-              
-                <div (click)="changeTripType('one_way')" [ngClass]=" selectedTripType === 'one_way'? 'trip_type_card active' : 'trip_type_card' " >
-                    <!-- <input class="radio" type="radio" id="tripType" name="tripType" value="one_way">
-                    <label for="one_way" class="label">One Way</label><br> -->
+                          
+                <div (click)="changeTripType('one_way')" class="trip_type_card" [ngClass]=" selectedTripType === 'one_way'? 'trip_type_card active' : 'trip_type_card' " >
                     <span class="trip_type">One Way</span>
                 </div>
 
-                <div (click)="changeTripType('round_trip')"  [ngClass]=" selectedTripType === 'round_trip'? 'trip_type_card active' : 'trip_type_card' ">
-                    <!-- <input type="radio" id="tripType" name="tripType" value="round_trip">
-                    <label for="tripType" class="label">Round Trip</label><br> -->
+                <div (click)="changeTripType('round_trip')" class="trip_type_card" [ngClass]=" selectedTripType === 'round_trip'? 'trip_type_card active' : 'trip_type_card' " >
                     <span class="trip_type">Round Trip</span>
-                </div>     
-            
+                </div>
+        
             </div>
 
             <div class="travel_mode_container">
@@ -58,10 +54,21 @@
 
                     <div class="origin_card">
                         <span class="label">From</span>
-                        <input type="text" class="form_text_input" formControlName="sourceCity" value={{selectedOrigin}} placeholder="From">
+                        <input type="text" class="form_text_input" formControlName="sourceCity" value={{selectedOrigin}} placeholder="From"   (input)="filterCities($event, 'sourceCity')">
                         <input type="hidden" formControlName="sourceCountry" />
 
                       <!-- <p class="country" >India</p> -->
+                      <div class="autocomplete_container">
+                        <div
+                          *ngFor="let city of sourceFilteredCities"
+                          class="autocomplete_item"
+                          (click)="selectCity(city, 'sourceCity')"
+                        >
+                          {{ city.name }}, {{ city.country }}
+                        </div>
+                      
+                      
+                      </div>
 
                     <div    *ngIf="
                     travelRequestForm.get('sourceCity')?.invalid &&
@@ -78,11 +85,21 @@
 
                     <div class="destination_card">
                         <span class="label" >To</span>
-                        <input type="text" class="form_text_input" formControlName="destinationCity" value={{selectedDestination}} placeholder="From">
+                        <input type="text" class="form_text_input" formControlName="destinationCity" value={{selectedDestination}} placeholder="From"  (input)="filterCities($event, 'destinationCity')">
                         <input type="hidden" formControlName="destinationCountry" />
 
                         <!-- <p class="country" >India</p> -->
-
+                        <div class="autocomplete_container">
+                            <div
+                              *ngFor="let city of destinationFilteredCities"
+                              class="autocomplete_item"
+                              (click)="selectCity(city, 'destinationCity')"
+                            >
+                              {{ city.name }}, {{ city.country }}
+                            </div>
+                          
+                          
+                          </div>
                         <div *ngIf= "travelRequestForm.get('destinationCity')?.invalid && travelRequestForm.get('destinationCity')?.touched" class="form_error_container">
                             <span class="form_error"> <i class="ri-error-warning-line"></i> Enter your destination</span>
                             <i class="form_hook ri-triangle-fill"></i>
@@ -98,18 +115,8 @@
                     <div class="date_card">
                         <span class="label">Departure <i class="down_icon ri-arrow-down-s-fill"></i></span>
                        
-                       <input type="text" formControlName="departureDate" class="form_control custom_datepicker" bsDatepicker  [bsConfig]="{ minDate: today }" readonly 
+                    <input type="text" formControlName="departureDate" class="form_control custom_datepicker" bsDatepicker  [bsConfig]="{ minDate: today }" readonly 
                        (keydown)="onKeyDown($event)">
-
-                       <!-- <div *ngIf="
-                        travelRequestForm
-                          .get('departureDate')
-                          ?.hasError('required') &&
-                        travelRequestForm.get('departureDate')?.touched
-                      " class="form_error_container">
-                            <span class="form_error"> <i class="ri-error-warning-line"></i> select a departure date </span>
-                            <i class="form_hook ri-triangle-fill"></i>
-                        </div> -->
 
                     </div>
 
@@ -117,23 +124,12 @@
                     <div class="return_date_card">
 
                         <span class="label">Return <i class="down_icon ri-arrow-down-s-fill"></i></span>
-                        <!-- <input *ngIf="selectedTripType !== 'one_way'" formControlName="returnDate" type="date" class="date_picker" [min]="minDate"> -->
-                        
-                        <input *ngIf="selectedTripType !== 'one_way'" type="text" formControlName="returnDate" class="form_control custom_datepicker" bsDatepicker  [bsConfig]="{ minDate: selectedDepartureDate }" readonly 
-                        (keydown)="onKeyDown($event)">
 
+                            <input  *ngIf="selectedTripType === 'round_trip'"  type="text" formControlName="returnDate" class="form_control custom_datepicker" bsDatepicker  [bsConfig]="{ minDate: selectedDepartureDate }" readonly 
+                            (keydown)="onKeyDown($event)">
+                                
                         <span (dblclick)="changeTripType('round_trip')" class="round_trip_message" *ngIf="selectedTripType === 'one_way'">Double Click to Add Return Date</span>
                         
-                        <!-- <div *ngIf="
-                        travelRequestForm
-                          .get('returnDate')
-                          ?.hasError('required') &&
-                        travelRequestForm.get('returnDate')?.touched
-                      " class="form_error_container">
-                            <span class="form_error"> <i class="ri-error-warning-line"></i> select a return date </span>
-                            <i class="form_hook ri-triangle-fill"></i>
-                        </div> -->
-
                     </div>
                 
                 </div>
@@ -150,7 +146,12 @@
 
                         <div class="project_code_section">
 
+                            <div class="label_and_error_section">
+
                             <label class="form_label" for="cars">Project Code:</label>
+                            <span *ngIf= "travelRequestForm.get('projectCode')?.invalid && travelRequestForm.get('projectCode')?.touched" class="normal_form_error"> <i class="ri-error-warning-line"></i> select the project code</span>
+                            
+                            </div>
 
                             <select id="projectCode" formControlName="projectCode" >
                                 
@@ -161,12 +162,16 @@
                                   </ng-container>
 
                             </select>
-
                         </div>
 
                         <div class="travel_purpose_section">
-                            <label class="form_label" for="cars">Travel Purpose:</label>
+                            <div class="label_and_error_section">
+                                <label class="form_label" for="cars">Travel Purpose:</label>
+                                <span *ngIf= "travelRequestForm.get('tripPurpose')?.invalid && travelRequestForm.get('tripPurpose')?.touched" class="normal_form_error"> <i class="ri-error-warning-line"></i> enter the purpose of your travel</span>
+
+                            </div>
                             <input type="text" class="form_text_input" formControlName="tripPurpose" placeholder="Enter the trip purpose">
+
                         </div>
 
                         <div class="btn_container">
@@ -188,22 +193,55 @@
                 <span class="dot right_dot"></span>
                 <!-- </div> -->
 
-                <div *ngIf="selectedTravelMode !== 'car' " class="pref_dep_time_section">
+                <div *ngIf="selectedTravelMode !== 'car' " class="pref_dep_time_section"  >
                  
-                            <label class="form_label" for="prefDepTime">Preferred Departure Time:</label>
-                            <select id="prefDepTime" formControlName="prefDepartureTime" >
-                                <option value="PRJ001">00.00 - 01.00</option>
-                                <option value="PRJ002">01.00 - 02.00</option>
-                                <option value="PRJ003">02.00 - 03.00</option>
-                                <option value="PRJ004">03.00 - 04.00</option>
-                            </select>
+                    <div class="label_and_view_section">
+                        <label class="form_label" for="prefDepTime"><i class="ri-time-zone-line"></i> Preferred Departure Time:</label>
+                        <div class="pref_dep_time_details"  (click)="togglePrefDepTimeContainer('open',  $event)">
+                            <span> <i class="cal_icon ri-calendar-schedule-line"></i> {{selectedPrefDepTime}}</span>
+                        </div>
+                    </div>
+
+                   
+    
+                    <div *ngIf="isPrefDepTimeDetailsSectionOpen" class="time_slot_container">
+
+                        <div class="slot_selector">
+
+                            <ng-container *ngFor="let item of availableDepartureTimes">
+                                <div  (click)="changePrefDepTimeSlot(item)" [ngClass]=" selectedPrefDepTimeSlot === item ? 'time_slot_card active':'time_slot_card' ">
+                                    <span>{{item}}</span>
+                                </div>
+                            </ng-container>
+
+                        </div>
+
+                        <div class="am_pm_selector">
+                                
+                                <div (click)="changePrefDepTimeUnit('AM')"   [ngClass]=" selectedPrefDepTimeUnit === 'AM'? 'card active': 'card' ">
+                                    <span>AM</span>
+                                </div>
+
+                                <div (click)="changePrefDepTimeUnit('PM')" [ngClass]=" selectedPrefDepTimeUnit === 'PM'? 'card active' :'card' ">
+                                    <span>PM</span>
+                                </div>
+
+                        </div>
+
+                        <div class="btn_container">
+                            <div (click)="togglePrefDepTimeContainer('close',  $event)" class="apply_btn">
+                                <span>Apply</span>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
 
                 <div class="accommodation_service_section">
 
                     <div class="heading_section">
-                        <span class="value">Accommodation Required</span>
+                        <span class="value"><i class="ri-hotel-line"></i> Accommodation Required</span>
                     </div>
 
                     <div class="selector_section">
@@ -220,7 +258,7 @@
                 <div *ngIf="selectedTravelMode !== 'car' " class="cab_service_section">
 
                     <div class="heading_section">
-                        <span class="value">Cab Required</span>
+                        <span class="value"><i class="ri-taxi-line"></i> Cab Required</span>
                     </div>
 
                     <div class="selector_section">
@@ -236,7 +274,7 @@
 
                 <div *ngIf="!isPickUpTimeDisabled()" class="pref_pickup_time_section">
                  
-                    <label class="form_label" for="prefDepTime">Preferred PickUp Time:</label>
+                    <label class="form_label" for="prefDepTime"><i class="ri-map-pin-time-line"></i> Preferred PickUp Time:</label>
                     <input class="form_time_input" type="time" id="time" formControlName="prefPickUpTime" >
 
                 </div>
@@ -244,7 +282,7 @@
                 <div class="file_container">
 
                     <!-- Passport Attachment -->
-                    <div class="file_card">
+                    <div *ngIf = "selectedTravelType ==='international'" class="file_card">
                             
                         <div class="file_title">
                             <span class="title"> <i class="ri-attachment-2"></i> Passport</span>
@@ -254,6 +292,21 @@
                             <input type="file" id="file" formControlName="passportAttachment" class="file-input" (change)="displayFileName($event, 'passport')">
                             <label for="file" class="custom-file-input">Choose File</label>
                             <div id="passport-file-name">  {{ selectedPassportFileName }}</div>
+                        </div>
+
+                    </div>
+
+                    <!-- Id Card Attachment-->
+                    <div *ngIf="selectedTravelType=== 'domestic' " class="file_card">
+                            
+                        <div class="file_title">
+                            <span class="title"> <i class="ri-attachment-2"></i> ID Card</span>
+                        </div>
+
+                        <div class="selector">
+                            <input type="file" id="file" formControlName="idCardAttachment" class="file-input" (change)="displayFileName($event, 'idCard')">
+                            <label for="file" class="custom-file-input">Choose File</label>
+                            <div id="id-card-file-name">  {{ selectedPassportFileName }}</div>
                         </div>
 
                     </div>
@@ -281,7 +334,7 @@
             <div class="third_row">
                  <div class="actions">
                     <div class="submit_btn_container">
-                        <button class="submit_btn" type="submit" >Submit</button>
+                        <button class="submit_btn" type="submit"  >Submit</button>
                     </div>
                  </div>
             </div>
