@@ -53,18 +53,21 @@ export class TravelRequestCardComponent {
 
     }
   }  //View Travel Options send by travel admin
+  // viewTravelOptions(requestId: number) {
+
+  //   const queryParams = { requestId: requestId }
+
+  //   // this.router.navigate(['employee/viewtraveloptions'], { queryParams: queryParams });
+  //   this.router.navigate(['view_travel_options'], {
+  //     relativeTo: this.activatedRoute.parent,
+  //     queryParams: { requestId: requestId }
+  //   })
+
+  //   //this.bsModalRef.hide();
+
+  // }
   viewTravelOptions(requestId: number) {
-
-    const queryParams = { requestId: requestId }
-
-    // this.router.navigate(['employee/viewtraveloptions'], { queryParams: queryParams });
-    this.router.navigate(['view_travel_options'], {
-      relativeTo: this.activatedRoute.parent,
-      queryParams: { requestId: requestId }
-    })
-
-    //this.bsModalRef.hide();
-
+  alert('reason for reject')
   }
 
 

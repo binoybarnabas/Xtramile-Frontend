@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class TravelRequestCardModalComponent {
   private _requestId!: number;
+  primaryStatus: string='Denied';
 
 
   @Input()

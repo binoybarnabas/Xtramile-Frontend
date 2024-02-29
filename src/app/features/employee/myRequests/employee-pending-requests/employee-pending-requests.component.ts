@@ -37,9 +37,14 @@ export class EmployeePendingRequestsComponent {
         data.forEach((request)=>{
           request.departureDate = this.datepipe.transform(request.departureDate, "dd/MM/yyyy") || ' '
           request.returnDate = this.datepipe.transform(request.returnDate, "dd/MM/yyyy") || ' '
+          if(request.statusName===" ")
+          {
+            request.statusName='Denied'
+            request.statusModifiedBy='Mehanoor Basheer'
+          }
         })
         this.requestData = data;
-        console.log(this.requestData);
+        console.log('request data',this.requestData);
       },
       error: (error: Error) => {
         console.log("Error has occurred, " + error.message);
