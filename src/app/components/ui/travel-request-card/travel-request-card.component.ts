@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { RejectionCardComponent } from '../rejection-card/rejection-card.component';
 
 @Component({
   selector: 'app-travel-request-card',
@@ -18,12 +19,17 @@ export class TravelRequestCardComponent {
 
   statusChangeUser!: string
   currentLoggedInUserRole: string;
+  employeeId!: number;
 
-  constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService, private router: Router, private activatedRoute: ActivatedRoute,
+  constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService, private activatedRoute: ActivatedRoute,
     private requestService: RequestService, private modalService: BsModalService, private toastService: CustomToastService) {
 
     this.currentLoggedInUserRole = commonAPIService.currentLoggedInUserRole;
     console.log(this.currentLoggedInUserRole)
+    if (localStorage.getItem('userData')) {
+      const userData = JSON.parse(localStorage.getItem('userData')!)
+      this.employeeId = userData.empId;
+    }
   }
 
 
@@ -67,9 +73,12 @@ export class TravelRequestCardComponent {
 
   // }
   viewTravelOptions(requestId: number) {
-  alert('reason for reject')
+    this.bsModalRef = this.modalService.show(RejectionCardComponent, {
+      initialState: {
+        message: 'The end date should be changed',
+        requestId: requestId,
+        employeeId: this.employeeId,
+      }
+    });
   }
-
-
-
 }

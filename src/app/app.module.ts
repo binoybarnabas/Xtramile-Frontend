@@ -124,6 +124,7 @@ import { DashboardNotificationComponent } from './components/ui/dashboard-compon
 import { DashboardDoneTripsComponent } from './components/ui/dashboard-components/dashboard-done-trips/dashboard-done-trips.component';
 import { DashboardUpcomingTripsComponent } from './components/ui/dashboard-components/dashboard-upcoming-trips/dashboard-upcoming-trips.component';
 import { DashboardTableComponent } from './components/ui/dashboard-components/dashboard-table/dashboard-table.component';
+import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
 
 @NgModule({
   declarations: [
@@ -235,7 +236,8 @@ import { DashboardTableComponent } from './components/ui/dashboard-components/da
     DashboardNotificationComponent,
     DashboardDoneTripsComponent,
     DashboardUpcomingTripsComponent,
-    DashboardTableComponent
+    DashboardTableComponent,
+    RejectionCardComponent
   ]
   ,
 

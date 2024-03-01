@@ -66,7 +66,7 @@ const routes: Routes = [
       { path: 'view_travel_options', component: TravelOptionViewerComponent },
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },
-      { path: 'profile', component: EmployeeProfileComponent }
+      { path: 'profile', component: EmployeeProfileComponent },
     ]
   },
   {

@@ -83,6 +83,17 @@ export class CommonAPIService {
   showToast(message: string) {
     this.toastService.showToast(message);
   }
+  resubmitRequestStatus(requestId:number,employeeId:number):Observable<any>{
+    const body = {
+      requestId: requestId,
+      empId:employeeId,
+      primaryStatusId: 1,
+      date: new Date(),
+      secondaryStatusId: 6
+    };
+    console.log('successfully updated the resubmit status')
+    return this.http.post('http://localhost:5190/api/requeststatus/add',body);
+  }
 
 }
 
