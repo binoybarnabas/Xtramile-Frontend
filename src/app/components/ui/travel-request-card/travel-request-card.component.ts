@@ -19,17 +19,12 @@ export class TravelRequestCardComponent {
 
   statusChangeUser!: string
   currentLoggedInUserRole: string;
-  employeeId!: number;
 
   constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService, private activatedRoute: ActivatedRoute,
     private requestService: RequestService, private modalService: BsModalService, private toastService: CustomToastService) {
 
     this.currentLoggedInUserRole = commonAPIService.currentLoggedInUserRole;
     console.log(this.currentLoggedInUserRole)
-    if (localStorage.getItem('userData')) {
-      const userData = JSON.parse(localStorage.getItem('userData')!)
-      this.employeeId = userData.empId;
-    }
   }
 
 
@@ -72,12 +67,11 @@ export class TravelRequestCardComponent {
   //   //this.bsModalRef.hide();
 
   // }
-  viewTravelOptions(requestId: number) {
+  viewTravelOptions() {
+    //api call to fetch the reason for rejection
     this.bsModalRef = this.modalService.show(RejectionCardComponent, {
       initialState: {
         message: 'The end date should be changed',
-        requestId: requestId,
-        employeeId: this.employeeId,
       }
     });
   }

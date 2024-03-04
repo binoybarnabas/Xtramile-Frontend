@@ -22,16 +22,16 @@ export class RejectionCardComponent {
    this.router.navigate(['employee/request'], { queryParams: queryParams });
 
     this.closeModal();
-    this.apiservice.resubmitRequestStatus(this.requestId,this.employeeId).subscribe(
-      {
-        next: () => {
-          console.log('sucessfully set the status');
+    // this.apiservice.resubmitRequestStatus(this.requestId,this.employeeId).subscribe(
+    //   {
+    //     next: () => {
+    //       console.log('sucessfully set the status');
 
-        },
-        complete: () => {
-          console.log("Resubmit Request")
-        }
-      })
+    //     },
+    //     complete: () => {
+    //       console.log("Resubmit Request")
+    //     }
+    //   })
   }
 
   closeModal() {

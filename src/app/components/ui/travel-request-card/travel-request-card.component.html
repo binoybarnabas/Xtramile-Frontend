@@ -9,7 +9,7 @@
           <p class="value">{{ item.statusModifiedBy }}</p>
         </div>
 
-        <div *ngIf="item.statusName == 'Forwarded'">
+        <div *ngIf="item.statusName == 'Approved'">
           <span class="title">Approved By</span>
           <p class="value">{{ item.statusModifiedBy }}</p>
         </div>
@@ -23,8 +23,14 @@
           <span class="title">Selected By</span>
           <p class="value">{{ item.statusModifiedBy }}</p>
         </div>
+
         <div *ngIf="item.statusName == 'Denied'">
           <span class="title">Rejected By</span>
+          <p class="value">{{ item.statusModifiedBy }}</p>
+        </div>
+
+        <div *ngIf="item.statusName == 'Resubmitted'">
+          <span class="title">Resubmitted By</span>
           <p class="value">{{ item.statusModifiedBy }}</p>
         </div>
       </div>
@@ -132,7 +138,7 @@
 
       <div
         [ngClass]="{ approve_btn: item.statusName === 'Denied' }"
-        (click)="viewTravelOptions(item.requestId)"
+        (click)="viewTravelOptions()"
       >
         <span
           *ngIf="

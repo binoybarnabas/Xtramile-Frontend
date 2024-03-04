@@ -25,7 +25,7 @@ export class DescriptionModalComponent {
   private _requestId!: number;
   private cancelRequestSubscription!: Subscription;
   optionForm: FormGroup;
-  empId: number = 9;
+  empId: number = 0;
   constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private apiservice: ManagerTravelRequestsService, private route: ActivatedRoute, private router: Router, private toastService: CustomToastService) {
     this.optionForm = this.formBuilder.group({
       description: ['', Validators.required]
@@ -34,6 +34,10 @@ export class DescriptionModalComponent {
   }
   ngOnInit() {
     console.log(this.requestId)
+    if (localStorage.getItem('userData')) {
+      const userData = JSON.parse(localStorage.getItem('userData')!)
+      this.empId = userData.empId;
+    }
   }
   closeModal() {
     console.log(this.requestId)

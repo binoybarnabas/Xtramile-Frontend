@@ -40,7 +40,6 @@ export class EmployeePendingRequestsComponent {
           if(request.statusName===" ")
           {
             request.statusName='Denied'
-            request.statusModifiedBy='Mehanoor Basheer'
           }
         })
         this.requestData = data;

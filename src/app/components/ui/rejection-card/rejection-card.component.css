@@ -19,7 +19,8 @@
   
   .content {
     margin-top: 0.75rem;
-    text-align: center;
+    text-align: left;
+    margin-left: 1rem;
   }
   
   .title {
