@@ -10,9 +10,7 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { EmployeeDetails } from '../travelRequest/new-travel-request/request';
-
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
 import { slLocale } from 'ngx-bootstrap/chronos';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
 
@@ -35,7 +33,6 @@ export class TravelRequestFormComponent {
 
   selectedTripType: string;
   selectedTravelMode: string;
-
   selectedTravelType: string;
 
   selectedOrigin: string;
@@ -50,7 +47,6 @@ export class TravelRequestFormComponent {
   today: Date;
   tomorrow: Date;
 
-
   isPrefDepTimeDetailsSectionOpen: boolean;
 
   //without AM / PM
@@ -61,6 +57,12 @@ export class TravelRequestFormComponent {
 
   //combination of slot with Unit
   selectedPrefDepTime: string;
+
+  isPrefPickUpTimeDetailsSectionOpen: boolean;
+
+  selectedPrefPickUpTime: string;
+
+  isTravelAuthFileSelected: boolean;
 
   //Employee id
   empId: number
@@ -114,7 +116,11 @@ export class TravelRequestFormComponent {
     this.isPrefDepTimeDetailsSectionOpen = false;
     this.selectedPrefDepTimeSlot = '12.00 - 01.00';
     this.selectedPrefDepTimeUnit = 'AM';
-    this.selectedPrefDepTime = '12.00 - 01.00 AM'
+    this.selectedPrefDepTime = '12.00 - 01.00 AM';
+    this.isPrefPickUpTimeDetailsSectionOpen = false;
+    this.selectedPrefPickUpTime = '12 : 30 AM';
+
+    this.isTravelAuthFileSelected = false;
 
   }
 
@@ -192,6 +198,21 @@ export class TravelRequestFormComponent {
 
   }
 
+  //method toggle pref pick time container
+  togglePrefPickUpTimeContainer(action: string, event?: Event) {
+    event?.stopPropagation();
+    if (action === 'open') {
+      this.isPrefPickUpTimeDetailsSectionOpen = true;
+
+    }
+    else if (action === 'close') {
+
+      // this.selectedPrefDepTime = this.selectedPrefDepTimeSlot + " " + this.selectedPrefDepTimeUnit;
+      this.isPrefPickUpTimeDetailsSectionOpen = false;
+
+    }
+
+  }
 
   ngOnInit() {
 
@@ -230,22 +251,22 @@ export class TravelRequestFormComponent {
       sourceCity: new FormControl(this.selectedOrigin, Validators.required),
       destinationCity: new FormControl(this.selectedDestination, Validators.required),
 
-      sourceCountry: new FormControl('', Validators.nullValidator),
-      destinationCountry: new FormControl('', Validators.nullValidator),
+      sourceCountry: new FormControl('India', Validators.nullValidator),
+      destinationCountry: new FormControl('India', Validators.nullValidator),
       prefDepartureTime: new FormControl('', Validators.nullValidator),
 
       //Domestic / International
       travelType: new FormControl(this.selectedTravelType, Validators.required),
-      projectCode: new FormControl('', Validators.required),
+      projectCode: new FormControl(this.projectCodes[0], Validators.required),
 
       //Additional Info
       cabRequired: new FormControl(false, Validators.required),
       prefPickUpTime: new FormControl('', Validators.nullValidator),
       accommodationRequired: new FormControl(false, Validators.required),
 
-      travelAuthorizationEmailCapture: new FormControl(Validators.nullValidator),
-      passportAttachment: new FormControl(Validators.nullValidator),
-      idCardAttachment: new FormControl(Validators.nullValidator)
+      travelAuthorizationEmailCapture: new FormControl('', Validators.nullValidator),
+      //passportAttachment: new FormControl(Validators.nullValidator),
+      //  idCardAttachment: new FormControl(Validators.nullValidator)
       // additionalComments: new FormControl('', Validators.nullValidator)
 
     })
@@ -308,13 +329,23 @@ export class TravelRequestFormComponent {
   }
 
   //Handling File Changes
-  onFileChange(event: any, controlName: string): void {
-    // const file = (event.target as HTMLInputElement).files?.[0];
-    const file = event.target.files[0];
-    this.travelRequestForm.get(controlName)?.setValue(file);
-    this.travelRequestForm.get(controlName)?.updateValueAndValidity();
-    console.log('Form Validity:', this.travelRequestForm.valid);
+  // onFileChange(event: any, controlName: string): void {
+  //   const file = event.target.files[0];
+  //   this.travelRequestForm.get(controlName)?.setValue(file);
+  //   this.travelRequestForm.get(controlName)?.updateValueAndValidity();
+  //   console.log('Form Validity:', this.travelRequestForm.valid);
+  // }
+
+  onFileSelected(event: any) {
+    const fileInput = event.target;
+    if (fileInput.files.length > 0) {
+      this.isTravelAuthFileSelected = true;
+      const fileName = fileInput.files[0].name;
+      const fileLabel = document.querySelector('.file_type') as HTMLSpanElement;
+      fileLabel.innerHTML = `<i class="icon ri-attachment-2"></i> ${fileName}`;
+    }
   }
+
 
   filterCities(event: any, field: string): void {
     const value = event.target.value;
@@ -471,6 +502,13 @@ export class TravelRequestFormComponent {
 
   }
 
+
+  handleTimeSelected(time: string) {
+    this.selectedPrefPickUpTime = time;
+    this.togglePrefPickUpTimeContainer('close', new Event('dummyEvent'));
+    //    alert("Time selected: " + time);
+  }
+
   //travel req submit method
   submitTravelRequest() {
     alert("submitted")
@@ -479,6 +517,7 @@ export class TravelRequestFormComponent {
     this.travelRequestForm.value.travelMode = this.selectedTravelMode;
     this.travelRequestForm.value.tripType = this.selectedTripType;
     this.travelRequestForm.value.prefDepartureTime = this.selectedPrefDepTime;
+    this.travelRequestForm.value.prefPickUpTime = this.selectedPrefPickUpTime;
 
     console.log(this.travelRequestForm.value);
     console.log("DONE");

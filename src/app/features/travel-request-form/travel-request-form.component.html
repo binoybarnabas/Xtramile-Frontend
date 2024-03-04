@@ -202,8 +202,6 @@
                         </div>
                     </div>
 
-                   
-    
                     <div *ngIf="isPrefDepTimeDetailsSectionOpen" class="time_slot_container">
 
                         <div class="slot_selector">
@@ -238,7 +236,10 @@
 
                 </div>
 
-                <div class="accommodation_service_section">
+                <div class="accommodation_cab_section">
+                    
+                    <!-- accommodation -->
+                    <div class="accommodation_service_section">
 
                     <div class="heading_section">
                         <span class="value"><i class="ri-hotel-line"></i> Accommodation Required</span>
@@ -253,16 +254,16 @@
 
                     </div>
 
-                </div>
+                    </div>
 
-                <div *ngIf="selectedTravelMode !== 'car' " class="cab_service_section">
+                    <!-- cab -->
+                    <div *ngIf="selectedTravelMode !== 'car' " class="cab_service_section">
 
                     <div class="heading_section">
                         <span class="value"><i class="ri-taxi-line"></i> Cab Required</span>
                     </div>
 
                     <div class="selector_section">
-
                         <label class="toggle_switch">
                             <input type="checkbox" formControlName="cabRequired">
                             <span class="toggle_slider"></span>
@@ -270,61 +271,42 @@
 
                     </div>
 
-                </div>
+                    </div>
 
-                <div *ngIf="!isPickUpTimeDisabled()" class="pref_pickup_time_section">
+                </div>
+          
+                <!-- pref pickup time -->
+                <div *ngIf="!isPickUpTimeDisabled()" class="pref_pick_up_time_section">
                  
-                    <label class="form_label" for="prefDepTime"><i class="ri-map-pin-time-line"></i> Preferred PickUp Time:</label>
-                    <input class="form_time_input" type="time" id="time" formControlName="prefPickUpTime" >
+                    <div class="label_and_view_section">
+                        <label class="form_label" for="prefPickUpTime"><i class="ri-time-zone-line"></i> Preferred PickUp Time:</label>
+                        <div class="pref_pick_up_time_details"  (click)="togglePrefPickUpTimeContainer('open',  $event)">
+                            <span> <i class="ri-map-pin-time-line"></i> {{selectedPrefPickUpTime}}</span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="isPrefPickUpTimeDetailsSectionOpen" class="time_picker_container" >
+                        <app-custom-time-picker (timeSelected)="handleTimeSelected($event)"></app-custom-time-picker>
+                    </div>
 
                 </div>
 
                 <div class="file_container">
 
-                    <!-- Passport Attachment -->
-                    <div *ngIf = "selectedTravelType ==='international'" class="file_card">
-                            
-                        <div class="file_title">
-                            <span class="title"> <i class="ri-attachment-2"></i> Passport</span>
-                        </div>
-
-                        <div class="selector">
-                            <input type="file" id="file" formControlName="passportAttachment" class="file-input" (change)="displayFileName($event, 'passport')">
-                            <label for="file" class="custom-file-input">Choose File</label>
-                            <div id="passport-file-name">  {{ selectedPassportFileName }}</div>
-                        </div>
-
+                    <div class="heading_section">
+                        <span class="value"> <i class="icon ri-file-upload-line"></i> Travel Auth Document</span>
                     </div>
 
-                    <!-- Id Card Attachment-->
-                    <div *ngIf="selectedTravelType=== 'domestic' " class="file_card">
-                            
-                        <div class="file_title">
-                            <span class="title"> <i class="ri-attachment-2"></i> ID Card</span>
-                        </div>
-
-                        <div class="selector">
-                            <input type="file" id="file" formControlName="idCardAttachment" class="file-input" (change)="displayFileName($event, 'idCard')">
-                            <label for="file" class="custom-file-input">Choose File</label>
-                            <div id="id-card-file-name">  {{ selectedPassportFileName }}</div>
-                        </div>
-
-                    </div>
-
-                    <!-- Travel Auth Mail Atatchment -->
-                    <div class="file_card">
+                    <div class="selected_file_view_container">
                         
-                        <div class="file_title">
-                            <span class="title"> <i class="ri-attachment-2"></i> Travel Auth Mail</span>
+                        <div class="file_card">
+                            <label for="file_input" class="file_type">
+                                <i *ngIf="!isTravelAuthFileSelected" class="icon ri-upload-2-line"></i> Upload
+                            </label>
+                            <input type="file" formControlName="travelAuthorizationEmailCapture" id="file_input" style="display: none;" (change)="onFileSelected($event)">
                         </div>
 
-                        <div class="selector">
-                            <input type="file" id="file" formControlName="travelAuthorizationEmailCapture" class="file-input" (change)="displayFileName($event,'travel_auth_mail')">
-                            <label for="file" class="custom-file-input">Choose File</label>
-                            <div id="travel-auth-mail-file-name">  {{ selectedTravelAuthMailFileName }}</div>
-                        </div>
-
-                    </div>    
+                    </div>
                              
                 </div>
 

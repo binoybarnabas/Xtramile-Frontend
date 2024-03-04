@@ -1,9 +1,41 @@
 .main_container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 5rem;
+    /* margin: 5rem; */
+    background-color: var(--card-bg-color);
+    box-shadow: var(--normal-box-shadow);
+    border-radius: var(--normal-border-radius);
+    width: fit-content;
+    padding: 1.5rem;
 }
+
+.main_container .action_btns .apply_btn {
+
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--form-label-font-size);
+    margin-top: 20px;
+    font-weight: var(--active-font-weight);
+    border: 1px solid var(--first-color);
+    /* color: var(--primary-orange-color); */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--first-color);
+}
+
+.main_container .action_btns .apply_btn:hover {
+    background-color: var(--first-color);
+    color: var(--card-bg-color);
+
+}
+
+
 
 .main_container .time_picker_card {
     width: 250px;
@@ -33,8 +65,8 @@
     cursor: pointer;
     /* background: var(--dark-gradient-color); */
     /* background-color: var(--primary-orange-color); */
-    background-color: var(--secondary-orange-color);
-    color: var(--primary-orange-color);
+    background-color: var(--menu-hover-color);
+    color: var(--first-color);
 
     transition: 0.3s;
     margin-left: auto;
@@ -47,7 +79,7 @@
 
 .main_container .time_picker_card .decrementer:hover,
 .main_container .time_picker_card .incrementer:hover {
-    background-color: var(--primary-orange-color);
+    background-color: var(--first-color);
     color: var(--card-bg-color);
 
 }
@@ -66,6 +98,14 @@
 
 
 }
+
+
+
+.main_container .time_picker_card .display .separator {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 
 /* .main_container .time_picker_card .display.active_hour {
     animation: moveDown 2s ease infinite alternate;
@@ -125,7 +165,7 @@
     /* background-color: var(--first-color); */
     color: var(--card-bg-color);
     /* background: var(--dark-gradient-color); */
-    background-color: var(--primary-orange-color);
+    background-color: var(--first-color);
 
 
 }

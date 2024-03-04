@@ -11,16 +11,18 @@
     display: flex;
     flex-direction: column;
     /* background-color: var(--card-bg-color); */
-    box-shadow: var(--normal-box-shadow);
+    /* box-shadow: var(--normal-box-shadow); */
     width: 100%;
-    margin: 1rem;
+    /* margin: 1rem; */
     align-items: center;
     justify-content: center;
     border-radius: var(--normal-border-radius);
     height: fit-content;
-    background-color: var(--body-bg-color);
+    /* background-color: var(--card-bg-color); */
     position: relative;
     transition: 0.3s;
+    background-color: #130f40;
+    background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
 }
 
 .main_container .req_form_container .autocomplete_container {
@@ -615,11 +617,15 @@
 .main_container .req_form_container .bottom_section .dot {
     height: 25px;
     width: 25px;
-    background-color: var(--body-bg-color);
+    /* background-color: var(--body-bg-color); */
     border-radius: 50%;
     display: inline-block;
     position: absolute;
     top: -15px;
+    /* background-color: #130f40; */
+    /* background-image: linear-gradient(315deg, #130f40 0%, #000000 74%); */
+
+
 
     /* background: var(--dark-gradient-color); */
 }
@@ -628,6 +634,10 @@
 
     position: absolute;
     left: -12px;
+    background-color: #130f40;
+    background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
+
+
 
 }
 
@@ -635,6 +645,8 @@
 
     position: absolute;
     right: -12px;
+    background-color: #130f40;
+
 
 }
 
@@ -644,63 +656,70 @@
 /* sec row */
 
 .main_container .req_form_container .bottom_section .second_row {
-    display: flex;
-    /* flex-direction: column; */
+
     background-color: var(--card-bg-color);
-    /* box-shadow: var(--normal-box-shadow); */
     border-radius: 0 0 5px 5px;
     margin-bottom: 1rem;
     width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
+    /* align-items: center; */
     padding: 1rem;
     margin-left: auto;
     margin-right: auto;
     border-top: 1px dashed var(--ternary-text-color);
-    /* border-top: 2px dotted var(--body-bg-color); */
     position: relative;
-
     /* background: var(--dark-gradient-color); */
+    display: flex;
+    justify-content: space-between;
+
 
 }
 
-.main_container .req_form_container .bottom_section .second_row .pref_dep_time_section {
+
+.main_container .req_form_container .bottom_section .second_row .pref_dep_time_section,
+.main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section {
     display: flex;
     flex-direction: column;
-    /* margin: 0; */
-    width: 20%;
-    padding: 0.5rem;
-    /* background-color: #d3d3d3; */
-
+    /* background-color: #130f40; */
+    /* width: 20%; */
 }
+
 
 .main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .form_label {
     font-size: var(--form-label-font-size);
     color: var(--ternary-text-color);
 }
 
-.main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .pref_dep_time_details {
+.main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .pref_dep_time_details,
+.main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section .pref_pick_up_time_details {
     font-size: var(--form-label-font-size);
     font-weight: var(--active-font-weight);
-    background-color: var(--card-bg-color);
-    color: var(--secondary-text-color);
+    /* background-color: var(--card-bg-color); */
+    /* color: var(--secondary-text-color); */
     padding: 8px;
     margin-top: 5px;
     width: fit-content;
-    border-radius: 5px;
-    box-shadow: var(--normal-box-shadow);
-    background-color: var(--first-color);
-    color: var(--card-bg-color);
+    border-radius: 20px;
+    /* box-shadow: var(--normal-box-shadow); */
+    /* background-color: var(--first-color); */
+    /* color: var(--card-bg-color); */
     width: 150px;
-    cursor: pointer;
+    height: 35px;
 
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 2px solid var(--first-color);
+    color: var(--first-color);
 }
 
-.main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .pref_dep_time_details .cal_icon {
+/* .main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .pref_dep_time_details .cal_icon,
+.main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section .pref_pick_up_time_details .cal_icon {
     margin-right: 5px;
     font-size: 1rem;
     color: var(--menu-hover-color);
-}
+} */
 
 
 .main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .time_slot_container {
@@ -810,7 +829,6 @@
     align-items: center;
     font-size: var(--form-label-font-size);
     font-weight: var(--active-font-weight);
-    /* background-color: var(--first-color); */
 
     border-radius: 5px;
     border: 1px solid var(--first-color);
@@ -827,35 +845,21 @@
 
 
 
-/* not used */
-.main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .pref_dep_time_selector {
 
-    margin-top: 5px;
-    padding: 10px;
-    font-size: var(--small-font-size);
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="%23828282" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-color: var(--card-bg-color);
+
+
+
+
+
+
+
+.main_container .req_form_container .bottom_section .second_row .accommodation_cab_section {
+    /* background-color: #130f40; */
+    display: block;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -864,13 +868,20 @@
 .main_container .req_form_container .bottom_section .second_row .cab_service_section,
 .main_container .req_form_container .bottom_section .second_row .accommodation_service_section {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 17.5%;
-    padding: 0.5rem;
-
-    /* width: 25%; */
+    /* position: absolute; */
+    /* width: 17.5%; */
+    /* padding: 0.5rem; */
 }
+
+.main_container .req_form_container .bottom_section .second_row .cab_service_section {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+
+}
+
 
 .main_container .req_form_container .bottom_section .second_row .cab_service_section .heading_section .value,
 .main_container .req_form_container .bottom_section .second_row .accommodation_service_section .value {
@@ -937,26 +948,36 @@
 
 
 
-.main_container .req_form_container .bottom_section .second_row .pref_pickup_time_section {
+/* .main_container .req_form_container .bottom_section .second_row .pref_pickup_time_section {
     display: flex;
     flex-direction: column;
     padding: 0;
     width: 15%;
     padding: 0.5rem;
-}
+} */
 
+/* 
 .main_container .req_form_container .bottom_section .second_row .pref_pickup_time_section .form_time_input {
-    /* width: 300px; */
     margin-top: 5px;
-
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: var(--small-font-size);
     outline: none;
     width: 100%;
-}
+} */
 
+
+.main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section .time_picker_container {
+    position: absolute;
+    background-color: var(--card-bg-color);
+    /* padding: 8px; */
+    box-shadow: var(--normal-box-shadow);
+    border-radius: var(--normal-border-radius);
+    z-index: 9999;
+    width: fit-content;
+    top: 60px;
+}
 
 
 
@@ -965,22 +986,64 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    width: 30%;
-    padding: 0.5rem;
-    /* margin-top: 0; */
+
+    /* background-color: #130f40; */
+    flex-direction: column;
+
 }
 
-.main_container .req_form_container .bottom_section .second_row .file_container .file_card {
+
+.main_container .req_form_container .bottom_section .second_row .file_container .heading_section .value {
+    font-size: var(--form-label-font-size);
+    color: var(--ternary-text-color);
+    margin-right: 10px;
+}
+
+.main_container .req_form_container .bottom_section .second_row .file_container .selected_file_view_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main_container .req_form_container .bottom_section .second_row .file_container .selected_file_view_container .file_card .file_type {
+    font-size: var(--form-label-font-size);
+    font-weight: var(--active-font-weight);
+    padding: 8px;
+    margin-top: 5px;
+    width: fit-content;
+    border-radius: 5px;
+    box-shadow: var(--normal-box-shadow);
+    background-color: var(--first-color);
+    color: var(--card-bg-color);
+    width: 160px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-left: 8px; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.main_container .req_form_container .bottom_section .second_row .file_container .selected_file_view_container .file_card .file_type .icon {
+    margin-right: 5px;
+    font-size: 1rem;
+
+}
+
+
+
+/* .main_container .req_form_container .bottom_section .second_row .file_container .file_card {
     margin: 5px;
     font-size: var(--form-label-font-size);
     color: var(--ternary-text-color);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* align-items: center; */
     max-width: 7.5rem;
-    /* max-height: 3rem; */
 }
 
 .main_container .req_form_container .bottom_section .second_row .file_container .file_card .file_title {
@@ -1010,7 +1073,6 @@
 }
 
 .main_container .req_form_container .bottom_section .second_row .file_container .file_card .custom-file-input {
-    /* background-color: #007bff; */
     color: #fff;
     border: none;
     padding: 8px 16px;
@@ -1022,12 +1084,10 @@
 }
 
 .main_container .req_form_container .bottom_section .second_row .file_container .file_card .custom-file-input:hover {
-    /* background-color: #0056b3; */
     background: var(--primary-btn-hover-color);
 }
 
 .main_container .req_form_container .bottom_section .second_row .file_container .file_card #passport-file-name {
-    /* margin-top: 10px; */
     font-size: var(--form-label-font-size);
     color: var(--ternary-text-color);
     overflow: hidden;
@@ -1036,13 +1096,17 @@
 }
 
 .main_container .req_form_container .bottom_section .second_row .file_container .file_card #travel-auth-mail-file-name {
-    /* margin-top: 10px; */
     font-size: var(--form-label-font-size);
     color: var(--ternary-text-color);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
+} */
+
+
+
+
+
 
 .main_container .req_form_container .bottom_section .third_row {
     display: flex;
@@ -1175,19 +1239,50 @@
         left: 0;
     }
 
+    .main_container .req_form_container .bottom_section .second_row .accommodation_cab_section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 60px;
+        margin: 10px 0;
+        /* height: 100px; */
+
+    }
+
+
     .main_container .req_form_container .bottom_section .second_row .accommodation_service_section {
         width: 100%;
         justify-content: space-between;
+        align-items: center;
+        position: absolute;
+        top: 0;
     }
 
     .main_container .req_form_container .bottom_section .second_row .cab_service_section {
         width: 100%;
         justify-content: space-between;
+        position: absolute;
+        bottom: 0;
+
     }
 
-    .main_container .req_form_container .bottom_section .second_row .pref_pickup_time_section {
+    .main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section {
         width: 100%;
+
     }
+
+    .main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section .label_and_view_section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+    }
+
+    .main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section .label_and_view_section .pref_pick_up_time_details {
+        margin: 0;
+    }
+
+
 
     .main_container .req_form_container .bottom_section .second_row .file_container {
         width: 100%;

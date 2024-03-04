@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-custom-time-picker',
@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./custom-time-picker.component.css']
 })
 export class CustomTimePickerComponent {
+
+  @Output() timeSelected: EventEmitter<string> = new EventEmitter<string>();
 
   selectedHour: string;
   selectedMinute: string;
@@ -147,6 +149,15 @@ export class CustomTimePickerComponent {
 
   }
 
+
+  returnTime() {
+
+    const timeString = this.selectedHour + " : " + this.selectedMinute + "  " + this.selectedUnitOfTime;
+    this.timeSelected.emit(timeString);
+
+    //alert(this.selectedHour + " : " + this.selectedMinute + "  " + this.selectedUnitOfTime);
+
+  }
 
 
 

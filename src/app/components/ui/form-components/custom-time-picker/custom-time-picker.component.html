@@ -1,9 +1,6 @@
 <div class="main_container">
 
-
     <div class="time_picker_card">
-        
-
         
         <div class="hour_section">
 
@@ -22,7 +19,7 @@
         </div>
 
         <div class="display">
-            <span> : </span>
+            <span class="separator"> : </span>
         </div>
 
         <div class="minute_section">
@@ -50,6 +47,13 @@
             </div>
         </div>
 
+
+    </div>
+
+    <div class="action_btns">
+        <div (click)="returnTime()" class="apply_btn" type="button">
+            <span>Apply</span>
+        </div>
 
     </div>
 
