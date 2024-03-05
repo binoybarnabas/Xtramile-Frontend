@@ -1,0 +1,60 @@
+<div class="main_container">
+
+    <div class="time_picker_card">
+        
+        <div class="hour_section">
+
+            <div (click)="updateHour('-')" class="decrementer">
+                <span>-</span>
+            </div>
+
+            <div class="display">
+                <span>{{selectedHour}}</span>
+            </div>
+
+            <div (click)="updateHour('+')"  class="incrementer">
+                <span>+</span>
+            </div>
+
+        </div>
+
+        <div class="display">
+            <span class="separator"> : </span>
+        </div>
+
+        <div class="minute_section">
+            <div (click)="updateMinute('-')" class="decrementer">
+                <span>-</span>
+            </div>
+
+            <div class="display">
+                <span>{{selectedMinute}}</span>
+            </div>
+
+            <div (click)="updateMinute('+')"  class="incrementer">
+                <span>+</span>
+            </div>
+
+        </div>
+
+        <div class="unit_section">
+            <div (click)="changeUnitOfTime('AM')" [ngClass]="selectedUnitOfTime === 'AM' ? 'card active':'card' ">
+                <span>AM</span>
+            </div>
+
+            <div (click)="changeUnitOfTime('PM')"  [ngClass]="selectedUnitOfTime === 'PM' ? 'card active':'card' " >
+                <span>PM</span>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="action_btns">
+        <div (click)="returnTime()" class="apply_btn" type="button">
+            <span>Apply</span>
+        </div>
+
+    </div>
+
+</div>

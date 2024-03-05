@@ -124,6 +124,9 @@ import { DashboardNotificationComponent } from './components/ui/dashboard-compon
 import { DashboardDoneTripsComponent } from './components/ui/dashboard-components/dashboard-done-trips/dashboard-done-trips.component';
 import { DashboardUpcomingTripsComponent } from './components/ui/dashboard-components/dashboard-upcoming-trips/dashboard-upcoming-trips.component';
 import { DashboardTableComponent } from './components/ui/dashboard-components/dashboard-table/dashboard-table.component';
+import { ShortYearDateFormatPipe } from './pipes/ShortYearDate/short-year-date-format.pipe';
+import { CustomTimePickerComponent } from './components/ui/form-components/custom-time-picker/custom-time-picker.component';
+import { FileUploaderComponent } from './components/ui/form-components/file-uploader/file-uploader.component';
 
 @NgModule({
   declarations: [
@@ -235,7 +238,10 @@ import { DashboardTableComponent } from './components/ui/dashboard-components/da
     DashboardNotificationComponent,
     DashboardDoneTripsComponent,
     DashboardUpcomingTripsComponent,
-    DashboardTableComponent
+    DashboardTableComponent,
+    ShortYearDateFormatPipe,
+    CustomTimePickerComponent,
+    FileUploaderComponent
   ]
   ,
 

@@ -17,13 +17,11 @@ import { cities } from 'src/app/services/commonAPIServices/cities';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 
-
 @Component({
   selector: 'app-new-travel-request',
   templateUrl: './new-travel-request.component.html',
   styleUrls: ['./new-travel-request.component.css']
 })
-
 
 export class NewTravelRequestComponent {
   //Employee id
@@ -47,7 +45,6 @@ export class NewTravelRequestComponent {
   generalInformationsMap = new Map<string, any>();
   tripInformationsMap = new Map<string, any>();
   additionalInformationsMap = new Map<string, any>();
-
 
   //sus
   requestStatus!: RequestStatus
@@ -153,8 +150,6 @@ export class NewTravelRequestComponent {
   ngDoCheck() {
 
     this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
-
-    //console.log("Toast Testing")
 
   }
 
