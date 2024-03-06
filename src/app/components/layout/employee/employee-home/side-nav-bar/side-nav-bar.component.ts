@@ -123,6 +123,8 @@ export class SideNavBarComponent {
 
       case 'documents': this.router.navigate(['/employee/documents']);
         break;
+      case 'documents': this.router.navigate(['/employee/documents'])
+        break;
     }
 
   }

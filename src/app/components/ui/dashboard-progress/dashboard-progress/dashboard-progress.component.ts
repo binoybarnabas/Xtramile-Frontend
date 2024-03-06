@@ -8,6 +8,7 @@ import { EmployeeDashboardService } from 'src/app/services/employeeServices/dash
 })
 export class DashboardProgressComponent {
   @Input() employeeId: number = 0;
+  @Input() requestCode: string = '';
   currentStep: number = 0;
 
   // Define the steps array within the component
@@ -22,7 +23,7 @@ export class DashboardProgressComponent {
   constructor(private service: EmployeeDashboardService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['employeeId']) {
+    if (changes['employeeId'] || changes['requestCode']) {
       this.fetchProgress();
     }
   }
@@ -31,10 +32,12 @@ export class DashboardProgressComponent {
   }
 
   fetchProgress() {
-    this.service.getRequestProgress(this.employeeId).subscribe((data: any) => {
-      if (data) {
-        console.log(data)
-        switch (data.progress) {
+    this.service.getRequestProgress(this.employeeId).subscribe((data: any[]) => {
+      // Filter progress data based on the requestCode
+      const filteredData = data.find(item => item.requestCode === this.requestCode);
+  
+      if (filteredData) {
+        switch (filteredData.progress) {
           case 'Request Submitted':
             this.currentStep = 0;
             break;
@@ -67,6 +70,7 @@ export class DashboardProgressComponent {
       }
     });
   }
+  
   
 
  getLineWidth(index: number): string {

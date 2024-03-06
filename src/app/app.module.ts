@@ -130,6 +130,8 @@ import { FileUploaderComponent } from './components/ui/form-components/file-uplo
 import { DocumentCardComponent } from './components/ui/document-card/document-card.component';
 import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
 import { PageHeaderComponent } from './components/layout/page-header/page-header.component';
+import { DocumentsComponent } from './components/ui/documents/documents.component';
+
 
 @NgModule({
   declarations: [
@@ -247,7 +249,8 @@ import { PageHeaderComponent } from './components/layout/page-header/page-header
     FileUploaderComponent,
     DocumentCardComponent,
     TravellerDocumentsComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    DocumentsComponent
   ]
   ,
 

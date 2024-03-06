@@ -77,3 +77,30 @@
 .main_container .trip_card .trip-info .trip_button:hover {
   background-color: #2bb2fe;
 }
+/* Add these styles to your existing CSS or create a new CSS file */
+
+.main_container .trip_card .navigation-buttons {
+  display: flex;
+  margin-top: 7em;
+}
+
+.main_container .trip_card .nav-button {
+  background-color: #2bb2fe;
+  color: white;
+  padding: 0px 7px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 0.4em;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.main_container .trip_card .nav-button:hover {
+  background-color: #1a87c7;
+}
+
+/* Style for the next button */
+.main_container .trip_card .nav-button.next {
+  margin-left: auto; /* Push the next button to the right */
+}
