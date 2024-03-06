@@ -127,6 +127,7 @@ import { DashboardTableComponent } from './components/ui/dashboard-components/da
 import { ShortYearDateFormatPipe } from './pipes/ShortYearDate/short-year-date-format.pipe';
 import { CustomTimePickerComponent } from './components/ui/form-components/custom-time-picker/custom-time-picker.component';
 import { FileUploaderComponent } from './components/ui/form-components/file-uploader/file-uploader.component';
+import { DocumentsComponent } from './components/ui/documents/documents.component';
 
 @NgModule({
   declarations: [
@@ -241,7 +242,8 @@ import { FileUploaderComponent } from './components/ui/form-components/file-uplo
     DashboardTableComponent,
     ShortYearDateFormatPipe,
     CustomTimePickerComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    DocumentsComponent
   ]
   ,
 

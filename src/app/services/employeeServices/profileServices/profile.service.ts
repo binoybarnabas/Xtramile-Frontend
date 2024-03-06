@@ -15,8 +15,6 @@ export class ProfileService {
     return this.http.patch(`http://localhost:5190/api/employee/edit/profile/details/${employeeId}`, editedData);
   }
 
-
-
   //get the employee details
   getEmployeeData(employeeId: number): Observable<any> {
     return this.http.get(`http://localhost:5190/api/employee/profile/details/${employeeId}`)
