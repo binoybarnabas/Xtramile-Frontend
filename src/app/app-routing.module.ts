@@ -46,6 +46,11 @@ import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/trave
 import { TravelRequestFormComponent } from './features/travel-request-form/travel-request-form.component';
 import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
 
+import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
+
+import { DocumentsComponent } from './components/ui/documents/documents.component';
+
+
 const routes: Routes = [
   { path: '', component: LoginComponent },
   // { path: 'login', component: LoginPageComponent },
@@ -57,23 +62,24 @@ const routes: Routes = [
 
       //  { path: 'dashboard', component: EmployeeDashboardComponent },
       { path: 'dashboard', component: TravellerDashboardComponent },
-
       { path: 'request', component: TravelRequestFormComponent },
       // { path: 'request', component: NewTravelRequestComponent },
-
       { path: 'pending', component: EmployeePendingRequestsComponent },
       { path: 'available_options', component: OptionviewCardComponent },
       { path: 'view_travel_options', component: TravelOptionViewerComponent },
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },
-      { path: 'profile', component: EmployeeProfileComponent }
+      { path: 'profile', component: EmployeeProfileComponent },
+      { path: 'documents', component: TravellerDocumentsComponent },
+      {path:'documents',component:DocumentsComponent}
+
     ]
   },
   {
     path: 'manager', component: ManagerHomeComponent, canActivate: [authGuard], children: [
       { path: 'dashboard', component: ManagerDashboardComponent },
       { path: 'requestdetail', component: NewTravelRequestComponent },
-      { path: 'newrequests', component: ManagerIncomingTravelRequestsComponent },
+      { path: 'newrequest', component: ManagerIncomingTravelRequestsComponent },
       { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
       { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
       { path: 'closed', component: ManagerClosedTravelRequestsComponent },

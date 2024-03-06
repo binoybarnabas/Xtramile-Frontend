@@ -1,9 +1,11 @@
 .main_container {
-    background-color: var(--card-bg-color);
+    /* background-color: var(--card-bg-color); */
     padding: 0;
     margin: 0;
     height: 100vh;
-    padding: 1rem;
+    /* padding: 1rem; */
+    border-radius: var(--normal-border-radius);
+    /* box-shadow: var(--normal-box-shadow); */
 
 }
 
@@ -42,7 +44,7 @@
 .main_container .bottom_section {
     margin-top: 1.4rem;
     display: flex;
-    height: 60vh;
+    /* height: 60vh; */
     display: flex;
     justify-content: space-between;
     /* position: relative; */
@@ -213,6 +215,7 @@
         height: fit-content;
         display: flex;
         flex-direction: column;
+
     }
 
     .main_container .bottom_section .bottom_left_section {

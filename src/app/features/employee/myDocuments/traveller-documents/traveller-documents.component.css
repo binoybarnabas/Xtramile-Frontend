@@ -1,0 +1,52 @@
+.main_container {
+
+    width: 100%;
+    /* padding: 1rem; */
+    /* background-color: var(--card-bg-color); */
+}
+
+.main_container .heading_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--menu-hover-color);
+    border-radius: var(--normal-border-radius);
+    padding: 10px;
+    background-color: var(--secondary-orange-color);
+    /* box-shadow: var(--normal-box-shadow); */
+    background-color: rgba(128, 128, 128, 0.1);
+    height: 50px;
+
+}
+
+.main_container .heading_section .heading .heading_text {
+    font-size: var(--normal-font-size);
+    font-weight: var(--active-font-weight);
+    /* color: var(--primary-orange-color); */
+    margin-top: auto;
+    margin-bottom: auto;
+    color: var(--third-color);
+}
+
+.main_container .heading_section .btn_container .add_btn {
+
+    width: 100px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-weight: var(--active-font-weight);
+    font-size: var(--small-font-size);
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--third-color);
+    border: 2px solid var(--third-color);
+
+}
+
+.main_container .heading_section .btn_container .add_btn:hover {
+    color: var(--card-bg-color);
+    background-color: var(--third-color);
+
+}

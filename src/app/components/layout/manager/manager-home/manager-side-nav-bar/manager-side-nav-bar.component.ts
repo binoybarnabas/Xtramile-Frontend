@@ -154,6 +154,8 @@ export class ManagerSideNavBarComponent {
       case 'profile': this.router.navigate(['/manager/profile']);
                       break;
 
+                      
+
     }
   }
 

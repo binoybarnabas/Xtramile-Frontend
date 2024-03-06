@@ -618,7 +618,6 @@ export const cities = [
     { name: 'Yambio', country: 'South Sudan' },
     // Indian Cities
 
-    { name: 'Trivandrum', country: 'India' },
     // Indian Cities
     { name: 'Mumbai', country: 'India' },
     { name: 'Delhi', country: 'India' },

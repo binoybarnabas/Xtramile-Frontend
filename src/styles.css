@@ -6,6 +6,7 @@
 :root {
   /*========Main theme colors========*/
   --first-color: #4f80e1;
+
   --second-color: #0240bc;
   --third-color: #9a4cfa;
 
@@ -152,8 +153,10 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: var(--body-bg-color);
+  background-color: var(--menu-hover-color);
   scrollbar-width: none;
+
+
 }
 
 /*=========================== Top Bar Styles Starts ==============================*/
@@ -178,26 +181,27 @@ body {
 } */
 
 .top_bar_container .left_section .top_bar_logo_container {
-  background-color: var(--primary-text-color);
+  /* background-color: var(--primary-text-color); */
   padding: 0.3rem 0.5rem 0rem 0.5rem;
   border-radius: 0.3rem;
   transition: 0.3s;
   cursor: pointer;
+
 }
 
-.top_bar_container .left_section .top_bar_logo_container:hover {
+/* .top_bar_container .left_section .top_bar_logo_container:hover {
   color: var(--primary-text-color);
   background-color: var(--card-bg-color);
-}
+} */
 
-.top_bar_container .left_section .top_bar_logo_container:hover .top_bar_logo {
+/* .top_bar_container .left_section .top_bar_logo_container:hover .top_bar_logo {
   color: var(--primary-text-color);
-}
+} */
 
 .top_bar_container .left_section .top_bar_logo_container .top_bar_logo {
   font-size: var(--h3-font-size);
   font-weight: var(--extra-font-weight);
-  color: var(--card-bg-color);
+  color: var(--primary-text-color);
 }
 
 .top_bar_container .left_section .top_bar_logo_container .top_bar_logo i {
@@ -601,38 +605,30 @@ body {
 /*=========================== Middle Console Styles Starts ==============================*/
 .middle_console_container {
   position: absolute;
-  background-color: var(--card-bg-color);
-  width: 78%;
-  /* width: 100%; */
-  /* sus */
-  /* height: 97vh; */
-  /* height: max-content; */
-  /* height: fit-content; */
+  /* background-color: vr(--card-bg-color); */
+  width: 80.5%;
   height: 100vh;
-  margin-left: 21%;
-  margin-top: 13vh;
+  margin-left: 19.5%;
+  margin-top: 10vh;
+
   border-radius: 6px;
   z-index: -100;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 3px 0px;
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 3px 0px; */
   transition: 0.6s;
 
-  /* background-image: url('https://images.pexels.com/photos/33041/antelope-canyon-lower-canyon-arizona.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
   background-repeat: no-repeat;
   object-fit: cover;
-  /* background-position: center; */
-  overflow-y: scroll;
-  /* background-image: url('https://images.pexels.com/photos/1933319/pexels-photo-1933319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
+  /* overflow-y: scroll; */
 
-  /* background-image: url('https://images.pexels.com/photos/4245826/pexels-photo-4245826.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
   background-position: center;
-  /* padding: 2vw; */
-  /* overflow: scroll; */
-  background: var(--dark-gradient-color);
+  padding: 1rem;
+
 }
 
 .middle_console_container.collapsed {
-  width: 93%;
-  margin-left: 5.5%;
+  width: 95.6%;
+  margin-left: 4.2%;
+  padding: 1rem;
   /* padding: 2vw; */
 
 }
@@ -640,12 +636,9 @@ body {
 
 .middle_console_container .main_heading_section {
   padding: 1rem 1rem 0.5rem 1rem;
-  /* border-bottom: 2.5px solid var(--body-bg-color); */
-  /* border-top: 3px solid var(--first-color); */
   border-radius: 5px 5px 0 0;
   background: var(--dark-gradient-color);
   width: 100%;
-
 }
 
 .middle_console_container .main_heading_section .main_heading {
@@ -656,10 +649,14 @@ body {
 }
 
 .middle_console_container .body_section {
-  /* background-color: var(--card-bg-color); */
+  background-color: var(--card-bg-color);
+  border-radius: var(--normal-border-radius);
+  box-shadow: var(--normal-box-shadow);
   transition: 0.6s;
   /* padding: 1rem; */
   /* background-size: contain; */
+  min-height: 100%;
+  padding: 1rem;
 
 }
 
