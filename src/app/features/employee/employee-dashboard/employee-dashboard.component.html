@@ -1,70 +1,58 @@
 <div class="dashboard_outercontainer">
+  <div class="top_section">
+    <!-- Meter  -->
+    <div class="dashboard_container">
+      <!-- dashboard gauge -->
+      <app-dashboard-gauge
+        [totalDays]="totalDays"
+        [remainingDays]="remainingDays"
+      ></app-dashboard-gauge>
+      <!-- calender -->
+    </div>
 
-
-<div class="top_section">
-  <!-- Meter  -->
-  <div class="dashboard_container">
-    <!-- dashboard gauge -->
-    <app-dashboard-gauge
-      [totalDays]="totalDays"
-      [remainingDays]="remainingDays"
-    ></app-dashboard-gauge>
-    <!-- calender -->
-  </div>
-
-  <!-- upcoming -->
-  <div class="dashboard_container">
+    <!-- upcoming -->
+    <div class="dashboard_container">
       <!-- upcoming trip in dashboard -->
       <app-dashboard-upcoming-trip
         [employeeId]="employeeId"
       ></app-dashboard-upcoming-trip>
-  
+    </div>
+
+    <!-- Calendar -->
+    <div class="dashboard_container">
+      <app-dashboard-calender [empId]="employeeId"></app-dashboard-calender>
+    </div>
   </div>
 
-  <!-- Calendar -->
-  <div class="dashboard_container">
-    <app-dashboard-calender [empId]="employeeId"></app-dashboard-calender>
+  <div class="bottom_section">
+    <!-- ReqStatus -->
+    <div class="dashboard_container">
+      <app-dashboard-card
+        [titles]="cardTitles"
+        [data]="cardData"
+        (cardClick)="onClickCard($event)"
+      ></app-dashboard-card>
+    </div>
 
-  </div>
-
-</div>
-
-<div class="bottom_section">
-
-  <!-- ReqStatus -->
-  <div class="dashboard_container">
-    <!-- card that show the request status -->
-    <app-dashboard-card
-      [titles]="cardTitles"
-      [data]="cardData"
-      (cardClick)="onClickCard()"
-    ></app-dashboard-card>
-
-  </div>
-
-  <!-- prev trips -->
-  <!-- <div>
+    <!-- prev trips -->
+    <!-- <div>
     <app-option-card [options]="completedTrips"></app-option-card>
   </div> -->
 
-  <!-- dashboard map -->
-  <div class="dashboard_item">
-    <app-dashboard-map [currentCountry]="currentCountry"></app-dashboard-map>
+    <!-- dashboard map -->
+    <div class="dashboard_item">
+      <app-dashboard-map [currentCountry]="currentCountry"></app-dashboard-map>
+    </div>
   </div>
 
-</div>
-
-<!-- progress of the report -->
-<div class="modal_container" *ngIf="showModal">
-  <div class="created_modal">
-    <button class="close_button" (click)="closeModal()">X</button>
-    <app-dashboard-progress [employeeId]="employeeId"></app-dashboard-progress>
+  <!-- progress of the report -->
+  <div class="modal_container" *ngIf="showModal">
+    <div class="created_modal">
+      <button class="close_button" (click)="closeModal()">X</button>
+      <app-dashboard-progress
+        [employeeId]="employeeId"
+        [requestCode]="modalRequestCode"
+      ></app-dashboard-progress>
+    </div>
   </div>
 </div>
-
-
-</div>
-  
-
-
-

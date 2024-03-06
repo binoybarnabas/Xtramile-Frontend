@@ -36,7 +36,7 @@ export class ManagerForwardedTravelRequestsComponent {
   getManagerForwardRequests(){
     console.log("inside get forward req")
     this.apiService.getManagerForwardedRequest(this.managerId,this.currentPage,this.itemsPerPage).subscribe({
-      next: (data) => {
+      next: (data:any) => {
         this.travelRequest = data.employeeRequest.map((request: any) => {
           return {
             ...request,
@@ -49,7 +49,7 @@ export class ManagerForwardedTravelRequestsComponent {
         console.log(data);
         console.log(this.travelRequest);
       },
-      error: (error) => {
+      error: (error:Error) => {
         console.error('Error:', error);
         // Handle error if needed
       },

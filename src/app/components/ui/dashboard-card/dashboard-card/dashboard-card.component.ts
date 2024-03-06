@@ -9,14 +9,16 @@ export class DashboardCardComponent {
   @Input() titles: string[] = [];
   @Input() data: string[] = [];
   @Input() employeeId: number = 0;
-  @Output() cardClick: EventEmitter<void> = new EventEmitter<void>();
+  @Output() cardClick: EventEmitter<string> = new EventEmitter<string>();
 
    get showScrollbar(): boolean {
     return this.titles.length > 1;
   }
 
-  onCardClick() {
+  onCardClick(clickedData: string) {
     // Emit the event to show the modal
-    this.cardClick.emit();
+    this.cardClick.emit(clickedData);
+    
+    console.log('modal req code',clickedData)
   }
 }
