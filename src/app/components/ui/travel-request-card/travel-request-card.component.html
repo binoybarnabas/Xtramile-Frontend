@@ -138,7 +138,7 @@
 
       <div
         [ngClass]="{ approve_btn: item.statusName === 'Denied' }"
-        (click)="viewTravelOptions()"
+        (click)="viewTravelOptions(item.requestId)"
       >
         <span
           *ngIf="

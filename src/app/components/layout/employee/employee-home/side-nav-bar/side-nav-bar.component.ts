@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { SideNavBarService } from '../../../../../services/employeeServices/layoutServices/side-nav-bar.service';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ export class SideNavBarComponent {
   myRequestsMap = new Map<string, string>();
   mySettlementsMap = new Map<string, string>();
 
+  @Output() logoutEvent: EventEmitter<string> = new EventEmitter<string>();
 
 
   subMenu1ToggleValue = 0;
@@ -123,4 +124,8 @@ export class SideNavBarComponent {
 
   }
 
+  logout() {
+
+    this.logoutEvent.emit("logout"); // Emit logout event
+  }
 }

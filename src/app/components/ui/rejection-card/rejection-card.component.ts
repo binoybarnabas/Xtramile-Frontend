@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 
 @Component({
   selector: 'app-rejection-card',
@@ -13,7 +12,7 @@ export class RejectionCardComponent {
  requestId:number=0;
  employeeId:number=0;
 
-  constructor(public bsModalRef: BsModalRef,private router: Router, private apiservice:CommonAPIService) {}
+  constructor(public bsModalRef: BsModalRef,private router: Router) {}
 
   resubmitForm() {
     alert('Resubmit form');
@@ -22,6 +21,7 @@ export class RejectionCardComponent {
    this.router.navigate(['employee/request'], { queryParams: queryParams });
 
     this.closeModal();
+    //to update the status as open denied after resubmitting
     // this.apiservice.resubmitRequestStatus(this.requestId,this.employeeId).subscribe(
     //   {
     //     next: () => {

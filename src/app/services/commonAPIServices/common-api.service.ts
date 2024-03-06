@@ -6,6 +6,7 @@ import { LoginService } from '../loginService/login.service';
 // import { UserData } from '../interfaces/iuserData';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { ResubmitRequest } from 'src/app/services/interfaces/iResubmitRequest'
 
 @Injectable({
   providedIn: 'root'
@@ -83,7 +84,7 @@ export class CommonAPIService {
   showToast(message: string) {
     this.toastService.showToast(message);
   }
-  resubmitRequestStatus(requestId:number,employeeId:number):Observable<any>{
+  resubmitRequestStatus(requestId:number,employeeId:number):Observable<ResubmitRequest>{
     const body = {
       requestId: requestId,
       empId:employeeId,
@@ -92,8 +93,10 @@ export class CommonAPIService {
       secondaryStatusId: 6
     };
     console.log('successfully updated the resubmit status')
-    return this.http.post('http://localhost:5190/api/requeststatus/add',body);
+    return this.http.post<ResubmitRequest>('http://localhost:5190/api/requeststatus/add',body);
   }
-
+  getRequestReason(requestId:number):Observable<string>{
+    return this.http.get(`http://localhost:5190/api/request/request/reason/${requestId}`, { responseType: 'text' });
+  }
 }
 

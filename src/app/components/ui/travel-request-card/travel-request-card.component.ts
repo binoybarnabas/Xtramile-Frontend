@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
@@ -20,7 +19,7 @@ export class TravelRequestCardComponent {
   statusChangeUser!: string
   currentLoggedInUserRole: string;
 
-  constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService, private activatedRoute: ActivatedRoute,
+  constructor(public bsModalRef: BsModalRef, private commonAPIService: CommonAPIService,
     private requestService: RequestService, private modalService: BsModalService, private toastService: CustomToastService) {
 
     this.currentLoggedInUserRole = commonAPIService.currentLoggedInUserRole;
@@ -53,26 +52,21 @@ export class TravelRequestCardComponent {
     else if (this.currentLoggedInUserRole == 'manager') {
 
     }
-  }  //View Travel Options send by travel admin
-  // viewTravelOptions(requestId: number) {
-
-  //   const queryParams = { requestId: requestId }
-
-  //   // this.router.navigate(['employee/viewtraveloptions'], { queryParams: queryParams });
-  //   this.router.navigate(['view_travel_options'], {
-  //     relativeTo: this.activatedRoute.parent,
-  //     queryParams: { requestId: requestId }
-  //   })
-
-  //   //this.bsModalRef.hide();
-
-  // }
-  viewTravelOptions() {
-    //api call to fetch the reason for rejection
-    this.bsModalRef = this.modalService.show(RejectionCardComponent, {
-      initialState: {
-        message: 'The end date should be changed',
+  }  
+ 
+  viewTravelOptions(requestId: number) {
+    this.commonAPIService.getRequestReason(requestId).subscribe({
+      next: (data) => {
+        this.bsModalRef = this.modalService.show(RejectionCardComponent, {
+          initialState: {
+            message: data, 
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error fetching request reason:', error);
       }
     });
   }
+  
 }
