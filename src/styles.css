@@ -606,10 +606,10 @@ body {
 .middle_console_container {
   position: absolute;
   /* background-color: vr(--card-bg-color); */
-  width: 78.5%;
+  width: 80.5%;
   height: 100vh;
-  margin-left: 20.5%;
-  margin-top: 12vh;
+  margin-left: 19.5%;
+  margin-top: 10vh;
 
   border-radius: 6px;
   z-index: -100;
@@ -621,12 +621,14 @@ body {
   /* overflow-y: scroll; */
 
   background-position: center;
+  padding: 1rem;
 
 }
 
 .middle_console_container.collapsed {
-  width: 93%;
-  margin-left: 5.5%;
+  width: 95.6%;
+  margin-left: 4.2%;
+  padding: 1rem;
   /* padding: 2vw; */
 
 }
@@ -647,10 +649,14 @@ body {
 }
 
 .middle_console_container .body_section {
-  /* background-color: var(--card-bg-color); */
+  background-color: var(--card-bg-color);
+  border-radius: var(--normal-border-radius);
+  box-shadow: var(--normal-box-shadow);
   transition: 0.6s;
   /* padding: 1rem; */
   /* background-size: contain; */
+  min-height: 100%;
+  padding: 1rem;
 
 }
 

@@ -18,6 +18,7 @@ export class EmployeePendingRequestsComponent {
   empId: number;
   userData: UserData
 
+  pageHeading: string = 'Pending Approval';
 
   constructor(private requestService: RequestService, private router: Router, private activatedRoute: ActivatedRoute, private datepipe: DatePipe) {
     const storedUserData = localStorage.getItem('userData');
@@ -34,7 +35,7 @@ export class EmployeePendingRequestsComponent {
   getRequests(empId: number) {
     this.subscription = this.requestService.getRequestsPendingStatus(empId).subscribe({
       next: (data) => {
-        data.forEach((request)=>{
+        data.forEach((request) => {
           request.departureDate = this.datepipe.transform(request.departureDate, "dd/MM/yyyy") || ' '
           request.returnDate = this.datepipe.transform(request.returnDate, "dd/MM/yyyy") || ' '
         })

@@ -1,0 +1,22 @@
+.heading_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--menu-hover-color);
+    border-radius: var(--normal-border-radius);
+    padding: 10px;
+    background-color: var(--secondary-orange-color);
+    /* box-shadow: var(--normal-box-shadow); */
+    background-color: rgba(128, 128, 128, 0.1);
+    height: 50px;
+
+}
+
+.heading_section .heading_text {
+    font-size: var(--normal-font-size);
+    font-weight: var(--active-font-weight);
+    /* color: var(--primary-orange-color); */
+    margin-top: auto;
+    margin-bottom: auto;
+    color: var(--third-color);
+}

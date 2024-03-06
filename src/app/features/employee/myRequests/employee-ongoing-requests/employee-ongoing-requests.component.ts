@@ -9,20 +9,22 @@ import { DatePipe } from '@angular/common';
 })
 export class EmployeeOngoingRequestsComponent {
 
-  tableHeaders: string[] = ['Request ID', 'Project Code', 'ProjectName', 'Start Date', 'End Date','Reason','Status'];
-  fieldsToDisplay: string[] = ['requestId', 'projectCode', 'projectName','startDate', 'endDate','reason','statusName'];
-  incomingRequestdata:any[] = [];
+  tableHeaders: string[] = ['Request ID', 'Project Code', 'ProjectName', 'Start Date', 'End Date', 'Reason', 'Status'];
+  fieldsToDisplay: string[] = ['requestId', 'projectCode', 'projectName', 'startDate', 'endDate', 'reason', 'statusName'];
+  incomingRequestdata: any[] = [];
 
-  constructor(private apiservice: RequestService){}
-  employeeId: number = 3;  
-  
+  constructor(private apiservice: RequestService) { }
+  employeeId: number = 3;
+
+  pageHeading: string = 'Ongoing Travel'
+
   ngOnInit() {
     //get employee ongoing data such as requestId, projectCode, projectName, startDate, endDate, reason, statusName
     this.apiservice.getEmployeeOngoingRequest(this.employeeId).subscribe((data: any[]) => {
       this.incomingRequestdata = this.formatData(data);
     });
   }
-  
+
   formatData(data: any[]): any[] {
     //using DatePipe to convert the date into dd/LL/yyyy format
     const datePipe = new DatePipe('en-US');

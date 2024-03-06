@@ -86,6 +86,17 @@
     </div>
   </div>
 
+  <!-- Docs -->
+  <div class="side_bar_main">
+    <i
+      *ngIf="isSideNavBarCollapsed === 1"
+      class="left_icon collapsed_icon ri-file-pdf-line"
+    ></i>
+    <p class="main_title" (click)="navigateToRequest('documents')">
+      <i class="ri-file-pdf-line"></i> My Documents
+    </p>
+  </div>
+
   <div class="side_bar_main">
     <i
       *ngIf="isSideNavBarCollapsed === 1"
