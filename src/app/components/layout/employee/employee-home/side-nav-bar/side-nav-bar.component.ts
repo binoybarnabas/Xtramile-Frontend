@@ -27,7 +27,7 @@ export class SideNavBarComponent {
     this.isSideNavBarCollapsed = 1;
 
     //myRequestsMap contains values for My Requests sub menu
-    this.myRequestsMap.set('new ri-add-line', "New Requests");
+    this.myRequestsMap.set('new ri-add-line', "New Request");
     // this.myRequestsMap.set('ri-draft-line', "Draft Requests");
     this.myRequestsMap.set('ri-loader-line', "Pending Approval");
     this.myRequestsMap.set('ri-arrow-up-circle-line', "Ongoing Travel")
@@ -108,7 +108,7 @@ export class SideNavBarComponent {
     this.activeItem = destination; // Update activeItem when an item is clicked
     console.log("inside navigate" + destination);
     switch (destination) {
-      case 'New Requests': this.router.navigate(['/employee/request']);
+      case 'New Request': this.router.navigate(['/employee/request']);
         break;
       case 'Pending Approval': this.router.navigate(['/employee/pending']);
         break;
@@ -118,7 +118,10 @@ export class SideNavBarComponent {
         break;
       case 'profile': this.router.navigate(['/employee/profile']);
         break;
-      case 'dashboard': this.router.navigate(['/employee/dashboard'])
+      case 'dashboard': this.router.navigate(['/employee/dashboard']);
+        break;
+
+      case 'documents': this.router.navigate(['/employee/documents']);
         break;
       case 'documents': this.router.navigate(['/employee/documents'])
         break;
