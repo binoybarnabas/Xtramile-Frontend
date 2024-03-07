@@ -47,7 +47,6 @@ import { TravelRequestFormComponent } from './features/travel-request-form/trave
 import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
 import { DocumentsComponent } from './components/ui/documents/documents.component';
 import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
->>>>>>>>> Temporary merge branch 2
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -70,7 +69,7 @@ const routes: Routes = [
       { path: 'profile', component: EmployeeProfileComponent },
       // { path: 'documents', component: DocumentsComponent },
       { path: 'documents', component: TravellerDocumentsComponent },
-      { path: 'add_documents', component: DocumentsComponent }
+      // { path: 'add_documents', component: DocumentsComponent }
 
     ]
   },
