@@ -127,11 +127,10 @@ import { DashboardTableComponent } from './components/ui/dashboard-components/da
 import { ShortYearDateFormatPipe } from './pipes/ShortYearDate/short-year-date-format.pipe';
 import { CustomTimePickerComponent } from './components/ui/form-components/custom-time-picker/custom-time-picker.component';
 import { FileUploaderComponent } from './components/ui/form-components/file-uploader/file-uploader.component';
+import { DocumentsComponent } from './components/ui/documents/documents.component';
 import { DocumentCardComponent } from './components/ui/document-card/document-card.component';
 import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
 import { PageHeaderComponent } from './components/layout/page-header/page-header.component';
-import { DocumentsComponent } from './components/ui/documents/documents.component';
-
 
 @NgModule({
   declarations: [
@@ -247,10 +246,10 @@ import { DocumentsComponent } from './components/ui/documents/documents.componen
     ShortYearDateFormatPipe,
     CustomTimePickerComponent,
     FileUploaderComponent,
+    DocumentsComponent,
     DocumentCardComponent,
     TravellerDocumentsComponent,
-    PageHeaderComponent,
-    DocumentsComponent
+    PageHeaderComponent
   ]
   ,
 
