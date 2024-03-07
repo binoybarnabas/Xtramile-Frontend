@@ -2,6 +2,7 @@ import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { countries } from 'src/app/services/commonAPIServices/countries';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-traveller-documents',
   templateUrl: './traveller-documents.component.html',
@@ -23,10 +24,11 @@ export class TravellerDocumentsComponent {
     private fb: FormBuilder,
     private documentService: DocumentsService,
     private elementRef: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private datepipe: DatePipe
   ) {
     this.isDocUploadModalOpen = false;
-    this.selectedDocType = 'idCard'
+    this.selectedDocType = 'ID Card'
   }
 
 
@@ -90,32 +92,31 @@ export class TravellerDocumentsComponent {
     if (this.documentUploadForm.valid) {
       // Implement save logic here
       console.log(this.documentUploadForm.value);
+      const formData = new FormData();
 
-      const expiryDate = new Date(
-        //'Thu Mar 07 2024 10:53:24 GMT+0530 (India Standard Time)'
-        this.documentUploadForm.value.expiryDate
-      );
-
-      const formattedDateParts = [
-        expiryDate.toLocaleDateString('en-GB', { year: 'numeric' }),
-        expiryDate.toLocaleDateString('en-GB', { month: '2-digit' }),
-        expiryDate.toLocaleDateString('en-GB', { day: '2-digit' })
-      ];
-
-      const formattedDate = formattedDateParts.join('-');
-
-      console.log(formattedDate);
+      const expiryDate = new Date(this.documentUploadForm.value.expiryDate);
+      const formattedDate = this.datepipe.transform(expiryDate, "yyyy-MM-dd") || '';
 
       const userData = localStorage.getItem('userData');
       const parsedUserData = userData !== null ? JSON.parse(userData) : '';
 
-      const formData = {
-        UploadedBy: parsedUserData.empId,
-        TravelDocType: this.selectedDocType,
-        DocId: this.documentUploadForm.value.docNumber,
-        ExpiryDate: this.documentUploadForm.value.expiryDate ? formattedDate : '',
-        Country: this.documentUploadForm.value.country,
-        File: this.documentUploadForm.value.documentFile
+      // const formData = {
+      //   UploadedBy: parsedUserData.empId,
+      //   TravelDocType: this.selectedDocType,
+      //   DocId: this.documentUploadForm.value.docNumber,
+      //   ExpiryDate: this.documentUploadForm.value.expiryDate ? formattedDate : '',
+      //   Country: this.documentUploadForm.value.country,
+      //   File: this.documentUploadForm.value.documentFile
+      // }
+
+      formData.append('UploadedBy', parsedUserData.empId);
+      formData.append('TravelDocType', this.selectedDocType);
+      formData.append('ExpiryDate', formattedDate);
+      formData.append('Country', this.documentUploadForm.value.country);
+      formData.append('DocId', this.documentUploadForm.value.docNumber)
+      const fileInput = this.documentUploadForm.get('documentFile');
+      if (fileInput && fileInput.value) {
+        formData.append('File', fileInput.value);
       }
 
       console.log(formData)
