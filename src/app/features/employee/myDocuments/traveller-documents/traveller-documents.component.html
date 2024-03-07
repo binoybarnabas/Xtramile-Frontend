@@ -1,4 +1,3 @@
-<!-- <p>traveller-documents works!</p> -->
 <div class="main_container">
 
     <div class="heading_section">
@@ -6,7 +5,7 @@
             <h3 class="heading_text">My Documents</h3>
         </div>
         <div class="btn_container">
-            <div class="add_btn">
+            <div (click)="toggleDocUploadModal(true)" class="add_btn" type="button">
                 <span class="btn_text" >Add</span>
             </div>
         </div>
@@ -16,6 +15,96 @@
     
     </app-document-card>
 
+    <div *ngIf="isDocUploadModalOpen" class="upload_form_container">
+
+        <div class="document_upload_form_modal">
+
+            <div class="form_container_main">
+
+                <div class="heading_section">
+                    <div class="heading">
+                        <span>Upload New Document</span>
+                    </div>
+                </div>
+    
+                <div class="body_section">
+
+                    <form [formGroup]="documentUploadForm" (ngSubmit)="saveForm()">
+
+                      <div class="doc_type_container">
+                        <div (click)="changeDocType('idCard')" [ngClass]= " selectedDocType === 'idCard' ? 'doc_type_card active' : 'doc_type_card'" >
+                          <span class="text">ID Card</span>
+                        </div>
+                        <div (click)="changeDocType('passPort')"  [ngClass]= " selectedDocType === 'passPort' ? 'doc_type_card active' : 'doc_type_card'"  >
+                          <span class="text">Passport</span>
+                        </div>
+                        <div  (click)="changeDocType('visa')"  [ngClass]= " selectedDocType === 'visa' ? 'doc_type_card active' : 'doc_type_card'"  >
+                          <span class="text">Visa</span>
+                        </div>
+                      </div>
+                    
+                      <!-- file drop -->
+                      <div class="file_drop_area_container" (dragover)="onDragOver($event)" (dragenter)="onDragEnter($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+                          <!-- <label for="documentUpload">Upload Document</label> -->
+                          <input type="file" formControlName="documentFile" id="documentFile" style="display: none" (change)="onFileSelected($event)">
+                          <div id="dragDropArea" class="drag-drop-area" (click)="clickInput()">
+                            <i class="icon ri-upload-cloud-line"></i>
+                            <p class="label_text_main">Drag & drop your file here</p>
+                            <span class="label_text_sub">or <a href="javascript:void(0);" (click)="clickInput()">browse</a> file from device </span><br>
+                            <span class="file_name" *ngIf="documentUploadForm.get('documentFile')?.value">{{ documentUploadForm.get('documentFile')?.value.name }}</span>
+                          </div>
+                         
+                      </div>
+                        
+                      <!-- doc number expiry date -->
+                      <div class="doc_number_and_date_section">
+
+                          <!-- doc number -->
+                          <div class="doc_number_container">
+                            <label class="label" for="docNumber">Document Identification Number</label>
+                            <input type="text" formControlName="docNumber" class="text_input" placeholder="document identification number">
+                            <span *ngIf="documentUploadForm.get('docNumber')?.invalid && documentUploadForm.get('docNumber')?.touched"  class="form_error">Enter the document identification number</span>
+                          </div>
+
+                         <!-- expiratiion date -->
+                          <div *ngIf="selectedDocType != 'idCard' " class="doc_expiration_date_container">
+
+                           <label class="label" for="docExpirationDate">Document Expiration Date</label>
+                            <input type="date" formControlName="expiryDate" class="date_picker">
+
+                         </div>
+
+                      </div>
+                 
+                      <!-- doc issued country -->
+                      <div class="doc_country_container">
+  
+                          <label class="label" for="country">Document Issuing Country</label>
+                          <input list="countryList" id="country" formControlName="country" class="text_input" placeholder="enter the country name">
+                          <datalist class="country_list" id="countryList"> 
+                            <option class="county_name" *ngFor="let country of countryList" [value]="country.name"></option>
+                          </datalist>
+
+                          <span *ngIf="documentUploadForm.get('country')?.invalid && documentUploadForm.get('country')?.touched"  class="form_error">Enter a country name</span>
+
+  
+                      </div>
+
+                      <!-- actions -->
+                      <div class="actions"> 
+                            <button class="cancel_btn" (click)="toggleDocUploadModal(false)" type="button" >Cancel</button>
+                            <button class="submit_btn" type="submit" [disabled]="documentUploadForm.invalid">Save</button>
+                      </div>
+
+                    </form>
+
+                </div>
+    
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 

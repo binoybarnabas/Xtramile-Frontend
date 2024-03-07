@@ -67,8 +67,8 @@ const routes: Routes = [
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },
       { path: 'profile', component: EmployeeProfileComponent },
-      { path: 'documents', component: DocumentsComponent },
-      { path: 'view-documents', component: TravellerDocumentsComponent }
+      // { path: 'documents', component: DocumentsComponent },
+      { path: 'documents', component: TravellerDocumentsComponent }
     ]
   },
   {
