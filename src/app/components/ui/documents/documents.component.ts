@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
@@ -16,7 +17,8 @@ export class DocumentsComponent {
     private fb: FormBuilder,
     private documentService: DocumentsService,
     private elementRef: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private datepipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -28,8 +30,8 @@ export class DocumentsComponent {
     });
 
     this.form.get('documentType')?.valueChanges.subscribe((value) => {
-      this.visaCountryVisible = value === 'visa';
-      this.expiryDateVisible = value === 'passport' || value === 'visa';
+      this.visaCountryVisible = value === 'Visa';
+      this.expiryDateVisible = value === 'Passport' || value === 'Visa';
       if (this.visaCountryVisible) {
         this.form.get('visaCountry')?.setValidators(Validators.required);
       } else {
@@ -72,49 +74,83 @@ export class DocumentsComponent {
   }
 
   //submitting the form
+  // saveForm() {
+  //   if (this.form.valid) {
+  //     // Implement save logic here
+  //     console.log(this.form.value);
+
+
+  //     const expiryDate = new Date(
+  //       //'Thu Mar 07 2024 10:53:24 GMT+0530 (India Standard Time)'
+  //       this.form.value.expiryDate
+  //     );
+
+  //     // const formattedDateParts = [
+  //     //   expiryDate.toLocaleDateString('en-GB', { day: '2-digit' }),
+  //     //   expiryDate.toLocaleDateString('en-GB', { month: '2-digit' }),
+  //     //   expiryDate.toLocaleDateString('en-GB', { year: 'numeric' })
+  //     // ];
+      
+  //     const formattedDate = this.datepipe.transform(expiryDate, "yyyy-MM-dd");
+
+  //     console.log(formattedDate);
+
+  //     const userData = localStorage.getItem('userData');
+  //     const parsedUserData = userData!== null ? JSON.parse(userData) : '';
+
+  //     const formData = {
+  //       UploadedBy:parsedUserData.empId,
+  //       TravelDocType:this.form.value.documentType,
+  //       ExpiryDate:this.form.value.expiryDate ? formattedDate : '',
+  //       Country: this.form.value.country,
+  //       File:this.form.value.documentUpload
+  //     }
+  //     // console.log(formData)
+
+  //     this.documentService.sendDocumentData(formData).subscribe({
+  //       next:(response)=>{
+  //         console.log(response)
+  //       },
+  //       error:(error:Error)=>{
+  //         console.log(error)
+  //       }
+  //     })
+  //   }
+  // }
+
   saveForm() {
     if (this.form.valid) {
-      // Implement save logic here
-      console.log(this.form.value);
-
-
-      const expiryDate = new Date(
-        //'Thu Mar 07 2024 10:53:24 GMT+0530 (India Standard Time)'
-        this.form.value.expiryDate
-      );
-
-      const formattedDateParts = [
-        expiryDate.toLocaleDateString('en-GB', { day: '2-digit' }),
-        expiryDate.toLocaleDateString('en-GB', { month: '2-digit' }),
-        expiryDate.toLocaleDateString('en-GB', { year: 'numeric' })
-      ];
-      
-      const formattedDate = formattedDateParts.join('-');
-
-      console.log(formattedDate);
-
+      // Create a new FormData object
+      const formData = new FormData();
+  
+      // Add form fields to the FormData object
+      const expiryDate = new Date(this.form.value.expiryDate);
+      const formattedDate = this.datepipe.transform(expiryDate, "yyyy-MM-dd") || '';
+  
       const userData = localStorage.getItem('userData');
-      const parsedUserData = userData!== null ? JSON.parse(userData) : '';
-
-      const formData = {
-        empId:parsedUserData.empId,
-        documentType:this.form.value.documentType,
-        expiryDate:this.form.value.expiryDate ? formattedDate : '',
-        country: this.form.value.country,
-        documentUpload:this.form.value.documentUpload
+      const parsedUserData = userData ? JSON.parse(userData) : '';
+  
+      formData.append('UploadedBy', parsedUserData.empId);
+      formData.append('TravelDocType', this.form.value.documentType);
+      formData.append('ExpiryDate', formattedDate);
+      formData.append('Country', this.form.value.country);
+      const fileInput = this.form.get('documentUpload');
+      if (fileInput && fileInput.value) {
+        formData.append('File', fileInput.value);
       }
-      // console.log(formData)
-
+    
+      // Send FormData object to the backend
       this.documentService.sendDocumentData(formData).subscribe({
-        next:(response)=>{
-          console.log(response)
+        next: (response) => {
+          console.log(response);
         },
-        error:(error:Error)=>{
-          console.log(error)
+        error: (error: Error) => {
+          console.log(error);
         }
-      })
+      });
     }
   }
+  
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
