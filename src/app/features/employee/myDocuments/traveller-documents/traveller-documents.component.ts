@@ -97,9 +97,9 @@ export class TravellerDocumentsComponent {
       );
 
       const formattedDateParts = [
-        expiryDate.toLocaleDateString('en-GB', { day: '2-digit' }),
+        expiryDate.toLocaleDateString('en-GB', { year: 'numeric' }),
         expiryDate.toLocaleDateString('en-GB', { month: '2-digit' }),
-        expiryDate.toLocaleDateString('en-GB', { year: 'numeric' })
+        expiryDate.toLocaleDateString('en-GB', { day: '2-digit' })
       ];
 
       const formattedDate = formattedDateParts.join('-');
@@ -110,15 +110,15 @@ export class TravellerDocumentsComponent {
       const parsedUserData = userData !== null ? JSON.parse(userData) : '';
 
       const formData = {
-        empId: parsedUserData.empId,
-        documentType: this.selectedDocType,
-        docNumber: this.documentUploadForm.value.docNumber,
-        expiryDate: this.documentUploadForm.value.expiryDate ? formattedDate : '',
-        country: this.documentUploadForm.value.country,
-        documentFile: this.documentUploadForm.value.documentFile
+        UploadedBy: parsedUserData.empId,
+        TravelDocType: this.selectedDocType,
+        DocId: this.documentUploadForm.value.docNumber,
+        ExpiryDate: this.documentUploadForm.value.expiryDate ? formattedDate : '',
+        Country: this.documentUploadForm.value.country,
+        File: this.documentUploadForm.value.documentFile
       }
 
-
+      console.log(formData)
       this.documentService.sendDocumentData(formData).subscribe({
         next: (response) => {
           this.toggleDocUploadModal(false);
@@ -128,7 +128,6 @@ export class TravellerDocumentsComponent {
           console.log(error)
         }
       });
-
 
     }
   }
