@@ -3,14 +3,12 @@
   It includes a header with the title "Profile" and a main container containing a form for user details. 
   The page features:
   > a background image
-
   > a dynamic "Edit/Save" button 
   > displays a profile picture
   > full name 
   > department 
   The form contains input fields for various details, with some being editable only in "Edit" mode. 
-  Validation messages are included for the contact number field. 
-  Additionally, there are file upload options for passport and ID card documents, active only in "Edit" mode. 
+  Validation messages are included for the contact number field. Active only in "Edit" mode. 
 -->
 <body>
   <!-- <div class="profile_header">
@@ -40,21 +38,86 @@
               </button>
             </div>
             <div>
-              <!-- profile picture of the employee -->
-              <div class="profile_picture">
+              <input
+                type="file"
+                accept="image/*"
+                (change)="onImageSelected($event)"
+                [hidden]="true"
+                formControlName="profilePicture"
+                #mymodal
+              />
+              <!-- profile picture, add 'editable' class when in edit mode -->
+              <div class="profile_picture" (click)="onProfilePictureClick()">
                 <img
                   class="img-fluid"
-                  src="https://media.istockphoto.com/vectors/businessman-profile-icon-male-portrait-flat-vector-id530838817?k=20&m=530838817&s=170667a&w=0&h=uv1NsUb1a5aC3C8FK14TSxLvEyA77rZJVwdlQh66JQU="
+                  src="{{ profileImage ? profileImage : defaultImageUrl }}"
                 />
+                <i class="ri-pencil-fill" *ngIf="editMode"></i>
               </div>
-              <!-- full name and department of the employee -->
-              <div class="text_details">
-                <h3>
-                  {{ form.get("firstName")?.value }}
-                  {{ form.get("lastName")?.value }}
-                </h3>
-                <p>{{ form.get("department")?.value }}</p>
+
+              <!-- Image Crop Modal -->
+              <div
+                #imageCropModal
+                id="mymodal"
+                class="modal"
+                tabindex="-1"
+                role="dialog"
+                [ngStyle]="{ display: display }"
+              >
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Crop Image</h5>
+                      <button
+                        type="button"
+                        class="close"
+                        (click)="closeModal()"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <image-cropper
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true"
+                        [aspectRatio]="4 / 4"
+                        [resizeToWidth]="300"
+                        [cropperMinWidth]="100"
+                        [cropperMinHeight]="100"
+                        [canvasRotation]="0"
+                        format="png"
+                        (imageCropped)="imageCropped($event)"
+                      ></image-cropper>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="onCropImageSave()"
+                      >
+                        Save
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        (click)="closeModal()"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
+
+            <!-- full name and department of the employee -->
+            <div class="text_details">
+              <h3>
+                {{ form.get("firstName")?.value }}
+                {{ form.get("lastName")?.value }}
+              </h3>
+              <p>{{ form.get("department")?.value }}</p>
             </div>
           </div>
         </div>
@@ -115,7 +178,8 @@
               class="profile_validation_color"
               *ngIf="
                 form.get('contactNumber')?.hasError('pattern') ||
-                form.get('contactNumber')?.hasError('maxlength')
+                form.get('contactNumber')?.hasError('maxlength') ||
+                form.get('contactNumber')?.hasError('minlength')
               "
             >
               *Please enter a valid number.
@@ -183,35 +247,6 @@
             >
               *Address is required.
             </div>
-          </div>
-          <!-- passport which is uploaded by the employee, editable by the employee -->
-          <div class="form-column">
-            <label for="passport">Passport</label>
-            <input
-              type="file"
-              class="form-control"
-              formControlName="passport"
-              accept=".pdf,.jpg,.jpeg,.png"
-              [style.color]="'#808080'"
-              [style.border-color]="'#80bdff'"
-              [readonly]="!editMode"
-              onchange="console.log(event.target.files)"
-              (change)="onFileSelected($event, 'passport')"
-            />
-          </div>
-          <!-- ID card which is uploaded by the employee, editable by the employee -->
-          <div class="form-column">
-            <label for="idCard">ID Card</label>
-            <input
-              type="file"
-              class="form-control"
-              formControlName="idCard"
-              accept=".pdf,.jpg,.jpeg,.png"
-              [style.color]="'#808080'"
-              [style.border-color]="'#80bdff'"
-              [readonly]="!editMode"
-              (change)="onFileSelected($event, 'idCard')"
-            />
           </div>
         </div>
       </form>

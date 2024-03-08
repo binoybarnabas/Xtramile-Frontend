@@ -128,6 +128,7 @@ import { ShortYearDateFormatPipe } from './pipes/ShortYearDate/short-year-date-f
 import { CustomTimePickerComponent } from './components/ui/form-components/custom-time-picker/custom-time-picker.component';
 import { FileUploaderComponent } from './components/ui/form-components/file-uploader/file-uploader.component';
 import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -266,7 +267,8 @@ import { RejectionCardComponent } from './components/ui/rejection-card/rejection
     //   preventDuplicates: true,
     // }),
 
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ImageCropperModule,
 
   ],
   providers: [DatePipe,

@@ -6,31 +6,31 @@
  
   }
   
-  .content {
+  .card .content {
     margin-top: 0.75rem;
     text-align: left;
     margin-left: 1rem;
   }
   
-  .title {
+  .card .content .title {
     color: var(--primary-blue-color);
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.5rem;
   }
   
-  .message {
+  .card .content .title .message {
     margin-top: 0.5rem;
     color: #595b5f;
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
   
-  .actions {
+  .card .actions {
     margin: 0.75rem 1rem;
   }
   
-  .resubmit {
+  .card .actions .resubmit {
     display: inline-flex;
     padding: 0.5rem 1rem;
     background-color: var(--primary-blue-color);
@@ -45,7 +45,7 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
   
-  .cancel {
+  .card .actions .cancel {
     display: inline-flex;
     margin-top: 0.75rem;
     padding: 0.5rem 1rem;
@@ -63,24 +63,23 @@
   @media (max-width: 768px) {
     .card {
       padding: 1rem;
-      width: 50%;
     }
-    .content {
+    .card .content {
       margin-left: 0.5rem;
     }
   
-    .title {
+    .card .content .title {
       font-size: 0.875rem;
       line-height: 1.25rem;
     }
   
-    .message {
+    .card .content .title .message {
       font-size: 0.75rem;
       line-height: 1rem;
     }
   
-    .resubmit,
-    .cancel {
+    .card .actions .resubmit,
+    .card .actions .cancel {
       padding: 0.25rem 0.5rem;
       font-size: 0.875rem;
       line-height: 1.25rem;
