@@ -8,7 +8,8 @@
 
     <div class="top_bar_logo_container">
       <h3 class="top_bar_logo">
-        <i class="ri-git-pr-draft-fill"></i> XtraMile
+        <!-- <i class="ri-git-pr-draft-fill"></i> XtraMile -->
+        <i class="ri-scroll-to-bottom-fill"></i>  XtraMile
       </h3>
     </div>
   </div>
@@ -18,9 +19,8 @@
       <p class="date">
         <i class="cal_icon ri-calendar-2-line"></i>{{ date | customDate }}
       </p>
-      <i class="notification ri-notification-2-line" (click)="openNotificationModal()"></i>
+      <i class="notification ri-notification-2-fill" (click)="openNotificationModal()"></i>
     </div>
-
     <div class="profile_info">
       <p class="name">{{ employeeName }}</p>
       <span class="designation">{{ designation }}</span>

@@ -20,13 +20,20 @@
       class="collapsed_icon ri-dashboard-line"
     ></i>
 
-    <p class="main_title active" [ngClass]="{'active': activeItem === 'dashboard'}"
-    (click)="navigateToRequest('dashboard')" >
+    <p
+      class="main_title active"
+      [ngClass]="{ active: activeItem === 'dashboard' }"
+      (click)="navigateToRequest('dashboard')"
+    >
       <i class="left_icon ri-dashboard-line"></i> Dashboard
     </p>
   </div>
 
-  <div class="side_bar_main" [ngClass]="{'active': activeItem === 'myrequests'}" (click)="toggleSubMenu('1')">
+  <div
+    class="side_bar_main"
+    [ngClass]="{ active: activeItem === 'myrequests' }"
+    (click)="toggleSubMenu('1')"
+  >
     <i
       *ngIf="isSideNavBarCollapsed === 1"
       class="collapsed_icon ri-sticky-note-add-line"
@@ -86,6 +93,32 @@
     </div>
   </div>
 
+  <!-- Docs -->
+  <div class="side_bar_main">
+    <i
+      *ngIf="isSideNavBarCollapsed === 1"
+      class="left_icon collapsed_icon ri-file-pdf-line"
+    ></i>
+    <p class="main_title" (click)="navigateToRequest('documents')">
+      <i class="ri-file-pdf-line"></i> My Documents
+    </p>
+  </div>
+
+  <!-- <div class="side_bar_main">
+    <i
+      *ngIf="isSideNavBarCollapsed === 1"
+      class="collapsed_icon ri-dashboard-line"
+    ></i>
+
+    <p
+      class="main_title active"
+      [ngClass]="{ active: activeItem === 'documents' }"
+      (click)="navigateToRequest('documents')"
+    >
+      <i class="left_icon ri-dashboard-line"></i> Documents Upload
+    </p>
+  </div> -->
+
   <div class="side_bar_main">
     <i
       *ngIf="isSideNavBarCollapsed === 1"
@@ -102,6 +135,8 @@
       class="collapsed_icon ri-logout-box-r-line"
     ></i>
 
-    <p (click)="logout()" class="main_title"><i class="ri-logout-box-r-line"></i> Log out</p>
+    <p (click)="logout()" class="main_title">
+      <i class="ri-logout-box-r-line"></i> Log out
+    </p>
   </div>
 </div>

@@ -1,0 +1,62 @@
+<div class="main-container">
+  <form [formGroup]="form" (ngSubmit)="saveForm()">
+    <div class="form-group">
+      <label for="documentType">Type of Document</label>
+      <select formControlName="documentType" id="documentType">
+        <option value="" disabled selected>Select Document Type</option>
+        <option value="ID Card">ID Card</option>
+        <option value="Passport">Passport</option>
+        <option value="Visa">Visa</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="country">Country</label>
+      <select formControlName="country" id="country">
+        <option value="" disabled selected>pick the country</option>
+        <option *ngFor="let country of countryData" [value]="country">
+          {{ country }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group" *ngIf="expiryDateVisible">
+      <label for="expiryDate">Expiry Date</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="expiryDate"
+        id="expiryDate"
+        placeholder="yyyy-mm-dd"
+        bsDatepicker
+      />
+    </div>
+
+    <div
+      class="form-group"
+      (dragover)="onDragOver($event)"
+      (dragenter)="onDragEnter($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)"
+    >
+      <label for="documentUpload">Upload Document</label>
+      <input
+        type="file"
+        formControlName="documentUpload"
+        id="documentUpload"
+        style="display: none"
+        (change)="onFileSelected($event)"
+      />
+      <div id="dragDropArea" class="drag-drop-area">
+        <p>
+          Drag & drop your file here or
+          <a href="javascript:void(0);" (click)="clickInput()">browse</a>
+        </p>
+        <span *ngIf="form.get('documentUpload')?.value">{{
+          form.get("documentUpload")?.value.name
+        }}</span>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid">Save</button>
+  </form>
+</div>
