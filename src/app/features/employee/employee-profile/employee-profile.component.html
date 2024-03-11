@@ -12,209 +12,231 @@
   Validation messages are included for the contact number field. 
   Additionally, there are file upload options for passport and ID card documents, active only in "Edit" mode. 
 -->
-<body>
+<!-- <body> -->
   <!-- <div class="profile_header">
     <h1>Profile</h1>
   </div> -->
+
   <div class="main_container">
+
     <div class="inner_container">
+      
       <form [formGroup]="form">
+
         <div class="top_container">
+          
           <div class="background_image">
-            <!-- background image -->
-            <img
+
+
+            <!-- <div class="action_btn_container">
+              <button class="action_btn">Edit</button>
+            </div> -->
+
+            <div class="cover_name_container">
+              <h1 class="cover_name"> {{ form.get("firstName")?.value }}
+              </h1>
+            </div>
+
+            <!-- bg -->
+            <!-- <img
               class="img-fluid"
-              src="https://focusworldtours.com/wp-content/uploads/2023/01/Cover-1.jpg"
-            />
-            <!-- black transparent container infront of the background image -->
+              src="https://images.pexels.com/photos/315934/pexels-photo-315934.jpeg"
+            /> -->
+
+            <img class="img-fluid" src="https://images.pexels.com/photos/261986/pexels-photo-261986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            " alt="">
+
+
             <div class="black_container">
               <!-- edit or save button -->
-              <button
-                [type]="editMode ? 'submit' : 'button'"
-                class="button"
-                (click)="!editMode ? toggleEditMode() : onSubmit()"
-              >
-                <span class="button_content">{{
+              <div class="action_btn_container">
+                <button  [type]="editMode ? 'submit' : 'button'"
+                
+                (click)="!editMode ? toggleEditMode() : onSubmit()" class="action_btn"  [ngClass]="editMode? 'action_btn_edit_mode':'action_btn'"   >  <span class="button_content">{{
                   editMode ? "Save" : "Edit"
-                }}</span>
-              </button>
+                }}</span> </button>
+              </div>
+
             </div>
-            <div>
-              <!-- profile picture of the employee -->
+
+            <div class="profile_data_container">
+
               <div class="profile_picture">
                 <img
                   class="img-fluid"
-                  src="https://media.istockphoto.com/vectors/businessman-profile-icon-male-portrait-flat-vector-id530838817?k=20&m=530838817&s=170667a&w=0&h=uv1NsUb1a5aC3C8FK14TSxLvEyA77rZJVwdlQh66JQU="
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&usqp=CAU"
                 />
               </div>
-              <!-- full name and department of the employee -->
+
               <div class="text_details">
-                <h3>
+                <h3 class="name">
                   {{ form.get("firstName")?.value }}
                   {{ form.get("lastName")?.value }}
                 </h3>
-                <p>{{ form.get("department")?.value }}</p>
+                <p class="department">{{ form.get("department")?.value }}</p>
+              </div>
+         
+
+            </div>
+
+        
+          </div>
+   
+
+        </div>
+
+
+        <!-- general details of the employee -->
+        <div class="bottom_section">
+          <div class="form-row">
+            <!-- first Name, not editable by the employee-->
+            <div class="form-column">
+              <label for="fname">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="firstName"
+                [readonly]="true"
+                formControlName="firstName"
+              />
+            </div>
+            <!-- last Name, not editable by the employee-->
+            <div class="form-column">
+              <label for="lname">Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="lastName"
+                [readonly]="true"
+                formControlName="lastName"
+              />
+            </div>
+            <!-- email, not editable by the employee-->
+            <div class="form-column">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                name="email"
+                [readonly]="true"
+                formControlName="email"
+              />
+            </div>
+
+            <!-- Department Name, not editable by the employee-->
+            <div class="form-column">
+              <label class="label" for="fname">Department</label>
+              <input
+                type="text"
+                class="form-control"
+                name="department"
+                [readonly]="true"
+                formControlName="department"
+              />
+            </div>
+            <!-- Reports to person's full name, not editable by the employee -->
+            <div class="form-column">
+              <label for="fname">Reports To</label>
+              <input
+                type="text"
+                class="form-control"
+                name="reportsTo"
+                [readonly]="true"
+                formControlName="reportsTo"
+              />
+            </div>
+            <!-- project ID, not editable by the employee -->
+            <div class="form-column">
+              <label for="fname">Project ID</label>
+              <input
+                type="text"
+                class="form-control"
+                name="projectId"
+                [readonly]="true"
+                formControlName="projectId"
+              />
+            </div>
+            <!-- project name, not editable by the employee-->
+            <div class="form-column">
+              <label for="fname">Project Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="projectName"
+                [readonly]="true"
+                formControlName="projectName"
+              />
+            </div>
+
+            <!-- address , editable by the employee-->
+            <div class="form-column">
+              <label for="address">Address Line 1</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="address"
+                [readonly]="!editMode"
+              />
+              <!-- validations for address -->
+              <div
+                class="profile_validation_color"
+                *ngIf="form.get('address')?.hasError('required')"
+              >
+                *Address is required.
               </div>
             </div>
+
+            <div class="form-column">
+              <label for="address">Address Line 2</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="address"
+                [readonly]="!editMode"
+              />
+              <!-- validations for address -->
+              <div
+                class="profile_validation_color"
+                *ngIf="form.get('address')?.hasError('required')"
+              >
+                *Address is required.
+              </div>
+            </div>
+
+                        <!-- contactNumber, editable by the employee-->
+                        <div class="form-column">
+                          <label for="phone">Phone</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            formControlName="contactNumber"
+                            [readonly]="!editMode"
+                          />
+                          <!-- validations for contact Number -->
+                          <div
+                            class="profile_validation_color"
+                            *ngIf="form.get('contactNumber')?.hasError('required')"
+                          >
+                            *Phone number is required.
+                          </div>
+                          <div
+                            class="profile_validation_color"
+                            *ngIf="
+                              form.get('contactNumber')?.hasError('pattern') ||
+                              form.get('contactNumber')?.hasError('maxlength')
+                            "
+                          >
+                            *Please enter a valid number.
+                          </div>
+                        </div>
+
+  
           </div>
         </div>
-        <!-- general details of the employee -->
-        <div class="form-row">
-          <!-- first Name, not editable by the employee-->
-          <div class="form-column">
-            <label for="fname">First Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="firstName"
-              [readonly]="true"
-              formControlName="firstName"
-            />
-          </div>
-          <!-- last Name, not editable by the employee-->
-          <div class="form-column">
-            <label for="lname">Last Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="lastName"
-              [readonly]="true"
-              formControlName="lastName"
-            />
-          </div>
-          <!-- email, not editable by the employee-->
-          <div class="form-column">
-            <label for="email">Email</label>
-            <input
-              type="text"
-              class="form-control"
-              name="email"
-              [readonly]="true"
-              formControlName="email"
-            />
-          </div>
-          <!-- contactNumber, editable by the employee-->
-          <div class="form-column">
-            <label for="phone">Phone</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="contactNumber"
-              [readonly]="!editMode"
-              [style.color]="'#808080'"
-              [style.border-color]="'#80bdff'"
-            />
-            <!-- validations for contact Number -->
-            <div
-              class="profile_validation_color"
-              *ngIf="form.get('contactNumber')?.hasError('required')"
-            >
-              *Phone number is required.
-            </div>
-            <div
-              class="profile_validation_color"
-              *ngIf="
-                form.get('contactNumber')?.hasError('pattern') ||
-                form.get('contactNumber')?.hasError('maxlength')
-              "
-            >
-              *Please enter a valid number.
-            </div>
-          </div>
-          <!-- Department Name, not editable by the employee-->
-          <div class="form-column">
-            <label for="fname">Department</label>
-            <input
-              type="text"
-              class="form-control"
-              name="department"
-              [readonly]="true"
-              formControlName="department"
-            />
-          </div>
-          <!-- Reports to person's full name, not editable by the employee -->
-          <div class="form-column">
-            <label for="fname">Reports To</label>
-            <input
-              type="text"
-              class="form-control"
-              name="reportsTo"
-              [readonly]="true"
-              formControlName="reportsTo"
-            />
-          </div>
-          <!-- project ID, not editable by the employee -->
-          <div class="form-column">
-            <label for="fname">Project ID</label>
-            <input
-              type="text"
-              class="form-control"
-              name="projectId"
-              [readonly]="true"
-              formControlName="projectId"
-            />
-          </div>
-          <!-- project name, not editable by the employee-->
-          <div class="form-column">
-            <label for="fname">Project Name</label>
-            <input
-              type="text"
-              class="form-control"
-              name="projectName"
-              [readonly]="true"
-              formControlName="projectName"
-            />
-          </div>
-          <!-- address , editable by the employee-->
-          <div class="form-column">
-            <label for="address">Address</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="address"
-              [style.color]="'#808080'"
-              [style.border-color]="'#80bdff'"
-              [readonly]="!editMode"
-            />
-            <!-- validations for address -->
-            <div
-              class="profile_validation_color"
-              *ngIf="form.get('address')?.hasError('required')"
-            >
-              *Address is required.
-            </div>
-          </div>
-          <!-- passport which is uploaded by the employee, editable by the employee -->
-          <div class="form-column">
-            <label for="passport">Passport</label>
-            <input
-              type="file"
-              class="form-control"
-              formControlName="passport"
-              accept=".pdf,.jpg,.jpeg,.png"
-              [style.color]="'#808080'"
-              [style.border-color]="'#80bdff'"
-              [readonly]="!editMode"
-              onchange="console.log(event.target.files)"
-              (change)="onFileSelected($event, 'passport')"
-            />
-          </div>
-          <!-- ID card which is uploaded by the employee, editable by the employee -->
-          <div class="form-column">
-            <label for="idCard">ID Card</label>
-            <input
-              type="file"
-              class="form-control"
-              formControlName="idCard"
-              accept=".pdf,.jpg,.jpeg,.png"
-              [style.color]="'#808080'"
-              [style.border-color]="'#80bdff'"
-              [readonly]="!editMode"
-              (change)="onFileSelected($event, 'idCard')"
-            />
-          </div>
-        </div>
+
       </form>
     </div>
+
   </div>
-</body>
+
+<!-- </body> -->
