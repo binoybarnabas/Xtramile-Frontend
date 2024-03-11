@@ -9,7 +9,9 @@
     <div class="top_bar_logo_container">
       <h3 class="top_bar_logo">
         <!-- <i class="ri-git-pr-draft-fill"></i> XtraMile -->
-        <i class="ri-scroll-to-bottom-fill"></i>  XtraMile
+        <!-- <i class="ri-scroll-to-bottom-fill"></i>  XtraMile -->
+
+        <p class="logo_text"><img class="logo_img" src="../../../assets/images/logo.png" alt=""> XtraMile</p>
       </h3>
     </div>
   </div>
@@ -27,10 +29,11 @@
     </div>
 
     <div class="profile_photo" (click)="toggleDropdown($event)" s>
-      <img class="profile_img" src="assets\images\user (1).png" alt="" />
-      <div class="dropdown" *ngIf="showDropdown">
+      <!-- <img class="profile_img" src="assets\images\user (1).png" alt="" /> -->
+      <img (dblclick)="logout()" class="profile_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&usqp=CAU" alt="">
+      <!-- <div class="dropdown" *ngIf="showDropdown">
         <button (click)="logout()">Logout</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
