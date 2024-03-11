@@ -12,8 +12,8 @@ export class ProfileService {
   apiURL = 'http://localhost:5190/api/'
 
   //Patch the employee details
-  updateProfile(employeeId: number, editedData: { [key: string]: any }): Observable<any> {
-    return this.http.patch(this.apiURL+`employee/edit/profile/details/${employeeId}`, editedData);
+  updateProfile(employeeId: number, editedData: { [key: string]: any },formData: any): Observable<any> {
+    return this.http.patch(this.apiURL+`employee/edit/profile/details/${employeeId}`, editedData, formData);
   }
 
   //get the employee details

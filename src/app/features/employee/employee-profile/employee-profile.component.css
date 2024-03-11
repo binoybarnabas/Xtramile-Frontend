@@ -206,3 +206,25 @@
     max-width: 100%;
   }
 }
+.modal_50w {
+  width: 28% !important;
+  margin-top: 5em;
+}
+/* Custom Modal Styles */
+.modal-content {
+  border-radius: 10px; 
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
+}
+
+.modal-title {
+  color: #495057; 
+}
+
+.modal-dialog {
+  transform: translate(0, 0);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+

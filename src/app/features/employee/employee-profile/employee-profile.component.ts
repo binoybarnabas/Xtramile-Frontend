@@ -24,6 +24,7 @@ export class EmployeeProfileComponent {
   croppedImage: any = '';
   display: string='';
   bsModalRef!: BsModalRef<unknown>;
+  profileImageFile!: File;
 
   
   constructor(private service: ProfileService) { 
@@ -105,6 +106,15 @@ export class EmployeeProfileComponent {
   }
   //to patch the values after the user click on the save button
   onSubmit() {
+
+  const formData = new FormData();
+
+  // Check if the profileImage is indeed a File object
+  if (this.profileImageFile instanceof File) {
+    formData.append('profilePicture', this.profileImageFile);
+  } 
+  console.log(formData.get('profilePicture'));
+  
     //making the initial values as empty
     let updatedData: { contactNumber?: String; address?: String } = {
       contactNumber: '',
@@ -137,7 +147,7 @@ export class EmployeeProfileComponent {
       //whenever user click on edit and save button unnecessary API call won't go
       if (this.form.dirty && this.form.touched && this.form.valid) {
         console.log('updated value', updatedData)
-        this.service.updateProfile(this.employeeId, updatedData).subscribe(() => {
+        this.service.updateProfile(this.employeeId, updatedData, formData).subscribe(() => {
           console.log('PATCH request successful');
           this.toggleEditMode();
 
@@ -201,12 +211,17 @@ export class EmployeeProfileComponent {
     }
   }
   
-  
-  
   onCropImageSave() {
     this.profileImage = this.croppedImage;
   
-    this.newImageSelected = true;
+    // this.newImageSelected = true;
+  const blob = this.dataURLtoBlob(this.croppedImage);
+  const imageName = `profile_${this.employeeId}.png`; // Example filename with timestamp
+  const imageFile = new File([blob], imageName, { type: 'image/png' });
+  console.log('image name',imageName,' and image file ', imageFile)
+
+  this.profileImageFile = imageFile; // Now, this.profileImage is a File object
+  this.newImageSelected = true;
   
     this.closeModal(); 
   }
@@ -220,4 +235,17 @@ export class EmployeeProfileComponent {
       fileInput.value = ''; // Clear the file input after closing the modal
     }
   }
+  private dataURLtoBlob(dataURL: string): Blob {
+    const byteString = window.atob(dataURL.split(',')[1]);
+    const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+  
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+  
+    return new Blob([ab], {type: mimeString});
+  }
+  
 }
