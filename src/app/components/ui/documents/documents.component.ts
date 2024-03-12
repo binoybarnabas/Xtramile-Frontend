@@ -199,4 +199,5 @@ export class DocumentsComponent {
   clickInput() {
     document.getElementById('documentUpload')?.click();
   }
+  
 }
