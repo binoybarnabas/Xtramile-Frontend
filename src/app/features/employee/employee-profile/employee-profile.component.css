@@ -181,9 +181,17 @@
     grid-template-columns: 2fr;
   }
 
-  .button {
-    left: 90%;
-    transform: translateX(-70%);
+  .profile_header {
+    margin-left: 0.5em;
+  }
+
+  .main_container .inner_container .top_container .background_image .profile_picture {
+    bottom: -3em; /* Adjust profile picture position */
+  }
+
+  .main_container .inner_container .top_container .background_image .black_container .button {
+    padding: 0 1.5rem;
+    left: 80%;
   }
 
   .text_details h3 {
@@ -194,23 +202,51 @@
     font-size: small;
   }
 
-  .text_details {
+  .main_container .inner_container .top_container .background_image .text_details {
+    bottom: 1em;
     left: 8rem;
+    line-height: 1em;
+    transform: translateX(-50%);
   }
+
+  .main_container .inner_container .top_container .background_image .text_details h3, 
+  .main_container .inner_container .top_container .background_image .text_details p {
+    line-height: 1em;
+    transform: translateX(35%);
+    font-size: medium;
+  }
+  .main_container .inner_container .top_container .background_image .text_details {
+    bottom: 1em;
+    left: 7rem;
+  }
+  .main_container .inner_container .top_container .background_image .profile_picture img {
+    width: 5em;
+    max-width: 5em;
+    border-radius: 5em;
+    height: auto;
+  }
+  .main_container .inner_container .top_container .background_image .profile_picture {
+    bottom: 1em;
+    transform: translateX(-70%);
+  }
+  .main_container .inner_container .top_container .background_image .profile_picture .ri-pencil-fill {
+    font-size: 1.5em;
+    top:2em;
+    left: 2em; 
+  }
+  
 }
 
 @media only screen and (max-width: 1200px) {
 
-  .black_container,
-  .inner_container {
+  .main_container, .black_container, .inner_container{
     max-width: 100%;
   }
 }
 .modal_50w {
-  width: 28% !important;
+  width: 30% !important;
   margin-top: 5em;
 }
-/* Custom Modal Styles */
 .modal-content {
   border-radius: 10px; 
   overflow: hidden;
@@ -224,7 +260,64 @@
 .modal-dialog {
   transform: translate(0, 0);
   transition: transform 0.3s ease-in-out;
+  display: flex;
+  align-items: center; /* Center vertically in viewport */
+  justify-content: center;
 }
 
-
+@media only screen and (max-width: 460px) {
+  .main_container .inner_container .top_container .background_image .black_container .button {
+    padding: 0 1rem;
+    left: 80%;
+  }
+  .form-control {
+    width: 100%;
+    padding: 0.5em;
+  }
+  .main_container .inner_container .top_container .background_image .text_details h3, 
+  .main_container .inner_container .top_container .background_image .text_details p {
+    line-height: 1em;
+    transform: translateX(20%);
+    font-size: small;
+  }
+  .main_container .inner_container .top_container .background_image .text_details {
+    bottom: 0.3em;
+    left: 2.3rem;
+  }
+  .main_container .inner_container .top_container .background_image .profile_picture {
+    bottom: 3em;
+  }
+}
+  @media only screen and (max-width: 281px) {
+    .main_container .inner_container .top_container .background_image .black_container .button {
+      padding: 0 0.5rem;
+      left: 35%;
+      bottom: -38%;
+      height:30% ;
+    }
+    .main_container .inner_container .top_container .background_image .text_details h3, 
+    .main_container .inner_container .top_container .background_image .text_details p {
+      line-height: 1em;
+      transform: translateX(20%);
+      font-size: x-small;
+    }
+    .main_container .inner_container .top_container .background_image .text_details {
+      bottom: 2em;
+      left: 2rem;
+    }
+    .main_container .inner_container .top_container .background_image .profile_picture {
+      bottom: 4.5em;
+      transform: translateX(-76%);
+    }
+    .main_container .inner_container .top_container .background_image .black_container .button_content {
+      font-size: x-small;
+    }
+    .form-column label, .form-control {
+      font-size: small;
+    }
+    .modal_50w {
+      width: 30% !important;
+      margin-top: 2em; 
+    }
+}
 

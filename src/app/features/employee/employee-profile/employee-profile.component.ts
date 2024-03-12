@@ -213,6 +213,7 @@ export class EmployeeProfileComponent {
   
   onCropImageSave() {
     this.profileImage = this.croppedImage;
+    console.log('this.profileImage',this.profileImage)
   
     // this.newImageSelected = true;
   const blob = this.dataURLtoBlob(this.croppedImage);
