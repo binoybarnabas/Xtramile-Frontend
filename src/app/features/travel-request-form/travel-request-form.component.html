@@ -20,25 +20,13 @@
 
             <div class="travel_mode_container">
 
-                <div  (click)="changeTravelMode('flight')"  [ngClass]=" selectedTravelMode === 'flight'? 'travel_mode_card active':'travel_mode_card' ">
-                    <i class="icon ri-plane-line"></i>
-                    <p class="value" >Flight</p>
-                </div>
-
-                <div (click)="changeTravelMode('bus')" [ngClass]=" selectedTravelMode === 'bus'? 'travel_mode_card active':'travel_mode_card'" >
-                        <i class="icon ri-bus-fill"></i>
-                        <p class="value" >Bus</p>
-                </div>
-
-                <div (click)="changeTravelMode('car')" [ngClass]=" selectedTravelMode === 'car'? 'travel_mode_card active':'travel_mode_card' " >
-                        <i class="icon ri-roadster-fill"></i>
-                        <p class="value" >Car</p>
-                </div>
-                    
-                <div (click)="changeTravelMode('train')" [ngClass]=" selectedTravelMode === 'train'? 'travel_mode_card active':'travel_mode_card' " >
-                        <i class="icon ri-train-line"></i>
-                        <p class="value" >Train</p>
-                </div>   
+                <ng-container *ngFor="let entry of getTravelModeInfoMapEntries()">
+                    <!-- <option [value]="mode.modeId">{{ mode.modeName }}</option> -->
+                    <div  (click)="changeTravelMode(entry[1][0])"  [ngClass]=" selectedTravelMode === getModeIdFromMapUsingKey(entry[0]) ? 'travel_mode_card active':'travel_mode_card' ">
+                        <i class="icon {{entry[0]}}"></i>
+                        <p class="value" >{{entry[1][1]}}</p>
+                    </div>
+                </ng-container>
 
             </div>
 
@@ -148,7 +136,7 @@
 
                             <div class="label_and_error_section">
 
-                            <label class="form_label" for="cars">Project Code:</label>
+                            <label class="form_label" >Project Code:</label>
                             <span *ngIf= "travelRequestForm.get('projectCode')?.invalid && travelRequestForm.get('projectCode')?.touched" class="normal_form_error"> <i class="ri-error-warning-line"></i> select the project code</span>
                             
                             </div>
@@ -166,7 +154,7 @@
 
                         <div class="travel_purpose_section">
                             <div class="label_and_error_section">
-                                <label class="form_label" for="cars">Travel Purpose:</label>
+                                <label class="form_label" >Travel Purpose:</label>
                                 <span *ngIf= "travelRequestForm.get('tripPurpose')?.invalid && travelRequestForm.get('tripPurpose')?.touched" class="normal_form_error"> <i class="ri-error-warning-line"></i> enter the purpose of your travel</span>
 
                             </div>
@@ -193,7 +181,7 @@
                 <span class="dot right_dot"></span> -->
                 <!-- </div> -->
 
-                <div *ngIf="selectedTravelMode !== 'car' " class="pref_dep_time_section"  >
+                <div *ngIf="selectedTravelMode !== getModeIdFromMapUsingKey('ri-taxi-line');  " class="pref_dep_time_section"  >
                  
                     <div class="label_and_view_section">
                         <label class="form_label" for="prefDepTime"><i class="ri-time-zone-line"></i> Preferred Departure Time:</label>
@@ -257,7 +245,7 @@
                     </div>
 
                     <!-- cab -->
-                    <div *ngIf="selectedTravelMode !== 'car' " class="cab_service_section">
+                    <div *ngIf="selectedTravelMode !== getModeIdFromMapUsingKey('ri-taxi-line') " class="cab_service_section">
 
                     <div class="heading_section">
                         <span class="value"><i class="ri-taxi-line"></i> Cab Required</span>
@@ -276,7 +264,7 @@
                 </div>
           
                 <!-- pref pickup time -->
-                <div *ngIf="!isPickUpTimeDisabled()" class="pref_pick_up_time_section">
+                <div *ngIf="!isPickUpTimeDisabled() || selectedTravelMode === getModeIdFromMapUsingKey('ri-taxi-line') " class="pref_pick_up_time_section">
                  
                     <div class="label_and_view_section">
                         <label class="form_label" for="prefPickUpTime"><i class="ri-time-zone-line"></i> Preferred PickUp Time:</label>

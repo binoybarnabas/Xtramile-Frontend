@@ -32,7 +32,7 @@ export class TravelRequestFormComponent {
   selectedTravelAuthMailFileName: any;
 
   selectedTripType: string;
-  selectedTravelMode: string;
+  selectedTravelMode: number;
   selectedTravelType: string;
 
   selectedOrigin: string;
@@ -78,6 +78,9 @@ export class TravelRequestFormComponent {
 
   travelModes: any[] = [];
 
+  //mapping travel mode remix icons with combination of modeId and modeName
+  travelModeIconValueTripletMap = new Map<string, [number, string]>();
+
   availableDepartureTimes: string[] = [];
 
   cities = cities;//Fetch Data From Any External API
@@ -108,7 +111,7 @@ export class TravelRequestFormComponent {
     this.empId = this.userData?.empId
     this.isProjectDetailsSectionOpen = false;
     this.selectedTripType = 'round_trip';
-    this.selectedTravelMode = 'flight';
+    this.selectedTravelMode = 1;
     this.selectedOrigin = 'Trivandrum';
     this.selectedDestination = 'Kochi';
     this.selectedTravelType = 'domestic'
@@ -163,7 +166,7 @@ export class TravelRequestFormComponent {
     this.selectedTripType = tripType;
   }
 
-  changeTravelMode(travelMode: string) {
+  changeTravelMode(travelMode: number) {
     this.selectedTravelMode = travelMode;
   }
 
@@ -393,10 +396,63 @@ export class TravelRequestFormComponent {
       .subscribe((data: any) => {
         // Assuming data is an array of project codes
         this.travelModes = data;
+
         console.log(data)
+        this.setTravelModeIconValueMap();
       });
 
   }
+
+  //set remix icons based on the values fetch from back end
+  setTravelModeIconValueMap() {
+
+    this.travelModes.forEach(mode => {
+
+      //mapping modeNames with remix icons
+      switch (mode.modeName) {
+
+        case 'Flight':
+          this.travelModeIconValueTripletMap.set("ri-plane-line", [mode.modeId, mode.modeName]);
+          break;
+
+        case 'Train':
+          this.travelModeIconValueTripletMap.set("ri-train-line", [mode.modeId, mode.modeName]);
+          break;
+
+        case 'Bus':
+          this.travelModeIconValueTripletMap.set("ri-bus-line", [mode.modeId, mode.modeName]);
+          break;
+
+        case 'Cab':
+          this.travelModeIconValueTripletMap.set("ri-taxi-line", [mode.modeId, mode.modeName]);
+          break;
+
+        default:
+          this.travelModeIconValueTripletMap.set("ri-car-line", [mode.modeId, mode.modeName]);
+          break;
+
+      }
+
+    });
+
+  }
+
+  //getModeId From the triplet map using keyname
+  getModeIdFromMapUsingKey(key: string) {
+    const triplet = this.travelModeIconValueTripletMap.get(key);
+    if (triplet) {
+      return triplet[0];
+    } else {
+      return 0;
+    }
+  }
+
+
+  // Function to convert the Map into an array of key-value pairs
+  getTravelModeInfoMapEntries(): [string, any][] {
+    return Array.from(this.travelModeIconValueTripletMap.entries());
+  }
+
 
   //listening to changes happening on origin and destination fields
   subscribeToOriginAndDestinationChanges() {
