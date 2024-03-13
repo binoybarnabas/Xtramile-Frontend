@@ -40,7 +40,7 @@ export class EmployeePendingRequestsComponent {
           request.returnDate = this.datepipe.transform(request.returnDate, "dd/MM/yyyy") || ' '
         })
         this.requestData = data;
-        console.log(this.requestData);
+        console.log('request data',this.requestData);
       },
       error: (error: Error) => {
         console.log("Error has occurred, " + error.message);

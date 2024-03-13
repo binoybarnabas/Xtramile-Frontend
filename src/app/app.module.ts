@@ -131,6 +131,8 @@ import { DocumentsComponent } from './components/ui/documents/documents.componen
 import { DocumentCardComponent } from './components/ui/document-card/document-card.component';
 import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
 import { PageHeaderComponent } from './components/layout/page-header/page-header.component';
+import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -246,6 +248,7 @@ import { PageHeaderComponent } from './components/layout/page-header/page-header
     ShortYearDateFormatPipe,
     CustomTimePickerComponent,
     FileUploaderComponent,
+    RejectionCardComponent,
     DocumentsComponent,
     DocumentCardComponent,
     TravellerDocumentsComponent,
@@ -272,7 +275,8 @@ import { PageHeaderComponent } from './components/layout/page-header/page-header
     //   preventDuplicates: true,
     // }),
 
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ImageCropperModule,
 
   ],
   providers: [DatePipe,

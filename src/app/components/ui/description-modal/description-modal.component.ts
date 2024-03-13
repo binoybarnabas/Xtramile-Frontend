@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 
@@ -22,8 +23,9 @@ export class DescriptionModalComponent {
     return this._requestId;
   }
   private _requestId!: number;
+  private cancelRequestSubscription!: Subscription;
   optionForm: FormGroup;
-  empId: number = 9;
+  empId: number = 0;
   constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private apiservice: ManagerTravelRequestsService, private route: ActivatedRoute, private router: Router, private toastService: CustomToastService) {
     this.optionForm = this.formBuilder.group({
       description: ['', Validators.required]
@@ -32,6 +34,10 @@ export class DescriptionModalComponent {
   }
   ngOnInit() {
     console.log(this.requestId)
+    if (localStorage.getItem('userData')) {
+      const userData = JSON.parse(localStorage.getItem('userData')!)
+      this.empId = userData.empId;
+    }
   }
   closeModal() {
     console.log(this.requestId)
@@ -68,6 +74,9 @@ export class DescriptionModalComponent {
             this.toastService.showToast("Travel Request Rejected!")
           }
         })
+        if (this.cancelRequestSubscription) {
+          this.cancelRequestSubscription.unsubscribe();
+        }
 
     }
   }

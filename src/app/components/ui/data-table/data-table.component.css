@@ -22,6 +22,7 @@
   border-collapse: collapse;
   margin-top: 1rem;
   border-style: none;
+  background-color: var(--card-bg-color);
 }
 
 .data_table_container .dynamic_table .table_row {

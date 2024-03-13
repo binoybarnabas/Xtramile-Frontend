@@ -140,6 +140,7 @@
 
 
 .main_container .inner_container .top_container .background_image .profile_picture {
+  position: relative;
   position: absolute;
   bottom: 0.4em;
   left: 4em;
@@ -149,7 +150,7 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-
+  display: flex;
 }
 
 /* 
@@ -260,10 +261,7 @@
   color: var(--secondary-orange-color);
   margin: 0;
 
-
 }
-
-
 
 .main_container .inner_container .bottom_section {
   /* position: absolute; */
@@ -312,12 +310,12 @@
 .form-control[readonly] {
   background-color: var(--card-bg-color);
   outline: none;
-
 }
 
 .form-control[readonly]:focus {
   cursor: no-drop;
   outline: none;
+  box-shadow: none;
 }
 
 .form-control:not([readonly]) {
@@ -372,4 +370,17 @@
   .inner_container {
     max-width: 100%;
   }
+}
+.main_container .inner_container .top_container .background_image .profile_data_container .profile_picture .ri-pencil-fill {
+  position: absolute;
+  z-index: 2;
+  font-size: 1.5em;
+  color: var(--primary-text-color);
+  top: 2.5em; 
+  right: 0.5em; 
+}
+.modal_50w {
+  width: 28% !important;
+  /* margin: 0 auto; */
+  margin-top: 5em;
 }
