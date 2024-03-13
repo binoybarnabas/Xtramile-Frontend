@@ -8,22 +8,33 @@
     <i class="icon ri-draggable"></i>
   </div>
 
+  <!-- Dashboard -->
   <div class="side_bar_main">
+
+    <div *ngIf="isSideNavBarCollapsed === 1"
+    class="collapsed_icon_card  active">
     <i
-      *ngIf="isSideNavBarCollapsed === 1"
       class="collapsed_icon ri-dashboard-line"
     ></i>
+    <!-- <span class="collapsed_text" >Dashboard</span> -->
+    </div>
+
 
     <p class="main_title active" (click)="navigateToRequest('dashboard')">
       <i class="left_icon ri-dashboard-line"></i> Dashboard
     </p>
   </div>
 
+  <!-- Travel Req -->
   <div class="side_bar_main" (click)="toggleSubMenu('1')">
+
+    <div *ngIf="isSideNavBarCollapsed === 1"
+    class="collapsed_icon_card">
     <i
-      *ngIf="isSideNavBarCollapsed === 1"
       class="collapsed_icon ri-suitcase-2-line"
     ></i>
+    <!-- <span class="collapsed_text" >Dashboard</span> -->
+    </div>
 
     <p class="main_title">
       <i class="left_icon ri-suitcase-2-line"></i> Travel Requests
@@ -49,11 +60,16 @@
     </div>
   </div>
 
-  <div class="side_bar_main" (click)="toggleSubMenu('2')">
+  <!-- Travel Setllements -->
+  <!-- <div class="side_bar_main" (click)="toggleSubMenu('2')">
+
+    <div *ngIf="isSideNavBarCollapsed === 1"
+    class="collapsed_icon_card">
     <i
-      *ngIf="isSideNavBarCollapsed === 1"
       class="collapsed_icon ri-cash-line"
     ></i>
+    </div>
+    
 
     <p class="main_title">
       <i class="left_icon ri-cash-line"></i> Travel Settlements
@@ -77,13 +93,18 @@
         </li>
       </ng-container>
     </div>
-  </div>
+  </div> -->
 
+  <!-- My Requests -->
   <div class="side_bar_main" (click)="toggleSubMenu('3')">
+
+    <div *ngIf="isSideNavBarCollapsed === 1"
+    class="collapsed_icon_card">
     <i
-      *ngIf="isSideNavBarCollapsed === 1"
       class="collapsed_icon ri-bill-line"
     ></i>
+    <!-- <span class="collapsed_text" >Dashboard</span> -->
+    </div>
 
     <p class="main_title">
       <i class="left_icon ri-bill-line"></i> My Requests
@@ -109,11 +130,15 @@
     </div>
   </div>
 
-  <div class="side_bar_main" (click)="toggleSubMenu('4')">
+  <!-- My Settlements -->
+  <!-- <div class="side_bar_main" (click)="toggleSubMenu('4')">
+
+    <div *ngIf="isSideNavBarCollapsed === 1"
+    class="collapsed_icon_card">
     <i
-      *ngIf="isSideNavBarCollapsed === 1"
       class="collapsed_icon ri-currency-line"
     ></i>
+    </div>
 
     <p class="main_title">
       <i class="left_icon ri-currency-line"></i> My Settlements
@@ -137,15 +162,18 @@
         </li>
       </ng-container>
     </div>
-  </div>
+  </div> -->
 
   
-
   <div class="side_bar_main">
+
+    <div *ngIf="isSideNavBarCollapsed === 1"
+    class="collapsed_icon_card ">
     <i
-      *ngIf="isSideNavBarCollapsed === 1"
-      class="left_icon collapsed_icon ri-user-line"
+      class="collapsed_icon ri-user-line"
     ></i>
+    <!-- <span class="collapsed_text" >Dashboard</span> -->
+    </div>
     <p class="main_title" (click)="navigateToRequest('profile')">
       <i class="left_icon ri-user-line"></i> Profile
     </p>
@@ -159,4 +187,5 @@
 
     <p class="main_title"><i class="ri-logout-box-r-line"></i> Log out</p>
   </div>
+  
 </div>

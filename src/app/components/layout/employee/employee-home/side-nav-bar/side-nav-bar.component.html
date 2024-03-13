@@ -15,10 +15,15 @@
     </div> -->
 
   <div class="side_bar_main">
-    <i
+    <!-- <i
       *ngIf="isSideNavBarCollapsed === 1"
       class="collapsed_icon ri-dashboard-line"
-    ></i>
+    ></i> -->
+
+    <div *ngIf="isSideNavBarCollapsed === 1" class="collapsed_icon_card  active">
+    <i class="collapsed_icon ri-dashboard-line"></i>
+    <!-- <span class="collapsed_text" >Dashboard</span> -->
+    </div>
 
     <p
       class="main_title active"
@@ -34,10 +39,11 @@
     [ngClass]="{ active: activeItem === 'myrequests' }"
     (click)="toggleSubMenu('1')"
   >
-    <i
-      *ngIf="isSideNavBarCollapsed === 1"
-      class="collapsed_icon ri-sticky-note-add-line"
-    ></i>
+ 
+    <div *ngIf="isSideNavBarCollapsed === 1" class="collapsed_icon_card">
+      <i class="collapsed_icon ri-sticky-note-add-line"></i>
+      <!-- <span class="collapsed_text" >Dashboard</span> -->
+      </div>
 
     <p class="main_title">
       <i class="left_icon ri-sticky-note-add-line"></i> My Requests
@@ -64,11 +70,12 @@
   </div>
 
   <div class="side_bar_main" (click)="toggleSubMenu('2')">
-    <i
-      *ngIf="isSideNavBarCollapsed === 1"
-      class="collapsed_icon ri-bill-line"
-    ></i>
 
+    <div *ngIf="isSideNavBarCollapsed === 1" class="collapsed_icon_card">
+      <i class="collapsed_icon ri-bill-line "></i>
+      <!-- <span class="collapsed_text" >Dashboard</span> -->
+      </div>
+    
     <p class="main_title">
       <i class="left_icon ri-bill-line"></i> My Settlements
       <i
@@ -95,10 +102,11 @@
 
   <!-- Docs -->
   <div class="side_bar_main">
-    <i
-      *ngIf="isSideNavBarCollapsed === 1"
-      class="left_icon collapsed_icon ri-file-pdf-line"
-    ></i>
+
+    <div *ngIf="isSideNavBarCollapsed === 1" class="collapsed_icon_card">
+      <i class="collapsed_icon ri-file-pdf-line "></i>
+      <!-- <span class="collapsed_text" >Dashboard</span> -->
+      </div>
     <p class="main_title" (click)="navigateToRequest('documents')">
       <i class="ri-file-pdf-line"></i> My Documents
     </p>
@@ -120,10 +128,11 @@
   </div> -->
 
   <div class="side_bar_main">
-    <i
-      *ngIf="isSideNavBarCollapsed === 1"
-      class="left_icon collapsed_icon ri-user-line"
-    ></i>
+
+    <div *ngIf="isSideNavBarCollapsed === 1" class="collapsed_icon_card">
+      <i class="collapsed_icon ri-user-line "></i>
+      <!-- <span class="collapsed_text" >Dashboard</span> -->
+      </div>
     <p class="main_title" (click)="navigateToRequest('profile')">
       <i class="left_icon ri-user-line"></i> Profile
     </p>

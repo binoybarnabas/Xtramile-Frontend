@@ -15,7 +15,9 @@
   </div>
 
   <div class="right_section">
+
     <div class="form_container">
+
       <div *ngIf="isLoading" class="loader"></div>
       <form
         (ngSubmit)="travelRequestFormSubmitFunction()"
@@ -25,7 +27,7 @@
         <!-- general info section -->
         <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group">
           <div class="form_title">
-            <h4>General Informations</h4>
+            <p class="title_text">General Informations</p>
           </div>
 
           <div
@@ -125,7 +127,7 @@
         <!-- trip info section -->
         <div *ngIf="newReqFormSubMenuValue === 1" class="form_input_group">
           <div class="form_title">
-            <h4>Trip Informations</h4>
+            <p class="title_text">Trip Informations</p>
           </div>
 
           <div
@@ -508,7 +510,7 @@
         <!-- additional info section -->
         <div *ngIf="newReqFormSubMenuValue === 2" class="form_input_group">
           <div class="form_title">
-            <h4>Additional Informations</h4>
+            <p class="title_text">Additional Informations</p>
           </div>
 
           <div
@@ -657,7 +659,7 @@
             </ng-container>
 
             <!-- Priority - Visisble for manager -->
-            <div
+            <!-- <div
               *ngIf="currentLoggedInUserRole === 'manager'"
               class="form_input_container"
             >
@@ -689,6 +691,7 @@
                 </span>
               </div>
             </div>
+             -->
           </div>
 
           <!-- If Employee then submit -->
@@ -752,7 +755,7 @@
           class="form_input_group"
         >
           <div class="form_title">
-            <h4>Documents Attached</h4>
+            <p class="title_text">Documents Attached</p>
           </div>
 
           <div class="form_elements">
@@ -801,7 +804,7 @@
             </div>
             <div class="btn_container">
               <button
-                (click)="changeNewReqFormSubMenuValue(1)"
+                (click)="changeNewReqFormSubMenuValue(2)"
                 class="cancel_btn"
               >
                 Back
