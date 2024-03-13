@@ -137,7 +137,7 @@ import { TextEditorComponent } from './components/ui/text-editor/text-editor.com
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { FileOptionViewerComponent } from './file-option-viewer/file-option-viewer.component';
+import { FileOptionViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/file-option-viewer/file-option-viewer.component';
 
 @NgModule({
   declarations: [
