@@ -14,10 +14,10 @@ export class EmployeeProfileComponent {
   employeeId!: number;
   initialValue: { [key: string]: any } = {}; //to store the initial value of contact and address
   initialData: { [key: string]: any } = {}; // to store the initial value of all other data
-  // Inside the component class
+ 
   profileImage: string | null = null;
   newImageSelected: boolean = false;
-  defaultImageUrl: string = 'https://media.istockphoto.com/vectors/businessman-profile-icon-male-portrait-flat-vector-id530838817?k=20&m=530838817&s=170667a&w=0&h=uv1NsUb1a5aC3C8FK14TSxLvEyA77rZJVwdlQh66JQU=';
+  
  
   @ViewChild('imageCropModal') imageCropModal: any; // Reference to the image cropping modal
   imageChangedEvent: any = '';
@@ -50,7 +50,7 @@ export class EmployeeProfileComponent {
     projectId: new FormControl({ value: '', disabled: true }),
     projectName: new FormControl({ value: '', disabled: true }),
     address: new FormControl('', Validators.required),
-    profilePicture:new FormControl('',Validators.required)
+    profilePicture:new FormControl('')
   });
   ngOnInit() {
     this.form.disable();
@@ -123,6 +123,8 @@ export class EmployeeProfileComponent {
 
     console.log('upadted Data', updatedData)
     console.log('initial value', this.initialValue)
+    console.log(this.form.controls);
+
 
     //  check if the initially stored value is same as the value in the form after the user click on save button.
     //  if the value is same make updatedData value as undefined otherwise assign the new value to the updated.
@@ -147,7 +149,7 @@ export class EmployeeProfileComponent {
       //whenever user click on edit and save button unnecessary API call won't go
       if (this.form.dirty && this.form.touched && this.form.valid) {
         console.log('updated value', updatedData)
-        this.service.updateProfile(this.employeeId, updatedData, formData).subscribe(() => {
+        this.service.updateProfile(this.employeeId, updatedData).subscribe(() => {
           console.log('PATCH request successful');
           this.toggleEditMode();
 

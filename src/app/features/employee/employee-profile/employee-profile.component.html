@@ -274,7 +274,8 @@
               class="profile_validation_color"
               *ngIf="
                 form.get('contactNumber')?.hasError('pattern') ||
-                form.get('contactNumber')?.hasError('maxlength')
+                form.get('contactNumber')?.hasError('maxlength') ||
+                form.get('contactNumber')?.hasError('minlength')
               "
             >
               *Please enter a valid number.
