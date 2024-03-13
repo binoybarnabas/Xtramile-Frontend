@@ -32,7 +32,7 @@ export class TravelRequestFormComponent {
   selectedTravelAuthMailFileName: any;
 
   selectedTripType: string;
-  selectedTravelMode: string;
+  selectedTravelMode: number;
   selectedTravelType: string;
 
   selectedOrigin: string;
@@ -78,6 +78,9 @@ export class TravelRequestFormComponent {
 
   travelModes: any[] = [];
 
+  //mapping travel mode remix icons with combination of modeId and modeName
+  travelModeIconValueTripletMap = new Map<string, [number, string]>();
+
   availableDepartureTimes: string[] = [];
 
   cities = cities;//Fetch Data From Any External API
@@ -92,8 +95,7 @@ export class TravelRequestFormComponent {
     private modalService: BsModalService,
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
-    private shortYearDateFormatPipe: ShortYearDateFormatPipe,
-
+    private shortYearDateFormatPipe: ShortYearDateFormatPipe
   ) {
 
     // Get current date
@@ -108,7 +110,7 @@ export class TravelRequestFormComponent {
     this.empId = this.userData?.empId
     this.isProjectDetailsSectionOpen = false;
     this.selectedTripType = 'round_trip';
-    this.selectedTravelMode = 'flight';
+    this.selectedTravelMode = 1;
     this.selectedOrigin = 'Trivandrum';
     this.selectedDestination = 'Kochi';
     this.selectedTravelType = 'domestic'
@@ -163,7 +165,7 @@ export class TravelRequestFormComponent {
     this.selectedTripType = tripType;
   }
 
-  changeTravelMode(travelMode: string) {
+  changeTravelMode(travelMode: number) {
     this.selectedTravelMode = travelMode;
   }
 
@@ -244,7 +246,7 @@ export class TravelRequestFormComponent {
 
       //Trip Info
       tripType: new FormControl(this.selectedTripType, Validators.nullValidator),
-      travelMode: new FormControl(this.selectedTravelMode, Validators.nullValidator),
+      travelModeId: new FormControl(this.selectedTravelMode, Validators.nullValidator),
       tripPurpose: new FormControl(this.selectedTravelPurpose, Validators.required),
       departureDate: new FormControl(this.today, Validators.required),
       returnDate: new FormControl(this.tomorrow, Validators.nullValidator),
@@ -257,7 +259,7 @@ export class TravelRequestFormComponent {
 
       //Domestic / International
       travelType: new FormControl(this.selectedTravelType, Validators.required),
-      projectCode: new FormControl(this.projectCodes[0], Validators.required),
+      projectId: new FormControl(this.projectCodes[0], Validators.required),
 
       //Additional Info
       cabRequired: new FormControl(false, Validators.required),
@@ -326,7 +328,7 @@ export class TravelRequestFormComponent {
       }
     }
     return null;
-  }
+  }     
 
   //Handling File Changes
   // onFileChange(event: any, controlName: string): void {
@@ -393,10 +395,63 @@ export class TravelRequestFormComponent {
       .subscribe((data: any) => {
         // Assuming data is an array of project codes
         this.travelModes = data;
+
         console.log(data)
+        this.setTravelModeIconValueMap();
       });
 
   }
+
+  //set remix icons based on the values fetch from back end
+  setTravelModeIconValueMap() {
+
+    this.travelModes.forEach(mode => {
+
+      //mapping modeNames with remix icons
+      switch (mode.modeName) {
+
+        case 'Flight':
+          this.travelModeIconValueTripletMap.set("ri-plane-line", [mode.modeId, mode.modeName]);
+          break;
+
+        case 'Train':
+          this.travelModeIconValueTripletMap.set("ri-train-line", [mode.modeId, mode.modeName]);
+          break;
+
+        case 'Bus':
+          this.travelModeIconValueTripletMap.set("ri-bus-line", [mode.modeId, mode.modeName]);
+          break;
+
+        case 'Cab':
+          this.travelModeIconValueTripletMap.set("ri-taxi-line", [mode.modeId, mode.modeName]);
+          break;
+
+        default:
+          this.travelModeIconValueTripletMap.set("ri-car-line", [mode.modeId, mode.modeName]);
+          break;
+
+      }
+
+    });
+
+  }
+
+  //getModeId From the triplet map using keyname
+  getModeIdFromMapUsingKey(key: string) {
+    const triplet = this.travelModeIconValueTripletMap.get(key);
+    if (triplet) {
+      return triplet[0];
+    } else {
+      return 0;
+    }
+  }
+
+
+  // Function to convert the Map into an array of key-value pairs
+  getTravelModeInfoMapEntries(): [string, any][] {
+    return Array.from(this.travelModeIconValueTripletMap.entries());
+  }
+
 
   //listening to changes happening on origin and destination fields
   subscribeToOriginAndDestinationChanges() {
@@ -514,18 +569,23 @@ export class TravelRequestFormComponent {
     alert("submitted")
     console.log("TEST SUBMITTED DATA");
 
-    this.travelRequestForm.value.travelMode = this.selectedTravelMode;
+    this.travelRequestForm.value.travelModeId = this.selectedTravelMode;
     this.travelRequestForm.value.tripType = this.selectedTripType;
     this.travelRequestForm.value.prefDepartureTime = this.selectedPrefDepTime;
     this.travelRequestForm.value.prefPickUpTime = this.selectedPrefPickUpTime;
-
+    this.travelRequestForm.value.accommodationRequired = this.travelRequestForm.value.accommodationRequired === true ? 'yes':'no';
+    this.travelRequestForm.value.cabRequired = this.travelRequestForm.value.cabRequired === true ? 'yes':'no';
     console.log(this.travelRequestForm.value);
     console.log("DONE");
 
+    this.requestService.sendEmployeeNewTravelRequest(this.travelRequestForm.value).subscribe({
+      next:(response)=>{
+        console.log(response);
+      },
+      error:(error:Error)=>{
+        console.log(error);
+      }
+    });
   }
-
-
-
-
   //eof
 }
