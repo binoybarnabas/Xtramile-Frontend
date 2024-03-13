@@ -3,117 +3,150 @@
   It includes a header with the title "Profile" and a main container containing a form for user details. 
   The page features:
   > a background image
+
   > a dynamic "Edit/Save" button 
   > displays a profile picture
   > full name 
   > department 
   The form contains input fields for various details, with some being editable only in "Edit" mode. 
-  Validation messages are included for the contact number field. Active only in "Edit" mode. 
+  Validation messages are included for the contact number field. 
+  Additionally, there are file upload options for passport and ID card documents, active only in "Edit" mode. 
 -->
-<body>
-  <!-- <div class="profile_header">
+<!-- <body> -->
+<!-- <div class="profile_header">
     <h1>Profile</h1>
   </div> -->
-  <div class="main_container">
-    <div class="inner_container">
-      <form [formGroup]="form">
-        <div class="top_container">
-          <div class="background_image">
-            <!-- background image -->
-            <img
+
+<div class="main_container">
+  <div class="inner_container">
+    <form [formGroup]="form">
+      <div class="top_container">
+        <div class="background_image">
+          <!-- <div class="action_btn_container">
+              <button class="action_btn">Edit</button>
+            </div> -->
+
+          <div class="cover_name_container">
+            <h1 class="cover_name">{{ form.get("firstName")?.value }}</h1>
+          </div>
+
+          <!-- bg -->
+          <!-- <img
               class="img-fluid"
-              src="https://focusworldtours.com/wp-content/uploads/2023/01/Cover-1.jpg"
-            />
-            <!-- black transparent container infront of the background image -->
-            <div class="black_container">
-              <!-- edit or save button -->
+              src="https://images.pexels.com/photos/315934/pexels-photo-315934.jpeg"
+            /> -->
+
+          <img
+            class="img-fluid"
+            src="https://images.pexels.com/photos/261986/pexels-photo-261986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            "
+            alt=""
+          />
+
+          <div class="black_container">
+            <!-- edit or save button -->
+            <div class="action_btn_container">
               <button
                 [type]="editMode ? 'submit' : 'button'"
-                class="button"
                 (click)="!editMode ? toggleEditMode() : onSubmit()"
+                class="action_btn"
+                [ngClass]="editMode ? 'action_btn_edit_mode' : 'action_btn'"
               >
                 <span class="button_content">{{
                   editMode ? "Save" : "Edit"
                 }}</span>
               </button>
             </div>
-            <div>
-              <input
-                type="file"
-                accept="image/*"
-                (change)="onImageSelected($event)"
-                [hidden]="true"
-                formControlName="profilePicture"
-                #mymodal
-              />
-              <!-- profile picture, add 'editable' class when in edit mode -->
-              <div class="profile_picture" (click)="onProfilePictureClick()">
-                <img
-                  class="img-fluid"
-                  src="{{ profileImage ? profileImage : defaultImageUrl }}"
-                />
-                <i class="ri-pencil-fill" *ngIf="editMode"></i>
-              </div>
+          </div>
 
-              <!-- Image Crop Modal -->
-              <div
-                #imageCropModal
-                id="mymodal"
-                class="modal"
-                tabindex="-1"
-                role="dialog"
-                [ngStyle]="{ display: display }"
-              >
-                <div class="modal-dialog modal-lg modal_50w" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Crop Image</h5>
-                    </div>
-                    <div class="modal-body">
-                      <image-cropper
-                        [imageChangedEvent]="imageChangedEvent"
-                        [maintainAspectRatio]="true"
-                        [aspectRatio]="4 / 4"
-                        [resizeToWidth]="300"
-                        [cropperMinWidth]="100"
-                        [cropperMinHeight]="100"
-                        [canvasRotation]="0"
-                        format="png"
-                        (imageCropped)="imageCropped($event)"
-                      ></image-cropper>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="onCropImageSave()"
-                      >
-                        Save
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        (click)="closeModal()"
-                      >
-                        Close
-                      </button>
-                    </div>
+          <div class="profile_data_container">
+            <input
+              type="file"
+              accept="image/*"
+              (change)="onImageSelected($event)"
+              [hidden]="true"
+              formControlName="profilePicture"
+              #mymodal
+            />
+            <div class="profile_picture" (click)="onProfilePictureClick()">
+              <img
+                class="img-fluid"
+                src="{{
+                  profileImage
+                    ? profileImage
+                    : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&usqp=CAU'
+                }}"
+              />
+              <i class="ri-pencil-fill" *ngIf="editMode"></i>
+            </div>
+            <!-- Image Crop Modal -->
+            <div
+              #imageCropModal
+              id="mymodal"
+              class="modal"
+              tabindex="-1"
+              role="dialog"
+              [ngStyle]="{ display: display }"
+            >
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Crop Image</h5>
+                    <button
+                      type="button"
+                      class="close"
+                      (click)="closeModal()"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <image-cropper
+                      [imageChangedEvent]="imageChangedEvent"
+                      [maintainAspectRatio]="true"
+                      [aspectRatio]="4 / 4"
+                      [resizeToWidth]="300"
+                      [cropperMinWidth]="100"
+                      [cropperMinHeight]="100"
+                      [canvasRotation]="0"
+                      format="png"
+                      (imageCropped)="imageCropped($event)"
+                    ></image-cropper>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      (click)="onCropImageSave()"
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      (click)="closeModal()"
+                    >
+                      Close
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- full name and department of the employee -->
             <div class="text_details">
-              <h3>
+              <h3 class="name">
                 {{ form.get("firstName")?.value }}
                 {{ form.get("lastName")?.value }}
               </h3>
-              <p>{{ form.get("department")?.value }}</p>
+              <p class="department">{{ form.get("department")?.value }}</p>
             </div>
           </div>
         </div>
-        <!-- general details of the employee -->
+      </div>
+
+      <!-- general details of the employee -->
+      <div class="bottom_section">
         <div class="form-row">
           <!-- first Name, not editable by the employee-->
           <div class="form-column">
@@ -148,38 +181,10 @@
               formControlName="email"
             />
           </div>
-          <!-- contactNumber, editable by the employee-->
-          <div class="form-column">
-            <label for="phone">Phone</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="contactNumber"
-              [readonly]="!editMode"
-              [style.color]="'#808080'"
-              [style.border-color]="'#80bdff'"
-            />
-            <!-- validations for contact Number -->
-            <div
-              class="profile_validation_color"
-              *ngIf="form.get('contactNumber')?.hasError('required')"
-            >
-              *Phone number is required.
-            </div>
-            <div
-              class="profile_validation_color"
-              *ngIf="
-                form.get('contactNumber')?.hasError('pattern') ||
-                form.get('contactNumber')?.hasError('maxlength') ||
-                form.get('contactNumber')?.hasError('minlength')
-              "
-            >
-              *Please enter a valid number.
-            </div>
-          </div>
+
           <!-- Department Name, not editable by the employee-->
           <div class="form-column">
-            <label for="fname">Department</label>
+            <label class="label" for="fname">Department</label>
             <input
               type="text"
               class="form-control"
@@ -221,15 +226,14 @@
               formControlName="projectName"
             />
           </div>
+
           <!-- address , editable by the employee-->
           <div class="form-column">
-            <label for="address">Address</label>
+            <label for="address">Address Line 1</label>
             <input
               type="text"
               class="form-control"
               formControlName="address"
-              [style.color]="'#808080'"
-              [style.border-color]="'#80bdff'"
               [readonly]="!editMode"
             />
             <!-- validations for address -->
@@ -240,8 +244,54 @@
               *Address is required.
             </div>
           </div>
+
+          <div class="form-column">
+            <label for="address">Address Line 2</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="address"
+              [readonly]="!editMode"
+            />
+            <!-- validations for address -->
+            <div
+              class="profile_validation_color"
+              *ngIf="form.get('address')?.hasError('required')"
+            >
+              *Address is required.
+            </div>
+          </div>
+
+          <!-- contactNumber, editable by the employee-->
+          <div class="form-column">
+            <label for="phone">Phone</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="contactNumber"
+              [readonly]="!editMode"
+            />
+            <!-- validations for contact Number -->
+            <div
+              class="profile_validation_color"
+              *ngIf="form.get('contactNumber')?.hasError('required')"
+            >
+              *Phone number is required.
+            </div>
+            <div
+              class="profile_validation_color"
+              *ngIf="
+                form.get('contactNumber')?.hasError('pattern') ||
+                form.get('contactNumber')?.hasError('maxlength')
+              "
+            >
+              *Please enter a valid number.
+            </div>
+          </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
-</body>
+</div>
+
+<!-- </body> -->

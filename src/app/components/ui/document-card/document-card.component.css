@@ -1,10 +1,7 @@
 .doc_card_container {
     display: grid;
-
     width: 100%;
-
 }
-
 
 .doc_card_container .doc_card {
     position: relative;
@@ -12,18 +9,13 @@
     height: 210px;
     perspective: 1000px;
     margin: 10px;
-
+    transition: 0.3s;
 }
 
-.doc_card_container .doc_card .front_side,
-.doc_card_container .doc_card .back_side {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    transition: transform 0.6s ease;
+.doc_card_container .doc_card:hover {
+    /* transform:scale3d(); */
+    transform: scale3d(1.03, 1.03, 1.03);
 }
-
 
 .front_side {
     transform: rotateY(0deg);
@@ -43,70 +35,85 @@
 
 .doc_card_container .doc_card .front_side,
 .doc_card_container .doc_card .back_side {
+
+    position: absolute;
+    /* width: 100%;
+    height: 100%; */
+    backface-visibility: hidden;
+    transition: transform 0.6s ease;
     color: var(--card-bg-color);
     padding: 0.8rem;
     width: 330px;
     height: 210px;
     border-radius: var(--normal-border-radius);
     box-shadow: var(--normal-box-shadow);
-    /* background-color: #000000; */
-    /* position: relative; */
-    /* background-color: #130f40;
-    background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
-    background-color: #2d3436; */
-
-    /* background-color: #130f40;
-    background-image: linear-gradient(315deg, #130f40 0%, #000000 74%); */
-
-    background: var(--dark-gradient-color);
 
 }
 
+.doc_card_container .doc_card .front_side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background: url('https://images.pexels.com/photos/315938/pexels-photo-315938.jpeg?auto=compress&cs=tinysrgb&w=600'); */
+    /* background: url('https://images.pexels.com/photos/2387533/pexels-photo-2387533.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
+
+    /* water drops */
+    background: url('https://images.pexels.com/photos/9668533/pexels-photo-9668533.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    /* background: url('https://images.pexels.com/photos/4121831/pexels-photo-4121831.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
+
+    /* car */
+    /* background: url('https://images.pexels.com/photos/261986/pexels-photo-261986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
+
+    /* background: url('https://images.pexels.com/photos/221189/pexels-photo-221189.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
+
+    background-size: cover;
+    /* border-left: 1px solid var(--third-color);
+    border-right: 1px solid var(--third-color); */
+    /* background: linear-gradient(#000000, #130F40); */
+}
 
 .doc_card_container .doc_card .front_side .top_section {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     color: var(--ternary-text-color);
-
+    /* background-color: aqua; */
 }
 
-.doc_card_container .doc_card .front_side .top_section .file_type_container .icon {
+
+.doc_card_container .doc_card .front_side .top_section .top_icon .icon {
     /* background-color: var(--card-bg-color); */
-    color: var(--card-bg-color);
+    color: var(--third-color);
     padding: 5px;
-    border-radius: var(--normal-border-radius);
+    border-radius: 7px;
     font-size: 1.4rem;
+    background-color: rgba(128, 128, 128, 0.09);
     /* border: 1px solid var(--card-bg-color); */
-
-
-
 }
 
-.doc_card_container .doc_card .front_side .top_section .file_type_container .value {
-    font-size: 1.2rem;
-    margin-left: 3px;
+.doc_card_container .doc_card .front_side .file_type_container {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    top: 0;
+    right: 0;
+    justify-content: center;
+}
+
+
+.doc_card_container .doc_card .front_side .file_type_container .value {
+    font-size: 2.8rem;
     font-weight: var(--active-font-weight);
-    color: var(--ternary-text-color);
-    /* text-transform: uppercase; */
-
-
+    color: rgba(128, 128, 128, 0.4);
+    text-transform: uppercase;
+    text-align: end;
 }
-
-.doc_card_container .doc_card .front_side .top_section .file_size_container .value {
-    font-size: var(--extra-small-font-size);
-    color: var(--ternary-text-color);
-}
-
-
 
 
 .doc_card_container .doc_card .front_side .middle_section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* padding-top: 10px; */
-    /* align-items: center; */
-
 }
 
 .doc_card_container .doc_card .front_side .middle_section .doc_number_container {
@@ -115,19 +122,16 @@
     align-items: center;
     font-size: var(--large-font-size);
     font-weight: var(--active-font-weight);
-    margin-top: 13px;
-    margin-bottom: 8px;
+    margin-top: 18px;
+    margin-bottom: 5px;
     padding: 5px;
     color: var(--card-bg-color);
-
-
 }
 
 .doc_card_container .doc_card .front_side .middle_section .doc_number_container .value {
     margin-top: auto;
     margin-bottom: auto;
 }
-
 
 .doc_card_container .doc_card .front_side .middle_section .date_container {
     display: flex;
@@ -148,8 +152,6 @@
 }
 
 
-
-
 .doc_card_container .doc_card .front_side .bottom_section {
 
     position: absolute;
@@ -161,13 +163,7 @@
     /* background: var(--dark-gradient-color); */
     border-radius: 0 0 var(--normal-border-radius) var(--normal-border-radius);
 
-    /* background-color: rgba(128, 128, 128, 0.07); */
-    /* Gray color with 50% opacity */
-
-
-
 }
-
 
 .doc_card_container .doc_card .front_side .bottom_section .action_buttons {
     display: flex;
@@ -180,9 +176,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: var(--normal-font-size);
+    font-size: var(--small-font-size);
     font-weight: var(--active-font-weight);
-    color: var(--ternary-text-color);
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-radius: 25px; */
+    /* padding: 0 10px; */
+
+    text-transform: uppercase;
+
 }
 
 
@@ -228,8 +232,22 @@
 
 .doc_card_container .doc_card .back_side {
     padding: 0;
+    /* background: var(--dark-gradient-color); */
+    background: url('https://images.pexels.com/photos/261986/pexels-photo-261986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
 }
 
+
+.doc_card_container .doc_card .back_side .file_size_container {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.doc_card_container .doc_card .back_side .file_size_container .value {
+    font-size: var(--extra-small-font-size);
+    color: var(--ternary-text-color);
+}
 
 .doc_card_container .doc_card .back_side .img_container .img {
     width: 330px;
