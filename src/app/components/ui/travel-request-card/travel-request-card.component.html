@@ -23,6 +23,16 @@
           <span class="title">Selected By</span>
           <p class="value">{{ item.statusModifiedBy }}</p>
         </div>
+
+        <div *ngIf="item.statusName == 'Denied'">
+          <span class="title">Rejected By</span>
+          <p class="value">{{ item.statusModifiedBy }}</p>
+        </div>
+
+        <div *ngIf="item.statusName == 'Resubmitted'">
+          <span class="title">Resubmitted By</span>
+          <p class="value">{{ item.statusModifiedBy }}</p>
+        </div>
       </div>
 
       <div class="right">
@@ -90,6 +100,8 @@
             [ngClass]="
               item.statusName === 'Forwarded'
                 ? 'value status_forwarded'
+                : item.statusName === 'Denied'
+                ? 'value status_denied'
                 : 'value status'
             "
           >
@@ -124,8 +136,16 @@
         >
       </div>
 
-      <div (click)="viewTravelOptions(item.requestId)" class="approve_btn">
-        <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label"
+      <div
+        [ngClass]="{ approve_btn: item.statusName === 'Denied' }"
+        (click)="viewTravelOptions(item.requestId)"
+      >
+        <span
+          *ngIf="
+            currentLoggedInUserRole === 'employee' &&
+            item.statusName === 'Denied'
+          "
+          class="btn_label"
           >View</span
         >
         <span *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label"
