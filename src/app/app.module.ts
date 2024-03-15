@@ -74,9 +74,9 @@ import { FinancePersonnelPendingBillsComponent } from './features/financePersonn
 import { FinancePersonnelClosedBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-closed-bills/finance-personnel-closed-bills.component';
 import { OptionCardComponent } from './components/ui/option-card/option-card.component';
 import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
-import { DataTableComponent } from './components/ui/data-table/data-table.component';
+import { DataTableComponent } from './components/ui/table-components/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { TableFilterComponent } from './components/ui/table-filter/table-filter.component';
+import { TableFilterComponent } from './components/ui/table-components/table-filter/table-filter.component';
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
 import { ReqFormComponent } from './features/manager/req-form/req-form.component';
 import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component';
@@ -132,7 +132,9 @@ import { DocumentCardComponent } from './components/ui/document-card/document-ca
 import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
 import { PageHeaderComponent } from './components/layout/page-header/page-header.component';
 import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
-import { ImageCropperModule } from 'ngx-image-cropper';
+//import { ImageCropperModule } from 'ngx-image-cropper';
+import { EmptyDataComponent } from './components/ui/empty-data/empty-data.component';
+
 
 @NgModule({
   declarations: [
@@ -252,7 +254,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     DocumentsComponent,
     DocumentCardComponent,
     TravellerDocumentsComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    EmptyDataComponent
   ]
   ,
 
@@ -276,7 +279,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     // }),
 
     ModalModule.forRoot(),
-    ImageCropperModule,
+    // ImageCropperModule,
 
   ],
   providers: [DatePipe,

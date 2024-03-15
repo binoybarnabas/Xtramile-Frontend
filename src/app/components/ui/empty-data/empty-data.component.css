@@ -1,0 +1,47 @@
+.main_container {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.main_container .empty_data_card {
+
+    width: 300px;
+    border-radius: var(--normal-border-radius);
+    box-shadow: var(--normal-box-shadow);
+    background-color: var(--card-bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    padding: 1.5rem;
+    transition: 0.3s;
+    /* border-bottom: 2px solid var(--first-color); */
+
+}
+
+
+
+
+.main_container .empty_data_card .info_container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.main_container .empty_data_card .info_container .main_title {
+    font-size: var(--medium-font-size);
+    font-weight: var(--active-font-weight);
+}
+
+
+.main_container .empty_data_card .info_container .sub_message {
+    font-size: var(--form-label-font-size);
+    color: var(--ternary-text-color);
+}

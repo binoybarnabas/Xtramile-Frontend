@@ -1,7 +1,9 @@
+<app-page-header [headingInputData]="pageHeading">
+
+</app-page-header>
+
 <div class="table_container">
-  <!-- <h4 class="title_2">Pending Approval</h4> -->
-  <!-- <span>Incoming Travel Requests</span>   -->
-  <!-- Include the component in your parent component -->
+
   <app-table-filter
     (dateSelected)="handleDateSelection($event)"
     (sortOptionSelected)="handleSortOptionSelection($event)"
@@ -17,10 +19,16 @@
     (rowClick)="handleSelectedRow($event)"
   ></app-data-table>
 
-  <pagination
+  <pagination 
     [itemsPerPage]="itemsPerPage"
     [totalItems]="totalItems"
     [(ngModel)]="currentPage"
     (pageChanged)="pageChanged($event)"
   ></pagination>
-</div>
+  
+
+  <!-- <pagination class="pull-right-sm" [boundaryLinks]="true" [maxSize]="5" [rotate]="true" 
+[itemsPerPage]="values.maxNumberOfRowsPerPage" [totalItems]="values.totalNumberOfRows" 
+[ngModel]="values.currentPage [pageBtnClass]="myCustomClass" (pageChanged)="update($event)" 
+previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+</div> -->

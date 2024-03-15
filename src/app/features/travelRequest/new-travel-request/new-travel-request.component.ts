@@ -131,7 +131,7 @@ export class NewTravelRequestComponent {
         }
         else {
           this.currentLoggedInUserRole = 'manager';
-          this.newReqFormSubMenuValue = 2;
+          //this.newReqFormSubMenuValue = 2;
         }
           break;
       }
@@ -373,7 +373,7 @@ export class NewTravelRequestComponent {
     //validation for manager editable field
     if (this.currentLoggedInUserRole === 'manager') {
       this.travelRequestForm = new FormGroup({
-        priority: new FormControl('', Validators.required)
+        priority: new FormControl('', Validators.nullValidator)
       });
 
     }
@@ -792,7 +792,6 @@ export class NewTravelRequestComponent {
 
         console.log("TRAVEL Options")
         console.log(this.travelOptionsData)
-        console.log(data);
         //console.log("OPTIONS DATA")
         //console.log(data);
 

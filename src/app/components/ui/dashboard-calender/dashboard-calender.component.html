@@ -27,9 +27,7 @@
           *ngFor="let day of week"
           [ngClass]="{
             'highlighted-departure': isDepartureDate(day),
-            'highlighted-return': isReturnDate(day),
-            'highlighted-within-range':
-              isWithinRange(day) && !isDepartureDate(day) && !isReturnDate(day)
+            'highlighted-return': isReturnDate(day)  
           }"
         >
           {{ day ? day.getDate() : "" }}

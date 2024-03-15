@@ -119,7 +119,6 @@ export class TravellerDocumentsComponent {
         formData.append('File', fileInput.value);
       }
 
-      console.log(formData)
       this.documentService.sendDocumentData(formData).subscribe({
         next: (response) => {
           this.toggleDocUploadModal(false);

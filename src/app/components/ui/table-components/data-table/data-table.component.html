@@ -1,16 +1,20 @@
 <div class="data_table_container">
-  <div>
-    <table class="dynamic_table col-10 col-md-3 mb-2">
-      <thead>
-        <tr class="table_heading">
-          <th *ngFor="let header of headers">{{ header }}</th>
+
+  
+    <table class="dynamic_table">
+
+      <thead class="table_heading">
+        <tr class="table_heading_row">
+          <th class="heading_text" *ngFor="let header of headers">{{ header }}</th>
         </tr>
       </thead>
 
-      <tbody>
-        <tr *ngFor="let row of data" (click)="onRowClick(row)">
+      <tbody class="table_body">
+
+        <tr class="table_body_row" *ngFor="let row of data" (click)="onRowClick(row)">
+          
           <td
-            class="table_row"
+            class="table_data"
             *ngFor="let prop of displayedProperties; let i = index"
             [ngClass]="{
               status_pending: headers[i] === 'Status' && row[prop] === 'Open',
@@ -40,8 +44,11 @@
               </ng-template>
             </ng-template>
           </td>
+          
         </tr>
+
       </tbody>
     </table>
-  </div>
+  
+
 </div>

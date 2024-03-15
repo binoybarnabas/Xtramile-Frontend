@@ -1,0 +1,132 @@
+.table_filter_container {
+    margin-top: 1rem;
+    background-color: var(--menu-hover-color);
+    border-radius: var(--normal-border-radius);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.table_filter_container .filter_items_section {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.table_filter_container .filter_items_section .date_picker_section {
+    display: flex;
+    width: 20%;
+    background-color: var(--card-bg-color);
+    display: flex;
+    align-self: center;
+    padding: 0 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+}
+
+.table_filter_container .filter_items_section .date_picker_section .date_picker {
+    width: 100%;
+    height: 40px;
+    font-size: var(--form-label-font-size);
+    font-weight: var(--active-font-weight);
+    outline: none;
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    margin-left: 5px;
+}
+
+.table_filter_container .filter_items_section .date_picker_section .icon {
+
+    z-index: 999;
+    color: var(--ternary-text-color);
+    font-weight: var(--active-font-weight);
+    font-size: var(--normal-font-size);
+    margin-top: auto;
+    margin-bottom: auto;
+
+}
+
+.table_filter_container .filter_items_section .sort_section {
+    display: flex;
+    width: 20%;
+    background-color: var(--card-bg-color);
+    display: flex;
+    align-self: center;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.table_filter_container .filter_items_section .sort_section .filter_item {
+    height: 40px;
+    font-size: var(--form-label-font-size);
+    font-weight: var(--active-font-weight);
+    outline: none;
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    padding: 0 10px;
+    color: var(--ternary-text-color);
+
+}
+
+.table_filter_container .filter_items_section .search_section {
+    display: flex;
+    width: 50%;
+    background-color: var(--card-bg-color);
+    display: flex;
+    align-self: center;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+.table_filter_container .filter_items_section .search_section .search_icon {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    color: var(--ternary-text-color);
+}
+
+
+.table_filter_container .filter_items_section .search_section .filter_item {
+    height: 40px;
+    font-size: var(--form-label-font-size);
+    font-weight: var(--active-font-weight);
+    outline: none;
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    padding: 0 10px;
+}
+
+.table_filter_container .filter_items_section .see_all_btn_section {
+    display: flex;
+    width: 10%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 10px;
+    height: 40px;
+    background-color: var(--card-bg-color);
+}
+
+.table_filter_container .filter_items_section .see_all_btn_section:hover .see_all_btn {
+    color: var(--first-color);
+}
+
+.table_filter_container .filter_items_section .see_all_btn_section .see_all_btn {
+    background-color: transparent;
+    color: var(--ternary-text-color);
+    border: none;
+    font-weight: var(--active-font-weight);
+    font-size: var(--form-label-font-size);
+}
