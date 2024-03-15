@@ -133,6 +133,11 @@ import { TravellerDocumentsComponent } from './features/employee/myDocuments/tra
 import { PageHeaderComponent } from './components/layout/page-header/page-header.component';
 import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { TextEditorComponent } from './components/ui/text-editor/text-editor.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { FileOptionViewerComponent } from './file-option-viewer/file-option-viewer.component';
 
 @NgModule({
   declarations: [
@@ -252,7 +257,10 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     DocumentsComponent,
     DocumentCardComponent,
     TravellerDocumentsComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    TextEditorComponent,
+    ManagerTravelOptionsViewerComponent,
+    FileOptionViewerComponent
   ]
   ,
 
@@ -277,7 +285,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 
     ModalModule.forRoot(),
     ImageCropperModule,
-
+    EditorModule,
+    TabsModule.forRoot()
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true }],

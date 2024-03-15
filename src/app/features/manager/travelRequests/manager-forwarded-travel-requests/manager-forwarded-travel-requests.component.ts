@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
@@ -19,7 +19,7 @@ export class ManagerForwardedTravelRequestsComponent {
   currentPage = 1;
   tableHeaders=['RequestID','Employee','ProjectCode','Date','Status'] ;
   dataHeaders=['requestId','employeeNameAndEmail','projectCode','date','status'] ;
-  constructor( private apiService: ManagerTravelRequestsService,private router:Router, private datePipe: DatePipe)
+  constructor( private apiService: ManagerTravelRequestsService,private router:Router, private datePipe: DatePipe, private activatedRoute: ActivatedRoute)
   {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
@@ -61,5 +61,21 @@ export class ManagerForwardedTravelRequestsComponent {
   pageChanged(event: any): void {
     this.currentPage = event.page;
     this.getManagerForwardRequests();
+  }
+
+  // navigation 
+  selectedRow: any;
+  requestId!:number;
+  handleSelectedRow(row: any){
+    this.selectedRow = row;
+    console.log(this.selectedRow.requestId)
+    this.requestId = this.selectedRow.requestId
+    const queryParams = { requestId: this.requestId }
+    this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: queryParams });
+    
+    // this.router.navigate(['view_travel_options'],{
+    //   relativeTo: this.activatedRoute,
+    //   queryParams: {requestId: this.requestId}
+    // })
   }
 }

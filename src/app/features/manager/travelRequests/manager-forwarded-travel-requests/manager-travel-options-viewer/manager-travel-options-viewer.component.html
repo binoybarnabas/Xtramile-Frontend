@@ -1,0 +1,20 @@
+<tabset>
+  <tab heading="Tab 1">
+    <app-optionview-card></app-optionview-card>
+  </tab>
+  <tab heading="Tab 2">
+    <div *ngFor="let item of descriptions; let i = index" class="panel">
+      <div class="panel-header" (click)="togglePanel(item)">
+        Option {{ i + 1 }}
+        <!-- Button to confirm option -->
+        <button class="confirm-button" *ngIf="item.expanded" (click)="confirmOption(item.optionId)">Confirm</button>
+      </div>
+      <div class="panel-content" [@expandCollapse]="item.expanded ? 'expanded' : 'collapsed'">
+        <div [innerHTML]="item.htmlString"></div>
+      </div>
+    </div>
+  </tab>
+  <tab heading="Tab 3">
+    <p>jhdjgj</p>
+  </tab>
+</tabset>

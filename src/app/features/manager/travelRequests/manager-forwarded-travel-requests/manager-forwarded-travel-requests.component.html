@@ -3,9 +3,10 @@
  
   <app-data-table [headers]="tableHeaders"
   [data]="travelRequest"
-  [displayedProperties]="dataHeaders"></app-data-table>
+  [displayedProperties]="dataHeaders"
+  (rowClick)="handleSelectedRow($event)"></app-data-table>
  
- 
+ s
   <pagination [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" ></pagination></div>
  
 <div *ngIf="travelRequest?.length === 0">

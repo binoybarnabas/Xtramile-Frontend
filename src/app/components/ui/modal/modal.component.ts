@@ -51,7 +51,6 @@ export class ModalComponent {
 
   closeModal() {
     this.bsModalRef.hide();
-
   }
 
 

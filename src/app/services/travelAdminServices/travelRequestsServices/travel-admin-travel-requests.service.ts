@@ -124,6 +124,8 @@ export class TravelAdminTravelRequestsService {
     return this.http.post(this.apiURL + '/availableoptions/addoption', travelOptionData, { headers, responseType: 'text' });
   }
 
-
+  saveTravelOption(htmlContent: string, requestId: number): Observable<any> {
+    return this.http.post<any>(`http://localhost:5190/api/availableoptions/addtextoption`, { htmlContent, requestId });
+  }
 
 }

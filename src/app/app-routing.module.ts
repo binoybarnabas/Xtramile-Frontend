@@ -47,6 +47,7 @@ import { TravelRequestFormComponent } from './features/travel-request-form/trave
 import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
 import { DocumentsComponent } from './components/ui/documents/documents.component';
 import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
+import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -75,10 +76,14 @@ const routes: Routes = [
   },
   {
     path: 'manager', component: ManagerHomeComponent, canActivate: [authGuard], children: [
-      { path: 'dashboard', component: ManagerDashboardComponent },
+      { path: 'dashboard', component: ManagerTravelOptionsViewerComponent},
       { path: 'requestdetail', component: NewTravelRequestComponent },
       { path: 'newrequest', component: ManagerIncomingTravelRequestsComponent },
-      { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
+      { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent,children: [
+        {
+          path: 'view_options_travel', component: ManagerTravelOptionsViewerComponent
+        }
+      ] },
       { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
       { path: 'closed', component: ManagerClosedTravelRequestsComponent },
       { path: 'request', component: NewTravelRequestComponent },

@@ -1,0 +1,26 @@
+.panel {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.panel-header {
+  background-color: #f0f0f0;
+  padding: 10px;
+  position: relative; /* Position relative to allow absolute positioning of the button */
+}
+
+.confirm-button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.panel-content {
+  padding: 10px;
+  overflow: auto; 
+}
+
+.hide {
+  display: none;
+}
