@@ -15,8 +15,8 @@
       </div>
       <div class="location_container">
         <p class="location">
-          <i class="map_pin_icon ri-map-pin-fill"></i> {{ sourceCity }},
-          {{ sourceCountry }}
+          <i class="map_pin_icon ri-map-pin-fill"></i> {{ destinationCity }},
+          {{ destinationCountry }}
         </p>
       </div>
     </div>
@@ -62,11 +62,9 @@
         </div>
       </div>
 
-      <div class="action_btn_container">
+      <div class="action_btn_container" (click)="viewOngoingDetails()">
         <div class="view_btn">
-          <span class="btn_text" (click)="viewOngoingDetails()"
-            >View Detail</span
-          >
+          <span class="btn_text">View Detail</span>
         </div>
       </div>
     </div>

@@ -76,7 +76,7 @@ export class DashboardUpcomingTripsComponent {
           // Find the specific country in the data
           const country = countryData.find(
             (c: { countryName: string }) =>
-              c.countryName === this.sourceCountry
+              c.countryName === this.destinationCountry
           );
           console.log('country data',countryData)
   
@@ -84,7 +84,7 @@ export class DashboardUpcomingTripsComponent {
           if (country) {
             this.countryName = country.countryName;
             // Find the city in the country's cities array
-            const city = country.cities.find((c: { cityName: string }) => c.cityName === this.sourceCity);
+            const city = country.cities.find((c: { cityName: string }) => c.cityName === this.destinationCity);
             if (city) {
               // Use city image if available
               this.currentImageUrl = city.touristPlaceImageUrl;
