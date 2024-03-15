@@ -82,12 +82,13 @@
   border-radius: 5px;
 }
 
-/* .highlighted-departure {
+.highlighted-departure {
   background-color: var(--menu-hover-color);
   border-radius: 5px 0 0 5px;
+
 }
 
-
+/*
 .highlighted-return {
   background-color: var(--menu-hover-color);
   border-radius: 0 5px 5px 0;

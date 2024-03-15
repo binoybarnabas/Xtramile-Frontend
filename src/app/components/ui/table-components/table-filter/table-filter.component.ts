@@ -9,7 +9,7 @@ export class TableFilterComponent {
   // data to be used are selected date, selectedSortOption and searchByName
   selectedDate: any;
   selectedSortOption: string = 'select';
-  searchName:string = '' 
+  searchName: string = ''
 
   @Output() dateSelected: EventEmitter<any> = new EventEmitter<any>();
   @Output() sortOptionSelected: EventEmitter<string> = new EventEmitter<string>();
@@ -17,7 +17,7 @@ export class TableFilterComponent {
   @Output() seeAllClicked: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {
-  
+
   }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class TableFilterComponent {
   }
 
   //to send value or name to get the name
-  OnNameSearch():void{
+  OnNameSearch(): void {
     // all the name should be converted to title case since the first and last name in db are added as that
     this.searchByName.emit(toTitleCase(this.searchName));
   }
@@ -42,7 +42,7 @@ export class TableFilterComponent {
   onSeeAllClick(): void {
     this.selectedDate = null;
     this.selectedSortOption = 'select';
-    this.searchName = '' 
+    this.searchName = ''
     this.seeAllClicked.emit();
   }
 }
