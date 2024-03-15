@@ -792,7 +792,6 @@ export class NewTravelRequestComponent {
 
         console.log("TRAVEL Options")
         console.log(this.travelOptionsData)
-        console.log(data);
         //console.log("OPTIONS DATA")
         //console.log(data);
 
