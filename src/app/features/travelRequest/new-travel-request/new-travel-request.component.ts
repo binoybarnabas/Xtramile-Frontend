@@ -558,7 +558,7 @@ export class NewTravelRequestComponent {
     const requestStatus: RequestStatus = {
       requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
       empId: 10,     // Assign the employee ID
-      primaryStatusId: 10, // Assign the primary status ID
+      primaryStatusId: 2, // Assign the primary status ID
       date: new Date(),  // Assign the current date
       secondaryStatusId: 10 // Assign the secondary status ID
 

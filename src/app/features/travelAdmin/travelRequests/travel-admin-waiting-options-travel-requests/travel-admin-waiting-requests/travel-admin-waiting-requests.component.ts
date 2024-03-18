@@ -20,6 +20,10 @@ export class TravelAdminWaitingRequestsComponent {
   requestId: number = 0;
   row: any;
   clickable: boolean = false
+  requestData: any[] = [];
+  itemsPerPage = 10;
+  totalItems = 0;
+  currentPage = 1;
 
   constructor(private travelAdminTravelRequestService: TravelAdminTravelRequestsService, private commonService: CommonAPIService,
     private datePipe : DatePipe, 
@@ -27,12 +31,14 @@ export class TravelAdminWaitingRequestsComponent {
     private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(){
-    this.subscription = this.travelAdminTravelRequestService.getWaitingOrSelectedRequests('WT').subscribe({
+    this.subscription = this.travelAdminTravelRequestService.getWaitingOrSelectedRequests('PE','WT',this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
-        data.forEach((request) => {
-          request.createdOn = this.datePipe.transform(request.createdOn, 'dd/LL/yyy') || '';
-        });
-        this.incomingRequestdata = data;  
+        this.incomingRequestdata = data.travelRequest.map((request: any) => {
+          return {
+            ...request,
+            createdOn: this.datePipe.transform(request.createdOn,'dd/MM/yyyy')
+          }
+        });  
         console.log(this.incomingRequestdata)      
       },
       error: (error: Error) => {
