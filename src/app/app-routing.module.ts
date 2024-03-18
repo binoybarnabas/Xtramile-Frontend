@@ -55,6 +55,7 @@ const routes: Routes = [
   // { path: 'login', component: LoginPageComponent },
   { path: 'login', component: LoginComponent },
 
+
   {
     // path: 'employee', component: EmployeeHomeComponent,canActivate:[authGuard], children: [
     path: 'employee', component: EmployeeHomeComponent, canActivate: [authGuard], children: [
@@ -77,8 +78,11 @@ const routes: Routes = [
   },
   {
     path: 'manager', component: ManagerHomeComponent, canActivate: [authGuard], children: [
-      { path: 'dashboard', component: ManagerDashboardComponent},
+      { path: 'dashboard', component: TravellerDashboardComponent },
       { path: 'requestdetail', component: NewTravelRequestComponent },
+      { path: 'request', component: TravelRequestFormComponent },
+      { path: 'incoming', component: ManagerIncomingTravelRequestsComponent },
+      { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
       { path: 'newrequest', component: ManagerIncomingTravelRequestsComponent },
       { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent,children: [
         {
@@ -90,7 +94,7 @@ const routes: Routes = [
       ] },
       { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
       { path: 'closed', component: ManagerClosedTravelRequestsComponent },
-      { path: 'request', component: NewTravelRequestComponent },
+      // { path: 'request', component: NewTravelRequestComponent },
       { path: 'pending', component: EmployeePendingRequestsComponent },
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },

@@ -1,66 +1,86 @@
 <div class="upcoming_trip_container">
-    <div class="trip_heading">
-        <p class="value">Upcoming Trips</p>
+  <div class="trip_heading">
+    <p class="value">Upcoming Trips</p>
+  </div>
+
+  <div class="trip_card" *ngIf="tripDetailsAvailable">
+    <div class="left">
+      <div class="img_container">
+        <img
+          class="img"
+          [src]="currentImageUrl"
+          alt="img"
+          [ngStyle]="{ 'max-width.px': 200, 'max-height.px': 170 }"
+        />
+      </div>
+      <div class="location_container">
+        <p class="location">
+          <i class="map_pin_icon ri-map-pin-fill"></i> {{ destinationCity }},
+          {{ destinationCountry }}
+        </p>
+      </div>
     </div>
 
-    <div class="trip_card">
-
-        <div class="left">
-            <div class="img_container">
-                <img class="img" src="https://infopark.in/assets/images/Lulu_cyber2.jpg" alt="img">
-            </div>
-            <div class="location_container">
-                <p class="location"> <i class="map_pin_icon ri-map-pin-fill"></i> Kochi, Kerala</p>
-            </div>
+    <div class="right">
+      <div class="trip_dep_time_container">
+        <div class="trip_purpose">
+          <p class="value">{{ tripPurpose }}</p>
         </div>
-        
-        <div class="right">
 
-            <div class="trip_dep_time_container">
-
-                <div class="trip_purpose">
-                    <p class="value" >Business Meet</p>
-                </div>
-
-                <!-- <div class="project_details">
+        <!-- <div class="project_details">
                     <p class="project_code" >PRJ001</p>
                 </div> -->
-                <div class="departure_time">
-                    <p class="value"><i class="icon ri-plane-line"></i> 12.00 AM</p>
+        <div class="departure_time">
+          <p class="value"><i class="icon ri-plane-line"></i> 12.00 AM</p>
 
-                    <!-- <p class="value"> <i class="clock_icon ri-time-zone-line"></i>  12.00 AM</p> -->
-                </div>
-
-            </div>
-
-            <div class="trip_durations">
-                <div class="start_date">
-                    <span class="value"><i class="ri-calendar-line"></i> 12 Feb 2024</span>
-                </div>
-                <i class="right_arrow ri-arrow-right-line"></i>
-                <div class="end_date">
-                    <span class="value"><i class="ri-calendar-line"></i> 22 Feb 2024 </span>
-                </div>
-            </div>
-
-            <div class="origin_destination_container">
-                <div class="origin_card">
-                    <p class="city">Trivandrum</p>
-                </div>
-                <i class="plane_icon ri-plane-line"></i>
-                <div class="destination_card">
-                    <p class="city">Kochi</p>
-                </div>
-            </div>
-
-            <div class="action_btn_container">
-                <div class="view_btn">
-                    <span class="btn_text">View Detail</span>
-                </div>
-            </div>
-
-
+          <!-- <p class="value"> <i class="clock_icon ri-time-zone-line"></i>  12.00 AM</p> -->
         </div>
+      </div>
 
+      <div class="trip_durations">
+        <div class="start_date">
+          <span class="value"
+            ><i class="ri-calendar-line"></i>
+            {{ startDate | date : "shortDate" }}</span
+          >
+        </div>
+        <i class="right_arrow ri-arrow-right-line"></i>
+        <div class="end_date">
+          <span class="value"
+            ><i class="ri-calendar-line"></i> {{ endDate | date : "shortDate" }}
+          </span>
+        </div>
+      </div>
+
+      <div class="origin_destination_container">
+        <div class="origin_card">
+          <p class="city">{{ sourceCity }}</p>
+        </div>
+        <i class="plane_icon ri-plane-line"></i>
+        <div class="destination_card">
+          <p class="city">{{ destinationCity }}</p>
+        </div>
+      </div>
+
+      <div class="action_btn_container" (click)="viewOngoingDetails()">
+        <div class="view_btn">
+          <span class="btn_text">View Detail</span>
+        </div>
+      </div>
     </div>
+  </div>
+  <div *ngIf="!tripDetailsAvailable">
+    <div class="trip_card">
+      <div class="trip_image">
+        <img
+          src="https://bmsastech.com/wp-content/uploads/2020/05/ContentWritingVector.png"
+          alt="No Upcoming Trip Image"
+          [ngStyle]="{ 'max-width.px': 200, 'max-height.px': 170 }"
+        />
+      </div>
+      <div class="trip_details">
+        <p>No upcoming trip.</p>
+      </div>
+    </div>
+  </div>
 </div>

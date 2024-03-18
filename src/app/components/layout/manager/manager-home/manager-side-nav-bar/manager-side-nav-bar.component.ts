@@ -21,7 +21,7 @@ export class ManagerSideNavBarComponent {
 
   isSideNavBarCollapsed: any;
 
-  constructor(private sideNavBarService: SideNavBarService, private router:Router) {
+  constructor(private sideNavBarService: SideNavBarService, private router: Router) {
 
     this.isSideNavBarCollapsed = 1;
 
@@ -32,9 +32,9 @@ export class ManagerSideNavBarComponent {
     this.travelRequestsMap.set('new ri-history-line', "Closed Requests");
 
     //travelSettlementsMap contains values for Travel Settlements sub menu
-    this.travelSettlementsMap.set('new ri-import-line', "Incoming Bills");
-    this.travelSettlementsMap.set('new ri-share-forward-line', "Forwarded Bills");
-    this.travelSettlementsMap.set('new ri-history-line', "Closed Bills");
+    // this.travelSettlementsMap.set('new ri-import-line', "Incoming Bills");
+    // this.travelSettlementsMap.set('new ri-share-forward-line', "Forwarded Bills");
+    // this.travelSettlementsMap.set('new ri-history-line', "Closed Bills");
 
     //myRequestsMap contains values for My Requests sub menu
     this.myRequestsMap.set('new ri-add-line', "New Request");
@@ -43,9 +43,9 @@ export class ManagerSideNavBarComponent {
     this.myRequestsMap.set('ri-history-line', "Request History")
 
     //mySettlementsMap contains values for My Settlements sub menu
-    this.mySettlementsMap.set('new ri-add-line', "New Bill");
-    this.mySettlementsMap.set('ri-loader-line', "Pending Bills");
-    this.mySettlementsMap.set('ri-history-line', "Closed Bills")
+    // this.mySettlementsMap.set('new ri-add-line', "New Bill");
+    // this.mySettlementsMap.set('ri-loader-line', "Pending Bills");
+    // this.mySettlementsMap.set('ri-history-line', "Closed Bills")
 
   }
 
@@ -131,30 +131,33 @@ export class ManagerSideNavBarComponent {
 
   }
 
-  navigateToRequest(routeDestination : string) {
+  navigateToRequest(routeDestination: string) {
     console.log("inside navigate" + routeDestination);
-    switch(routeDestination){
-      
-      case 'Incoming Requests': this.router.navigate(['/manager/newrequests']);
-                            break;
-      case 'Forwarded': this.router.navigate(['/manager/forwarded']);
-                            break;
-      case 'Ongoing Travel': this.router.navigate(['/manager/ongoing']);
-                            break;
-      case 'Closed Requests': this.router.navigate(['/manager/closed']);
-                            break;
-      case 'New Request': this.router.navigate(['/manager/request']);
-                            break;
-      case 'Pending Approval': this.router.navigate(['/manager/pending']);
-                            break;
-      case 'Ongoing Travel': this.router.navigate(['/manager/ongoing']);
-                            break;
-      case 'Request History': this.router.navigate(['/manager/history']);
-                            break;
-      case 'profile': this.router.navigate(['/manager/profile']);
-                      break;
+    switch (routeDestination) {
 
-                      
+      case 'dashboard': this.router.navigate(['/manager/dashboard']);
+        break;
+
+      case 'Incoming Requests': this.router.navigate(['/manager/incoming']);
+        break;
+      case 'Forwarded': this.router.navigate(['/manager/forwarded']);
+        break;
+      case 'Ongoing Travel': this.router.navigate(['/manager/ongoing']);
+        break;
+      case 'Closed Requests': this.router.navigate(['/manager/closed']);
+        break;
+      case 'New Request': this.router.navigate(['/manager/request']);
+        break;
+      case 'Pending Approval': this.router.navigate(['/manager/pending']);
+        break;
+      case 'Ongoing Travel': this.router.navigate(['/manager/ongoing']);
+        break;
+      case 'Request History': this.router.navigate(['/manager/history']);
+        break;
+      case 'profile': this.router.navigate(['/manager/profile']);
+        break;
+
+
 
     }
   }

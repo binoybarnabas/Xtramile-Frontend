@@ -1,0 +1,106 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+.data_table_container {
+  width: 100%;
+  border-radius: var(--normal-border-radius);
+}
+
+
+.data_table_container .dynamic_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-style: none;
+  border-radius: var(--normal-border-radius);
+  background-color: var(--card-bg-color);
+  box-shadow: var(--normal-box-shadow);
+
+}
+
+.data_table_container .dynamic_table .table_heading {
+  font-size: var(--small-font-size);
+  font-weight: var(--active-font-weight);
+  height: 45px;
+  /* border-top: 2px solid var(--menu-hover-color);
+  border-bottom: 2px solid var(--menu-hover-color); */
+  background: var(--menu-hover-color);
+  color: var(--secondary-text-color);
+  width: 100%;
+}
+
+.data_table_container .dynamic_table .table_heading .table_heading_row {
+
+  width: 100%;
+}
+
+.data_table_container .dynamic_table .table_heading .table_heading_row .heading_text {
+  /* color: var(--secondary-text-color); */
+  font-size: var(--small-font-size);
+  margin-left: 5px;
+  /* border: none;
+  border-bottom: 1px solid #ddd; */
+  padding: 0.5rem;
+  text-align: left;
+
+
+}
+
+
+
+
+
+
+
+
+.data_table_container .dynamic_table .table_body {
+  background-color: var(--card-bg-color);
+  transition: 0.3s;
+  border-radius: var(--normal-border-radius);
+
+}
+
+.data_table_container .dynamic_table .table_body .table_body_row {
+  font-size: var(--form-label-font-size);
+
+}
+
+.data_table_container .dynamic_table .table_body .table_body_row:hover {
+  background-color: var(--secondary-cyan-color);
+  cursor: pointer;
+  border-left: 2px solid var(--first-color);
+  border-right: 2px solid var(--first-color);
+}
+
+
+.data_table_container .dynamic_table .table_body .table_body_row .table_data {
+  border: none;
+  border-bottom: 1px solid var(--menu-hover-color);
+  padding: 0.2rem 0.5rem;
+  text-align: left;
+}
+
+
+
+
+
+
+.data_table_container .dynamic_table .status_pending {
+  color: var(--primary-orange-color);
+}
+
+.data_table_container .dynamic_table .status_approved {
+  color: var(--first-color);
+}
+
+.data_table_container .dynamic_table.status_rejected {
+  color: var(--danger-color);
+}
+
+.data_table_container .dynamic_table .mode_domestic {
+  color: var(--primary-cyan-color);
+}
+
+.data_table_container .dynamic_table .mode_international {
+  color: var(--primary-green-color);
+}

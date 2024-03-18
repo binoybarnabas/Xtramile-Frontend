@@ -17,6 +17,10 @@ export class TravelAdminSelectedRequestsComponent {
   tableHeaders: string[] = ['Request ID', 'Employee', 'Project Code', 'Date','Mode','Priority'];
   fieldsToDisplay: string[] = ['requestId', 'employeeName', 'projectCode','createdOn','travelTypeName','priorityName'];
   incomingRequestdata:any[] = [];
+  requestData: any[] = [];
+  itemsPerPage = 10;
+  totalItems = 0;
+  currentPage = 1;
 
   requestId: number = 0;
 
@@ -24,12 +28,15 @@ export class TravelAdminSelectedRequestsComponent {
     private router: Router,private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(){
-    this.subscription = this.travelAdminTravelRequestService.getWaitingOrSelectedRequests('SD').subscribe({
+    this.subscription = this.travelAdminTravelRequestService.getWaitingOrSelectedRequests('PE','SD',this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
-        data.forEach((request) => {
-          request.createdOn = this.datePipe.transform(request.createdOn, 'dd/LL/yyy') || '';
-        });
-        this.incomingRequestdata = data;        
+        this.incomingRequestdata = data.travelRequest.map((request: any) => {
+          return {
+            ...request,
+            createdOn: this.datePipe.transform(request.createdOn,'dd/MM/yyyy')
+          }
+        });  
+        console.log(this.incomingRequestdata)     
       },
       error: (error: Error) => {
         console.log("Error while fetching requests")

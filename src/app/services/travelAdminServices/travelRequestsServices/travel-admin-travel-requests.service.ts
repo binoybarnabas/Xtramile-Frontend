@@ -25,9 +25,11 @@ export class TravelAdminTravelRequestsService {
 
   //to get travel request details of a particular request id
 
-  getWaitingOrSelectedRequests(statusCode: string): Observable<WaitingOrSelectedRequests[]> {
-    console.log("ccalws")
-    return this.http.get<WaitingOrSelectedRequests[]>(this.apiURL + `/traveladmin/requestsView/${statusCode}`)
+  getWaitingOrSelectedRequests(primarystatusCode: string, secondaryStatusCode: string, offset: number,pageSize: number): Observable<any> {
+    const url = this.apiURL + `/traveladmin/requestsView/${primarystatusCode}/${secondaryStatusCode}`;
+    const params = new HttpParams().set('offset', offset)
+      .set('pageSize', pageSize);
+    return this.http.get<any>(url,{params});
   }
 
 

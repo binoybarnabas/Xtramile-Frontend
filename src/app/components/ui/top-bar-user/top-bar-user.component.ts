@@ -5,6 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NotificationsComponent } from '../notifications/notifications.component';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,24 +14,23 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
   styleUrls: ['./top-bar-user.component.css']
 })
 export class TopBarUserComponent {
-  date:any
+  date: any
   isSideNavBarCollapsed: any;
   showDropdown: boolean = false;
   @Output() logoutEvent: EventEmitter<string> = new EventEmitter<string>();
-  
-  @Input() employeeName:string = ''
-  @Input() designation: string =''
+
+  @Input() employeeName: string = ''
+  @Input() designation: string = ''
 
   notificationModalRef?: BsModalRef;
 
-  empId= 0;
+  empId = 0;
 
-  requestNotification: any= []
+  requestNotification: any = []
 
-  constructor(private sideNavBarService: SideNavBarService,private modalService: BsModalService,
-     private requestService: RequestService,private managerService :ManagerTravelRequestsService) 
-     
-     {this.isSideNavBarCollapsed = sideNavBarService.isSideNavBarCollapsed;
+  constructor(private sideNavBarService: SideNavBarService, private modalService: BsModalService,
+    private requestService: RequestService, private managerService: ManagerTravelRequestsService, private router: Router) {
+    this.isSideNavBarCollapsed = sideNavBarService.isSideNavBarCollapsed;
     this.date = Date.now();
   }
 
@@ -44,44 +44,50 @@ export class TopBarUserComponent {
     this.logoutEvent.emit("logout"); // Emit logout event
   }
 
-  ngOnInit(){
-    if(localStorage.getItem('userData')){
-      const userData= JSON.parse(localStorage.getItem('userData')!)
-      this.empId=userData.empId;
+  ngOnInit() {
+    if (localStorage.getItem('userData')) {
+      const userData = JSON.parse(localStorage.getItem('userData')!)
+      this.empId = userData.empId;
     }
     this.getRequestNotification();
   }
 
-  openNotificationModal(){
-    this.notificationModalRef= this.modalService.show(NotificationsComponent,{
+  openNotificationModal() {
+    this.notificationModalRef = this.modalService.show(NotificationsComponent, {
       backdrop: false,
-      initialState: {requestNotification: this.requestNotification},
+      initialState: { requestNotification: this.requestNotification },
       class: 'modal-sm'
-    } )
-    
+    })
+
   }
 
-  closeModal(){
+  closeModal() {
     this.modalService.hide();
   }
 
-  getRequestNotification(){
-    if (this.designation=='Employee'){
+  getRequestNotification() {
+    if (this.designation == 'Employee') {
       this.requestService.getEmployeeRequestNotification(this.empId).subscribe(
         {
-          next: (data) =>{
-            this.requestNotification=data;
+          next: (data) => {
+            this.requestNotification = data;
             console.log(this.requestNotification)
           }
         });
     }
-    else if(this.designation=='Manager'){
+    else if (this.designation == 'Manager') {
       this.managerService.getManagerRequestNotification(this.empId).subscribe({
-        next: (data) =>{
-          this.requestNotification=data;
+        next: (data) => {
+          this.requestNotification = data;
         }
       }
       );
     }
+  }
+
+  navigateTo(path: string) {
+
+    this.router.navigate([path]);
+
   }
 }

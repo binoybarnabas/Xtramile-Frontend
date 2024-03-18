@@ -8,20 +8,23 @@ import { ManagerDashboardService } from 'src/app/services/managerServices/dashbo
 })
 export class ManagerDashboardComponent {
 
-  completedTripsData :any;
-  empId!:number;
-  constructor(private apiservice: ManagerDashboardService){
+  completedTripsData: any;
+  empId!: number;
+
+  pageHeading: string;
+
+  constructor(private apiservice: ManagerDashboardService) {
+    this.pageHeading = 'Dashboard'
     const userData = localStorage.getItem('userData');
-    if(userData){
+    if (userData) {
       const userParsedData = JSON.parse(userData);
       this.empId = userParsedData.empId;
     }
   }
-  ngOnInit(){
-    this.apiservice.getAllRequestsMonthly(this.empId).subscribe((data: any) =>
-    {
+  ngOnInit() {
+    this.apiservice.getAllRequestsMonthly(this.empId).subscribe((data: any) => {
       this.completedTripsData = data;
-      console.log(this.completedTripsData )
+      console.log(this.completedTripsData)
     });
   }
 }

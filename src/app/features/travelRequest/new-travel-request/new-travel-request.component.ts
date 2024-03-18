@@ -132,7 +132,7 @@ export class NewTravelRequestComponent {
         }
         else {
           this.currentLoggedInUserRole = 'manager';
-          this.newReqFormSubMenuValue = 2;
+          //this.newReqFormSubMenuValue = 2;
         }
           break;
       }
@@ -374,7 +374,7 @@ export class NewTravelRequestComponent {
     //validation for manager editable field
     if (this.currentLoggedInUserRole === 'manager') {
       this.travelRequestForm = new FormGroup({
-        priority: new FormControl('', Validators.required)
+        priority: new FormControl('', Validators.nullValidator)
       });
 
     }
@@ -527,7 +527,7 @@ export class NewTravelRequestComponent {
     //Should call a PATCH method to set priority of the request
     console.log(this.travelRequestForm.value.priority);
 
-    this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId, this.travelRequestForm.value.priority).subscribe(
+    this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId).subscribe(
       {
         next: (data) => {
           console.log(data);
@@ -560,7 +560,7 @@ export class NewTravelRequestComponent {
     const requestStatus: RequestStatus = {
       requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
       empId: 10,     // Assign the employee ID
-      primaryStatusId: 10, // Assign the primary status ID
+      primaryStatusId: 2, // Assign the primary status ID
       date: new Date(),  // Assign the current date
       secondaryStatusId: 10 // Assign the secondary status ID
 
@@ -803,7 +803,6 @@ export class NewTravelRequestComponent {
 
         console.log("TRAVEL Options")
         console.log(this.travelOptionsData)
-        console.log(data);
         //console.log("OPTIONS DATA")
         //console.log(data);
 

@@ -5,6 +5,7 @@ import { TravelRequestDetailViewModel } from 'src/app/services/interfaces/iTrave
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { local } from 'd3';
 import { DatePipe } from '@angular/common';
+import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
 @Component({
   selector: 'app-travel-request-card-modal',
@@ -13,7 +14,7 @@ import { DatePipe } from '@angular/common';
 })
 export class TravelRequestCardModalComponent {
   private _requestId!: number;
-  primaryStatus: string='Denied';
+  primaryStatus: string = 'Denied';
 
 
   @Input()
@@ -24,7 +25,8 @@ export class TravelRequestCardModalComponent {
 
   travelRequestDetailViewModel!: TravelRequestDetailViewModel
 
-  constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService, private datePipe: DatePipe) {
+  constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService, private datePipe: DatePipe, private managerTravelRequest: ManagerTravelRequestsService
+  ) {
   }
 
 
@@ -35,25 +37,26 @@ export class TravelRequestCardModalComponent {
       next: (data) => {
         this.travelRequestDetailViewModel = data;
         console.log(this.travelRequestDetailViewModel)
+        console.log(this.travelRequestDetailViewModel.requestId)
       },
       error: (error: Error) => { console.log("problems in fetching data") },
       complete: () => { console.log("get request by id is done") }
     });
 
   }
-  navigateHandleUserSelection(){
+  navigateHandleUserSelection() {
     const userData = localStorage.getItem('userData')
-    if(userData){
+    if (userData) {
       const userDataParsed = JSON.parse(userData)
 
-      if(userDataParsed.role=='Manager' &&  userDataParsed.department=='TA'){
+      if (userDataParsed.role == 'Manager' && userDataParsed.department == 'TA') {
         this.navigateToAddOptions();
       }
-      else if(userDataParsed.role=='Manager'){
+      else if (userDataParsed.role == 'Manager') {
         this.navigateToSetPriority();
       }
     }
-    
+
 
   }
 
@@ -64,12 +67,35 @@ export class TravelRequestCardModalComponent {
     this.bsModalRef.hide();
   }
 
-  navigateToSetPriority(){
+  navigateToSetPriority() {
     const queryParams = { requestId: this._requestId }
     this.router.navigate(['manager/requestdetail'], { queryParams: queryParams });
     this.bsModalRef.hide();
   }
 
+  //Manager forwarding the travel request form
+  onManagerForwardTravelRequestForm() {
+    //Should call a PATCH method to set priority of the request
+    //console.log(this.travelRequestForm.value.priority);
+
+    this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId).subscribe(
+      {
+        next: (data) => {
+          console.log(data);
+          // window.alert(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
+          //  console.log(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
+          // Redirect to another page
+          //alert("Approved");
+          this.router.navigate(['/manager/dashboard']);
+
+        },
+        complete: () => {
+          //this.toastr.success('Request approved!', 'Success');
+          // this.toastService.showToast("Travel Request Approved!")
+        }
+      }
+    );
+  }
 
 
 
