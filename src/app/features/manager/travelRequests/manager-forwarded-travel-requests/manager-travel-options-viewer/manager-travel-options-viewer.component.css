@@ -1,26 +1,61 @@
-.panel {
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
+::ng-deep .nav-tabs .nav-link {
+  color: var(--third-color); /* Change to your desired font color */
 }
 
-.panel-header {
+.main_heading {
+  font-size: var(--h4-font-size);
+  font-weight: var(--extra-font-weight);
+}
+
+.panel {
+  border: 1px solid #ccc;
+  margin-bottom: 30px;
+}
+
+.panel .panel_header {
   background-color: #f0f0f0;
   padding: 10px;
   position: relative; /* Position relative to allow absolute positioning of the button */
+  color: var(--third-color);
 }
 
-.confirm-button {
+.panel .panel_header .expansion_arrow{
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
+  color: var(--third-color);
+  font-size: x-large;
 }
 
-.panel-content {
+.panel .panel_header .confirm_button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: var(--third-color); /* Blue color used for selected text */
+  padding: 5px 10px; /* Add padding to the text for spacing */
+  border-radius: 5px; /* Apply border radius */
+  border: 1px solid var(--third-color); /* Add a border */
+  font-size: small;
+}
+
+.panel .panel_header .selected_text {
+  font-size: smaller;
+  color: var(--third-color); /* Blue color used for selected text */
+  margin-left: 10px; /* Adjust the spacing between the text and the button */
+  padding-inline: 5px; /* Add padding to the text for spacing */
+  border-radius: 20px; /* Apply border radius */
+  border: 1px solid var(--third-color); /* Add a border */
+}
+
+.panel .panel_content {
   padding: 10px;
   overflow: auto; 
 }
 
-.hide {
-  display: none;
+.selected_panel { 
+  border: 1px solid var(--third-color);
+  box-shadow: 0 0 5px var(--third-color); /* Shadow effect */
+  transition: background-color 0.3s, border 0.3s, box-shadow 0.3s; /* Smooth transition */
 }

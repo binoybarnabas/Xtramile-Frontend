@@ -4,6 +4,8 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { ActivatedRoute } from '@angular/router';
+import { UserData } from 'src/app/services/interfaces/iuserData';
 @Component({
   selector: 'app-manager-travel-options-viewer',
   templateUrl: './manager-travel-options-viewer.component.html',
@@ -17,13 +19,26 @@ import { CustomToastService } from 'src/app/services/toastServices/custom-toast.
   ]
 })
 export class ManagerTravelOptionsViewerComponent {
-requestId:number = 5
+requestId!:number;
 descriptions!: any[];
-
-constructor(private managerService:ManagerTravelRequestsService, private sanitizer: DomSanitizer,private requestService: RequestService,private toastService: CustomToastService){
+receveingOptionId !:number;
+empId:number=1;
+userData: UserData;
+constructor(private managerService:ManagerTravelRequestsService, private sanitizer: DomSanitizer,private requestService: RequestService,private toastService: CustomToastService,private activatedRoute:ActivatedRoute ){
+  const storedUserData = localStorage.getItem('userData');
+  this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
+  this.empId = this.userData?.empId
 }
 ngOnInit(){
+  this.activatedRoute.queryParamMap.subscribe((query) => {
+    if (query.get('requestId')) {
+      this.requestId = parseInt(query.get('requestId')!, 10)
+      console.log(this.requestId)
+    }
+  })
+  
   this.getAvailableOptionsDescription();
+  this.getSelectedOption(); 
 }
 
 getAvailableOptionsDescription(){
@@ -45,11 +60,28 @@ getAvailableOptionsDescription(){
     }
  })
 }
+
+getSelectedOption(){
+   this.requestService.selectedOptionFromEmployee(this.requestId).subscribe({
+    next: (data) =>{
+    console.log('jbjdhb')
+    this.receveingOptionId = data
+    console.log(this.receveingOptionId)
+  },
+  error: (error: any) => {
+    console.error('Post failed:', error);
+  },
+  complete: () => {
+    console.log('Post request completed.');
+  }
+
+  })
+}
+
 togglePanel(item: any): void {
   item.expanded = !item.expanded;
 }
-//
-empId:number=1;
+
 confirmOption(optionId:any): void {  
   console.log('Option confirmed:', optionId);
   this.requestService.submitSelectedOption(this.requestId, this.empId, optionId).subscribe({

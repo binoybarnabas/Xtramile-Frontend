@@ -1,0 +1,112 @@
+.travel_options_container {
+    margin-top: 0.6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.travel_options_container .option_card {
+    background-color: var(--card-bg-color);
+    width: 100%;
+    border-radius: var(--normal-border-radius);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 3px;
+    /* margin: 0.5rem; */
+    transition: 0.3s;
+}
+
+
+
+.travel_options_container .option_card:hover {
+    transform: scale(1.01);
+}
+
+.travel_options_container .option_card.selected {
+    border: 3px solid var(--first-color);
+    /* or any other border style you prefer */
+}
+
+
+.travel_options_container .option_card .option_file {
+    width: 100%;
+}
+
+.travel_options_container .option_card .option_file .img {
+    width: 100%;
+    border-radius: var(--normal-border-radius) var(--normal-border-radius) 0 0;
+}
+
+.travel_options_container .option_card .description {
+    width: 100%;
+    padding-left: 0.6rem;
+    padding-top: 0.6rem;
+    padding-right: 0.6rem;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.travel_options_container .option_card .description p {
+    font-size: var(--form-label-font-size);
+    color: var(--ternary-text-color);
+}
+
+.travel_options_container .option_card .description .del_icon {
+    font-size: var(--medium-font-size);
+    color: var(--danger-color);
+    font-weight: var(--active-font-weight);
+}
+
+.travel_options_container .option_card .description .del_icon:hover {
+    cursor: pointer;
+}
+
+
+.travel_options_main_container .actions_container {
+    position: absolute;
+    right: 2rem;
+    display: flex;
+
+}
+
+
+.travel_options_main_container .actions_container .cancel_btn {
+
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--second-color);
+    background-color: transparent;
+    border-radius: var(--small-border-radius);
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 10px; */
+    font-weight: var(--active-font-weight);
+    border: var(--normal-button-border-size) solid var(--second-color);
+    font-size: var(--span-font-size);
+    margin-right: 10px;
+
+}
+
+
+.travel_options_main_container .actions_container .submit_btn {
+
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--card-bg-color);
+    background-color: var(--second-color);
+    border-radius: var(--small-border-radius);
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 10px; */
+    font-weight: var(--active-font-weight);
+    border: var(--normal-button-border-size) solid var(--second-color);
+    font-size: var(--span-font-size);
+
+}
+
+.main_heading {
+    font-size: var(--h4-font-size);
+    font-weight: var(--extra-font-weight);
+}

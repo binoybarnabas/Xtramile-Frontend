@@ -29,11 +29,12 @@ export class TravelAdminWaitingRequestsComponent {
   ngOnInit(){
     this.subscription = this.travelAdminTravelRequestService.getWaitingOrSelectedRequests('WT').subscribe({
       next: (data) => {
+        console.log(data) ;
         data.forEach((request) => {
           request.createdOn = this.datePipe.transform(request.createdOn, 'dd/LL/yyy') || '';
         });
         this.incomingRequestdata = data;  
-        console.log(this.incomingRequestdata)      
+        console.log(data)      
       },
       error: (error: Error) => {
         console.log("Error while fetching requests")

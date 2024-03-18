@@ -1,1 +1,81 @@
-<p>file-option-viewer works!</p>
+<!-- Waiting -->
+<h3 class="main_heading  mt-5 mb-3 ">File Options</h3>
+
+<ng-container *ngIf="travelOptionsData.length === 0; else elseblockone">
+  <p>There are no file options, check text options</p>
+</ng-container>
+<ng-template #elseblockone>
+  <div class="travel_options_main_container">
+    <div class="travel_options_container">
+      <ng-container *ngFor="let item of travelOptionsData">
+        <div
+          (click)="receveingOptionId == null ? selectOption(item) : null"
+          [ngClass]="{ selected: item === selectedOption }"
+          class="option_card"
+        >
+          <div class="option_file">
+            <img
+              class="img"
+              src="{{item.optionFileURL}}" 
+              alt="img_not_found"
+            />
+          </div>
+          <div class="description">
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="actions_container" *ngIf="buttonActivate && receveingOptionId == null">
+      <div class="cancel_btn_container">
+        <button class="cancel_btn" type="button"  (click)="resetSelection()">Cancel</button>
+      </div>
+      <div class="submit_btn_container">
+        <app-change-status-button
+          [name]="name_rm"
+          [empId]="empId"
+          [requestId]="reqId"
+          [primaryStatusCode]="primaryStatusCode_rm"
+          [secondaryStatusCode]="secondaryStatusCode_rm"
+          (externalpostTriggered)="postSelection()"
+        ></app-change-status-button>
+  
+      </div>
+    </div>
+</div>
+</ng-template>
+
+<!-- Selected -->
+<div *ngIf="hideDiv">
+  <h3 class="main_heading  mt-5 mb-3 ">Selected option</h3>
+
+  <ng-container *ngIf="travelOptionsData.length === 0 || receveingOptionId == null; else elseblock">
+    <p>No selected file option</p>
+  </ng-container>
+  <ng-template #elseblock>
+    <div class="travel_options_container">
+      <ng-container *ngFor="let item of travelOptionsData; let i = index">
+        <div *ngIf="travelOptionId[i] === receveingOptionId"
+          class="option_card">
+          <div class="option_file">
+            <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="" />
+          </div>
+          <div class="description">
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+      </ng-container>
+  </div>
+  </ng-template>  
+  <div class="text-center mt-5" *ngIf="!buttonActivate && receveingOptionId != 0">
+    <app-change-status-button
+      [name]="name_ta"
+      [empId]="empId"
+      [requestId]="reqId"
+      [primaryStatusCode]="primaryStatusCode_ta"
+      [secondaryStatusCode]="secondaryStatusCode_ta">
+    </app-change-status-button>
+  </div>
+</div>
+
+

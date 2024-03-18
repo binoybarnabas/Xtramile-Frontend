@@ -1,20 +1,25 @@
 <tabset>
-  <tab heading="Tab 1">
-    <app-optionview-card></app-optionview-card>
+  <tab heading="File Options">
+    <app-file-option-viewer></app-file-option-viewer>
   </tab>
-  <tab heading="Tab 2">
-    <div *ngFor="let item of descriptions; let i = index" class="panel">
-      <div class="panel-header" (click)="togglePanel(item)">
-        Option {{ i + 1 }}
-        <!-- Button to confirm option -->
-        <button class="confirm-button" *ngIf="item.expanded" (click)="confirmOption(item.optionId)">Confirm</button>
+  <tab heading="Text Options">
+    <h3 class="main_heading  mt-5 mb-3 ">Text Options</h3>
+    <ng-container *ngIf="descriptions.length === 0; else elseblockone">
+      <p>There are no text options, check file options</p>
+    </ng-container>
+    <ng-template #elseblockone>
+      <div *ngFor="let item of descriptions; let i = index" class="panel" [ngClass]="{ 'selected_panel': item.optionId === receveingOptionId }">
+        <div class="panel_header" (click)="togglePanel(item)">
+          Option {{ i + 1 }}
+          <!-- Button to confirm option -->
+          <div class="expansion_arrow" *ngIf="!item.expanded"><i class="ri-arrow-down-s-line"></i></div>
+          <button class="confirm_button" *ngIf="item.expanded && receveingOptionId == 0" (click)="confirmOption(item.optionId)">Confirm</button>
+          <span class="selected_text" *ngIf="item.optionId === receveingOptionId"><i class="ri-arrow-right-s-line"></i>Selected</span>
+        </div>
+        <div class="panel_content" [@expandCollapse]="item.expanded ? 'expanded' : 'collapsed'">
+          <div [innerHTML]="item.htmlString"></div>
+        </div>
       </div>
-      <div class="panel-content" [@expandCollapse]="item.expanded ? 'expanded' : 'collapsed'">
-        <div [innerHTML]="item.htmlString"></div>
-      </div>
-    </div>
-  </tab>
-  <tab heading="Tab 3">
-    <p>jhdjgj</p>
+    </ng-template>
   </tab>
 </tabset>

@@ -138,6 +138,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FileOptionViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/file-option-viewer/file-option-viewer.component';
+import { ManagerForwadedRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwaded-requests/manager-forwaded-requests.component';
 
 @NgModule({
   declarations: [
@@ -260,7 +261,8 @@ import { FileOptionViewerComponent } from './features/manager/travelRequests/man
     PageHeaderComponent,
     TextEditorComponent,
     ManagerTravelOptionsViewerComponent,
-    FileOptionViewerComponent
+    FileOptionViewerComponent,
+    ManagerForwadedRequestsComponent
   ]
   ,
 
