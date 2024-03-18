@@ -105,7 +105,7 @@ export class ReqFormComponent {
 
   ApproveRequest() {
     console.log(this.selectedPriority);
-    this.managerTravelRequest.setRequestPriorityAndApprove(this.employeeRequestData.requestId, this.selectedPriority).subscribe(
+    this.managerTravelRequest.setRequestPriorityAndApprove(this.employeeRequestData.requestId).subscribe(
       {
         next: (data) => {
           console.log(data);

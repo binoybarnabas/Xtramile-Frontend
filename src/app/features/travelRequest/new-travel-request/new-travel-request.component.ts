@@ -270,8 +270,8 @@ export class NewTravelRequestComponent {
           //Initializing the Trip Info Map
 
           this.tripInformationsMap.set('Project Code', this.travelRequestDetailViewModel?.projectCode);
-          this.tripInformationsMap.set('Trip Type', this.travelRequestDetailViewModel?.tripType);
           this.tripInformationsMap.set('Travel Type', this.travelRequestDetailViewModel?.travelType);
+          this.tripInformationsMap.set('Trip Type', this.travelRequestDetailViewModel?.tripType);
           this.tripInformationsMap.set('Travel Mode', this.travelRequestDetailViewModel?.travelMode);
 
           this.tripInformationsMap.set('Source City', this.travelRequestDetailViewModel?.sourceCity);
@@ -282,13 +282,14 @@ export class NewTravelRequestComponent {
           this.tripInformationsMap.set('Departure Date', this.travelRequestDetailViewModel?.departureDate);
           this.tripInformationsMap.set('Return Date', this.travelRequestDetailViewModel?.returnDate);
           this.tripInformationsMap.set('Preferred Departure Time', this.travelRequestDetailViewModel?.prefDepartureTime);
-          this.tripInformationsMap.set('Purpose of Travel', this.travelRequestDetailViewModel?.tripPurpose);
+          this.tripInformationsMap.set('Purpose Travel', this.travelRequestDetailViewModel?.tripPurpose);
 
 
           //Additional Informations
           this.additionalInformationsMap.set('Cab Service Requested', this.travelRequestDetailViewModel?.cabRequired);
           this.additionalInformationsMap.set('Preferred PickUp Time', this.travelRequestDetailViewModel?.prefPickUpTime);
           this.additionalInformationsMap.set('Accommodation Requested', this.travelRequestDetailViewModel?.accommodationRequired);
+          this.additionalInformationsMap.set('Additional Comments', this.travelRequestDetailViewModel?.additionalComments);
         },
         error: (error: Error) => {
           console.log(error);
@@ -525,7 +526,7 @@ export class NewTravelRequestComponent {
     //Should call a PATCH method to set priority of the request
     console.log(this.travelRequestForm.value.priority);
 
-    this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId, this.travelRequestForm.value.priority).subscribe(
+    this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId).subscribe(
       {
         next: (data) => {
           console.log(data);

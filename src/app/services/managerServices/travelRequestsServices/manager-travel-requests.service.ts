@@ -63,10 +63,9 @@ export class ManagerTravelRequestsService {
     return this.http.get(`http://localhost:5190/api/reportingmanager/travel/request/${requestId}`);
   }
 
-  setRequestPriorityAndApprove(requestId:number,priorityId:number):Observable<any>{
+  setRequestPriorityAndApprove(requestId:number):Observable<any>{
     const body = {
       requestId: requestId,
-      priorityId: priorityId,
       managerId:this.managerId
     };
     console.log("manager id" + body.managerId);

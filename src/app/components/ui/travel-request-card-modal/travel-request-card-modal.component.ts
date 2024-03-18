@@ -37,6 +37,7 @@ export class TravelRequestCardModalComponent {
       next: (data) => {
         this.travelRequestDetailViewModel = data;
         console.log(this.travelRequestDetailViewModel)
+        console.log(this.travelRequestDetailViewModel.requestId)
       },
       error: (error: Error) => { console.log("problems in fetching data") },
       complete: () => { console.log("get request by id is done") }
@@ -77,7 +78,7 @@ export class TravelRequestCardModalComponent {
     //Should call a PATCH method to set priority of the request
     //console.log(this.travelRequestForm.value.priority);
 
-    this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId, 3).subscribe(
+    this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId).subscribe(
       {
         next: (data) => {
           console.log(data);
