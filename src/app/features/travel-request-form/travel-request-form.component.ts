@@ -95,7 +95,8 @@ export class TravelRequestFormComponent {
     private modalService: BsModalService,
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
-    private shortYearDateFormatPipe: ShortYearDateFormatPipe
+    private shortYearDateFormatPipe: ShortYearDateFormatPipe,
+    private datepipe: DatePipe
   ) {
 
     // Get current date
@@ -345,6 +346,9 @@ export class TravelRequestFormComponent {
       const fileName = fileInput.files[0].name;
       const fileLabel = document.querySelector('.file_type') as HTMLSpanElement;
       fileLabel.innerHTML = `<i class="icon ri-attachment-2"></i> ${fileName}`;
+      this.travelRequestForm.patchValue({
+        travelAuthorizationEmailCapture : fileInput.files[0]
+      })
     }
   }
 
@@ -566,21 +570,37 @@ export class TravelRequestFormComponent {
 
   //travel req submit method
   submitTravelRequest() {
-    alert("submitted")
     console.log("TEST SUBMITTED DATA");
 
-    this.travelRequestForm.value.travelModeId = this.selectedTravelMode;
-    this.travelRequestForm.value.tripType = this.selectedTripType;
-    this.travelRequestForm.value.prefDepartureTime = this.selectedPrefDepTime;
-    this.travelRequestForm.value.prefPickUpTime = this.selectedPrefPickUpTime;
-    this.travelRequestForm.value.accommodationRequired = this.travelRequestForm.value.accommodationRequired === true ? 'yes':'no';
-    this.travelRequestForm.value.cabRequired = this.travelRequestForm.value.cabRequired === true ? 'yes':'no';
-    console.log(this.travelRequestForm.value);
+    const formData = new FormData();
+
+    formData.append("createdBy", String(this.empId));
+    formData.append("tripType", this.selectedTripType);    
+    formData.append("travelModeId", String(this.selectedTravelMode));    
+    formData.append("tripPurpose", this.selectedTravelPurpose);    
+    formData.append("departureDate", this.datePipe.transform(this.travelRequestForm.get('departureDate')?.value, "yyyy-MM-dd") || '');    
+    formData.append("returnDate", this.datePipe.transform(this.travelRequestForm.get('returnDate')?.value, "yyyy-MM-dd") || '');    
+    formData.append("sourceCity", this.selectedOrigin);    
+    formData.append("destinationCity", this.selectedDestination);    
+    formData.append("sourceCountry", this.travelRequestForm.get('sourceCountry')?.value);    
+    formData.append("destinationCountry", this.travelRequestForm.get('destinationCountry')?.value);    
+    formData.append("prefDepartureTime", this.selectedPrefDepTime);    
+    formData.append("travelType", this.selectedTravelType);    
+    formData.append("projectId", this.travelRequestForm.get('projectId')?.value);    
+    formData.append("cabRequired", this.travelRequestForm.value.accommodationRequired === true ? 'yes':'no');    
+    formData.append("prefPickUpTime", this.selectedPrefPickUpTime);    
+    formData.append("accommodationRequired", this.travelRequestForm.value.cabRequired === true ? 'yes':'no');
+    const fileInput = this.travelRequestForm.get('travelAuthorizationEmailCapture');
+    if (fileInput && fileInput.value) {
+      formData.append('travelAuthorizationEmailCapture', fileInput.value);
+    }
+
     console.log("DONE");
 
-    this.requestService.sendEmployeeNewTravelRequest(this.travelRequestForm.value).subscribe({
+    this.requestService.sendEmployeeNewTravelRequest(formData).subscribe({
       next:(response)=>{
         console.log(response);
+        alert("submitted")
       },
       error:(error:Error)=>{
         console.log(error);

@@ -91,27 +91,22 @@ export class TravellerDocumentsComponent {
   saveForm() {
     if (this.documentUploadForm.valid) {
       // Implement save logic here
-      console.log(this.documentUploadForm.value);
       const formData = new FormData();
 
-      const expiryDate = new Date(this.documentUploadForm.value.expiryDate);
-      const formattedDate = this.datepipe.transform(expiryDate, "yyyy-MM-dd") || '';
+      const expiryDate: Date | null = this.documentUploadForm.value.expiryDate ? new Date(this.documentUploadForm.value.expiryDate) : null;
+      
+      let formattedDate: string | null = null;
+      if (expiryDate) {
+        formattedDate = this.datepipe.transform(expiryDate, 'yyyy-MM-dd');
+      }
 
       const userData = localStorage.getItem('userData');
       const parsedUserData = userData !== null ? JSON.parse(userData) : '';
 
-      // const formData = {
-      //   UploadedBy: parsedUserData.empId,
-      //   TravelDocType: this.selectedDocType,
-      //   DocId: this.documentUploadForm.value.docNumber,
-      //   ExpiryDate: this.documentUploadForm.value.expiryDate ? formattedDate : '',
-      //   Country: this.documentUploadForm.value.country,
-      //   File: this.documentUploadForm.value.documentFile
-      // }
-
       formData.append('UploadedBy', parsedUserData.empId);
       formData.append('TravelDocType', this.selectedDocType);
-      formData.append('ExpiryDate', formattedDate);
+      if(formattedDate)
+        formData.append('ExpiryDate', formattedDate);
       formData.append('Country', this.documentUploadForm.value.country);
       formData.append('DocId', this.documentUploadForm.value.docNumber)
       const fileInput = this.documentUploadForm.get('documentFile');
@@ -119,7 +114,6 @@ export class TravellerDocumentsComponent {
         formData.append('File', fileInput.value);
       }
 
-      console.log(formData)
       this.documentService.sendDocumentData(formData).subscribe({
         next: (response) => {
           this.toggleDocUploadModal(false);
@@ -191,7 +185,5 @@ export class TravellerDocumentsComponent {
   changeDocType(newDocType: string) {
     this.selectedDocType = newDocType;
   }
-
-
 
 }
