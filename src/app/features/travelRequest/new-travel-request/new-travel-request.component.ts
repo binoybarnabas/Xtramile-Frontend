@@ -526,7 +526,7 @@ export class NewTravelRequestComponent {
     //Should call a PATCH method to set priority of the request
     console.log(this.travelRequestForm.value.priority);
 
-    this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId, this.travelRequestForm.value.priority).subscribe(
+    this.managerTravelRequest.setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId).subscribe(
       {
         next: (data) => {
           console.log(data);
@@ -559,7 +559,7 @@ export class NewTravelRequestComponent {
     const requestStatus: RequestStatus = {
       requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
       empId: 10,     // Assign the employee ID
-      primaryStatusId: 10, // Assign the primary status ID
+      primaryStatusId: 2, // Assign the primary status ID
       date: new Date(),  // Assign the current date
       secondaryStatusId: 10 // Assign the secondary status ID
 

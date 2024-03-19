@@ -310,17 +310,44 @@
 
 
 .req_card_container .req_card .action_section {
-    padding-top: 1rem;
+    border-top: 1px dashed var(--ternary-text-color);
+    padding-top: 0.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom: 0;
+}
+
+
+.req_card_container .req_card .action_section .see_more_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.req_card_container .req_card .action_section .see_more_btn .btn_text {
+    cursor: pointer;
+    font-size: var(--form-label-font-size);
+    color: var(--ternary-text-color);
+    transition: 0.3s;
+}
+
+.req_card_container .req_card .action_section .see_more_btn .btn_text:hover {
+    color: var(--first-color);
+    font-weight: var(--active-font-weight);
+}
+
+
+
+.req_card_container .req_card .action_section .approve_reject_btns {
+
     display: flex;
     justify-content: space-between;
     color: var(--card-bg-color);
     font-size: var(--form-label-font-size);
     font-weight: var(--active-font-weight);
+    margin-top: 1rem;
 
-    border-top: 1px dashed var(--ternary-text-color);
 }
 
 
