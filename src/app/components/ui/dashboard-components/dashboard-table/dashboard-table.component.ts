@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { EmployeeDashboardService } from 'src/app/services/employeeServices/dashboardServices/employee-dashboard.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class DashboardTableComponent {
   requestProgress!: any[];
 
 
-  constructor(private service: EmployeeDashboardService) {}
+  constructor(private service: EmployeeDashboardService,private router: Router) {}
 
   ngOnInit(){
     this.fetchProgress();
@@ -29,5 +30,16 @@ export class DashboardTableComponent {
       console.error('Error fetching completed trips:', error);
     }
   );
+}
+viewRequestDetails(status:string){
+  if(status==='Closed'){
+  this.router.navigate(['/employee/history']);
+}
+else if(status==='Ongoing'){
+  this.router.navigate(['/employee/ongoing']);
+}
+else{
+  this.router.navigate(['/employee/pending']);
+}
 }
 }

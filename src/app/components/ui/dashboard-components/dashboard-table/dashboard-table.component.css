@@ -45,10 +45,6 @@
     display: none;
 } */
 
-
-
-
-
 .dashboard_table .status .blue {
     color: var(--primary-blue-color);
     background-color: var(--secondary-blue-color);

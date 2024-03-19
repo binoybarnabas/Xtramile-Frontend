@@ -132,7 +132,7 @@ import { DocumentCardComponent } from './components/ui/document-card/document-ca
 import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
 import { PageHeaderComponent } from './components/layout/page-header/page-header.component';
 import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
-//import { ImageCropperModule } from 'ngx-image-cropper';
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { EmptyDataComponent } from './components/ui/empty-data/empty-data.component';
 
 
@@ -279,7 +279,7 @@ import { EmptyDataComponent } from './components/ui/empty-data/empty-data.compon
     // }),
 
     ModalModule.forRoot(),
-    // ImageCropperModule,
+    ImageCropperModule,
 
   ],
   providers: [DatePipe,

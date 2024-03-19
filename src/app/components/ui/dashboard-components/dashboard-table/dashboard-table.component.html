@@ -10,7 +10,7 @@
   </thead>
 
   <tbody class="table_body" *ngFor="let trip of requestProgress">
-    <tr>
+    <tr (click)="viewRequestDetails(trip.status)">
       <td class="data">{{ trip.requestCode }}</td>
       <td class="data">{{ trip.sourceCity }}</td>
       <td class="data">{{ trip.destinationCity }}</td>

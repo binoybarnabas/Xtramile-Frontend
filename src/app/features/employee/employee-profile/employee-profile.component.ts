@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-//import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ProfileService } from 'src/app/services/employeeServices/profileServices/profile.service';
 
 @Component({
@@ -201,17 +201,17 @@ export class EmployeeProfileComponent {
     this.display = 'block';
   }
 
-  // imageCropped(event: ImageCroppedEvent) {
-  //   if (event.blob) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       this.croppedImage = e.target?.result as string;
-  //     };
-  //     reader.readAsDataURL(event.blob);
-  //   } else {
-  //     console.error('Error: Blob data is not available in ImageCroppedEvent.', event);
-  //   }
-  // }
+  imageCropped(event: ImageCroppedEvent) {
+    if (event.blob) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.croppedImage = e.target?.result as string;
+      };
+      reader.readAsDataURL(event.blob);
+    } else {
+      console.error('Error: Blob data is not available in ImageCroppedEvent.', event);
+    }
+  }
 
   onCropImageSave() {
     this.profileImage = this.croppedImage;
