@@ -1,0 +1,134 @@
+<div class="main_container">
+
+    <div class="left_section">
+
+      <div class="top_left">
+        
+        <div class="first_col">
+          <app-dashboard-report-generator></app-dashboard-report-generator>
+        </div>
+
+        <!-- <div class="sec_col">
+          <span>Sec Col</span>
+        </div> -->
+
+        <div class="third_col">
+          <app-task-manager></app-task-manager>
+        </div>
+
+      </div>
+
+
+      <div class="bottom_left">
+        
+        <div class="table_container">
+
+          <div class="heading_container">
+
+            <!-- incoming requests -->
+              <div
+                (click)="changeDashboardTableBody('incoming_requests')"
+                [ngClass]="
+                  dashboardTableBody === 'incoming_requests'
+                    ? 'heading_card active'
+                    : ' heading_card'
+                "
+              >
+                <span class="heading">Incoming</span>
+              </div>
+              <!-- waiting for options -->
+              <div
+                (click)="changeDashboardTableBody('waiting')"
+                [ngClass]="
+                  dashboardTableBody === 'waiting'
+                    ? 'heading_card active'
+                    : 'heading_card'
+                "
+                class="heading_card"
+              >
+                <span class="heading">Waiting</span>
+              </div>
+              <!-- options selected -->
+              <div
+                (click)="changeDashboardTableBody('selected')"
+                [ngClass]="
+                  dashboardTableBody === 'selected'
+                    ? 'heading_card active'
+                    : 'heading_card'
+                "
+                class="heading_card"
+              >
+                <span class="heading">Selected</span>
+              </div>
+              <!-- ongoing requests -->
+              <div
+              (click)="changeDashboardTableBody('ongoing_requests')"
+              [ngClass]="
+                dashboardTableBody === 'ongoing_requests'
+                  ? 'heading_card active'
+                  : 'heading_card'
+              "
+              class="heading_card"
+            >
+              <span class="heading">Ongoing</span>
+            </div>  
+
+          </div>
+      
+          <div class="body">
+
+              <!-- incoming req table -->
+              <div
+                *ngIf="dashboardTableBody === 'incoming_requests'"
+                class="travel_request_container"
+              >
+                <app-dashboard-table></app-dashboard-table>
+              </div>
+              
+              <!-- waiting req table -->
+              <div
+                *ngIf="dashboardTableBody === 'waiting'"
+                class="travel_request_container"
+              >
+                <app-dashboard-table></app-dashboard-table>
+              </div>
+
+              <!-- selected options req table -->
+              <div
+                *ngIf="dashboardTableBody === 'selected'"
+                class="travel_request_container"
+              >
+                <app-dashboard-table></app-dashboard-table>
+              </div>
+
+              <!-- ongoing req table -->
+              <div
+                *ngIf="dashboardTableBody === 'ongoing_requests'"
+                class="travel_request_container"
+              >
+                <app-dashboard-table></app-dashboard-table>
+              </div>
+
+          </div>
+
+        </div>
+      </div>
+    
+    </div>
+
+    <div class="right_section">
+
+        <div class="top_right">
+          <app-dashboard-notification></app-dashboard-notification>
+
+        </div>
+
+        <div class="bottom_right">
+          <app-messenger></app-messenger>
+
+        </div>
+
+    </div>
+
+
+</div>

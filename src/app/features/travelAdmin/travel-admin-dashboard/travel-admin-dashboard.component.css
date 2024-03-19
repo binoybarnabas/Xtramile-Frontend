@@ -1,0 +1,115 @@
+.main_container {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    border-radius: var(--normal-border-radius);
+    display: flex;
+}
+
+
+.main_container .left_section {
+    width: 70%;
+    margin-right: 5px;
+    /* background-color: black; */
+
+}
+
+.main_container .left_section .top_left {
+
+    border-radius: var(--normal-border-radius);
+    height: 45%;
+    /* padding: 0.5rem; */
+    display: flex;
+    justify-content: space-between;
+    margin-right: 0.5rem;
+
+}
+
+.main_container .left_section .top_left .first_col {
+    width: 55%;
+    margin-right: 0.5rem;
+}
+
+.main_container .left_section .top_left .third_col {
+    width: 45%;
+    /* background-color: aqua; */
+}
+
+
+.main_container .left_section .bottom_left {
+    margin-top: 0.5rem;
+    height: 55%;
+}
+
+
+.main_container .left_section .table_container {
+    width: 100%;
+    background-color: var(--card-bg-color);
+    padding: 5px;
+    border-radius: var(--normal-border-radius);
+    box-shadow: var(--normal-box-shadow);
+    transition: 0.6s ease;
+}
+
+.main_container .left_section .table_container .heading_container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: var(--card-bg-color);
+    border-radius: 10px;
+    border: 1px solid var(--menu-hover-color);
+}
+
+.main_container .left_section .table_container .heading_container .heading_card {
+    font-size: var(--small-font-size);
+    color: var(--ternary-text-color);
+    width: 50%;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.main_container .left_section .table_container .heading_container .heading_card.active {
+    font-weight: var(--active-font-weight);
+    background-color: var(--secondary-orange-color);
+    color: var(--primary-orange-color);
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.main_container .left_section .table_container .body {
+    overflow-x: hidden;
+}
+
+.main_container .left_section .table_container .body .travel_request_container {
+    border-radius: var(--normal-border-radius);
+}
+
+
+
+.main_container .right_section {
+    width: 30%;
+    margin-left: 5px;
+}
+
+.main_container .right_section .top_right,
+.main_container .right_section .bottom_right {
+    background-color: var(--card-bg-color);
+    box-shadow: var(--normal-box-shadow);
+    border-radius: var(--normal-border-radius);
+}
+
+.main_container .right_section .top_right {
+    height: 45%;
+}
+
+.main_container .right_section .bottom_right {
+    height: 55%;
+}
+
+
+
+.main_container .right_section .bottom_right {
+    margin-top: 10px;
+}
