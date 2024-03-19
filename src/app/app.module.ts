@@ -134,6 +134,9 @@ import { PageHeaderComponent } from './components/layout/page-header/page-header
 import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
 //import { ImageCropperModule } from 'ngx-image-cropper';
 import { EmptyDataComponent } from './components/ui/empty-data/empty-data.component';
+import { MessengerComponent } from './components/ui/dashboard-components/messenger/messenger.component';
+import { TaskManagerComponent } from './components/ui/dashboard-components/task-manager/task-manager.component';
+import { DashboardReportGeneratorComponent } from './components/ui/dashboard-components/dashboard-report-generator/dashboard-report-generator.component';
 
 
 @NgModule({
@@ -255,7 +258,10 @@ import { EmptyDataComponent } from './components/ui/empty-data/empty-data.compon
     DocumentCardComponent,
     TravellerDocumentsComponent,
     PageHeaderComponent,
-    EmptyDataComponent
+    EmptyDataComponent,
+    MessengerComponent,
+    TaskManagerComponent,
+    DashboardReportGeneratorComponent
   ]
   ,
 
