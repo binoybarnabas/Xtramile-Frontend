@@ -64,7 +64,6 @@ getAvailableOptionsDescription(){
 getSelectedOption(){
    this.requestService.selectedOptionFromEmployee(this.requestId).subscribe({
     next: (data) =>{
-    console.log('jbjdhb')
     this.receveingOptionId = data
     console.log(this.receveingOptionId)
   },

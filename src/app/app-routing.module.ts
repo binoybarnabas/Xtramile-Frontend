@@ -82,7 +82,6 @@ const routes: Routes = [
       { path: 'requestdetail', component: NewTravelRequestComponent },
       { path: 'request', component: TravelRequestFormComponent },
       { path: 'incoming', component: ManagerIncomingTravelRequestsComponent },
-      { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
       { path: 'newrequest', component: ManagerIncomingTravelRequestsComponent },
       { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent,children: [
         {

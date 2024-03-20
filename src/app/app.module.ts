@@ -266,8 +266,7 @@ import { ManagerForwadedRequestsComponent } from './features/manager/travelReque
     ManagerTravelOptionsViewerComponent,
     FileOptionViewerComponent,
     ManagerForwadedRequestsComponent
-  ]
-  ,
+  ],
 
   imports: [
     CommonModule,
@@ -289,7 +288,7 @@ import { ManagerForwadedRequestsComponent } from './features/manager/travelReque
     // }),
 
     ModalModule.forRoot(),
-    ImageCropperModule,
+    // ImageCropperModule,
     EditorModule,
     TabsModule.forRoot()
   ],
