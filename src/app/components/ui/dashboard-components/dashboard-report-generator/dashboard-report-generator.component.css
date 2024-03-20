@@ -1,0 +1,191 @@
+.main_container {
+    height: 100%;
+}
+
+.main_container .top_section {
+    height: 70%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 1rem;
+    /* background-color: aqua; */
+}
+
+.main_container .top_section .progress_card {
+    padding: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--card-bg-color);
+    box-shadow: var(--normal-box-shadow);
+    border-radius: var(--normal-border-radius);
+    height: 5.5rem;
+
+}
+
+.main_container .top_section .progress_card .title_value_section {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+
+}
+
+
+.main_container .top_section .progress_card .title_value_section .title {
+    font-size: var(--normal-font-size);
+    color: var(--ternary-text-color);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.main_container .top_section .progress_card .title_value_section .value {
+    font-size: var(--extra-large-font-size);
+    font-weight: var(--active-font-weight);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.main_container .top_section .progress_card .icon_container {
+    background-color: var(--secondary-orange-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_container .top_section .progress_card .icon_container.cyan {
+    background-color: var(--secondary-cyan-color);
+    color: var(--primary-cyan-color);
+
+}
+
+.main_container .top_section .progress_card .icon_container.green {
+    background-color: var(--secondary-green-color);
+    color: var(--primary-green-color);
+}
+
+.main_container .top_section .progress_card .icon_container.red {
+    background-color: var(--secondary-red-color);
+    color: var(--primary-red-color);
+}
+
+.main_container .top_section .progress_card .icon_container.orange {
+    background-color: var(--secondary-orange-color);
+    color: var(--primary-orange-color);
+}
+
+
+.main_container .top_section .progress_card .icon_container .icon {
+    font-size: var(--extra-large-font-size);
+}
+
+
+.main_container .bottom_section {
+    height: 30%;
+    /* margin-top: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--card-bg-color);
+    box-shadow: var(--normal-box-shadow);
+    border-radius: var(--normal-border-radius);
+
+}
+
+
+.main_container .bottom_section .body_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    /* margin-bottom: 10px; */
+    background-color: none;
+    box-shadow: none;
+
+}
+
+.main_container .bottom_section .body_section .date_picker_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* width: 75%; */
+    height: 100%;
+    /* background-color: aquamarine; */
+}
+
+.main_container .bottom_section .body_section .date_picker_container .month_picker {
+    display: flex;
+    justify-content: space-between;
+    /* width: 50%; */
+}
+
+.main_container .bottom_section .body_section .date_picker_container .year_picker {
+    display: flex;
+    justify-content: space-between;
+    /* width: 40%; */
+}
+
+
+.main_container .bottom_section .body_section .date_picker_container .month_picker .value_container {
+    min-width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_container .bottom_section .body_section .date_picker_container .year_picker .value_container {
+    min-width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.main_container .bottom_section .body_section .date_picker_container .value {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: var(--normal-font-size);
+    font-weight: var(--active-font-weight);
+}
+
+
+.main_container .bottom_section .body_section .date_picker_container .icon {
+    color: var(--third-color);
+    font-size: var(--extra-large-font-size);
+    cursor: pointer;
+}
+
+
+
+.main_container .bottom_section .body_section .action_btn_container {
+    /* background-color: brown; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 25%; */
+    margin-left: 0.5rem;
+    /* background-color: rgb(0, 94, 94); */
+    height: 100%;
+}
+
+
+.main_container .bottom_section .body_section .action_btn_container .action_btn {
+    height: 40px;
+    /* width: 90px; */
+    background-color: var(--third-color);
+    color: var(--card-bg-color);
+    margin-top: auto;
+    margin-bottom: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: var(--small-font-size);
+    font-weight: var(--active-font-weight);
+    cursor: pointer;
+}

@@ -3,7 +3,7 @@
     width: 100%;
     border-collapse: collapse;
     border-radius: var(--normal-border-radius);
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 
 }
 
@@ -16,6 +16,10 @@
     padding: 10px;
     border-top: 1px solid var(--menu-hover-color);
     border-bottom: 1px solid var(--menu-hover-color);
+}
+
+.dashboard_table .table_body {
+    overflow-y: scroll;
 }
 
 /* .dashboard_table .heading,

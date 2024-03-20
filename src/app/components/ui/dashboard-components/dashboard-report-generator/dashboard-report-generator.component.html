@@ -1,0 +1,59 @@
+<div class="main_container">
+
+    <div class="top_section">
+
+        <ng-container *ngFor="let item of progressCards">
+            <div class="progress_card">
+
+                <div class="title_value_section">
+                    <span class="title">{{item.title}}</span>
+                    <p class="value">{{item.value}}</p>
+                </div>
+                <div class="icon_container {{item.iconContainerClass}}">
+                    <span><i class={{item.iconClass}}></i></span>
+                </div>
+        
+            </div>
+        </ng-container>
+
+
+    </div>
+
+    <div class="bottom_section">
+
+         <!-- <div class="heading_section">
+            <p class="title_text">Monthly Reports</p>
+         </div> -->
+
+         <div class="body_section">
+
+            <div class="date_picker_container">
+                
+                <div class="month_picker">
+                    <span (click)="updateSelectedReportMonth('minus')" class="up_arrow"><i class="icon ri-arrow-left-s-line"></i></span>
+                    <div class="value_container">
+                        <p class="value">{{selectedReportMonth}}</p>
+                    </div>
+                    <span (click)="updateSelectedReportMonth('plus')" class="down_arrow"><i class="icon ri-arrow-right-s-line"></i></span>
+                </div>
+
+                <div class="year_picker">
+                    <span (click)="updateSelectedReportYear('minus')" class="up_arrow"><i class="icon ri-arrow-left-s-line"></i></span>
+                    <div class="value_container">
+                        <p class="value">{{selectedReportYear}}</p>
+                    </div>         
+                    <span (click)="updateSelectedReportYear('plus')" class="down_arrow"><i class="icon ri-arrow-right-s-line"></i></span>
+                </div>
+
+            </div>
+
+            <div class="action_btn_container">
+                <div class="action_btn">
+                    <span class="btn_text">Generate</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
