@@ -1,6 +1,6 @@
 <div class="main_container">
 
-    <div class="search_bar_container">
+    <div  *ngIf="isChatViewerOpen === 'no'"  class="search_bar_container">
         <div class="search_bar_card">
             <input type="text" class="search_input" placeholder="Search...">
             <i class="icon ri-search-line"></i>
@@ -8,24 +8,24 @@
         </div>
     </div>
 
-    <div class="chat_list_container">
+    <div *ngIf="isChatViewerOpen === 'no'" class="chat_list_container">
 
         <ng-container *ngFor="let chat of chatItems">
-            <div class="chat_item">
+            <div  class="chat_item">
 
                 <div class="profile_section">
                     <img class="img" src={{chat.profileImg}} alt="">
                 </div>
     
-                <div class="info_section">
+                <div (click)="toggleChatViewer('open',1)" class="info_section">
                     <p class="name_text">{{chat.name}}</p>
                     <span class="chat_text" >{{chat.message}}</span>
-                    <!-- <span [ngClass]="chat.status ==='sent' ? 'chat_text sent' : 'chat_text' " >{{chat.message}}</span> -->
                 </div>
     
                 <div class="metadata_section">
                     <span class="time">{{chat.time}}</span>
                     <div class="status_container">
+                        <i (click)="deleteChat('1')" class="del_icon ri-delete-bin-4-fill"></i>
                         <span *ngIf="chat.status==='replied' && chat.count !=='1' " class="count">{{chat.count}}</span>
                         <span *ngIf="chat.status==='sent'"  class="status_icon"><i class="ri-check-line"></i></span>
                         <span *ngIf="chat.status==='viewed'"  class="status_icon"><i class="ri-eye-fill"></i></span>
@@ -33,15 +33,67 @@
                 </div>
     
             </div>
-
         </ng-container>
     
-    
-
     </div>
 
-    <div class="chat_viewer_container">
+    <div *ngIf="isChatViewerOpen === 'yes'" class="chat_viewer_container">
+        
+        <div class="top_section">
+            
+            <div (click)="toggleChatViewer('close',1)" class="back_btn_container">
+                <span><i class="icon ri-arrow-left-s-line"></i></span>
+            </div>
+            
+            <div class="profile_img_container">
+                <img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&usqp=CAU" alt="">
+            </div>
 
+            <div class="name_container">
+                <p class="name_text">Ahinav</p>
+                <span class="user_status">online</span>
+            </div>
+        </div>
+
+        <div class="chat_body">
+
+            <div class="message_item received">
+                <p class="message_text">Hello Lorem Ipsum is simple dummy text in the printing and typesetting inducsjdfk </p>
+                <div class="time_container">
+                    <span class="time">12.00 AM</span>
+                </div>
+
+            </div>
+
+            <div class="message_item send">
+                <p class="message_text">Hello Lorem Ipsum is simple dummy text in the printing and typesetting inducsjdfk </p>
+                <div class="time_container">
+                    <span class="time">12.00 AM</span>
+                </div>
+            </div>
+
+            <div class="message_item received">
+                <p class="message_text">Hello Lorem Ipsum is simple dummy text in the printing and typesetting inducsjdfk </p>
+                <div class="time_container">
+                    <span class="time">12.00 AM</span>
+                </div>
+            </div>
+
+            <div class="message_item send">
+                <p class="message_text">Hello Lorem Ipsum is simple dummy text in the printing and typesetting inducsjdfk </p>
+                <div class="time_container">
+                    <span class="time">12.00 AM</span>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="action_btn_container">
+            <input class="input_text" type="text" placeholder="send a message">
+            <div class="send_btn">
+                <span class="send_text"> <i class="icon ri-send-plane-fill"></i> </span>
+            </div>
+        </div>
     </div>
 
 </div>
