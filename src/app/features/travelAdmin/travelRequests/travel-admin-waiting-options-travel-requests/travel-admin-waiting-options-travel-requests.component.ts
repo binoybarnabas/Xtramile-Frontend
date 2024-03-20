@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./travel-admin-waiting-options-travel-requests.component.css']
 })
 export class TravelAdminWaitingOptionsTravelRequestsComponent {
-  
+
+  pageHeading: string = 'Waiting Options'
+
 }

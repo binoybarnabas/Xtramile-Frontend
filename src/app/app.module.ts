@@ -137,6 +137,7 @@ import { EmptyDataComponent } from './components/ui/empty-data/empty-data.compon
 import { MessengerComponent } from './components/ui/dashboard-components/messenger/messenger.component';
 import { TaskManagerComponent } from './components/ui/dashboard-components/task-manager/task-manager.component';
 import { DashboardReportGeneratorComponent } from './components/ui/dashboard-components/dashboard-report-generator/dashboard-report-generator.component';
+import { TraveladminViewTravelDocumentsComponent } from './features/travelAdmin/travelDocuments/traveladmin-view-travel-documents/traveladmin-view-travel-documents.component';
 
 
 @NgModule({
@@ -261,7 +262,8 @@ import { DashboardReportGeneratorComponent } from './components/ui/dashboard-com
     EmptyDataComponent,
     MessengerComponent,
     TaskManagerComponent,
-    DashboardReportGeneratorComponent
+    DashboardReportGeneratorComponent,
+    TraveladminViewTravelDocumentsComponent
   ]
   ,
 

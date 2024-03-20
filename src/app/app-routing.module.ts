@@ -47,6 +47,8 @@ import { TravelRequestFormComponent } from './features/travel-request-form/trave
 import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
 import { DocumentsComponent } from './components/ui/documents/documents.component';
 import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
+import { TraveladminViewTravelDocumentsComponent } from './features/travelAdmin/travelDocuments/traveladmin-view-travel-documents/traveladmin-view-travel-documents.component';
+import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-ongoing-travel-requests/travel-admin-ongoing-travel-requests.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -93,6 +95,7 @@ const routes: Routes = [
   {
     path: 'traveladmin', component: TravelAdminHomeComponent, canActivate: [authGuard], children: [
       { path: 'dashboard', component: TravelAdminDashboardComponent },
+      { path: 'view_travel_documents', component: TraveladminViewTravelDocumentsComponent },
       { path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent },
       {
         path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
@@ -106,11 +109,11 @@ const routes: Routes = [
           { path: 'view_selected_options', component: SelectedOptionTravelAdminComponent }
         ]
       },
-      { path: 'ongoing', component: TravelAdminOngoingTravelComponent },
+      { path: 'ongoing', component: TravelAdminOngoingTravelRequestsComponent },
       { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },
       // { path: 'profile', component: TravelAdminProfileComponent },
       { path: 'requestdetail', component: NewTravelRequestComponent },
-      { path: 'request', component: NewTravelRequestComponent },
+      { path: 'request', component: TravelRequestFormComponent },
       { path: 'pending', component: EmployeePendingRequestsComponent },
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },

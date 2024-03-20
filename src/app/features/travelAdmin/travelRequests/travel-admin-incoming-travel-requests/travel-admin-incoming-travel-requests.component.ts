@@ -12,6 +12,9 @@ import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-re
   styleUrls: ['./travel-admin-incoming-travel-requests.component.css']
 })
 export class TravelAdminIncomingTravelRequestsComponent {
+
+  pageHeading: string = "Incoming Requests";
+
   tableHeaders: string[] = ['Request ID', 'Employee', 'Project Code', 'Date', 'Mode', 'Priority', 'Status'];
   fieldsToDisplay: string[] = ['requestId', 'employeeName', 'projectCode', 'createdOn', 'travelTypeName', 'priorityName', 'statusName'];
   incomingRequestdata: any[] = [];

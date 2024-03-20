@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class TravelAdminClosedTravelRequestsComponent {
 
+  pageHeading: string = 'Closed Travel Requests'
+
 }
