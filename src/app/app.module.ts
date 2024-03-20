@@ -118,7 +118,7 @@ import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/trave
 
 import { DashboardCalenderComponent } from './components/ui/dashboard-calender/dashboard-calender.component';
 import { CustomToastComponent } from './components/ui/custom-toast/custom-toast.component';
-import { TravelRequestFormComponent } from './features/travel-request-form/travel-request-form.component';
+import { TravelRequestFormComponent } from './features/travellerFeatures/travel-request-form/travel-request-form.component';
 import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
 import { DashboardNotificationComponent } from './components/ui/dashboard-components/dashboard-notification/dashboard-notification.component';
 import { DashboardDoneTripsComponent } from './components/ui/dashboard-components/dashboard-done-trips/dashboard-done-trips.component';
@@ -138,6 +138,9 @@ import { MessengerComponent } from './components/ui/dashboard-components/messeng
 import { TaskManagerComponent } from './components/ui/dashboard-components/task-manager/task-manager.component';
 import { DashboardReportGeneratorComponent } from './components/ui/dashboard-components/dashboard-report-generator/dashboard-report-generator.component';
 import { TraveladminViewTravelDocumentsComponent } from './features/travelAdmin/travelDocuments/traveladmin-view-travel-documents/traveladmin-view-travel-documents.component';
+import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
+import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
+import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
 
 
 @NgModule({
@@ -263,7 +266,10 @@ import { TraveladminViewTravelDocumentsComponent } from './features/travelAdmin/
     MessengerComponent,
     TaskManagerComponent,
     DashboardReportGeneratorComponent,
-    TraveladminViewTravelDocumentsComponent
+    TraveladminViewTravelDocumentsComponent,
+    TravellerPendingRequestsComponent,
+    TravellerOngoingTravelComponent,
+    TravellerTravelHistoryComponent
   ]
   ,
 

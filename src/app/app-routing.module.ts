@@ -43,12 +43,17 @@ import { LoginComponent } from './components/ui/login/login.component';
 
 import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/selected-option-travel-admin/selected-option-travel-admin.component';
-import { TravelRequestFormComponent } from './features/travel-request-form/travel-request-form.component';
+import { TravelRequestFormComponent } from './features/travellerFeatures/travel-request-form/travel-request-form.component';
 import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
 import { DocumentsComponent } from './components/ui/documents/documents.component';
 import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
 import { TraveladminViewTravelDocumentsComponent } from './features/travelAdmin/travelDocuments/traveladmin-view-travel-documents/traveladmin-view-travel-documents.component';
 import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-ongoing-travel-requests/travel-admin-ongoing-travel-requests.component';
+import { TravelAdminPendingRequestsComponent } from './features/travelAdmin/myRequests/travel-admin-pending-requests/travel-admin-pending-requests.component';
+import { TravelAdminTravelHistoryComponent } from './features/travelAdmin/myRequests/travel-admin-travel-history/travel-admin-travel-history.component';
+import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
+import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
+import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -86,9 +91,9 @@ const routes: Routes = [
       { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
       { path: 'closed', component: ManagerClosedTravelRequestsComponent },
       // { path: 'request', component: NewTravelRequestComponent },
-      { path: 'pending', component: EmployeePendingRequestsComponent },
-      { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
-      { path: 'history', component: EmployeeClosedRequestsComponent },
+      { path: 'pending', component: TravellerPendingRequestsComponent },
+      { path: 'ongoing', component: TravellerOngoingTravelComponent },
+      { path: 'history', component: TravellerTravelHistoryComponent },
       { path: 'profile', component: EmployeeProfileComponent }
     ]
   },
@@ -109,14 +114,14 @@ const routes: Routes = [
           { path: 'view_selected_options', component: SelectedOptionTravelAdminComponent }
         ]
       },
-      { path: 'ongoing', component: TravelAdminOngoingTravelRequestsComponent },
+      { path: 'approved_requests', component: TravelAdminOngoingTravelRequestsComponent },
       { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },
       // { path: 'profile', component: TravelAdminProfileComponent },
       { path: 'requestdetail', component: NewTravelRequestComponent },
       { path: 'request', component: TravelRequestFormComponent },
-      { path: 'pending', component: EmployeePendingRequestsComponent },
-      { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
-      { path: 'history', component: EmployeeClosedRequestsComponent },
+      { path: 'pending', component: TravellerPendingRequestsComponent },
+      { path: 'ongoing', component: TravellerOngoingTravelComponent },
+      { path: 'history', component: TravellerTravelHistoryComponent },
       { path: 'profile', component: EmployeeProfileComponent }
     ]
   },

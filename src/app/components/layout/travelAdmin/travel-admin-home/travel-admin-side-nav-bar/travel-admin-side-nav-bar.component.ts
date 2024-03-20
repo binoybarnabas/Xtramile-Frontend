@@ -29,7 +29,7 @@ export class TravelAdminSideNavBarComponent {
     this.travelRequestsMap.set('new ri-mail-download-line', "Incoming Requests");
     this.travelRequestsMap.set('new ri-loader-3-line', "Waiting Options");
     this.travelRequestsMap.set('new ri-check-double-line', "Selected Options");
-    this.travelRequestsMap.set('new ri-arrow-up-circle-line', "Ongoing Travel");
+    this.travelRequestsMap.set('new ri-arrow-up-circle-line', "Approved Requests");
     this.travelRequestsMap.set('new ri-history-line', "Closed Requests");
 
     //travelSettlementsMap contains values for Travel Settlements sub menu
@@ -149,7 +149,7 @@ export class TravelAdminSideNavBarComponent {
       case 'Selected Options': this.router.navigate(['/traveladmin/selected']);
         break;
 
-      case 'Ongoing Travel': this.router.navigate(['/traveladmin/ongoing']);
+      case 'Approved Requests': this.router.navigate(['/traveladmin/approved_requests']);
         break;
 
       case 'Closed Requests': this.router.navigate(['/traveladmin/closed']);
