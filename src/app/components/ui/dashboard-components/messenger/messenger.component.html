@@ -1,0 +1,47 @@
+<div class="main_container">
+
+    <div class="search_bar_container">
+        <div class="search_bar_card">
+            <input type="text" class="search_input" placeholder="Search...">
+            <i class="icon ri-search-line"></i>
+
+        </div>
+    </div>
+
+    <div class="chat_list_container">
+
+        <ng-container *ngFor="let chat of chatItems">
+            <div class="chat_item">
+
+                <div class="profile_section">
+                    <img class="img" src={{chat.profileImg}} alt="">
+                </div>
+    
+                <div class="info_section">
+                    <p class="name_text">{{chat.name}}</p>
+                    <span class="chat_text" >{{chat.message}}</span>
+                    <!-- <span [ngClass]="chat.status ==='sent' ? 'chat_text sent' : 'chat_text' " >{{chat.message}}</span> -->
+                </div>
+    
+                <div class="metadata_section">
+                    <span class="time">{{chat.time}}</span>
+                    <div class="status_container">
+                        <span *ngIf="chat.status==='replied' && chat.count !=='1' " class="count">{{chat.count}}</span>
+                        <span *ngIf="chat.status==='sent'"  class="status_icon"><i class="ri-check-line"></i></span>
+                        <span *ngIf="chat.status==='viewed'"  class="status_icon"><i class="ri-eye-fill"></i></span>
+                    </div>
+                </div>
+    
+            </div>
+
+        </ng-container>
+    
+    
+
+    </div>
+
+    <div class="chat_viewer_container">
+
+    </div>
+
+</div>

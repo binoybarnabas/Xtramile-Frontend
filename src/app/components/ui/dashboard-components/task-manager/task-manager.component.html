@@ -1,0 +1,46 @@
+<div class="main_container">
+
+    <div class="heading_section">
+         <p class="main_heading">Tasks to do</p>
+         <span class="view_all_text">View All</span>
+    </div>
+
+    <div class="body_section">
+
+        <ng-container *ngFor="let item of travelTasks">
+            <div (click)="onTaskSelected(item.id)" class="task_item_card">
+
+                <div class="deadline_card">
+                    <span class="date">{{item.deadline.date}}</span>
+                    <p class="time">{{item.deadline.time}}</p>
+                </div>
+    
+                <div class="task_info">
+                    <span [ngClass]="selectedTaskId===item.id ? 'task_info_text active' : 'task_info_text' ">{{item.taskInfo}}</span>
+                </div>
+    
+            </div>
+        </ng-container>
+    
+    </div>
+
+    <div class="action_section">
+
+        <div class="date_picker_container">
+            <!-- <input type="date" class="date_picker"> -->
+            <i class="icon ri-calendar-todo-line"></i>
+        </div>
+
+        <div (click)="toggleTaskSelection('no')" class="text_box_container">
+            <input type="text" class="text_input" placeholder="Add new task">
+        </div>
+
+        <div class="button">
+            <span  *ngIf="isTaskSelected==='no'"><i class="icon ri-arrow-right-fill"></i></span>
+            <span *ngIf="isTaskSelected ==='yes'"><i class="icon ri-check-fill"></i></span>
+        </div>
+
+
+    </div>
+
+</div>

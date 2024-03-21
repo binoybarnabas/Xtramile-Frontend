@@ -134,7 +134,9 @@ import { PageHeaderComponent } from './components/layout/page-header/page-header
 import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
 //import { ImageCropperModule } from 'ngx-image-cropper';
 import { EmptyDataComponent } from './components/ui/empty-data/empty-data.component';
-
+import { MessengerComponent } from './components/ui/dashboard-components/messenger/messenger.component';
+import { TaskManagerComponent } from './components/ui/dashboard-components/task-manager/task-manager.component';
+import { DashboardReportGeneratorComponent } from './components/ui/dashboard-components/dashboard-report-generator/dashboard-report-generator.component';
 import { TextEditorComponent } from './components/ui/text-editor/text-editor.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
@@ -262,6 +264,9 @@ import { ManagerForwadedRequestsComponent } from './features/manager/travelReque
     TravellerDocumentsComponent,
     PageHeaderComponent,
     EmptyDataComponent,
+    MessengerComponent,
+    TaskManagerComponent,
+    DashboardReportGeneratorComponent,
     TextEditorComponent,
     ManagerTravelOptionsViewerComponent,
     FileOptionViewerComponent,

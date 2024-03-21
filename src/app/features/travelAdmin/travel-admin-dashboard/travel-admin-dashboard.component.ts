@@ -1,9 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { TravelAdminDashboardService } from 'src/app/services/travelAdminServices/dashboardServices/travel-admin-dashboard.service';
-// import Chart from 'chart.js/auto';
-import { Subscription } from 'rxjs';
-import { EmployeeDashboardService } from 'src/app/services/employeeServices/dashboardServices/employee-dashboard.service';
 
 @Component({
   selector: 'app-travel-admin-dashboard',
@@ -12,6 +7,12 @@ import { EmployeeDashboardService } from 'src/app/services/employeeServices/dash
 })
 export class TravelAdminDashboardComponent {
 
+
+  dashboardTableBody: string = 'incoming_requests';
+
+  changeDashboardTableBody(content: string) {
+    this.dashboardTableBody = content;
+  }
 
 
 }
