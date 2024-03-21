@@ -23,4 +23,10 @@ export class ProfileService {
   saveFileDetails(fileDetails: any): Observable<any> {
     return this.http.post(``, fileDetails);
   }
+  uploadProfilePicture(profileImage: any, employeeId: number){
+    return this.http.post(`http://localhost:5190/api/employee/upload/profilePicture/${employeeId}`,profileImage);
+  }
+  updateProfilePicture(profileImage:any, employeeId: number){
+    return this.http.patch(`http://localhost:5190/api/employee/update/profilePicture/${employeeId}`,profileImage);
+  }
 }

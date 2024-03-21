@@ -1,130 +1,153 @@
 .done_trips_container .heading_container {
-    /* background: var(--dark-gradient-color); */
-    padding: 10px;
-    border-radius: 5px 5px 0 0;
-    display: flex;
-    align-items: center;
-    background-color: var(--primary-orange-color);
-    display: flex;
-    justify-content: space-between;
+  /* background: var(--dark-gradient-color); */
+  padding: 10px;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  align-items: center;
+  background-color: var(--scroll-thumb-color);
+  display: flex;
+  justify-content: space-between;
 }
 
 .done_trips_container .heading_container .heading {
-    margin-top: auto;
-    margin-bottom: auto;
-    color: var(--card-bg-color);
-    font-weight: var(--active-font-weight);
+  margin-top: auto;
+  margin-bottom: auto;
+  color: var(--card-bg-color);
+  font-weight: var(--active-font-weight);
 }
 
 .done_trips_container .heading_container .count {
-    padding: 5px;
-    border-radius: 5px;
-    font-size: var(--form-label-font-size);
-    background-color: var(--card-bg-color);
-    color: var(--primary-orange-color);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: var(--form-label-font-size);
+  background-color: var(--card-bg-color);
+  color: var(--primary-orange-color);
 }
 
-
 .done_trips_container .trip_history_container {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    max-height: 43vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 43vh;
 }
 
 .done_trips_container .trip_history_container .trip_history_card {
-    border-radius: 5px;
-    padding: 1rem;
-    /* background: var(--secondary-orange-color); */
-    color: var(--primary-orange-color);
-    box-shadow: var(--normal-box-shadow);
-    background-color: var(--card-bg-color);
-    margin-top: 0.5rem;
-    position: relative;
-    transition: 0.3s;
-    cursor: pointer;
+  border-radius: 5px;
+  padding: 1rem;
+  /* background: var(--secondary-orange-color); */
+  color: var(--primary-orange-color);
+  box-shadow: var(--normal-box-shadow);
+  background-color: var(--card-bg-color);
+  margin-top: 0.5rem;
+  position: relative;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .done_trips_container .trip_history_container .trip_history_card:hover {
-    transform: scale(1.01);
+  transform: scale(1.01);
 }
 
-.done_trips_container .trip_history_container .trip_history_card .origin_destination_section {
-    display: flex;
-    font-size: var(--small-font-size);
-    font-weight: var(--active-font-weight);
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-
+.done_trips_container
+  .trip_history_container
+  .trip_history_card
+  .origin_destination_section {
+  display: flex;
+  font-size: var(--small-font-size);
+  font-weight: var(--active-font-weight);
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
-.done_trips_container .trip_history_container .trip_history_card .origin_destination_section .origin_card,
-.done_trips_container .trip_history_container .trip_history_card .origin_destination_section .destination_card {
-    display: flex;
-    align-items: center;
+.done_trips_container
+  .trip_history_container
+  .trip_history_card
+  .origin_destination_section
+  .origin_card,
+.done_trips_container
+  .trip_history_container
+  .trip_history_card
+  .origin_destination_section
+  .destination_card {
+  display: flex;
+  align-items: center;
 }
 
-.done_trips_container .trip_history_container .trip_history_card .origin_destination_section .origin_card .origin,
-.done_trips_container .trip_history_container .trip_history_card .origin_destination_section .destination_card .destination {
-    margin-top: auto;
-    margin-bottom: auto;
+.done_trips_container
+  .trip_history_container
+  .trip_history_card
+  .origin_destination_section
+  .origin_card
+  .origin,
+.done_trips_container
+  .trip_history_container
+  .trip_history_card
+  .origin_destination_section
+  .destination_card
+  .destination {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 /* .main_container .bottom_section .bottom_right_section .trip_history_container .trip_history_card .origin_destination_section .mode_count_container {
     display: flex;
 } */
 
-
-
-.done_trips_container .trip_history_container .trip_history_card .origin_destination_section .plane_icon {
-    transform: rotate(90deg);
-    color: var(--second-color);
-    animation: rotateRight 3s linear infinite;
-    position: absolute;
-    left: 48%;
-    right: 48%;
-
+.done_trips_container
+  .trip_history_container
+  .trip_history_card
+  .origin_destination_section
+  .plane_icon {
+  transform: rotate(90deg);
+  color: var(--second-color);
+  animation: rotateRight 3s linear infinite;
+  position: absolute;
+  left: 48%;
+  right: 48%;
 }
 
 @keyframes rotateRight {
+  0% {
+    transform: rotate(0deg);
+  }
 
-    0% {
-        transform: rotate(0deg);
-    }
+  50% {
+    transform: rotate(0deg);
+  }
 
-    50% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .done_trips_container .trip_history_container .trip_history_card .date_section {
-    display: flex;
-    justify-content: space-between;
-    font-size: var(--extra-small-font-size);
-    margin-top: 5px;
-    color: var(--ternary-text-color);
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--extra-small-font-size);
+  margin-top: 5px;
+  color: var(--ternary-text-color);
 }
 
-.done_trips_container .trip_history_container .trip_history_card .date_section .cal_icon,
-.done_trips_container .trip_history_container .trip_history_card .date_section .done_icon {
-    color: var(--primary-blue-color);
+.done_trips_container
+  .trip_history_container
+  .trip_history_card
+  .date_section
+  .cal_icon,
+.done_trips_container
+  .trip_history_container
+  .trip_history_card
+  .date_section
+  .done_icon {
+  color: var(--primary-blue-color);
 }
-
 
 @media screen and (max-width: 860px) {
-
-    .done_trips_container .trip_history_container {
-        height: 40vh;
-    }
-
+  .done_trips_container .trip_history_container {
+    height: 40vh;
+  }
 }
 
 /* @media screen and (max-width: 460px) {

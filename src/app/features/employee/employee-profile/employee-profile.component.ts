@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
 import { ProfileService } from 'src/app/services/employeeServices/profileServices/profile.service';
 
 @Component({
@@ -14,9 +14,13 @@ export class EmployeeProfileComponent {
   employeeId!: number;
   initialValue: { [key: string]: any } = {}; //to store the initial value of contact and address
   initialData: { [key: string]: any } = {}; // to store the initial value of all other data
+  firstTimeImageUpload: boolean = true;
 
   profileImage: string | null = null;
   newImageSelected: boolean = false;
+
+  profilePicture: string | null | undefined = null;
+
 
 
   @ViewChild('imageCropModal') imageCropModal: any; // Reference to the image cropping modal
@@ -81,7 +85,8 @@ export class EmployeeProfileComponent {
           reportsTo: data.reportsTo,
           department: data.departmentName,
           projectId: data.projectCode,
-          projectName: data.projectName
+          projectName: data.projectName,
+          profilePicture: data.profilePicture          
         }
         this.form.patchValue({
           firstName: data.firstName,
@@ -92,8 +97,10 @@ export class EmployeeProfileComponent {
           address: data.address,
           department: data.departmentName,
           projectId: data.projectCode,
-          projectName: data.projectName
+          projectName: data.projectName,
         });
+        this.profilePicture = data.profilePicture;
+        console.log(this.profilePicture);
       },
       error: (error: any) => {
         console.error('Error fetching employee data:', error);
@@ -107,14 +114,6 @@ export class EmployeeProfileComponent {
   //to patch the values after the user click on the save button
   onSubmit() {
 
-    const formData = new FormData();
-
-    // Check if the profileImage is indeed a File object
-    if (this.profileImageFile instanceof File) {
-      formData.append('profilePicture', this.profileImageFile);
-    }
-    console.log(formData.get('profilePicture'));
-
     //making the initial values as empty
     let updatedData: { contactNumber?: String; address?: String } = {
       contactNumber: '',
@@ -124,7 +123,6 @@ export class EmployeeProfileComponent {
     console.log('upadted Data', updatedData)
     console.log('initial value', this.initialValue)
     console.log(this.form.controls);
-
 
     //  check if the initially stored value is same as the value in the form after the user click on save button.
     //  if the value is same make updatedData value as undefined otherwise assign the new value to the updated.
@@ -215,16 +213,42 @@ export class EmployeeProfileComponent {
 
   onCropImageSave() {
     this.profileImage = this.croppedImage;
-    console.log('this.profileImage', this.profileImage)
 
     // this.newImageSelected = true;
-    const blob = this.dataURLtoBlob(this.croppedImage);
+    const blob = base64ToFile(this.croppedImage);
     const imageName = `profile_${this.employeeId}.png`; // Example filename with timestamp
     const imageFile = new File([blob], imageName, { type: 'image/png' });
     console.log('image name', imageName, ' and image file ', imageFile)
 
     this.profileImageFile = imageFile; // Now, this.profileImage is a File object
     this.newImageSelected = true;
+
+    if(this.profilePicture == null){
+      const formData = new FormData();
+      formData.append("profilePicture",this.profileImageFile);
+      this.service.uploadProfilePicture(formData,this.employeeId).subscribe({
+        error: (error: Error) => {
+          console.log("Error in posting profile image");
+          console.log(error.message);
+        },
+        complete: () => {
+          console.log("Posting Profile Image Complete");
+        }      
+      });
+    }
+    else{
+      const formData = new FormData();
+      formData.append("profilePicture",this.profileImageFile);
+      this.service.updateProfilePicture(formData,this.employeeId).subscribe({
+        error: (error: Error) => {
+          console.log("Error in posting profile image");
+          console.log(error.message);
+        },
+        complete: () => {
+          console.log("Posting Profile Image Complete");
+        }      
+      });
+    }
 
     this.closeModal();
   }
@@ -238,17 +262,4 @@ export class EmployeeProfileComponent {
       fileInput.value = ''; // Clear the file input after closing the modal
     }
   }
-  private dataURLtoBlob(dataURL: string): Blob {
-    const byteString = window.atob(dataURL.split(',')[1]);
-    const mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-
-    return new Blob([ab], { type: mimeString });
-  }
-
 }
