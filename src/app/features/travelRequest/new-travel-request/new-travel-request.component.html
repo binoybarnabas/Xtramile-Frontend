@@ -292,39 +292,37 @@
           class="form_input_group"
         >
           <div class="form_title">
-            <h4>Add Available Options</h4>
-            <div class="add_btn_container">
-              <button
-                type="button"
-                (click)="openAddOptionModal()"
-                class="add_btn"
-              >
-                Add
-              </button>
-            </div>
+            <p class="title_text">Available Options</p>
           </div>
 
-                  <div class="options_container">
+          <div class="options_container">
 
-                    <ng-container *ngFor="let item of travelOptionsData">
-
-                        <div class="option_card">
-
-                            <div class="option_file">
-                                <img class="img" [src]="item.optionFileURL" alt="img_not_found">
-                            </div>
-                            <div class="description">
-                                <p>{{item.description}}</p>
+              <ng-container *ngFor="let item of travelOptionsData">
+                  <div class="option_card">
+                      <div class="option_file">
+                          <img class="img" [src]="item.optionFileURL" alt="img_not_found">
+                      </div>
+                      <div class="description">
+                            <p>{{item.description}}</p>
                                 <!-- <i class="del_icon ri-delete-bin-line"></i> -->
-                            </div>
-
-                        </div>
-                    </ng-container>
-
+                      </div>
                   </div>
+              </ng-container>
 
-                
-                    <div class="form_submit_container">
+              <div  (click)="openAddOptionModal()" class="new_option_card">
+
+                <div class="icon_container">
+                  <span><i class="add_icon ri-sticky-note-add-line"></i></span>
+                </div>
+                <div class="text_container">
+                      <span class="text">Add</span>
+                </div>
+            </div>
+       
+
+          </div>
+  
+          <div class="form_submit_container">
 
                         <div class="reject_btn_container">
                             <button type="button" class="reject_btn"> Reject</button>

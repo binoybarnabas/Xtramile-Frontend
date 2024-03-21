@@ -29,13 +29,13 @@ export class TravelAdminSideNavBarComponent {
     this.travelRequestsMap.set('new ri-mail-download-line', "Incoming Requests");
     this.travelRequestsMap.set('new ri-loader-3-line', "Waiting Options");
     this.travelRequestsMap.set('new ri-check-double-line', "Selected Options");
-    this.travelRequestsMap.set('new ri-arrow-up-circle-line', "Ongoing Travel");
+    this.travelRequestsMap.set('new ri-arrow-up-circle-line', "Approved Requests");
     this.travelRequestsMap.set('new ri-history-line', "Closed Requests");
 
     //travelSettlementsMap contains values for Travel Settlements sub menu
-    this.travelSettlementsMap.set('new ri-import-line', "Incoming Bills");
-    this.travelSettlementsMap.set('new ri-share-forward-line', "Forwarded Bills");
-    this.travelSettlementsMap.set('new ri-history-line', "Closed Bills");
+    // this.travelSettlementsMap.set('new ri-import-line', "Incoming Bills");
+    // this.travelSettlementsMap.set('new ri-share-forward-line', "Forwarded Bills");
+    // this.travelSettlementsMap.set('new ri-history-line', "Closed Bills");
 
     //myRequestsMap contains values for My Requests sub menu
     this.myRequestsMap.set('new ri-add-line', "New Request");
@@ -44,9 +44,9 @@ export class TravelAdminSideNavBarComponent {
     this.myRequestsMap.set('ri-history-line', "Request History")
 
     //mySettlementsMap contains values for My Settlements sub menu
-    this.mySettlementsMap.set('new ri-add-line', "New Bill");
-    this.mySettlementsMap.set('ri-loader-line', "Pending Bills");
-    this.mySettlementsMap.set('ri-history-line', "Closed Bills")
+    // this.mySettlementsMap.set('new ri-add-line', "New Bill");
+    // this.mySettlementsMap.set('ri-loader-line', "Pending Bills");
+    // this.mySettlementsMap.set('ri-history-line', "Closed Bills")
 
   }
 
@@ -132,35 +132,49 @@ export class TravelAdminSideNavBarComponent {
 
   }
 
-    /// routing based on the values from the keys in myRequest map
-    navigateToRequest(destination : string) {
-      console.log("inside navigate:" + destination);
-      switch(destination){
-        case 'Incoming Requests': this.router.navigate(['/traveladmin/incomingrequests']);
-                              break;
-        case 'Waiting Options': this.router.navigate(['/traveladmin/waiting']);
-                              break;
-        case 'Selected Options': this.router.navigate(['/traveladmin/selected']);
-                              break;
-        case 'Ongoing Travel': this.router.navigate(['/traveladmin/ongoing']);
-                              break;
-        case 'Closed Requests': this.router.navigate(['/traveladmin/closed']);
-                              break;
-        case 'New Request': this.router.navigate(['/traveladmin/request']);
-                              break;
-        case 'Pending Approval': this.router.navigate(['/traveladmin/pending']);
-                              break;
-        case 'Ongoing Travel': this.router.navigate(['/traveladmin/ongoing']);
-                              break;
-        case 'Request History': this.router.navigate(['/traveladmin/history']);
-                              break;
-        case 'profile': this.router.navigate(['/traveladmin/profile']);
-                        break;
-        case 'dashboard': this.router.navigate(['/traveladmin/dashboard']);
-                         break;
-  
-      }
-      
+  /// routing based on the values from the keys in myRequest map
+  navigateToRequest(destination: string) {
+    // console.log("inside navigate:" + destination);
+    switch (destination) {
+
+      case 'Incoming Requests': this.router.navigate(['/traveladmin/incomingrequests']);
+        break;
+
+      case 'travel_documents': this.router.navigate(['/traveladmin/view_travel_documents']);
+        break;
+
+      case 'Waiting Options': this.router.navigate(['/traveladmin/waiting']);
+        break;
+
+      case 'Selected Options': this.router.navigate(['/traveladmin/selected']);
+        break;
+
+      case 'Approved Requests': this.router.navigate(['/traveladmin/approved_requests']);
+        break;
+
+      case 'Closed Requests': this.router.navigate(['/traveladmin/closed']);
+        break;
+
+      case 'New Request': this.router.navigate(['/traveladmin/request']);
+        break;
+
+      case 'Pending Approval': this.router.navigate(['/traveladmin/pending']);
+        break;
+
+      case 'Ongoing Travel': this.router.navigate(['/traveladmin/ongoing']);
+        break;
+
+      case 'Request History': this.router.navigate(['/traveladmin/history']);
+        break;
+
+      case 'profile': this.router.navigate(['/traveladmin/profile']);
+        break;
+
+      case 'dashboard': this.router.navigate(['/traveladmin/dashboard']);
+        break;
+
     }
+
+  }
 
 }

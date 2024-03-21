@@ -9,7 +9,7 @@ import { SideNavBarService } from 'src/app/services/employeeServices/layoutServi
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
-import { EmployeeDetails } from '../travelRequest/new-travel-request/request';
+import { EmployeeDetails } from '../../travelRequest/new-travel-request/request';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { slLocale } from 'ngx-bootstrap/chronos';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
@@ -329,7 +329,7 @@ export class TravelRequestFormComponent {
       }
     }
     return null;
-  }     
+  }
 
   //Handling File Changes
   // onFileChange(event: any, controlName: string): void {
@@ -347,7 +347,7 @@ export class TravelRequestFormComponent {
       const fileLabel = document.querySelector('.file_type') as HTMLSpanElement;
       fileLabel.innerHTML = `<i class="icon ri-attachment-2"></i> ${fileName}`;
       this.travelRequestForm.patchValue({
-        travelAuthorizationEmailCapture : fileInput.files[0]
+        travelAuthorizationEmailCapture: fileInput.files[0]
       })
     }
   }
@@ -575,21 +575,21 @@ export class TravelRequestFormComponent {
     const formData = new FormData();
 
     formData.append("createdBy", String(this.empId));
-    formData.append("tripType", this.selectedTripType);    
-    formData.append("travelModeId", String(this.selectedTravelMode));    
-    formData.append("tripPurpose", this.selectedTravelPurpose);    
-    formData.append("departureDate", this.datePipe.transform(this.travelRequestForm.get('departureDate')?.value, "yyyy-MM-dd") || '');    
-    formData.append("returnDate", this.datePipe.transform(this.travelRequestForm.get('returnDate')?.value, "yyyy-MM-dd") || '');    
-    formData.append("sourceCity", this.selectedOrigin);    
-    formData.append("destinationCity", this.selectedDestination);    
-    formData.append("sourceCountry", this.travelRequestForm.get('sourceCountry')?.value);    
-    formData.append("destinationCountry", this.travelRequestForm.get('destinationCountry')?.value);    
-    formData.append("prefDepartureTime", this.selectedPrefDepTime);    
-    formData.append("travelType", this.selectedTravelType);    
-    formData.append("projectId", this.travelRequestForm.get('projectId')?.value);    
-    formData.append("cabRequired", this.travelRequestForm.value.accommodationRequired === true ? 'yes':'no');    
-    formData.append("prefPickUpTime", this.selectedPrefPickUpTime);    
-    formData.append("accommodationRequired", this.travelRequestForm.value.cabRequired === true ? 'yes':'no');
+    formData.append("tripType", this.selectedTripType);
+    formData.append("travelModeId", String(this.selectedTravelMode));
+    formData.append("tripPurpose", this.selectedTravelPurpose);
+    formData.append("departureDate", this.datePipe.transform(this.travelRequestForm.get('departureDate')?.value, "yyyy-MM-dd") || '');
+    formData.append("returnDate", this.datePipe.transform(this.travelRequestForm.get('returnDate')?.value, "yyyy-MM-dd") || '');
+    formData.append("sourceCity", this.selectedOrigin);
+    formData.append("destinationCity", this.selectedDestination);
+    formData.append("sourceCountry", this.travelRequestForm.get('sourceCountry')?.value);
+    formData.append("destinationCountry", this.travelRequestForm.get('destinationCountry')?.value);
+    formData.append("prefDepartureTime", this.selectedPrefDepTime);
+    formData.append("travelType", this.selectedTravelType);
+    formData.append("projectId", this.travelRequestForm.get('projectId')?.value);
+    formData.append("cabRequired", this.travelRequestForm.value.accommodationRequired === true ? 'yes' : 'no');
+    formData.append("prefPickUpTime", this.selectedPrefPickUpTime);
+    formData.append("accommodationRequired", this.travelRequestForm.value.cabRequired === true ? 'yes' : 'no');
     const fileInput = this.travelRequestForm.get('travelAuthorizationEmailCapture');
     if (fileInput && fileInput.value) {
       formData.append('travelAuthorizationEmailCapture', fileInput.value);
@@ -598,11 +598,11 @@ export class TravelRequestFormComponent {
     console.log("DONE");
 
     this.requestService.sendEmployeeNewTravelRequest(formData).subscribe({
-      next:(response)=>{
+      next: (response) => {
         console.log(response);
         alert("submitted")
       },
-      error:(error:Error)=>{
+      error: (error: Error) => {
         console.log(error);
       }
     });
