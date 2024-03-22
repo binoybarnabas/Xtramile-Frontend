@@ -293,9 +293,21 @@
         >
           <div class="form_title">
             <p class="title_text">Available Options</p>
+            <div class="add_btn_container">
+              <button
+                type="button"
+                (click)="openAddTextOptionModal()"
+                class="add_btn"
+              >
+                Add Text
+              </button>
+              <button (click)="openAddOptionModal()" class="add_btn">
+                Add File<i class="ri-attachment-2"></i>
+              </button>
+            </div>
           </div>
 
-          <div class="options_container">
+          <!-- <div class="options_container">
 
               <ng-container *ngFor="let item of travelOptionsData">
                   <div class="option_card">
@@ -304,7 +316,6 @@
                       </div>
                       <div class="description">
                             <p>{{item.description}}</p>
-                                <!-- <i class="del_icon ri-delete-bin-line"></i> -->
                       </div>
                   </div>
               </ng-container>
@@ -320,7 +331,7 @@
             </div>
        
 
-          </div>
+          </div> -->
   
           <div class="form_submit_container">
 

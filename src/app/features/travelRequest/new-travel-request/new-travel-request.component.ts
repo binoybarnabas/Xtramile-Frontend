@@ -16,6 +16,7 @@ import { DescriptionModalComponent } from 'src/app/components/ui/description-mod
 import { cities } from 'src/app/services/commonAPIServices/cities';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { TextEditorComponent } from 'src/app/components/ui/text-editor/text-editor.component';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -602,7 +603,7 @@ export class NewTravelRequestComponent {
 
 
   // TRAVEL ADMIN
-  openAddOptionModal() {
+  openAddTextOptionModal(){
     const initialState = {
       requestId: this.travelRequestDetailViewModel.requestId
     };
@@ -610,12 +611,30 @@ export class NewTravelRequestComponent {
     // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
 
 
-    this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
+    this.bsModalRef = this.modalService.show(TextEditorComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
       console.log('Modal result:', result);
 
 
+      // You can perform actions with the result data here
+    });
+  }
+
+  openAddOptionModal() {
+    const initialState = {
+      requestId: this.travelRequestDetailViewModel.requestId
+    };
+ 
+    // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
+ 
+ 
+    this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
+    this.bsModalRef.content.onClose.subscribe((result: any) => {
+      // Handle the result from the modal if needed
+      console.log('Modal result:', result);
+ 
+ 
       // You can perform actions with the result data here
     });
   }

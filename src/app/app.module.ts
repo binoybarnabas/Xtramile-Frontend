@@ -142,7 +142,12 @@ import { TravellerPendingRequestsComponent } from './features/travellerFeatures/
 import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
 import { TabbedDataTableComponent } from './components/ui/tabbed-data-table/tabbed-data-table.component';
-
+import { TextEditorComponent } from './components/ui/text-editor/text-editor.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { FileOptionViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/file-option-viewer/file-option-viewer.component';
+import { ManagerForwadedRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwaded-requests/manager-forwaded-requests.component';
 
 @NgModule({
   declarations: [
@@ -267,13 +272,16 @@ import { TabbedDataTableComponent } from './components/ui/tabbed-data-table/tabb
     MessengerComponent,
     TaskManagerComponent,
     DashboardReportGeneratorComponent,
+    TextEditorComponent,
+    ManagerTravelOptionsViewerComponent,
+    FileOptionViewerComponent,
     TraveladminViewTravelDocumentsComponent,
     TravellerPendingRequestsComponent,
     TravellerOngoingTravelComponent,
     TravellerTravelHistoryComponent,
-    TabbedDataTableComponent
-  ]
-  ,
+    TabbedDataTableComponent,
+    ManagerForwadedRequestsComponent
+  ],
 
   imports: [
     CommonModule,
@@ -296,7 +304,8 @@ import { TabbedDataTableComponent } from './components/ui/tabbed-data-table/tabb
 
     ModalModule.forRoot(),
     ImageCropperModule,
-
+    EditorModule,
+    TabsModule.forRoot()
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true }],
