@@ -14,7 +14,7 @@
             
         </div>
 
-        <div class="filter_and_search_container">
+        <div *ngIf="isSearchFilterNeeded === 'yes'" class="filter_and_search_container">
 
             <div class="search_container">
                 <div class="icon_container">
@@ -58,7 +58,7 @@
             </table>
               
         </div>
-        
+
     </div>
 
 </div>
