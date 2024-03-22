@@ -9,7 +9,7 @@
 
 .main_container .left_section {
     width: 70%;
-    margin-right: 5px;
+    /* margin-right: 5px; */
     /* background-color: black; */
 
 }
@@ -21,7 +21,7 @@
     /* padding: 0.5rem; */
     display: flex;
     justify-content: space-between;
-    margin-right: 0.5rem;
+    margin-right: 0.6rem;
 
 }
 
@@ -32,7 +32,6 @@
 
 .main_container .left_section .top_left .third_col {
     width: 45%;
-    /* background-color: aqua; */
 }
 
 

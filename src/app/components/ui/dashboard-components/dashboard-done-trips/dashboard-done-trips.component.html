@@ -1,120 +1,41 @@
 <div class="done_trips_container">
+  <div class="heading_container">
+    <p class="heading">Completed Trips</p>
+    <span class="count"> {{ completedTrips.length }}</span>
+    <!-- Display the count of completed trips -->
+  </div>
 
-    <div class="heading_container">
-        <p class="heading" >Completed Trips</p>
-        <span class="count"> 5</span>
-    </div>
-
-    <div class="trip_history_container">
-
-        <div class="trip_history_card">
-            <div class="origin_destination_section">
-                <div class="origin_card">
-                    <p class="origin">Trivandrum</p>
-                </div>
-                <div class="mode_count_container">
-                    <i class="plane_icon ri-plane-line"></i>
-                    <!-- <span class="count">3</span> -->
-                </div>
-                <div class="destination_card">
-                    <p class="destination">Kochi</p>
-                </div>
-            </div>
-
-            <div class="date_section">
-                <span class="value"><i class="cal_icon ri-calendar-schedule-line"></i> 12 Feb 24 - 22 Feb 24</span>
-                <span class="value"><i class="done_icon ri-check-double-line"></i> 25/02/2024 </span>
-            </div>
+  <div class="trip_history_container">
+    <!-- Loop through each completed trip and display its details -->
+    <div class="trip_history_card" *ngFor="let trip of completedTrips">
+      <div class="origin_destination_section" (click)="viewDoneTripDetails()">
+        <div class="origin_card">
+          <p class="origin">{{ trip.from }}</p>
+          <!-- Display the origin of the trip -->
         </div>
+        <i class="plane_icon ri-plane-line"></i>
+        <div class="destination_card">
+          <p class="destination">{{ trip.to }}</p>
+          <!-- Display the destination of the trip -->
+        </div>
+      </div>
 
-        <div class="trip_history_card">
-            <div class="origin_destination_section">
-                <div class="origin_card">
-                    <p class="origin">Delhi</p>
-                </div>
-                <i class="plane_icon ri-plane-line"></i>
-                <div class="destination_card">
-                    <p class="destination">Bangalore</p>
-                </div>
-            </div>
-
-            <div class="date_section">
-                    <span class="value"><i class="cal_icon ri-calendar-schedule-line"></i> 12 Feb 24 - 22 Feb 24</span>
-                    <span class="value"><i class="done_icon ri-check-double-line"></i> 25/02/2024 </span>
-            </div>
-        </div> 
-
-        <div class="trip_history_card">
-            <div class="origin_destination_section">
-                <div class="origin_card">
-                    <p class="origin">Austin</p>
-                </div>
-                <i class="plane_icon ri-plane-line"></i>
-                <div class="destination_card">
-                    <p class="destination">Chennai</p>
-                </div>
-            </div>
-
-            <div class="date_section">
-                <span class="value"><i class="cal_icon ri-calendar-schedule-line"></i> 12 Feb 24 - 22 Feb 24</span>
-                <span class="value"><i class="done_icon ri-check-double-line"></i> 25/02/2024 </span>
-            </div>
-        </div>      
-        <div class="trip_history_card">
-            <div class="origin_destination_section">
-                <div class="origin_card">
-                    <p class="origin">Austin</p>
-                </div>
-                <div class="mode_count_container">
-                    <i class="plane_icon ri-plane-line"></i>
-                    <!-- <span class="count">3</span> -->
-                </div>
-
-                <div class="destination_card">
-                    <p class="destination">Chennai</p>
-                </div>
-            </div>
-
-            <div class="date_section">
-                <span class="value"><i class="cal_icon ri-calendar-schedule-line"></i> 12 Feb 24 - 22 Feb 24</span>
-                <span class="value"><i class="done_icon ri-check-double-line"></i> 25/02/2024 </span>
-            </div>
-        </div>  
-
-        <div class="trip_history_card">
-            <div class="origin_destination_section">
-                <div class="origin_card">
-                    <p class="origin">Austin</p>
-                </div>
-                <i class="plane_icon ri-plane-line"></i>
-                <div class="destination_card">
-                    <p class="destination">Chennai</p>
-                </div>
-            </div>
-
-            <div class="date_section">
-                <span class="value"><i class="cal_icon ri-calendar-schedule-line"></i> 12 Feb 24 - 22 Feb 24</span>
-                <span class="value"><i class="done_icon ri-check-double-line"></i> 25/02/2024 </span>
-            </div>
-        </div> 
-             
-        <div class="trip_history_card">
-            <div class="origin_destination_section">
-                <div class="origin_card">
-                    <p class="origin">Austin</p>
-                </div>
-                <i class="plane_icon ri-plane-line"></i>
-                <div class="destination_card">
-                    <p class="destination">Chennai</p>
-                </div>
-            </div>
-
-            <div class="date_section">
-                <span class="value"><i class="cal_icon ri-calendar-schedule-line"></i> 12 Feb 24 - 22 Feb 24</span>
-                <span class="value"><i class="done_icon ri-check-double-line"></i> 25/02/2024 </span>
-            </div>
-        </div>                
-        
+      <div class="date_section">
+        <span class="value"
+          ><i class="cal_icon ri-calendar-schedule-line"></i>
+          {{ trip.departureDate | date : "shortDate" }} -
+          {{ trip.returnDate | date : "shortDate" }}</span
+        >
+        <!-- Display the start and end dates of the trip -->
+        <span class="value"
+          ><i class="done_icon ri-check-double-line"></i>
+          {{ trip.completedDate | date : "shortDate" }}</span
+        >
+        <!-- Display the completion date of the trip -->
+        <span *ngIf="trip.count > 1" class="count_on_card">{{
+          trip.count
+        }}</span>
+      </div>
     </div>
-    
+  </div>
 </div>

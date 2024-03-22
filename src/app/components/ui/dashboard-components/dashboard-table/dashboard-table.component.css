@@ -49,17 +49,26 @@
     display: none;
 } */
 
-
-
-
-
-.dashboard_table .status .value {
+.dashboard_table .status .blue {
     color: var(--primary-blue-color);
     background-color: var(--secondary-blue-color);
     padding: 3px 20px;
     border-radius: 15px;
 }
 
+.dashboard_table .status .green {
+    color: var(--primary-green-color);
+    background-color: var(--secondary-green-color);
+    padding: 3px 20px;
+    border-radius: 15px;
+}
+
+.dashboard_table .status .red {
+    color: var(--primary-red-color);
+    background-color: var(--secondary-red-color);
+    padding: 3px 20px;
+    border-radius: 15px;
+}
 
 
 .dashboard_table tbody tr:hover {

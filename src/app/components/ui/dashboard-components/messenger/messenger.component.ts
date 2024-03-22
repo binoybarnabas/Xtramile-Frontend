@@ -10,6 +10,15 @@ import { ChatItem } from 'src/app/services/interfaces/iChatItem';
 export class MessengerComponent {
 
 
+  isChatViewerOpen: string;
+
+  isDeleteBtnVisible: boolean;
+
+  constructor() {
+    this.isChatViewerOpen = 'no';
+    this.isDeleteBtnVisible = false;
+  }
+
   chatItems: ChatItem[] = [
     {
       profileImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&usqp=CAU",
@@ -68,5 +77,22 @@ export class MessengerComponent {
       status: 'viewed',
     }
   ];
+
+
+  //method to toggle visisbilit of chat viewer
+  toggleChatViewer(action: string, chatId: number) {
+    if (action === 'open') {
+      this.isChatViewerOpen = 'yes';
+    }
+    else {
+      this.isChatViewerOpen = 'no';
+    }
+  }
+
+
+  deleteChat(chatId: string) {
+    alert('deleted!');
+  }
+
 
 }

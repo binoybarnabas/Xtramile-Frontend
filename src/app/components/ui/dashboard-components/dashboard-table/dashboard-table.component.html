@@ -1,47 +1,32 @@
 <table class="dashboard_table">
-    <thead>
-        <tr class="tbl_heading">
-            <th class="heading">Req ID</th>
-            <th class="heading">From</th>
-            <th class="heading">To</th>
-            <th class="heading">Status</th>
-            <th class="heading">Remarks</th>
-        </tr>
-    </thead>
+  <thead>
+    <tr class="tbl_heading">
+      <th class="heading">Req ID</th>
+      <th class="heading">From</th>
+      <th class="heading">To</th>
+      <th class="heading">Status</th>
+      <th class="heading">Remarks</th>
+    </tr>
+  </thead>
 
-    <tbody class="table_body">
-
-        <tr>
-            <td class="data">REQ101</td>
-            <td class="data">Trivandrum</td>
-            <td class="data">Austin</td>
-            <td class=" data status"><span class="value">Waiting</span> </td>
-            <td class="data remarks">Approved by Manager</td>
-        </tr>
-
-         <tr>
-            <td class="data">REQ101</td>
-            <td class="data">Trivandrum</td>
-            <td class="data">Austin</td>
-            <td class=" data status"><span class="value">Waiting</span> </td>
-            <td class="data remarks">Approved by Manager</td>
-        </tr>             
-
-        <tr>
-            <td class="data">REQ101</td>
-            <td class="data">Trivandrum</td>
-            <td class="data">Austin</td>
-            <td class=" data status"><span class="value">Waiting</span> </td>
-            <td class="data remarks">Approved by Manager</td>
-        </tr>
-
-        <tr>
-            <td class="data">REQ101</td>
-            <td class="data">Trivandrum</td>
-            <td class="data">Austin</td>
-            <td class=" data status"><span class="value">Waiting</span> </td>
-            <td class="data remarks">Approved by Manager <br> <i class="user_icon ri-user-line"></i> Mehtab </td>
-        </tr>                       
-    
-    </tbody>
+  <tbody class="table_body" *ngFor="let trip of requestProgress">
+    <tr (click)="viewRequestDetails(trip.status)">
+      <td class="data">{{ trip.requestCode }}</td>
+      <td class="data">{{ trip.sourceCity }}</td>
+      <td class="data">{{ trip.destinationCity }}</td>
+      <td class="data status">
+        <span
+          [ngClass]="
+            trip.status === 'Ongoing'
+              ? 'green'
+              : trip.status === 'Cancelled' || trip.status === 'Denied'
+              ? 'red'
+              : 'blue'
+          "
+          >{{ trip.status }}</span
+        >
+      </td>
+      <td class="data remarks">{{ trip.progress }}</td>
+    </tr>
+  </tbody>
 </table>

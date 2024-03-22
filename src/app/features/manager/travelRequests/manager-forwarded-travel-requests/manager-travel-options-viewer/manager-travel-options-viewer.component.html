@@ -12,13 +12,32 @@
         <div class="panel_header" (click)="togglePanel(item)">
           Option {{ i + 1 }}
           <!-- Button to confirm option -->
+          <span class="confirm_button" *ngIf="item.expanded && receveingOptionId == null && buttonActivate">
+            <app-change-status-button
+            [name]="name_rm"
+            [empId]="empId"
+            [requestId]="requestId"
+            [primaryStatusCode]="primaryStatusCode_rm"
+            [secondaryStatusCode]="secondaryStatusCode_rm"
+            (externalpostTriggered)="confirmOption(item.optionId)"
+          ></app-change-status-button>
+          </span>
           <div class="expansion_arrow" *ngIf="!item.expanded"><i class="ri-arrow-down-s-line"></i></div>
-          <button class="confirm_button" *ngIf="item.expanded && receveingOptionId == 0" (click)="confirmOption(item.optionId)">Confirm</button>
+          <!-- <button class="confirm_button" *ngIf="item.expanded && receveingOptionId == null" (click)="confirmOption(item.optionId)">Confirm</button> -->
           <span class="selected_text" *ngIf="item.optionId === receveingOptionId"><i class="ri-arrow-right-s-line"></i>Selected</span>
         </div>
         <div class="panel_content" [@expandCollapse]="item.expanded ? 'expanded' : 'collapsed'">
           <div [innerHTML]="item.htmlString"></div>
         </div>
+      </div>
+      <div class="text-center mt-5" *ngIf="!buttonActivate && receveingOptionId != null && descriptions.length != 0">
+        <app-change-status-button
+          [name]="name_ta"
+          [empId]="empId"
+          [requestId]="requestId"
+          [primaryStatusCode]="primaryStatusCode_ta"
+          [secondaryStatusCode]="secondaryStatusCode_ta">
+        </app-change-status-button>
       </div>
     </ng-template>
   </tab>

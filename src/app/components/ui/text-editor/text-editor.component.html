@@ -10,17 +10,20 @@
   apiKey="6fbq26b4z6phet50bxxqc7w4ht11my7jsqlyfto1x8jk82pa"
   [(ngModel)]="htmlContent"
   [init]="{
-    height: 200,
+    height: 250,
     width: 400,
     menubar: false,
     plugins: 'wordcount',
     toolbar: 'undo redo | formatselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | wordcount'
   }"
 ></editor>
-<div class="attachment_container">
-  <button (click)="openAddOptionModal()" class="btn btn-primary"><i class="ri-attachment-2"></i></button> 
+  <!-- <div class="attachment_container">
+    <button (click)="openAddOptionModal()" class="btn btn-primary"><i class="ri-attachment-2"></i></button> 
+  </div> -->
 </div>
+<div class="text-center mt-3">
+  <button class="btn btn-primary" (click)="saveTravelOption()">Submit</button>
 </div>
-<button class="btn btn-primary mt-3" (click)="saveTravelOption()">Submit</button>
-</div>
+
+
 

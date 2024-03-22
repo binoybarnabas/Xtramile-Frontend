@@ -24,6 +24,17 @@ descriptions!: any[];
 receveingOptionId !:number;
 empId:number=1;
 userData: UserData;
+
+ //For change status button of rm.
+ name_rm: string = 'Submit'
+ primaryStatusCode_rm: string = 'PE'
+ secondaryStatusCode_rm: string = 'SD'
+
+ //For change status button of ta.
+ name_ta:string = "Confirm"
+ primaryStatusCode_ta:string = "FD"
+ secondaryStatusCode_ta:string = "FD"
+ 
 constructor(private managerService:ManagerTravelRequestsService, private sanitizer: DomSanitizer,private requestService: RequestService,private toastService: CustomToastService,private activatedRoute:ActivatedRoute ){
   const storedUserData = localStorage.getItem('userData');
   this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
@@ -78,6 +89,7 @@ getSelectedOption(){
 }
 
 togglePanel(item: any): void {
+  console.log(item)
   item.expanded = !item.expanded;
 }
 
@@ -86,6 +98,7 @@ confirmOption(optionId:any): void {
   this.requestService.submitSelectedOption(this.requestId, this.empId, optionId).subscribe({
     next: (response: any) => {
       console.log('Post successful:', response);
+      this.getAvailableOptionsDescription();
     },
     error: (error: any) => {
       console.error('Post failed:', error);
@@ -93,8 +106,22 @@ confirmOption(optionId:any): void {
     complete: () => {
       console.log('Post request completed.');
       this.toastService.showToast("Travel Option Selected!");
-      // alert("Submitted!")
     }
   });
+}
+buttonActivate: boolean = this.checkRoleOfUser();
+checkRoleOfUser(): boolean {
+  const userData = localStorage.getItem('userData');
+  if (userData) {
+    const userDataParsed = JSON.parse(userData);
+
+    if (userDataParsed.role === 'Manager' && userDataParsed.department === 'TA') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  // Return a default value if userData is falsy
+  return false;
 }
 }

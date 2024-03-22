@@ -605,7 +605,7 @@ export class NewTravelRequestComponent {
 
 
   // TRAVEL ADMIN
-  openAddOptionModal() {
+  openAddTextOptionModal(){
     const initialState = {
       requestId: this.travelRequestDetailViewModel.requestId
     };
@@ -623,15 +623,23 @@ export class NewTravelRequestComponent {
     });
   }
 
-  openAddOptionModalFile(){
-    this.bsModalRef = this.modalService.show(ModalComponent);
+  openAddOptionModal() {
+    const initialState = {
+      requestId: this.travelRequestDetailViewModel.requestId
+    };
+ 
+    // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
+ 
+ 
+    this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
       console.log('Modal result:', result);
+ 
+ 
       // You can perform actions with the result data here
     });
-  } 
-
+  }
 
   openRejectionReasonModal() {
     const initialState = {

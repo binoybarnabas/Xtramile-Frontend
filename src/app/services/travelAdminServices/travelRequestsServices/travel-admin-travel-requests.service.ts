@@ -128,7 +128,8 @@ export class TravelAdminTravelRequestsService {
   }
 
   saveTravelOption(htmlContent: string, requestId: number): Observable<any> {
-    return this.http.post<any>(`http://localhost:5190/api/availableoptions/addtextoption`, { htmlContent, requestId });
+    const headers = new HttpHeaders();
+    return this.http.post(`http://localhost:5190/api/availableoptions/addtextoption`, { htmlContent, requestId },{ headers, responseType: 'text' });
   }
 
 }

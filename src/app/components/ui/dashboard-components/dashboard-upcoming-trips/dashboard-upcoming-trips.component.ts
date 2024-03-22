@@ -37,7 +37,7 @@ export class DashboardUpcomingTripsComponent {
         // Log the fetched data
         console.log('upcoming trips:', data);
         
-        if (data.length > 0) {
+        if (data!==null) {
           // Assign fetched data to trips array
           this.trips = data;
           this.loadCurrentTrip(); // Load the current trip details
@@ -48,7 +48,7 @@ export class DashboardUpcomingTripsComponent {
             .subscribe(() => {
               this.nextTrip();
             });
-        } else {
+        } else if(data===null){
           // Set the flag to indicate that no trip details are available
           this.tripDetailsAvailable = false;
         }

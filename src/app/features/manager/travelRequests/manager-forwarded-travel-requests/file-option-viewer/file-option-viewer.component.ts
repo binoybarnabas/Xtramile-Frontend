@@ -26,7 +26,7 @@ export class FileOptionViewerComponent {
 
   //For change status button of rm.
   name_rm: string = 'Submit'
-  primaryStatusCode_rm: string = 'SD'
+  primaryStatusCode_rm: string = 'PE'
   secondaryStatusCode_rm: string = 'SD'
  
 
@@ -121,6 +121,7 @@ export class FileOptionViewerComponent {
           //Change Alert to PopUp
           // Reset the selectedOption after a successful post
           this.selectedOption = null;
+          this.getTravelOptionsByReqId(this.reqId)
         },
         error: (error: any) => {
           console.error('Post failed:', error);

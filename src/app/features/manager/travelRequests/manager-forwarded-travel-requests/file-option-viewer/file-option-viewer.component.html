@@ -30,7 +30,7 @@
       <div class="cancel_btn_container">
         <button class="cancel_btn" type="button"  (click)="resetSelection()">Cancel</button>
       </div>
-      <div class="submit_btn_container">
+      <div class="submit_btn_container" *ngIf="buttonActivate">
         <app-change-status-button
           [name]="name_rm"
           [empId]="empId"
@@ -67,7 +67,7 @@
       </ng-container>
   </div>
   </ng-template>  
-  <div class="text-center mt-5" *ngIf="!buttonActivate && receveingOptionId != 0">
+  <div class="text-center mt-5" *ngIf="!buttonActivate && receveingOptionId != null && travelOptionsData.length != 0">
     <app-change-status-button
       [name]="name_ta"
       [empId]="empId"

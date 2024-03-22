@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { ModalComponent } from '../modal/modal.component';
+import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 
 @Component({
   selector: 'app-text-editor',
@@ -12,7 +13,7 @@ export class TextEditorComponent {
   htmlContent: string = ''; // Variable to store the content of the editor
   requestId:number =1;
   optionId:number =1;
-  constructor(public bsModalRef: BsModalRef,private apiService:TravelAdminTravelRequestsService,private modalService: BsModalService){
+  constructor(public bsModalRef: BsModalRef,private apiService:TravelAdminTravelRequestsService,private modalService: BsModalService,private toastService: CustomToastService){
     
   }
   UploadFile(){}
@@ -21,18 +22,17 @@ export class TextEditorComponent {
     this.bsModalRef.hide(); 
   }
   saveTravelOption() {
-    
-    console.log(this.htmlContent);
     this.apiService.saveTravelOption(this.htmlContent, this.requestId)
       .subscribe({
         next: (response: any) => {
           console.log('Post successful:', response);
-          // Reset the selectedOption after a successful post
+          this.closeModal();
         },
         error: (error: any) => {
           console.error('Post failed:', error);
         },
         complete: () => {
+          this.toastService.showToast("Travel Option Added!")
           console.log('Post request completed.');
         }
   });
