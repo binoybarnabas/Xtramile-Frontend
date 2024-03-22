@@ -64,7 +64,6 @@ export class NewTravelRequestComponent {
   destinationFilteredCities: any[] = []; // Separate filtered list for destination field
   optionFileUrl: string = "";
 
-
   // Function to convert the Map into an array of key-value pairs
   getGeneralInfoMapEntries(): [string, any][] {
     return Array.from(this.generalInformationsMap.entries());
@@ -124,8 +123,7 @@ export class NewTravelRequestComponent {
 
         case 'Manager': if (this.userData.department == 'TA') {
           this.currentLoggedInUserRole = 'travelAdmin';
-          this.newReqFormSubMenuValue = 4;
-
+          //this.newReqFormSubMenuValue = 4;
         }
         else if (this.userData.department == 'FD') {
           this.currentLoggedInUserRole = 'financePersonnel';

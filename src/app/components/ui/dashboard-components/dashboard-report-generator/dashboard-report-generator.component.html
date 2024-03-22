@@ -30,19 +30,19 @@
             <div class="date_picker_container">
                 
                 <div class="month_picker">
-                    <span (click)="updateSelectedReportMonth('minus')" class="up_arrow"><i class="icon ri-arrow-left-s-line"></i></span>
+                    <i (click)="updateSelectedReportMonth('minus')" class="icon ri-arrow-left-s-line"></i>
                     <div class="value_container">
                         <p class="value">{{selectedReportMonth}}</p>
                     </div>
-                    <span (click)="updateSelectedReportMonth('plus')" class="down_arrow"><i class="icon ri-arrow-right-s-line"></i></span>
+                    <i (click)="updateSelectedReportMonth('plus')" class="icon ri-arrow-right-s-line"></i>
                 </div>
 
                 <div class="year_picker">
-                    <span (click)="updateSelectedReportYear('minus')" class="up_arrow"><i class="icon ri-arrow-left-s-line"></i></span>
+                    <i (click)="updateSelectedReportYear('minus')" class="icon ri-arrow-left-s-line"></i>
                     <div class="value_container">
                         <p class="value">{{selectedReportYear}}</p>
                     </div>         
-                    <span (click)="updateSelectedReportYear('plus')" class="down_arrow"><i class="icon ri-arrow-right-s-line"></i></span>
+                    <i (click)="updateSelectedReportYear('plus')" class="icon ri-arrow-right-s-line"></i>
                 </div>
 
             </div>
