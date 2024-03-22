@@ -141,6 +141,7 @@ import { TraveladminViewTravelDocumentsComponent } from './features/travelAdmin/
 import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
 import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
+import { TabbedDataTableComponent } from './components/ui/tabbed-data-table/tabbed-data-table.component';
 
 
 @NgModule({
@@ -269,7 +270,8 @@ import { TravellerTravelHistoryComponent } from './features/travellerFeatures/tr
     TraveladminViewTravelDocumentsComponent,
     TravellerPendingRequestsComponent,
     TravellerOngoingTravelComponent,
-    TravellerTravelHistoryComponent
+    TravellerTravelHistoryComponent,
+    TabbedDataTableComponent
   ]
   ,
 

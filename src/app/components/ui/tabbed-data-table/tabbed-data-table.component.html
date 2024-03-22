@@ -1,0 +1,64 @@
+<div class="main_container">
+
+    <div class="header_section">
+
+        <div class="tab_container">
+
+            <ng-container *ngFor="let tab of tabs let i = index"> 
+
+                <div (click)="activeTabIndex = i" class="tab_card" [class.active]="activeTabIndex === i">
+                    <span>{{tab.name}}</span>
+                </div>
+
+            </ng-container>
+            
+        </div>
+
+        <div class="filter_and_search_container">
+
+            <div class="search_container">
+                <div class="icon_container">
+                    <i class="search_icon ri-search-2-line"></i>
+                </div>
+                <input class="text_input" type="text" placeholder="search">
+            </div>
+
+            <div class="filter_container">
+
+                <ng-container *ngFor="let item of filters">
+                    <div (click)="toggleFilter(item.filterId)" [ngClass]=" item.isActive === 'yes'? 'filter_card active' : 'filter_card'">
+                        <span class="filter_text">{{item.filterName}}</span>
+                    </div>
+                </ng-container>
+           
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="body_section">
+
+        <div  *ngFor="let tab of tabs; let i = index" class="table_container">
+            
+            <table *ngIf="activeTabIndex === i"  class="table_main">
+
+                <thead class="table_heading" >
+                  <tr class="heading_row">
+                    <th *ngFor="let heading of tab.headings">{{ heading }}</th>
+                  </tr>
+                </thead>
+              
+                <tbody class="table_body">
+                  <tr *ngFor="let row of tab.entries" class="body_row">
+                    <td *ngFor="let entry of row" class="body_col_item">{{ entry }}</td>
+                  </tr>
+                </tbody>
+              
+            </table>
+              
+        </div>
+        
+    </div>
+
+</div>
