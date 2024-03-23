@@ -1,69 +1,64 @@
-<div class="doc_card_container" *ngFor="let card of cards">
+<div class="doc_card_container" *ngFor="let card of employeeDocuments">
+  <div
+    class="doc_card"
+    [ngClass]="{ flip: card.isFlipped }"
+    (dblclick)="flipCard(card)"
+  >
+    <div class="front_side">
+      <div class="file_type_container">
+        <span class="value">{{ card.documentType }}</span>
+        <!-- Display the document type -->
+      </div>
 
-    <!-- <div class="doc_card_outer"> -->
+      <div class="top_section"></div>
 
-        <div class="doc_card"  [ngClass]="{'flip': card.isFlipped}" (dblclick)="flipCard(card)">
-
-        <div class="front_side">
-          
-        <div class="file_type_container">
-            <span class="value">VISA</span>
+      <div class="middle_section">
+        <div class="doc_number_container">
+          <p class="value">{{ card.identificationNumber }}</p>
+          <!-- Display the document number -->
         </div>
-            
-        <div class="top_section">
-            <!-- <div class="top_icon">
-            <i class="icon ri-wireless-charging-line"></i>
-            </div> -->
+        <div class="date_container">
+          <div class="upload_date">
+            <span class="title">UPLOADED ON</span>
+            <p class="value">{{ card.uploadedDate | date : "dd-MM-yyyy" }}</p>
+            <!-- Display the uploaded date -->
+          </div>
+          <div class="valid_thru" *ngIf="card.documentType !== 'ID Card'">
+            <!-- Conditionally show if document type is not 'ID Card' -->
+            <span class="title">VALID THRU</span>
+            <p class="value">{{ card.validThru | date : "dd-MM-yyyy" }}</p>
+            <!-- Display the validity date -->
+          </div>
         </div>
+      </div>
 
-        <div class="middle_section">
-            <div class="doc_number_container">
-                <!-- <span>DOCUMENT NO</span> -->
-                <p class="value">KZSPMWSB8923</p>
-            </div>
-            <div class="date_container">
-                <div class="upload_date">
-                    <span class="title">UPLOADED ON</span>
-                    <p class="value">12-12-2024</p>
-                </div>
-                <div class="valid_thru"> 
-                    <span class="title">VALID THRU</span>   
-                    <p class="value">12-12-2025</p>
-                </div>
-            </div>
+      <div class="bottom_section">
+        <div class="action_buttons">
+          <div class="del_btn" type="button">
+            <span><i class="icon ri-delete-bin-7-line"></i></span>
+          </div>
+
+          <div class="country_name">
+            <span class="value">{{ card.country }}</span>
+            <!-- Display the country -->
+          </div>
+
+          <div class="download_btn" type="button">
+            <span><i class="icon ri-download-line"></i></span>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="bottom_section">
-            <div class="action_buttons">
-              
-                <div class="del_btn" type="button">
-                    <span><i class="icon ri-delete-bin-7-line"></i></span>
-                </div>
-
-                <div class="country_name">
-                    <span class="value">India</span>
-                </div>
-
-                <div class="download_btn" type="button">
-                    <span><i class="icon ri-download-line"></i></span>
-                </div>
-            </div>
-        </div>
-
-        </div>
-
-        <div class="back_side">
-
-            <div class="img_container">
-                <!-- <img class="img" src="https://images.pexels.com/photos/3972750/pexels-photo-3972750.jpeg?auto=compress&cs=tinysrgb&w=600" alt=""> -->
-            </div>
-            <div class="file_size_container">
-                <span class="value">220 KB</span>
-            </div>
-
-        </div>
-
-        </div>
-        
-    <!-- </div> -->
+    <div class="back_side">
+      <div class="img_container">
+        <img class="img" [src]="card.documentURL" alt="document image" />
+        <!-- Display the document image -->
+      </div>
+      <div class="file_size_container">
+        <span class="value">{{ card.documentSize }} KB</span>
+        <!-- Display the file size -->
+      </div>
+    </div>
+  </div>
 </div>

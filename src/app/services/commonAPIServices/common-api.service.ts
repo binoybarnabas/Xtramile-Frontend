@@ -98,5 +98,9 @@ export class CommonAPIService {
   getRequestReason(requestId:number):Observable<string>{
     return this.http.get(`http://localhost:5190/api/request/request/reason/${requestId}`, { responseType: 'text' });
   }
+  getEmployeeDocuments(employeeId:number){
+    return this.http.get<ResubmitRequest>(`http://localhost:5190/api/traveldocumentfile/traveldocumentfiles/${employeeId}`);
+  }
+  
 }
 

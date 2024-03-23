@@ -251,6 +251,7 @@
 
 .doc_card_container .doc_card .back_side .img_container .img {
     width: 330px;
+    height: 210px;
     border-radius: var(--normal-border-radius);
     object-fit: cover;
 

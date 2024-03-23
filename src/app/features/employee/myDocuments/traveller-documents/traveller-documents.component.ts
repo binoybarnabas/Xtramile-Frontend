@@ -112,6 +112,7 @@ export class TravellerDocumentsComponent {
       const fileInput = this.documentUploadForm.get('documentFile');
       if (fileInput && fileInput.value) {
         formData.append('File', fileInput.value);
+        formData.append('Size', fileInput.value.size);
       }
 
       this.documentService.sendDocumentData(formData).subscribe({
