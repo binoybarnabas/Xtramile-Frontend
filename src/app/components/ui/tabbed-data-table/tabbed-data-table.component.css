@@ -160,6 +160,7 @@
 .main_container .body_section .table_container .table_body{
     font-size: var(--form-label-font-size);
     width: 100%;
+
 }
 
 .main_container .body_section .table_container .table_body .body_row{

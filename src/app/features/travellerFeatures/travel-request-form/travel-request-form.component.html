@@ -143,7 +143,7 @@
                             <select id="projectCode" formControlName="projectId" >
                                 
                                 <ng-container *ngFor="let code of projectCodes">
-                                    <option [value]="code.projectId">
+                                    <option [value]="code.projectId"  [(ngModel)]="selectedProjectCode">
                                       {{ code.projectCode }} - {{ code.projectName }}
                                     </option>
                                   </ng-container>
@@ -157,7 +157,7 @@
                                 <span *ngIf= "travelRequestForm.get('tripPurpose')?.invalid && travelRequestForm.get('tripPurpose')?.touched" class="normal_form_error"> <i class="ri-error-warning-line"></i> enter the purpose of your travel</span>
 
                             </div>
-                            <input type="text" class="form_text_input" formControlName="tripPurpose" placeholder="Enter the trip purpose">
+                            <input type="text" class="form_text_input" formControlName="tripPurpose" placeholder="Enter the trip purpose" [(ngModel)]="selectedTravelPurpose">
 
                         </div>
 

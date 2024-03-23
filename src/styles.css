@@ -252,10 +252,11 @@ body {
 
 .top_bar_container .right_section .calendar_section {
   display: flex;
-  margin-right: 5rem;
+  margin-right: 3rem;
   justify-content: center;
   align-items: center;
   font-weight: var(--active-font-weight);
+  
 }
 
 .top_bar_container .right_section .calendar_section .cal_icon {
@@ -267,19 +268,33 @@ body {
   font-size: var(--p-font-size);
 }
 
-.top_bar_container .right_section .calendar_section .notification {
-  color: var(--second-color);
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-left: 0.9rem;
-  font-size: var(--medium-font-size);
-  transition: transform 0.3s;
+
+.top_bar_container .right_section .messenger_section{
+  margin-right: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
 }
 
-.top_bar_container .right_section .calendar_section .notification:hover {
-  transform: rotate(-180deg);
-  color: var(--danger-color);
+.top_bar_container .right_section .messenger_section:hover .icon{
+  background-color: var(--third-color);
+  color: var(--card-bg-color);
+  transform: rotate(360deg);
 }
+
+
+.top_bar_container .right_section .messenger_section .icon{
+  color: var(--third-color);
+  font-size: var(--large-font-size);
+  padding:3px 8px;
+  border-radius: 5px;
+  background-color: var(--secondary-cyan-color);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+
 
 .top_bar_container .right_section .profile_info {
   /* margin-top: auto; */

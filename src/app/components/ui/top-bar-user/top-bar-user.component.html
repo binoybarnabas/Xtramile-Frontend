@@ -22,8 +22,14 @@
       <p class="date">
         <i class="cal_icon ri-calendar-2-line"></i>{{ date | customDate }}
       </p>
-      <i class="notification ri-notification-2-fill" (click)="openNotificationModal()"></i>
+      <!-- <i class="notification ri-notification-2-fill" (click)="openNotificationModal()"></i> -->
     </div>
+
+    <div class="messenger_section">
+      <i (click)=toggleTravelMessenger() class="icon ri-chat-3-line"></i>
+    </div>
+
+
     <div class="profile_info">
       <p class="name">{{ employeeName }}</p>
       <span class="designation">{{ designation }}</span>

@@ -12,31 +12,32 @@
 .main_container .top_section {
     display: flex;
     justify-content: space-between;
-    height: 40vh;
+    height: 45vh;
 }
 
 .main_container .top_section .top_left_section {
-    width: 45%;
+    width: 44%;
 }
 
 .main_container .top_section .top_middle_top_right_section {
     display: flex;
     width: 55%;
-    /* background-color: black; */
 }
 
 .main_container .top_section .top_middle_section {
     width: 50%;
     /* background-color: rgb(0, 0, 0); */
-    margin-left: 1rem;
+    /* margin-left: 0.5; */
     border-radius: var(--normal-border-radius);
     box-shadow: var(--normal-box-shadow);
     background-color: var(--card-bg-color);
+    margin-right: 0.5rem;
+
 }
 
 .main_container .top_section .top_right_section {
     width: 50%;
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
     border-radius: var(--normal-border-radius);
     padding: 5px;
 }

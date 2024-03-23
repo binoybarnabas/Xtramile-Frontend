@@ -142,7 +142,9 @@ import { TravellerPendingRequestsComponent } from './features/travellerFeatures/
 import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
 import { TabbedDataTableComponent } from './components/ui/tabbed-data-table/tabbed-data-table.component';
-
+import { DashCalendarComponent } from './components/ui/dashboard-components/dash-calendar/dash-calendar.component';
+import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
+import { TravelMessengerFullScreenComponent } from './travel-messenger-full-screen/travel-messenger-full-screen.component';
 
 @NgModule({
   declarations: [
@@ -271,7 +273,10 @@ import { TabbedDataTableComponent } from './components/ui/tabbed-data-table/tabb
     TravellerPendingRequestsComponent,
     TravellerOngoingTravelComponent,
     TravellerTravelHistoryComponent,
-    TabbedDataTableComponent
+    TabbedDataTableComponent,
+    DashCalendarComponent,
+    TravelMessengerModalComponent,
+    TravelMessengerFullScreenComponent
   ]
   ,
 

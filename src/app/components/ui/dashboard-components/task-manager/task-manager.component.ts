@@ -45,7 +45,7 @@ export class TaskManagerComponent {
 
     },
     {
-      id: 4,
+      id: 5,
       deadline: {
         date: "15 May 24",
         time: "11.00 AM"
@@ -58,18 +58,35 @@ export class TaskManagerComponent {
   isTaskSelected: string;
   selectedTaskId!: number;
 
+  isDateIconClicked:boolean;
+
+  selectedTaskDate: Date;
+  newTaskInfo: string ='';
+
   constructor() {
+    this.isDateIconClicked = false;
     this.isTaskSelected = 'no';
+    this.selectedTaskDate = new Date();
   }
 
   onTaskSelected(taskId: number) {
     this.isTaskSelected = 'yes';
     this.selectedTaskId = taskId;
+    this.isDateIconClicked = false;
   }
 
   toggleTaskSelection(toggleValue: string) {
     this.isTaskSelected = toggleValue;
     this.selectedTaskId = 0;
+  }
+
+  toggleDateIconSelection(toggleValue: boolean){
+    this.isDateIconClicked = toggleValue;
+  }
+
+  addNewTask(){
+    this.isDateIconClicked = false;
+    alert(this.newTaskInfo);
   }
 
 }

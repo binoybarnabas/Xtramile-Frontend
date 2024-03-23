@@ -54,6 +54,7 @@ import { TravelAdminTravelHistoryComponent } from './features/travelAdmin/myRequ
 import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
 import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
+import { TravelMessengerFullScreenComponent } from './travel-messenger-full-screen/travel-messenger-full-screen.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -101,6 +102,7 @@ const routes: Routes = [
     path: 'traveladmin', component: TravelAdminHomeComponent, canActivate: [travelAdminAuthGuard], children: [
       { path: 'dashboard', component: TravelAdminDashboardComponent },
       { path: 'view_travel_documents', component: TraveladminViewTravelDocumentsComponent },
+      {path: 'view_all_messages', component : TravelMessengerFullScreenComponent},
       { path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent },
       {
         path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [

@@ -7,8 +7,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 1rem;
-    /* background-color: aqua; */
+    grid-column-gap: 0.5rem;
 }
 
 .main_container .top_section .progress_card {
@@ -19,9 +18,14 @@
     background-color: var(--card-bg-color);
     box-shadow: var(--normal-box-shadow);
     border-radius: var(--normal-border-radius);
-    height: 5.5rem;
-
+    height: 90%;
+    transition: 0.3s;
 }
+
+.main_container .top_section .progress_card:hover{ 
+    transform: scale(1.03);
+}
+
 
 .main_container .top_section .progress_card .title_value_section {
     width: 60%;
@@ -60,7 +64,6 @@
 .main_container .top_section .progress_card .icon_container.cyan {
     background-color: var(--secondary-cyan-color);
     color: var(--primary-cyan-color);
-
 }
 
 .main_container .top_section .progress_card .icon_container.green {
