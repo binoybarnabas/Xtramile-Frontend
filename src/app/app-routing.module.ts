@@ -54,7 +54,7 @@ import { TravelAdminTravelHistoryComponent } from './features/travelAdmin/myRequ
 import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
 import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
-import { TravelMessengerFullScreenComponent } from './travel-messenger-full-screen/travel-messenger-full-screen.component';
+import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },

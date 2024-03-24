@@ -144,7 +144,7 @@ import { TravellerTravelHistoryComponent } from './features/travellerFeatures/tr
 import { TabbedDataTableComponent } from './components/ui/tabbed-data-table/tabbed-data-table.component';
 import { DashCalendarComponent } from './components/ui/dashboard-components/dash-calendar/dash-calendar.component';
 import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
-import { TravelMessengerFullScreenComponent } from './travel-messenger-full-screen/travel-messenger-full-screen.component';
+import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 
 @NgModule({
   declarations: [

@@ -721,11 +721,10 @@ body {
 .middle_console_container {
   position: absolute;
   /* background-color: vr(--card-bg-color); */
-  width: 80.5%;
-  height: 100vh;
-  margin-left: 19.5%;
-  margin-top: 10vh;
-
+  width: 80.8%;
+  height: calc(100vh - 65px);
+  margin-left: 19.2%;
+  margin-top: 65px;
   border-radius: 6px;
   z-index: -100;
   /* box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 3px 0px; */
@@ -741,8 +740,8 @@ body {
 }
 
 .middle_console_container.collapsed {
-  width: 95.6%;
-  margin-left: 4.2%;
+  width: 95.8%;
+  margin-left: 4%;
   padding: 1rem;
   /* padding: 2vw; */
 
