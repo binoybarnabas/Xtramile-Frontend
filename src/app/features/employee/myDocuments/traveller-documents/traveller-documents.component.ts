@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { countries } from 'src/app/services/commonAPIServices/countries';
 import { DatePipe } from '@angular/common';
+import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 @Component({
   selector: 'app-traveller-documents',
   templateUrl: './traveller-documents.component.html',
@@ -25,7 +26,8 @@ export class TravellerDocumentsComponent {
     private documentService: DocumentsService,
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    private commonService:CommonAPIService
   ) {
     this.isDocUploadModalOpen = false;
     this.selectedDocType = 'ID Card'
@@ -115,17 +117,18 @@ export class TravellerDocumentsComponent {
         formData.append('Size', fileInput.value.size);
       }
 
-      this.documentService.sendDocumentData(formData).subscribe({
-        next: (response) => {
-          this.toggleDocUploadModal(false);
-          console.log(response)
-        },
-        error: (error: Error) => {
-          console.log(error)
-        }
-      });
 
-    }
+    this.documentService.sendDocumentData(formData).subscribe({
+      next: (response) => {
+        this.toggleDocUploadModal(false);
+        this.commonService.setIsFile(true);
+        console.log(response)
+      },
+      error: (error: Error) => {
+        console.log(error)
+      }
+    });
+  }
   }
 
   onFileSelected(event: any) {

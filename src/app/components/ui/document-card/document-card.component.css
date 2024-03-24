@@ -1,8 +1,16 @@
 .doc_card_container {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); /* Three cards per row */
+    gap: 20px; /* Adjust as needed */
     width: 100%;
 }
 
+.doc_card {
+    position: relative;
+    perspective: 1000px;
+    height: 210px;
+    transition: 0.3s;
+}
 .doc_card_container .doc_card {
     position: relative;
     width: 330px;
@@ -256,3 +264,16 @@
     object-fit: cover;
 
 }
+.no-data-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5em;
+    height: 300px; 
+  }
+  
+  .no-data-container img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  

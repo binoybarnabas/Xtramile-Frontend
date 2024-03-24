@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
 import { LoginService } from '../loginService/login.service';
 // import { UserData } from '../interfaces/iuserData';
@@ -18,6 +18,9 @@ export class CommonAPIService {
   userData?: UserData
 
   currentLoggedInUserRole: string;
+  
+  private isFileSubject = new BehaviorSubject<boolean>(false);
+  public isFile$ = this.isFileSubject.asObservable();
 
   constructor(private http: HttpClient, private toastService: CustomToastService) {
 
@@ -101,6 +104,9 @@ export class CommonAPIService {
   getEmployeeDocuments(employeeId:number){
     return this.http.get<ResubmitRequest>(`http://localhost:5190/api/traveldocumentfile/traveldocumentfiles/${employeeId}`);
   }
-  
+  setIsFile(value: boolean) {
+    this.isFileSubject.next(value);
+  }
+
 }
 

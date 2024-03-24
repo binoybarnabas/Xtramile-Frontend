@@ -1,45 +1,47 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
-import { interval, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-document-card',
   templateUrl: './document-card.component.html',
   styleUrls: ['./document-card.component.css']
 })
-export class DocumentCardComponent implements OnDestroy {
+export class DocumentCardComponent implements OnInit, OnDestroy {
   employeeId: number = 0;
   employeeDocuments: any;
-  pollingInterval: number = 3000; 
-  pollingSubscription!: Subscription;
+  pollingInterval: number = 1000;
+  isFlipping: boolean = false;
+  private isFileSubscription!: Subscription;
 
-  constructor(private commonService: CommonAPIService, private http: HttpClient) { }
+  constructor(private commonService: CommonAPIService) { }
 
   ngOnInit() {
     if (localStorage.getItem('userData')) {
       const userData = JSON.parse(localStorage.getItem('userData')!);
       this.employeeId = userData.empId;
     }
-    this.pollingSubscription = interval(this.pollingInterval).subscribe(() => {
-      this.getDocuments();
+    this.getDocuments();
+    this.isFileSubscription = this.commonService.isFile$.subscribe(isFile => {
+      if (isFile) {
+        this.getDocuments();
+      }
     });
   }
 
   ngOnDestroy() {
-    if (this.pollingSubscription) {
-      this.pollingSubscription.unsubscribe();
-    }
+    this.isFileSubscription.unsubscribe();
   }
 
   flipCard(card: any) {
+    this.isFlipping = true;
     card.isFlipped = !card.isFlipped;
   }
 
   getDocuments() {
     this.commonService.getEmployeeDocuments(this.employeeId).subscribe(
       (data) => {
-        this.employeeDocuments = data; 
+        this.employeeDocuments = data;
         console.log('Fetched documents:', data);
       },
       (error) => {
