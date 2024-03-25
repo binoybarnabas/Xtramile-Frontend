@@ -5,7 +5,7 @@
          <span class="view_all_text">View All</span>
     </div>
 
-    <div class="body_section">
+    <div class="task_container">
 
         <ng-container *ngFor="let item of travelTasks">
             <div (click)="onTaskSelected(item.id)" [ngClass]="selectedTaskId===item.id ? 'task_item_card active' : 'task_item_card' " >
@@ -16,14 +16,12 @@
                 </div>
     
                 <div class="task_info">
-                    <!-- <span [ngClass]="selectedTaskId===item.id ? 'task_info_text active' : 'task_info_text' ">{{item.taskInfo}}</span> -->
                     <span class="task_info_text">{{item.taskInfo}}</span>
                 </div>
     
             </div>
         </ng-container>
-
-    
+        
         <div *ngIf="isDateIconClicked" class="task_item_card" >
 
             <div class="deadline_card">
@@ -38,10 +36,13 @@
     
     </div>
 
+    <!-- <div class="task_container">
+        <span>KO</span><br>
+    </div> -->
+
     <div class="action_section">
 
         <div (click)="toggleDateIconSelection(true)" class="date_picker_container">
-            <!-- <i class="icon ri-calendar-todo-line"></i> -->
             <input class="date_picker" type="date" [(ngModel)]="selectedTaskDate">
         </div>
 

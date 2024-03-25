@@ -53,6 +53,43 @@ export class TaskManagerComponent {
       taskInfo: "Pack essentials for hiking trip in the Alps"
 
     },
+    {
+      id: 6,
+      deadline: {
+        date: "15 May 24",
+        time: "11.00 AM"
+      },
+      taskInfo: "Pack essentials for hiking trip in the Alps"
+
+    },
+    {
+      id: 7,
+      deadline: {
+        date: "15 May 24",
+        time: "11.00 AM"
+      },
+      taskInfo: "Pack essentials for hiking trip in the Alps"
+
+    },
+    {
+      id: 8,
+      deadline: {
+        date: "15 May 24",
+        time: "11.00 AM"
+      },
+      taskInfo: "Pack essentials for hiking trip in the Alps"
+
+    },
+    {
+      id: 9,
+      deadline: {
+        date: "15 May 24",
+        time: "11.00 AM"
+      },
+      taskInfo: "Pack essentials for hiking trip in the Alps"
+
+    },
+
   ];
 
   isTaskSelected: string;

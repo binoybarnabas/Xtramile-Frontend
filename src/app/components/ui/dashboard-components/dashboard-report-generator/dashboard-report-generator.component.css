@@ -1,5 +1,8 @@
 .main_container {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .main_container .top_section {
@@ -88,15 +91,13 @@
 
 
 .main_container .bottom_section {
-    height: 30%;
-    /* margin-top: 10px; */
+    height: 27%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: var(--card-bg-color);
     box-shadow: var(--normal-box-shadow);
     border-radius: var(--normal-border-radius);
-
 }
 
 
@@ -172,8 +173,8 @@
     justify-content: center;
     /* width: 25%; */
     /* margin-left: 0.5rem; */
-    /* background-color: rgb(0, 94, 94); */
     height: 100%;
+    margin-right: 0.5rem;
 }
 
 

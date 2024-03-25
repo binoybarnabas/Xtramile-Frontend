@@ -7,18 +7,34 @@
     background-color: var(--card-bg-color);
     height: 100vh;
     position: relative;
+
 }
 
-
+@keyframes moveBottom {
+    0% {
+        transform: translateY(-200px);
+    }
+    100% {
+        transform: translateY(20px);
+    }
+}
 
 .login_container .left_section .logo_container {
     margin: 2rem 0 0 2rem;
+    animation: moveBottom 800ms linear;
+
 }
 
 .login_container .left_section .logo_container .logo {
     font-weight: var(--active-font-weight);
 }
 
+.login_container .left_section .logo_container .logo .logo_no_bg{
+    width: 50px;
+    /* background-color: var(--secondary-cyan-color); */
+    padding: 4px;
+    border-radius: 5px 15px 5px 15px;
+}
 
 .login_container .left_section .logo_container .icon {
     color: var(--second-color);
@@ -42,6 +58,8 @@
     padding: 2rem;
     border-radius: var(--normal-border-radius);
     transition: 0.3s;
+    animation: moveBottom 800ms linear;
+
 }
 
 
@@ -154,11 +172,11 @@
 .login_container .right_section .img_container img {
 
     height: 80vh;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     position: absolute;
     left: -13rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    animation: slide 4s infinite;
+    animation: moveRight 800ms linear;
     /* Adjust the animation duration as needed */
 }
 
@@ -171,13 +189,22 @@
 
     50% {
         transform: translateX(100px);
-        /* Adjust the distance to slide */
     }
 
     100% {
         transform: translateX(0);
     }
 }
+
+@keyframes moveRight {
+    0% {
+        transform: translateX(-300px);
+    }
+    100% {
+        transform: translateX(20px);
+    }
+}
+
 
 /* Styles for loader */
 .loader {

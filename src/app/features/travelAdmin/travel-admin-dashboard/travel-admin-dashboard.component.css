@@ -1,7 +1,7 @@
 .main_container {
-    padding: 0;
+    /* padding: 0.5rem; */
     margin: 0;
-    height: 100vh;
+    height: calc(100vh - 1.5rem - 65px);
     border-radius: var(--normal-border-radius);
     display: flex;
 }
@@ -9,47 +9,45 @@
 
 .main_container .left_section {
     width: 70%;
-    /* margin-right: 5px; */
-    /* background-color: black; */
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .main_container .left_section .top_left {
 
     border-radius: var(--normal-border-radius);
-    height: 45%;
+    /* height: 50%; */
+    height: calc((100vh - 2.5rem - 65px)/2);
     /* padding: 0.5rem; */
     display: flex;
     justify-content: space-between;
-    margin-right: 0.6rem;
 
 }
 
 .main_container .left_section .top_left .first_col {
-    width: 55%;
+    width: 50%;
     margin-right: 0.5rem;
 }
 
-.main_container .left_section .top_left .third_col {
-    width: 45%;
+.main_container .left_section .top_left .sec_col {
+    width: 50%;
 }
 
 
-.main_container .left_section .bottom_left {
-    
-    height: 50%;
-    
-    
+.main_container .left_section .bottom_left {    
+    height: calc((100vh - 1.5rem - 65px)/2);
 }
 
 
-.main_container .left_section .table_container {
+/* .main_container .left_section .bottom_left .table_container {
     width: 100%;
     background-color: var(--card-bg-color);
     padding: 5px;
     border-radius: var(--normal-border-radius);
     box-shadow: var(--normal-box-shadow);
     transition: 0.6s ease;
+    background-color: black;
 }
 
 .main_container .left_section .table_container .heading_container {
@@ -85,13 +83,17 @@
 
 .main_container .left_section .table_container .body .travel_request_container {
     border-radius: var(--normal-border-radius);
-}
+} */
 
 
 
 .main_container .right_section {
     width: 30%;
-    margin-left: 5px;
+    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background-color: aqua; */
 }
 
 .main_container .right_section .top_right,
@@ -102,15 +104,16 @@
 }
 
 .main_container .right_section .top_right {
-    height: 45%;
+    
+    height: calc((100vh - 2.5rem - 65px)/2);
+    /* height: 50%; */
+    margin: 0;
+    background-color: rgb(0, 0, 0);
 }
 
 .main_container .right_section .bottom_right {
-    height: 55%;
+    height: calc((100vh - 1.5rem - 65px)/2);
+    /* height: 50%; */
+    margin: 0;
 }
 
-
-
-.main_container .right_section .bottom_right {
-    margin-top: 10px;
-}
