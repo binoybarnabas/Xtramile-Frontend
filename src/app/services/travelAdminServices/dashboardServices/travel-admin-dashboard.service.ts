@@ -10,8 +10,8 @@ export class TravelAdminDashboardService {
   private apiURL = 'http://localhost:5190/api'
   constructor(private http : HttpClient) { }
   //to generate report based on input month
-  generateMonthlyModeReport(month: string): Observable<any> {
-    return this.http.get<any>(this.apiURL+`/traveladmin/generateReport/${month}`,{ responseType: 'blob' as 'json' });
+  generateMonthlyModeReport(month: string,year:number): Observable<any> {
+    return this.http.get<any>(this.apiURL+`/traveladmin/generateReport/${month}/${year}`,{ responseType: 'blob' as 'json' });
   }
 
   //to get all project codes and id

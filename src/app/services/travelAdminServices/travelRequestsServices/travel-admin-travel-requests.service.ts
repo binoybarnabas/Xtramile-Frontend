@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { WaitingOrSelectedRequests } from '../../interfaces/iwaiting-or-selected-requests';
 import { AvailableOptions } from '../../interfaces/iavailable-options';
 import { TravelOptionDetails } from '../../interfaces/iTravelOptionDetails';
@@ -131,5 +131,4 @@ export class TravelAdminTravelRequestsService {
     const headers = new HttpHeaders();
     return this.http.post(`http://localhost:5190/api/availableoptions/addtextoption`, { htmlContent, requestId },{ headers, responseType: 'text' });
   }
-
 }

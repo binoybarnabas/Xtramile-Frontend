@@ -97,6 +97,7 @@ export class NewTravelRequestComponent {
     private modalService: BsModalService,
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService
+    
   ) {
 
     const storedUserData = localStorage.getItem('userData');
@@ -630,13 +631,12 @@ export class NewTravelRequestComponent {
  
  
     this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
-    this.bsModalRef.content.onClose.subscribe((result: any) => {
-      // Handle the result from the modal if needed
-      console.log('Modal result:', result);
- 
- 
-      // You can perform actions with the result data here
+    this.bsModalRef.content.travelOptionAdded.subscribe(() => {
+      // Call the method to fetch travel options
+      console.log('where is')
+      this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId);
     });
+      // You can perform actions with the result data here
   }
 
   openRejectionReasonModal() {
@@ -651,9 +651,6 @@ export class NewTravelRequestComponent {
       // You can perform actions with the result data here
     });
   }
-
-
-
 
 
   filterCities(event: any, field: string): void {
@@ -801,7 +798,6 @@ export class NewTravelRequestComponent {
 
   //Get Travel Options By Req Id
   getTravelOptionsByReqId(reqId: number) {
-
     this.requestService.getTravelOptionsByReqId(reqId).subscribe({
       next: (data) => {
 
@@ -821,7 +817,5 @@ export class NewTravelRequestComponent {
       }
     });
   }
-
-
   //EOF 
 }

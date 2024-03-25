@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProgressCard } from 'src/app/services/interfaces/iProgressCard';
+import { TravelAdminDashboardService } from 'src/app/services/travelAdminServices/dashboardServices/travel-admin-dashboard.service';
 
 @Component({
   selector: 'app-dashboard-report-generator',
@@ -23,7 +24,7 @@ export class DashboardReportGeneratorComponent {
   selectedReportMonth: string;
   indexOfSelectedReportMonth: number;
 
-  constructor() {
+  constructor(private travelAdminService:TravelAdminDashboardService) {
 
     this.selectedReportYear = new Date().getFullYear();
 
@@ -113,5 +114,20 @@ export class DashboardReportGeneratorComponent {
     //api call to generate report
     //use selectedReportMonth, selectedReportYear variables to pass as arugments
     //download the report automatically once it is generated
+    this.travelAdminService.generateMonthlyModeReport(this.selectedReportMonth, this.selectedReportYear).subscribe(
+      (response: Blob) => {
+        // Handle the file download here
+        const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const downloadURL = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = this.selectedReportMonth+'-'+this.selectedReportYear+'.xlsx';
+        link.click();
+      },
+      (error: any) => {
+        console.error('Error generating report:', error);
+        // Handle error
+      }
+    );
   }
 }
