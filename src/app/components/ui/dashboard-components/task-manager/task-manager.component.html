@@ -5,10 +5,10 @@
          <span class="view_all_text">View All</span>
     </div>
 
-    <div class="body_section">
+    <div class="task_container">
 
         <ng-container *ngFor="let item of travelTasks">
-            <div (click)="onTaskSelected(item.id)" class="task_item_card">
+            <div (click)="onTaskSelected(item.id)" [ngClass]="selectedTaskId===item.id ? 'task_item_card active' : 'task_item_card' " >
 
                 <div class="deadline_card">
                     <span class="date">{{item.deadline.date}}</span>
@@ -16,26 +16,41 @@
                 </div>
     
                 <div class="task_info">
-                    <span [ngClass]="selectedTaskId===item.id ? 'task_info_text active' : 'task_info_text' ">{{item.taskInfo}}</span>
+                    <span class="task_info_text">{{item.taskInfo}}</span>
                 </div>
     
             </div>
         </ng-container>
+        
+        <div *ngIf="isDateIconClicked" class="task_item_card" >
+
+            <div class="deadline_card">
+                <span class="date">{{selectedTaskDate | shortYearDateFormat}}</span>
+            </div>
+
+            <div class="task_info">
+                <span class="task_info_text">{{newTaskInfo}}</span>
+            </div>
+
+        </div>
     
     </div>
 
+    <!-- <div class="task_container">
+        <span>KO</span><br>
+    </div> -->
+
     <div class="action_section">
 
-        <div class="date_picker_container">
-            <!-- <input type="date" class="date_picker"> -->
-            <i class="icon ri-calendar-todo-line"></i>
+        <div (click)="toggleDateIconSelection(true)" class="date_picker_container">
+            <input class="date_picker" type="date" [(ngModel)]="selectedTaskDate">
         </div>
 
         <div (click)="toggleTaskSelection('no')" class="text_box_container">
-            <input type="text" class="text_input" placeholder="Add new task">
+            <input type="text" class="text_input" placeholder="Add new task" [(ngModel)]="newTaskInfo">
         </div>
 
-        <div class="button">
+        <div (click)="addNewTask()" class="button">
             <span  *ngIf="isTaskSelected==='no'"><i class="icon ri-arrow-right-fill"></i></span>
             <span *ngIf="isTaskSelected ==='yes'"><i class="icon ri-check-fill"></i></span>
         </div>

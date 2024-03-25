@@ -26,7 +26,9 @@ export class TopBarUserComponent {
 
   empId = 0;
 
-  requestNotification: any = []
+  requestNotification: any = [];
+
+  isTravelMessengerOpen: boolean = false;
 
   constructor(private sideNavBarService: SideNavBarService, private modalService: BsModalService,
     private requestService: RequestService, private managerService: ManagerTravelRequestsService, private router: Router) {
@@ -90,4 +92,23 @@ export class TopBarUserComponent {
     this.router.navigate([path]);
 
   }
+
+  //toggle Travel Messenger Full screen 
+  toggleTravelMessenger(){
+    
+    if(this.isTravelMessengerOpen){
+      this.isTravelMessengerOpen = false;
+    }
+    else{
+      //if currentLoggedUser is TA
+      //then open the view all messages component
+      this.navigateTo('traveladmin/view_all_messages')
+
+      //if curentLoggedInUser is Traveller
+      //then Open The TravelMessengerModal Only
+      this.isTravelMessengerOpen = true;
+    }
+
+  }
+
 }

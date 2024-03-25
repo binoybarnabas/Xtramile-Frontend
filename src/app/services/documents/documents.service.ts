@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TravelDocuments } from '../interfaces/iTravelDocuments';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class DocumentsService {
   // send the new document uploaded - docs like passport visa and id from the user profile.
   sendDocumentData(formData:any):Observable<any>{
     return this.http.post<any>('http://localhost:5190/api/traveldocumentfile/add',formData)
+  }
+
+  getTravelDocumentByType(fileType : string): Observable<TravelDocuments[]>{
+    return this.http.get<TravelDocuments[]>(`http://localhost:5190/api/traveldocumentfile/traveldocuments/${fileType}`);
   }
 
 }

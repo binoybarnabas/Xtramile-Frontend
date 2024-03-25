@@ -21,7 +21,7 @@ export class SideNavBarComponent {
   subMenu2ToggleValue = 0;
 
   isSideNavBarCollapsed: any;
-  activeItem: string = 'dashboard'; // Variable to store the active item
+  activeSideNavItem: string = 'dashboard'; // Variable to store the active item
   constructor(private sideNavBarService: SideNavBarService, private router: Router) {
 
     this.isSideNavBarCollapsed = 1;
@@ -35,10 +35,9 @@ export class SideNavBarComponent {
 
 
     //mySettlementsMap contains values for My Settlements sub menu
-    this.mySettlementsMap.set('new ri-add-line', "New Bill");
-    // this.mySettlementsMap.set('ri-draft-line', "Draft Bills");
-    this.mySettlementsMap.set('ri-loader-line', "Pending Bills");
-    this.mySettlementsMap.set('ri-history-line', "Closed Bills")
+    // this.mySettlementsMap.set('new ri-add-line', "New Bill");
+    // this.mySettlementsMap.set('ri-loader-line', "Pending Bills");
+    // this.mySettlementsMap.set('ri-history-line', "Closed Bills")
 
   }
 
@@ -61,7 +60,7 @@ export class SideNavBarComponent {
     if (this.isSideNavBarCollapsed === 0) {
 
       if (menuNumber === '1') {
-
+        this.activeSideNavItem = 'my_requests'
         if (this.subMenu1ToggleValue === 0) {
           this.subMenu1ToggleValue = 1;
         }
@@ -105,7 +104,7 @@ export class SideNavBarComponent {
 
   /// routing based on the values from the keys in myRequest map
   navigateToRequest(destination: string) {
-    this.activeItem = destination; // Update activeItem when an item is clicked
+    this.activeSideNavItem = destination; // Update activeItem when an item is clicked
     console.log("inside navigate" + destination);
     switch (destination) {
       case 'New Request': this.router.navigate(['/employee/request']);
@@ -133,4 +132,8 @@ export class SideNavBarComponent {
 
     this.logoutEvent.emit("logout"); // Emit logout event
   }
+
+
+
+
 }

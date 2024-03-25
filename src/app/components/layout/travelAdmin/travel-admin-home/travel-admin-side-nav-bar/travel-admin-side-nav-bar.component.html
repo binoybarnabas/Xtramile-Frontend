@@ -19,7 +19,7 @@
     <!-- <span class="collapsed_text" >Dashboard</span> -->
     </div>
 
-    <p class="main_title active" (click)="navigateToRequest('dashboard')">
+    <p class="main_title active" [ngClass]="{active : activeSideNavItem === 'dashboard'}" (click)="navigateToRequest('dashboard')">
       <i class="left_icon ri-dashboard-line"></i> Dashboard
     </p>
   </div>
@@ -35,7 +35,7 @@
     <!-- <span class="collapsed_text" >Dashboard</span> -->
     </div>
 
-    <p class="main_title">
+    <p class="main_title" [ngClass]="{active : activeSideNavItem === 'travel_requests'}">
       <i class="left_icon ri-suitcase-2-line"></i> Travel Requests
       <i
         [ngClass]="
@@ -68,7 +68,7 @@
       ></i>
     <!-- <span class="collapsed_text" >Dashboard</span> -->
     </div>
-    <p class="main_title" (click)="navigateToRequest('travel_documents')">
+    <p class="main_title" [ngClass]="{active : activeSideNavItem === 'travel_documents'}" (click)="navigateToRequest('travel_documents')">
       <i class="left_icon ri-article-line"></i> Travel Documents
     </p>
   </div>
@@ -114,7 +114,7 @@
   <!-- <span class="collapsed_text" >Dashboard</span> -->
   </div>
 
-    <p class="main_title">
+    <p class="main_title" [ngClass]="{active : activeSideNavItem === 'my_requests'}">
       <i class="left_icon ri-bill-line"></i> My Requests
       <i
         [ngClass]="
@@ -178,7 +178,7 @@
       ></i>
     <!-- <span class="collapsed_text" >Dashboard</span> -->
     </div>
-    <p class="main_title" (click)="navigateToRequest('profile')">
+    <p class="main_title" [ngClass]="{active : activeSideNavItem === 'profile'}" (click)="navigateToRequest('profile')">
       <i class="left_icon ri-user-line"></i> Profile
     </p>
   </div>

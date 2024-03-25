@@ -1,4 +1,3 @@
-<!-- <p>side-nav-bar works!</p> -->
 
 <div
   [ngClass]="
@@ -14,38 +13,37 @@
         <h3 class="side_bar_logo"> <i class="ri-road-map-fill"></i> XtraMile</h3>
     </div> -->
 
+    <!-- dashboard -->
   <div class="side_bar_main">
     <!-- <i
       *ngIf="isSideNavBarCollapsed === 1"
       class="collapsed_icon ri-dashboard-line"
     ></i> -->
 
-    <div *ngIf="isSideNavBarCollapsed === 1" class="collapsed_icon_card  active">
+    <div (click)="navigateToRequest('dashboard')" *ngIf="isSideNavBarCollapsed === 1" [ngClass]=" activeSideNavItem === 'dashboard' ? 'collapsed_icon_card active':'collapsed_icon_card'">
     <i class="collapsed_icon ri-dashboard-line"></i>
     <!-- <span class="collapsed_text" >Dashboard</span> -->
     </div>
 
     <p
       class="main_title active"
-      [ngClass]="{ active: activeItem === 'dashboard' }"
+      [ngClass]="{ active: activeSideNavItem === 'dashboard' }"
       (click)="navigateToRequest('dashboard')"
     >
       <i class="left_icon ri-dashboard-line"></i> Dashboard
     </p>
   </div>
 
-  <div
-    class="side_bar_main"
-    [ngClass]="{ active: activeItem === 'myrequests' }"
+  <div class="side_bar_main"
     (click)="toggleSubMenu('1')"
   >
  
-    <div *ngIf="isSideNavBarCollapsed === 1" class="collapsed_icon_card">
-      <i class="collapsed_icon ri-sticky-note-add-line"></i>
+  <div (click)="navigateToRequest('New Request')" *ngIf="isSideNavBarCollapsed === 1" [ngClass]=" activeSideNavItem === 'my_requests' ? 'collapsed_icon_card active':'collapsed_icon_card'">
+    <i class="collapsed_icon ri-sticky-note-add-line"></i>
       <!-- <span class="collapsed_text" >Dashboard</span> -->
       </div>
 
-    <p class="main_title">
+    <p [ngClass]=" activeSideNavItem ==='my_requests' ? 'main_title active' : 'main_title'">
       <i class="left_icon ri-sticky-note-add-line"></i> My Requests
       <i
         [ngClass]="
@@ -69,11 +67,10 @@
     </div>
   </div>
 
-  <div class="side_bar_main" (click)="toggleSubMenu('2')">
+  <!-- <div class="side_bar_main" (click)="toggleSubMenu('2')">
 
     <div *ngIf="isSideNavBarCollapsed === 1" class="collapsed_icon_card">
       <i class="collapsed_icon ri-bill-line "></i>
-      <!-- <span class="collapsed_text" >Dashboard</span> -->
       </div>
     
     <p class="main_title">
@@ -98,16 +95,16 @@
         </li>
       </ng-container>
     </div>
-  </div>
+  </div> -->
 
   <!-- Docs -->
   <div class="side_bar_main">
 
-    <div *ngIf="isSideNavBarCollapsed === 1" class="collapsed_icon_card">
+    <div (click)="navigateToRequest('documents')" *ngIf="isSideNavBarCollapsed === 1" [ngClass]=" activeSideNavItem === 'documents' ? 'collapsed_icon_card active':'collapsed_icon_card'">
       <i class="collapsed_icon ri-file-pdf-line "></i>
       <!-- <span class="collapsed_text" >Dashboard</span> -->
       </div>
-    <p class="main_title" (click)="navigateToRequest('documents')">
+    <p [ngClass]=" activeSideNavItem === 'documents' ? 'main_title active' : 'main_title'" (click)="navigateToRequest('documents')">
       <i class="ri-file-pdf-line"></i> My Documents
     </p>
   </div>
@@ -129,11 +126,11 @@
 
   <div class="side_bar_main">
 
-    <div *ngIf="isSideNavBarCollapsed === 1" class="collapsed_icon_card">
+    <div (click)="navigateToRequest('profile')" *ngIf="isSideNavBarCollapsed === 1" [ngClass]=" activeSideNavItem === 'profile' ? 'collapsed_icon_card active':'collapsed_icon_card'">
       <i class="collapsed_icon ri-user-line "></i>
       <!-- <span class="collapsed_text" >Dashboard</span> -->
       </div>
-    <p class="main_title" (click)="navigateToRequest('profile')">
+    <p [ngClass]="activeSideNavItem === 'profile' ? 'main_title active' : 'main_title'" (click)="navigateToRequest('profile')">
       <i class="left_icon ri-user-line"></i> Profile
     </p>
   </div>
@@ -148,4 +145,5 @@
       <i class="ri-logout-box-r-line"></i> Log out
     </p>
   </div>
+
 </div>

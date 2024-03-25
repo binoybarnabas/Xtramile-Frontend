@@ -9,6 +9,8 @@ import { SideNavBarService } from 'src/app/services/employeeServices/layoutServi
 })
 export class TravelAdminSideNavBarComponent {
 
+  activeSideNavItem : string = 'dashboard';
+
   travelRequestsMap = new Map<string, string>();
   travelSettlementsMap = new Map<string, string>();
   myRequestsMap = new Map<string, string>();
@@ -81,6 +83,7 @@ export class TravelAdminSideNavBarComponent {
 
         case '1':
           {
+            this.activeSideNavItem = 'travel_requests';
             this.subMenu1ToggleValue = this.subMenu1ToggleValue === 0 ? 1 : 0;
             break;
           }
@@ -93,6 +96,7 @@ export class TravelAdminSideNavBarComponent {
 
         case '3':
           {
+            this.activeSideNavItem = 'my_requests';
             this.subMenu3ToggleValue = this.subMenu3ToggleValue === 0 ? 1 : 0;
             break;
           }
@@ -134,6 +138,7 @@ export class TravelAdminSideNavBarComponent {
 
   /// routing based on the values from the keys in myRequest map
   navigateToRequest(destination: string) {
+    this.activeSideNavItem = destination;
     // console.log("inside navigate:" + destination);
     switch (destination) {
 
