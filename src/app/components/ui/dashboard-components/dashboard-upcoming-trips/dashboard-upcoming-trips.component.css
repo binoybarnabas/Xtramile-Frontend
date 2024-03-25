@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     border-radius: var(--normal-border-radius);
+    height: 100%;
 
 }
 

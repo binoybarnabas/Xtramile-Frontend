@@ -63,12 +63,13 @@
   }
   
   .loader {
-    border: 6px solid #3498db; /* Blue color for the loader */
+    border: 6px solid var(--third-color); /* Blue color for the loader */
     border-top: 6px solid transparent; /* Make the top transparent to create a circular effect */
     border-radius: 50%;
-    width: 50px; /* Adjust the size as needed */
-    height: 50px; /* Adjust the size as needed */
+    width: 25px; /* Adjust the size as needed */
+    height: 25px; /* Adjust the size as needed */
     animation: spin 1s linear infinite; /* Animation for rotation */
+    z-index: 999;
   }
   
   @keyframes spin {

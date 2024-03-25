@@ -20,7 +20,8 @@ tabs = [
       ['KLS002', 'Abhijit', 'Ireland', 'UK',  'Approved', 'Ready for processing'],
       ['BCV008', 'Bivina MC', 'Dubai', 'KSA', 'Pending', 'Waiting for confirmation'],
       ['DEF456', 'John Smith', 'Trivandrum', 'Canada', 'Approved', 'Proceeding with booking'],
-      ['GHI789', 'Jane Doe', 'Kochi', 'Australia',  'Pending', 'Additional details required']
+      ['GHI789', 'Jane Doe', 'Kochi', 'Australia',  'Pending', 'Additional details required'],
+   
     ]
   },
   {
