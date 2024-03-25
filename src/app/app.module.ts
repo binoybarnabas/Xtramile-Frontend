@@ -283,8 +283,7 @@ import { TravelMessengerFullScreenComponent } from './features/travelAdmin/trave
     TravellerOngoingTravelComponent,
     TravellerTravelHistoryComponent,
     TabbedDataTableComponent,
-    ManagerForwadedRequestsComponent
-  ],
+    ManagerForwadedRequestsComponent,
     TabbedDataTableComponent,
     DashCalendarComponent,
     TravelMessengerModalComponent,
