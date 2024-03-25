@@ -30,10 +30,10 @@
 }
 
 .login_container .left_section .logo_container .logo .logo_no_bg{
-    width: 50px;
+    width: 30px;
     /* background-color: var(--secondary-cyan-color); */
     padding: 4px;
-    border-radius: 5px 15px 5px 15px;
+    /* border-radius: 5px 15px 5px 15px; */
 }
 
 .login_container .left_section .logo_container .icon {
