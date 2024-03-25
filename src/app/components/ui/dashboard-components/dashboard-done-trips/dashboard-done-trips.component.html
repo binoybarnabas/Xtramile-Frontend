@@ -1,13 +1,17 @@
 <div class="done_trips_container">
   <div class="heading_container">
     <p class="heading">Completed Trips</p>
-    <span class="count"> {{ completedTrips.length }}</span>
+    <span class="count">{{ totalCount }}</span>
     <!-- Display the count of completed trips -->
   </div>
 
-  <div class="trip_history_container">
+  <div
+    *ngIf="completedTrips.length > 0; else noDataTemplate"
+    class="trip_history_container"
+  >
     <!-- Loop through each completed trip and display its details -->
     <div class="trip_history_card" *ngFor="let trip of completedTrips">
+      <!-- Origin and destination section -->
       <div class="origin_destination_section" (click)="viewDoneTripDetails()">
         <div class="origin_card">
           <p class="origin">{{ trip.from }}</p>
@@ -20,17 +24,18 @@
         </div>
       </div>
 
+      <!-- Date section -->
       <div class="date_section">
-        <span class="value"
-          ><i class="cal_icon ri-calendar-schedule-line"></i>
+        <span class="value">
+          <i class="cal_icon ri-calendar-schedule-line"></i>
           {{ trip.departureDate | date : "shortDate" }} -
-          {{ trip.returnDate | date : "shortDate" }}</span
-        >
+          {{ trip.returnDate | date : "shortDate" }}
+        </span>
         <!-- Display the start and end dates of the trip -->
-        <span class="value"
-          ><i class="done_icon ri-check-double-line"></i>
-          {{ trip.completedDate | date : "shortDate" }}</span
-        >
+        <span class="value">
+          <i class="done_icon ri-check-double-line"></i>
+          {{ trip.completedDate | date : "shortDate" }}
+        </span>
         <!-- Display the completion date of the trip -->
         <span *ngIf="trip.count > 1" class="count_on_card">{{
           trip.count
@@ -38,4 +43,16 @@
       </div>
     </div>
   </div>
+
+  <!-- Template to display when there is no data -->
+  <!-- Template to display when there is no data -->
+  <ng-template #noDataTemplate>
+    <div class="no_data_container">
+      <img
+        class="no_data_image"
+        src="https://thumbs.dreamstime.com/b/no-data-search-not-found-concept-businessman-holding-magnifying-glass-empty-file-folder-277353524.jpg"
+        alt="No Data Found"
+      />
+    </div>
+  </ng-template>
 </div>

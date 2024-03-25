@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add New Option</h4>
+  <button type="button" class="exit_button" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true"><i class="ri-close-fill"></i></span>
+  </button>
+</div>
+<div class="option_body">
+  <div class="editor_container">
+    <editor
+  apiKey="6fbq26b4z6phet50bxxqc7w4ht11my7jsqlyfto1x8jk82pa"
+  [(ngModel)]="htmlContent"
+  [init]="{
+    height: 250,
+    width: 400,
+    menubar: false,
+    plugins: 'wordcount',
+    toolbar: 'undo redo | formatselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | wordcount'
+  }"
+></editor>
+  <!-- <div class="attachment_container">
+    <button (click)="openAddOptionModal()" class="btn btn-primary"><i class="ri-attachment-2"></i></button> 
+  </div> -->
+</div>
+<div class="text-center mt-3">
+  <button class="btn btn-primary" (click)="saveTravelOption()">Submit</button>
+</div>
+
+
+

@@ -54,6 +54,8 @@ import { TravelAdminTravelHistoryComponent } from './features/travelAdmin/myRequ
 import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
 import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
+import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
+import { ManagerForwadedRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwaded-requests/manager-forwaded-requests.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 
 const routes: Routes = [
@@ -88,7 +90,15 @@ const routes: Routes = [
       { path: 'requestdetail', component: NewTravelRequestComponent },
       { path: 'request', component: TravelRequestFormComponent },
       { path: 'incoming', component: ManagerIncomingTravelRequestsComponent },
-      { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
+      { path: 'newrequest', component: ManagerIncomingTravelRequestsComponent },
+      { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent,children: [
+        {
+          path:'',component: ManagerForwadedRequestsComponent
+        },
+        {
+          path: 'view_options_travel', component: ManagerTravelOptionsViewerComponent
+        }
+      ] },
       { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
       { path: 'closed', component: ManagerClosedTravelRequestsComponent },
       // { path: 'request', component: NewTravelRequestComponent },
@@ -107,13 +117,13 @@ const routes: Routes = [
       {
         path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
           { path: '', component: TravelAdminWaitingRequestsComponent },
-          { path: 'view_travel_options', component: TravelOptionViewerComponent }
+          { path: 'view_travel_options', component: ManagerTravelOptionsViewerComponent }
         ]
       },
       {
         path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
           { path: '', component: TravelAdminSelectedRequestsComponent },
-          { path: 'view_selected_options', component: SelectedOptionTravelAdminComponent }
+          { path: 'view_selected_options', component: ManagerTravelOptionsViewerComponent }
         ]
       },
       { path: 'approved_requests', component: TravelAdminOngoingTravelRequestsComponent },

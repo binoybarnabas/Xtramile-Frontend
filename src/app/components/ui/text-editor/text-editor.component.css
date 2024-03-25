@@ -1,0 +1,25 @@
+.editor_container{
+    position: relative;
+}
+.attachment_container{
+    position: absolute;
+    top:7px;
+    z-index: 999;
+    left: 345px;
+}
+.option_body{
+    padding-inline: 50px;
+    padding-block: 30px;
+}
+.modal-header {
+    background-color: var(--second-color);
+    color: var(--card-bg-color);
+    border-bottom: none;
+}
+  
+.modal-header .exit_button {
+    background-color: var(--second-color);
+    border-radius: 1rem;
+    border-color: #fff;
+    color: var(--card-bg-color);
+}

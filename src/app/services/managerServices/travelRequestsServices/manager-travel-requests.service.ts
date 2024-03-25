@@ -117,4 +117,8 @@ export class ManagerTravelRequestsService {
     return this.http.get(url,{params});
   }
 
+  getAvailableOptionsDescription(requestId:number): Observable<any>{
+    return this.http.get(`http://localhost:5190/api/availableoptions/gettextoptions/$${requestId}`)
+  }
+
 }
