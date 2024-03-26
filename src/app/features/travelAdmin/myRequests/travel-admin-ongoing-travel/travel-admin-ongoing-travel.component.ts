@@ -1,4 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 
 @Component({
   selector: 'app-travel-admin-ongoing-travel',
@@ -8,5 +12,12 @@ import { Component } from '@angular/core';
 export class TravelAdminOngoingTravelComponent {
 
   pageHeading: string = 'Ongoing Travel'
+  constructor() {
+  
+    }
 
+    getOngoingRequests(){
+    
+    }
+  
 }

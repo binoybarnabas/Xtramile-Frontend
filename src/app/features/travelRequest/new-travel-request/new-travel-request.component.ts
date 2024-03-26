@@ -557,7 +557,7 @@ export class NewTravelRequestComponent {
 
     const requestStatus: RequestStatus = {
       requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
-      empId: 10,     // Assign the employee ID
+      empId: this.empId,     // Assign the employee ID
       primaryStatusId: 2, // Assign the primary status ID
       date: new Date(),  // Assign the current date
       secondaryStatusId: 10 // Assign the secondary status ID
@@ -633,7 +633,6 @@ export class NewTravelRequestComponent {
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
       console.log('Modal result:', result);
- 
  
       // You can perform actions with the result data here
     });
