@@ -1,6 +1,38 @@
-::ng-deep .nav-tabs .nav-link {
-  color: var(--third-color); /* Change to your desired font color */
+::ng-deep .nav-tabs {
+ border-radius: 8px;
+ margin-bottom: 1rem;
+ height: 45px;
+ width: fit-content;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin-left: auto;
+ margin-right: auto;
+ background-color: var(--card-bg-color);
+ padding: 5px;
+ border: none;
+ box-shadow: var(--normal-box-shadow);
+ width: 175px;
 }
+
+::ng-deep .nav-tabs .nav-link {
+  color: var(--ternary-text-color); /* Change to your desired font color */
+  font-size: var(--form-label-font-size);
+  border-radius: 5px;
+  border: none;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::ng-deep .nav-tabs .nav-link.active{
+  background-color: var(--third-color);
+  color: var(--card-bg-color);
+  font-weight: var(--active-font-weight);
+}
+
+
 
 .main_heading {
   font-size: var(--h4-font-size);
@@ -8,15 +40,22 @@
 }
 
 .panel {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   margin-bottom: 30px;
+  border-radius: 0.5rem;
+  width: 300px;
+  box-shadow: var(--normal-box-shadow);
+  cursor: pointer;
 }
 
 .panel .panel_header {
-  background-color: #f0f0f0;
+  background-color: var(--secondary-cyan-color);
+  font-size: var(--small-font-size);
+  font-weight: var(--active-font-weight);
   padding: 10px;
   position: relative; /* Position relative to allow absolute positioning of the button */
   color: var(--third-color);
+  border-radius: 5px 5px 0 0;
 }
 
 .panel .panel_header .expansion_arrow{
@@ -41,7 +80,7 @@
 }
 
 .panel .panel_header .selected_text {
-  font-size: smaller;
+  font-size: var(--form-label-font-size);
   color: var(--third-color); /* Blue color used for selected text */
   margin-left: 10px; /* Adjust the spacing between the text and the button */
   padding-inline: 5px; /* Add padding to the text for spacing */
@@ -51,6 +90,7 @@
 
 .panel .panel_content {
   padding: 10px;
+  min-height: 100px;
   overflow: auto; 
 }
 
@@ -59,3 +99,12 @@
   box-shadow: 0 0 5px var(--third-color); /* Shadow effect */
   transition: background-color 0.3s, border 0.3s, box-shadow 0.3s; /* Smooth transition */
 }
+
+.tab{
+  padding: 1rem;
+  font-size: var(--small-font-size);
+  background-color: var(--card-bg-color);
+  box-shadow: var(--normal-box-shadow);
+  border-radius: var(--normal-border-radius);
+}
+
