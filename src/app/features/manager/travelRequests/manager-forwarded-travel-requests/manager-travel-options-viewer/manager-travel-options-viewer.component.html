@@ -1,9 +1,9 @@
 <tabset>
-  <tab heading="File Options">
+  <tab class="tab" heading="Images">
     <app-file-option-viewer></app-file-option-viewer>
   </tab>
-  <tab heading="Text Options">
-    <h3 class="main_heading  mt-5 mb-3 ">Text Options</h3>
+  <tab class="tab" heading="Texts">
+    <!-- <h3 class="main_heading  mt-5 mb-3 ">Text Options</h3> -->
     <ng-container *ngIf="descriptions.length === 0; else elseblockone">
       <p>There are no text options, check file options</p>
     </ng-container>

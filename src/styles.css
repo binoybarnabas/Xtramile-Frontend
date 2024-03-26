@@ -7,8 +7,10 @@
   /*========Main theme colors========*/
   --first-color: #4f80e1;
 
-  --second-color: #0240bc;
+  /* --second-color: #0240bc; */
   --third-color: #9a4cfa;
+  --second-color: #9a4cfa;
+  --first-color: #9a4cfa;
 
   /*==========Menu Item Colors======*/
   --bullet-color: #171717;
