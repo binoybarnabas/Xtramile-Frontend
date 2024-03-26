@@ -12,10 +12,13 @@ export class TabbedDataTableComponent {
 
 @Input() tabs: any[] = [];
 @Input() filters: any[] = [];
+@Input() isSearchFilterNeeded: string;
 
 activeTabIndex: number = 0; // Initially set to show the first tab
 
 constructor(){
+
+  this.isSearchFilterNeeded = 'yes';
 
 }
 

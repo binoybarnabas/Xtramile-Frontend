@@ -11,15 +11,17 @@ import { EmployeeDashboardService } from 'src/app/services/employeeServices/dash
 export class DashboardDoneTripsComponent implements OnInit {
   @Input() empId: number = 0;
   completedTrips: any[] = []; 
+  totalCount:number=0;
 
   constructor(private employeeService: EmployeeDashboardService, private router: Router) { }
 
   ngOnInit(): void {
     // Call getCompletedTrips method from EmployeeService to fetch completed trips
     this.employeeService.getCompletedTrips(this.empId).subscribe(
-      (data: any[]) => {
+      (data) => {
         // Assign the fetched data to completedTrips array
-        this.completedTrips = data;
+        this.completedTrips = data.completedTrips;
+        this.totalCount=data.totalCount;
         console.log('completed trips',this.completedTrips)
       },
       (error) => {

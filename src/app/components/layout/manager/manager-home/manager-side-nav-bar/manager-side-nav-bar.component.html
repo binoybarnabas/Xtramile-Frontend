@@ -1,4 +1,4 @@
-<div
+<div 
   [ngClass]="
     isSideNavBarCollapsed === 1 ? 'side_bar_collapsed' : 'side_bar_container'
   "
@@ -11,8 +11,8 @@
   <!-- Dashboard -->
   <div class="side_bar_main">
 
-    <div *ngIf="isSideNavBarCollapsed === 1"
-    class="collapsed_icon_card  active">
+    <div (click)="navigateToRequest('dashboard')" *ngIf="isSideNavBarCollapsed === 1"
+    class="collapsed_icon_card  active" [ngClass]="{active : activeSideNavItem ==='dashboard'}" >
     <i
       class="collapsed_icon ri-dashboard-line"
     ></i>
@@ -20,7 +20,7 @@
     </div>
 
 
-    <p class="main_title active" (click)="navigateToRequest('dashboard')">
+    <p class="main_title active" [ngClass]="{ active: activeSideNavItem === 'dashboard' }" (click)="navigateToRequest('dashboard')">
       <i class="left_icon ri-dashboard-line"></i> Dashboard
     </p>
   </div>
@@ -28,15 +28,15 @@
   <!-- Travel Req -->
   <div class="side_bar_main" (click)="toggleSubMenu('1')">
 
-    <div *ngIf="isSideNavBarCollapsed === 1"
-    class="collapsed_icon_card">
+    <div (click)="navigateToRequest('Incoming Requests')" *ngIf="isSideNavBarCollapsed === 1"
+    class="collapsed_icon_card" [ngClass]="{active : activeSideNavItem ==='travel_requests'}">
     <i
-      class="collapsed_icon ri-suitcase-2-line"
+      class="collapsed_icon ri-suitcase-2-line" 
     ></i>
     <!-- <span class="collapsed_text" >Dashboard</span> -->
     </div>
 
-    <p class="main_title">
+    <p [ngClass]="activeSideNavItem ==='travel_requests' ? 'main_title active' : 'main_title'">
       <i class="left_icon ri-suitcase-2-line"></i> Travel Requests
       <i
         [ngClass]="
@@ -96,9 +96,9 @@
   </div> -->
 
   <!-- My Requests -->
-  <div class="side_bar_main" (click)="toggleSubMenu('3')">
+  <div class="side_bar_main"  (click)="toggleSubMenu('3')">
 
-    <div *ngIf="isSideNavBarCollapsed === 1"
+    <div (click)="navigateToRequest('New Request')" *ngIf="isSideNavBarCollapsed === 1"
     class="collapsed_icon_card">
     <i
       class="collapsed_icon ri-bill-line"
@@ -106,7 +106,7 @@
     <!-- <span class="collapsed_text" >Dashboard</span> -->
     </div>
 
-    <p class="main_title">
+    <p class="main_title" [ngClass]="{ active: activeSideNavItem === 'my_requests' }">
       <i class="left_icon ri-bill-line"></i> My Requests
       <i
         [ngClass]="
@@ -167,14 +167,14 @@
   
   <div class="side_bar_main">
 
-    <div *ngIf="isSideNavBarCollapsed === 1"
+    <div (click)="navigateToRequest('profile')" *ngIf="isSideNavBarCollapsed === 1"
     class="collapsed_icon_card ">
     <i
       class="collapsed_icon ri-user-line"
     ></i>
     <!-- <span class="collapsed_text" >Dashboard</span> -->
     </div>
-    <p class="main_title" (click)="navigateToRequest('profile')">
+    <p class="main_title" [ngClass]="{ active: activeSideNavItem === 'profile' }" (click)="navigateToRequest('profile')">
       <i class="left_icon ri-user-line"></i> Profile
     </p>
   </div>

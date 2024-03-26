@@ -32,8 +32,8 @@ userData: UserData;
 
  //For change status button of ta.
  name_ta:string = "Confirm"
- primaryStatusCode_ta:string = "FD"
- secondaryStatusCode_ta:string = "FD"
+ primaryStatusCode_ta:string = "OG"
+ secondaryStatusCode_ta:string = "OG"
  
 constructor(private managerService:ManagerTravelRequestsService, private sanitizer: DomSanitizer,private requestService: RequestService,private toastService: CustomToastService,private activatedRoute:ActivatedRoute ){
   const storedUserData = localStorage.getItem('userData');

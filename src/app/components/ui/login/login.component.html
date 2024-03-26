@@ -1,7 +1,9 @@
 <div class="login_container">
   <div class="left_section">
     <div class="logo_container">
-      <h3 class="logo"><i class="icon ri-git-pr-draft-fill"></i> XtraMile</h3>
+      <!-- <h3 class="logo"><i class="icon ri-git-pr-draft-fill"></i> XtraMile</h3> -->
+      <h3 class="logo"><img class="logo_no_bg" src="../../../assets/images/v_logo_no_bg_1.png">XtraMile</h3>
+
     </div>
 
     <div class="login_form_container">
@@ -11,6 +13,7 @@
       </div>
       <div class="form_section">
         <div *ngIf="isLoading" class="loader"></div>
+        <div *ngIf="isLoading" class="loader2"></div>
         <form [formGroup]="loginForm" (ngSubmit)="login()" class="login_form">
           <div class="form_input_container">
             <label class="label">Email</label>

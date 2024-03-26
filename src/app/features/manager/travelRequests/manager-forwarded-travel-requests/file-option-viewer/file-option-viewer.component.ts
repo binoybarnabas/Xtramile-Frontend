@@ -32,8 +32,8 @@ export class FileOptionViewerComponent {
 
   //For change status button of ta.
   name_ta:string = "Confirm"
-  primaryStatusCode_ta:string = "FD"
-  secondaryStatusCode_ta:string = "FD"
+  primaryStatusCode_ta:string = "OG"
+  secondaryStatusCode_ta:string = "OG"
 
   hideDiv:boolean = true;
   constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute, private router: Router, private toastService: CustomToastService

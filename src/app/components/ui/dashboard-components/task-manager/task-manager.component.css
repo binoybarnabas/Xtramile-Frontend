@@ -2,19 +2,25 @@
     padding: 1rem;
     background-color: var(--card-bg-color);
     box-shadow: var(--normal-box-shadow);
-    border-radius: var(--normal-border-radius);
+    border-radius: var(--normal-border-radius);    
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
 }
 
 .main_container .heading_section {
-    height: 20%;
+    height: 30px;
     display: flex;
     justify-content: space-between;
+    margin-top: 0;
 }
 
 .main_container .heading_section .main_heading {
     font-size: var(--normal-font-size);
     font-weight: var(--active-font-weight);
-
 }
 
 .main_container .heading_section .view_all_text {
@@ -24,65 +30,72 @@
 
 }
 
-.main_container .body_section {
-    height: 26vh;
+
+.main_container .task_container{
+    height: 70%;
+    overflow-y: scroll;
+    border-radius: 0;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+/* .main_container .body_section {
     box-shadow: none;
     padding: 0;
     overflow-y: scroll;
+    border-radius: 0;
+    background-color: aqua;
+} */
 
-}
-
-.main_container .body_section .task_item_card {
+.main_container .task_container .task_item_card {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: var(--small-font-size);
     background-color: none;
     box-shadow: none;
-    margin-bottom: 10px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    cursor: pointer;
+    margin-bottom: 8px;
+    padding: 5px;
 
 }
 
+.main_container .task_container .task_item_card.active{
+    background-color: var(--secondary-cyan-color);
+    border-left: 2px solid var(--third-color);
+    /* border-radius:  5px 0px 0px 5px; */
+}
 
-
-
-.main_container .body_section .task_item_card .deadline_card {
+.main_container .task_container .task_item_card .deadline_card {
     font-size: var(--form-label-font-size);
     font-weight: var(--active-font-weight);
-    width: 28%;
+    width: 25%;
     text-align: start;
 }
 
-.main_container .body_section .task_item_card .deadline_card .date {
+.main_container .task_container .task_item_card .deadline_card .date {
     margin-top: auto;
     margin-bottom: auto;
-
 }
 
-.main_container .body_section .task_item_card .deadline_card .time {
+.main_container .task_container .task_item_card .deadline_card .time {
     margin-top: auto;
     margin-bottom: auto;
     color: var(--ternary-text-color);
 
 }
 
-.main_container .body_section .task_item_card .task_info {
-    width: 72%;
+.main_container .task_container .task_item_card .task_info {
+    width: 75%;
     font-size: var(--small-font-size);
-    overflow: hidden;
+    /* overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; */
 }
 
-.main_container .body_section .task_item_card .task_info .task_info_text.active {
+.main_container .task_container .task_item_card .task_info .task_info_text.active {
     color: var(--third-color);
     font-weight: var(--active-font-weight);
 }
-
 
 .main_container .action_section {
     display: flex;
@@ -97,7 +110,7 @@
     justify-content: center;
     align-items: center;
     width: 35px;
-    /* background-color: black; */
+    
 }
 
 
@@ -106,13 +119,37 @@
     color: var(--third-color);
 }
 
+.main_container .action_section .date_picker_container .date_picker{
+    width: 20px;
+    height: 20px;
+    border: none;
+    outline: none;
+    color: var(--third-color);
+    border-radius: 3px;
+    margin-top: auto;
+    margin-bottom: auto;
+    
+}
+
+
+.main_container .action_section .selected_date_container{
+    font-size: var(--extra-small-font-size);
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .main_container .action_section .text_box_container {
     /* width: 100%; */
     padding: 0 10px;
+    width: 100%;
+    
 }
 
 .main_container .action_section .text_box_container .text_input {
-    width: 100%;
+    width:100%;
     height: 38px;
     border: none;
     outline: none;

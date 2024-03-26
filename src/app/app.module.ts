@@ -148,6 +148,9 @@ import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRe
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FileOptionViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/file-option-viewer/file-option-viewer.component';
 import { ManagerForwadedRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwaded-requests/manager-forwaded-requests.component';
+import { DashCalendarComponent } from './components/ui/dashboard-components/dash-calendar/dash-calendar.component';
+import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
+import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 
 @NgModule({
   declarations: [
@@ -280,8 +283,13 @@ import { ManagerForwadedRequestsComponent } from './features/manager/travelReque
     TravellerOngoingTravelComponent,
     TravellerTravelHistoryComponent,
     TabbedDataTableComponent,
-    ManagerForwadedRequestsComponent
-  ],
+    ManagerForwadedRequestsComponent,
+    TabbedDataTableComponent,
+    DashCalendarComponent,
+    TravelMessengerModalComponent,
+    TravelMessengerFullScreenComponent
+  ]
+  ,
 
   imports: [
     CommonModule,

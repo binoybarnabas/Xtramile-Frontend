@@ -1,0 +1,145 @@
+<div class="main_container">
+
+    <div class="left_section">
+
+        <div class="search_bar_container">  
+            
+            <div class="icon_container"> <i class="icon ri-search-2-line"></i> </div>
+            <input type="text" class="search_input" placeholder="search...">
+        </div>
+
+        <div class="chat_list_container">
+            <ng-container *ngFor="let chat of chatItems">    
+                <div class="chat_item_card">
+    
+                <div class="img_section">
+                    <img class="img" src={{chat.profileImg}} alt="">
+                </div>
+    
+                <div class="info_section">
+                    <p class="name">{{chat.name}}</p>
+                    <span class="message">{{chat.message}}</span>
+                </div>
+    
+                <div class="meta_data_section">
+                    <p class="time">12.00</p>
+                    <div class="status_container">
+                        <i (click)="deleteChat('1')" class="del_icon ri-delete-bin-4-fill"></i>
+                        <span *ngIf="chat.status==='replied' && chat.count !=='1' " class="count">{{chat.count}}</span>
+                        <span *ngIf="chat.status==='sent'"  class="status_icon"><i class="ri-check-line"></i></span>
+                        <span *ngIf="chat.status==='viewed'"  class="status_icon"><i class="ri-eye-fill"></i></span>
+                    </div>
+                    <!-- <span class="icon_section"> <i class="icon ri-check-line"></i> </span> -->
+                </div>
+    
+                </div>
+            </ng-container>
+
+        </div>
+
+    </div>
+
+    <div class="right_section">
+
+        <div class="chat_info_section">
+
+            <div class="profile_img_container">
+                <img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&usqp=CAU" alt="">
+            </div>
+
+            <div class="profile_info_container">
+                <p class="name">John Doe</p>
+                <!-- <span class="status">Online</span> -->
+            </div>
+
+            <div class="action_container">
+                
+                <div class="action_card">
+                    <i class="icon ri-phone-fill"></i>
+                </div>
+                <div class="action_card">
+                    <i class="icon ri-mail-line"></i>
+                </div>
+
+                <div class="action_card">  
+                    <i class="icon ri-mic-fill"></i>
+                </div>
+             
+            </div>
+
+        </div>
+
+        <div class="chat_view_container">
+
+            <div class="grouped_chat_date_container">
+                <span class="date">25 Feb 24</span>
+            </div>
+
+            <div class="text_message_item send">
+                <p class="message_text" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                <div class="meta_data_section">
+                    <p class="time">12.00</p>
+                    <i class="status_icon ri-check-line">  </i>
+                </div>
+            </div>
+            <div class="text_message_item received">
+                <p class="message_text" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                <div class="meta_data_section">
+                    <p class="time">12.00</p>
+                    <i class="status_icon ri-check-line">  </i>
+                </div>
+            </div>
+            <div class="text_message_item received">
+                <p class="message_text" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                <div class="meta_data_section">
+                    <p class="time">12.00</p>
+                    <i class="status_icon ri-check-line">  </i>
+                </div>
+            </div>
+
+            <div class="multimedia_container send">
+                <div class="multimedia_message_item">
+                    <img class="multimedia" src="https://images.pexels.com/photos/19288164/pexels-photo-19288164/free-photo-of-direction.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load">
+                    <div class="meta_data_section">
+                        <p class="time">12.00</p>
+                        <i class="status_icon ri-check-line">  </i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text_message_item received">
+                <p class="message_text" >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p>
+                <div class="meta_data_section">
+                    <p class="time">12.00</p>
+                    <i class="status_icon ri-check-line">  </i>
+                </div>
+            </div>
+            <div class="multimedia_container received">
+                <div class="multimedia_message_item">
+                    <img class="multimedia" src="https://images.pexels.com/photos/19288164/pexels-photo-19288164/free-photo-of-direction.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load">
+                    <div class="meta_data_section">
+                        <p class="time">12.00</p>
+                        <i class="status_icon ri-check-line">  </i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- type section -->
+        <div class="chat_action_container">
+            
+            <div class="text_input_container">
+                <i class="attachment_icon ri-attachment-2"></i>
+                <input class="text_input" type="text" placeholder="Type a message">
+            </div>
+            <div class="send_btn_container">
+                <i class="icon ri-send-plane-fill"></i>
+            </div>
+        </div>
+    
+    </div>
+
+
+
+</div>
