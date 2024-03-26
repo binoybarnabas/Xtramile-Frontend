@@ -1,3 +1,7 @@
 <app-page-header [headingInputData]="pageHeading"></app-page-header>
 
-<app-tabbed-data-table [tabs]="tabs" [filters]="filters"></app-tabbed-data-table>
+<app-tabbed-data-table
+  [tabs]="tabs"
+  [filters]="filters"
+  (filterToggled)="onFilterToggled($event)"
+></app-tabbed-data-table>
