@@ -7,10 +7,10 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--menu-hover-color);
-    border-radius: var(--normal-border-radius);
+    border-radius: 5px;
     padding: 10px;
-    background-color: var(--secondary-orange-color);
-    background-color: rgba(128, 128, 128, 0.1);
+    background-color: var(--secondary-cyan-color);
+    /* background-color: rgba(128, 128, 128, 0.1); */
     height: 50px;
 }
 
