@@ -15,6 +15,8 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 3px;
     /* margin: 0.5rem; */
     transition: 0.3s;
+    padding: 6px;
+    cursor: pointer;
 }
 
 
@@ -24,9 +26,16 @@
 }
 
 .travel_options_container .option_card.selected {
-    border: 3px solid var(--first-color);
+    /* border: 3px solid var(--first-color); */
     /* or any other border style you prefer */
+    background-color: var(--primary-cyan-color);
+    padding: 3px;
 }
+
+.travel_options_container .option_card.selected .description{
+    margin-top: 3px;
+}
+
 
 
 .travel_options_container .option_card .option_file {
@@ -35,7 +44,7 @@
 
 .travel_options_container .option_card .option_file .img {
     width: 100%;
-    border-radius: var(--normal-border-radius) var(--normal-border-radius) 0 0;
+    border-radius: 6px;
 }
 
 .travel_options_container .option_card .description {
@@ -43,8 +52,11 @@
     padding-left: 0.6rem;
     padding-top: 0.6rem;
     padding-right: 0.6rem;
-
+    background-color: var(--secondary-cyan-color);
+    border-radius: 6px;
+    margin-top: 6px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
