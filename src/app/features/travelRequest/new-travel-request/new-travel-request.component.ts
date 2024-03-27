@@ -59,7 +59,7 @@ export class NewTravelRequestComponent {
   travelOptionsData: TravelOptionDetails[] = [];
 
   //to identify if its travel admin close request screen
-  isClosed: boolean =false;
+  isCloseVisible: boolean =false;
 
 
   cities = cities;//Fetch Data From Any External API
@@ -253,7 +253,7 @@ export class NewTravelRequestComponent {
               next: (data) => {
                 console.log("TA")
                 if(data=='Ongoing'){
-                  this.isClosed=true;
+                  this.isCloseVisible=true;
                 }
               }
             })

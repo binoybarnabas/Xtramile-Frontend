@@ -12,7 +12,7 @@ import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminSe
 export class TravelAdminClosedTravelRequestsComponent {
 
   pageHeading: string = 'Closed Travel Requests'
-  tableHeaders: string[] = ['Request ID','Project Code','Project Name','Employee','Source City','Destination City','Date'];
+  tableHeaders: string[] = ['Request ID','Project Code','Project Name','Employee','Source City','Destination City','Closed On'];
   fieldsToDisplay: string[] = ['requestId', 'projectCode','projectName', 'name','sourceCity','destinationCity','date'];
   requestData: any[] = [];
   requestId: number = 0;
