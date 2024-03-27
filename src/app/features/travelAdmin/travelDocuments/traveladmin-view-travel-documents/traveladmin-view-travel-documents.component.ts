@@ -22,6 +22,10 @@ export class TraveladminViewTravelDocumentsComponent {
   }
 
   ngOnInit(){
+    this.getAllDocuments();
+  }
+
+  getAllDocuments(){
     //Get all Visas
     this.documentService.getTravelDocumentByType('Visa').subscribe({
       next : (data) => {
@@ -37,7 +41,7 @@ export class TraveladminViewTravelDocumentsComponent {
         this.initializeTabs();
       }
     })
-
+    
     //Get sll Passports
     this.documentService.getTravelDocumentByType('Passport').subscribe({
       next : (data) => {
@@ -53,7 +57,7 @@ export class TraveladminViewTravelDocumentsComponent {
         this.initializeTabs();
       }
     })
-
+    
     //Get all IdCards    
     this.documentService.getTravelDocumentByType('ID Card').subscribe({
       next : (data) => {
@@ -68,15 +72,120 @@ export class TraveladminViewTravelDocumentsComponent {
     })
   }
 
+  getExpiredDocuments(){
+    this.documentService.getExpiredTravelDocumentByType('Visa').subscribe({
+      next : (data) => {
+        data.forEach((doc) => {
+          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' '
+        })
+        this.visaDocuments = data
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        this.initializeTabs();
+      }
+    })
+
+    this.documentService.getExpiredTravelDocumentByType('Passport').subscribe({
+      next : (data) => {
+        data.forEach((doc) => {
+          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' '
+        })
+        this.passportDocuments = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        this.initializeTabs();
+      }
+    })
+
+    this.documentService.getExpiredTravelDocumentByType('ID Card').subscribe({
+      next : (data) => {
+        this.idCardDocuments = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        this.initializeTabs();
+      }
+    })
+  }
+
+  getValidDocuments(){
+    this.documentService.getValidTravelDocumentsByType('Visa').subscribe({
+      next : (data) => {
+        data.forEach((doc) => {
+          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' '
+        })
+        this.visaDocuments = data
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        this.initializeTabs();
+      }
+    })
+
+    this.documentService.getValidTravelDocumentsByType('Passport').subscribe({
+      next : (data) => {
+        data.forEach((doc) => {
+          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' '
+        })
+        this.passportDocuments = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        this.initializeTabs();
+      }
+    })
+
+    this.documentService.getValidTravelDocumentsByType('ID Card').subscribe({
+      next : (data) => {
+        this.idCardDocuments = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+        this.initializeTabs();
+      }
+    })
+  }
+
+
 //initialize this filter array as per requirements
 //filterId should be unique
 //set the isActive value to 'yes' if a filter needs to enabled by default
-filters = [{'filterId':'1','filterName':'Sort by Name','isActive':'no'},
-          {'filterId':'2','filterName':'Sort by Date','isActive':'no'},
-          {'filterId':'3','filterName':'Sort by Country','isActive':'no'},
-          {'filterId':'4','filterName':'Show Expired Only','isActive':'no'}
+filters = [{'filterId':'1','filterName':'Show Expired Only','isActive':'no'},
+           {'filterId':'2','filterName':'Show Valid Only','isActive':'no'}];
 
-        ];
+onFilterToggled(filterId : string){
+  for(let i=0; i< this.filters.length; i++){
+    if(this.filters[i].filterId === filterId){
+      if(this.filters[i].filterId === '1')
+      {
+        if(this.filters[i].isActive === 'yes')
+          this.getExpiredDocuments();
+        else
+          this.getAllDocuments();
+      }
+      else if(this.filters[i].filterId === '2'){
+        if(this.filters[i].isActive === 'yes')
+          this.getValidDocuments();
+        else
+          this.getAllDocuments();
+      }
+    }
+  }
+}
 
   initializeTabs() {
     if (this.visaDocuments && this.passportDocuments && this.idCardDocuments) {

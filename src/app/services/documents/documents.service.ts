@@ -26,4 +26,12 @@ export class DocumentsService {
     return this.http.get<TravelDocuments[]>(`http://localhost:5190/api/traveldocumentfile/traveldocuments/${fileType}`);
   }
 
+  getExpiredTravelDocumentByType(fileType : string): Observable<TravelDocuments[]>{
+    return this.http.get<TravelDocuments[]>(`http://localhost:5190/api/traveldocumentfile/expiredDocuments/${fileType}`);
+  }
+
+  getValidTravelDocumentsByType(fileType : string): Observable<TravelDocuments[]>{
+    return this.http.get<TravelDocuments[]>(`http://localhost:5190/api/traveldocumentfile/validDocuments/${fileType}`);
+  }
+
 }
