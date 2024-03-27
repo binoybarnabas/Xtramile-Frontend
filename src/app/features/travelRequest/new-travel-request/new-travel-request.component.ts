@@ -58,6 +58,9 @@ export class NewTravelRequestComponent {
 
   travelOptionsData: TravelOptionDetails[] = [];
 
+  //to identify if its travel admin close request screen
+  isClosed: boolean =false;
+
 
   cities = cities;//Fetch Data From Any External API
   sourceFilteredCities: any[] = []; // Separate filtered list for source field
@@ -243,6 +246,19 @@ export class NewTravelRequestComponent {
           this.getTravelOptionsByReqId(data.requestId)
 
           console.log(data)
+
+          //if logged in user is travel admin and request status is ongoing, enable the close button
+          if(this.userData.role =='Manager' && this.userData.department == 'TA' ){
+            this.requestService.getStatusName(requestId).subscribe(({
+              next: (data) => {
+                console.log("TA")
+                if(data=='Ongoing'){
+                  this.isClosed=true;
+                }
+              }
+            })
+            );
+          }
 
           if (this.currentLoggedInUserRole != 'employee') {
 
@@ -653,8 +669,6 @@ export class NewTravelRequestComponent {
 
 
 
-
-
   filterCities(event: any, field: string): void {
     const value = event.target.value;
     if (!value) {
@@ -707,8 +721,6 @@ export class NewTravelRequestComponent {
   }
 
 
-
-
   subscribeToOriginAndDestinationChanges() {
     const sourceCityControl = this.travelRequestForm.get('sourceCity');
     const destinationCityControl = this.travelRequestForm.get('destinationCity');
@@ -753,11 +765,6 @@ export class NewTravelRequestComponent {
   isPickUpTimeDisabled() {
     return this.travelRequestForm.get('cabRequired')?.value === 'no';
   }
-
-
-
-
-
 
 
   subscribeToTripTypeChanges() {
@@ -819,6 +826,40 @@ export class NewTravelRequestComponent {
         console.log("Completed");
       }
     });
+  }
+
+
+  onTravelAdminRequestClose() {
+    if(confirm("Do you want to close the request")){
+      const requestStatus: RequestStatus = {
+        requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
+        empId: this.empId,     // Assign the employee ID
+        primaryStatusId: 3, // Assign the primary status ID
+        date: new Date(),  // Assign the current date
+        secondaryStatusId: 10 // Assign the secondary status ID
+  
+      };
+  
+      this.commonApiService.updateRequestStatus(requestStatus).subscribe({
+        next: (data) => {
+          console.log(data);
+          //Redirect to another page on submit click
+          this.router.navigate(['/traveladmin/closed']);
+  
+        },
+        error: (error: Error) => {
+          console.log("Error in posting request status");
+          console.log(error.message);
+        },
+        complete: () => {
+          console.log("Posting Request Status Closed");
+          // alert("Posting Request Status Complete");
+          this.toastService.showToast("Request closed")
+        }
+      });
+
+    }
+
   }
 
 

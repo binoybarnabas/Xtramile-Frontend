@@ -335,7 +335,7 @@
   
           <div class="form_submit_container">
 
-                        <div class="reject_btn_container">
+                        <div class="reject_btn_container" *ngIf="!isClosed">
                             <button type="button" class="reject_btn"> Reject</button>
                         </div>
 
@@ -346,12 +346,21 @@
               >
                 Back
               </button>
-              <input
+              <input *ngIf="!isClosed"
                 (click)="onTravelAdminOptionsSend()"
                 class="submit_btn"
                 type="button"
                 Value="Send"
               />
+
+              <!-- if the request is ongoing enable close -->
+                <input *ngIf="isClosed"
+              (click)="onTravelAdminRequestClose()"
+              class="submit_btn"
+              type="button"
+              Value="Close"
+              />
+
             </div>
           </div>
 

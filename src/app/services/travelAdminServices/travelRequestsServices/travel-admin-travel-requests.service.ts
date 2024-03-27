@@ -140,4 +140,11 @@ export class TravelAdminTravelRequestsService {
     return this.http.get(url, { params });
   }
 
+  getClosedTravel(pageIndex: number, pageSize: number): Observable<any> {
+    const url = this.apiURL + '/traveladmin/closed';
+    const params = new HttpParams().set('pageIndex', pageIndex)
+      .set('pageSize', pageSize);
+    return this.http.get(url, { params });
+  }
+
 }

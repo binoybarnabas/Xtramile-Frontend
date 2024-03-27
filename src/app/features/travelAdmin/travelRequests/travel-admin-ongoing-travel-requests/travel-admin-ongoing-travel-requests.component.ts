@@ -31,7 +31,7 @@ export class TravelAdminOngoingTravelRequestsComponent {
 
   pageChanged(event: any): void {
     this.currentPage = event.page;
-    this.apiservice.getIncomingRequests(this.currentPage, this.pageSize).subscribe((data: any) => {
+    this.apiservice.getOngoingTravel(this.currentPage, this.pageSize).subscribe((data: any) => {
       this.requestData = data.ongoingTravel;
       this.totalItems = data.pageCount;
     });
@@ -48,13 +48,13 @@ export class TravelAdminOngoingTravelRequestsComponent {
     this.selectedRow = row;
     console.log(this.selectedRow.requestId)
     this.requestId = this.selectedRow.requestId
-    //const queryParams = { requestId: this.requestId }
-    //this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
+    
 
     const initialState = {
       requestId: this.selectedRow.requestId
     };
-
+    const queryParams = { requestId: this.requestId }
+    this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
     this.bsModalRef = this.modalService.show(TravelRequestCardModalComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
