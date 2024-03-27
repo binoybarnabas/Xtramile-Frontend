@@ -22,4 +22,9 @@ export class EmployeeDashboardService {
   getCompletedTrips(empId:number):Observable<any>{
     return this.http.get(`http://localhost:5190/api/employee/completedtrips/${empId}`)
   }
+
+  getNotification(empId:number):Observable<any>{
+    return this.http.get(`http://localhost:5190/api/notification/getnotifications/${empId}`)
+  }
+  
 }
