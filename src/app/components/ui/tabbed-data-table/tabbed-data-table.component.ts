@@ -19,6 +19,7 @@ export class TabbedDataTableComponent {
 
 
 activeTabIndex: number = 0; // Initially set to show the first tab
+searchInputValue: string = ''
 
 constructor(){
   this.isSearchFilterNeeded = 'yes';
@@ -27,6 +28,7 @@ constructor(){
 //method to toggle filters
 //multiple items can be selected
 toggleFilter(filterId:string){
+  this.searchInputValue = '';  
   for(let i=0; i< this.filters.length; i++){
     if(this.filters[i].filterId !== filterId){
       if(this.filters[i].isActive === 'yes'){    
@@ -45,8 +47,7 @@ toggleFilter(filterId:string){
   }
 }
 
-onSearch(event: any){
-  const employeeName: string = (event.target as HTMLInputElement).value
-  this.search.emit(employeeName);
+onSearch(){
+  this.search.emit(this.searchInputValue);
 }
 }

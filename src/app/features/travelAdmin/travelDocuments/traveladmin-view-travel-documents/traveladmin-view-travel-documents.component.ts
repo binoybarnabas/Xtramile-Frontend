@@ -183,13 +183,13 @@ onFilterToggled(filterId : string){
       if(this.filters[i].filterId === '1')
       {
         if(this.filters[i].isActive === 'yes')
-        this.initializeTabs(this.expiredVisaDocuments,this.expiredPassportDocuments,this.expiredIdCardDocuments);
+        this.initializeTabs(this.expiredVisaDocuments,this.expiredPassportDocuments,this.idCardDocuments);
         else
         this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
       }
       else if(this.filters[i].filterId === '2'){
         if(this.filters[i].isActive === 'yes')
-        this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.validIdCardDocuments);
+        this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);
         else
         this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
       }
@@ -258,37 +258,37 @@ getRemainingDaysMessage(remainingDays: number): string {
 }
 
 onSearch(employeeName: string) {
-  // let filteredVisaDocuments = this.visaDocuments;
-  // let filteredPassportDocuments = this.passportDocuments;
-  // let filteredIdCardDocuments = this.idCardDocuments;
+  let filteredVisaDocuments = this.visaDocuments;
+  let filteredPassportDocuments = this.passportDocuments;
+  let filteredIdCardDocuments = this.idCardDocuments;
 
-  // // Filter documents based on selected filter criteria
-  // for (const filter of this.filters) {
-  //   if (filter.isActive === 'yes') {
-  //     switch (filter.filterId) {
-  //       case '1': // Show Expired Only
-  //         filteredVisaDocuments = this.expiredVisaDocuments;
-  //         filteredPassportDocuments = this.expiredPassportDocuments;
-  //         filteredIdCardDocuments = this.expiredIdCardDocuments;
-  //         break;
-  //       case '2': // Show Valid Only
-  //         filteredVisaDocuments = this.validVisaDocuments;
-  //         filteredPassportDocuments = this.validPassportDocuments;
-  //         filteredIdCardDocuments = this.validIdCardDocuments;
-  //         break;
-  //     }
-  //   }
-  // }
+  // Filter documents based on selected filter criteria
+  for (const filter of this.filters) {
+    if (filter.isActive === 'yes') {
+      switch (filter.filterId) {
+        case '1': // Show Expired Only
+          filteredVisaDocuments = this.expiredVisaDocuments;
+          filteredPassportDocuments = this.expiredPassportDocuments;
+          filteredIdCardDocuments = this.expiredIdCardDocuments;
+          break;
+        case '2': // Show Valid Only
+          filteredVisaDocuments = this.validVisaDocuments;
+          filteredPassportDocuments = this.validPassportDocuments;
+          filteredIdCardDocuments = this.validIdCardDocuments;
+          break;
+      }
+    }
+  }
 
-  // // Perform search on filtered documents
-  // if (employeeName !== '') {
-  //   filteredVisaDocuments = filteredVisaDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
-  //   filteredPassportDocuments = filteredPassportDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
-  //   filteredIdCardDocuments = filteredIdCardDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
-  // }
+  // Perform search on filtered documents
+  if (employeeName !== '') {
+    filteredVisaDocuments = filteredVisaDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
+    filteredPassportDocuments = filteredPassportDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
+    filteredIdCardDocuments = filteredIdCardDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
+  }
 
-  // // Initialize tabs with the filtered documents
-  // this.initializeTabs(filteredVisaDocuments, filteredPassportDocuments, filteredIdCardDocuments);
+  // Initialize tabs with the filtered documents
+  this.initializeTabs(filteredVisaDocuments, filteredPassportDocuments, filteredIdCardDocuments);
 }
 
 
