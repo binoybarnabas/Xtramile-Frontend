@@ -4,5 +4,6 @@ export interface TravelDocuments{
     country: string;
     expiryDate: string;
     remainingDays: number;
-    documentURL: string
+    expiresIn : string;
+    documentURL: string;
 }

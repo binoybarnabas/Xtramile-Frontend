@@ -15,6 +15,7 @@ export class TabbedDataTableComponent {
 @Input() isSearchFilterNeeded: string;
 
 @Output() filterToggled: EventEmitter<any> = new EventEmitter<any>();
+@Output() search: EventEmitter<any> = new EventEmitter<any>();
 
 
 activeTabIndex: number = 0; // Initially set to show the first tab
@@ -44,6 +45,8 @@ toggleFilter(filterId:string){
   }
 }
 
-
-
+onSearch(event: any){
+  const employeeName: string = (event.target as HTMLInputElement).value
+  this.search.emit(employeeName);
+}
 }
