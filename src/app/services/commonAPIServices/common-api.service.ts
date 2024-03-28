@@ -107,6 +107,8 @@ export class CommonAPIService {
   setIsFile(value: boolean) {
     this.isFileSubject.next(value);
   }
-
+  deleteEmployeeDetails(fileId:number){
+    return this.http.delete<ResubmitRequest>(`http://localhost:5190/api/traveldocumentfile/deleteDocument/${fileId}`);
+  }
 }
 

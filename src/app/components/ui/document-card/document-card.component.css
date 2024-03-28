@@ -1,7 +1,7 @@
 .doc_card_container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); /* Three cards per row */
-    gap: 20px; /* Adjust as needed */
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); 
+    gap: 20px; 
     width: 100%;
 }
 

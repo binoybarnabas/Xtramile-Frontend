@@ -49,4 +49,17 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
       }
     );
   }
+  onDeleteDocument(fileId: number): void {
+    this.commonService.deleteEmployeeDetails(fileId).subscribe(
+      () => {
+        this.commonService.setIsFile(true) 
+        console.log('is set fiel',true)
+        console.log(`Document with ID ${fileId} deleted successfully.`);
+      },
+      (error: any) => {
+        console.error(`Error deleting document with ID ${fileId}:`, error);
+      }
+    );
+  }
+  
 }
