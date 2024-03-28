@@ -12,7 +12,7 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
   templateUrl: './travel-request-card-modal.component.html',
   styleUrls: ['./travel-request-card-modal.component.css']
 })
-export class TravelRequestCardModalComponent {
+export class  TravelRequestCardModalComponent {
   private _requestId!: number;
   primaryStatus: string = 'Denied';
 
