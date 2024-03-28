@@ -128,4 +128,9 @@ export class RequestService {
   selectedOptionFromEmployee(requestId: number):Observable<any>{
     return this.http.get(this.apiURL+ `/traveladmin/selectedoption/${requestId}`)
   }
+
+  deleteOptions(optionIds: number[]): Observable<any> {
+    console.log(optionIds)
+    return this.http.post<any>('api/delete-options', optionIds);
+  }
 }

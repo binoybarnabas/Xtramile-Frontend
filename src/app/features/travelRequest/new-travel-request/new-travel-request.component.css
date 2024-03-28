@@ -621,3 +621,9 @@
         transform: rotate(360deg);
     }
 }
+
+/* delete */
+.option_card.selected {
+    border: 2px solid var( --second-color); /* Change border color to blue when selected */
+    box-shadow: 0 0 5px 0 var( --second-color); /* Add a blue shadow when selected */
+}

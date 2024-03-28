@@ -310,7 +310,7 @@
           <div class="options_container">
 
               <ng-container *ngFor="let item of travelOptionsData">
-                  <div class="option_card">
+                  <div class="option_card" (click)="toggleOptionSelection(item)" [class.selected]="isSelected(item)">
                       <div class="option_file">
                           <img class="img" [src]="item.optionFileURL" alt="img_not_found">
                       </div>
@@ -319,7 +319,7 @@
                       </div>
                   </div>
               </ng-container>
-
+              <button (click)="deleteSelectedOptions()">Delete Selected Options</button>
               <div  (click)="openAddOptionModal()" class="new_option_card">
 
                 <div class="icon_container">

@@ -817,5 +817,36 @@ export class NewTravelRequestComponent {
       }
     });
   }
+
+  //Deletion of Options
+  selectedOptionIds: number[] = [];
+
+  toggleOptionSelection(item: any) {
+      const index = this.selectedOptionIds.indexOf(item.optionId);
+      if (index === -1) {
+          this.selectedOptionIds.push(item.optionId);
+      } else {
+          this.selectedOptionIds.splice(index, 1);
+      }
+  }
+  
+  isSelected(item: any): boolean {
+      return this.selectedOptionIds.includes(item.optionId);
+  }
+  
+  deleteSelectedOptions() {
+      // Call your service method to delete selected option IDs
+      this.requestService.deleteOptions(this.selectedOptionIds).subscribe({
+          next: () => {
+              console.log("Selected options deleted successfully.");
+              // Clear the selectedOptionIds array
+              this.selectedOptionIds = [];
+          },
+          error: (error: Error) => {
+              console.log("Error deleting selected options: " + error.message);
+          }
+      });
+  }
+  
   //EOF 
 }
