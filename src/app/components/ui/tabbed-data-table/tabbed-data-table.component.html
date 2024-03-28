@@ -24,21 +24,27 @@
           class="text_input"
           type="text"
           placeholder="Search Employee Name"
-          (input)="onSearch($event)"
+          (input)="onSearch()"
+          [(ngModel)]="searchInputValue"
         />
       </div>
 
       <div class="filter_container">
-        <ng-container *ngFor="let item of filters">
-          <div
-            (click)="toggleFilter(item.filterId)"
-            [ngClass]="
-              item.isActive === 'yes' ? 'filter_card active' : 'filter_card'
-            "
-          >
-            <span class="filter_text">{{ item.filterName }}</span>
-          </div>
+        <ng-container *ngIf="activeTabIndex === 2; else displayFilter">
+          <div ngClass="filter_card inactive"></div>
         </ng-container>
+        <ng-template #displayFilter>
+          <ng-container *ngFor="let item of filters">
+            <div
+              (click)="toggleFilter(item.filterId)"
+              [ngClass]="
+                item.isActive === 'yes' ? 'filter_card active' : 'filter_card'
+              "
+            >
+              <span class="filter_text">{{ item.filterName }}</span>
+            </div>
+          </ng-container>
+        </ng-template>
       </div>
     </div>
   </div>
