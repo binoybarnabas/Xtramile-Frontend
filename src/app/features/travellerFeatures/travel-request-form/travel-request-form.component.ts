@@ -38,7 +38,8 @@ export class TravelRequestFormComponent {
   selectedOrigin: string;
   selectedDestination: string;
 
-  selectedProjectCode: string = '';
+  selectedProjectCode!: string;
+  selectedProjectId!: number;
   selectedTravelPurpose: string;
 
   selectedDepartureDate!: Date;
@@ -139,7 +140,6 @@ export class TravelRequestFormComponent {
       this.isProjectDetailsSectionOpen = true;
     } else if (action === 'close') {
 
-      this.selectedProjectCode = this.travelRequestForm.value.projectCode;
       this.selectedTravelPurpose = this.travelRequestForm.value.tripPurpose;
       this.isProjectDetailsSectionOpen = false;
 
@@ -388,6 +388,7 @@ export class TravelRequestFormComponent {
         // Assuming data is an array of project codes
         this.projectCodes = data;
         console.log(data);
+        this.selectedProjectId = data[0].projectId;
         this.selectedProjectCode = data[0].projectCode;
 
       });
@@ -486,6 +487,13 @@ export class TravelRequestFormComponent {
 
     }
 
+  }
+
+  //update default project code - id is also updated since id is being passed to back end
+  //project code is for UI
+  updateSelectedProjectCode(newProjectId:number, newProjectCode:string){
+    this.selectedProjectId = newProjectId;
+    this.selectedProjectCode = newProjectCode;
   }
 
   //update travel type based on selected origin and destination

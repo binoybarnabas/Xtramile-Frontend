@@ -17,16 +17,16 @@
   </app-page-header>
   <div *ngIf="travelRequest?.length">
    
-    <app-data-table [headers]="tableHeaders"
+    <!-- <app-data-table [headers]="tableHeaders"
     [data]="travelRequest"
     [displayedProperties]="dataHeaders"
-    (rowClick)="handleSelectedRow($event)"></app-data-table>
+    (rowClick)="handleSelectedRow($event)"></app-data-table> -->
    
+    <app-tabbed-data-table   [tabs]="tabs" [filters]="filters" ></app-tabbed-data-table>
    
-    <pagination [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" ></pagination></div>
-   
-  <div *ngIf="travelRequest?.length === 0">
-      <!-- <p>No data available</p> -->
-      <app-empty-data></app-empty-data>
-  
+    <pagination [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" ></pagination>
   </div>
+   
+  <!-- <div *ngIf="travelRequest?.length === 0">
+      <app-empty-data></app-empty-data>
+  </div> -->

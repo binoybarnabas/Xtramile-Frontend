@@ -11,5 +11,8 @@
         </div>
     </div>
     </ng-container>
+    <div *ngIf="notifications.length === 0" class="no_data_container">
+        <span class="text"><i class="ri-close-circle-line"></i> No Notifications</span>
+    </div>
 
 </div>
