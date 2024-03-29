@@ -73,13 +73,8 @@
                   {{ entry }}
                 </ng-container>
                 <ng-template #actionCell>
-                  <a
-                    class="ri-eye-line"
-                    *ngIf="entry"
-                    href="{{ entry }}"
-                    target="_blank"
-                  ></a>
-                  <span *ngIf="!entry">No document</span>
+                  <a class="ri-eye-line" href="{{ entry }}" target="_blank"></a>
+                  <!-- <a class="ri-download-line" href="{{ entry }}" download></a> -->
                 </ng-template>
               </td>
             </tr>
