@@ -132,4 +132,19 @@ export class TravelAdminTravelRequestsService {
     return this.http.post(`http://localhost:5190/api/availableoptions/addtextoption`, { htmlContent, requestId },{ headers, responseType: 'text' });
   }
 
+  getOngoingTravel(pageIndex: number, pageSize: number): Observable<any> {
+
+    const url = this.apiURL + '/traveladmin/ongoing';
+    const params = new HttpParams().set('pageIndex', pageIndex)
+      .set('pageSize', pageSize);
+    return this.http.get(url, { params });
+  }
+
+  getClosedTravel(pageIndex: number, pageSize: number): Observable<any> {
+    const url = this.apiURL + '/traveladmin/closed';
+    const params = new HttpParams().set('pageIndex', pageIndex)
+      .set('pageSize', pageSize);
+    return this.http.get(url, { params });
+  }
+
 }

@@ -307,7 +307,7 @@
             </div>
           </div>
 
-          <!-- <div class="options_container">
+          <div class="options_container">
 
               <ng-container *ngFor="let item of travelOptionsData">
                   <div class="option_card">
@@ -320,7 +320,7 @@
                   </div>
               </ng-container>
 
-              <div  (click)="openAddOptionModal()" class="new_option_card">
+              <!-- <div  (click)="openAddOptionModal()" class="new_option_card">
 
                 <div class="icon_container">
                   <span><i class="add_icon ri-sticky-note-add-line"></i></span>
@@ -328,14 +328,14 @@
                 <div class="text_container">
                       <span class="text">Add</span>
                 </div>
-            </div>
+            </div> -->
        
 
-          </div> -->
+          </div>
   
           <div class="form_submit_container">
 
-                        <div class="reject_btn_container">
+                        <div class="reject_btn_container" *ngIf="!isCloseVisible">
                             <button type="button" class="reject_btn"> Reject</button>
                         </div>
 
@@ -346,12 +346,21 @@
               >
                 Back
               </button>
-              <input
+              <input *ngIf="!isCloseVisible"
                 (click)="onTravelAdminOptionsSend()"
                 class="submit_btn"
                 type="button"
                 Value="Send"
               />
+
+              <!-- if the request is ongoing enable close -->
+                <input *ngIf="isCloseVisible"
+              (click)="onTravelAdminRequestClose()"
+              class="submit_btn"
+              type="button"
+              Value="Close"
+              />
+
             </div>
           </div>
 

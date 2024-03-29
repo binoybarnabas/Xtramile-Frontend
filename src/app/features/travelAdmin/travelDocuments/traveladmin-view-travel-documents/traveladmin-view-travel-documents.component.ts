@@ -15,6 +15,12 @@ export class TraveladminViewTravelDocumentsComponent {
   visaDocuments!: TravelDocuments[];
   passportDocuments!: TravelDocuments[];
   idCardDocuments!: TravelDocuments[];
+  expiredVisaDocuments!: TravelDocuments[];
+  expiredPassportDocuments!: TravelDocuments[];
+  expiredIdCardDocuments!: TravelDocuments[];
+  validVisaDocuments!: TravelDocuments[];
+  validPassportDocuments!: TravelDocuments[];
+  validIdCardDocuments!: TravelDocuments[];
 
   constructor(private documentService: DocumentsService,
     private datepipe: DatePipe
@@ -22,11 +28,18 @@ export class TraveladminViewTravelDocumentsComponent {
   }
 
   ngOnInit(){
+    this.getAllDocuments();
+    this.getExpiredDocuments();
+    this.getValidDocuments();
+  }
+
+  getAllDocuments(){
     //Get all Visas
     this.documentService.getTravelDocumentByType('Visa').subscribe({
       next : (data) => {
         data.forEach((doc) => {
-          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' '
+          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
+          doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
         this.visaDocuments = data
       },
@@ -34,15 +47,16 @@ export class TraveladminViewTravelDocumentsComponent {
         console.log(error);
       },
       complete: () => {
-        this.initializeTabs();
+        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
       }
     })
-
-    //Get sll Passports
+    
+    //Get all Passports
     this.documentService.getTravelDocumentByType('Passport').subscribe({
       next : (data) => {
         data.forEach((doc) => {
-          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' '
+          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
+          doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
         this.passportDocuments = data;
       },
@@ -50,10 +64,10 @@ export class TraveladminViewTravelDocumentsComponent {
         console.log(error);
       },
       complete: () => {
-        this.initializeTabs();
+        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
       }
     })
-
+    
     //Get all IdCards    
     this.documentService.getTravelDocumentByType('ID Card').subscribe({
       next : (data) => {
@@ -63,52 +77,157 @@ export class TraveladminViewTravelDocumentsComponent {
         console.log(error);
       },
       complete: () => {
-        this.initializeTabs();
+        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
       }
     })
   }
 
+  getExpiredDocuments(){
+    this.documentService.getExpiredTravelDocumentByType('Visa').subscribe({
+      next : (data) => {
+        data.forEach((doc) => {
+          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
+          doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
+        })
+        this.expiredVisaDocuments = data
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    })
+
+    this.documentService.getExpiredTravelDocumentByType('Passport').subscribe({
+      next : (data) => {
+        data.forEach((doc) => {
+          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
+          doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
+        })
+        this.expiredPassportDocuments = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    })
+
+    this.documentService.getExpiredTravelDocumentByType('ID Card').subscribe({
+      next : (data) => {
+        this.expiredIdCardDocuments = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    })
+  }
+
+  getValidDocuments(){
+    this.documentService.getValidTravelDocumentsByType('Visa').subscribe({
+      next : (data) => {
+        data.forEach((doc) => {
+          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
+          doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
+        })
+        this.validVisaDocuments = data
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    })
+
+    this.documentService.getValidTravelDocumentsByType('Passport').subscribe({
+      next : (data) => {
+        data.forEach((doc) => {
+          doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
+          doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
+        })
+        this.validPassportDocuments = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    })
+
+    this.documentService.getValidTravelDocumentsByType('ID Card').subscribe({
+      next : (data) => {
+        this.validIdCardDocuments = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => {
+      }
+    })
+  }
+
+
 //initialize this filter array as per requirements
 //filterId should be unique
 //set the isActive value to 'yes' if a filter needs to enabled by default
-filters = [{'filterId':'1','filterName':'Sort by Name','isActive':'no'},
-          {'filterId':'2','filterName':'Sort by Date','isActive':'no'},
-          {'filterId':'3','filterName':'Sort by Country','isActive':'no'},
-          {'filterId':'4','filterName':'Show Expired Only','isActive':'no'}
+filters = [{'filterId':'1','filterName':'Show Expired Only','isActive':'no'},
+           {'filterId':'2','filterName':'Show Valid Only','isActive':'no'}];
 
-        ];
+onFilterToggled(filterId : string){
+  if(this.tabs.name === 'ID Cards')
+    return ;
+  for(let i=0; i< this.filters.length; i++){
+    if(this.filters[i].filterId === filterId){
+      if(this.filters[i].filterId === '1')
+      {
+        if(this.filters[i].isActive === 'yes')
+        this.initializeTabs(this.expiredVisaDocuments,this.expiredPassportDocuments,this.idCardDocuments);
+        else
+        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
+      }
+      else if(this.filters[i].filterId === '2'){
+        if(this.filters[i].isActive === 'yes')
+        this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);
+        else
+        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
+      }
+    }
+  }
+}
 
-  initializeTabs() {
-    if (this.visaDocuments && this.passportDocuments && this.idCardDocuments) {
+  initializeTabs(visa : TravelDocuments[], passport : TravelDocuments[], idCard : TravelDocuments[]) {
+    if (visa && passport && idCard) {
       this.tabs = [
         {
           name: 'Visa',
           headings: ['Visa Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Action'],
-          entries: this.visaDocuments.map((item) => [
+          entries: visa.map((item) => [
             item.identificationNumber,
             item.uploadedBy,
             item.country,
             item.expiryDate,
-            item.remainingDays,
+            item.expiresIn,
             item.documentURL
           ])
         },
         {
           name: 'Passports',
           headings: ['Passport Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Action'],
-          entries: this.passportDocuments.map((item) => [
+          entries: passport.map((item) => [
             item.identificationNumber,
             item.uploadedBy,
             item.country,
             item.expiryDate,
-            item.remainingDays,
+            item.expiresIn,
             item.documentURL
           ])
         },
         {
           name: 'ID Cards',
           headings: ['ID Number', 'Uploaded By', 'Issued Country', 'Action' ],
-          entries: this.idCardDocuments.map((item) => [
+          entries: idCard.map((item) => [
             item.identificationNumber,
             item.uploadedBy,
             item.country,
@@ -120,5 +239,57 @@ filters = [{'filterId':'1','filterName':'Sort by Name','isActive':'no'},
   }
 //Initialize this tabs array
 tabs: any = [];
+
+getRemainingDaysMessage(remainingDays: number): string {
+  if(remainingDays > 0){
+    if(remainingDays === 1)
+      return `Expires in 1 day`
+    else
+      return `Expires in ${remainingDays} days`;
+  }
+  else if(remainingDays < 0){
+    if(remainingDays === -1)
+      return `Expired 1 day ago`
+    else
+    return `Expired ${Math.abs(remainingDays)} days ago`;
+  }
+  else
+    return 'Expires Today'
+}
+
+onSearch(employeeName: string) {
+  let filteredVisaDocuments = this.visaDocuments;
+  let filteredPassportDocuments = this.passportDocuments;
+  let filteredIdCardDocuments = this.idCardDocuments;
+
+  // Filter documents based on selected filter criteria
+  for (const filter of this.filters) {
+    if (filter.isActive === 'yes') {
+      switch (filter.filterId) {
+        case '1': // Show Expired Only
+          filteredVisaDocuments = this.expiredVisaDocuments;
+          filteredPassportDocuments = this.expiredPassportDocuments;
+          filteredIdCardDocuments = this.expiredIdCardDocuments;
+          break;
+        case '2': // Show Valid Only
+          filteredVisaDocuments = this.validVisaDocuments;
+          filteredPassportDocuments = this.validPassportDocuments;
+          filteredIdCardDocuments = this.validIdCardDocuments;
+          break;
+      }
+    }
+  }
+
+  // Perform search on filtered documents
+  if (employeeName !== '') {
+    filteredVisaDocuments = filteredVisaDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
+    filteredPassportDocuments = filteredPassportDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
+    filteredIdCardDocuments = filteredIdCardDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
+  }
+
+  // Initialize tabs with the filtered documents
+  this.initializeTabs(filteredVisaDocuments, filteredPassportDocuments, filteredIdCardDocuments);
+}
+
 
 }
