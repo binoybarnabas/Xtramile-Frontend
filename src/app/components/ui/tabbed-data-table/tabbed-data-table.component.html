@@ -73,8 +73,21 @@
                   {{ entry }}
                 </ng-container>
                 <ng-template #actionCell>
-                  <a class="ri-eye-line" href="{{ entry }}" target="_blank"></a>
-                  <!-- <a class="ri-download-line" href="{{ entry }}" download></a> -->
+                  <div class="action_icons">
+                    <div class="view_icon">
+                      <a
+                        class="ri-eye-line"
+                        href="{{ entry }}"
+                        target="_blank"
+                      ></a>
+                    </div>
+                    <div class="download_icon">
+                      <a
+                        class="ri-download-line"
+                        (click)="onDownloadFileClick(entry, tab.name, row[1])"
+                      ></a>
+                    </div>
+                  </div>
                 </ng-template>
               </td>
             </tr>

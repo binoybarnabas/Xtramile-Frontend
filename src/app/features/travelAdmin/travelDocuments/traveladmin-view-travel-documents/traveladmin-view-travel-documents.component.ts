@@ -213,7 +213,7 @@ onFilterToggled(filterId : string){
           ])
         },
         {
-          name: 'Passports',
+          name: 'Passport',
           headings: ['Passport Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Action'],
           entries: passport.map((item) => [
             item.identificationNumber,
@@ -225,7 +225,7 @@ onFilterToggled(filterId : string){
           ])
         },
         {
-          name: 'ID Cards',
+          name: 'ID Card',
           headings: ['ID Number', 'Uploaded By', 'Issued Country', 'Action' ],
           entries: idCard.map((item) => [
             item.identificationNumber,
