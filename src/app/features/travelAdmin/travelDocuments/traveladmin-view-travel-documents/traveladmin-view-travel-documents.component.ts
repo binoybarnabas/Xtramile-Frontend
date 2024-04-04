@@ -22,6 +22,14 @@ export class TraveladminViewTravelDocumentsComponent {
   validPassportDocuments!: TravelDocuments[];
   validIdCardDocuments!: TravelDocuments[];
 
+  //Initialize this tabs array
+  tabs: any = [];
+  //initialize this filter array as per requirements
+  //filterId should be unique
+  //set the isActive value to 'yes' if a filter needs to enabled by default
+  filters = [{'filterId':'1','filterName':'Show Expired Only','isActive':'no'},
+           {'filterId':'2','filterName':'Show Valid Only','isActive':'no'}];
+           
   constructor(private documentService: DocumentsService,
     private datepipe: DatePipe
     ){
@@ -169,11 +177,7 @@ export class TraveladminViewTravelDocumentsComponent {
   }
 
 
-//initialize this filter array as per requirements
-//filterId should be unique
-//set the isActive value to 'yes' if a filter needs to enabled by default
-filters = [{'filterId':'1','filterName':'Show Expired Only','isActive':'no'},
-           {'filterId':'2','filterName':'Show Valid Only','isActive':'no'}];
+
 
 onFilterToggled(filterId : string){
   if(this.tabs.name === 'ID Cards')
@@ -237,8 +241,6 @@ onFilterToggled(filterId : string){
       ];
     }
   }
-//Initialize this tabs array
-tabs: any = [];
 
 getRemainingDaysMessage(remainingDays: number): string {
   if(remainingDays > 0){

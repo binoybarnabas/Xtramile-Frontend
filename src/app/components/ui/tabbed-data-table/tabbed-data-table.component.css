@@ -151,8 +151,7 @@
     height: 40px;
     border-top: 1px solid var(--menu-hover-color);
     border-bottom: 1px solid var(--menu-hover-color);
-    font-size: var(--small-font-size);
-  
+    font-size: var(--form-label-font-size);
 }
 
 
@@ -182,3 +181,8 @@
     padding-left: 5px;
 }
 
+
+
+.main_container .body_section .table_container .table_body .no_records_container{
+    width: 100%;
+}

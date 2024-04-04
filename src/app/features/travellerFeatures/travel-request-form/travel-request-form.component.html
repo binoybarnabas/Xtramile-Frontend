@@ -133,22 +133,21 @@
 
                         <div class="project_code_section">
 
-                            <div class="label_and_error_section">
+                                  <div class="label_and_error_section">
+                                    <label class="form_label" >Project Code:</label>    
+                                    </div>
 
-                            <label class="form_label" >Project Code:</label>
-                            <span *ngIf= "travelRequestForm.get('projectCode')?.invalid && travelRequestForm.get('projectCode')?.touched" class="normal_form_error"> <i class="ri-error-warning-line"></i> select the project code</span>
-                            
-                            </div>
+                                  <div class="project_code_selector_container">
+    
+                                    <ng-container *ngFor="let code of projectCodes">
+                                        <div (click)="updateSelectedProjectCode(code.projectId, code.projectCode)" [ngClass]="selectedProjectId === code.projectId ? 'project_code_card active' : 'project_code_card'">
+                                            <span class="project_code"> {{code.projectCode}}</span>
+                                        </div>
+                                    </ng-container>
+                                    
+                                  </div>
 
-                            <select id="projectCode" formControlName="projectId" >
-                                
-                                <ng-container *ngFor="let code of projectCodes">
-                                    <option [value]="code.projectId"  [(ngModel)]="selectedProjectCode">
-                                      {{ code.projectCode }} - {{ code.projectName }}
-                                    </option>
-                                  </ng-container>
-
-                            </select>
+                            <!-- </select> -->
                         </div>
 
                         <div class="travel_purpose_section">

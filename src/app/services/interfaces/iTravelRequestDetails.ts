@@ -53,7 +53,6 @@ export interface TravelRequestDetails {
 export interface TravelRequestDetailViewModel {
     requestId: number;
     createdBy: string;
-
     requestCode: string;
     projectCode: string;
     tripType: string;
@@ -68,24 +67,17 @@ export interface TravelRequestDetailViewModel {
     returnDate: string;
     tripPurpose: string;
     prefDepartureTime: string;
-
     cabRequired: string;
     prefPickUpTime: string;
     accommodationRequired: string;
-
     travelAuthorizationEmailCapture: File | undefined;
     passportAttachment: File | undefined;
-
     additionalComments: string;
-
     priority?: string;
-
-
     primaryStatus: string;
     employeeName: string;
     passportFileUrl: string;
     travelAuthMailFileUrl: string;
-
 }
 
 
