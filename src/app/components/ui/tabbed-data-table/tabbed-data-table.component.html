@@ -60,13 +60,8 @@
           </tr>
         </thead>
 
-
         <ng-container *ngIf="tab.entries.length > 0; else noContent">
           <tbody class="table_body">
-
-        <tbody class="table_body">
-          <ng-container *ngIf="tab.entries.length > 0;">
-
             <tr *ngFor="let row of tab.entries" class="body_row">
               <td
                 *ngFor="let entry of row; let i = index"
@@ -96,23 +91,14 @@
                 </ng-template>
               </td>
             </tr>
-
           </tbody>
         </ng-container>
         <ng-template #noContent>
-          <p>No Data Available</p>
-        </ng-template>
-
-          </ng-container>
           <div *ngIf="tab.entries.length === 0" class="no_record_container">
             <app-empty-data></app-empty-data>
           </div>
-          <!-- <ng-template > -->
-          <!-- </ng-template> -->
-        </tbody>
-
+        </ng-template>
       </table>
-   
     </div>
   </div>
 </div>

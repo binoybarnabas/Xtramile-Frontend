@@ -121,4 +121,12 @@ export class ManagerTravelRequestsService {
     return this.http.get(`http://localhost:5190/api/availableoptions/gettextoptions/$${requestId}`)
   }
 
+  getWaitingOrSelectedRequests(managerId: number, primarystatusCode: string, secondaryStatusCode: string, offset: number,pageSize: number): Observable<any> {
+    const url = `  http://localhost:5190/api/reportingmanager/travelRequests/waiting_or_selected/${managerId}/${primarystatusCode}/${secondaryStatusCode}`;
+    const params = new HttpParams().set('offset', offset)
+      .set('pageSize', pageSize);
+    return this.http.get<any>(url,{params});
+  }
+
+
 }

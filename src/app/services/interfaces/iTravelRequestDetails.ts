@@ -78,6 +78,10 @@ export interface TravelRequestDetailViewModel {
     employeeName: string;
     passportFileUrl: string;
     travelAuthMailFileUrl: string;
+    date : string;
+    status: string
+    employeeNameAndEmail : string
+
 }
 
 
