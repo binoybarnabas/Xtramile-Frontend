@@ -587,7 +587,8 @@ export class TravelRequestFormComponent {
     formData.append("travelModeId", String(this.selectedTravelMode));
     formData.append("tripPurpose", this.selectedTravelPurpose);
     formData.append("departureDate", this.datePipe.transform(this.travelRequestForm.get('departureDate')?.value, "yyyy-MM-dd") || '');
-    formData.append("returnDate", this.datePipe.transform(this.travelRequestForm.get('returnDate')?.value, "yyyy-MM-dd") || '');
+    if(this.selectedTripType === 'round_trip')
+      formData.append("returnDate", this.datePipe.transform(this.travelRequestForm.get('returnDate')?.value, "yyyy-MM-dd") || '');
     formData.append("sourceCity", this.selectedOrigin);
     formData.append("destinationCity", this.selectedDestination);
     formData.append("sourceCountry", this.travelRequestForm.get('sourceCountry')?.value);

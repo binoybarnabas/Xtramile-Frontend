@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { filter } from 'd3';
+import { blob, filter } from 'd3';
 
 @Component({
   selector: 'app-tabbed-data-table',
@@ -21,7 +22,7 @@ export class TabbedDataTableComponent {
 activeTabIndex: number = 0; // Initially set to show the first tab
 searchInputValue: string = ''
 
-constructor(){
+constructor(private http: HttpClient){
   this.isSearchFilterNeeded = 'yes';
 }
 
@@ -49,5 +50,26 @@ toggleFilter(filterId:string){
 
 onSearch(){
   this.search.emit(this.searchInputValue);
+}
+
+onDownloadFileClick(url: string, docType: string, employeeName: string){
+  this.http.get(url, {responseType: 'blob'}).subscribe({
+    next: (data: Blob) =>{
+      const blob = new Blob([data], {type: data.type});
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = `${employeeName}_${docType}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(link.href);      
+    },
+    error: (error : Error) => {
+      console.error("Error Downloading File");
+      console.error(error.message);
+    },
+    complete: () => {
+    }
+  })
 }
 }

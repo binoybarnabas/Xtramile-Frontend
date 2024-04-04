@@ -56,7 +56,7 @@ export class ManagerTravelRequestsService {
    }
    
    getManagerOngoingTravelRequest(managerId: number): Observable<any> {
-    return this.http.get(`http://localhost:5190/api/reportingmanager/ongoing/travel/request/${managerId}`);
+    return this.http.get(`http://localhost:5190/api/reportingmanager/travel/request/ongoing/${managerId}`);
   }
 
   GetTravelRequest(requestId:number):Observable<any>{

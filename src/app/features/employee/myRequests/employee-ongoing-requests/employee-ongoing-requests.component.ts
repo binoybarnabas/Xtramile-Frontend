@@ -14,7 +14,11 @@ export class EmployeeOngoingRequestsComponent {
   incomingRequestdata: any[] = [];
 
   constructor(private apiservice: RequestService) { }
-  employeeId: number = 3;
+
+  userData = localStorage.getItem('userData');
+  parsedUserData = this.userData ? JSON.parse(this.userData) : ''
+
+  employeeId: number = this.parsedUserData.empId;
 
   pageHeading: string = 'Ongoing Travel'
 
