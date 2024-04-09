@@ -16,6 +16,7 @@ export class ManagerForwadedRequestsComponent {
   waitingRequests = []
   selectedRequests = []
   pageHeading: string = 'Forwarded Travel Requests'
+  activeTabIndex: number = 0;
 
   managerId: number; // to check the data
   userData: UserData
@@ -40,12 +41,11 @@ export class ManagerForwadedRequestsComponent {
   ngOnInit() {
     this.getManagerForwardRequests();
     this.getWaitingRequests();
-
+    this.getSelectedRequests();
   }
 
   initializeTabs(forwardedRequests : TravelRequestDetailViewModel[], waitingOptions : WaitingOrSelectedRequests[], selectedOptions : WaitingOrSelectedRequests[]) {
     if (forwardedRequests && waitingOptions && selectedOptions) {
-      console.log(forwardedRequests);
       this.tabs = [
         {
           name: 'Forwarded',
@@ -84,10 +84,8 @@ export class ManagerForwadedRequestsComponent {
   }
 
   getManagerForwardRequests() {
-    console.log("inside get forward req")
     this.apiService.getManagerForwardedRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
       next: (data: any) => {
-        console.log(data.employeeRequest);
         this.travelRequest = data.employeeRequest.map((request: any) => {
           return {
             ...request,
@@ -96,9 +94,6 @@ export class ManagerForwadedRequestsComponent {
         });
         
         this.totalItems = data.totalCount;
-
-        console.log(data);
-        console.log(this.travelRequest);
       },
       error: (error: Error) => {
         console.error('Error:', error);
@@ -133,7 +128,7 @@ export class ManagerForwadedRequestsComponent {
   getSelectedRequests(){
     this.apiService.getWaitingOrSelectedRequests(this.managerId,'PE','SD',this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.waitingRequests = data.travelRequest.map((request: any) => {
+        this.selectedRequests = data.travelRequest.map((request: any) => {
           return {
             ...request,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
@@ -157,13 +152,16 @@ export class ManagerForwadedRequestsComponent {
     this.getManagerForwardRequests();
   }
   // navigation 
-  selectedRow: any;
   requestId!:number;
   handleSelectedRow(row: any){
-    this.selectedRow = row;
-    console.log(this.selectedRow.requestId)
-    this.requestId = this.selectedRow.requestId
-    const queryParams = { requestId: this.requestId }
-    this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: queryParams });
+    if((this.tabs[this.activeTabIndex].name === 'Waiting') || (this.tabs[this.activeTabIndex].name === 'Selected')){
+      this.requestId = row[0];
+      const queryParams = {requestId: this.requestId}
+      this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: queryParams});
+    }
   } 
+
+  handleTabChange(activeTabIndex : number){
+    this.activeTabIndex = activeTabIndex;
+  }
 }

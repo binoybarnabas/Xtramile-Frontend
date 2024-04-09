@@ -17,6 +17,8 @@ export class TabbedDataTableComponent {
 
 @Output() filterToggled: EventEmitter<any> = new EventEmitter<any>();
 @Output() search: EventEmitter<any> = new EventEmitter<any>();
+@Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
+@Output() tabChange: EventEmitter<any> = new EventEmitter<any>();
 
 
 activeTabIndex: number = 0; // Initially set to show the first tab
@@ -71,5 +73,14 @@ onDownloadFileClick(url: string, docType: string, employeeName: string){
     complete: () => {
     }
   })
+}
+
+onRowClick(row: any){
+  this.rowClick.emit(row);
+}
+
+onTabChange(index: number){
+  this.activeTabIndex = index;
+  this.tabChange.emit(this.activeTabIndex);
 }
 }

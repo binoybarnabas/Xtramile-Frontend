@@ -206,7 +206,7 @@ onFilterToggled(filterId : string){
       this.tabs = [
         {
           name: 'Visa',
-          headings: ['Visa Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Action'],
+          headings: ['Visa Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Actions'],
           entries: visa.map((item) => [
             item.identificationNumber,
             item.uploadedBy,
@@ -218,7 +218,7 @@ onFilterToggled(filterId : string){
         },
         {
           name: 'Passport',
-          headings: ['Passport Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Action'],
+          headings: ['Passport Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Actions'],
           entries: passport.map((item) => [
             item.identificationNumber,
             item.uploadedBy,
@@ -230,7 +230,7 @@ onFilterToggled(filterId : string){
         },
         {
           name: 'ID Card',
-          headings: ['ID Number', 'Uploaded By', 'Issued Country', 'Action' ],
+          headings: ['ID Number', 'Uploaded By', 'Issued Country', 'Actions' ],
           entries: idCard.map((item) => [
             item.identificationNumber,
             item.uploadedBy,
