@@ -17,6 +17,7 @@ import { cities } from 'src/app/services/commonAPIServices/cities';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { TextEditorComponent } from 'src/app/components/ui/text-editor/text-editor.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -58,6 +59,9 @@ export class NewTravelRequestComponent {
 
   travelOptionsData: TravelOptionDetails[] = [];
 
+  //to identify if its travel admin close request screen
+  isCloseVisible: boolean =false;
+
 
   cities = cities;//Fetch Data From Any External API
   sourceFilteredCities: any[] = []; // Separate filtered list for source field
@@ -85,7 +89,8 @@ export class NewTravelRequestComponent {
   leftSectionNavItems: string[] = [];
   currentLoggedInUserRole: string;
 
-
+  private isFileSubscription!: Subscription;
+  
   travelRequestFormSubmitFunction: () => void = this.onEmployeeTravelRequestFormSubmit.bind(this);
 
   constructor(private sideNavBarService: SideNavBarService,
@@ -229,7 +234,6 @@ export class NewTravelRequestComponent {
       complete: () => { console.log("get employee by id is done") }
     });
 
-
     //get an employee request based on an request Id
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
@@ -242,8 +246,25 @@ export class NewTravelRequestComponent {
           // Getting the employee profile info
 
           this.getTravelOptionsByReqId(data.requestId)
-
+          this.isFileSubscription = this.commonApiService.isFile$.subscribe(isFile => {
+            if (isFile) {
+              this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId);
+            }
+          });
           console.log(data)
+
+          //if logged in user is travel admin and request status is ongoing, enable the close button
+          if(this.userData.role =='Manager' && this.userData.department == 'TA' ){
+            this.requestService.getStatusName(requestId).subscribe(({
+              next: (data) => {
+                console.log("TA")
+                if(data=='Ongoing'){
+                  this.isCloseVisible=true;
+                }
+              }
+            })
+            );
+          }
 
           if (this.currentLoggedInUserRole != 'employee') {
 
@@ -383,10 +404,7 @@ export class NewTravelRequestComponent {
 
     this.subscribeToTripTypeChanges();
 
-
-
     //end of ngOnInit()
-
   }
 
 
@@ -558,7 +576,7 @@ export class NewTravelRequestComponent {
 
     const requestStatus: RequestStatus = {
       requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
-      empId: 10,     // Assign the employee ID
+      empId: this.empId,     // Assign the employee ID
       primaryStatusId: 2, // Assign the primary status ID
       date: new Date(),  // Assign the current date
       secondaryStatusId: 10 // Assign the secondary status ID
@@ -631,13 +649,13 @@ export class NewTravelRequestComponent {
  
  
     this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
-    this.bsModalRef.content.travelOptionAdded.subscribe(() => {
-      // Call the method to fetch travel options
-      console.log('where is')
-      this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId);
-    });
+    this.bsModalRef.content.onClose.subscribe((result: any) => {
+      // Handle the result from the modal if needed
+      console.log('Modal result:', result);
+ 
       // You can perform actions with the result data here
-  }
+  })
+}
 
   openRejectionReasonModal() {
     const initialState = {
@@ -651,7 +669,6 @@ export class NewTravelRequestComponent {
       // You can perform actions with the result data here
     });
   }
-
 
   filterCities(event: any, field: string): void {
     const value = event.target.value;
@@ -705,8 +722,6 @@ export class NewTravelRequestComponent {
   }
 
 
-
-
   subscribeToOriginAndDestinationChanges() {
     const sourceCityControl = this.travelRequestForm.get('sourceCity');
     const destinationCityControl = this.travelRequestForm.get('destinationCity');
@@ -753,11 +768,6 @@ export class NewTravelRequestComponent {
   }
 
 
-
-
-
-
-
   subscribeToTripTypeChanges() {
 
     const tripTypeControl = this.travelRequestForm.get('tripType');
@@ -798,6 +808,7 @@ export class NewTravelRequestComponent {
 
   //Get Travel Options By Req Id
   getTravelOptionsByReqId(reqId: number) {
+
     this.requestService.getTravelOptionsByReqId(reqId).subscribe({
       next: (data) => {
 
@@ -816,6 +827,40 @@ export class NewTravelRequestComponent {
         console.log("Completed");
       }
     });
+  }
+
+
+  onTravelAdminRequestClose() {
+    if(confirm("Do you want to close the request")){
+      const requestStatus: RequestStatus = {
+        requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
+        empId: this.empId,     // Assign the employee ID
+        primaryStatusId: 3, // Assign the primary status ID
+        date: new Date(),  // Assign the current date
+        secondaryStatusId: 10 // Assign the secondary status ID
+  
+      };
+  
+      this.commonApiService.updateRequestStatus(requestStatus).subscribe({
+        next: (data) => {
+          console.log(data);
+          //Redirect to another page on submit click
+          this.router.navigate(['/traveladmin/closed']);
+  
+        },
+        error: (error: Error) => {
+          console.log("Error in posting request status");
+          console.log(error.message);
+        },
+        complete: () => {
+          console.log("Posting Request Status Closed");
+          // alert("Posting Request Status Complete");
+          this.toastService.showToast("Request closed")
+        }
+      });
+
+    }
+
   }
 
   //Deletion of Options
@@ -841,6 +886,7 @@ export class NewTravelRequestComponent {
               console.log("Selected options deleted successfully.");
               // Clear the selectedOptionIds array
               this.selectedOptionIds = [];
+              this.commonApiService.setIsFile(true);
           },
           error: (error: Error) => {
               console.log("Error deleting selected options: " + error.message);

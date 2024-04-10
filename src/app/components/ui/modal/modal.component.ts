@@ -31,8 +31,7 @@ export class ModalComponent {
 
   travelOptionForm!: FormGroup;
 
-  constructor(public bsModalRef: BsModalRef, private travelAdminRequestService: TravelAdminTravelRequestsService, private toastService: CustomToastService
-  ) {
+  constructor(public bsModalRef: BsModalRef, private travelAdminRequestService: TravelAdminTravelRequestsService, private toastService: CustomToastService, private commonService:CommonAPIService) {
 
   }
 
@@ -47,7 +46,7 @@ export class ModalComponent {
 
     });
 
-
+    this.commonService.setIsFile(false);
   }
 
   closeModal() {
@@ -114,7 +113,9 @@ export class ModalComponent {
       next: (response) => {
         console.log(response);
         // alert("Travel Option Added!");
+        this.commonService.setIsFile(true);
         this.closeModal();
+        
       },
       error: (error: Error) => {
         alert("Error has occurred" + error.message);

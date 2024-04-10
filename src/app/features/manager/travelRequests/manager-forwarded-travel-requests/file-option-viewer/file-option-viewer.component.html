@@ -67,7 +67,7 @@
       </ng-container>
   </div>
   </ng-template>  
-  <div class="text-center mt-5" *ngIf="!buttonActivate && receveingOptionId != null && travelOptionsData.length != 0">
+  <div class="text-center mt-5" *ngIf="!buttonActivate && receveingOptionId != null && travelOptionsData.length != 0" (click)="onTravelAdminConfirm()">
     <app-change-status-button
       [name]="name_ta"
       [empId]="empId"

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Toast } from 'ngx-toastr';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { UserData } from 'src/app/services/interfaces/iuserData';
@@ -166,5 +167,10 @@ export class FileOptionViewerComponent {
 
   resetSelection() {
     this.selectedOption = null;
+  }
+
+  onTravelAdminConfirm(){
+    this.toastService.showToast("Confirmation sent successfully.")
+    this.router.navigate(['/traveladmin/approved_requests']);
   }
 }

@@ -319,23 +319,20 @@
                       </div>
                   </div>
               </ng-container>
-              <button (click)="deleteSelectedOptions()">Delete Selected Options</button>
-              <div  (click)="openAddOptionModal()" class="new_option_card">
-
+              <div (click)="openAddOptionModal()" class="new_option_card">
                 <div class="icon_container">
                   <span><i class="add_icon ri-sticky-note-add-line"></i></span>
                 </div>
                 <div class="text_container">
                       <span class="text">Add</span>
                 </div>
-            </div>
-       
-
+            </div> 
+            <button  class="delete_btn" (click)="deleteSelectedOptions()"><i class="ri-delete-bin-line"></i></button>
           </div>
   
           <div class="form_submit_container">
 
-                        <div class="reject_btn_container">
+                        <div class="reject_btn_container" *ngIf="!isCloseVisible">
                             <button type="button" class="reject_btn"> Reject</button>
                         </div>
 
@@ -346,12 +343,21 @@
               >
                 Back
               </button>
-              <input
+              <input *ngIf="!isCloseVisible"
                 (click)="onTravelAdminOptionsSend()"
                 class="submit_btn"
                 type="button"
                 Value="Send"
               />
+
+              <!-- if the request is ongoing enable close -->
+                <input *ngIf="isCloseVisible"
+              (click)="onTravelAdminRequestClose()"
+              class="submit_btn"
+              type="button"
+              Value="Close"
+              />
+
             </div>
           </div>
 

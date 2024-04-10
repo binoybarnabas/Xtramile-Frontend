@@ -125,8 +125,9 @@
     font-weight: var(--active-font-weight);
 }
 
-
-
+.main_container .header_section .filter_and_search_container .filter_container .filter_card.inactive{
+    display: none;
+}
 
 .main_container .body_section{
     background-color: var(--card-bg-color);

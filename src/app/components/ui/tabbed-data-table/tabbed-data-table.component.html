@@ -20,20 +20,31 @@
         <div class="icon_container">
           <i class="search_icon ri-search-2-line"></i>
         </div>
-        <input class="text_input" type="text" placeholder="search" />
+        <input
+          class="text_input"
+          type="text"
+          placeholder="Search Employee Name"
+          (input)="onSearch()"
+          [(ngModel)]="searchInputValue"
+        />
       </div>
 
       <div class="filter_container">
-        <ng-container *ngFor="let item of filters">
-          <div
-            (click)="toggleFilter(item.filterId)"
-            [ngClass]="
-              item.isActive === 'yes' ? 'filter_card active' : 'filter_card'
-            "
-          >
-            <span class="filter_text">{{ item.filterName }}</span>
-          </div>
+        <ng-container *ngIf="activeTabIndex === 2; else displayFilter">
+          <div ngClass="filter_card inactive"></div>
         </ng-container>
+        <ng-template #displayFilter>
+          <ng-container *ngFor="let item of filters">
+            <div
+              (click)="toggleFilter(item.filterId)"
+              [ngClass]="
+                item.isActive === 'yes' ? 'filter_card active' : 'filter_card'
+              "
+            >
+              <span class="filter_text">{{ item.filterName }}</span>
+            </div>
+          </ng-container>
+        </ng-template>
       </div>
     </div>
   </div>
@@ -43,37 +54,39 @@
       <table *ngIf="activeTabIndex === i" class="table_main">
         <thead class="table_heading">
           <tr class="heading_row">
-            <th *ngFor="let heading of tab.headings; let columnIndex = index">
-              <ng-container *ngIf="heading !== 'Action'; else actionHeader">
-                {{ heading }}
-              </ng-container>
-              <ng-template #actionHeader>
-                <span> Action </span>
-              </ng-template>
+            <th *ngFor="let heading of tab.headings">
+              {{ heading }}
             </th>
           </tr>
         </thead>
 
         <tbody class="table_body">
-          <tr *ngFor="let row of tab.entries" class="body_row">
-            <td
-              *ngFor="let entry of row; let columnIndex = index"
-              class="body_col_item"
-            >
-              <ng-container
-                *ngIf="columnIndex !== tab.headings.length - 1; else actionCell"
+          <ng-container *ngIf="tab.entries.length > 0; else noContent">
+            <tr *ngFor="let row of tab.entries" class="body_row">
+              <td
+                *ngFor="let entry of row; let i = index"
+                class="body_col_item"
               >
-                {{ entry }}
-              </ng-container>
-              <ng-template #actionCell>
-                <a *ngIf="entry" href="{{ entry }}" target="_blank">
-                  <i class="ri-eye-line"></i>
-                  <!-- Assuming you have an eye icon from the desired icon library -->
-                </a>
-                <span *ngIf="!entry">No document</span>
-              </ng-template>
-            </td>
-          </tr>
+                <ng-container
+                  *ngIf="tab.headings[i] !== 'Action'; else actionCell"
+                >
+                  {{ entry }}
+                </ng-container>
+                <ng-template #actionCell>
+                  <a
+                    class="ri-eye-line"
+                    *ngIf="entry"
+                    href="{{ entry }}"
+                    target="_blank"
+                  ></a>
+                  <span *ngIf="!entry">No document</span>
+                </ng-template>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-template #noContent>
+            <p>No Data Available</p>
+          </ng-template>
         </tbody>
       </table>
     </div>

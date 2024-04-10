@@ -131,6 +131,6 @@ export class RequestService {
 
   deleteOptions(optionIds: number[]): Observable<any> {
     console.log(optionIds)
-    return this.http.post<any>('api/delete-options', optionIds);
+    return this.http.delete<any>('http://localhost:5190/api/availableoptions/deleteTravelOptions', {body: optionIds});
   }
 }
