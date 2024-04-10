@@ -18,10 +18,9 @@ export class CommonAPIService {
   userData?: UserData
 
   currentLoggedInUserRole: string;
-  
+
   private isFileSubject = new BehaviorSubject<boolean>(false);
   public isFile$ = this.isFileSubject.asObservable();
-
   constructor(private http: HttpClient, private toastService: CustomToastService) {
 
     //Getting the current Loggedin user based on session value

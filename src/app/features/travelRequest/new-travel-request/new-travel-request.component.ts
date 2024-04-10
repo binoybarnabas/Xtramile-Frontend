@@ -17,6 +17,7 @@ import { cities } from 'src/app/services/commonAPIServices/cities';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { TextEditorComponent } from 'src/app/components/ui/text-editor/text-editor.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -88,7 +89,8 @@ export class NewTravelRequestComponent {
   leftSectionNavItems: string[] = [];
   currentLoggedInUserRole: string;
 
-
+  private isFileSubscription!: Subscription;
+  
   travelRequestFormSubmitFunction: () => void = this.onEmployeeTravelRequestFormSubmit.bind(this);
 
   constructor(private sideNavBarService: SideNavBarService,
@@ -100,6 +102,7 @@ export class NewTravelRequestComponent {
     private modalService: BsModalService,
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService
+    
   ) {
 
     const storedUserData = localStorage.getItem('userData');
@@ -231,7 +234,6 @@ export class NewTravelRequestComponent {
       complete: () => { console.log("get employee by id is done") }
     });
 
-
     //get an employee request based on an request Id
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
@@ -244,7 +246,11 @@ export class NewTravelRequestComponent {
           // Getting the employee profile info
 
           this.getTravelOptionsByReqId(data.requestId)
-
+          this.isFileSubscription = this.commonApiService.isFile$.subscribe(isFile => {
+            if (isFile) {
+              this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId);
+            }
+          });
           console.log(data)
 
           //if logged in user is travel admin and request status is ongoing, enable the close button
@@ -398,10 +404,7 @@ export class NewTravelRequestComponent {
 
     this.subscribeToTripTypeChanges();
 
-
-
     //end of ngOnInit()
-
   }
 
 
@@ -651,8 +654,8 @@ export class NewTravelRequestComponent {
       console.log('Modal result:', result);
  
       // You can perform actions with the result data here
-    });
-  }
+  })
+}
 
   openRejectionReasonModal() {
     const initialState = {
@@ -666,8 +669,6 @@ export class NewTravelRequestComponent {
       // You can perform actions with the result data here
     });
   }
-
-
 
   filterCities(event: any, field: string): void {
     const value = event.target.value;
@@ -862,6 +863,36 @@ export class NewTravelRequestComponent {
 
   }
 
+  //Deletion of Options
+  selectedOptionIds: number[] = [];
 
+  toggleOptionSelection(item: any) {
+      const index = this.selectedOptionIds.indexOf(item.optionId);
+      if (index === -1) {
+          this.selectedOptionIds.push(item.optionId);
+      } else {
+          this.selectedOptionIds.splice(index, 1);
+      }
+  }
+  
+  isSelected(item: any): boolean {
+      return this.selectedOptionIds.includes(item.optionId);
+  }
+  
+  deleteSelectedOptions() {
+      // Call your service method to delete selected option IDs
+      this.requestService.deleteOptions(this.selectedOptionIds).subscribe({
+          next: () => {
+              console.log("Selected options deleted successfully.");
+              // Clear the selectedOptionIds array
+              this.selectedOptionIds = [];
+              this.commonApiService.setIsFile(true);
+          },
+          error: (error: Error) => {
+              console.log("Error deleting selected options: " + error.message);
+          }
+      });
+  }
+  
   //EOF 
 }

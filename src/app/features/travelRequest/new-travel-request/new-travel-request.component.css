@@ -427,7 +427,6 @@
     /* box-shadow: var(--normal-box-shadow); */
     color: var(--primary-orange-color);
     cursor: pointer;
-
 }
 
 .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .options_container .new_option_card:hover {
@@ -620,4 +619,24 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+/* delete */
+.option_card.selected {
+    border: 2px solid var( --second-color); /* Change border color to blue when selected */
+    box-shadow: 0 0 5px 0 var( --second-color); /* Add a blue shadow when selected */
+}
+
+.delete_btn{
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--card-bg-color);
+    background-color: var(--second-color);
+    border-radius: var(--small-border-radius);
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 10px; */
+    font-weight: var(--active-font-weight);
+    border: var(--normal-button-border-size) solid var(--second-color);
+    font-size: var(--span-font-size);
 }

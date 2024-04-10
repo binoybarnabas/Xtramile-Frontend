@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 // import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 
@@ -15,6 +16,7 @@ import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminSe
 
 export class ModalComponent {
 
+  @Output() travelOptionAdded: EventEmitter<void> = new EventEmitter<void>();
   private _requestId!: number;
 
   @Input()
@@ -27,11 +29,9 @@ export class ModalComponent {
     }
   }
 
-
   travelOptionForm!: FormGroup;
 
-  constructor(public bsModalRef: BsModalRef, private travelAdminRequestService: TravelAdminTravelRequestsService, private toastService: CustomToastService
-  ) {
+  constructor(public bsModalRef: BsModalRef, private travelAdminRequestService: TravelAdminTravelRequestsService, private toastService: CustomToastService, private commonService:CommonAPIService) {
 
   }
 
@@ -46,7 +46,7 @@ export class ModalComponent {
 
     });
 
-
+    this.commonService.setIsFile(false);
   }
 
   closeModal() {
@@ -113,7 +113,9 @@ export class ModalComponent {
       next: (response) => {
         console.log(response);
         // alert("Travel Option Added!");
+        this.commonService.setIsFile(true);
         this.closeModal();
+        
       },
       error: (error: Error) => {
         alert("Error has occurred" + error.message);
@@ -134,6 +136,4 @@ export class ModalComponent {
     console.log('Form Validity:', this.travelOptionForm.valid);
 
   }
-
-
 }

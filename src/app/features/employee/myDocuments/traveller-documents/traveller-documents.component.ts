@@ -56,6 +56,7 @@ export class TravellerDocumentsComponent {
     // });
 
     // this.getCountries();
+    this.commonService.setIsFile(false);
   }
 
 
