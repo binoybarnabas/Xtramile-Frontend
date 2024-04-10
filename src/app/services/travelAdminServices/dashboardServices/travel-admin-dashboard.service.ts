@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -27,5 +27,9 @@ export class TravelAdminDashboardService {
   // to get all requests on a monthly basis
   getAllRequestsMonthly():Observable<any>{
     return this.http.get(this.apiURL+`/traveladmin/requestsbymonth`)
+  }
+  
+  getAllTravelRequest(primaryCode:string,secondaryCode:string):Observable<any>{
+    return this.http.get(this.apiURL+`/traveladmin/requestsView/${primaryCode}/${secondaryCode}?pageSize=10&pageIndex=1`)
   }
 }
