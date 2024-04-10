@@ -1,9 +1,10 @@
 <div class="main_container">
   <div class="header_section">
     <div class="tab_container">
-      <ng-container *ngFor="let tab of tabs; let i = index">
+      <ng-container
+        *ngFor="let tab of tabs; let i = index">
         <div
-          (click)="activeTabIndex = i"
+          (click)="onTabChange(i)"
           class="tab_card"
           [class.active]="activeTabIndex === i"
         >
@@ -62,13 +63,17 @@
 
         <ng-container *ngIf="tab.entries.length > 0; else noContent">
           <tbody class="table_body">
-            <tr *ngFor="let row of tab.entries" class="body_row">
+            <tr
+              *ngFor="let row of tab.entries"
+              class="body_row"
+              (click)="onRowClick(row)"
+            >
               <td
                 *ngFor="let entry of row; let i = index"
                 class="body_col_item"
               >
                 <ng-container
-                  *ngIf="tab.headings[i] !== 'Action'; else actionCell"
+                  *ngIf="tab.headings[i] !== 'Actions'; else actionCell"
                 >
                   {{ entry }}
                 </ng-container>
