@@ -154,7 +154,7 @@ export class ManagerForwadedRequestsComponent {
   // navigation 
   requestId!:number;
   handleSelectedRow(row: any){
-    if((this.tabs[this.activeTabIndex].name === 'Waiting') || (this.tabs[this.activeTabIndex].name === 'Selected')){
+    if(this.activeTabIndex === 1 || this.activeTabIndex === 2){
       this.requestId = row[0];
       const queryParams = {requestId: this.requestId}
       this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: queryParams});
