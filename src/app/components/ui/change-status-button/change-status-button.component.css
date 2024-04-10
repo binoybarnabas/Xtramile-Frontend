@@ -1,0 +1,12 @@
+.main_btn{
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--card-bg-color);
+    border: var(--normal-button-border-size) solid var(--second-color);
+    border-radius: var(--small-border-radius);
+    background-color: var(--third-color);
+    justify-content: center;
+    align-items: center;
+    font-weight: var(--active-font-weight);
+    font-size: var(--span-font-size);
+}

@@ -22,6 +22,14 @@ export class TraveladminViewTravelDocumentsComponent {
   validPassportDocuments!: TravelDocuments[];
   validIdCardDocuments!: TravelDocuments[];
 
+  //Initialize this tabs array
+  tabs: any = [];
+  //initialize this filter array as per requirements
+  //filterId should be unique
+  //set the isActive value to 'yes' if a filter needs to enabled by default
+  filters = [{'filterId':'1','filterName':'Show Expired Only','isActive':'no'},
+           {'filterId':'2','filterName':'Show Valid Only','isActive':'no'}];
+           
   constructor(private documentService: DocumentsService,
     private datepipe: DatePipe
     ){
@@ -169,11 +177,7 @@ export class TraveladminViewTravelDocumentsComponent {
   }
 
 
-//initialize this filter array as per requirements
-//filterId should be unique
-//set the isActive value to 'yes' if a filter needs to enabled by default
-filters = [{'filterId':'1','filterName':'Show Expired Only','isActive':'no'},
-           {'filterId':'2','filterName':'Show Valid Only','isActive':'no'}];
+
 
 onFilterToggled(filterId : string){
   if(this.tabs.name === 'ID Cards')
@@ -202,7 +206,7 @@ onFilterToggled(filterId : string){
       this.tabs = [
         {
           name: 'Visa',
-          headings: ['Visa Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Action'],
+          headings: ['Visa Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Actions'],
           entries: visa.map((item) => [
             item.identificationNumber,
             item.uploadedBy,
@@ -213,8 +217,8 @@ onFilterToggled(filterId : string){
           ])
         },
         {
-          name: 'Passports',
-          headings: ['Passport Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Action'],
+          name: 'Passport',
+          headings: ['Passport Number', 'Uploaded By', 'Issued Country', 'Expiry Date', 'Remaining Days', 'Actions'],
           entries: passport.map((item) => [
             item.identificationNumber,
             item.uploadedBy,
@@ -225,8 +229,8 @@ onFilterToggled(filterId : string){
           ])
         },
         {
-          name: 'ID Cards',
-          headings: ['ID Number', 'Uploaded By', 'Issued Country', 'Action' ],
+          name: 'ID Card',
+          headings: ['ID Number', 'Uploaded By', 'Issued Country', 'Actions' ],
           entries: idCard.map((item) => [
             item.identificationNumber,
             item.uploadedBy,
@@ -237,8 +241,6 @@ onFilterToggled(filterId : string){
       ];
     }
   }
-//Initialize this tabs array
-tabs: any = [];
 
 getRemainingDaysMessage(remainingDays: number): string {
   if(remainingDays > 0){

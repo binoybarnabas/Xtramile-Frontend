@@ -1,9 +1,10 @@
 <div class="main_container">
   <div class="header_section">
     <div class="tab_container">
-      <ng-container *ngFor="let tab of tabs; let i = index">
+      <ng-container
+        *ngFor="let tab of tabs; let i = index">
         <div
-          (click)="activeTabIndex = i"
+          (click)="onTabChange(i)"
           class="tab_card"
           [class.active]="activeTabIndex === i"
         >
@@ -60,34 +61,48 @@
           </tr>
         </thead>
 
-        <tbody class="table_body">
-          <ng-container *ngIf="tab.entries.length > 0; else noContent">
-            <tr *ngFor="let row of tab.entries" class="body_row">
+        <ng-container *ngIf="tab.entries.length > 0; else noContent">
+          <tbody class="table_body">
+            <tr
+              *ngFor="let row of tab.entries"
+              class="body_row"
+              (click)="onRowClick(row)"
+            >
               <td
                 *ngFor="let entry of row; let i = index"
                 class="body_col_item"
               >
                 <ng-container
-                  *ngIf="tab.headings[i] !== 'Action'; else actionCell"
+                  *ngIf="tab.headings[i] !== 'Actions'; else actionCell"
                 >
                   {{ entry }}
                 </ng-container>
                 <ng-template #actionCell>
-                  <a
-                    class="ri-eye-line"
-                    *ngIf="entry"
-                    href="{{ entry }}"
-                    target="_blank"
-                  ></a>
-                  <span *ngIf="!entry">No document</span>
+                  <div class="action_icons">
+                    <div class="view_icon">
+                      <a
+                        class="ri-eye-line"
+                        href="{{ entry }}"
+                        target="_blank"
+                      ></a>
+                    </div>
+                    <div class="download_icon">
+                      <a
+                        class="ri-download-line"
+                        (click)="onDownloadFileClick(entry, tab.name, row[1])"
+                      ></a>
+                    </div>
+                  </div>
                 </ng-template>
               </td>
             </tr>
-          </ng-container>
-          <ng-template #noContent>
-            <p>No Data Available</p>
-          </ng-template>
-        </tbody>
+          </tbody>
+        </ng-container>
+        <ng-template #noContent>
+          <div *ngIf="tab.entries.length === 0" class="no_record_container">
+            <app-empty-data></app-empty-data>
+          </div>
+        </ng-template>
       </table>
     </div>
   </div>

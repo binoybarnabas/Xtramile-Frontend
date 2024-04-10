@@ -11,6 +11,18 @@
     border-bottom: 3px solid var(--card-bg-color);
  }
 
+ .notification_container .no_data_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--form-label-font-size);
+    color: var(--ternary-text-color);
+    height: 100%;
+    background-color: var(--secondary-cyan-color);
+    border-radius: 5px;
+    color: var(--primary-cyan-color);
+ }
+
  .notification_container .notification_card {
      background-color: var(--secondary-cyan-color);
      padding: 10px;
