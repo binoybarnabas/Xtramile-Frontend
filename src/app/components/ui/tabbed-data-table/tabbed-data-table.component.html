@@ -24,20 +24,27 @@
           class="text_input"
           type="text"
           placeholder="Search Employee Name"
+          (input)="onSearch()"
+          [(ngModel)]="searchInputValue"
         />
       </div>
 
       <div class="filter_container">
-        <ng-container *ngFor="let item of filters">
-          <div
-            (click)="toggleFilter(item.filterId)"
-            [ngClass]="
-              item.isActive === 'yes' ? 'filter_card active' : 'filter_card'
-            "
-          >
-            <span class="filter_text">{{ item.filterName }}</span>
-          </div>
+        <ng-container *ngIf="activeTabIndex === 2; else displayFilter">
+          <div ngClass="filter_card inactive"></div>
         </ng-container>
+        <ng-template #displayFilter>
+          <ng-container *ngFor="let item of filters">
+            <div
+              (click)="toggleFilter(item.filterId)"
+              [ngClass]="
+                item.isActive === 'yes' ? 'filter_card active' : 'filter_card'
+              "
+            >
+              <span class="filter_text">{{ item.filterName }}</span>
+            </div>
+          </ng-container>
+        </ng-template>
       </div>
     </div>
   </div>
@@ -53,8 +60,8 @@
           </tr>
         </thead>
 
-        <tbody class="table_body">
-          <ng-container *ngIf="tab.entries.length > 0; else noContent">
+        <ng-container *ngIf="tab.entries.length > 0; else noContent">
+          <tbody class="table_body">
             <tr *ngFor="let row of tab.entries" class="body_row">
               <td
                 *ngFor="let entry of row; let i = index"
@@ -66,21 +73,31 @@
                   {{ entry }}
                 </ng-container>
                 <ng-template #actionCell>
-                  <a
-                    class="ri-eye-line"
-                    *ngIf="entry"
-                    href="{{ entry }}"
-                    target="_blank"
-                  ></a>
-                  <span *ngIf="!entry">No document</span>
+                  <div class="action_icons">
+                    <div class="view_icon">
+                      <a
+                        class="ri-eye-line"
+                        href="{{ entry }}"
+                        target="_blank"
+                      ></a>
+                    </div>
+                    <div class="download_icon">
+                      <a
+                        class="ri-download-line"
+                        (click)="onDownloadFileClick(entry, tab.name, row[1])"
+                      ></a>
+                    </div>
+                  </div>
                 </ng-template>
               </td>
             </tr>
-          </ng-container>
-          <ng-template #noContent>
-            <p>No Data Available</p>
-          </ng-template>
-        </tbody>
+          </tbody>
+        </ng-container>
+        <ng-template #noContent>
+          <div *ngIf="tab.entries.length === 0" class="no_record_container">
+            <app-empty-data></app-empty-data>
+          </div>
+        </ng-template>
       </table>
     </div>
   </div>

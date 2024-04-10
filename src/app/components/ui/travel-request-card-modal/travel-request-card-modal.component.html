@@ -1,5 +1,5 @@
 <div class="req_card_container">
-  <div class="req_card"  >
+  <div class="req_card">
     <div class="section_1 general_info">
       <!-- <span class="left_dot"></span> -->
 
@@ -121,10 +121,10 @@
     </div>
 
     <div class="section_3 action_section">
-
       <div class="see_more_btn">
-        <span class="btn_text"           (click)="navigateHandleUserSelection()"
-        >See More</span>
+        <span class="btn_text" (click)="navigateHandleUserSelection()"
+          >See More</span
+        >
       </div>
       <div class="approve_reject_btns">
         <div class="reject_btn">
@@ -132,17 +132,13 @@
           <!-- <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label">Withdraw</span> -->
           <!-- <span *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label">Reject</span> -->
         </div>
-  
-        <div
-          type="button"
-          class="approve_btn" (click)="onManagerForwardTravelRequestForm()"
-        >
+
+        <div type="button" class="approve_btn" (click)="onProceedButtonClick()">
           <span class="btn_label">Proceed</span>
           <!-- <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label">Edit</span> -->
           <!-- <span  *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label">Approve</span> -->
         </div>
       </div>
-
     </div>
   </div>
 </div>

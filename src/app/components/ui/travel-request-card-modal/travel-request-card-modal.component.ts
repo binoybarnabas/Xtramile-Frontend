@@ -12,7 +12,7 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
   templateUrl: './travel-request-card-modal.component.html',
   styleUrls: ['./travel-request-card-modal.component.css']
 })
-export class TravelRequestCardModalComponent {
+export class  TravelRequestCardModalComponent {
   private _requestId!: number;
   primaryStatus: string = 'Denied';
 
@@ -92,9 +92,24 @@ export class TravelRequestCardModalComponent {
         complete: () => {
           //this.toastr.success('Request approved!', 'Success');
           // this.toastService.showToast("Travel Request Approved!")
+          this.bsModalRef.hide();
         }
       }
     );
+  }
+
+  onProceedButtonClick(){
+    const userData = localStorage.getItem('userData')
+    if (userData) {
+      const userDataParsed = JSON.parse(userData)
+
+      if (userDataParsed.role == 'Manager' && userDataParsed.department == 'TA') {
+        this.navigateToAddOptions();
+      }
+      else if (userDataParsed.role == 'Manager') {
+        this.onManagerForwardTravelRequestForm();
+      }
+    }    
   }
 
 

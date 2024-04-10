@@ -69,11 +69,12 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!tripDetailsAvailable">
-    <div class="trip_card">
+
+  <div class="no_data_container" *ngIf="!tripDetailsAvailable">
+    <div class="no_trip_card">
       <div class="trip_image">
         <img
-          src="https://bmsastech.com/wp-content/uploads/2020/05/ContentWritingVector.png"
+          src="https://thumbs.dreamstime.com/b/no-data-search-not-found-concept-businessman-holding-magnifying-glass-empty-file-folder-277353524.jpg"
           alt="No Upcoming Trip Image"
           [ngStyle]="{ 'max-width.px': 200, 'max-height.px': 170 }"
         />
@@ -83,4 +84,5 @@
       </div>
     </div>
   </div>
+
 </div>
