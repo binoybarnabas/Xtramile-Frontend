@@ -1,60 +1,104 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TravelAdminDashboardService } from 'src/app/services/travelAdminServices/dashboardServices/travel-admin-dashboard.service';
+import { Observable } from 'rxjs';
+
+// Define a type for the entry in tabs
+type TabEntry = [string, string, string, string, string, string];
 
 @Component({
   selector: 'app-travel-admin-dashboard',
   templateUrl: './travel-admin-dashboard.component.html',
   styleUrls: ['./travel-admin-dashboard.component.css']
 })
-export class TravelAdminDashboardComponent {
+export class TravelAdminDashboardComponent implements OnInit {
 
+  request: string = '';
+  employeeId: string = ''; // Assuming you have an employeeId variable defined.
 
-  isSearchFilterNeededForDashboardTable:string = 'no';
+  isSearchFilterNeededForDashboardTable: string = 'no';
 
-//Initialize this tabs array with input values
-tabs = [
-  {
-    name: 'Incoming',
-    headings: ['REQ CODE', 'Requested By', 'From', 'To', 'Status', 'Remarks'],
-    entries: [
-      ['KZ00O1', 'Abhinav Nair', 'UK', 'USA',  'Pending', 'Needs approval'],
-      ['KLS002', 'Abhijit', 'Ireland', 'UK',  'Approved', 'Ready for processing'],
-      ['BCV008', 'Bivina MC', 'Dubai', 'KSA', 'Pending', 'Waiting for confirmation'],
-      ['DEF456', 'John Smith', 'Trivandrum', 'Canada', 'Approved', 'Proceeding with booking'],
-      ['GHI789', 'Jane Doe', 'Kochi', 'Australia',  'Pending', 'Additional details required'],
-   
-    ]
-  },
-  {
-    name: 'Waiting',
-    headings: ['REQ CODE', 'Requested By', 'From', 'To', 'Status', 'Remarks'],
-    entries: [
-      ['JKL012', 'Michael Brown', 'USA', 'UK', 'Pending', 'Awaiting confirmation'],
-      ['MNO345', 'Emily Davis', 'Canada', 'USA', 'Pending', 'Waiting for approval'],
-      ['PQR678', 'William Wilson', 'UK', 'Germany', 'Pending', 'Reviewing details'],
-      ['STU901', 'Sophia Johnson', 'Australia', 'Canada', 'Pending', 'Processing request'],
-      ['VWX234', 'James Smith', 'Germany', 'UK', 'Pending', 'Awaiting further instructions']
-    ]
-  },
-  {
-    name: 'Selected',
-    headings: ['REQ CODE', 'Requested By', 'From', 'To', 'Status', 'Remarks'],
-    entries: [
-      ['ABC123', 'Alex Johnson', 'Canada', 'USA', 'Selected', 'Confirmed booking'],
-      ['DEF456', 'Sarah Brown', 'Australia', 'UK', 'Selected', 'Flight details sent'],
-      ['GHI789', 'Mark Wilson', 'Germany', 'Canada', 'Selected', 'Hotel reservation completed']
-    ]
-  },
-  {
-    name: 'Ongoing',
-    headings: ['REQ CODE', 'Requested By', 'From', 'To', 'Status', 'Remarks'],
-    entries: [
-      ['XYZ567', 'Nicole Anderson', 'UK', 'Australia', 'In Progress', 'Processing documents'],
-      ['UVW890', 'Chris Evans', 'USA', 'Germany', 'In Progress', 'Preparing for travel'],
-      ['LMN345', 'Emma Watson', 'Canada', 'India', 'In Progress', 'Coordinating transportation']
-    ]
+  constructor(private service: TravelAdminDashboardService) { }
+
+  ngOnInit() {
+    this.fetchDataAndUpdateTabs(); 
   }
-];
 
+  tabs = [
+    {
+      name: 'Incoming',
+      headings: ['REQ CODE', 'Requested By', 'From', 'To', 'Status', 'Remarks'],
+      entries: [] as TabEntry[] // Explicitly typed as TabEntry[]
+    },
+    {
+      name: 'Waiting',
+      headings: ['REQ CODE', 'Requested By', 'From', 'To', 'Status', 'Remarks'],
+      entries: [] as TabEntry[] // Explicitly typed as TabEntry[]
+    },
+    {
+      name: 'Ongoing',
+      headings: ['REQ CODE','Requested By', 'From', 'To', 'Status', 'Remarks'],
+      entries: [] as TabEntry[] // Explicitly typed as TabEntry[]
+    },
+    {
+      name: 'Completed',
+      headings: ['REQ CODE', 'Requested By', 'From', 'To', 'Status', 'Remarks'],
+      entries: [] as TabEntry[] // Explicitly typed as TabEntry[]
+    }
+  ];
 
+fetchDataAndUpdateTabs() {
+  this.service.getAllTravelRequestDashboard().subscribe((data: any) => {
+    this.tabs[0].entries = [];
+    this.tabs[1].entries = [];
+    this.tabs[2].entries = [];
+    this.tabs[3].entries = [];
+    console.log('travel admin dashboard request',data)
+
+    data.incomingRequests.forEach((request: any) => {
+      this.tabs[0].entries.push([
+        request.requestId.toString(),
+        request.name,
+        request.sourceCity, 
+        request.destinationCity, 
+        'Incoming',
+        request.status
+      ] as TabEntry);
+    });
+    
+    data.waitingSelectedRequests.forEach((request: any) => {
+      var remarks=request.status==='Selected'?'Selected the option':'Selection pending';
+      this.tabs[1].entries.push([
+        request.requestId.toString(),
+        request.name,
+        request.sourceCity, 
+        request.destinationCity, 
+        request.status,
+        remarks
+      ] as TabEntry);
+    });
+
+    data.ongoingRequests.forEach((request: any) => {
+      this.tabs[2].entries.push([
+        request.requestId.toString(),
+        request.name,
+        request.sourceCity, 
+        request.destinationCity, 
+        'Ongoing',
+        'Currently on trip'
+      ] as TabEntry);
+    });
+
+    data.closedRequests.forEach((request: any) => {
+      this.tabs[3].entries.push([
+        request.requestId.toString(),
+        request.name,
+        request.sourceCity, 
+        request.destinationCity, 
+        'Closed',
+        'Trip Completed'
+      ] as TabEntry);
+    });
+});
+}
 
 }

@@ -38,7 +38,9 @@
         <div class="bottom_section">
           <div class="action_buttons">
             <div class="del_btn" type="button">
-              <span><i class="icon ri-delete-bin-7-line"></i></span>
+              <span (click)="onDeleteDocument(card.fileId)"
+                ><i class="icon ri-delete-bin-7-line"></i
+              ></span>
             </div>
 
             <div class="country_name">
@@ -47,7 +49,15 @@
             </div>
 
             <div class="download_btn" type="button">
-              <span><i class="icon ri-download-line"></i></span>
+              <span>
+                <a
+                  class="ri-download-line"
+                  (click)="
+                    onDownloadFileClick(card.documentURL, card.documentType)
+                  "
+                >
+                </a>
+              </span>
             </div>
           </div>
         </div>
