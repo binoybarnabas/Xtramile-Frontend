@@ -12,9 +12,9 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
   styleUrls: ['./manager-forwaded-requests.component.css']
 })
 export class ManagerForwadedRequestsComponent {
-  travelRequest = []
-  waitingRequests = []
-  selectedRequests = []
+  travelRequest!: TravelRequestDetailViewModel[];
+  waitingRequests!: WaitingOrSelectedRequests[]
+  selectedRequests!: WaitingOrSelectedRequests[]
   pageHeading: string = 'Forwarded Travel Requests'
   activeTabIndex: number = 0;
 
@@ -39,13 +39,11 @@ export class ManagerForwadedRequestsComponent {
   //Initialize this tabs array
   tabs: any = [];
   ngOnInit() {
-    this.getManagerForwardRequests();
-    this.getWaitingRequests();
-    this.getSelectedRequests();
+    this.handleTabChange(this.activeTabIndex);
   }
 
   initializeTabs(forwardedRequests : TravelRequestDetailViewModel[], waitingOptions : WaitingOrSelectedRequests[], selectedOptions : WaitingOrSelectedRequests[]) {
-    if (forwardedRequests && waitingOptions && selectedOptions) {
+    if(this.activeTabIndex === 0){
       this.tabs = [
         {
           name: 'Forwarded',
@@ -58,6 +56,14 @@ export class ManagerForwadedRequestsComponent {
             item.status
           ])
         },
+        // Placeholder objects for other tabs
+        { name: 'Waiting', headings: [], entries: [] },
+        { name: 'Selected', headings: [], entries: [] }
+    ];
+    }
+    else if(this.activeTabIndex === 1){
+      this.tabs = [
+        { name: 'Forwarded', headings: [], entries: [] },
         {
           name: 'Waiting',
           headings: ['RequestID', 'Employee', 'ProjectCode', 'Date'],
@@ -68,6 +74,13 @@ export class ManagerForwadedRequestsComponent {
             item.createdOn,
           ])
         },
+        { name: 'Selected', headings: [], entries: [] }
+    ];
+    }
+    else if(this.activeTabIndex === 2){
+      this.tabs = [
+        { name: 'Forwarded', headings: [], entries: [] },
+        { name: 'Waiting', headings: [], entries: [] },
         {
           name: 'Selected',
           headings: ['RequestID', 'Employee', 'ProjectCode', 'Date'],
@@ -79,8 +92,7 @@ export class ManagerForwadedRequestsComponent {
           ])
         }
       ];
-    }
-   
+    }   
   }
 
   getManagerForwardRequests() {
@@ -149,7 +161,12 @@ export class ManagerForwadedRequestsComponent {
   // handle page change event
   pageChanged(event: any): void {
     this.currentPage = event.page;
-    this.getManagerForwardRequests();
+    if(this.activeTabIndex === 0)
+      this.getManagerForwardRequests();
+    else if(this.activeTabIndex === 1)
+      this.getWaitingRequests();
+    else if(this.activeTabIndex === 2)
+      this.getSelectedRequests();
   }
   // navigation 
   requestId!:number;
@@ -162,6 +179,25 @@ export class ManagerForwadedRequestsComponent {
   } 
 
   handleTabChange(activeTabIndex : number){
+    this.currentPage = 1
     this.activeTabIndex = activeTabIndex;
+    if(this.activeTabIndex === 0){
+      if(!this.travelRequest)
+        this.getManagerForwardRequests();
+      else
+        this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests);     
+    }
+    else if(this.activeTabIndex === 1){
+      if(!this.waitingRequests)
+        this.getWaitingRequests();
+      else
+        this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests); 
+    }
+    else if(this.activeTabIndex === 2){
+      if(!this.selectedRequests)
+        this.getSelectedRequests();
+      else
+        this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests); 
+    }
   }
 }
