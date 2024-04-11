@@ -50,8 +50,12 @@
 
             <div class="download_btn" type="button">
               <span>
-                <a [href]="card.documentURL" target="_blank" download>
-                  <i class="icon ri-download-line"></i>
+                <a
+                  class="ri-download-line"
+                  (click)="
+                    onDownloadFileClick(card.documentURL, card.documentType)
+                  "
+                >
                 </a>
               </span>
             </div>

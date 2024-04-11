@@ -29,7 +29,7 @@ export class TravelAdminDashboardService {
     return this.http.get(this.apiURL+`/traveladmin/requestsbymonth`)
   }
   
-  getAllTravelRequest(primaryCode:string,secondaryCode:string):Observable<any>{
-    return this.http.get(this.apiURL+`/traveladmin/requestsView/${primaryCode}/${secondaryCode}?pageSize=10&pageIndex=1`)
+  getAllTravelRequestDashboard():Observable<any>{
+    return this.http.get(this.apiURL+`/traveladmin/dashboardRequests`)
   }
 }
