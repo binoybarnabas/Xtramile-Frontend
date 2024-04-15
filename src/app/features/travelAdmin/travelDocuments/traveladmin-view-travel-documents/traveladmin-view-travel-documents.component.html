@@ -7,3 +7,10 @@
   (search)="onSearch($event)"
   (tabChange)="onTabChange($event)"
 ></app-tabbed-data-table>
+
+<pagination
+  [itemsPerPage]="itemsPerPage"
+  [totalItems]="getTotalItems()"
+  [(ngModel)]="currentPage"
+  (pageChanged)="pageChanged($event)"
+></pagination>

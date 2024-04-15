@@ -28,7 +28,7 @@
 
   <pagination
     [itemsPerPage]="itemsPerPage"
-    [totalItems]="totalItems"
+    [totalItems]="totalItems[activeTabIndex]"
     [(ngModel)]="currentPage"
     (pageChanged)="pageChanged($event)"
   ></pagination>

@@ -21,7 +21,10 @@ export class ManagerForwadedRequestsComponent {
   managerId: number; // to check the data
   userData: UserData
   itemsPerPage = 10;
-  totalItems = 0;
+  forwardedTotalItems = 0;
+  waitingTotalItems = 0;
+  selectedTotalItems = 0
+  totalItems: number[] = [this.forwardedTotalItems,this.waitingTotalItems, this.selectedTotalItems]
   currentPage = 1;
   tableHeaders = ['RequestID', 'Employee', 'ProjectCode', 'Date', 'Status'];
   dataHeaders = ['requestId', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
@@ -105,7 +108,7 @@ export class ManagerForwadedRequestsComponent {
           };
         });
         
-        this.totalItems = data.totalCount;
+        this.forwardedTotalItems = data.totalCount;
       },
       error: (error: Error) => {
         console.error('Error:', error);
@@ -113,6 +116,7 @@ export class ManagerForwadedRequestsComponent {
       },
       complete: () => {
         this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests)
+        this.totalItems = [this.forwardedTotalItems, this.waitingTotalItems, this.selectedTotalItems]
       }
     });
   }
@@ -120,19 +124,20 @@ export class ManagerForwadedRequestsComponent {
   getWaitingRequests(){
     this.apiService.getWaitingOrSelectedRequests(this.managerId,'PE','WT',this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.waitingRequests = data.travelRequest.map((request: any) => {
+        this.waitingRequests = data.items.map((request: any) => {
           return {
             ...request,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
           };
         });
-        this.totalItems = data.totalCount;        
+        this.waitingTotalItems = data.totalCount;        
       },
       error: (error: Error) => {
         console.error('Error: ' + error.message);
       },
       complete: () => {
         this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests)
+        this.totalItems = [this.forwardedTotalItems, this.waitingTotalItems, this.selectedTotalItems]
       }
     })
   }
@@ -140,19 +145,20 @@ export class ManagerForwadedRequestsComponent {
   getSelectedRequests(){
     this.apiService.getWaitingOrSelectedRequests(this.managerId,'PE','SD',this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.selectedRequests = data.travelRequest.map((request: any) => {
+        this.selectedRequests = data.items.map((request: any) => {
           return {
             ...request,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
           };
         });
-        this.totalItems = data.totalCount;        
+        this.selectedTotalItems = data.totalCount;        
       },
       error: (error: Error) => {
         console.error('Error: ' + error.message);
       },
       complete: () => {
         this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests)
+        this.totalItems = [this.forwardedTotalItems, this.waitingTotalItems, this.selectedTotalItems]
       }
     })
   }
@@ -160,13 +166,12 @@ export class ManagerForwadedRequestsComponent {
 
   // handle page change event
   pageChanged(event: any): void {
-    this.currentPage = event.page;
-    if(this.activeTabIndex === 0)
-      this.getManagerForwardRequests();
-    else if(this.activeTabIndex === 1)
-      this.getWaitingRequests();
-    else if(this.activeTabIndex === 2)
-      this.getSelectedRequests();
+    this.currentPage = event.page
+    switch(this.activeTabIndex){
+      case 0: this.getManagerForwardRequests(); break;
+      case 1: this.getWaitingRequests(); break;
+      case 2: this.getSelectedRequests(); break; 
+    }
   }
   // navigation 
   requestId!:number;

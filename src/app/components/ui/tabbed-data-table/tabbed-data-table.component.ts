@@ -31,7 +31,6 @@ constructor(private http: HttpClient){
 //method to toggle filters
 //multiple items can be selected
 toggleFilter(filterId:string){
-  this.searchInputValue = '';  
   for(let i=0; i< this.filters.length; i++){
     if(this.filters[i].filterId !== filterId){
       if(this.filters[i].isActive === 'yes'){    
