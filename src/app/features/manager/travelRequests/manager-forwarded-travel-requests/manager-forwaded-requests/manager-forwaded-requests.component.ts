@@ -170,7 +170,7 @@ export class ManagerForwadedRequestsComponent {
     switch(this.activeTabIndex){
       case 0: this.getManagerForwardRequests(); break;
       case 1: this.getWaitingRequests(); break;
-      case 2: this.getSelectedRequests; break; 
+      case 2: this.getSelectedRequests(); break; 
     }
   }
   // navigation 
