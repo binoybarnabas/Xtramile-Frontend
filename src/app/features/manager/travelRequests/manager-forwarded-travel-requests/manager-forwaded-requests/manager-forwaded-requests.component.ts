@@ -124,13 +124,13 @@ export class ManagerForwadedRequestsComponent {
   getWaitingRequests(){
     this.apiService.getWaitingOrSelectedRequests(this.managerId,'PE','WT',this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.waitingRequests = data.travelRequest.map((request: any) => {
+        this.waitingRequests = data.items.map((request: any) => {
           return {
             ...request,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
           };
         });
-        this.waitingTotalItems = data.pageCount;        
+        this.waitingTotalItems = data.totalCount;        
       },
       error: (error: Error) => {
         console.error('Error: ' + error.message);
@@ -145,13 +145,13 @@ export class ManagerForwadedRequestsComponent {
   getSelectedRequests(){
     this.apiService.getWaitingOrSelectedRequests(this.managerId,'PE','SD',this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.selectedRequests = data.travelRequest.map((request: any) => {
+        this.selectedRequests = data.items.map((request: any) => {
           return {
             ...request,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
           };
         });
-        this.selectedTotalItems = data.pageCount;        
+        this.selectedTotalItems = data.totalCount;        
       },
       error: (error: Error) => {
         console.error('Error: ' + error.message);
