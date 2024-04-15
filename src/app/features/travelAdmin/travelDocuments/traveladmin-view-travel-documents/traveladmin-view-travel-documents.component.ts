@@ -14,6 +14,18 @@ export class TraveladminViewTravelDocumentsComponent {
 
   activeTabIndex: number = 0;
   filterId: number = 0;
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalVisas: number = 0;
+  totalPassPorts: number = 0;
+  totalIDs: number = 0;
+  totalExpiredVisas: number = 0;
+  totalValidVisas: number = 0;
+  totalExpiredPassports: number = 0;
+  totalValidPassports: number = 0;
+  totalItems: number[] = [this.totalVisas, this.totalPassPorts, this.totalIDs]
+  totalExpiredItems: number[] = [this.totalExpiredVisas,this.totalExpiredPassports, this.totalIDs]
+  totalValidItems: number[] = [this.totalValidVisas, this.totalValidPassports, this.totalIDs]
 
   visaDocuments!: TravelDocuments[];
   passportDocuments!: TravelDocuments[];
@@ -41,123 +53,137 @@ export class TraveladminViewTravelDocumentsComponent {
   }
 
   getAllVisas(){
-    this.documentService.getTravelDocumentByType('Visa').subscribe({
+    this.documentService.getTravelDocumentByType('Visa', this.currentPage, this.itemsPerPage).subscribe({
       next : (data) => {
-        data.forEach((doc) => {
+        data.items.forEach((doc: TravelDocuments) => {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.visaDocuments = data
+        this.visaDocuments = data.items
+        this.totalVisas = data.totalCount
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
         this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
+        this.totalItems = [this.totalVisas, this.totalPassPorts, this.totalIDs];
       }
     })
   }
 
   getAllPassports(){
-    this.documentService.getTravelDocumentByType('Passport').subscribe({
+    this.documentService.getTravelDocumentByType('Passport', this.currentPage, this.itemsPerPage).subscribe({
       next : (data) => {
-        data.forEach((doc) => {
+        data.items.forEach((doc : TravelDocuments) => {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.passportDocuments = data;
+        this.passportDocuments = data.items;
+        this.totalPassPorts = data.totalCount;
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
         this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
+        this.totalItems = [this.totalVisas, this.totalPassPorts, this.totalIDs];
       }
     })
   }
 
   getAllIds(){
-    this.documentService.getTravelDocumentByType('ID Card').subscribe({
+    this.documentService.getTravelDocumentByType('ID Card', this.currentPage, this.itemsPerPage).subscribe({
       next : (data) => {
-        this.idCardDocuments = data;
+        this.idCardDocuments = data.items;
+        this.totalIDs = data.totalCount;
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
         this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
+        this.totalItems = [this.totalVisas, this.totalPassPorts, this.totalIDs];
       }
     })    
   }
 
   getExpiredVisas(){
-    this.documentService.getExpiredTravelDocumentByType('Visa').subscribe({
+    this.documentService.getExpiredTravelDocumentByType('Visa', this.currentPage, this.itemsPerPage).subscribe({
       next : (data) => {
-        data.forEach((doc) => {
+        data.items.forEach((doc: TravelDocuments) => {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.expiredVisaDocuments = data
+        this.expiredVisaDocuments = data.items
+        this.totalExpiredVisas = data.totalCount
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
         this.initializeTabs(this.expiredVisaDocuments,this.expiredPassportDocuments,this.idCardDocuments);
+        this.totalExpiredItems = [this.totalExpiredVisas,this.totalExpiredPassports, this.totalIDs];
       }
     })
   }
 
   getExpiredPassports(){
-    this.documentService.getExpiredTravelDocumentByType('Passport').subscribe({
+    this.documentService.getExpiredTravelDocumentByType('Passport', this.currentPage, this.itemsPerPage).subscribe({
       next : (data) => {
-        data.forEach((doc) => {
+        data.items.forEach((doc: TravelDocuments) => {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.expiredPassportDocuments = data;
+        this.expiredPassportDocuments = data.items;
+        this.totalExpiredPassports = data.totalCount;
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
         this.initializeTabs(this.expiredVisaDocuments,this.expiredPassportDocuments,this.idCardDocuments);
+        this.totalExpiredItems = [this.totalExpiredVisas,this.totalExpiredPassports, this.totalIDs];
       }
     })
   }
 
   getValidVisas(){
-    this.documentService.getValidTravelDocumentsByType('Visa').subscribe({
+    this.documentService.getValidTravelDocumentsByType('Visa', this.currentPage, this.itemsPerPage).subscribe({
       next : (data) => {
-        data.forEach((doc) => {
+        data.items.forEach((doc: TravelDocuments) => {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.validVisaDocuments = data
+        this.validVisaDocuments = data.items;
+        this.totalValidVisas = data.totalCount;
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
         this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);
+        this.totalValidItems = [this.totalValidVisas, this.totalValidPassports, this.totalIDs];
       }
     })
   }
 
   getValidPassports(){
-    this.documentService.getValidTravelDocumentsByType('Passport').subscribe({
+    this.documentService.getValidTravelDocumentsByType('Passport', this.currentPage, this.itemsPerPage).subscribe({
       next : (data) => {
-        data.forEach((doc) => {
+        data.items.forEach((doc: TravelDocuments) => {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.validPassportDocuments = data;
+        this.validPassportDocuments = data.items;
+        this.totalValidPassports = data.totalCount;
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
         this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);
+        this.totalValidItems = [this.totalValidVisas, this.totalValidPassports, this.totalIDs];
       }
     })
   }
@@ -188,20 +214,16 @@ export class TraveladminViewTravelDocumentsComponent {
     else if(filterId === 1){
       if(this.filters[filterId].isActive === 'yes'){
         if(this.activeTabIndex === 0){
-          if(!this.validVisaDocuments){
+          if(!this.validVisaDocuments)
             this.getValidVisas();
-          }
-          else{
+          else
             this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);            
-          }
         }
         else if(this.activeTabIndex === 1){
-          if(!this.validPassportDocuments){
+          if(!this.validPassportDocuments)
             this.getValidPassports();
-          }
-          else{
+          else
             this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);            
-          }
         }
       }
       else{
@@ -291,18 +313,14 @@ onSearch(employeeName: string) {
 
   // Filter documents based on selected filter criteria
   if(this.filterId === 0){
-    if(this.filters[this.filterId].isActive === 'yes'){
-      filteredVisaDocuments = this.expiredVisaDocuments;
-      filteredPassportDocuments = this.expiredPassportDocuments;
-      filteredIdCardDocuments = this.idCardDocuments;
-    }
+    filteredVisaDocuments = this.expiredVisaDocuments;
+    filteredPassportDocuments = this.expiredPassportDocuments;
+    filteredIdCardDocuments = this.idCardDocuments;
   }
   else if(this.filterId === 1){
-    if(this.filters[this.filterId].isActive === 'yes'){
-                filteredVisaDocuments = this.validVisaDocuments;
-          filteredPassportDocuments = this.validPassportDocuments;
-          filteredIdCardDocuments = this.idCardDocuments;
-    }
+    filteredVisaDocuments = this.validVisaDocuments;
+    filteredPassportDocuments = this.validPassportDocuments;
+    filteredIdCardDocuments = this.idCardDocuments;
   }
   // Perform search on filtered documents
   if (employeeName !== '') {
@@ -319,10 +337,10 @@ onSearch(employeeName: string) {
 }
 
   onTabChange(activeTabIndex: number){
+    this.currentPage = 1;
     this.activeTabIndex = activeTabIndex;
-    if(this.filters[this.filterId].isActive === 'yes'){
+    if(this.filters[this.filterId].isActive === 'yes')
       this.filters[this.filterId].isActive = 'no'
-    }
     if(this.activeTabIndex === 0){
       if(!this.visaDocuments)
         this.getAllVisas();
@@ -341,6 +359,50 @@ onSearch(employeeName: string) {
       else
         this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
     }
+  }
+
+  pageChanged(event: any): void {
+    this.currentPage = event.page
+    if(this.filterId === 0){
+      if(this.filters[this.filterId].isActive === 'yes'){
+        switch(this.activeTabIndex){
+          case 0: this.getExpiredVisas(); break;
+          case 1: this.getExpiredPassports(); break;
+          case 2: this.getAllIds(); break; 
+        }
+      }
+    }
+    else if(this.filterId === 1){
+      if(this.filters[this.filterId].isActive === 'yes'){
+        switch(this.activeTabIndex){
+          case 0: this.getValidVisas(); break;
+          case 1: this.getValidPassports(); break;
+          case 2: this.getAllIds(); break; 
+        }
+      }
+    }
+    else if(this.filters[this.filterId].isActive === 'no'){
+      switch(this.activeTabIndex){
+        case 0: this.getAllVisas(); break;
+        case 1: this.getAllPassports(); break;
+        case 2: this.getAllIds; break; 
+      }
+    }
+  }
+
+  getTotalItems(){
+    let totalItem = 0;
+    if(this.filters[this.filterId].isActive === 'yes'){
+      if(this.filterId === 0)
+        totalItem = this.totalExpiredItems[this.activeTabIndex];
+      else if(this.filterId === 1)
+        totalItem = this.totalValidItems[this.activeTabIndex];
+    }
+    else{
+      totalItem = this.totalItems[this.activeTabIndex];
+    }
+    console.log(totalItem);
+    return totalItem
   }
 
 }
