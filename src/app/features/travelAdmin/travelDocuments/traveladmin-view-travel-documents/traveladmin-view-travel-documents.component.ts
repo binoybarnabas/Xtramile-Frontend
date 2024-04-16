@@ -192,8 +192,8 @@ export class TraveladminViewTravelDocumentsComponent {
     this.filterId = filterId;
     if(this.tabs.name === 'ID Cards')
       return ;
-    if(filterId === 0){
-      if(this.filters[filterId].isActive === 'yes'){
+    if(this.filters[filterId].isActive === 'yes'){
+      if(filterId === 0){
         if(this.activeTabIndex === 0){
           if(!this.expiredVisaDocuments)
             this.getExpiredVisas();
@@ -205,14 +205,9 @@ export class TraveladminViewTravelDocumentsComponent {
             this.getExpiredPassports();
           else
             this.initializeTabs(this.expiredVisaDocuments,this.expiredPassportDocuments,this.idCardDocuments);            
-        }
+        }        
       }
-      else{
-        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
-      }
-    }
-    else if(filterId === 1){
-      if(this.filters[filterId].isActive === 'yes'){
+      else if(filterId === 1){
         if(this.activeTabIndex === 0){
           if(!this.validVisaDocuments)
             this.getValidVisas();
@@ -224,11 +219,11 @@ export class TraveladminViewTravelDocumentsComponent {
             this.getValidPassports();
           else
             this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);            
-        }
+        }        
       }
-      else{
-        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
-      }      
+    }
+    else{
+      this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
     }
   }
 
@@ -310,17 +305,18 @@ onSearch(employeeName: string) {
   let filteredVisaDocuments = this.visaDocuments;
   let filteredPassportDocuments = this.passportDocuments;
   let filteredIdCardDocuments = this.idCardDocuments;
-
-  // Filter documents based on selected filter criteria
-  if(this.filterId === 0){
-    filteredVisaDocuments = this.expiredVisaDocuments;
-    filteredPassportDocuments = this.expiredPassportDocuments;
-    filteredIdCardDocuments = this.idCardDocuments;
-  }
-  else if(this.filterId === 1){
-    filteredVisaDocuments = this.validVisaDocuments;
-    filteredPassportDocuments = this.validPassportDocuments;
-    filteredIdCardDocuments = this.idCardDocuments;
+  
+  if(this.filters[this.filterId].isActive === 'yes'){
+    if(this.filterId === 0){
+      filteredVisaDocuments = this.expiredVisaDocuments;
+      filteredPassportDocuments = this.expiredPassportDocuments;
+      filteredIdCardDocuments = this.idCardDocuments;      
+    }
+    else if(this.filterId === 1){
+      filteredVisaDocuments = this.validVisaDocuments;
+      filteredPassportDocuments = this.validPassportDocuments;
+      filteredIdCardDocuments = this.idCardDocuments;      
+    }
   }
   // Perform search on filtered documents
   if (employeeName !== '') {
@@ -363,25 +359,23 @@ onSearch(employeeName: string) {
 
   pageChanged(event: any): void {
     this.currentPage = event.page
-    if(this.filterId === 0){
-      if(this.filters[this.filterId].isActive === 'yes'){
+    if(this.filters[this.filterId].isActive === 'yes'){
+      if(this.filterId === 0){
         switch(this.activeTabIndex){
           case 0: this.getExpiredVisas(); break;
           case 1: this.getExpiredPassports(); break;
           case 2: this.getAllIds(); break; 
         }
       }
-    }
-    else if(this.filterId === 1){
-      if(this.filters[this.filterId].isActive === 'yes'){
+      else if(this.filterId === 1){
         switch(this.activeTabIndex){
           case 0: this.getValidVisas(); break;
           case 1: this.getValidPassports(); break;
           case 2: this.getAllIds(); break; 
         }
-      }
+      }      
     }
-    else if(this.filters[this.filterId].isActive === 'no'){
+    else{
       switch(this.activeTabIndex){
         case 0: this.getAllVisas(); break;
         case 1: this.getAllPassports(); break;
@@ -401,7 +395,6 @@ onSearch(employeeName: string) {
     else{
       totalItem = this.totalItems[this.activeTabIndex];
     }
-    console.log(totalItem);
     return totalItem
   }
 
