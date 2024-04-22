@@ -33,6 +33,11 @@
           <span class="title">Resubmitted By</span>
           <p class="value">{{ item.statusModifiedBy }}</p>
         </div>
+
+        <div *ngIf="item.statusName == 'Waiting'">
+          <span class="title">Options Sent By</span>
+          <p class="value">{{ item.statusModifiedBy }}</p>
+        </div>
       </div>
 
       <div class="right">
