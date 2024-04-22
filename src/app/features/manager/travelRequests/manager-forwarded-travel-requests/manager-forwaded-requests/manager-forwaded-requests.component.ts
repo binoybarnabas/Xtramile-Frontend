@@ -12,9 +12,9 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
   styleUrls: ['./manager-forwaded-requests.component.css']
 })
 export class ManagerForwadedRequestsComponent {
-  travelRequest!: TravelRequestDetailViewModel[];
-  waitingRequests!: WaitingOrSelectedRequests[]
-  selectedRequests!: WaitingOrSelectedRequests[]
+  travelRequest: TravelRequestDetailViewModel[][] = [];
+  waitingRequests: WaitingOrSelectedRequests[][] = [];
+  selectedRequests: WaitingOrSelectedRequests[][] = [];
   pageHeading: string = 'Forwarded Travel Requests'
   activeTabIndex: number = 0;
 
@@ -101,13 +101,12 @@ export class ManagerForwadedRequestsComponent {
   getManagerForwardRequests() {
     this.apiService.getManagerForwardedRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
       next: (data: any) => {
-        this.travelRequest = data.employeeRequest.map((request: any) => {
+        this.travelRequest[this.currentPage-1] = data.employeeRequest.map((request: any) => {
           return {
             ...request,
             date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
           };
-        });
-        
+        });        
         this.forwardedTotalItems = data.totalCount;
       },
       error: (error: Error) => {
@@ -115,8 +114,8 @@ export class ManagerForwadedRequestsComponent {
         // Handle error if needed
       },
       complete: () => {
-        this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests)
-        this.totalItems = [this.forwardedTotalItems, this.waitingTotalItems, this.selectedTotalItems]
+        this.initializeTabs(this.travelRequest[this.currentPage-1],this.waitingRequests[this.currentPage-1], this.selectedRequests[this.currentPage-1]);
+        this.totalItems = [this.forwardedTotalItems, this.waitingTotalItems, this.selectedTotalItems];
       }
     });
   }
@@ -124,7 +123,7 @@ export class ManagerForwadedRequestsComponent {
   getWaitingRequests(){
     this.apiService.getWaitingOrSelectedRequests(this.managerId,'PE','WT',this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.waitingRequests = data.items.map((request: any) => {
+        this.waitingRequests[this.currentPage-1] = data.items.map((request: any) => {
           return {
             ...request,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
@@ -136,8 +135,8 @@ export class ManagerForwadedRequestsComponent {
         console.error('Error: ' + error.message);
       },
       complete: () => {
-        this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests)
-        this.totalItems = [this.forwardedTotalItems, this.waitingTotalItems, this.selectedTotalItems]
+        this.initializeTabs(this.travelRequest[this.currentPage-1],this.waitingRequests[this.currentPage-1], this.selectedRequests[this.currentPage-1]);
+        this.totalItems = [this.forwardedTotalItems, this.waitingTotalItems, this.selectedTotalItems];
       }
     })
   }
@@ -145,7 +144,7 @@ export class ManagerForwadedRequestsComponent {
   getSelectedRequests(){
     this.apiService.getWaitingOrSelectedRequests(this.managerId,'PE','SD',this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
-        this.selectedRequests = data.items.map((request: any) => {
+        this.selectedRequests[this.currentPage-1] = data.items.map((request: any) => {
           return {
             ...request,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
@@ -157,22 +156,44 @@ export class ManagerForwadedRequestsComponent {
         console.error('Error: ' + error.message);
       },
       complete: () => {
-        this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests)
-        this.totalItems = [this.forwardedTotalItems, this.waitingTotalItems, this.selectedTotalItems]
+        this.initializeTabs(this.travelRequest[this.currentPage-1],this.waitingRequests[this.currentPage-1], this.selectedRequests[this.currentPage-1]);
+        this.totalItems = [this.forwardedTotalItems, this.waitingTotalItems, this.selectedTotalItems];
       }
     })
   }
 
+  upDateRequest(){
+    switch(this.activeTabIndex){
+      case 0: {
+        if(!this.travelRequest[this.currentPage-1])
+          this.getManagerForwardRequests();
+        else
+          this.initializeTabs(this.travelRequest[this.currentPage-1],this.waitingRequests[this.currentPage-1], this.selectedRequests[this.currentPage-1]);  
+        break;
+      }
+      case 1: {
+        if(!this.waitingRequests[this.currentPage-1])
+          this.getWaitingRequests();
+        else
+          this.initializeTabs(this.travelRequest[this.currentPage-1],this.waitingRequests[this.currentPage-1], this.selectedRequests[this.currentPage-1]);
+        break;          
+      }
+      case 2: {
+        if(!this.selectedRequests[this.currentPage-1])
+          this.getSelectedRequests();
+        else
+          this.initializeTabs(this.travelRequest[this.currentPage-1],this.waitingRequests[this.currentPage-1], this.selectedRequests[this.currentPage-1]);
+        break;        
+      }
+    }
+  }
 
   // handle page change event
   pageChanged(event: any): void {
-    this.currentPage = event.page
-    switch(this.activeTabIndex){
-      case 0: this.getManagerForwardRequests(); break;
-      case 1: this.getWaitingRequests(); break;
-      case 2: this.getSelectedRequests(); break; 
-    }
+    this.currentPage = event.page;
+    this.upDateRequest();
   }
+
   // navigation 
   requestId!:number;
   handleSelectedRow(row: any){
@@ -184,25 +205,11 @@ export class ManagerForwadedRequestsComponent {
   } 
 
   handleTabChange(activeTabIndex : number){
-    this.currentPage = 1
     this.activeTabIndex = activeTabIndex;
-    if(this.activeTabIndex === 0){
-      if(!this.travelRequest)
-        this.getManagerForwardRequests();
-      else
-        this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests);     
-    }
-    else if(this.activeTabIndex === 1){
-      if(!this.waitingRequests)
-        this.getWaitingRequests();
-      else
-        this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests); 
-    }
-    else if(this.activeTabIndex === 2){
-      if(!this.selectedRequests)
-        this.getSelectedRequests();
-      else
-        this.initializeTabs(this.travelRequest,this.waitingRequests, this.selectedRequests); 
-    }
-  }
+    this.currentPage = 1;
+    this.upDateRequest();
+    setTimeout(() => {
+      this.currentPage = 1;
+    })
+  }  
 }
