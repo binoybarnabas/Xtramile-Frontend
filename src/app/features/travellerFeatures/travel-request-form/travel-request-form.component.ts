@@ -595,7 +595,7 @@ export class TravelRequestFormComponent {
     formData.append("destinationCountry", this.travelRequestForm.get('destinationCountry')?.value);
     formData.append("prefDepartureTime", this.selectedPrefDepTime);
     formData.append("travelType", this.selectedTravelType);
-    formData.append("projectId", this.travelRequestForm.get('projectId')?.value);
+    formData.append("projectId", this.selectedProjectId.toString());
     formData.append("cabRequired", this.travelRequestForm.value.accommodationRequired === true ? 'yes' : 'no');
     formData.append("prefPickUpTime", this.selectedPrefPickUpTime);
     formData.append("accommodationRequired", this.travelRequestForm.value.cabRequired === true ? 'yes' : 'no');
