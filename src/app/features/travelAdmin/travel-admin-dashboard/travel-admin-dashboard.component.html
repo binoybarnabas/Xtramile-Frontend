@@ -1,43 +1,35 @@
 <div class="main_container">
+  <div class="left_section">
+    <div class="top_left">
+      <div class="first_col">
+        <app-dashboard-report-generator></app-dashboard-report-generator>
+      </div>
 
-    <div class="left_section">
-
-      <div class="top_left">
-        
-        <div class="first_col">
-          <app-dashboard-report-generator></app-dashboard-report-generator>
-        </div>
-
-        <!-- <div class="sec_col">
+      <!-- <div class="sec_col">
           <span>Sec Col</span>
         </div> -->
 
-        <div class="sec_col">
-          <app-task-manager></app-task-manager>
-        </div>
-
+      <div class="sec_col">
+        <app-task-manager></app-task-manager>
       </div>
-
-
-      <div class="bottom_left">
-        <app-tabbed-data-table [tabs]="tabs" [isSearchFilterNeeded]="isSearchFilterNeededForDashboardTable"></app-tabbed-data-table>
-      </div>
-    
     </div>
 
-    <div class="right_section">
+    <div class="bottom_left">
+      <app-tabbed-data-table
+        [tabs]="tabs"
+        [isSearchFilterNeeded]="isSearchFilterNeededForDashboardTable"
+        (rowClick)="navigateWhenRowClicked($event[0], $event[1])"
+      ></app-tabbed-data-table>
+    </div>
+  </div>
 
-        <div class="top_right">
-          <app-dashboard-notification></app-dashboard-notification>
-
-        </div>
-
-        <div class="bottom_right">
-          <app-messenger></app-messenger>
-
-        </div>
-
+  <div class="right_section">
+    <div class="top_right">
+      <app-dashboard-notification></app-dashboard-notification>
     </div>
 
-
+    <div class="bottom_right">
+      <app-messenger></app-messenger>
+    </div>
+  </div>
 </div>
