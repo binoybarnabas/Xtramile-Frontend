@@ -17,7 +17,7 @@ export class TabbedDataTableComponent {
 
 @Output() filterToggled: EventEmitter<any> = new EventEmitter<any>();
 @Output() search: EventEmitter<any> = new EventEmitter<any>();
-@Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
+@Output() rowClick: EventEmitter<[string, any]> = new EventEmitter();
 @Output() tabChange: EventEmitter<any> = new EventEmitter<any>();
 
 
@@ -74,8 +74,9 @@ onDownloadFileClick(url: string, docType: string, employeeName: string){
   })
 }
 
-onRowClick(row: any){
-  this.rowClick.emit(row);
+onRowClick(heading: any, row:any){
+  this.rowClick.emit([heading, row]);
+  console.log(row)
 }
 
 onTabChange(index: number){

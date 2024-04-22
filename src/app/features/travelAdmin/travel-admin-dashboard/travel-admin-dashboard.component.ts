@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelAdminDashboardService } from 'src/app/services/travelAdminServices/dashboardServices/travel-admin-dashboard.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 // Define a type for the entry in tabs
 type TabEntry = [string, string, string, string, string, string];
@@ -17,7 +18,7 @@ export class TravelAdminDashboardComponent implements OnInit {
 
   isSearchFilterNeededForDashboardTable: string = 'no';
 
-  constructor(private service: TravelAdminDashboardService) { }
+  constructor(private service: TravelAdminDashboardService, private router:Router) { }
 
   ngOnInit() {
     this.fetchDataAndUpdateTabs(); 
@@ -100,5 +101,25 @@ fetchDataAndUpdateTabs() {
     });
 });
 }
-
+navigateWhenRowClicked(rowClick: string, row: TabEntry) {
+  switch (rowClick) {
+    case 'Incoming':
+      this.router.navigate(['/traveladmin/incomingrequests']);
+      break;
+    case 'Ongoing':
+      this.router.navigate(['/traveladmin/approved_requests']);
+      break;
+    case 'Completed':
+      this.router.navigate(['/traveladmin/closed']);
+      break;
+    case 'Waiting':
+      const status = row[4];
+      if (status === 'Selected') {
+        this.router.navigate(['/traveladmin/selected']);
+      } else {
+        this.router.navigate(['/traveladmin/waiting']);
+      }
+      break;
+  }
+}
 }
