@@ -5,3 +5,11 @@
   [displayedProperties]="fieldsToDisplay"
   (rowClick)="selectedRow($event)"
 ></app-data-table>
+
+<pagination
+  [itemsPerPage]="itemsPerPage"
+  [totalItems]="totalItems"
+  [(ngModel)]="currentPage"
+  (pageChanged)="onPageChange($event)"
+>
+</pagination>

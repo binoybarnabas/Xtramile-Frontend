@@ -86,6 +86,9 @@
                   >
                   file from device </span
                 ><br />
+                <span class="error_message" *ngIf="fileErrorMessage">{{
+                  fileErrorMessage
+                }}</span>
                 <span
                   class="file_name"
                   *ngIf="documentUploadForm.get('documentFile')?.value"
