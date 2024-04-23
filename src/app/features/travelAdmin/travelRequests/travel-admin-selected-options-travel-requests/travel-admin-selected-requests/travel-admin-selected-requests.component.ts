@@ -28,15 +28,19 @@ export class TravelAdminSelectedRequestsComponent {
     private router: Router,private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(){
+    this.getRequests();
+  }
+
+  getRequests(){
     this.subscription = this.travelAdminTravelRequestService.getWaitingOrSelectedRequests('PE','SD',this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
-        this.incomingRequestdata = data.travelRequest.map((request: any) => {
+        this.incomingRequestdata = data.items.map((request: any) => {
           return {
             ...request,
             createdOn: this.datePipe.transform(request.createdOn,'dd/MM/yyyy')
           }
         });  
-        console.log(this.incomingRequestdata)     
+        this.totalItems = data.totalCount;
       },
       error: (error: Error) => {
         console.log("Error while fetching requests")
@@ -57,6 +61,10 @@ export class TravelAdminSelectedRequestsComponent {
     })
   }
 
+  onPageChange(event: any){
+    this.currentPage = event.page;
+    this.getRequests();
+  }
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }
