@@ -28,8 +28,8 @@
             </div>
             <div class="valid_thru" *ngIf="card.documentType !== 'ID Card'">
               <!-- Conditionally show if document type is not 'ID Card' -->
-              <span class="title">VALID THRU</span>
-              <p class="value">{{ card.validThru | date : "dd-MM-yyyy" }}</p>
+              <span class="title">VALID THROUGH</span>
+              <p class="value">{{ card.expiryDate | date : "dd-MM-yyyy" }}</p>
               <!-- Display the validity date -->
             </div>
           </div>

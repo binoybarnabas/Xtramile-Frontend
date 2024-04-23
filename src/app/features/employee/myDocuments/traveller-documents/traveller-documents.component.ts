@@ -20,6 +20,7 @@ export class TravellerDocumentsComponent {
   visaCountryVisible = false;
   expiryDateVisible = false;
   countryData: string[] = [];
+  fileErrorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -42,53 +43,9 @@ export class TravellerDocumentsComponent {
       expiryDate: ['', Validators.nullValidator],
       documentFile: [null, Validators.required], // Required validator for file upload
     });
-
-
-    // this.form.get('documentType')?.valueChanges.subscribe((value) => {
-    //   this.visaCountryVisible = value === 'visa';
-    //   this.expiryDateVisible = value === 'passport' || value === 'visa';
-    //   if (this.visaCountryVisible) {
-    //     this.form.get('visaCountry')?.setValidators(Validators.required);
-    //   } else {
-    //     this.form.get('visaCountry')?.clearValidators();
-    //   }
-    //   this.form.get('visaCountry')?.updateValueAndValidity();
-    // });
-
-    // this.getCountries();
     this.commonService.setIsFile(false);
   }
 
-
-  // ngAfterViewInit() {
-  //   this.getCountries();
-  // }
-
-  // searchText: string = '';
-
-  // getCountries() {
-  //   this.documentService.getCountries().subscribe({
-  //     next: (data) => {
-  //       this.countryData = data
-  //         .map((country: { name: { common: string } }) => country.name.common)
-  //         .sort();
-  //       console.log(this.countryData);
-  //     },
-  //     error: (error: Error) => {
-  //       console.log(error);
-  //     },
-  //   });
-  // }
-
-  // get filteredCountries() {
-  //   if (!this.searchText || this.searchText === '') {
-  //     return this.countryData;
-  //   } else {
-  //     return this.countryData.filter((country: string) =>
-  //       country.toLowerCase().includes(this.searchText.toLowerCase())
-  //     );
-  //   }
-  // }
 
   //submitting the form
   saveForm() {
@@ -134,6 +91,13 @@ export class TravellerDocumentsComponent {
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
+    // if(file.type !== 'application/pdf'){
+    //   event.target.value = '';
+    //   this.documentUploadForm.get('documentFile')?.setValue('');
+    //   this.fileErrorMessage = "* Select a PDF File";
+    //   return;
+    // }
+    // this.fileErrorMessage = ''
     this.documentUploadForm.patchValue({
       documentFile: file,
     });
@@ -169,6 +133,13 @@ export class TravellerDocumentsComponent {
     event.preventDefault();
     event.stopPropagation();
     const file = event.dataTransfer.files[0];
+    // if(file.type !== 'application/pdf'){
+    //   event.dataTransfer.value = '';
+    //   this.documentUploadForm.get('documentFile')?.setValue('');
+    //   this.fileErrorMessage = "* Select a PDF File";
+    //   return;
+    // }
+    // this.fileErrorMessage = ''
     this.documentUploadForm.patchValue({
       documentFile: file,
     });
