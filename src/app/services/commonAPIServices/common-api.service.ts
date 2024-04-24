@@ -47,7 +47,7 @@ export class CommonAPIService {
   }
 
   updateRequestStatus(requestStatus: RequestStatus): Observable<RequestStatus> {
-    return this.http.post<RequestStatus>(this.apiURL + 'requeststatu/add', requestStatus)
+    return this.http.post<RequestStatus>(this.apiURL + 'requeststatus/add', requestStatus)
   }
 
   searchCities(value: string) {
