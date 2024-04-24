@@ -1,8 +1,7 @@
 <div class="main_container">
   <div class="header_section">
     <div class="tab_container">
-      <ng-container
-        *ngFor="let tab of tabs; let i = index">
+      <ng-container *ngFor="let tab of tabs; let i = index">
         <div
           (click)="onTabChange(i)"
           class="tab_card"
@@ -66,7 +65,7 @@
             <tr
               *ngFor="let row of tab.entries"
               class="body_row"
-              (click)="onRowClick(row)"
+              (click)="onRowClick(tab.name, row)"
             >
               <td
                 *ngFor="let entry of row; let i = index"

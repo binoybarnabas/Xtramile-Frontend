@@ -25,10 +25,10 @@ export class TravelAdminTravelRequestsService {
 
   //to get travel request details of a particular request id
 
-  getWaitingOrSelectedRequests(primarystatusCode: string, secondaryStatusCode: string, offset: number,pageSize: number): Observable<any> {
+  getWaitingOrSelectedRequests(primarystatusCode: string, secondaryStatusCode: string, pageNumber: number,itemsPerPage: number): Observable<any> {
     const url = this.apiURL + `/traveladmin/requestsView/${primarystatusCode}/${secondaryStatusCode}`;
-    const params = new HttpParams().set('offset', offset)
-      .set('pageSize', pageSize);
+    const params = new HttpParams().set('pageNumber', pageNumber)
+      .set('itemsPerPage', itemsPerPage);
     return this.http.get<any>(url,{params});
   }
 

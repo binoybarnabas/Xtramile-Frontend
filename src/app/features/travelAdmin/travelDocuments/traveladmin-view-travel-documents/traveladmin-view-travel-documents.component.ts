@@ -27,13 +27,13 @@ export class TraveladminViewTravelDocumentsComponent {
   totalExpiredItems: number[] = [this.totalExpiredVisas,this.totalExpiredPassports, this.totalIDs]
   totalValidItems: number[] = [this.totalValidVisas, this.totalValidPassports, this.totalIDs]
 
-  visaDocuments!: TravelDocuments[];
-  passportDocuments!: TravelDocuments[];
-  idCardDocuments!: TravelDocuments[];
-  expiredVisaDocuments!: TravelDocuments[];
-  expiredPassportDocuments!: TravelDocuments[];
-  validVisaDocuments!: TravelDocuments[];
-  validPassportDocuments!: TravelDocuments[];
+  visaDocuments: TravelDocuments[][] = [];
+  passportDocuments: TravelDocuments[][] = [];
+  idCardDocuments: TravelDocuments[][] = [];
+  expiredVisaDocuments: TravelDocuments[][] = [];
+  expiredPassportDocuments: TravelDocuments[][] = [];
+  validVisaDocuments: TravelDocuments[][] = [];
+  validPassportDocuments: TravelDocuments[][] = [];
 
   //Initialize this tabs array
   tabs: any = [];
@@ -59,14 +59,14 @@ export class TraveladminViewTravelDocumentsComponent {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.visaDocuments = data.items
+        this.visaDocuments[this.currentPage - 1] = data.items
         this.totalVisas = data.totalCount
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
-        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
+        this.initializeTabs(this.visaDocuments[this.currentPage - 1],this.passportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
         this.totalItems = [this.totalVisas, this.totalPassPorts, this.totalIDs];
       }
     })
@@ -79,14 +79,14 @@ export class TraveladminViewTravelDocumentsComponent {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.passportDocuments = data.items;
+        this.passportDocuments[this.currentPage - 1] = data.items;
         this.totalPassPorts = data.totalCount;
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
-        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
+        this.initializeTabs(this.visaDocuments[this.currentPage - 1],this.passportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
         this.totalItems = [this.totalVisas, this.totalPassPorts, this.totalIDs];
       }
     })
@@ -95,14 +95,14 @@ export class TraveladminViewTravelDocumentsComponent {
   getAllIds(){
     this.documentService.getTravelDocumentByType('ID Card', this.currentPage, this.itemsPerPage).subscribe({
       next : (data) => {
-        this.idCardDocuments = data.items;
+        this.idCardDocuments[this.currentPage - 1] = data.items;
         this.totalIDs = data.totalCount;
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
-        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
+        this.initializeTabs(this.visaDocuments[this.currentPage - 1],this.passportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
         this.totalItems = [this.totalVisas, this.totalPassPorts, this.totalIDs];
       }
     })    
@@ -115,14 +115,14 @@ export class TraveladminViewTravelDocumentsComponent {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.expiredVisaDocuments = data.items
+        this.expiredVisaDocuments[this.currentPage - 1] = data.items
         this.totalExpiredVisas = data.totalCount
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
-        this.initializeTabs(this.expiredVisaDocuments,this.expiredPassportDocuments,this.idCardDocuments);
+        this.initializeTabs(this.expiredVisaDocuments[this.currentPage - 1],this.expiredPassportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
         this.totalExpiredItems = [this.totalExpiredVisas,this.totalExpiredPassports, this.totalIDs];
       }
     })
@@ -135,14 +135,14 @@ export class TraveladminViewTravelDocumentsComponent {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.expiredPassportDocuments = data.items;
+        this.expiredPassportDocuments[this.currentPage - 1] = data.items;
         this.totalExpiredPassports = data.totalCount;
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
-        this.initializeTabs(this.expiredVisaDocuments,this.expiredPassportDocuments,this.idCardDocuments);
+        this.initializeTabs(this.expiredVisaDocuments[this.currentPage - 1],this.expiredPassportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
         this.totalExpiredItems = [this.totalExpiredVisas,this.totalExpiredPassports, this.totalIDs];
       }
     })
@@ -155,14 +155,14 @@ export class TraveladminViewTravelDocumentsComponent {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.validVisaDocuments = data.items;
+        this.validVisaDocuments[this.currentPage - 1] = data.items;
         this.totalValidVisas = data.totalCount;
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
-        this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);
+        this.initializeTabs(this.validVisaDocuments[this.currentPage - 1],this.validPassportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
         this.totalValidItems = [this.totalValidVisas, this.totalValidPassports, this.totalIDs];
       }
     })
@@ -175,14 +175,14 @@ export class TraveladminViewTravelDocumentsComponent {
           doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
           doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
         })
-        this.validPassportDocuments = data.items;
+        this.validPassportDocuments[this.currentPage - 1] = data.items;
         this.totalValidPassports = data.totalCount;
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
-        this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);
+        this.initializeTabs(this.validVisaDocuments[this.currentPage - 1],this.validPassportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
         this.totalValidItems = [this.totalValidVisas, this.totalValidPassports, this.totalIDs];
       }
     })
@@ -192,44 +192,7 @@ export class TraveladminViewTravelDocumentsComponent {
     this.filterId = filterId;
     if(this.tabs.name === 'ID Cards')
       return ;
-    if(filterId === 0){
-      if(this.filters[filterId].isActive === 'yes'){
-        if(this.activeTabIndex === 0){
-          if(!this.expiredVisaDocuments)
-            this.getExpiredVisas();
-          else
-            this.initializeTabs(this.expiredVisaDocuments,this.expiredPassportDocuments,this.idCardDocuments);            
-        }
-        else if(this.activeTabIndex === 1){
-          if(!this.expiredPassportDocuments)
-            this.getExpiredPassports();
-          else
-            this.initializeTabs(this.expiredVisaDocuments,this.expiredPassportDocuments,this.idCardDocuments);            
-        }
-      }
-      else{
-        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
-      }
-    }
-    else if(filterId === 1){
-      if(this.filters[filterId].isActive === 'yes'){
-        if(this.activeTabIndex === 0){
-          if(!this.validVisaDocuments)
-            this.getValidVisas();
-          else
-            this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);            
-        }
-        else if(this.activeTabIndex === 1){
-          if(!this.validPassportDocuments)
-            this.getValidPassports();
-          else
-            this.initializeTabs(this.validVisaDocuments,this.validPassportDocuments,this.idCardDocuments);            
-        }
-      }
-      else{
-        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
-      }      
-    }
+    this.updateRequests();
   }
 
   initializeTabs(visa : TravelDocuments[], passport : TravelDocuments[], idCard : TravelDocuments[]) {
@@ -288,6 +251,72 @@ export class TraveladminViewTravelDocumentsComponent {
     }
   }
 
+  updateRequests(){
+    if(this.filters[this.filterId].isActive === 'yes'){
+      if(this.filterId === 0) {
+        switch(this.activeTabIndex){
+          case 0: {
+            if(!this.expiredVisaDocuments[this.currentPage - 1])
+              this.getExpiredVisas();
+            else
+            this.initializeTabs(this.expiredVisaDocuments[this.currentPage - 1],this.expiredPassportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
+          break;        
+          }
+          case 1: {
+            if(!this.expiredPassportDocuments[this.currentPage - 1])
+              this.getExpiredPassports();
+            else
+            this.initializeTabs(this.expiredVisaDocuments[this.currentPage - 1],this.expiredPassportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
+          break;                 
+          }
+        }
+      }
+      else if(this.filterId === 1){
+        switch(this.activeTabIndex){
+          case 0: {
+            if(!this.validVisaDocuments[this.currentPage - 1])
+              this.getValidVisas();
+            else
+            this.initializeTabs(this.validVisaDocuments[this.currentPage - 1],this.validPassportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);            
+            break;        
+          }
+          case 1: {
+            if(!this.validPassportDocuments[this.currentPage - 1])
+              this.getValidPassports();
+            else
+            this.initializeTabs(this.validVisaDocuments[this.currentPage - 1],this.validPassportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);            
+            break;                 
+          }
+        }
+      }
+    }
+    else{
+      switch(this.activeTabIndex){
+        case 0: {
+          if(!this.visaDocuments[this.currentPage - 1])
+            this.getAllVisas();
+          else
+            this.initializeTabs(this.visaDocuments[this.currentPage - 1],this.passportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
+          break;
+        }
+        case 1:{
+          if(!this.passportDocuments[this.currentPage - 1])
+            this.getAllPassports();
+          else
+            this.initializeTabs(this.visaDocuments[this.currentPage - 1],this.passportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
+          break;
+        }
+        case 2:{
+          if(!this.idCardDocuments[this.currentPage - 1])
+            this.getAllIds();
+          else
+            this.initializeTabs(this.visaDocuments[this.currentPage - 1],this.passportDocuments[this.currentPage - 1],this.idCardDocuments[this.currentPage - 1]);
+          break;
+        }
+      }
+    }    
+  }
+
 getRemainingDaysMessage(remainingDays: number): string {
   if(remainingDays > 0){
     if(remainingDays === 1)
@@ -306,21 +335,21 @@ getRemainingDaysMessage(remainingDays: number): string {
 }
 
 onSearch(employeeName: string) {
-  console.log(employeeName)
-  let filteredVisaDocuments = this.visaDocuments;
-  let filteredPassportDocuments = this.passportDocuments;
-  let filteredIdCardDocuments = this.idCardDocuments;
-
-  // Filter documents based on selected filter criteria
-  if(this.filterId === 0){
-    filteredVisaDocuments = this.expiredVisaDocuments;
-    filteredPassportDocuments = this.expiredPassportDocuments;
-    filteredIdCardDocuments = this.idCardDocuments;
-  }
-  else if(this.filterId === 1){
-    filteredVisaDocuments = this.validVisaDocuments;
-    filteredPassportDocuments = this.validPassportDocuments;
-    filteredIdCardDocuments = this.idCardDocuments;
+  let filteredVisaDocuments  = this.visaDocuments[this.currentPage - 1];
+  let filteredPassportDocuments = this.passportDocuments[this.currentPage - 1];
+  let filteredIdCardDocuments = this.idCardDocuments[this.currentPage - 1];
+  
+  if(this.filters[this.filterId].isActive === 'yes'){
+    if(this.filterId === 0){
+      filteredVisaDocuments = this.expiredVisaDocuments[this.currentPage - 1];
+      filteredPassportDocuments = this.expiredPassportDocuments[this.currentPage - 1];
+      filteredIdCardDocuments = this.idCardDocuments[this.currentPage - 1];      
+    }
+    else if(this.filterId === 1){
+      filteredVisaDocuments = this.validVisaDocuments[this.currentPage - 1];
+      filteredPassportDocuments = this.validPassportDocuments[this.currentPage - 1];
+      filteredIdCardDocuments = this.idCardDocuments[this.currentPage - 1];      
+    }
   }
   // Perform search on filtered documents
   if (employeeName !== '') {
@@ -337,57 +366,19 @@ onSearch(employeeName: string) {
 }
 
   onTabChange(activeTabIndex: number){
-    this.currentPage = 1;
     this.activeTabIndex = activeTabIndex;
+    this.currentPage = 1;
     if(this.filters[this.filterId].isActive === 'yes')
-      this.filters[this.filterId].isActive = 'no'
-    if(this.activeTabIndex === 0){
-      if(!this.visaDocuments)
-        this.getAllVisas();
-      else
-        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
-    }
-    else if(this.activeTabIndex === 1){
-      if(!this.passportDocuments)
-        this.getAllPassports()
-      else
-        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
-    }
-    else if(this.activeTabIndex === 2){
-      if(!this.idCardDocuments)
-        this.getAllIds();
-      else
-        this.initializeTabs(this.visaDocuments,this.passportDocuments,this.idCardDocuments);
-    }
+      this.filters[this.filterId].isActive = 'no';
+    this.updateRequests();
+    setTimeout(() => {
+      this.currentPage = 1;
+    })
   }
 
   pageChanged(event: any): void {
     this.currentPage = event.page
-    if(this.filterId === 0){
-      if(this.filters[this.filterId].isActive === 'yes'){
-        switch(this.activeTabIndex){
-          case 0: this.getExpiredVisas(); break;
-          case 1: this.getExpiredPassports(); break;
-          case 2: this.getAllIds(); break; 
-        }
-      }
-    }
-    else if(this.filterId === 1){
-      if(this.filters[this.filterId].isActive === 'yes'){
-        switch(this.activeTabIndex){
-          case 0: this.getValidVisas(); break;
-          case 1: this.getValidPassports(); break;
-          case 2: this.getAllIds(); break; 
-        }
-      }
-    }
-    else if(this.filters[this.filterId].isActive === 'no'){
-      switch(this.activeTabIndex){
-        case 0: this.getAllVisas(); break;
-        case 1: this.getAllPassports(); break;
-        case 2: this.getAllIds; break; 
-      }
-    }
+    this.updateRequests();
   }
 
   getTotalItems(){
@@ -401,7 +392,6 @@ onSearch(employeeName: string) {
     else{
       totalItem = this.totalItems[this.activeTabIndex];
     }
-    console.log(totalItem);
     return totalItem
   }
 
