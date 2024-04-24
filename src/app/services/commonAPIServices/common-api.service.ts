@@ -109,11 +109,7 @@ export class CommonAPIService {
     return this.http.delete<ResubmitRequest>(`http://localhost:5190/api/traveldocumentfile/deleteDocument/${fileId}`);
   }
   addOptionsForRequest(optionsData:any){
-    console.log(optionsData);
-    const headers = new HttpHeaders();
-    headers.append('enctype', 'multipart/form-data');
-    headers.append('Accept', 'application/json');
-    return this.http.post('http://localhost:5190/api/availableoptions/addoption',optionsData,{ headers: headers });
+    return this.http.post('http://localhost:5190/api/availableoptions/addoption',optionsData,{ responseType: 'text' });
   }
 }
 

@@ -35,3 +35,9 @@
     color: var(--card-bg-color);
     font-weight: var(--active-font-weight);
 }
+.confirm_button:disabled:hover {
+    background-color: var(--error-color);
+    cursor: not-allowed;
+    border: var(--normal-button-border-size) solid var(--error-color);
+  
+  }

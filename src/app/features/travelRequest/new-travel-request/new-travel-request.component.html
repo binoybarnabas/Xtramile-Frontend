@@ -363,11 +363,6 @@
           </div>
   
           <div class="form_submit_container">
-
-                        <!-- <div class="reject_btn_container" *ngIf="!isCloseVisible">
-                            <button type="button" class="reject_btn"> Reject</button>
-                        </div> -->
-
             <div class="btn_container">
               <button
                 (click)="changeNewReqFormSubMenuValue(3)"
@@ -380,6 +375,7 @@
                 class="submit_btn"
                 type="button"
                 Value="Send"
+                [disabled]="selectedImages.length === 0 && textOption.length === 0"
               />
 
               <!-- if the request is ongoing enable close -->

@@ -10,7 +10,7 @@ import { CustomToastService } from 'src/app/services/toastServices/custom-toast.
   styleUrls: ['./text-editor.component.css']
 })
 export class TextEditorComponent {
-  htmlContent: string = ''; // Variable to store the content of the editor
+  htmlContent: string = ''; 
   requestId:number =1;
   optionId:number =1;
   constructor(public bsModalRef: BsModalRef,private apiService:TravelAdminTravelRequestsService,private modalService: BsModalService,private toastService: CustomToastService){

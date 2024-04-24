@@ -599,8 +599,7 @@ export class NewTravelRequestComponent {
     formData.append('secondaryStatusId', '10'); // Assign the secondary status ID 
     console.log(formData);
     this.commonApiService.addOptionsForRequest(formData).subscribe({
-      next: (data) => {
-        console.log(data);
+      next: (data: string) => {
         this.router.navigate(['/traveladmin/waiting']);
       },
       error: (error: Error) => {
@@ -609,7 +608,6 @@ export class NewTravelRequestComponent {
       },
       complete: () => {
         console.log("Posting Request Status Complete");
-        // alert("Posting Request Status Complete");
         this.toastService.showToast("Travel Options Send!")
       }
     });
@@ -691,11 +689,8 @@ export class NewTravelRequestComponent {
       requestId: this.travelRequestDetailViewModel.requestId,
       onImagesSelected: this.addNewTravelOptions.bind(this)
     };
- 
-    // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
- 
     this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
-}
+  }
 
   openRejectionReasonModal() {
     const initialState = {
