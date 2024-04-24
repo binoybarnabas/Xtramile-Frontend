@@ -260,7 +260,7 @@ export class TravelRequestFormComponent {
 
       //Domestic / International
       travelType: new FormControl(this.selectedTravelType, Validators.required),
-      projectId: new FormControl(this.projectCodes[0], Validators.required),
+      //projectId: new FormControl(this.projectCodes[0], Validators.required),
 
       //Additional Info
       cabRequired: new FormControl(false, Validators.required),
@@ -595,7 +595,7 @@ export class TravelRequestFormComponent {
     formData.append("destinationCountry", this.travelRequestForm.get('destinationCountry')?.value);
     formData.append("prefDepartureTime", this.selectedPrefDepTime);
     formData.append("travelType", this.selectedTravelType);
-    formData.append("projectId", this.travelRequestForm.get('projectId')?.value);
+    formData.append("projectId", this.selectedProjectId.toString());
     formData.append("cabRequired", this.travelRequestForm.value.accommodationRequired === true ? 'yes' : 'no');
     formData.append("prefPickUpTime", this.selectedPrefPickUpTime);
     formData.append("accommodationRequired", this.travelRequestForm.value.cabRequired === true ? 'yes' : 'no');
