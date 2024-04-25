@@ -95,6 +95,8 @@ export class NewTravelRequestComponent {
   
   travelRequestFormSubmitFunction: () => void = this.onEmployeeTravelRequestFormSubmit.bind(this);
 
+  status: string = '';
+
   constructor(private sideNavBarService: SideNavBarService,
     private requestService: RequestService,
     private route: ActivatedRoute,
@@ -181,7 +183,12 @@ export class NewTravelRequestComponent {
         break;
 
       case 'travelAdmin':
-        this.leftSectionNavItems = ["General Informations", "Trip Informations", "Additional Informations", "Documents Attached", "Add Available Options"];
+        if(this.status === 'Open'){
+          this.leftSectionNavItems = ["General Informations", "Trip Informations", "Additional Informations", "Documents Attached"];
+        }
+        else{
+          this.leftSectionNavItems = ["General Informations", "Trip Informations", "Additional Informations", "Documents Attached", "Add Available Options"];
+        }          
         break;
 
       case 'financePersonnel':
@@ -212,8 +219,6 @@ export class NewTravelRequestComponent {
 
 
   ngOnInit() {
-
-    this.updateNavItemsBasedOnUserRole();
 
     //Different role has different submit functions
     this.changeSubmitFunction();
@@ -260,10 +265,18 @@ export class NewTravelRequestComponent {
           if(this.userData.role =='Manager' && this.userData.department == 'TA' ){
             this.requestService.getStatusName(requestId).subscribe(({
               next: (data) => {
+                this.status = data
                 console.log("TA")
                 if(data=='Ongoing'){
                   this.isCloseVisible=true;
                 }
+              },
+              error: (error: Error) => {
+                console.error(error.message);
+              },
+              complete: () => {
+                console.log(this.status)
+                this.updateNavItemsBasedOnUserRole();
               }
             })
             );
