@@ -87,11 +87,10 @@
     align-items: center;
 
     height: 40px;
-    background-color: var(--menu-hover-color);
+    background-color: var(--secondary-cyan-color);
     margin-bottom: 1.5rem;
     border-radius: 5px;
-    background: var(--dark-gradient-color);
-
+    box-shadow: var(--normal-box-shadow);
 }
 
 .req_forms_main_container .right_section .form_container .new_req_form .form_input_group .form_title .title_text {
@@ -100,7 +99,6 @@
     font-size: var(--normal-font-size);
     font-weight: var(--active-font-weight);
     color: var(--second-color);
-    color: var(--card-bg-color);
 }
 
 

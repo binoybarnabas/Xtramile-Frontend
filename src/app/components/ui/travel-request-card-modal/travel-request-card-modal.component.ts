@@ -16,7 +16,6 @@ export class  TravelRequestCardModalComponent {
   private _requestId!: number;
   primaryStatus: string = 'Denied';
 
-
   @Input()
   set requestId(value: number) {
     this._requestId = value;
@@ -24,6 +23,12 @@ export class  TravelRequestCardModalComponent {
   }
 
   travelRequestDetailViewModel!: TravelRequestDetailViewModel
+  
+  //isProceedBtnClicked : boolean = true;
+  visibleSectionName : string = "request_details";
+  visibleOptionTabId: number = 0;
+  isOptionCardSelected : boolean = false;
+  selectedOptionId : number = -1;
 
   constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService, private datePipe: DatePipe, private managerTravelRequest: ManagerTravelRequestsService
   ) {
@@ -104,7 +109,8 @@ export class  TravelRequestCardModalComponent {
       const userDataParsed = JSON.parse(userData)
 
       if (userDataParsed.role == 'Manager' && userDataParsed.department == 'TA') {
-        this.navigateToAddOptions();
+        //this.navigateToAddOptions();
+        this.visibleSectionName = 'add_travel_option';
       }
       else if (userDataParsed.role == 'Manager') {
         this.onManagerForwardTravelRequestForm();
@@ -112,6 +118,30 @@ export class  TravelRequestCardModalComponent {
     }    
   }
 
+
+  //method to move to another section
+  moveToSection(sectionName: string){
+    this.visibleSectionName = sectionName;
+  }
+
+  //method to switch tabs
+  switchOptionTab(newTabId: number){
+    this.visibleOptionTabId = newTabId;
+  }
+
+  //toggle visibility of delete btn and add btn
+  onOptionCardSelected(optionId: number){
+    
+    
+    if(this.isOptionCardSelected){
+      this.isOptionCardSelected = false;
+      this.selectedOptionId = -1;
+    }else{
+      this.isOptionCardSelected = true;
+      this.selectedOptionId = optionId;
+    }
+
+  }
 
 
 }
