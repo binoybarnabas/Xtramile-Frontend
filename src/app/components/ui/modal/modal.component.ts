@@ -102,38 +102,65 @@ export class ModalComponent {
   // }
 
   //Test mode
-  addNewTravelOption() {
-    const formData = new FormData();
-    const file = this.travelOptionForm.get('optionFile')?.value;
-    formData.append('optionFile', file);
-    formData.append('requestId', String(this._requestId));
-    formData.append('description', this.travelOptionForm.get('description')?.value);
+  // addNewTravelOption() {
+  //   const formData = new FormData();
+  //   const file = this.travelOptionForm.get('optionFile')?.value;
+  //   formData.append('optionFile', file);
+  //   formData.append('requestId', String(this._requestId));
+  //   formData.append('description', this.travelOptionForm.get('description')?.value);
 
-    this.travelAdminRequestService.addNewTravelOption(formData).subscribe({
-      next: (response) => {
-        console.log(response);
-        // alert("Travel Option Added!");
-        this.commonService.setIsFile(true);
-        this.closeModal();
+  //   this.travelAdminRequestService.addNewTravelOption(formData).subscribe({
+  //     next: (response) => {
+  //       console.log(response);
+  //       // alert("Travel Option Added!");
+  //       this.commonService.setIsFile(true);
+  //       this.closeModal();
         
-      },
-      error: (error: Error) => {
-        alert("Error has occurred" + error.message);
-      },
-      complete: () => {
-        console.log("COMPLETED");
-        this.toastService.showToast("Travel Option Added!")
-      }
-    });
-  }
+  //     },
+  //     error: (error: Error) => {
+  //       alert("Error has occurred" + error.message);
+  //     },
+  //     complete: () => {
+  //       console.log("COMPLETED");
+  //       this.toastService.showToast("Travel Option Added!")
+  //     }
+  //   });
+  // }
 
   //Handling File Changes
-  onFileChange(event: any, controlName: string): void {
-    // const file = (event.target as HTMLInputElement).files?.[0];
-    const file = event.target.files[0];
-    this.travelOptionForm.get(controlName)?.setValue(file);
-    this.travelOptionForm.get(controlName)?.updateValueAndValidity();
-    console.log('Form Validity:', this.travelOptionForm.valid);
+  // onFileChange(event: any, controlName: string): void {
+  //   // const file = (event.target as HTMLInputElement).files?.[0];
+  //   const file = event.target.files[0];
+  //   this.travelOptionForm.get(controlName)?.setValue(file);
+  //   this.travelOptionForm.get(controlName)?.updateValueAndValidity();
+  //   console.log('Form Validity:', this.travelOptionForm.valid);
 
+  // }
+  //
+  
+  selectedImages: File[] = [];
+  onFileChange(event: any): void {
+    const files = event.target.files;
+    this.selectedImages = [];
+  
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        this.selectedImages.push(files[i]);
+      }
+    }
+  }
+
+  @Input()
+  onImagesSelected!: Function;
+
+  selectImages(): void {
+    const images: File[] = this.selectedImages;
+    const descriptions: string[] = this.travelOptionForm.get('description')?.value;
+  
+    if (this.onImagesSelected) {
+      this.onImagesSelected(images, descriptions); // Calling the callback function
+    }
+  
+    this.closeModal();
   }
 }

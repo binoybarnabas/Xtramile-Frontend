@@ -23,3 +23,21 @@
     border-color: #fff;
     color: var(--card-bg-color);
 }
+.confirm_button{
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--second-color);
+    background-color: var(--second-color);
+    padding: 0.4rem;
+    width: 6rem;
+    font-size: var(--form-label-font-size);
+    border-radius: 5px;
+    color: var(--card-bg-color);
+    font-weight: var(--active-font-weight);
+}
+.confirm_button:disabled:hover {
+    background-color: var(--error-color);
+    cursor: not-allowed;
+    border: var(--normal-button-border-size) solid var(--error-color);
+  
+  }

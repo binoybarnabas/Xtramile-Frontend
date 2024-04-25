@@ -17,7 +17,9 @@ import { cities } from 'src/app/services/commonAPIServices/cities';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { TextEditorComponent } from 'src/app/components/ui/text-editor/text-editor.component';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, forkJoin } from 'rxjs';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -101,8 +103,9 @@ export class NewTravelRequestComponent {
     private router: Router,
     private modalService: BsModalService,
     private commonApiService: CommonAPIService,
-    private toastService: CustomToastService
-    
+    private toastService: CustomToastService,
+    private sanitizer: DomSanitizer,
+    private travelAdminService:TravelAdminTravelRequestsService
   ) {
 
     const storedUserData = localStorage.getItem('userData');
@@ -502,10 +505,7 @@ export class NewTravelRequestComponent {
       default:
         this.travelRequestFormSubmitFunction = this.onEmployeeTravelRequestFormSubmit.bind(this);
         break;
-
     }
-
-
   }
   isLoading: boolean = false;
 
@@ -573,23 +573,34 @@ export class NewTravelRequestComponent {
   //Travel Admin Send Options
   //There by status changes
   onTravelAdminOptionsSend() {
+    const formData = new FormData();
 
-    const requestStatus: RequestStatus = {
-      requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
-      empId: this.empId,     // Assign the employee ID
-      primaryStatusId: 2, // Assign the primary status ID
-      date: new Date(),  // Assign the current date
-      secondaryStatusId: 10 // Assign the secondary status ID
-
-    };
-
-    this.commonApiService.updateRequestStatus(requestStatus).subscribe({
-      next: (data) => {
-        console.log(data);
-        //Pop-up when options are submitted
-        //Redirect to another page on submit click
+    // Convert selectedImages to FormData
+    for (let i = 0; i < this.selectedImages.length; i++) {
+      formData.append('images', this.selectedImages[i], this.selectedImages[i].name);
+    }
+  
+    // Convert descriptions to JSON string and append to FormData
+    // Convert descriptions to FormData
+    this.descriptions.forEach((desc, index) => {
+      formData.append(`description[${index}]`, desc);
+    });
+  
+    // Convert texts to FormData
+    this.textOption.forEach((text, index) => {
+      formData.append(`texts[${index}]`, text);
+    });
+  
+    // Append other fields to FormData
+    formData.append('requestId', String(this.travelRequestDetailViewModel.requestId));
+    formData.append('empId', String(this.empId));
+    formData.append('primaryStatusId', '2'); // Assign the primary status ID
+    formData.append('date', new Date().toISOString()); // Assign the current date
+    formData.append('secondaryStatusId', '10'); // Assign the secondary status ID 
+    console.log(formData);
+    this.commonApiService.addOptionsForRequest(formData).subscribe({
+      next: (data: string) => {
         this.router.navigate(['/traveladmin/waiting']);
-
       },
       error: (error: Error) => {
         console.log("Error in posting request status");
@@ -597,7 +608,6 @@ export class NewTravelRequestComponent {
       },
       complete: () => {
         console.log("Posting Request Status Complete");
-        // alert("Posting Request Status Complete");
         this.toastService.showToast("Travel Options Send!")
       }
     });
@@ -622,40 +632,65 @@ export class NewTravelRequestComponent {
 
 
   // TRAVEL ADMIN
+  //text option
   openAddTextOptionModal(){
     const initialState = {
-      requestId: this.travelRequestDetailViewModel.requestId
+      requestId: this.travelRequestDetailViewModel.requestId,
+      textOptions:this.addtextOption.bind(this)
     };
-
-    // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
-
-
     this.bsModalRef = this.modalService.show(TextEditorComponent, { initialState });
-    this.bsModalRef.content.onClose.subscribe((result: any) => {
-      // Handle the result from the modal if needed
-      console.log('Modal result:', result);
-
-
-      // You can perform actions with the result data here
-    });
   }
 
+  textOption: string[] = [];
+
+  addtextOption(textOption: string): void {
+    this.textOption.push(textOption);
+  }
+
+  santizieHtml(html:string):SafeHtml{
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  panelOpenState: boolean[] = [];
+
+  togglePanel(index: number): void {
+    this.panelOpenState[index] = !this.panelOpenState[index];
+  }
+
+  isPanelOpen(index: number): boolean {
+    return this.panelOpenState[index] || false;
+  }
+  
+  removeTextOption(index: number): void {
+    if (index > -1) {
+      this.textOption.splice(index, 1);
+    }
+  }
+
+  saveTextTravelOption() {
+    this.travelAdminService.saveTravelOption(this.textOption, this.travelRequestDetailViewModel.requestId)
+      .subscribe({
+        next: (response: any) => {
+          console.log('Post successful:', response);
+        },
+        error: (error: any) => {
+          console.error('Post failed:', error);
+        },
+        complete: () => {
+          this.toastService.showToast("Travel Option Added!")
+          console.log('Post request completed.');
+        }
+  });
+  }
+
+  //imag option
   openAddOptionModal() {
     const initialState = {
-      requestId: this.travelRequestDetailViewModel.requestId
+      requestId: this.travelRequestDetailViewModel.requestId,
+      onImagesSelected: this.addNewTravelOptions.bind(this)
     };
- 
-    // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
- 
- 
     this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
-    this.bsModalRef.content.onClose.subscribe((result: any) => {
-      // Handle the result from the modal if needed
-      console.log('Modal result:', result);
- 
-      // You can perform actions with the result data here
-  })
-}
+  }
 
   openRejectionReasonModal() {
     const initialState = {
@@ -663,13 +698,51 @@ export class NewTravelRequestComponent {
     };
 
     this.bsModalRef = this.modalService.show(DescriptionModalComponent, { initialState });
-    this.bsModalRef.content.onClose.subscribe((result: any) => {
-      // Handle the result from the modal if needed
-      console.log('Modal result:', result);
-      // You can perform actions with the result data here
-    });
+  
   }
 
+
+  selectedImages: File[] = [];
+  imageUrls: string[] = [];
+  descriptions: string[] = [];
+
+  addNewTravelOptions(images: File[], description: string): void {
+    this.selectedImages = [...this.selectedImages, ...images];
+    this.descriptions.push(description);
+
+    const observables = images.map((image) => this.getImageUrl(image));
+  
+    forkJoin(observables).subscribe((urls: string[]) => {
+      this.imageUrls = [...this.imageUrls, ...urls];
+    });
+  }
+  
+  removeImage(index: number): void {
+    if (index >= 0 && index < this.selectedImages.length) {
+      this.selectedImages.splice(index, 1);
+      this.imageUrls.splice(index, 1);
+      this.descriptions.splice(index, 1);
+    }
+  }
+
+  getImageUrl(image: File): Observable<string> {
+    return new Observable<string>((observer) => {
+      const reader = new FileReader();
+      
+      reader.onload = (event: ProgressEvent<FileReader>) => {
+        const dataUrl = event.target?.result as string;
+        observer.next(dataUrl);
+        observer.complete();
+      };
+      
+      reader.onerror = (error) => {
+        observer.error(error);
+      };
+  
+      reader.readAsDataURL(image);
+    });
+  }
+  
   filterCities(event: any, field: string): void {
     const value = event.target.value;
     if (!value) {
