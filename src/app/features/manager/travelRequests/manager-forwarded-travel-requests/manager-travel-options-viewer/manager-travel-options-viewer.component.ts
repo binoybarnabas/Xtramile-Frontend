@@ -4,7 +4,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 @Component({
   selector: 'app-manager-travel-options-viewer',
@@ -35,7 +35,7 @@ userData: UserData;
  primaryStatusCode_ta:string = "OG"
  secondaryStatusCode_ta:string = "OG"
  
-constructor(private managerService:ManagerTravelRequestsService, private sanitizer: DomSanitizer,private requestService: RequestService,private toastService: CustomToastService,private activatedRoute:ActivatedRoute ){
+constructor(private managerService:ManagerTravelRequestsService, private sanitizer: DomSanitizer,private requestService: RequestService,private toastService: CustomToastService,private activatedRoute:ActivatedRoute ,private router: Router){
   const storedUserData = localStorage.getItem('userData');
   this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
   this.empId = this.userData?.empId
@@ -55,9 +55,10 @@ ngOnInit(){
 getAvailableOptionsDescription(){
   this.managerService.getAvailableOptionsDescription(this.requestId).subscribe({
     next: (response: any) =>{
-      this.descriptions = response.map((item: { htmlString: SafeHtml; description: string; expanded:boolean }) => {
+      this.descriptions = response.map((item: { htmlString: SafeHtml; description: string; expanded:boolean; clicked:boolean }) => {
         item.htmlString = this.sanitizer.bypassSecurityTrustHtml(item.description);
         item.expanded = false;
+        item.clicked = false; 
         return item;
       });
       console.log('get method is successful');
@@ -88,14 +89,19 @@ getSelectedOption(){
   })
 }
 
+selectedOptionId!:number;
 togglePanel(item: any): void {
   console.log(item)
+  this.descriptions.forEach(panel => panel.clicked = false);
   item.expanded = !item.expanded;
+  item.clicked = !item.clicked; 
+  this.selectedOptionId = item.optionId;
+  console.log(this.selectedOptionId)
 }
 
-confirmOption(optionId:any): void {  
-  console.log('Option confirmed:', optionId);
-  this.requestService.submitSelectedOption(this.requestId, this.empId, optionId).subscribe({
+confirmOption(): void {  
+  console.log('Option confirmed:', this.selectedOptionId);
+  this.requestService.submitSelectedOption(this.requestId, this.empId, this.selectedOptionId).subscribe({
     next: (response: any) => {
       console.log('Post successful:', response);
       this.getAvailableOptionsDescription();
@@ -105,6 +111,7 @@ confirmOption(optionId:any): void {
     },
     complete: () => {
       console.log('Post request completed.');
+      this.router.navigate(['manager/dashboard']);
       this.toastService.showToast("Travel Option Selected!");
     }
   });
@@ -123,5 +130,8 @@ checkRoleOfUser(): boolean {
   }
   // Return a default value if userData is falsy
   return false;
+}
+resetSelection(){
+  this.descriptions.forEach(panel => panel.clicked = false);
 }
 }

@@ -1,0 +1,448 @@
+<div class="req_forms_main_container">
+  <div class="left_section">
+    <div class="nav_items">
+      <ng-container *ngFor="let item of leftSectionNavItems; let i = index">
+        <li
+          (click)="changeNewReqFormSubMenuValue(i)"
+          [ngClass]="
+            newReqFormSubMenuValue !== i ? 'list_item' : 'list_item active'
+          "
+        >
+          {{ item }}
+        </li>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="right_section">
+
+    <div class="form_container">
+
+      <div *ngIf="isLoading" class="loader"></div>
+      <form
+        (ngSubmit)="travelRequestFormSubmitFunction()"
+        [formGroup]="travelRequestForm"
+        class="new_req_form"
+      >
+        <!-- general info section -->
+        <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group">
+          <div class="form_title">
+            <p class="title_text">General Informations</p>
+          </div>
+
+          <!-- View Mode  -->
+          <div
+            *ngIf="
+              currentLoggedInUserRole === 'travelAdmin' ||
+              currentLoggedInUserRole === 'manager' ||
+              currentLoggedInUserRole === 'financePersonnel'
+            "
+            class="form_data_view_container"
+          >
+            <ng-container *ngFor="let entry of getGeneralInfoMapEntries()">
+              <div class="item_card">
+                <p class="item_title">{{ entry[0] }}</p>
+                <p class="item_value">{{ entry[1] }}</p>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="form_input_group_navigator">
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(1)"
+                class="next_btn"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- trip info section -->
+        <div *ngIf="newReqFormSubMenuValue === 1" class="form_input_group">
+          <div class="form_title">
+            <p class="title_text">Trip Informations</p>
+          </div>
+
+          <!-- View Mode  -->
+          <div
+            *ngIf="
+              currentLoggedInUserRole === 'travelAdmin' ||
+              currentLoggedInUserRole === 'manager' ||
+              currentLoggedInUserRole === 'financePersonnel'
+            "
+            class="form_data_view_container"
+          >
+            <ng-container *ngFor="let entry of getTripInfoMapEntries()">
+              <div class="item_card">
+                <p class="item_title">{{ entry[0] }}</p>
+                <p class="item_value">{{ entry[1] }}</p>
+              </div>
+            </ng-container>
+          </div>
+
+          <div class="form_input_group_navigator">
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(0)"
+                class="back_btn"
+              >
+                Back
+              </button>
+              <button
+                (click)="changeNewReqFormSubMenuValue(2)"
+                class="next_btn"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- additional info section -->
+        <div *ngIf="newReqFormSubMenuValue === 2" class="form_input_group">
+          <div class="form_title">
+            <p class="title_text">Additional Informations</p>
+          </div>
+
+          <!-- View Mode  -->
+          <div
+            *ngIf="
+              currentLoggedInUserRole === 'travelAdmin' ||
+              currentLoggedInUserRole === 'manager' ||
+              currentLoggedInUserRole === 'financePersonnel'
+            "
+            class="form_data_view_container"
+          >
+            <ng-container *ngFor="let entry of getAdditionalInfoMapEntries()">
+              <div class="item_card">
+                <p class="item_title">{{ entry[0] }}</p>
+                <p class="item_value">{{ entry[1] }}</p>
+              </div>
+            </ng-container>
+
+            <!-- Priority - Visisble for manager -->
+            <!-- <div
+              *ngIf="currentLoggedInUserRole === 'manager'"
+              class="form_input_container"
+            >
+              <div class="priority_container">
+                <label for="priority">Priority</label>
+
+                <input
+                  type="range"
+                  formControlName="priority"
+                  min="1"
+                  max="3"
+                  class="priority-slider"
+                  id="priority"
+                  (input)="updatePriority($event)"
+                />
+
+                <div class="priority-level" id="priorityLevel">
+                  {{ priorityLevelText }}
+                </div>
+
+                <span
+                  class="form_error"
+                  *ngIf="
+                    travelRequestForm.get('priority')?.invalid &&
+                    travelRequestForm.get('priority')?.touched
+                  "
+                >
+                  Choose a value
+                </span>
+              </div>
+            </div>
+             -->
+          </div>
+
+          <!-- If Employee then submit -->
+          <div
+            *ngIf="currentLoggedInUserRole === 'employee'"
+            class="form_submit_container"
+          >
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(1)"
+                class="cancel_btn"
+              >
+                Back
+              </button>
+              <input
+                class="submit_btn"
+                type="submit"
+                [disabled]="travelRequestForm.invalid"
+                Value="Submit"
+              />
+            </div>
+          </div>
+
+          <!-- If TA or FNP Navigate  -->
+          <div
+            *ngIf="
+              currentLoggedInUserRole === 'manager' ||
+              currentLoggedInUserRole === 'travelAdmin' ||
+              currentLoggedInUserRole === 'financePersonnel'
+            "
+            class="form_input_group_navigator"
+          >
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(1)"
+                type="button"
+                class="back_btn"
+              >
+                Back
+              </button>
+              <button
+                (click)="changeNewReqFormSubMenuValue(3)"
+                type="button"
+                class="next_btn"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+
+          <!-- form input group ends -->
+        </div>
+
+        <!-- Docs Attached -->
+        <div
+          *ngIf="
+            newReqFormSubMenuValue === 3 &&
+            (currentLoggedInUserRole === 'travelAdmin' ||
+              currentLoggedInUserRole === 'manager')
+          "
+          class="form_input_group"
+        >
+          <div class="form_title">
+            <p class="title_text">Documents Attached</p>
+          </div>
+
+          <div class="form_elements">
+            <!-- form input elements ends -->
+          </div>
+
+          <div class="files_section">
+            <app-file-card> </app-file-card>
+          </div>
+
+          <div
+            *ngIf="currentLoggedInUserRole === 'travelAdmin'"
+            class="form_input_group_navigator"
+          >
+            <div class="btn_container">
+              <button
+                type="button"
+                (click)="changeNewReqFormSubMenuValue(2)"
+                class="back_btn"
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                (click)="changeNewReqFormSubMenuValue(4)"
+                class="next_btn"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+
+          <!-- If  Manager then submit -->
+          <div
+            *ngIf="currentLoggedInUserRole === 'manager'"
+            class="form_submit_container"
+          >
+            <div class="reject_btn_container">
+              <button
+                type="button"
+                class="reject_btn"
+                (click)="openRejectionReasonModal()"
+              >
+                Reject
+              </button>
+            </div>
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(2)"
+                class="cancel_btn"
+              >
+                Back
+              </button>
+              <input
+                class="submit_btn"
+                type="submit"
+                [disabled]="travelRequestForm.invalid"
+                Value="Submit"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!--TA- add available options  section -->
+        <div
+          *ngIf="
+            currentLoggedInUserRole === 'travelAdmin' &&
+            newReqFormSubMenuValue === 4
+          "
+          class="form_input_group"
+        >
+          <div class="form_title">
+            <p class="title_text">Available Options</p>
+            <div class="add_btn_container">
+              <button
+                type="button"
+                (click)="openAddTextOptionModal()"
+                class="add_btn"
+              >
+                Add Text
+              </button>
+              <button (click)="openAddOptionModal()" class="add_btn">
+                Add File<i class="ri-attachment-2"></i>
+              </button>
+            </div>
+          </div>
+          <tabset>
+            <tab heading="Images">
+              <div class="selected-images-container">
+                <div *ngFor="let image of selectedImages; let i = index" class="image-item">
+                  <img [src]="imageUrls[i]" alt="Selected Image">
+                  <p>{{ descriptions[i] }}</p>
+                  <button (click)="removeImage(i)" class="remove-btn"><i class="ri-delete-bin-line"></i></button>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Texts">
+              <div class="expansion-panel-container">
+                <div 
+                  *ngFor="let htmlContent of textOption; let i = index" 
+                  class="expansion-panel"
+                >
+                  <div 
+                    class="expansion-panel-header" 
+                    (click)="togglePanel(i)"
+                  >
+                    Option {{ i + 1 }}
+                    <i class="ri-arrow-down-s-line" *ngIf="!isPanelOpen(i)"></i>
+                    <i class="ri-arrow-up-s-line" *ngIf="isPanelOpen(i)"></i>
+                    <button class="delete-button" (click)="removeTextOption(i)"><i class="ri-delete-bin-line"></i></button>
+                  </div>
+                  <div 
+                    class="expansion-panel-content" 
+                    *ngIf="isPanelOpen(i)"
+                    [innerHTML]= "santizieHtml(htmlContent)"
+                  ></div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+          <div class="options_container">
+              <ng-container *ngFor="let item of travelOptionsData">
+                  <div class="option_card" (click)="toggleOptionSelection(item)" [class.selected]="isSelected(item)">
+                      <div class="option_file">
+                          <img class="img" [src]="item.optionFileURL" alt="img_not_found">
+                      </div>
+                      <div class="description">
+                            <p>{{item.description}}</p>
+                      </div>
+                  </div>
+              </ng-container>
+              <!-- <div (click)="openAddOptionModal()" class="new_option_card">
+                <div class="icon_container">
+                  <span><i class="add_icon ri-sticky-note-add-line"></i></span>
+                </div>
+                <div class="text_container">
+                      <span class="text">Add</span>
+                </div>
+            ` </div>  -->
+            <!-- <button  class="delete_btn" (click)="deleteSelectedOptions()"><i class="ri-delete-bin-line"></i></button> -->
+          </div>
+  
+          <div class="form_submit_container">
+            <div class="btn_container">
+              <button
+                (click)="changeNewReqFormSubMenuValue(3)"
+                class="cancel_btn"
+              >
+                Back
+              </button>
+              <input *ngIf="!isCloseVisible"
+                (click)="onTravelAdminOptionsSend()"
+                class="submit_btn"
+                type="button"
+                Value="Send"
+                [disabled]="selectedImages.length === 0 && textOption.length === 0"
+              />
+
+              <!-- if the request is ongoing enable close -->
+                <input *ngIf="isCloseVisible"
+              (click)="onTravelAdminRequestClose()"
+              class="submit_btn"
+              type="button"
+              Value="Close"
+              />
+
+            </div>
+          </div>
+
+          <!-- form input group ends -->
+        </div>
+
+        <!-- FNP - PerDiem Allocation section -->
+        <div
+          *ngIf="
+            currentLoggedInUserRole === 'financePersonnel' &&
+            newReqFormSubMenuValue === 3
+          "
+          class="form_input_group"
+        >
+          <div class="form_title">
+            <h4>Per Diem Allocations</h4>
+
+            <div class="add_btn_container">
+              <button type="button" class="add_btn">Add</button>
+            </div>
+          </div>
+
+          <div class="form_elements">
+            <!-- Modal -->
+          </div>
+
+          <div class="perdiem_section">
+            <app-perdiem-card> </app-perdiem-card>
+          </div>
+
+          <div class="form_submit_container">
+            <div class="btn_container">
+              <button
+                type="button"
+                (click)="changeNewReqFormSubMenuValue(2)"
+                class="cancel_btn"
+              >
+                Back
+              </button>
+              <input
+                class="submit_btn"
+                type="submit"
+                [disabled]="travelRequestForm.invalid"
+                Value="Send"
+              />
+            </div>
+          </div>
+
+          <!-- form input group ends -->
+        </div>
+      </form>
+
+      <!-- form container ends -->
+    </div>
+
+    <!-- right section ends -->
+  </div>
+
+  <!-- req form main container ends -->
+</div>

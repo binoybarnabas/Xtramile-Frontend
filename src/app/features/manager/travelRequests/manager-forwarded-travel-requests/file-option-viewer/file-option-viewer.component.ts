@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Toast } from 'ngx-toastr';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
@@ -67,6 +67,9 @@ export class FileOptionViewerComponent {
     },
     complete: () => {
       console.log('Post request completed.');
+      if(this.receveingOptionId == null){
+        this.hideDiv= false;
+      }
     }
 
     })
@@ -151,18 +154,6 @@ export class FileOptionViewerComponent {
     }
     // Return a default value if userData is falsy
     return false;
-  }
- 
-  checkCurrentUrl() {
-    const currentUrl = this.router.url;
-    console.log(currentUrl);
-    if (currentUrl === "/traveladmin/waiting") {
-      // Hide the div
-      this.hideDiv = false; 
-    } else {
-      // Show the div
-      this.hideDiv = true;
-    }
   }
 
   resetSelection() {

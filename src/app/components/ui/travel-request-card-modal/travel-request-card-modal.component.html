@@ -123,7 +123,7 @@
       </div>
     </div>
 
-    <div class="section_3 action_section">
+    <div *ngIf="status !== 'Closed';" class="section_3 action_section">
       <div class="see_more_btn">
         <span class="btn_text" (click)="navigateHandleUserSelection()"
           >See More</span
@@ -137,7 +137,7 @@
         </div>
 
         <div type="button" class="approve_btn" (click)="onProceedButtonClick()">
-          <span class="btn_label">Proceed</span>
+          <span class="btn_label">Submit</span>
           <!-- <span *ngIf="currentLoggedInUserRole === 'employee'" class="btn_label">Edit</span> -->
           <!-- <span  *ngIf="currentLoggedInUserRole === 'manager'" class="btn_label">Approve</span> -->
         </div>

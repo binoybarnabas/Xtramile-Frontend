@@ -6,6 +6,7 @@ import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.
 import { local } from 'd3';
 import { DatePipe } from '@angular/common';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
+import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 
 @Component({
   selector: 'app-travel-request-card-modal',
@@ -15,6 +16,9 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
 export class  TravelRequestCardModalComponent {
   private _requestId!: number;
   primaryStatus: string = 'Denied';
+
+  status: string = '';
+
 
   @Input()
   set requestId(value: number) {
@@ -30,7 +34,8 @@ export class  TravelRequestCardModalComponent {
   isOptionCardSelected : boolean = false;
   selectedOptionId : number = -1;
 
-  constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService, private datePipe: DatePipe, private managerTravelRequest: ManagerTravelRequestsService
+  constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService, 
+    private managerTravelRequest: ManagerTravelRequestsService, private requestService: RequestService, 
   ) {
   }
 
@@ -47,6 +52,17 @@ export class  TravelRequestCardModalComponent {
       error: (error: Error) => { console.log("problems in fetching data") },
       complete: () => { console.log("get request by id is done") }
     });
+
+    this.requestService.getStatusName(this._requestId).subscribe({
+      next: (data) => {
+        console.log(this._requestId);
+        console.log(data)
+        this.status = data;
+        console.log(this.status )
+      },
+      complete: () => {
+      }
+    })
 
   }
   navigateHandleUserSelection() {
