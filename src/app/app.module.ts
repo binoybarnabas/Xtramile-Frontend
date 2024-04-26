@@ -13,7 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
-import { NewTravelRequestComponent } from './features/travelRequest/new-travel-request/new-travel-request.component';
+import { NewTravelRequestComponent } from './features/travelRequest/travel-request-information/travel-request-information.component';
 import { ManagerSideNavBarComponent } from './components/layout/manager/manager-home/manager-side-nav-bar/manager-side-nav-bar.component';
 import { ManagerMiddleConsoleComponent } from './components/layout/manager/manager-home/manager-middle-console/manager-middle-console.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
@@ -151,6 +151,7 @@ import { ManagerForwadedRequestsComponent } from './features/manager/travelReque
 import { DashCalendarComponent } from './components/ui/dashboard-components/dash-calendar/dash-calendar.component';
 import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
+import { PageActionContainerComponent } from './components/layout/page-action-container/page-action-container.component';
 
 @NgModule({
   declarations: [
@@ -287,7 +288,8 @@ import { TravelMessengerFullScreenComponent } from './features/travelAdmin/trave
     TabbedDataTableComponent,
     DashCalendarComponent,
     TravelMessengerModalComponent,
-    TravelMessengerFullScreenComponent
+    TravelMessengerFullScreenComponent,
+    PageActionContainerComponent
   ]
   ,
 

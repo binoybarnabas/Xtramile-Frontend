@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
-import { NewTravelRequestComponent } from './features/travelRequest/new-travel-request/new-travel-request.component';
+import { NewTravelRequestComponent } from './features/travelRequest/travel-request-information/travel-request-information.component';
 import { EmployeePendingRequestsComponent } from './features/employee/myRequests/employee-pending-requests/employee-pending-requests.component';
 import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';

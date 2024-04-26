@@ -1,19 +1,33 @@
 .file_container {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    transform: 0.3s;
 }
 
 
 .file_container .file_card {
 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: var(--card-bg-color);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 1rem;
     border-radius: var(--normal-border-radius);
-    height: 9rem;
+    height: 8rem;
     position: relative;
-    width: 18rem;
-    margin: 1rem;
+    width: 16rem;
+    margin: 0.5rem;
 
+}
+
+.file_container .file_card .file_name_section{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted var(--ternary-text-color);
+    padding-bottom: 0.5rem;
 }
 
 
@@ -24,9 +38,14 @@
     margin-bottom: 0;
 }
 
+.file_container .file_card .file_name_section .file_size{
+    font-size: var(--extra-small-font-size);
+    color: var(--ternary-text-color);
+}
+
 
 .file_container .file_card .file_name_section .file_name i {
-    color: var(--ternary-text-color);
+    color: var(--second-color);
 }
 
 
@@ -45,33 +64,25 @@
 
 .file_container .file_card .actions {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-
+    width: 100%;
 }
 
 
-.file_container .file_card .download_btn_container {
-    position: absolute;
-    bottom: 1rem;
-    display: flex;
-}
-
-.file_container .file_card .download_btn_container .download_btn {
-    background-color: var(--menu-hover-color);
+.file_container .file_card .actions .action_btn{
+    background-color: var(--secondary-cyan-color);
     color: var(--second-color);
-    padding: 0.5rem 2rem;
-    border-radius: 5px;
-    font-size: var(--form-label-font-size);
-    font-weight: var(--active-font-weight);
-    text-align: center;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: var(--normal-font-size);
     transition: 0.3s;
-    width: fit-content;
-
+    cursor: pointer;
 }
 
-.file_container .file_card .download_btn_container .download_btn:hover {
-    cursor: pointer;
+.file_container .file_card .actions .action_btn:hover{
     background-color: var(--second-color);
     color: var(--card-bg-color);
 }
+
+

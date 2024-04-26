@@ -1,24 +1,17 @@
 .heading_section {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    background-color: var(--menu-hover-color);
+    background-color: var(--card-bg-color);
     /* border-radius: var(--normal-border-radius); */
-    padding: 10px;
-    background-color: var(--secondary-cyan-color);
     /* box-shadow: var(--normal-box-shadow); */
-    /* background-color: rgba(128, 128, 128, 0.1); */
-    height: 50px;
-    margin-bottom: 0.5rem;
-    border-radius: 5px;
-
+    min-height: 42px;
+    border-bottom: 1px dashed var(--primary-text-color);
 }
 
 .heading_section .heading_text {
-    font-size: var(--normal-font-size);
+    font-size: var(--small-font-size);
     font-weight: var(--active-font-weight);
-    /* color: var(--primary-orange-color); */
-    margin-top: auto;
-    margin-bottom: auto;
-    color: var(--third-color);
+    color: var(--primary-text-color);
+    text-transform: uppercase;
 }

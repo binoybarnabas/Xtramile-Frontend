@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewTravelRequestComponent } from './new-travel-request.component';
+import { NewTravelRequestComponent } from './travel-request-information.component';
 
 describe('NewTravelRequestComponent', () => {
   let component: NewTravelRequestComponent;
