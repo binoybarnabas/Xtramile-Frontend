@@ -4,7 +4,7 @@
     border-radius: var(--normal-border-radius);
     padding: 0.5rem;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     /* margin-top: 1rem; */
 } 
 
@@ -134,7 +134,8 @@
     box-shadow: none;
     /* border: 1px solid var(--menu-hover-color); */
     border-radius: 5px;
-    padding: 0;
+    height: calc(100vh - 290px);
+    overflow-y: auto;
 }
 
 .main_container .body_section .table_container{
@@ -162,6 +163,7 @@
 .main_container .body_section .table_container .table_body{
     font-size: var(--form-label-font-size);
     width: 100%;
+
 }
 
 .main_container .body_section .table_container .table_body .body_row{
@@ -169,7 +171,7 @@
     border-bottom: 1px solid var(--menu-hover-color);
     width: 100%;
     /* transition: 0.3s; */
-    
+
 }
 .main_container .body_section .table_container .table_body .body_row:hover{
     background-color: var(--secondary-cyan-color);
@@ -204,3 +206,42 @@
     width: 100%;
 }
 
+.main_container .footer_section{
+    background-color: var(--card-bg-color);
+    height: 42px;
+    border-top: 1px dashed var(--ternary-text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+}
+
+.main_container .footer_section .pagination_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.main_container .footer_section .pagination_container .page_number{
+    background-color: var(--secondary-cyan-color);
+    color: var(--second-color);
+    width: 34px;
+    height: 34px;
+    margin-right: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--form-label-font-size);
+    border-radius: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.main_container .footer_section .pagination_container .page_number:hover{
+    background-color: var(--second-color);
+    color: var(--card-bg-color);
+    font-weight: var(--active-font-weight);
+}

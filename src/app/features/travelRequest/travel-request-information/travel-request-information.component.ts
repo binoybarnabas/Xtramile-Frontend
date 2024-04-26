@@ -12,7 +12,7 @@ import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
 import { UserData } from 'src/app/services/interfaces/iuserData';
-import { DescriptionModalComponent } from 'src/app/components/ui/description-modal/description-modal.component';
+import { DescriptionModalComponent } from 'src/app/components/ui/form-components/description-modal/description-modal.component';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { TextEditorComponent } from 'src/app/components/ui/text-editor/text-editor.component';

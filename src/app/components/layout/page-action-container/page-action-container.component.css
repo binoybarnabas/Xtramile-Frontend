@@ -1,9 +1,0 @@
-.action_container_main{
-    position: absolute;
-    bottom: 20px;
-    display: flex;
-    justify-content: space-evenly;
-    background-color: var(--card-bg-color);
-    border-radius: 8px;
-    box-shadow: var(--normal-box-shadow);
-}
