@@ -40,10 +40,6 @@ import { ManagerClosedTravelRequestsComponent } from './features/manager/travelR
 import { ManagerIncomingTravelSettlementsComponent } from './features/manager/travelSettlements/manager-incoming-travel-settlements/manager-incoming-travel-settlements.component';
 import { ManagerForwardedTravelSettlementsComponent } from './features/manager/travelSettlements/manager-forwarded-travel-settlements/manager-forwarded-travel-settlements.component';
 import { ManagerClosedTravelSettlementsComponent } from './features/manager/travelSettlements/manager-closed-travel-settlements/manager-closed-travel-settlements.component';
-import { ManagerNewRequestComponent } from './features/manager/myRequests/manager-new-request/manager-new-request.component';
-import { ManagerPendingRequestsComponent } from './features/manager/myRequests/manager-pending-requests/manager-pending-requests.component';
-import { ManagerOngoingTravelComponent } from './features/manager/myRequests/manager-ongoing-travel/manager-ongoing-travel.component';
-import { ManagerTravelHistoryComponent } from './features/manager/myRequests/manager-travel-history/manager-travel-history.component';
 import { ManagerNewBillComponent } from './features/manager/mySettlements/manager-new-bill/manager-new-bill.component';
 import { ManagerPendingBillsComponent } from './features/manager/mySettlements/manager-pending-bills/manager-pending-bills.component';
 import { ManagerClosedBillsComponent } from './features/manager/mySettlements/manager-closed-bills/manager-closed-bills.component';
@@ -57,10 +53,6 @@ import { TravelAdminClosedTravelRequestsComponent } from './features/travelAdmin
 import { TravelAdminIncomingTravelSettlementsComponent } from './features/travelAdmin/travelSettlements/travel-admin-incoming-travel-settlements/travel-admin-incoming-travel-settlements.component';
 import { TravelAdminForwardedTravelSettlementsComponent } from './features/travelAdmin/travelSettlements/travel-admin-forwarded-travel-settlements/travel-admin-forwarded-travel-settlements.component';
 import { TravelAdminClosedTravelSettlementsComponent } from './features/travelAdmin/travelSettlements/travel-admin-closed-travel-settlements/travel-admin-closed-travel-settlements.component';
-import { TravelAdminNewRequestComponent } from './features/travelAdmin/myRequests/travel-admin-new-request/travel-admin-new-request.component';
-import { TravelAdminPendingRequestsComponent } from './features/travelAdmin/myRequests/travel-admin-pending-requests/travel-admin-pending-requests.component';
-import { TravelAdminOngoingTravelComponent } from './features/travelAdmin/myRequests/travel-admin-ongoing-travel/travel-admin-ongoing-travel.component';
-import { TravelAdminTravelHistoryComponent } from './features/travelAdmin/myRequests/travel-admin-travel-history/travel-admin-travel-history.component';
 import { FinancePersonnelDashboardComponent } from './features/financePersonnel/finance-personnel-dashboard/finance-personnel-dashboard.component';
 import { FinancePersonnelProfileComponent } from './features/financePersonnel/finance-personnel-profile/finance-personnel-profile.component';
 import { FinancePersonnelPendingTravelSettlementsComponent } from './features/financePersonnel/settlements/finance-personnel-pending-travel-settlements/finance-personnel-pending-travel-settlements.component';
@@ -78,8 +70,6 @@ import { DataTableComponent } from './components/ui/table-components/data-table/
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TableFilterComponent } from './components/ui/table-components/table-filter/table-filter.component';
 import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
-import { ReqFormComponent } from './features/manager/req-form/req-form.component';
-import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component';
 import { ModalComponent } from './components/ui/modal/modal.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -188,10 +178,6 @@ import { PageActionContainerComponent } from './components/layout/page-action-co
     ManagerIncomingTravelSettlementsComponent,
     ManagerForwardedTravelSettlementsComponent,
     ManagerClosedTravelSettlementsComponent,
-    ManagerNewRequestComponent,
-    ManagerPendingRequestsComponent,
-    ManagerOngoingTravelComponent,
-    ManagerTravelHistoryComponent,
     ManagerNewBillComponent,
     ManagerPendingBillsComponent,
     ManagerClosedBillsComponent,
@@ -205,10 +191,6 @@ import { PageActionContainerComponent } from './components/layout/page-action-co
     TravelAdminIncomingTravelSettlementsComponent,
     TravelAdminForwardedTravelSettlementsComponent,
     TravelAdminClosedTravelSettlementsComponent,
-    TravelAdminNewRequestComponent,
-    TravelAdminPendingRequestsComponent,
-    TravelAdminOngoingTravelComponent,
-    TravelAdminTravelHistoryComponent,
     FinancePersonnelDashboardComponent,
     FinancePersonnelProfileComponent,
     FinancePersonnelPendingTravelSettlementsComponent,
@@ -228,8 +210,6 @@ import { PageActionContainerComponent } from './components/layout/page-action-co
     PerdiemCardComponent,
     FileCardComponent,
     LoginComponent,
-    ReqFormComponent,
-    TraveladminReqformComponent,
     ModalComponent,
     EmployeeViewCardComponent,
     ViewAvailableOptionsComponent,

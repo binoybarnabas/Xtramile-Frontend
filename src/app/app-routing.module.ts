@@ -8,10 +8,7 @@ import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
 import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
-import { ManagerOngoingTravelComponent } from './features/manager/myRequests/manager-ongoing-travel/manager-ongoing-travel.component';
 import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
-import { EmployeeDashboardComponent } from './features/employee/employee-dashboard/employee-dashboard.component';
-import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
 import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-home.component';
@@ -21,9 +18,6 @@ import { TravelAdminIncomingTravelRequestsComponent } from './features/travelAdm
 import { TravelAdminWaitingOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-options-travel-requests.component';
 import { TravelAdminSelectedOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-options-travel-requests.component';
 import { TravelAdminClosedTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-closed-travel-requests/travel-admin-closed-travel-requests.component';
-import { TravelAdminOngoingTravelComponent } from './features/travelAdmin/myRequests/travel-admin-ongoing-travel/travel-admin-ongoing-travel.component';
-import { ManagerProfileComponent } from './features/manager/manager-profile/manager-profile.component';
-import { TravelAdminProfileComponent } from './features/travelAdmin/travel-admin-profile/travel-admin-profile.component';
 import { FinancePersonnelHomeComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-home.component';
 import { FinancePersonnelDashboardComponent } from './features/financePersonnel/finance-personnel-dashboard/finance-personnel-dashboard.component';
 import { FinancePersonnelIncomingTravelSettlementsComponent } from './features/financePersonnel/settlements/finance-personnel-incoming-travel-settlements/finance-personnel-incoming-travel-settlements.component';
@@ -31,26 +25,18 @@ import { FinancePersonnelPendingTravelSettlementsComponent } from './features/fi
 import { FinancePersonnelClosedTravelSettlementsComponent } from './features/financePersonnel/settlements/finance-personnel-closed-travel-settlements/finance-personnel-closed-travel-settlements.component';
 import { FinancePersonnelProfileComponent } from './features/financePersonnel/finance-personnel-profile/finance-personnel-profile.component';
 import { ManagerOngoingTravelRequestsComponent } from './features/manager/travelRequests/manager-ongoing-travel-requests/manager-ongoing-travel-requests.component';
-import { ReqFormComponent } from './features/manager/req-form/req-form.component';
-import { TraveladminReqformComponent } from './features/travelAdmin/traveladmin-reqform/traveladmin-reqform.component';
 
-import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequests/view-available-options/view-available-options.component';
 import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
-import { LoginPageComponent } from './components/layout/login-page/login-page.component';
 import { employeeAuthGuard, managerAuthGuard, travelAdminAuthGuard } from './auth.guard';
 import { LoginComponent } from './components/ui/login/login.component';
 
 import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
-import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/selected-option-travel-admin/selected-option-travel-admin.component';
 import { TravelRequestFormComponent } from './features/travellerFeatures/travel-request-form/travel-request-form.component';
 import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
-import { DocumentsComponent } from './components/ui/documents/documents.component';
 import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
 import { TraveladminViewTravelDocumentsComponent } from './features/travelAdmin/travelDocuments/traveladmin-view-travel-documents/traveladmin-view-travel-documents.component';
 import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-ongoing-travel-requests/travel-admin-ongoing-travel-requests.component';
-import { TravelAdminPendingRequestsComponent } from './features/travelAdmin/myRequests/travel-admin-pending-requests/travel-admin-pending-requests.component';
-import { TravelAdminTravelHistoryComponent } from './features/travelAdmin/myRequests/travel-admin-travel-history/travel-admin-travel-history.component';
 import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
 import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
