@@ -10,7 +10,7 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalComponent } from 'src/app/components/ui/modal/modal.component';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
-import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
+import { RequestStatus } from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { DescriptionModalComponent } from 'src/app/components/ui/form-components/description-modal/description-modal.component';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';

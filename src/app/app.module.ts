@@ -69,7 +69,7 @@ import { OptionviewCardComponent } from './features/employee/myRequests/employee
 import { DataTableComponent } from './components/ui/table-components/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TableFilterComponent } from './components/ui/table-components/table-filter/table-filter.component';
-import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
+import { ChangeStatusButtonComponent } from './components/ui/referenceComponents/change-status-button/change-status-button.component';
 import { ModalComponent } from './components/ui/modal/modal.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -95,7 +95,7 @@ import { DashboardUpcomingTripComponent } from './components/ui/referenceCompone
 import { DashboardProgressComponent } from './components/ui/referenceComponents/dashboard-progress/dashboard-progress.component';
 import { DashboardCardComponent } from './components/ui/referenceComponents/dashboard-card/dashboard-card.component';
 import { StatusPipe } from './pipes/Status/status.pipe';
-import { NotificationsComponent } from './components/ui/notifications/notifications.component';
+import { NotificationsComponent } from './components/ui/referenceComponents/notifications/notifications.component';
 import { DashboardMapComponent } from './components/ui/referenceComponents/dashboard-map/dashboard-map.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 // import { BarChartComponent } from './components/ui/bar-chart/bar-chart.component';import { FileUploadComponent } from './file-upload/file-upload.component';
