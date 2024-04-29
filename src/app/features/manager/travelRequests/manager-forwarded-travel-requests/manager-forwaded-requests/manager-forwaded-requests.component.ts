@@ -198,7 +198,8 @@ export class ManagerForwadedRequestsComponent {
   requestId!:number;
   handleSelectedRow(row: any){
     if(this.activeTabIndex === 1 || this.activeTabIndex === 2){
-      this.requestId = row[0];
+      this.requestId = row[1][0];
+      console.log(row);
       const queryParams = {requestId: this.requestId}
       this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: queryParams});
     }

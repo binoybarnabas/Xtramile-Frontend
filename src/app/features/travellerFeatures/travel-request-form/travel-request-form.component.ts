@@ -260,7 +260,7 @@ export class TravelRequestFormComponent {
 
       //Domestic / International
       travelType: new FormControl(this.selectedTravelType, Validators.required),
-      projectId: new FormControl(this.projectCodes[0], Validators.required),
+      //projectId: new FormControl(this.projectCodes[0], Validators.required),
 
       //Additional Info
       cabRequired: new FormControl(false, Validators.required),

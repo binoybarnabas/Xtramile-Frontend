@@ -306,9 +306,41 @@
               </button>
             </div>
           </div>
-
+          <tabset>
+            <tab heading="Images">
+              <div class="selected-images-container">
+                <div *ngFor="let image of selectedImages; let i = index" class="image-item">
+                  <img [src]="imageUrls[i]" alt="Selected Image">
+                  <p>{{ descriptions[i] }}</p>
+                  <button (click)="removeImage(i)" class="remove-btn"><i class="ri-delete-bin-line"></i></button>
+                </div>
+              </div>
+            </tab>
+            <tab heading="Texts">
+              <div class="expansion-panel-container">
+                <div 
+                  *ngFor="let htmlContent of textOption; let i = index" 
+                  class="expansion-panel"
+                >
+                  <div 
+                    class="expansion-panel-header" 
+                    (click)="togglePanel(i)"
+                  >
+                    Option {{ i + 1 }}
+                    <i class="ri-arrow-down-s-line" *ngIf="!isPanelOpen(i)"></i>
+                    <i class="ri-arrow-up-s-line" *ngIf="isPanelOpen(i)"></i>
+                    <button class="delete-button" (click)="removeTextOption(i)"><i class="ri-delete-bin-line"></i></button>
+                  </div>
+                  <div 
+                    class="expansion-panel-content" 
+                    *ngIf="isPanelOpen(i)"
+                    [innerHTML]= "santizieHtml(htmlContent)"
+                  ></div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
           <div class="options_container">
-
               <ng-container *ngFor="let item of travelOptionsData">
                   <div class="option_card" (click)="toggleOptionSelection(item)" [class.selected]="isSelected(item)">
                       <div class="option_file">
@@ -319,23 +351,18 @@
                       </div>
                   </div>
               </ng-container>
-              <div (click)="openAddOptionModal()" class="new_option_card">
+              <!-- <div (click)="openAddOptionModal()" class="new_option_card">
                 <div class="icon_container">
                   <span><i class="add_icon ri-sticky-note-add-line"></i></span>
                 </div>
                 <div class="text_container">
                       <span class="text">Add</span>
                 </div>
-            </div> 
-            <button  class="delete_btn" (click)="deleteSelectedOptions()"><i class="ri-delete-bin-line"></i></button>
+            ` </div>  -->
+            <!-- <button  class="delete_btn" (click)="deleteSelectedOptions()"><i class="ri-delete-bin-line"></i></button> -->
           </div>
   
           <div class="form_submit_container">
-
-                        <div class="reject_btn_container" *ngIf="!isCloseVisible">
-                            <button type="button" class="reject_btn"> Reject</button>
-                        </div>
-
             <div class="btn_container">
               <button
                 (click)="changeNewReqFormSubMenuValue(3)"
@@ -348,6 +375,7 @@
                 class="submit_btn"
                 type="button"
                 Value="Send"
+                [disabled]="selectedImages.length === 0 && textOption.length === 0"
               />
 
               <!-- if the request is ongoing enable close -->

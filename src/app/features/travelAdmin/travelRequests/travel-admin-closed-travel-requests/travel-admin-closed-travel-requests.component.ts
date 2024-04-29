@@ -1,6 +1,5 @@
-import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-request-card-modal/travel-request-card-modal.component';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 
@@ -21,9 +20,8 @@ export class TravelAdminClosedTravelRequestsComponent {
   totalItems = 0;
   selectedRow: any;
   bsModalRef: any;
-  modalService: any;
 
-  constructor(private apiservice: TravelAdminTravelRequestsService, private router: Router, private datePipe: DatePipe){}
+  constructor(private apiservice: TravelAdminTravelRequestsService, private modalService: BsModalService){}
 
   ngOnInit(){
     this.fetchTravelRequest();
@@ -53,8 +51,6 @@ export class TravelAdminClosedTravelRequestsComponent {
     const initialState = {
       requestId: this.selectedRow.requestId
     };
-    const queryParams = { requestId: this.requestId }
-    this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
     this.bsModalRef = this.modalService.show(TravelRequestCardModalComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed

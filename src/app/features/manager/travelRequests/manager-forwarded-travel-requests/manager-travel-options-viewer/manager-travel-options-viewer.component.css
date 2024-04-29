@@ -108,3 +108,23 @@
   border-radius: var(--normal-border-radius);
 }
 
+.clicked_panel {
+  border: 2px solid var(--third-color);
+}
+
+.cancel_btn {
+
+  width: var(--normal-button-width);
+  height: var(--normal-button-height);
+  color: var(--second-color);
+  background-color: transparent;
+  border-radius: var(--small-border-radius);
+  justify-content: center;
+  align-items: center;
+  /* margin-right: 10px; */
+  font-weight: var(--active-font-weight);
+  border: var(--normal-button-border-size) solid var(--second-color);
+  font-size: var(--span-font-size);
+  margin-right: 10px;
+
+}

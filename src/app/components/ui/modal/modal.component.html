@@ -11,12 +11,12 @@
 
         <div class="form_container">
 
-            <form (ngSubmit)="addNewTravelOption()" [formGroup]="travelOptionForm" class="travelOptionForm">
+            <form (ngSubmit)="selectImages()" [formGroup]="travelOptionForm" class="travelOptionForm">
               
               <div class="file_input_container">
 
                 <input type="hidden" formControlName="requestId">
-                <input type="file" class="file_input" formControlName="optionFile"  (change)="onFileChange($event, 'optionFile')" required/>
+                <input type="file" class="file_input" (change)="onFileChange($event)" multiple required/>
 
                 <span class="form_error"
                 *ngIf="travelOptionForm.get('optionFile')?.invalid && travelOptionForm.get('optionFile')?.touched">
@@ -45,7 +45,7 @@
             
               <div class="file_submit_container">
                 <div class="cancel_btn_container">
-                  <button class="cancel_btn" type="reset">Cancel</button>
+                  <button class="cancel_btn" type="reset" (click)="closeModal()">Cancel</button>
                 </div>
                 <div class="submit_btn_container">
                   <button class="submit_btn" type="submit" [disabled]="travelOptionForm.invalid">Add</button>

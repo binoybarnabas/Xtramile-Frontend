@@ -22,7 +22,7 @@
   </div> -->
 </div>
 <div class="text-center mt-3">
-  <button class="btn btn-primary" (click)="saveTravelOption()">Submit</button>
+  <button class="confirm_button" (click)="selectTextOptions()" [disabled]="htmlContent.trim() === ''"  >Submit</button>
 </div>
 
 

@@ -1,7 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { RequestStatus } from 'src/app/components/ui/change-status-button/request-status';
+import { RequestStatus} from 'src/app/components/ui/change-status-button/request-status';
 import { LoginService } from '../loginService/login.service';
 // import { UserData } from '../interfaces/iuserData';
 import { UserData } from 'src/app/services/interfaces/iuserData';
@@ -49,7 +49,6 @@ export class CommonAPIService {
   updateRequestStatus(requestStatus: RequestStatus): Observable<RequestStatus> {
     return this.http.post<RequestStatus>(this.apiURL + 'requeststatus/add', requestStatus)
   }
-
 
   searchCities(value: string) {
     if (!value || value.length < 3) {
@@ -108,6 +107,9 @@ export class CommonAPIService {
   }
   deleteEmployeeDetails(fileId:number){
     return this.http.delete<ResubmitRequest>(`http://localhost:5190/api/traveldocumentfile/deleteDocument/${fileId}`);
+  }
+  addOptionsForRequest(optionsData:any){
+    return this.http.post('http://localhost:5190/api/availableoptions/addoption',optionsData,{ responseType: 'text' });
   }
 }
 
