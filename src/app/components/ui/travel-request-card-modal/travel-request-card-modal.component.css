@@ -65,6 +65,7 @@
 
 .req_card_container .req_card .travel_info .origin_destination_section .travel_mode {
     position: absolute;
+
     width: 35px;
     height: 35px;
     display: flex;
@@ -86,6 +87,19 @@
     font-size: var(--medium-font-size);
     display: inline-block;
     /* color: var(--card-bg-color); */
+
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+    border-radius: 50%;
+}
+
+.req_card_container .req_card .travel_info .origin_destination_section .travel_mode .icon {
+    font-size: var(--medium-font-size);
+    display: inline-block;
+    color: var(--card-bg-color);
+
     /* animation: moveRight 15s ease infinite; */
     /* animation: rotateRight 5s infinite; */
     /* Animation */
