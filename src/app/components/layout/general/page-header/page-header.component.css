@@ -1,0 +1,17 @@
+.heading_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--card-bg-color);
+    /* border-radius: var(--normal-border-radius); */
+    /* box-shadow: var(--normal-box-shadow); */
+    min-height: 42px;
+    border-bottom: 1px dashed var(--primary-text-color);
+}
+
+.heading_section .heading_text {
+    font-size: var(--small-font-size);
+    font-weight: var(--active-font-weight);
+    color: var(--primary-text-color);
+    text-transform: uppercase;
+}

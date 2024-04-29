@@ -9,13 +9,12 @@
 .data_table_container .dynamic_table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   border-style: none;
   border-radius: var(--normal-border-radius);
   background-color: var(--card-bg-color);
   box-shadow: var(--normal-box-shadow);
-
 }
 
 .data_table_container .dynamic_table .table_heading {
@@ -43,26 +42,20 @@
   padding: 0.5rem;
   text-align: left;
 
-
 }
-
-
-
-
-
-
-
 
 .data_table_container .dynamic_table .table_body {
   background-color: var(--card-bg-color);
   transition: 0.3s;
   border-radius: var(--normal-border-radius);
-
 }
 
 .data_table_container .dynamic_table .table_body .table_body_row {
   font-size: var(--form-label-font-size);
   height: 40px;
+  max-height: 40px;
+  border-left: 2px solid var(--card-bg-color);
+  border-right: 2px solid var(--card-bg-color);
 }
 
 .data_table_container .dynamic_table .table_body .table_body_row:hover {

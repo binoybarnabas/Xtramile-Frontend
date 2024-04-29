@@ -9,7 +9,7 @@ import { SideNavBarService } from 'src/app/services/employeeServices/layoutServi
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
-import { EmployeeDetails } from '../../travelRequest/new-travel-request/request';
+import { EmployeeDetails } from '../../travelRequest/travel-request-information/request';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { slLocale } from 'ngx-bootstrap/chronos';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';

@@ -12,7 +12,7 @@ export class EmployeeClosedRequestsComponent {
 
   requestData = []
 
-  empId = 17
+  empId: number = 0
   pageSize = 10;
   pageIndex = 1;
   totalCount = 0;
@@ -23,6 +23,11 @@ export class EmployeeClosedRequestsComponent {
   pageHeading: string = 'Travel History'
 
   ngOnInit() {
+    const userData = localStorage.getItem('userData');
+    if(userData){
+      const userDataParsed = JSON.parse(userData);
+      this.empId = userDataParsed.empId
+    }
     this.fetchRequestHistory();
   }
 
