@@ -248,13 +248,8 @@ export class NewTravelRequestComponent {
           this.travelRequestDetailViewModel = data
           // Getting the employee profile info
 
-          this.getTravelOptionsByReqId(data.requestId)
-          this.isFileSubscription = this.commonApiService.isFile$.subscribe(isFile => {
-            if (isFile) {
-              this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId);
-            }
-          });
-          console.log(data)
+
+        
 
           //if logged in user is travel admin and request status is ongoing, enable the close button
           if(this.userData.role =='Manager' && this.userData.department == 'TA' ){
@@ -880,27 +875,27 @@ export class NewTravelRequestComponent {
 
 
   //Get Travel Options By Req Id
-  getTravelOptionsByReqId(reqId: number) {
+  // getTravelOptionsByReqId(reqId: number) {
 
-    this.requestService.getTravelOptionsByReqId(reqId).subscribe({
-      next: (data) => {
+  //   this.requestService.getTravelOptionsByReqId(reqId).subscribe({
+  //     next: (data) => {
 
-        this.travelOptionsData = data;
+  //       this.travelOptionsData = data;
 
-        console.log("TRAVEL Options")
-        console.log(this.travelOptionsData)
-        //console.log("OPTIONS DATA")
-        //console.log(data);
+  //       console.log("TRAVEL Options")
+  //       console.log(this.travelOptionsData)
+  //       //console.log("OPTIONS DATA")
+  //       //console.log(data);
 
-      },
-      error: (error: Error) => {
-        console.log("Error has occurred, " + error.message);
-      },
-      complete: () => {
-        console.log("Completed");
-      }
-    });
-  }
+  //     },
+  //     error: (error: Error) => {
+  //       console.log("Error has occurred, " + error.message);
+  //     },
+  //     complete: () => {
+  //       console.log("Completed");
+  //     }
+  //   });
+  // }
 
 
   onTravelAdminRequestClose() {

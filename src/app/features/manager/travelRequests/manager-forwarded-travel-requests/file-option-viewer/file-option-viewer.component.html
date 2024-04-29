@@ -2,14 +2,14 @@
 <!-- <h3 class="main_heading  mt-5 mb-3 ">Images</h3> -->
 
 <ng-container *ngIf="travelOptionsData.length === 0; else elseblockone">
-  <p>There are no file options, check text options</p>
+  <p>There are no file options, click on text options</p>
 </ng-container>
 <ng-template #elseblockone>
   <div class="travel_options_main_container">
     <div class="travel_options_container">
       <ng-container *ngFor="let item of travelOptionsData">
         <div
-          (click)="receveingOptionId == null ? selectOption(item) : null"
+          (click)="receveingOptionId == null || editable? selectOption(item) : null"
           [ngClass]="{ selected: item === selectedOption }"
           class="option_card"
         >
@@ -25,6 +25,10 @@
           </div>
         </div>
       </ng-container>
+      <div *ngIf="editable" >
+        <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
+        <button class="update_btn" (click)="updateOption()">Update</button>
+      </div>
     </div>
     <div
       class="actions_container"
@@ -54,14 +58,16 @@
   <h3 class="main_heading mt-5 mb-3">Selected option</h3>
   <ng-container
     *ngIf="
-      travelOptionsData.length === 0 || receveingOptionId == null;
+      receveingOptionId == null;
       else elseblock
     "
   >
-    <p>No selected file option</p>
   </ng-container>
   <ng-template #elseblock>
     <div class="travel_options_container">
+      <div *ngIf="!shouldDisplayButton()">
+        Click on text options to view the selected option
+      </div>
       <ng-container *ngFor="let item of travelOptionsData; let i = index">
         <div
           *ngIf="travelOptionId[i] === receveingOptionId"
@@ -81,10 +87,9 @@
     class="text-center mt-5"
     *ngIf="
       !buttonActivate &&
-      receveingOptionId != null &&
-      travelOptionsData.length != 0
+       shouldDisplayButton()
     "
-    (click)="onTravelAdminConfirm()"
+    
   >
     <app-change-status-button
       [name]="name_ta"
@@ -95,4 +100,5 @@
     >
     </app-change-status-button>
   </div>
+  <button *ngIf="!buttonActivate" class= "edit_btn" (click)="editOption()">Edit Option</button>
 </div>

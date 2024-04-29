@@ -54,27 +54,9 @@ export class FileOptionViewerComponent {
       }
     })
     this.getTravelOptionsByReqId(this.reqId)
-    // this.getTravelOptionsByReqId(96)
 
      //2
-     this.requestService.selectedOptionFromEmployee(this.reqId).subscribe({
-      next: (data) =>{
-      this.receveingOptionId = data
-      console.log(data)
-    },
-    error: (error: any) => {
-      console.error('Post failed:', error);
-    },
-    complete: () => {
-      console.log('Post request completed.');
-      if(this.receveingOptionId == null){
-        this.hideDiv= false;
-      }
-    }
-
-    })
-
-    
+    this.selectedOptionFromManager();
   }
 
   //Get Travel Options By Req Id
@@ -105,6 +87,7 @@ export class FileOptionViewerComponent {
     // alert(this.selectedOptionId);
     this.selectedOption = option;
     this.selectedOptionId = option.optionId;
+    console.log(this.selectedOptionId);
   }
 
 
@@ -125,16 +108,14 @@ export class FileOptionViewerComponent {
           //Change Alert to PopUp
           // Reset the selectedOption after a successful post
           this.selectedOption = null;
-          this.getTravelOptionsByReqId(this.reqId)
+          this.router.navigate(['/manager/dashboard']);
+          this.toastService.showToast("Travel Option Selected!");
         },
         error: (error: any) => {
           console.error('Post failed:', error);
         },
         complete: () => {
           console.log('Post request completed.');
-          this.router.navigate(['manager/dashboard']);
-          this.toastService.showToast("Travel Option Selected!");
-          // alert("Submitted!")
         }
       });
     }
@@ -163,5 +144,53 @@ export class FileOptionViewerComponent {
   onTravelAdminConfirm(){
     this.toastService.showToast("Confirmation sent successfully.")
     this.router.navigate(['/traveladmin/approved_requests']);
+  }
+  shouldDisplayButton(): boolean {
+    return this.travelOptionId.some(id => id === this.receveingOptionId);
+  }
+  editable:boolean = false;
+  editOption(){
+    this.editable = !this.editable;
+  }
+
+  updateOption(){
+    const updatedOption = {
+      requestId:this.reqId,
+      empId:this.empId,
+      optionId: this.selectedOptionId
+    }
+    this.requestService.updateSelectedOption(updatedOption).subscribe({
+      next:() =>{
+        this.selectedOptionFromManager();
+      },
+      error:(error:Error)=>{
+        console.log('Error occured while updating option');
+      },
+      complete:() =>{
+        console.log('Option has been updated');
+      }
+    })
+  }
+
+  selectedOptionFromManager(){
+    this.requestService.selectedOptionFromEmployee(this.reqId).subscribe({
+      next: (data) =>{
+      this.receveingOptionId = data
+      console.log(data)
+    },
+    error: (error: any) => {
+      console.error('Post failed:', error);
+    },
+    complete: () => {
+      console.log('Post request completed.');
+      if(this.receveingOptionId == null){
+        this.hideDiv= false;
+      }
+    }
+    })
+  }
+  cancelEdit(){
+    this.editable = false;
+    this.selectedOption = null;
   }
 }

@@ -133,4 +133,9 @@ export class RequestService {
     console.log(optionIds)
     return this.http.delete<any>('http://localhost:5190/api/availableoptions/deleteTravelOptions', {body: optionIds});
   }
+
+  updateSelectedOption(updatedOption:any):Observable<any>{
+    console.log(updatedOption);
+    return this.http.patch<any>('http://localhost:5190/api/availableoptions/updateSelectedTravelOption',updatedOption);
+  }
 }
