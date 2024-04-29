@@ -28,7 +28,7 @@
     display: flex;
     padding: 1.2rem;
     padding-top: 0.5rem;
-    border-bottom: 0.09rem dashed var(--ternary-text-color);
+    border-bottom: 1px dashed var(--ternary-text-color);
     position: relative;
     justify-content: space-between;
 }
@@ -65,6 +65,29 @@
 
 .req_card_container .req_card .travel_info .origin_destination_section .travel_mode {
     position: absolute;
+
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-cyan-color);
+    border-radius: 7px;
+    color: var(--second-color);
+    transition: 0.3s;
+}
+
+.req_card_container .req_card .travel_info .origin_destination_section .travel_mode:hover{
+    background-color: var(--second-color);
+    color: var(--card-bg-color);
+}
+
+
+.req_card_container .req_card .travel_info .origin_destination_section .travel_mode .icon {
+    font-size: var(--medium-font-size);
+    display: inline-block;
+    /* color: var(--card-bg-color); */
+
     width: 10%;
     display: flex;
     justify-content: center;
@@ -76,8 +99,9 @@
     font-size: var(--medium-font-size);
     display: inline-block;
     color: var(--card-bg-color);
+
     /* animation: moveRight 15s ease infinite; */
-    animation: rotateRight 5s infinite;
+    /* animation: rotateRight 5s infinite; */
     /* Animation */
 }
 
