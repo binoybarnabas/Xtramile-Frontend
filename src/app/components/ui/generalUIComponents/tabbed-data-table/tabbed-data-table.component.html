@@ -1,0 +1,119 @@
+<div class="main_container">
+
+  <div class="header_section">
+    <div class="tab_container">
+      <ng-container *ngFor="let tab of tabs; let i = index">
+        <div
+          (click)="onTabChange(i)"
+          class="tab_card"
+          [class.active]="activeTabIndex === i"
+        >
+          <span>{{ tab.name }}</span>
+        </div>
+      </ng-container>
+    </div>
+
+    <div
+      *ngIf="isSearchFilterNeeded === 'yes'"
+      class="filter_and_search_container"
+    >
+      <div class="search_container">
+        <div class="icon_container">
+          <i class="search_icon ri-search-2-line"></i>
+        </div>
+        <input
+          class="text_input"
+          type="text"
+          placeholder="Search Employee Name"
+          (input)="onSearch()"
+          [(ngModel)]="searchInputValue"
+        />
+      </div>
+
+      <div class="filter_container">
+        <ng-container *ngIf="activeTabIndex === 2; else displayFilter">
+          <div ngClass="filter_card inactive"></div>
+        </ng-container>
+        <ng-template #displayFilter>
+          <ng-container *ngFor="let item of filters">
+            <div
+              (click)="toggleFilter(item.filterId)"
+              [ngClass]="
+                item.isActive === 'yes' ? 'filter_card active' : 'filter_card'
+              "
+            >
+              <span class="filter_text">{{ item.filterName }}</span>
+            </div>
+          </ng-container>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="body_section">
+    <div *ngFor="let tab of tabs; let i = index" class="table_container">
+      <table *ngIf="activeTabIndex === i" class="table_main">
+        <thead class="table_heading">
+          <tr class="heading_row">
+            <th *ngFor="let heading of tab.headings">
+              {{ heading }}
+            </th>
+          </tr>
+        </thead>
+
+        <ng-container *ngIf="tab.entries.length > 0; else noContent">
+          <tbody class="table_body">
+            <tr
+              *ngFor="let row of tab.entries"
+              class="body_row"
+              (click)="onRowClick(tab.name, row)"
+            >
+              <td
+                *ngFor="let entry of row; let i = index"
+                class="body_col_item"
+              >
+                <ng-container
+                  *ngIf="tab.headings[i] !== 'Actions'; else actionCell"
+                >
+                  {{ entry }}
+                </ng-container>
+                <ng-template #actionCell>
+                  <div class="action_icons">
+                    <div class="view_icon">
+                      <a
+                        class="ri-eye-line"
+                        href="{{ entry }}"
+                        target="_blank"
+                      ></a>
+                    </div>
+                    <div class="download_icon">
+                      <a
+                        class="ri-download-line"
+                        (click)="onDownloadFileClick(entry, tab.name, row[1])"
+                      ></a>
+                    </div>
+                  </div>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </ng-container>
+        <ng-template #noContent>
+          <div *ngIf="tab.entries.length === 0" class="no_record_container">
+            <app-empty-data></app-empty-data>
+          </div>
+        </ng-template>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer_section">
+    <div class="pagination_container">
+      <i class="page_number ri-arrow-left-wide-fill"></i>
+      <span class="page_number">1</span>
+      <span class="page_number">2</span>
+      <i class="page_number ri-arrow-right-wide-fill"></i>
+    </div>
+  </div>
+
+</div>

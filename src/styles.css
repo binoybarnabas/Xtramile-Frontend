@@ -780,9 +780,9 @@ body {
   transition: 0.6s;
   /* padding: 1rem; */
   /* background-size: contain; */
-  min-height: 100%;
+  height: calc(100vh - 75px);
   padding: 0.5rem;
-
+  overflow-y: auto;
 }
 
 /* Common Button Styles */

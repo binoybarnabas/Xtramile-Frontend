@@ -1,0 +1,245 @@
+<div class="req_forms_main_container">
+
+  <!-- heading bar -->
+  <div class="heading_section">
+    <div class="section_heading_card">
+      <p class="text">{{requestDetailsPageHeading}}</p>
+    </div>
+  </div>
+
+  <!-- body  -->
+  <div class="body_section">
+    <!-- left sub menu -->
+    <div class="left_section">
+      <div class="nav_items">
+        <ng-container *ngFor="let item of leftSectionNavItems; let i = index">
+          <li
+            (click)="changeNewReqFormSubMenuValue(i)"
+            [ngClass]="
+              newReqFormSubMenuValue !== i ? 'list_item' : 'list_item active'
+            "
+          >
+            {{ item }}
+          </li>
+        </ng-container>
+      </div>
+    </div>
+  
+    <div class="right_section">
+  
+      <div class="form_container">
+  
+        <div *ngIf="isLoading" class="loader"></div>
+        <form
+          [formGroup]="travelRequestForm"
+          class="new_req_form"
+        >
+          <!-- general info section -->
+          <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group">
+   
+            <!-- View Mode  -->
+            <div
+              *ngIf="
+                currentLoggedInUserRole === 'travelAdmin' ||
+                currentLoggedInUserRole === 'manager' ||
+                currentLoggedInUserRole === 'financePersonnel'
+              "
+              class="form_data_view_container"
+            >
+              <ng-container *ngFor="let entry of getGeneralInfoMapEntries()">
+                <div class="item_card">
+                  <p class="item_title">{{ entry[0] }}</p>
+                  <p class="item_value">{{ entry[1] }}</p>
+                </div>
+              </ng-container>
+            </div>
+  
+          </div>
+  
+          <!-- trip info section -->
+          <div *ngIf="newReqFormSubMenuValue === 1" class="form_input_group">
+
+            <!-- View Mode  -->
+            <div
+              *ngIf="
+                currentLoggedInUserRole === 'travelAdmin' ||
+                currentLoggedInUserRole === 'manager' ||
+                currentLoggedInUserRole === 'financePersonnel'
+              "
+              class="form_data_view_container"
+            >
+              <ng-container *ngFor="let entry of getTripInfoMapEntries()">
+                <div class="item_card">
+                  <p class="item_title">{{ entry[0] }}</p>
+                  <p class="item_value">{{ entry[1] }}</p>
+                </div>
+              </ng-container>
+            </div>
+  
+          </div>
+  
+          <!-- additional info section -->
+          <div *ngIf="newReqFormSubMenuValue === 2" class="form_input_group">
+
+            <!-- View Mode  -->
+            <div
+              *ngIf="
+                currentLoggedInUserRole === 'travelAdmin' ||
+                currentLoggedInUserRole === 'manager' ||
+                currentLoggedInUserRole === 'financePersonnel'
+              "
+              class="form_data_view_container"
+            >
+              <ng-container *ngFor="let entry of getAdditionalInfoMapEntries()">
+                <div class="item_card">
+                  <p class="item_title">{{ entry[0] }}</p>
+                  <p class="item_value">{{ entry[1] }}</p>
+                </div>
+              </ng-container>
+  
+            </div>
+  
+          </div>
+  
+          <!-- Docs Attached -->
+          <div
+            *ngIf="
+              newReqFormSubMenuValue === 3 &&
+              (currentLoggedInUserRole === 'travelAdmin' ||
+                currentLoggedInUserRole === 'manager')
+            "
+            class="form_input_group"
+          >
+            
+            <div class="files_section">
+              <app-file-card> </app-file-card>
+            </div>
+  
+          </div>
+  
+          <!--TA- add available options  section -->
+          <div
+            *ngIf="
+              currentLoggedInUserRole === 'travelAdmin' &&
+              newReqFormSubMenuValue === 4
+            "
+            class="travel_option_section"
+          >
+
+            <div class="head_section">
+
+                <div (click)="deleteSelectedOptions()" class="del_btn">
+                  <span><i class="ri-delete-bin-2-fill"></i></span>
+                </div>
+
+                <div class="title">
+                  <span>Update Travel Options</span>
+                </div>
+
+                <div (click)="openAddOptionModal()" class="add_btn">
+                  <span> Add</span>
+                </div>
+
+            </div>
+  
+            <div class="option_container">
+  
+                <ng-container *ngFor="let item of travelOptionsData">
+                    <div class="option_card" (click)="toggleOptionSelection(item)" [class.selected]="isSelected(item)">
+                        <div class="option_file">
+                            <img class="img" [src]="item.optionFileURL" alt="img_not_found">
+                        </div>
+                        <div class="description">
+                              <p>{{item.description}}</p>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <div class="option_card">
+                    <div class="img_file">
+                      <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
+                    </div>
+                </div>
+                <div class="option_card active">
+                  <div class="img_file">
+                    <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
+                  </div>
+              </div>
+              <div class="option_card">
+                <div class="img_file">
+                  <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
+                </div>
+              </div>
+              <div class="option_card">
+                <div class="img_file">
+                  <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
+                </div>
+              </div>
+
+              <div class="option_card">
+                <div class="text_option">
+                  <p>Lorem Ipsum is simply dummy text in the printing and typesetting industry</p>
+                </div>
+              </div>
+
+            </div>
+    
+            <!-- form input group ends -->
+          </div>
+  
+          <!-- FNP - PerDiem Allocation section -->
+          <div
+            *ngIf="
+              currentLoggedInUserRole === 'financePersonnel' &&
+              newReqFormSubMenuValue === 3
+            "
+            class="form_input_group"
+          >
+            <div class="form_title">
+              <h4>Per Diem Allocations</h4>
+  
+              <div class="add_btn_container">
+                <button type="button" class="add_btn">Add</button>
+              </div>
+            </div>
+  
+            <div class="form_elements">
+              <!-- Modal -->
+            </div>
+  
+            <div class="perdiem_section">
+              <app-perdiem-card> </app-perdiem-card>
+            </div>
+  
+            <!-- form input group ends -->
+          </div>
+
+        </form>
+  
+        <!-- form container ends -->
+      </div>
+  
+      <!-- right section ends -->
+    </div>
+  
+  </div>
+
+  <!-- action bar -->
+  <div class="action_section">
+    
+    <div class="btn_container">
+
+      <div class="back_btn_card">
+        <button (click)="onBackBtnClick()" class="btn">{{backBtnTitle}}</button>
+      </div>
+
+      <div class="forward_btn_card">
+        <button (click)="onForwardBtnClick()" class="btn">{{forwardBtnTitle}}</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- req form main container ends -->
+</div>

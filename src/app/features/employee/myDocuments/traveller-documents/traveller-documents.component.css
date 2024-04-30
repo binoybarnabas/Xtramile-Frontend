@@ -69,7 +69,7 @@
   display: flex;
   flex-direction: column;
   background-color: var(--card-bg-color);
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: var(--normal-border-radius);
   box-shadow: var(--normal-box-shadow);
 }
@@ -82,8 +82,11 @@
   justify-content: center;
   align-items: center;
   font-weight: var(--active-font-weight);
-  background-color: var(--secondary-cyan-color);
-  color: var(--third-color);
+  background-color: var(--card-bg-color);
+  color: var(--primary-text-color);
+  border-bottom: 1px dashed var(--ternary-text-color);
+  border-radius: 0;
+  height: 42px;
 }
 
 .main_container
@@ -93,6 +96,12 @@
   border-radius: 0;
   background-color: transparent;
   box-shadow: none;
+}
+
+.main_container .upload_form_container .document_upload_form_modal .body_section .upload_form .input_field_container{
+  height: calc(100vh - 215px);
+  overflow-y: auto;
+  padding: 0.5rem;
 }
 
 .main_container
@@ -115,7 +124,7 @@
   align-items: center;
   /* background-color: var(--card-bg-color); */
   /* box-shadow: var(--normal-box-shadow); */
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 5px;
   padding: 5px;
   width: fit-content;
@@ -348,7 +357,7 @@
   .actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .main_container

@@ -1,5 +1,8 @@
 <div class="req_card_container">
-  <div class="req_card">
+
+
+  <!-- req details -->
+  <div *ngIf="visibleSectionName === 'request_details' " class="req_card">
     <div class="section_1 general_info">
       <!-- <span class="left_dot"></span> -->
 
@@ -120,7 +123,7 @@
       </div>
     </div>
 
-    <div class="section_3 action_section">
+    <div *ngIf="status !== 'Closed';" class="section_3 action_section">
       <div class="see_more_btn">
         <span class="btn_text" (click)="navigateHandleUserSelection()"
           >See More</span
@@ -141,4 +144,81 @@
       </div>
     </div>
   </div>
+
+  <!-- options details -->
+  <div *ngIf="visibleSectionName === 'add_travel_option' " class="req_card_add_option_container">
+
+    <div class="heading_section">
+      <p class="title">ADD TRAVEL OPTIONS</p>
+      <div *ngIf="!isOptionCardSelected"  class="add_btn"> 
+        <span><i class="ri-apps-2-add-line"></i></span>
+      </div>
+      <div *ngIf="isOptionCardSelected" class="del_btn">
+        <span><i class="ri-delete-bin-2-fill"></i></span>
+      </div>
+   
+    </div>
+
+    <div class="body_section">
+
+      <div class="top_section">
+        <div class="tab_container">
+          <div (click) = "switchOptionTab(0)" [ngClass]=" visibleOptionTabId === 0 ? 'tab active' : 'tab'" >
+            <i class="icon ri-image-line"></i> 
+            <span class="text">Images</span>
+          </div>
+
+          <div (click) = "switchOptionTab(1)" [ngClass]=" visibleOptionTabId === 1 ? 'tab active' : 'tab'" >
+             <i class="icon ri-text-snippet"></i>
+              <span class="text">Texts</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="visibleOptionTabId === 0" class="img_container">
+
+        <div (click) = "onOptionCardSelected(0)" [ngClass]="selectedOptionId === 0 ? 'img_card active' : 'img_card' " >
+          <img class="img" src="https://www.shutterstock.com/image-vector/pattern-airline-boarding-pass-ticket-260nw-375639655.jpg" alt="">
+        </div>
+
+        <div (click) = "onOptionCardSelected(1)" [ngClass]="selectedOptionId === 1 ? 'img_card active' : 'img_card' " >
+          <img class="img" src="https://d1jcsq1lz9cdtw.cloudfront.net/media/slider_images/Zapurza-Slider_1.jpg" alt="">
+        </div>
+
+        <div (click) = "onOptionCardSelected(2)" [ngClass]="selectedOptionId === 2 ? 'img_card active' : 'img_card' " >
+          <img class="img" src="https://thumbs.dreamstime.com/b/realistic-airline-ticket-boarding-pass-design-blue-unreal-flight-time-passenger-name-vector-illustration-pattern-136281503.jpg" alt="">
+        </div>
+
+      </div>
+
+      <div *ngIf="visibleOptionTabId === 1" class="text_container">
+        <div (click) = "onOptionCardSelected(3)" [ngClass]="selectedOptionId === 3 ? 'text_card active' : 'text_card' " >
+          <p>COK - TVM</p>
+          <p>IRCTC</p>
+          <span>12.00 - 04.00</span>
+        </div>
+        <div (click) = "onOptionCardSelected(4)" [ngClass]="selectedOptionId === 4 ? 'text_card active' : 'text_card' " >
+          <p>COK - TVM</p>
+          <span>12.00 - 04.00</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="action_section">
+      
+      <div (click)="moveToSection('request_details')" class="back_btn">
+        <span class="btn_label">Back</span>
+      </div>
+
+      <div class="forward_btn">
+        <span class="btn_label">Submit</span>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
 </div>

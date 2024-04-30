@@ -47,12 +47,15 @@ export class TravelAdminDashboardComponent implements OnInit {
     }
   ];
 
+travelAdminNotification : any[] = []
+
 fetchDataAndUpdateTabs() {
   this.service.getAllTravelRequestDashboard().subscribe((data: any) => {
     this.tabs[0].entries = [];
     this.tabs[1].entries = [];
     this.tabs[2].entries = [];
     this.tabs[3].entries = [];
+    this.travelAdminNotification = [];
     console.log('travel admin dashboard request',data)
 
     data.incomingRequests.forEach((request: any) => {
@@ -99,6 +102,9 @@ fetchDataAndUpdateTabs() {
         'Trip Completed'
       ] as TabEntry);
     });
+
+    this.travelAdminNotification = data.notifications;
+    // console.log("travel admin notification",this.travelAdminNotification)
 });
 }
 navigateWhenRowClicked(rowClick: string, row: TabEntry) {

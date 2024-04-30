@@ -9,13 +9,11 @@ import { Notification } from 'src/app/services/interfaces/iNotification';
 export class DashboardNotificationComponent {
 
   @Input() notifications: Notification[] = [];
-
   constructor() { 
 
   }
 
   ngOnInit(): void {
     // Initialize the array with notifications
-   
   }
 }

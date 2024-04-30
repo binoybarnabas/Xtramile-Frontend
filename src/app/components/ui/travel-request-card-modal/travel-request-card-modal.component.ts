@@ -6,6 +6,7 @@ import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.
 import { local } from 'd3';
 import { DatePipe } from '@angular/common';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
+import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 
 @Component({
   selector: 'app-travel-request-card-modal',
@@ -16,6 +17,8 @@ export class  TravelRequestCardModalComponent {
   private _requestId!: number;
   primaryStatus: string = 'Denied';
 
+  status: string = '';
+
 
   @Input()
   set requestId(value: number) {
@@ -24,8 +27,15 @@ export class  TravelRequestCardModalComponent {
   }
 
   travelRequestDetailViewModel!: TravelRequestDetailViewModel
+  
+  //isProceedBtnClicked : boolean = true;
+  visibleSectionName : string = "request_details";
+  visibleOptionTabId: number = 0;
+  isOptionCardSelected : boolean = false;
+  selectedOptionId : number = -1;
 
-  constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService, private datePipe: DatePipe, private managerTravelRequest: ManagerTravelRequestsService
+  constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService, 
+    private managerTravelRequest: ManagerTravelRequestsService, private requestService: RequestService, 
   ) {
   }
 
@@ -42,6 +52,17 @@ export class  TravelRequestCardModalComponent {
       error: (error: Error) => { console.log("problems in fetching data") },
       complete: () => { console.log("get request by id is done") }
     });
+
+    this.requestService.getStatusName(this._requestId).subscribe({
+      next: (data) => {
+        console.log(this._requestId);
+        console.log(data)
+        this.status = data;
+        console.log(this.status )
+      },
+      complete: () => {
+      }
+    })
 
   }
   navigateHandleUserSelection() {
@@ -104,7 +125,8 @@ export class  TravelRequestCardModalComponent {
       const userDataParsed = JSON.parse(userData)
 
       if (userDataParsed.role == 'Manager' && userDataParsed.department == 'TA') {
-        this.navigateToAddOptions();
+        //this.navigateToAddOptions();
+        this.visibleSectionName = 'add_travel_option';
       }
       else if (userDataParsed.role == 'Manager') {
         this.onManagerForwardTravelRequestForm();
@@ -112,6 +134,30 @@ export class  TravelRequestCardModalComponent {
     }    
   }
 
+
+  //method to move to another section
+  moveToSection(sectionName: string){
+    this.visibleSectionName = sectionName;
+  }
+
+  //method to switch tabs
+  switchOptionTab(newTabId: number){
+    this.visibleOptionTabId = newTabId;
+  }
+
+  //toggle visibility of delete btn and add btn
+  onOptionCardSelected(optionId: number){
+    
+    
+    if(this.isOptionCardSelected){
+      this.isOptionCardSelected = false;
+      this.selectedOptionId = -1;
+    }else{
+      this.isOptionCardSelected = true;
+      this.selectedOptionId = optionId;
+    }
+
+  }
 
 
 }

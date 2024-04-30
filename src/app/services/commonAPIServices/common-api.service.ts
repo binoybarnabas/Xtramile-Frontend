@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { RequestStatus} from 'src/app/components/ui/change-status-button/request-status';
+import { RequestStatus} from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
 import { LoginService } from '../loginService/login.service';
 // import { UserData } from '../interfaces/iuserData';
 import { UserData } from 'src/app/services/interfaces/iuserData';
