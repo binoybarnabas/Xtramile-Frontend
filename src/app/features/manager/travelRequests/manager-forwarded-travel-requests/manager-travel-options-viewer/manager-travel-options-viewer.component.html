@@ -25,7 +25,8 @@
           [empId]="empId"
           [requestId]="requestId"
           [primaryStatusCode]="primaryStatusCode_ta"
-          [secondaryStatusCode]="secondaryStatusCode_ta">
+          [secondaryStatusCode]="secondaryStatusCode_ta"
+          (externalpostTriggered)="navigateToTAOngoing()">
         </app-change-status-button>
       </div>
       <button class= "edit_btn" (click)="editOption()">Edit Option</button>

@@ -37,11 +37,6 @@ export class ChangeStatusButtonComponent {
 
   async updateRequestStatus() {
 
-    if(this.externalpostTriggered){
-      this.externalpostTriggered.emit()
-    }
-
-  
     this.requestStatus.requestId = this.requestId
     this.requestStatus.empId = this.empId;
     //await and firstValueFrom are used to first get the id from the asynchronous function
@@ -64,11 +59,10 @@ export class ChangeStatusButtonComponent {
       },
       complete: () => {
         console.log("Posting Request Status Complete");
+        if(this.externalpostTriggered){
+          this.externalpostTriggered.emit()
+        }
       }
     });
-  }
-
-  ngOnDestroy(){
-    this.subscription.unsubscribe()
   }
 }
