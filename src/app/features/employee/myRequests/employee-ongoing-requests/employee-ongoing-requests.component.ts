@@ -22,10 +22,20 @@ export class EmployeeOngoingRequestsComponent {
 
   pageHeading: string = 'Ongoing Travel'
 
+  currentPage: number = 1;
+
+  itemsPerPage: number = 10;
+
+  totalCount: number = 0;
+
   ngOnInit() {
-    //get employee ongoing data such as requestId, projectCode, projectName, startDate, endDate, reason, statusName
-    this.apiservice.getEmployeeOngoingRequest(this.employeeId).subscribe((data: any[]) => {
-      this.incomingRequestdata = this.formatData(data);
+    this.getOngoingRequests();
+  }
+
+  getOngoingRequests(){
+    this.apiservice.getEmployeeOngoingRequest(this.employeeId, this.currentPage, this.itemsPerPage).subscribe((data) => {
+      this.incomingRequestdata = this.formatData(data.items);
+      this.totalCount = data.totalCount;
     });
   }
 
@@ -37,5 +47,10 @@ export class EmployeeOngoingRequestsComponent {
       startDate: datePipe.transform(item.startDate, 'dd/LL/yyyy'),
       endDate: datePipe.transform(item.endDate, 'dd/LL/yyyy')
     }));
+  }
+
+  onPageChange(event:any){
+    this.currentPage = event.page;
+    this.getOngoingRequests();
   }
 }
