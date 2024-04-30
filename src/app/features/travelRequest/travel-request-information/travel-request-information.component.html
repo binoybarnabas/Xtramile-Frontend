@@ -139,11 +139,17 @@
                 <div (click)="openAddOptionModal()" class="add_btn">
                   <span> Add</span>
                 </div>
-
             </div>
   
             <div class="option_container">
-  
+                <!-- <div (click)="openAddOptionModal()" class="new_option_card">
+                  <div class="icon_container">
+                    <span><i class="add_icon ri-sticky-note-add-line"></i></span>
+                  </div>
+                  <div class="text_container">
+                        <span class="text">Add</span>
+                  </div>
+              ` </div>  -->
                 <ng-container *ngFor="let item of travelOptionsData">
                     <div class="option_card" (click)="toggleOptionSelection(item)" [class.selected]="isSelected(item)">
                         <div class="option_file">

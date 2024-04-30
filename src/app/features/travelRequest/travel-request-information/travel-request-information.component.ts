@@ -383,10 +383,7 @@ export class NewTravelRequestComponent {
       requestId: this.travelRequestDetailViewModel.requestId
     };
  
-    // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
- 
- 
-    this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
+    this.bsModalRef = this.modalService.show(TextEditorComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
       console.log('Modal result:', result);

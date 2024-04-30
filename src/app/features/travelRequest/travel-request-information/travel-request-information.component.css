@@ -254,6 +254,35 @@
     color: var(--card-bg-color);
     margin-left: 10px;
 }
+ .new_option_card {
+    height: 200px;
+    width: 280px;
+    border-radius: var(--normal-border-radius);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    background-color: var(--secondary-orange-color);
+    /* background-color: var(--card-bg-color); */
+    /* box-shadow: var(--normal-box-shadow); */
+    color: var(--primary-orange-color);
+    cursor: pointer;
+}
+
+ .new_option_card:hover {
+    transform: scale(1.03);
+}
+
+
+ .new_option_card .icon_container .add_icon {
+    font-size: 3.5rem;
+}
+
+ .new_option_card .text_container .text {
+    font-weight: var(--active-font-weight);
+    font-size: var(--medium-font-size);
+}
 
 
 /* ------------------------------------------------ */

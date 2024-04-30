@@ -134,4 +134,23 @@ checkRoleOfUser(): boolean {
 resetSelection(){
   this.descriptions.forEach(panel => panel.clicked = false);
 }
+displayConfirmBtn(): boolean {
+  return this.descriptions.some(description => description.optionId === this.receveingOptionId);
+}
+
+editable:boolean = false;
+editOption(){
+  this.editable = !this.editable;
+}
+cancelEdit(){
+  this.descriptions.forEach(panel => panel.clicked = false);
+  this.editable = false;
+}
+updateOption(){
+  const updatedOption = {
+    requestId:this.requestId,
+    empId:this.empId,
+    optionId: this.selectedOptionId
+  }
+}
 }

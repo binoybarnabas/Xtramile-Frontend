@@ -8,7 +8,7 @@
       <p>There are no text options, check file options</p>
     </ng-container>
     <ng-template #elseblockone>
-      <div *ngFor="let item of descriptions; let i = index" class="panel" [ngClass]="{ 'selected_panel': item.optionId === receveingOptionId, 'clicked_panel': item.clicked &&  receveingOptionId == null}">
+      <div *ngFor="let item of descriptions; let i = index" class="panel" [ngClass]="{ 'selected_panel': item.optionId === receveingOptionId, 'clicked_panel': item.clicked && receveingOptionId == null}">
         <div class="panel_header" (click)="togglePanel(item)">
           Option {{ i + 1 }}
           <!-- Button to confirm option -->
@@ -19,7 +19,7 @@
           <div [innerHTML]="item.htmlString"></div>
         </div>
       </div>
-      <div class="text-center mt-5" *ngIf="!buttonActivate && receveingOptionId != null && descriptions.length != 0">
+      <div class="text-center mt-5" *ngIf="!buttonActivate && displayConfirmBtn()">
         <app-change-status-button
           [name]="name_ta"
           [empId]="empId"
@@ -28,6 +28,7 @@
           [secondaryStatusCode]="secondaryStatusCode_ta">
         </app-change-status-button>
       </div>
+      <button class= "edit_btn" (click)="editOption()">Edit Option</button>
       <div class="d-flex">
         <div class="cancel_btn_container">
           <button *ngIf="buttonActivate && receveingOptionId == null" class="cancel_btn" type="button" (click)="resetSelection()">
@@ -44,6 +45,10 @@
           (externalpostTriggered)="confirmOption()"
         ></app-change-status-button>
         </span>
+        <div *ngIf="editable" >
+          <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
+          <button class="update_btn" (click)="updateOption()">Update</button>
+        </div>
       </div>
     </ng-template>
   </tab>

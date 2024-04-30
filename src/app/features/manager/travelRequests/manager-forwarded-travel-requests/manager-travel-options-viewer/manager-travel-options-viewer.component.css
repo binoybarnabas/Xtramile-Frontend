@@ -128,3 +128,32 @@
   margin-right: 10px;
 
 }
+
+.edit_btn {
+  width: var(--normal-button-width);
+  height: var(--normal-button-height);
+  color: var(--card-bg-color);
+  background-color: var(--second-color);
+  border-radius: var(--small-border-radius);
+  justify-content: center;
+  align-items: center;
+  /* margin-right: 10px; */
+  font-weight: var(--active-font-weight);
+  border: var(--normal-button-border-size) solid var(--second-color);
+  font-size: var(--span-font-size);
+  margin-left: 1vw;
+}
+.update_btn {
+
+  width: var(--normal-button-width);
+  height: var(--normal-button-height);
+  color: var(--card-bg-color);
+  background-color: var(--second-color);
+  border-radius: var(--small-border-radius);
+  justify-content: center;
+  align-items: center;
+  /* margin-right: 10px; */
+  font-weight: var(--active-font-weight);
+  border: var(--normal-button-border-size) solid var(--second-color);
+  font-size: var(--span-font-size);  
+}

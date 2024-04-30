@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { TravelRequestDetailViewModel } from 'src/app/services/interfaces/iTravelRequestDetails';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
@@ -7,6 +7,7 @@ import { local } from 'd3';
 import { DatePipe } from '@angular/common';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
+import { TextEditorComponent } from '../text-editor/text-editor.component';
 
 @Component({
   selector: 'app-travel-request-card-modal',
@@ -35,7 +36,7 @@ export class  TravelRequestCardModalComponent {
   selectedOptionId : number = -1;
 
   constructor(public bsModalRef: BsModalRef, private router: Router, private commonApiService: CommonAPIService, 
-    private managerTravelRequest: ManagerTravelRequestsService, private requestService: RequestService, 
+    private managerTravelRequest: ManagerTravelRequestsService, private requestService: RequestService,private modalService: BsModalService
   ) {
   }
 
@@ -159,5 +160,18 @@ export class  TravelRequestCardModalComponent {
 
   }
 
+  openAddOptionModal() {
+    const initialState = {
+      requestId: this.travelRequestDetailViewModel.requestId
+    };
+ 
+    this.bsModalRef = this.modalService.show(TextEditorComponent, { initialState });
+    this.bsModalRef.content.onClose.subscribe((result: any) => {
+      // Handle the result from the modal if needed
+      console.log('Modal result:', result);
+ 
+      // You can perform actions with the result data here
+  })
+}
 
 }
