@@ -66,8 +66,11 @@ export class RequestService {
   }
 
   //get employee data that show in ongoing page
-  getEmployeeOngoingRequest(employeeId: number): Observable<any> {
-    return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`);
+  getEmployeeOngoingRequest(employeeId: number, pageNumber: number, itemsPerPage: number): Observable<any> {
+    const params = new HttpParams()
+    .set("pageNumber", pageNumber)
+    .set("itemsPerPage", itemsPerPage)
+    return this.http.get(`http://localhost:5190/api/employee/ongoing/request/${employeeId}`,{params});
   }
 
   getEmployeeRequestHisory(empId: number, pageIndex: number, pageSize: number): Observable<any> {
@@ -132,5 +135,10 @@ export class RequestService {
   deleteOptions(optionIds: number[]): Observable<any> {
     console.log(optionIds)
     return this.http.delete<any>('http://localhost:5190/api/availableoptions/deleteTravelOptions', {body: optionIds});
+  }
+
+  updateSelectedOption(updatedOption:any):Observable<any>{
+    console.log(updatedOption);
+    return this.http.patch<any>('http://localhost:5190/api/availableoptions/updateSelectedTravelOption',updatedOption);
   }
 }

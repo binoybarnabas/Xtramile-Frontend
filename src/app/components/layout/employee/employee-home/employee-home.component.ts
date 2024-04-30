@@ -31,10 +31,10 @@ export class EmployeeHomeComponent {
   }
 
 
-  ngOnDestroy() {
-    this.subscription.unSubscribe();
-    console.log("UNSUBSCRIBED")
-  }
+  // ngOnDestroy() {
+  //   this.subscription.unSubscribe();
+  //   console.log("UNSUBSCRIBED")
+  // }
 
   form!: FormGroup;
 

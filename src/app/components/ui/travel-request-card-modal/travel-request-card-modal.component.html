@@ -151,7 +151,7 @@
     <div class="heading_section">
       <p class="title">ADD TRAVEL OPTIONS</p>
       <div *ngIf="!isOptionCardSelected"  class="add_btn"> 
-        <span><i class="ri-apps-2-add-line"></i></span>
+        <span (click)="openAddOptionModal()"><i class="ri-apps-2-add-line"></i></span>
       </div>
       <div *ngIf="isOptionCardSelected" class="del_btn">
         <span><i class="ri-delete-bin-2-fill"></i></span>

@@ -29,7 +29,7 @@ export class ManagerHomeComponent {
 
   
   //logging out from the finance personnel module
-  logout(message :string){
+  logout(message:string){
     console.log(message);
     //clearing the session.
     // const logoutData = Object.keys(sessionStorage);

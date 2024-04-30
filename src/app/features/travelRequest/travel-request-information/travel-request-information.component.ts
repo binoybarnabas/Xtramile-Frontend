@@ -64,6 +64,8 @@ export class NewTravelRequestComponent {
 
   optionFileUrl: string = "";
 
+  status: string = '';
+
   // Function to convert the Map into an array of key-value pairs
   getGeneralInfoMapEntries(): [string, any][] {
     return Array.from(this.generalInformationsMap.entries());
@@ -164,8 +166,14 @@ export class NewTravelRequestComponent {
         break;
 
       case 'travelAdmin':
-        this.leftSectionNavItems = ["General Information", "Trip Information", "Additional Information", "Documents Attached", "Travel Options"];
-        this.totalNavCount = 4;
+        if(this.status === 'Open'){
+          this.leftSectionNavItems = ["General Information", "Trip Information", "Additional Information", "Documents Attached"];
+          this.totalNavCount = 3;
+        }
+        else{
+          this.leftSectionNavItems = ["General Information", "Trip Information", "Additional Information", "Documents Attached", "Travel Options"];
+          this.totalNavCount = 4;
+        }
         break;
 
       case 'financePersonnel':
@@ -196,8 +204,6 @@ export class NewTravelRequestComponent {
   travelRequestForm!: FormGroup;
 
   ngOnInit() {
-
-    this.updateNavItemsBasedOnUserRole();
 
     // let argsForGetEmployeeDataById = this.empId;
 
@@ -235,10 +241,14 @@ export class NewTravelRequestComponent {
           if(this.userData.role =='Manager' && this.userData.department == 'TA' ){
             this.requestService.getStatusName(requestId).subscribe(({
               next: (data) => {
+                this.status = data;
                 console.log("TA")
                 if(data=='Ongoing'){
                   this.isCloseVisible=true;
                 }
+              },
+              complete: () => {
+                this.updateNavItemsBasedOnUserRole();
               }
             })
             );
@@ -383,10 +393,7 @@ export class NewTravelRequestComponent {
       requestId: this.travelRequestDetailViewModel.requestId
     };
  
-    // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
- 
- 
-    this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
+    this.bsModalRef = this.modalService.show(TextEditorComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
       console.log('Modal result:', result);

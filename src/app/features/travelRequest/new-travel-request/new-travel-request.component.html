@@ -340,7 +340,7 @@
               </div>
             </tab>
           </tabset>
-          <div class="options_container">
+          <!-- <div class="options_container">
               <ng-container *ngFor="let item of travelOptionsData">
                   <div class="option_card" (click)="toggleOptionSelection(item)" [class.selected]="isSelected(item)">
                       <div class="option_file">
@@ -351,16 +351,16 @@
                       </div>
                   </div>
               </ng-container>
-              <!-- <div (click)="openAddOptionModal()" class="new_option_card">
+              <div (click)="openAddOptionModal()" class="new_option_card">
                 <div class="icon_container">
                   <span><i class="add_icon ri-sticky-note-add-line"></i></span>
                 </div>
                 <div class="text_container">
                       <span class="text">Add</span>
                 </div>
-            ` </div>  -->
-            <!-- <button  class="delete_btn" (click)="deleteSelectedOptions()"><i class="ri-delete-bin-line"></i></button> -->
-          </div>
+            ` </div> 
+            <button  class="delete_btn" (click)="deleteSelectedOptions()"><i class="ri-delete-bin-line"></i></button>
+          </div> -->
   
           <div class="form_submit_container">
             <div class="btn_container">
@@ -411,7 +411,7 @@
           <div class="form_elements">
             <!-- Modal -->
           </div>
-
+          
           <div class="perdiem_section">
             <app-perdiem-card> </app-perdiem-card>
           </div>

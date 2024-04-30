@@ -31,7 +31,9 @@
     border: 2px solid var(--third-color);
     padding: 3px;
 }
-
+.editMode {
+    border: 2px solid blueviolet;
+  }
 .travel_options_container .option_card.selected .description{
     margin-top: 3px;
 }
@@ -119,4 +121,50 @@
 .main_heading {
     font-size: var(--h4-font-size);
     font-weight: var(--extra-font-weight);
+}
+
+.update_btn {
+
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--card-bg-color);
+    background-color: var(--second-color);
+    border-radius: var(--small-border-radius);
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 10px; */
+    font-weight: var(--active-font-weight);
+    border: var(--normal-button-border-size) solid var(--second-color);
+    font-size: var(--span-font-size);  
+}
+.cancel_btn {
+
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--second-color);
+    background-color: transparent;
+    border-radius: var(--small-border-radius);
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 10px; */
+    font-weight: var(--active-font-weight);
+    border: var(--normal-button-border-size) solid var(--second-color);
+    font-size: var(--span-font-size);
+    margin-right: 10px;
+
+}
+.edit_btn {
+
+    width: var(--normal-button-width);
+    height: var(--normal-button-height);
+    color: var(--card-bg-color);
+    background-color: var(--second-color);
+    border-radius: var(--small-border-radius);
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 10px; */
+    font-weight: var(--active-font-weight);
+    border: var(--normal-button-border-size) solid var(--second-color);
+    font-size: var(--span-font-size);
+    margin-left: 1vw;
 }
