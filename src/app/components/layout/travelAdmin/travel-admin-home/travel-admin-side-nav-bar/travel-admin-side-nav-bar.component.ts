@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 
@@ -22,6 +22,8 @@ export class TravelAdminSideNavBarComponent {
   subMenu4ToggleValue = 0;
 
   isSideNavBarCollapsed: any;
+
+  @Output() logoutEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private sideNavBarService: SideNavBarService, private router: Router) {
 
@@ -180,6 +182,11 @@ export class TravelAdminSideNavBarComponent {
 
     }
 
+  }
+
+  logout() {
+
+    this.logoutEvent.emit("logout"); // Emit logout event
   }
 
 }

@@ -166,4 +166,8 @@ updateOption(){
     }
   })
 }
+navigateToTAOngoing(){
+  this.toastService.showToast("Request is Ongoing");
+  this.router.navigate(['traveladmin/approved_requests']);
+}
 }

@@ -609,7 +609,8 @@ export class TravelRequestFormComponent {
     this.requestService.sendEmployeeNewTravelRequest(formData).subscribe({
       next: (response) => {
         console.log(response);
-        alert("submitted")
+        this.toastService.showToast("Travel request Submitted");
+        this.router.navigate(['employee/pending']);
       },
       error: (error: Error) => {
         console.log(error);
