@@ -54,7 +54,7 @@
 </ng-template>
 
 <!-- Selected -->
-<div *ngIf="hideDiv">
+<div *ngIf="IsSelectedPage">
   <h3 class="main_heading mt-5 mb-3">Selected option</h3>
   <ng-container
     *ngIf="
@@ -100,5 +100,5 @@
     >
     </app-change-status-button>
   </div>
-  <button *ngIf="!buttonActivate" class= "edit_btn" (click)="editOption()">Edit Option</button>
+  <button *ngIf="!buttonActivate && IsSelectedPage" class= "edit_btn" (click)="editOption()">Edit Option</button>
 </div>

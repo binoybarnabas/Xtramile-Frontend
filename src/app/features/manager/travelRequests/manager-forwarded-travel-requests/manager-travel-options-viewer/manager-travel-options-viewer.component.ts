@@ -24,7 +24,7 @@ descriptions!: any[];
 receveingOptionId !:number;
 empId:number=1;
 userData: UserData;
-
+IsSelectedPage: boolean = false;
  //For change status button of rm.
  name_rm: string = 'Submit'
  primaryStatusCode_rm: string = 'PE'
@@ -45,6 +45,8 @@ ngOnInit(){
     if (query.get('requestId')) {
       this.requestId = parseInt(query.get('requestId')!, 10)
       console.log(this.requestId)
+      this.IsSelectedPage = query.get('IsSelectedPage') === 'true';
+      console.log(this.IsSelectedPage)
     }
   })
   
@@ -152,5 +154,16 @@ updateOption(){
     empId:this.empId,
     optionId: this.selectedOptionId
   }
+  this.requestService.updateSelectedOption(updatedOption).subscribe({
+    next: (response:string)=>{
+      this.getSelectedOption();
+    },
+    error: (error:any)=>{
+      console.log('Update operation is failed')
+    },
+    complete:()=>{
+      console.log('Update operation is completed')
+    }
+  })
 }
 }
