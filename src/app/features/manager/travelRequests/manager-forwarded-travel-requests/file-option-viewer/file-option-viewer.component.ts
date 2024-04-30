@@ -12,6 +12,8 @@ import { CustomToastService } from 'src/app/services/toastServices/custom-toast.
   styleUrls: ['./file-option-viewer.component.css']
 })
 export class FileOptionViewerComponent {
+
+  IsSelectedPage: boolean = false;
   travelOptionsData: TravelOptionDetails[] = [];
 
   reqId!: number;
@@ -50,7 +52,9 @@ export class FileOptionViewerComponent {
     this.activatedRoute.queryParamMap.subscribe((query) => {
       if (query.get('requestId')) {
         this.reqId = parseInt(query.get('requestId')!, 10)
-        console.log(this.reqId)
+        console.log(this.reqId);
+        this.IsSelectedPage = query.get('IsSelectedPage') === 'true';
+        console.log(this.IsSelectedPage)
       }
     })
     this.getTravelOptionsByReqId(this.reqId)
@@ -183,9 +187,9 @@ export class FileOptionViewerComponent {
     },
     complete: () => {
       console.log('Post request completed.');
-      if(this.receveingOptionId == null){
-        this.hideDiv= false;
-      }
+      // if(this.receveingOptionId == null){
+      //   this.hideDiv= false;
+      // }
     }
     })
   }

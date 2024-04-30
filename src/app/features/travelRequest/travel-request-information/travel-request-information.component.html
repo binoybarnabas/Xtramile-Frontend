@@ -150,7 +150,41 @@
                         <span class="text">Add</span>
                   </div>
               ` </div>  -->
-                <ng-container *ngFor="let item of travelOptionsData">
+              <tabset  [justified]="true">
+                <tab heading="Images" (selectTab)="onSelect($event)">
+                  <div class="selected-images-container">
+                    <div *ngFor="let image of selectedImages; let i = index" class="image-item">
+                      <img [src]="imageUrls[i]" alt="Selected_Image">
+                      <p>{{ descriptions[i] }}</p>
+                      <button (click)="removeImage(i)" class="remove-btn"><i class="ri-delete-bin-line"></i></button>
+                    </div>
+                  </div>
+                </tab>
+                <tab heading="Texts" (selectTab)="onSelect($event)">
+                  <div class="expansion-panel-container">
+                    <div 
+                      *ngFor="let htmlContent of textOption; let i = index" 
+                      class="expansion-panel"
+                    >
+                      <div 
+                        class="expansion-panel-header" 
+                        (click)="togglePanel(i)"
+                      >
+                        Option {{ i + 1 }}
+                        <i class="ri-arrow-down-s-line" *ngIf="!isPanelOpen(i)"></i>
+                        <i class="ri-arrow-up-s-line" *ngIf="isPanelOpen(i)"></i>
+                        <button class="delete-button" (click)="removeTextOption(i)"><i class="ri-delete-bin-line"></i></button>
+                      </div>
+                      <div 
+                        class="expansion-panel-content" 
+                        *ngIf="isPanelOpen(i)"
+                        [innerHTML]= "santizieHtml(htmlContent)"
+                      ></div>
+                    </div>
+                  </div>
+                </tab>
+              </tabset>
+                <!-- <ng-container *ngFor="let item of travelOptionsData">
                     <div class="option_card" (click)="toggleOptionSelection(item)" [class.selected]="isSelected(item)">
                         <div class="option_file">
                             <img class="img" [src]="item.optionFileURL" alt="img_not_found">
@@ -186,7 +220,7 @@
                 <div class="text_option">
                   <p>Lorem Ipsum is simply dummy text in the printing and typesetting industry</p>
                 </div>
-              </div>
+              </div> -->
 
             </div>
     
@@ -240,7 +274,7 @@
       </div>
 
       <div class="forward_btn_card">
-        <button (click)="onForwardBtnClick()" class="btn">{{forwardBtnTitle}}</button>
+        <button (click)="onForwardBtnClick()" class="btn" [disabled]="disableSubmitBtn()">{{forwardBtnTitle}}</button>
       </div>
 
     </div>
