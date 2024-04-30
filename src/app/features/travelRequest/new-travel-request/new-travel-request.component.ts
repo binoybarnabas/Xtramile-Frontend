@@ -696,7 +696,6 @@ export class NewTravelRequestComponent {
     const initialState = {
       requestId: this.travelRequestDetailViewModel.requestId
     };
-
     this.bsModalRef = this.modalService.show(DescriptionModalComponent, { initialState });
   
   }
