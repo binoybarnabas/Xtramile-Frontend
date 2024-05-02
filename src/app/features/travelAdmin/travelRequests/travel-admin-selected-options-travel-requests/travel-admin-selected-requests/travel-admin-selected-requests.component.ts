@@ -57,7 +57,9 @@ export class TravelAdminSelectedRequestsComponent {
     console.log('requestId:' + this.requestId)
     this.router.navigate(['view_selected_options'],{
       relativeTo: this.activatedRoute,
-      queryParams: {requestId: this.requestId}
+      queryParams:{ requestId: this.requestId,
+                    IsSelectedPage:true
+                  }
     })
   }
 
