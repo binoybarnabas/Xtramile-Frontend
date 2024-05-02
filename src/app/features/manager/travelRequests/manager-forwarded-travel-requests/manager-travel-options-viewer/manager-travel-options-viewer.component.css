@@ -129,7 +129,12 @@
 
 }
 
-.edit_btn {
+.action_btn{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action_btn .edit_btn {
   width: var(--normal-button-width);
   height: var(--normal-button-height);
   color: var(--card-bg-color);
@@ -143,6 +148,7 @@
   font-size: var(--span-font-size);
   margin-left: 1vw;
 }
+
 .update_btn {
 
   width: var(--normal-button-width);
@@ -156,4 +162,8 @@
   font-weight: var(--active-font-weight);
   border: var(--normal-button-border-size) solid var(--second-color);
   font-size: var(--span-font-size);  
+}
+
+.disabled_button {
+  opacity: 0.5; 
 }

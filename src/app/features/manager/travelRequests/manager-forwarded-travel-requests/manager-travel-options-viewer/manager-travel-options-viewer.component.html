@@ -8,7 +8,7 @@
       <p>There are no text options, check file options</p>
     </ng-container>
     <ng-template #elseblockone>
-      <div *ngFor="let item of descriptions; let i = index" class="panel" [ngClass]="{ 'selected_panel': item.optionId === receveingOptionId, 'clicked_panel': item.clicked && receveingOptionId == null}">
+      <div *ngFor="let item of descriptions; let i = index" class="panel" [ngClass]="{ 'selected_panel': item.optionId === receveingOptionId, 'clicked_panel': (item.clicked && editable) ||(item.clicked && receveingOptionId == null)}">
         <div class="panel_header" (click)="togglePanel(item)">
           Option {{ i + 1 }}
           <!-- Button to confirm option -->
@@ -19,18 +19,7 @@
           <div [innerHTML]="item.htmlString"></div>
         </div>
       </div>
-      <div class="text-center mt-5" *ngIf="!buttonActivate && displayConfirmBtn()">
-        <app-change-status-button
-          [name]="name_ta"
-          [empId]="empId"
-          [requestId]="requestId"
-          [primaryStatusCode]="primaryStatusCode_ta"
-          [secondaryStatusCode]="secondaryStatusCode_ta"
-          (externalpostTriggered)="navigateToTAOngoing()">
-        </app-change-status-button>
-      </div>
-      <button class= "edit_btn" (click)="editOption()">Edit Option</button>
-      <div class="d-flex">
+      <div class="action_btn">
         <div class="cancel_btn_container">
           <button *ngIf="buttonActivate && receveingOptionId == null" class="cancel_btn" type="button" (click)="resetSelection()">
             Cancel
@@ -44,11 +33,25 @@
           [primaryStatusCode]="primaryStatusCode_rm"
           [secondaryStatusCode]="secondaryStatusCode_rm"
           (externalpostTriggered)="confirmOption()"
+          [disabled]="disableUpdateBtn()"
         ></app-change-status-button>
         </span>
-        <div *ngIf="editable" >
+        <div class="ta_action_btn">
+          <div *ngIf="!buttonActivate && displayConfirmBtn() && !editable">
+            <app-change-status-button
+              [name]="name_ta"
+              [empId]="empId"
+              [requestId]="requestId"
+              [primaryStatusCode]="primaryStatusCode_ta"
+              [secondaryStatusCode]="secondaryStatusCode_ta"
+              (externalpostTriggered)="navigateToTAOngoing()">
+            </app-change-status-button>
+          </div>
+        </div>
+        <button *ngIf="IsSelectedPage && descriptions.length != 0" class="edit_btn" (click)="editOption()">Edit Option</button>
+        <div class="mx-2" *ngIf="editable">
           <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
-          <button class="update_btn" (click)="updateOption()">Update</button>
+          <button class="update_btn" (click)="updateOption()" [disabled]="disableUpdateBtn()" [ngClass]="{'disabled_button': disableUpdateBtn()}">Update</button>
         </div>
       </div>
     </ng-template>
