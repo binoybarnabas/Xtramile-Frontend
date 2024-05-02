@@ -52,6 +52,11 @@ ngOnInit(){
   
   this.getAvailableOptionsDescription();
   this.getSelectedOption(); 
+  this.requestService.patchImageEvent$.subscribe({
+    next:()=>{
+      this.getSelectedOption();
+    }
+  })
 }
 
 getAvailableOptionsDescription(){
@@ -157,17 +162,23 @@ updateOption(){
   this.requestService.updateSelectedOption(updatedOption).subscribe({
     next: (response:string)=>{
       this.getSelectedOption();
+      this.requestService.triggerTextPatchEvent();
     },
     error: (error:any)=>{
       console.log('Update operation is failed')
     },
     complete:()=>{
-      console.log('Update operation is completed')
+      this.toastService.showToast("Option has been updated");
+      this.editable = false;
     }
   })
 }
 navigateToTAOngoing(){
   this.toastService.showToast("Request is Ongoing");
   this.router.navigate(['traveladmin/approved_requests']);
+}
+disableUpdateBtn(): boolean {
+  const isAnyItemClicked = this.descriptions.some(item => item.clicked);
+  return !isAnyItemClicked;
 }
 }

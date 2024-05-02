@@ -61,6 +61,13 @@ export class FileOptionViewerComponent {
 
      //2
     this.selectedOptionFromManager();
+
+    //subject subscription
+    this.requestService.patchTextEvent$.subscribe({
+      next:()=>{
+        this.selectedOptionFromManager();
+      }
+    })
   }
 
   //Get Travel Options By Req Id
@@ -164,14 +171,18 @@ export class FileOptionViewerComponent {
       optionId: this.selectedOptionId
     }
     this.requestService.updateSelectedOption(updatedOption).subscribe({
-      next:() =>{
+      next:(data) =>{
         this.selectedOptionFromManager();
+        this.requestService.triggerImagePatchEvent();
       },
       error:(error:Error)=>{
         console.log('Error occured while updating option');
       },
       complete:() =>{
         console.log('Option has been updated');
+        this.toastService.showToast("Option has been updated");
+        this.editable = false;
+        this.selectedOption = null;
       }
     })
   }
@@ -187,14 +198,26 @@ export class FileOptionViewerComponent {
     },
     complete: () => {
       console.log('Post request completed.');
-      // if(this.receveingOptionId == null){
-      //   this.hideDiv= false;
-      // }
+      if(this.receveingOptionId == null){
+        this.hideDiv= false;
+      }
     }
     })
   }
   cancelEdit(){
     this.editable = false;
     this.selectedOption = null;
+  }
+
+  disableUpdateBtn(): boolean {
+    if(this.selectedOption == null){
+      return true
+    }
+    return false;
+  }
+
+  navigateToTAOngoing(){
+    this.toastService.showToast("Request is Ongoing");
+    this.router.navigate(['traveladmin/approved_requests']);
   }
 }

@@ -17,7 +17,7 @@ export class ChangeStatusButtonComponent {
   @Input() primaryStatusCode: string = '';
   @Input() secondaryStatusCode: string = '';
   @Output() externalpostTriggered = new EventEmitter<void>();
-
+  @Input() disabled:boolean =false;
   private subscription : Subscription | any
 
   statusId : number = 0

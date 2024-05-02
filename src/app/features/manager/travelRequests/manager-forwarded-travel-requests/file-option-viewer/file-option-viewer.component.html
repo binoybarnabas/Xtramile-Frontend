@@ -25,10 +25,10 @@
           </div>
         </div>
       </ng-container>
-      <div *ngIf="editable" >
-        <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
-        <button class="update_btn" (click)="updateOption()">Update</button>
-      </div>
+    </div>
+    <div *ngIf="editable" class="edit_container">
+      <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
+      <button class="update_btn" (click)="updateOption()" [disabled]="disableUpdateBtn()" [ngClass]="{ 'disabled_button': disableUpdateBtn() }">Update</button>
     </div>
     <div
       class="actions_container"
@@ -39,7 +39,7 @@
           Cancel
         </button>
       </div>
-      <div class="submit_btn_container" *ngIf="buttonActivate">
+      <div class="submit_btn_container" *ngIf="buttonActivate" >
         <app-change-status-button
           [name]="name_rm"
           [empId]="empId"
@@ -47,6 +47,7 @@
           [primaryStatusCode]="primaryStatusCode_rm"
           [secondaryStatusCode]="secondaryStatusCode_rm"
           (externalpostTriggered)="postSelection()"
+          [disabled]="disableUpdateBtn()"
         ></app-change-status-button>
       </div>
     </div>
@@ -54,7 +55,7 @@
 </ng-template>
 
 <!-- Selected -->
-<div *ngIf="IsSelectedPage">
+<div *ngIf="hideDiv">
   <h3 class="main_heading mt-5 mb-3">Selected option</h3>
   <ng-container
     *ngIf="
@@ -83,13 +84,12 @@
       </ng-container>
     </div>
   </ng-template>
-  <div
-    class="text-center mt-5"
+  <div class="ta_action_btn">
+    <div
     *ngIf="
       !buttonActivate &&
-       shouldDisplayButton()
+       shouldDisplayButton() && !editable
     "
-    
   >
     <app-change-status-button
       [name]="name_ta"
@@ -97,8 +97,10 @@
       [requestId]="reqId"
       [primaryStatusCode]="primaryStatusCode_ta"
       [secondaryStatusCode]="secondaryStatusCode_ta"
+      (externalpostTriggered)="navigateToTAOngoing()"
     >
     </app-change-status-button>
   </div>
-  <button *ngIf="!buttonActivate && IsSelectedPage" class= "edit_btn" (click)="editOption()">Edit Option</button>
+  <button *ngIf="IsSelectedPage && travelOptionsData.length != 0" class= "edit_btn" (click)="editOption()">Edit Option</button>
+  </div>
 </div>
