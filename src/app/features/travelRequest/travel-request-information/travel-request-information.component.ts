@@ -542,7 +542,6 @@ export class NewTravelRequestComponent {
       console.log(formData);
       this.commonApiService.addOptionsForRequest(formData).subscribe({
         next: (data: string) => {
-          this.router.navigate(['/traveladmin/waiting']);
         },
         error: (error: Error) => {
           console.log("Error in posting request status");
@@ -551,6 +550,7 @@ export class NewTravelRequestComponent {
         complete: () => {
           console.log("Posting Request Status Complete");
           this.toastService.showToast("Travel Options Send!")
+          this.router.navigate(['/traveladmin/waiting']);
           this.currentNavIndex = 0;
           this.newReqFormSubMenuValue = this.currentNavIndex;
           this.forwardBtnTitle = 'Next';
@@ -580,7 +580,7 @@ export class NewTravelRequestComponent {
       return false; // Explicitly return false if conditions are not met
     }
   }
-  
+
   //AddOption
   openAddTextOptionModal(){
     const initialState = {

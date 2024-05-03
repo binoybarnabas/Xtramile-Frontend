@@ -10,3 +10,7 @@
     font-weight: var(--active-font-weight);
     font-size: var(--span-font-size);
 }
+
+.disabled-button {
+    opacity: 0.5; 
+  }

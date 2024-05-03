@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { TravelRequestDetails } from '../../interfaces/iTravelRequestDetails';
 import { PendingRequest } from 'src/app/features/employee/myRequests/employee-pending-requests/pending-request';
 
@@ -139,6 +139,18 @@ export class RequestService {
 
   updateSelectedOption(updatedOption:any):Observable<any>{
     console.log(updatedOption);
-    return this.http.patch<any>('http://localhost:5190/api/availableoptions/updateSelectedTravelOption',updatedOption);
+    return this.http.patch<any>('http://localhost:5190/api/availableoptions/updateSelectedTravelOption',updatedOption,{ responseType: 'text' as 'json' });
+  }
+  
+  private textOptionEventSubject = new Subject<void>();
+  patchTextEvent$ = this.textOptionEventSubject.asObservable();
+  triggerTextPatchEvent() {
+    this.textOptionEventSubject.next();
+  }
+
+  private imageOptionEventSubject = new Subject<void>();
+  patchImageEvent$ = this.imageOptionEventSubject.asObservable();
+  triggerImagePatchEvent(){
+    this.imageOptionEventSubject.next();
   }
 }

@@ -1,4 +1,4 @@
-<button class="main_btn"(click)="updateRequestStatus()">
+<button class="main_btn"(click)="updateRequestStatus()" [disabled]="disabled" [ngClass]="{ 'disabled-button': disabled }">
   {{ name }}
 </button>
 

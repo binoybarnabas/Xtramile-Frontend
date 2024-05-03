@@ -536,3 +536,7 @@
     font-size: var(--span-font-size);
 }
 
+.option_default_message{
+    font-size: var(--p-font-size);
+}
+

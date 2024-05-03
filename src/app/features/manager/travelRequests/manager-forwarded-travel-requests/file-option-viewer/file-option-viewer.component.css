@@ -123,7 +123,18 @@
     font-weight: var(--extra-font-weight);
 }
 
-.update_btn {
+.travel_options_main_container .actions_container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.travel_options_main_container .edit_container{
+    margin-top: 2vw;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.edit_container .update_btn {
 
     width: var(--normal-button-width);
     height: var(--normal-button-height);
@@ -137,6 +148,11 @@
     border: var(--normal-button-border-size) solid var(--second-color);
     font-size: var(--span-font-size);  
 }
+
+.disabled_button {
+    opacity: 0.5; 
+}
+
 .cancel_btn {
 
     width: var(--normal-button-width);
@@ -153,7 +169,14 @@
     margin-right: 10px;
 
 }
-.edit_btn {
+
+.ta_action_btn{
+    display: flex;
+    margin-top: 2vw;
+    justify-content: flex-end; 
+}
+
+.ta_action_btn .edit_btn {
 
     width: var(--normal-button-width);
     height: var(--normal-button-height);
@@ -162,7 +185,6 @@
     border-radius: var(--small-border-radius);
     justify-content: center;
     align-items: center;
-    /* margin-right: 10px; */
     font-weight: var(--active-font-weight);
     border: var(--normal-button-border-size) solid var(--second-color);
     font-size: var(--span-font-size);
