@@ -153,6 +153,7 @@
               <tabset  [justified]="true">
                 <tab heading="Images" (selectTab)="onSelect($event)">
                   <div class="selected-images-container">
+                    <p *ngIf="selectedImages.length == 0" class="option_default_message">No options are added, Click on Add to add options</p>
                     <div *ngFor="let image of selectedImages; let i = index" class="image-item">
                       <img [src]="imageUrls[i]" alt="Selected_Image">
                       <p>{{ descriptions[i] }}</p>
@@ -161,6 +162,7 @@
                   </div>
                 </tab>
                 <tab heading="Texts" (selectTab)="onSelect($event)">
+                  <p *ngIf="textOption.length == 0" class="option_default_message">No options are added, Click on Add to add options</p>
                   <div class="expansion-panel-container">
                     <div 
                       *ngFor="let htmlContent of textOption; let i = index" 
