@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FileCard } from 'src/app/services/interfaces/iFileCard';
 
 @Component({
@@ -10,34 +10,39 @@ export class FileCardComponent {
 
 
   fileCard?: FileCard[];
+  @Input() requestId!: number
 
   constructor() {
 
     this.fileCard = [
       {
-        fileName: "Travel Auth Doc",
-        fileDescription: "emp_travel_auth.png",
+        fileType: "Travel Auth Doc",
+        fileName: "emp_travel_auth.png",
         fileSize: "20KB"
       },
       {
-        fileName: "Passport",
-        fileDescription: "emp_passport.pdf",
+        fileType: "Passport",
+        fileName: "emp_passport.pdf",
         fileSize: "20KB"
 
       },
       {
-        fileName: "VISA",
-        fileDescription: "emp_id_card.pdf",
+        fileType: "VISA",
+        fileName: "emp_id_card.pdf",
         fileSize: "20KB"
       },
       {
-        fileName: "VISA",
-        fileDescription: "emp_id_card.pdf",
+        fileType: "VISA",
+        fileName: "emp_id_card.pdf",
         fileSize: "20KB"
       }
 
     ]
 
+  }
+
+  ngOnInit(){
+    console.log(this.requestId)
   }
 
 

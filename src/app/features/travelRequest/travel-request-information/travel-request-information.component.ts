@@ -209,6 +209,8 @@ export class NewTravelRequestComponent {
 
   ngOnInit() {
 
+    this.updateNavItemsBasedOnUserRole();
+
     // let argsForGetEmployeeDataById = this.empId;
 
     this.requestService.getEmployeeDataById(this.empId).subscribe({
@@ -499,7 +501,10 @@ export class NewTravelRequestComponent {
   onBackBtnClick(){
 
     if(this.currentNavIndex === 0){
-      this.router.navigate(['/traveladmin/incomingrequests']);
+      if(this.currentLoggedInUserRole === 'travelAdmin')
+        this.router.navigate(['/traveladmin/incomingrequests']);
+      else if(this.currentLoggedInUserRole === 'manager')
+        this.router.navigate(['/manager/incoming'])
       return;
     }
 
