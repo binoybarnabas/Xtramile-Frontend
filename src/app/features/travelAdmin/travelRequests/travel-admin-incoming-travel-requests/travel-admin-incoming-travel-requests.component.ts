@@ -5,6 +5,7 @@ import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminSe
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TravelRequestCardComponent } from 'src/app/components/ui/travel-request-card/travel-request-card.component';
 import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-request-card-modal/travel-request-card-modal.component';
+import { TravelRequestInfoCardComponent } from 'src/app/components/ui/travel-request-info-card/travel-request-info-card.component';
 
 @Component({
   selector: 'app-travel-admin-incoming-travel-requests',
@@ -27,7 +28,8 @@ export class TravelAdminIncomingTravelRequestsComponent {
   totalItems = 0;
   bsModalRef!: BsModalRef;
 
-
+  //travel req info card
+  isTravelRequestInfoCardVisible : boolean = false;
 
   selectedDate!: Date;
   searchByName!: string;
@@ -222,17 +224,21 @@ export class TravelAdminIncomingTravelRequestsComponent {
 
 
   handleSelectedRow(row: any) {
+
+    //this.isTravelRequestInfoCardVisible = true;
+
     this.selectedRow = row;
     console.log(this.selectedRow.requestId)
     this.requestId = this.selectedRow.requestId
-    //const queryParams = { requestId: this.requestId }
-    //this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
+    // const queryParams = { requestId: this.requestId }
+    // this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
 
     const initialState = {
       requestId: this.selectedRow.requestId
     };
 
-    this.bsModalRef = this.modalService.show(TravelRequestCardModalComponent, { initialState });
+//    this.bsModalRef = this.modalService.show(TravelRequestCardModalComponent, { initialState });
+    this.bsModalRef = this.modalService.show(TravelRequestInfoCardComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
       console.log('Modal result:', result);

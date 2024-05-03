@@ -11,11 +11,12 @@
 
 </app-table-filter>
 
-<app-data-table 
+<app-data-table
 [headers]="tableHeaders" 
 [data]="requestData"
 [displayedProperties]="fieldsToDisplay"
 (rowClick) = "handleSelectedRow($event)"
 ></app-data-table>
 
-<pagination [itemsPerPage]="pageSize" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+<pagination  [itemsPerPage]="pageSize" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+
