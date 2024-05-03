@@ -141,6 +141,7 @@ import { ManagerForwadedRequestsComponent } from './features/manager/travelReque
 import { DashCalendarComponent } from './components/ui/dashboard-components/dash-calendar/dash-calendar.component';
 import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
+import { TravelRequestInfoCardComponent } from './components/ui/travel-request-info-card/travel-request-info-card.component';
 
 @NgModule({
   declarations: [
@@ -267,7 +268,8 @@ import { TravelMessengerFullScreenComponent } from './features/travelAdmin/trave
     TabbedDataTableComponent,
     DashCalendarComponent,
     TravelMessengerModalComponent,
-    TravelMessengerFullScreenComponent
+    TravelMessengerFullScreenComponent,
+    TravelRequestInfoCardComponent
   ]
   ,
 
