@@ -1,0 +1,35 @@
+<div class="main_container">
+
+  <div class="image_container">
+    <div *ngIf="images && images.length > 0" class="image_wrapper">
+      <img class="img" [src]="images[currentImageIndex]" alt="Image" [style.transform]="'scale(' + zoomLevel + ')'" />
+    </div>
+    <div *ngIf="!images || images.length === 0">
+      <p>No images to display.</p>
+    </div>
+  </div>
+
+  <div class="action_section">
+
+    <div class="zoom_actions">
+      <button class="btn" (click)="zoomOut()"><i class="ri-zoom-out-line"></i></button>
+      <button class="btn" (click)="zoomIn()"><i class="ri-zoom-in-line"></i></button>
+    </div>
+
+    <div>
+      <button class="btn close" (click)="closeImageViewer()"><i class="ri-fullscreen-exit-line"></i></button>
+    </div>
+
+    <div class="prev_next_actions">
+      <button class="btn" (click)="prevImage()"><i class="ri-arrow-left-circle-line"></i></button>
+      <button class="btn" (click)="nextImage()"><i class="ri-arrow-right-circle-line"></i></button>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+  

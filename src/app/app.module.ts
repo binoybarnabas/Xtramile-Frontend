@@ -142,6 +142,7 @@ import { DashCalendarComponent } from './components/ui/dashboard-components/dash
 import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 import { TravelRequestInfoCardComponent } from './components/ui/travel-request-info-card/travel-request-info-card.component';
+import { ImageViewerComponent } from './components/ui/generalUIComponents/image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [
@@ -269,7 +270,8 @@ import { TravelRequestInfoCardComponent } from './components/ui/travel-request-i
     DashCalendarComponent,
     TravelMessengerModalComponent,
     TravelMessengerFullScreenComponent,
-    TravelRequestInfoCardComponent
+    TravelRequestInfoCardComponent,
+    ImageViewerComponent
   ]
   ,
 
