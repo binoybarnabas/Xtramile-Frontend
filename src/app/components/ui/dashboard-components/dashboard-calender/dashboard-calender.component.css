@@ -1,13 +1,16 @@
 .calendar {
   border-radius: 6px;
-  background: var(--dark-gradient-color);
+  /* background: var(--dark-gradient-color); */
   color: var(--card-bg-color);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 8px;
+  padding: 5px;
   height: 100%;
+  background: var(--card-bg-color);
   /* border: 1px dotted var(--ternary-text-color); */
+  color: var(--primary-text-color);
+  box-shadow: var(--normal-box-shadow);
 
 }
 
@@ -15,11 +18,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  border-bottom: 1px solid var(--primary-orange-color);
+  border-radius: 5px;
   width: 100%;
-  padding: 10px;
+  padding: 8px 10px;
+  background-color: var(--second-color);
+  color: var(--card-bg-color);
+  margin-bottom: 4px;
 }
 
 .calendar-header .month_year {
@@ -51,17 +55,15 @@
 
 
 .calendar .day {
-
   font-size: var(--extra-small-font-size);
   font-weight: 500;
   text-transform: uppercase;
   padding-left: 7px;
   color: var(--ternary-text-color);
-
 }
 
 .date_container {
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
 /* .calendar th, */
@@ -79,8 +81,9 @@
 
 .calendar td:hover {
   /* border: 1px solid var(--card-bg-color); */
-  background-color: var(--primary-orange-color);
+  background-color: var(--secondary-cyan-color);
   border-radius: 5px;
+  color: var(--second-color);
 }
 
 .highlighted-departure {
