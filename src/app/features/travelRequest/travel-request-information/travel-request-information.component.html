@@ -157,27 +157,28 @@
                   <p *ngIf="selectedImages.length == 0" class="option_default_message">No options added yet!</p>
                 </tab>
                 <tab heading="Texts" (selectTab)="onSelect($event)">
+
                   <div class="expansion-panel-container">
-                    <div 
+                    <div (click)="onOptionSelected('text', i)" 
                       *ngFor="let htmlContent of textOption; let i = index" 
                       class="expansion-panel"
                     >
                       <div 
-                        class="expansion-panel-header" 
+                        [ngClass]="selectedTextOptionIndex === i ? 'expansion-panel-header active' : 'expansion-panel-header' "
                         (click)="togglePanel(i)"
                       >
-                        Option {{ i + 1 }}
-                        <i class="ri-arrow-down-s-line" *ngIf="!isPanelOpen(i)"></i>
-                        <i class="ri-arrow-up-s-line" *ngIf="isPanelOpen(i)"></i>
-                        <!-- <button class="delete-button" (click)="removeTextOption(i)"><i class="ri-delete-bin-line"></i></button> -->
+                      <p class="title">Option {{ i + 1 }}</p>
+                        <i class="icon ri-arrow-down-wide-line" *ngIf="!isPanelOpen(i)"></i>
+                        <i class="icon ri-arrow-up-wide-line" *ngIf="isPanelOpen(i)"></i>
                       </div>
-                      <div  (click)="onOptionSelected('text', i)" 
+                      <div  
                         class="expansion-panel-content" 
                         *ngIf="isPanelOpen(i)"
                         [innerHTML]= "santizieHtml(htmlContent)"
                       ></div>
                     </div>
                   </div>
+
                   <p *ngIf="textOption.length == 0" class="option_default_message">No options added yet!</p>
                 </tab>
               </tabset>
@@ -244,4 +245,4 @@
   <!-- req form main container ends -->
 </div>
 
-<app-image-viewer *ngIf="isImageViewerOpen" [images]="imageUrls" (close)="closeImageViewer()"></app-image-viewer>
+<app-image-viewer *ngIf="isImageViewerOpen" [images]="imageUrls" [descriptions]="descriptions" [currentImageIndex]="selectedImageOptionIndex" (close)="closeImageViewer()"></app-image-viewer>

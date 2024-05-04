@@ -11,6 +11,31 @@
   background-color: var(--primary-text-color);
 }
 
+.main_container .close_btn{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 99999;
+}
+
+
+.main_container .close_btn .btn.close{
+  color: var(--primary-text-color);
+  background-color: var(--secondary-cyan-color);
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--large-font-size);
+}
+
+.main_container .close_btn .btn.close:hover{
+  color: var(--primary-red-color);
+  background-color: var(--secondary-red-color);
+}
+
 .main_container .image_container {
   /* position: relative; */
   position: absolute;
@@ -56,6 +81,20 @@
     width: 100%;
 }
 
+.main_container .action_section .img_description{
+  font-size: var(--form-label-font-size);
+  color: var(--ternary-text-color);
+  width: 80%;
+  height: 38px;
+  overflow: hidden;
+  white-space: no-wrap;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .main_container .action_section .zoom_actions,
 .main_container .action_section .prev_next_actions{
     display: flex;
@@ -82,17 +121,7 @@
   color: var(--card-bg-color);
 }
 
-.main_container .action_section .btn.close{
-  color: var(--primary-text-color);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;  
-}
 
-.main_container .action_section .btn.close:hover{
-  color: var(--primary-red-color);
-  background-color: var(--secondary-red-color);
-}
 
 
 

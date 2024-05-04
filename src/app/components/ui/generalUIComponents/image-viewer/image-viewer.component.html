@@ -1,4 +1,8 @@
 <div class="main_container">
+  
+  <div class="close_btn">
+    <button class="btn close" (click)="closeImageViewer()"><i class="ri-close-circle-fill"></i></button>
+  </div>
 
   <div class="image_container">
     <div *ngIf="images && images.length > 0" class="image_wrapper">
@@ -9,6 +13,8 @@
     </div>
   </div>
 
+
+
   <div class="action_section">
 
     <div class="zoom_actions">
@@ -16,8 +22,8 @@
       <button class="btn" (click)="zoomIn()"><i class="ri-zoom-in-line"></i></button>
     </div>
 
-    <div>
-      <button class="btn close" (click)="closeImageViewer()"><i class="ri-fullscreen-exit-line"></i></button>
+    <div class="img_description">
+      <span>{{descriptions[currentImageIndex]}}</span>
     </div>
 
     <div class="prev_next_actions">
