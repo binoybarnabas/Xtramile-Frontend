@@ -124,6 +124,7 @@
 
 
 /* Travel Options */
+
 .req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .head_section{
     height: 45px;
     display: flex;
@@ -150,11 +151,20 @@
     cursor: pointer;
     font-size: var(--normal-font-size);
     transition: 0.3s;
+    border: none;
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .head_section .del_btn:disabled{
+    opacity: 0.3;
 }
 
 .req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .head_section .del_btn:hover{
     background-color: var(--secondary-red-color);
     color: var(--primary-red-color);
+}
+
+.req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .head_section .del_btn:disabled:hover{
+    cursor: no-drop;
 }
 
 .req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .head_section .add_btn{
@@ -185,39 +195,37 @@
     align-items: start;
     height: calc(100vh - 278px);
     overflow-y: auto;
-
 }
 
-.req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .option_container .option_card{
+/* .req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .option_container .option_card{
     margin: 5px;
     padding: 2px;
     border-radius: 8px;
     cursor: pointer;
-}
+} */
 
-.req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .option_container .option_card.active{
+/* .req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .option_container .option_card.active{
     background-color: var(--second-color);
-    /* filter: grayscale(1.5); */
-}
+} */
 
 /* .req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .option_container .option_card.active .img_file .img{
     filter: grayscale(1.2);
 } */
 
-.req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .option_container .option_card .img_file .img{
+/* .req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .option_container .option_card .img_file .img{
     width: 250px;
     height: 160px;
     border-radius: 6px;
-}
+} */
 
-.req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .option_container .option_card .text_option{
+/* .req_forms_main_container .right_section .form_container .new_req_form .travel_option_section .option_container .option_card .text_option{
     width: 250px;
     height: 160px;
     background-color: var(--secondary-cyan-color);
     padding: 8px;
     border-radius: 6px;
     font-size: var(--small-font-size);
-}
+} */
 
 /* actions */
 .req_forms_main_container .action_section{
@@ -257,7 +265,7 @@
 
 ::ng-deep .nav-tabs {
     border-radius: 8px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     height: 45px;
     width: fit-content;
     display: flex;
@@ -339,26 +347,40 @@
 
 .selected-images-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
   }
   
 .selected-images-container .image-item {
     position: relative;
-    border: 1px solid #e0e0e0; 
-    padding: 15px; 
-    border-radius: 5px; 
-  }
+    /* border: 1px solid var(--secondary-cyan-color); */
+    border-radius: 2px;
+}
   
-.selected-images-container .image-item img {
+.selected-images-container .image-item .img_wrapper{
+    padding: 2px;
+    border-radius: 2px;
+    background-color: var(--card-bg-color);
+}
+
+.selected-images-container .image-item .img_wrapper.active{
+    background-color: var(--second-color);
+}
+
+
+.selected-images-container .image-item .img {
     max-width: 100%;
     height: auto;
     display: block;
+    border-radius: 1.5px;
   }
   
-.selected-images-container .image-item p {
-    margin-top: 10px;
+.selected-images-container .image-item .text {
+    margin-top: 5px;
+    font-size: var(--form-label-font-size);
     text-align: center;
+    margin: 3px;
+    color: var(--ternary-text-color);
   }
   
 .selected-images-container .image-item .remove-btn {
@@ -537,6 +559,7 @@
 }
 
 .option_default_message{
-    font-size: var(--p-font-size);
+    font-size: var(--form-label-font-size);
+    color: var(--ternary-text-color);
 }
 
