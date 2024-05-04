@@ -211,8 +211,24 @@ export class NewTravelRequestComponent {
 
   ngOnInit() {
 
+
     this.initializeComponent();
 
+    this.updateNavItemsBasedOnUserRole();
+
+    // let argsForGetEmployeeDataById = this.empId;
+
+    this.requestService.getEmployeeDataById(this.empId).subscribe({
+
+      next: (data) => {
+        this.employeeDetails = data;
+        console.log(this.employeeDetails)
+
+      },
+      error: (error: Error) => { console.log("problems in fetching data") },
+      complete: () => { console.log("get employee by id is done") }
+    });
+    
     //get an employee request based on an request Id
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
@@ -506,7 +522,10 @@ export class NewTravelRequestComponent {
   onBackBtnClick(){
 
     if(this.currentNavIndex === 0){
-      this.router.navigate(['/traveladmin/incomingrequests']);
+      if(this.currentLoggedInUserRole === 'travelAdmin')
+        this.router.navigate(['/traveladmin/incomingrequests']);
+      else if(this.currentLoggedInUserRole === 'manager')
+        this.router.navigate(['/manager/incoming'])
       return;
     }
 
