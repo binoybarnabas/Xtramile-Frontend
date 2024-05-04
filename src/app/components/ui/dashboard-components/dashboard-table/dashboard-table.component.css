@@ -19,16 +19,8 @@
 }
 
 .dashboard_table .table_body {
-    overflow-y: scroll;
+    overflow-y: auto;
 }
-
-/* .dashboard_table .heading,
-.dashboard_table .data {
-    width: 150px;
-} */
-
-
-
 
 .dashboard_table .data {
     padding: 10px;
@@ -36,7 +28,6 @@
     font-size: var(--form-label-font-size);
     color: var(--secondary-text-color);
     overflow-wrap: break-word;
-
 }
 
 .dashboard_table .remarks {

@@ -8,10 +8,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ImageViewerComponent {
  
   @Input() images: string[] = [];
+  @Input() descriptions: string[] = [];
+  @Input() currentImageIndex: number = 0;
   @Output() close = new EventEmitter<void>();
   
   zoomLevel = 1;
-  currentImageIndex = 0;
+  //currentImageIndex = 0;
 
   constructor(){
 
