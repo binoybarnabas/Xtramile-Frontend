@@ -15,6 +15,8 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
   isFlipping: boolean = false;
   private isFileSubscription!: Subscription;
 
+  selectedDocCardId : number = -1;
+
   constructor(private commonService: CommonAPIService,private http: HttpClient) { }
 
   ngOnInit() {
@@ -82,4 +84,15 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+
+  onDocCardSelected(cardId: number){
+    if(this.selectedDocCardId === cardId){
+      this.selectedDocCardId = -1;
+    }else{
+      this.selectedDocCardId = cardId;
+    }
+  }
+
+
 }

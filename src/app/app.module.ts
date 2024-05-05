@@ -119,7 +119,7 @@ import { CustomTimePickerComponent } from './components/ui/form-components/custo
 import { FileUploaderComponent } from './components/ui/form-components/file-uploader/file-uploader.component';
 import { DocumentsComponent } from './components/ui/form-components/documents/documents.component';
 import { DocumentCardComponent } from './components/ui/generalUIComponents/document-card/document-card.component';
-import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
+import { TravellerDocumentsComponent } from './features/travellerFeatures/traveller-documents/traveller-documents.component';
 import { PageHeaderComponent } from './components/layout/general/page-header/page-header.component';
 import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
