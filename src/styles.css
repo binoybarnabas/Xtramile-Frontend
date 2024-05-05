@@ -68,6 +68,7 @@
   --normal-box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
   /*========Font size========*/
+  --tiny-font-size: 0.6rem;
   --extra-small-font-size: 0.7rem;
   --dash-table-font-size: 0.76em;
   --form-label-font-size: 0.8em;
