@@ -18,10 +18,11 @@
         <span
           [ngClass]="
             trip.status === 'Ongoing'
-              ? 'green'
+              ? 'text green'
               : trip.status === 'Cancelled' || trip.status === 'Denied'
-              ? 'red'
-              : 'blue'
+              ? 'text red'
+              : trip.status === 'Forwarded'
+              ? 'text forwarded' : 'text cyan'
           "
           >{{ trip.status }}</span
         >
