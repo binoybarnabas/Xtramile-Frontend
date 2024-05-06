@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ToastObject } from '../interfaces/ToastObject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomToastService {
 
-  private toastSubject = new Subject<string>();
+  private toastSubject = new Subject<ToastObject>();
   toastState = this.toastSubject.asObservable();
 
   constructor() { }
 
-  showToast(message: string) {
-    this.toastSubject.next(message);
+  showToast(toastObj: ToastObject) {
+    //const { message, toastType, toastDuration } = toastObj;
+    this.toastSubject.next(toastObj);
   }
+
 }

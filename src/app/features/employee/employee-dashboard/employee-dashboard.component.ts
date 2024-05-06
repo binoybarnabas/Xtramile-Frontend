@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { EmployeeDashboardService } from 'src/app/services/employeeServices/dashboardServices/employee-dashboard.service';
+import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -34,9 +35,9 @@ export class EmployeeDashboardComponent {
     this.fetchGaugeData();
 
   }
-  constructor(private service: EmployeeDashboardService, private commonApiService: CommonAPIService) {
-    this.commonApiService.showToast("Welcome to XtraMile");
-
+  constructor(private service: EmployeeDashboardService, private commonApiService: CommonAPIService, private toastService: CustomToastService) {
+    //this.commonApiService.showToast("Welcome to XtraMile");
+    this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
   }
 
   fetchProgress() {

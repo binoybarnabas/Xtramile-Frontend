@@ -11,7 +11,6 @@
     opacity: 0;
     transition: opacity 0.5s ease;
     box-shadow: var(--normal-box-shadow);
-
 }
 
 .toast.show {
@@ -20,4 +19,17 @@
 
 .toast-content {
     font-size: var(--small-font-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+/* .toast .close_icon{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: var(--normal-font-size);
+    color: var(--ternary-text-color);
+    font-weight: var(--active-font-weight);
+} */
+

@@ -43,7 +43,7 @@ export class TravelRequestCardComponent {
             },
             complete: () => {
               console.log("done");
-              this.toastService.showToast("Travel Request Cancelled!")
+              this.toastService.showToast({ message: "Travel Request Cancelled", toastType: "success", toastDuration: 3000 });
             }
           });
         }
