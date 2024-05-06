@@ -367,9 +367,9 @@ export class TravelRequestFormComponent {
     }
     const filterValue = value.toLowerCase();
     if (field === 'sourceCity') {
-      this.sourceFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue));
+      this.sourceFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue) || city.country.toLowerCase().includes(filterValue));
     } else if (field === 'destinationCity') {
-      this.destinationFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue));
+      this.destinationFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue) || city.country.toLowerCase().includes(filterValue));
     }
   }
 

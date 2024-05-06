@@ -11,13 +11,15 @@
             <span>{{item.fileName}}</span>
         </div>
 
-        <div class="actions">
+        <div *ngIf="item.fileURL" class="actions">
 
-            <div class="action_btn">
+            <div>
+                <a class="action_btn" href="{{item.fileURL}}" target="_blank">
                 <span> <i class="icon ri-eye-line"></i></span>
+                </a>
             </div>
 
-            <div class="action_btn">
+            <div class="action_btn" (click)="downloadFile(item.fileURL, item.fileName)">
                 <span><i class="icon ri-file-download-line"></i></span>
             </div>
             

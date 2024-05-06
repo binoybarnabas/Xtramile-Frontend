@@ -45,4 +45,8 @@ export class DocumentsService {
     return this.http.get(this.travelDocumentsURL + `/validDocuments/${fileType}`,{params});
   }
 
+  getRelevantTravelDocuments(requestId: number): Observable<any>{
+    return this.http.get(this.travelDocumentsURL + `/relevantDocuments/${requestId}`);
+  }
+
 }
