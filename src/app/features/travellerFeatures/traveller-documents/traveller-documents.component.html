@@ -1,6 +1,6 @@
-<app-page-header [headingInputData]="pageHeading"></app-page-header>
+<app-page-header *ngIf="!isPdfViewerOpen"  [headingInputData]="pageHeading"></app-page-header>
 
-<div class="main_container">
+<div *ngIf="!isPdfViewerOpen" class="main_container">
 
   <div class="btn_container">
 
@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <app-document-card> </app-document-card>
+  <app-document-card (openInPdfViewer)="openPdfViewer($event)"> </app-document-card>
 
   <div *ngIf="isDocUploadModalOpen" class="upload_form_container">
     <div class="document_upload_form_modal">
@@ -197,3 +197,6 @@
   </div>
 
 </div>
+
+<app-custom-pdf-viewer *ngIf="isPdfViewerOpen" [fileUrl]="loadedFileUrl" (close)="closePdfViewer()"></app-custom-pdf-viewer>
+
