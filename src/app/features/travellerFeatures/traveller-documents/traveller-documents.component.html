@@ -4,7 +4,7 @@
 
   <div class="btn_container">
 
-    <button class="del_btn"> <i class="ri-delete-bin-line"></i>  </button>
+    <button (click)="onDeleteBtnClick()" class="del_btn"> <i class="ri-delete-bin-line"></i>  </button>
     <div (click)="toggleDocUploadModal(true)" class="add_btn" type="button">
       <span class="btn_text">Add</span>
     </div>

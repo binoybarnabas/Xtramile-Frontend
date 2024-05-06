@@ -437,7 +437,6 @@ export class NewTravelRequestComponent {
     this.bsModalRef = this.modalService.show(DescriptionModalComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
-      console.log('Modal result:', result);
       // You can perform actions with the result data here
     });
   }
@@ -741,9 +740,13 @@ export class NewTravelRequestComponent {
   onOptionSelected(optionType:string, optionIndex: number){
 
     if(optionType === 'img'){
-      this.selectedImageOptionIndex = optionIndex;
+        this.selectedImageOptionIndex = optionIndex;
     }else{
-      this.selectedTextOptionIndex = optionIndex;
+      if(this.selectedTextOptionIndex === optionIndex){
+        this.selectedTextOptionIndex = -1;
+      }else{
+        this.selectedTextOptionIndex = optionIndex;
+      }
     }
 
   }
