@@ -27,6 +27,9 @@ export class TravellerDocumentsComponent {
   countryData: string[] = [];
   fileErrorMessage: string = '';
 
+  isPdfViewerOpen: boolean = false;
+  loadedFileUrl : string = '';
+
   bsModalRef!: BsModalRef;
 
   constructor(
@@ -178,6 +181,16 @@ export class TravellerDocumentsComponent {
       // Handle the result from the modal if needed
       // You can perform actions with the result data here
     });
+  }
+
+  openPdfViewer(fileUrl: string) {
+    this.loadedFileUrl = fileUrl;
+    this.isPdfViewerOpen = true;
+  }
+
+  closePdfViewer() {
+   this.isPdfViewerOpen = false;
+   //this.initializeComponent();
   }
 
 
