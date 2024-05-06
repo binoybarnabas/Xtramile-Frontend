@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { blob, filter } from 'd3';
 
@@ -54,7 +54,11 @@ onSearch(){
 }
 
 onDownloadFileClick(url: string, docType: string, employeeName: string){
-  this.http.get(url, {responseType: 'blob'}).subscribe({
+      const header = new HttpHeaders({
+      'Cache-Control': 'no-cache, no-store',
+      'Expires': '0'    
+    })
+  this.http.get(url, {responseType: 'blob', headers: header}).subscribe({
     next: (data: Blob) =>{
       const blob = new Blob([data], {type: data.type});
       const link = document.createElement('a');
