@@ -76,11 +76,11 @@ export class FileCardComponent {
   }
 
   downloadFile(url: string, fileName: string){
-    // const header = new HttpHeaders({
-    //   'Cache-Control': 'no-cache, no-store',
-    //   'Expires': '0'    
-    // })
-    this.http.get(url, {responseType: 'blob'}).subscribe({
+    const header = new HttpHeaders({
+      'Cache-Control': 'no-cache, no-store',
+      'Expires': '0'    
+    })
+    this.http.get(url, {responseType: 'blob', headers: header}).subscribe({
       next: (data: Blob) =>{
         const blob = new Blob([data], {type: data.type});
         const link = document.createElement('a');
