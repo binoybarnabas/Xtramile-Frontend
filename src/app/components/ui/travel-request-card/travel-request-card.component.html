@@ -57,13 +57,16 @@
           <p class="country">{{ item.sourceCountry }}</p>
         </div>
         <div class="travel_mode">
-          <i
-            [ngClass]="
-              item.travelMode === 'Cab'
-                ? 'icon ri-car-line'
-                : 'icon ri-plane-line'
-            "
-          ></i>
+          <div class="travel_mode">
+            <i
+              [ngClass]="{
+                'icon ri-car-line': item.travelMode === 'Cab',
+                'icon ri-plane-line': item.travelMode === 'Flight',
+                'icon ri-train-line': item.travelMode === 'Train',
+                'icon ri-bus-line': item.travelMode === 'Bus'
+              }"
+            ></i>
+          </div>
         </div>
         <div class="destination">
           <span class="city">{{ item.destinationCity }}</span>
