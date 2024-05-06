@@ -648,7 +648,7 @@
     border-radius: var(--normal-border-radius);
     z-index: 9999;
     width: 30%;
-    top: 60px;
+    top: -110px;
 }
 
 .main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .time_slot_container .slot_selector {
@@ -834,7 +834,7 @@
     border-radius: var(--normal-border-radius);
     z-index: 9999;
     width: fit-content;
-    top: 60px;
+    top: 10px;
 }
 
 .main_container .req_form_container .bottom_section .second_row .file_container {
@@ -1050,7 +1050,7 @@
     }
 
     .main_container .req_form_container {
-        margin: 0.5rem;
+        margin-left: 6rem;
     }
 
     .main_container .req_form_container .top_section .travel_mode_container {

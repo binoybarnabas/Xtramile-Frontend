@@ -43,7 +43,7 @@ export class DashboardUpcomingTripsComponent {
           this.loadCurrentTrip(); // Load the current trip details
 
           // Automatically cycle through trips every 5 seconds
-          interval(10000)
+          interval(3000)
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => {
               this.nextTrip();
@@ -58,9 +58,10 @@ export class DashboardUpcomingTripsComponent {
       }
     );
   }
-
   loadCurrentTrip() {
     const currentTrip = this.trips[this.currentIndex];
+    console.log('Current Trip:', currentTrip);
+  
     if (currentTrip && new Date(currentTrip.startDate) >= new Date()) {
       this.tripPurpose = currentTrip.tripPurpose;
       this.startDate = currentTrip.startDate;
@@ -73,35 +74,29 @@ export class DashboardUpcomingTripsComponent {
       // Fetch country image data
       this.service.getCountryImage().subscribe(
         (countryData: any[]) => {
+          console.log('Country Data:', countryData);
           // Find the specific country in the data
           const country = countryData.find(
             (c: { countryName: string }) =>
               c.countryName === this.destinationCountry
           );
-          console.log('country data',countryData)
+          console.log('Selected Country:', country);
   
           // If the country is found, set the values for countryName and currentImageUrl
           if (country) {
             this.countryName = country.countryName;
-            // Find the city in the country's cities array
-            const city = country.cities.find((c: { cityName: string }) => c.cityName === this.destinationCity);
-            if (city) {
-              // Use city image if available
-              this.currentImageUrl = city.touristPlaceImageUrl;
-            } else {
-              // Use country image if city image is not available
-              this.currentImageUrl = country.touristPlaceImageUrl;
-            }
+            this.currentImageUrl = country.imageUrl; // Set the image URL directly from the country object
+            this.tripDetailsAvailable=true;
           }
         },
         (error) => {
           console.error('Error fetching country image data:', error);
         }
       );
-    } else {
+    } else if(currentTrip==null){
       this.tripDetailsAvailable = false;
     }
-  }
+  }  
   
 
   // Function to navigate to the next trip
