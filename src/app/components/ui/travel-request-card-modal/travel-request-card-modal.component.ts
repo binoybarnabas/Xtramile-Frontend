@@ -3,8 +3,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { TravelRequestDetailViewModel } from 'src/app/services/interfaces/iTravelRequestDetails';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
-import { local } from 'd3';
-import { DatePipe } from '@angular/common';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { TextEditorComponent } from '../text-editor/text-editor.component';
@@ -49,8 +47,6 @@ export class TravelRequestCardModalComponent {
     this.commonApiService.GetTravelRequestById(this._requestId).subscribe({
       next: (data) => {
         this.travelRequestDetailViewModel = data;
-        console.log(this.travelRequestDetailViewModel);
-        console.log(this.travelRequestDetailViewModel.requestId);
       },
       error: (error: Error) => {
         console.log('problems in fetching data');

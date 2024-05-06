@@ -13,7 +13,7 @@ import { EmployeeDetails } from '../../travelRequest/travel-request-information/
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { slLocale } from 'ngx-bootstrap/chronos';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
-
+import { RequestStatus } from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
 
 @Component({
   selector: 'app-travel-request-form',
@@ -87,6 +87,8 @@ export class TravelRequestFormComponent {
   cities = cities;//Fetch Data From Any External API
   sourceFilteredCities: any[] = []; // Separate filtered list for source field
   destinationFilteredCities: any[] = []; // Separate filtered list for destination field
+
+  requestId: number = 0;
 
   constructor(private sideNavBarService: SideNavBarService,
     private requestService: RequestService,
@@ -583,7 +585,7 @@ export class TravelRequestFormComponent {
     const formData = new FormData();
 
     formData.append("createdBy", String(this.empId));
-    formData.append("tripType", this.selectedTripType);
+    formData.append("tripType", this.selectedTripType === 'round_trip' ? 'Round Trip' : 'One Way');
     formData.append("travelModeId", String(this.selectedTravelMode));
     formData.append("tripPurpose", this.selectedTravelPurpose);
     formData.append("departureDate", this.datePipe.transform(this.travelRequestForm.get('departureDate')?.value, "yyyy-MM-dd") || '');
@@ -596,9 +598,9 @@ export class TravelRequestFormComponent {
     formData.append("prefDepartureTime", this.selectedPrefDepTime);
     formData.append("travelType", this.selectedTravelType);
     formData.append("projectId", this.selectedProjectId.toString());
-    formData.append("cabRequired", this.travelRequestForm.value.accommodationRequired === true ? 'yes' : 'no');
+    formData.append("cabRequired", this.travelRequestForm.value.accommodationRequired === true ? 'Yes' : 'No');
     formData.append("prefPickUpTime", this.selectedPrefPickUpTime);
-    formData.append("accommodationRequired", this.travelRequestForm.value.cabRequired === true ? 'yes' : 'no');
+    formData.append("accommodationRequired", this.travelRequestForm.value.cabRequired === true ? 'Yes' : 'No');
     const fileInput = this.travelRequestForm.get('travelAuthorizationEmailCapture');
     if (fileInput && fileInput.value) {
       formData.append('travelAuthorizationEmailCapture', fileInput.value);
@@ -609,11 +611,24 @@ export class TravelRequestFormComponent {
     this.requestService.sendEmployeeNewTravelRequest(formData).subscribe({
       next: (response) => {
         console.log(response);
-        this.toastService.showToast("Travel request Submitted");
-        this.router.navigate(['employee/pending']);
+        this.requestId = response;
+        setTimeout(() => {
+          this.toastService.showToast("Travel request Submitted");
+          this.router.navigate(['employee/pending']);
+        },4000)
       },
       error: (error: Error) => {
         console.log(error);
+      },
+      complete: () => {
+        const requestStatus: RequestStatus = {
+          requestId: this.requestId,
+          empId: this.empId,
+          primaryStatusId: 1,
+          date: new Date(),
+          secondaryStatusId: 2
+        };
+        this.commonApiService.updateRequestStatus(requestStatus).subscribe();      
       }
     });
   }

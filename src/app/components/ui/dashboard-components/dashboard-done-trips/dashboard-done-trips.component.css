@@ -1,28 +1,38 @@
+.done_trips_container{
+  height: 100%;
+}
+
 .done_trips_container .heading_container {
   /* background: var(--dark-gradient-color); */
-  padding: 10px;
+  padding: 8px;
   border-radius: 5px 5px 0 0;
   display: flex;
   align-items: center;
-  background-color: var(--scroll-thumb-color);
   display: flex;
   justify-content: space-between;
+  background-color: var(--second-color);
 }
 
 .done_trips_container .heading_container .heading {
   margin-top: auto;
   margin-bottom: auto;
   color: var(--card-bg-color);
+  font-size: var(--small-font-size);
   font-weight: var(--active-font-weight);
-
 }
 
 .done_trips_container .heading_container .count {
-  padding: 5px;
-  border-radius: 5px;
-  font-size: var(--form-label-font-size);
+  /* padding: 5px; */
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content:center;
+  align-items: center; 
+  border-radius: 50%;
+  font-size: var(--extra-small-font-size);
+  font-weight: var(--active-font-weight);
   background-color: var(--card-bg-color);
-  color: var(--primary-orange-color);
+  color: var(--second-color);
 }
 
 .done_trips_container .trip_history_container {
@@ -30,8 +40,8 @@
   flex-direction: column;
   padding: 0.5rem;
   overflow-x: hidden;
-  overflow-y: scroll;
-  max-height: 43vh;
+  overflow-y: auto;
+  /* max-height: 40vh; */
 }
 
 .done_trips_container .trip_history_container .trip_history_card {
@@ -164,15 +174,16 @@
     background-color:var(--primary-orange-color); 
     color: var(--card-bg-color);
     padding: 1px 6px; 
-    border-radius: 50%; 
-  }
+    border-radius: 50%;   
+}
+
 .no_data_container {
   display: flex;
-  margin-top: 3em;
   justify-content: center;
   align-items: center;
+  margin-top: 8px;
 }
 
 .no_data_container .no_data_image {
-  max-width: 17em; 
+  max-width: 15em; 
 }

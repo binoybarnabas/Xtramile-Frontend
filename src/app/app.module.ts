@@ -119,7 +119,7 @@ import { CustomTimePickerComponent } from './components/ui/form-components/custo
 import { FileUploaderComponent } from './components/ui/form-components/file-uploader/file-uploader.component';
 import { DocumentsComponent } from './components/ui/form-components/documents/documents.component';
 import { DocumentCardComponent } from './components/ui/generalUIComponents/document-card/document-card.component';
-import { TravellerDocumentsComponent } from './features/employee/myDocuments/traveller-documents/traveller-documents.component';
+import { TravellerDocumentsComponent } from './features/travellerFeatures/traveller-documents/traveller-documents.component';
 import { PageHeaderComponent } from './components/layout/general/page-header/page-header.component';
 import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
@@ -141,6 +141,8 @@ import { ManagerForwadedRequestsComponent } from './features/manager/travelReque
 import { DashCalendarComponent } from './components/ui/dashboard-components/dash-calendar/dash-calendar.component';
 import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
+import { TravelRequestInfoCardComponent } from './components/ui/travel-request-info-card/travel-request-info-card.component';
+import { ImageViewerComponent } from './components/ui/generalUIComponents/image-viewer/image-viewer.component';
 
 @NgModule({
   declarations: [
@@ -267,7 +269,9 @@ import { TravelMessengerFullScreenComponent } from './features/travelAdmin/trave
     TabbedDataTableComponent,
     DashCalendarComponent,
     TravelMessengerModalComponent,
-    TravelMessengerFullScreenComponent
+    TravelMessengerFullScreenComponent,
+    TravelRequestInfoCardComponent,
+    ImageViewerComponent
   ]
   ,
 

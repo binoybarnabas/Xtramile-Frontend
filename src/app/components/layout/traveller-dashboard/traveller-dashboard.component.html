@@ -22,54 +22,57 @@
   </div>
 
   <div class="bottom_section">
-    <!-- Req History -->
-    <div class="bottom_left_section">
-      <div class="heading_container">
-        <div
-          (click)="changeDashboardTableBody('requests')"
-          [ngClass]="
-            dashboardTableBody === 'requests'
-              ? 'heading_card active'
-              : ' heading_card'
-          "
-        >
-          <span class="heading">My Requests</span>
+
+        <!-- Req History -->
+        <div class="bottom_left_section">
+          <div class="heading_container">
+            <div
+              (click)="changeDashboardTableBody('requests')"
+              [ngClass]="
+                dashboardTableBody === 'requests'
+                  ? 'heading_card active'
+                  : ' heading_card'
+              "
+            >
+              <span class="heading">My Requests</span>
+            </div>
+    
+            <div
+              (click)="changeDashboardTableBody('settlements')"
+              [ngClass]="
+                dashboardTableBody === 'settlements'
+                  ? 'heading_card active'
+                  : 'heading_card'
+              "
+              class="heading_card"
+            >
+              <span class="heading">My Settlements </span>
+            </div>
+          </div>
+    
+          <div class="body">
+            <div
+              *ngIf="dashboardTableBody === 'requests'"
+              class="travel_request_container"
+            >
+              <app-dashboard-table [employeeId]="employeeId"></app-dashboard-table>
+            </div>
+    
+            <!-- <div
+              *ngIf="dashboardTableBody === 'settlements'"
+              class="travel_settlement_container"
+            >
+              <p>Travel Settlements</p>
+              <app-dashboard-table></app-dashboard-table>
+            </div> -->
+          </div>
+        </div>
+    
+        <!-- Done Trips -->
+        <div class="bottom_right_section">
+          <app-dashboard-done-trips [empId]="employeeId"></app-dashboard-done-trips>
         </div>
 
-        <div
-          (click)="changeDashboardTableBody('settlements')"
-          [ngClass]="
-            dashboardTableBody === 'settlements'
-              ? 'heading_card active'
-              : 'heading_card'
-          "
-          class="heading_card"
-        >
-          <span class="heading">My Settlements </span>
-        </div>
-      </div>
 
-      <div class="body">
-        <div
-          *ngIf="dashboardTableBody === 'requests'"
-          class="travel_request_container"
-        >
-          <app-dashboard-table [employeeId]="employeeId"></app-dashboard-table>
-        </div>
-
-        <div
-          *ngIf="dashboardTableBody === 'settlements'"
-          class="travel_settlement_container"
-        >
-          <!-- <p>Travel Settlements</p> -->
-          <app-dashboard-table></app-dashboard-table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Done Trips -->
-    <div class="bottom_right_section">
-      <app-dashboard-done-trips [empId]="employeeId"></app-dashboard-done-trips>
-    </div>
   </div>
 </div>
