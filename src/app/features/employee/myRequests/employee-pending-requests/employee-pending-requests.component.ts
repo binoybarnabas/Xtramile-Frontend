@@ -17,6 +17,8 @@ export class EmployeePendingRequestsComponent {
   requestData: PendingRequest[] = [];
   empId: number;
   userData: UserData
+  tableHeaders = ['RequestID','ProjectCode','From','To', 'DepartureDate','ReturnDate','Status'];
+  dataHeaders = ['requestId', 'projectCode','sourceCity','destinationCity', 'departureDate','returnDate', 'statusName'];
 
   pageHeading: string = 'Pending Approval';
 
@@ -62,8 +64,6 @@ export class EmployeePendingRequestsComponent {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
-
 
 }
 
