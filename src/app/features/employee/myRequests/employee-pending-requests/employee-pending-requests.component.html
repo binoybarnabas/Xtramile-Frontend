@@ -17,6 +17,10 @@
 
 </app-page-header>
 
-<app-travel-request-card [data]="requestData">
+<app-travel-request-card *ngIf="requestData.length<=6" [data]="requestData">
 
 </app-travel-request-card>
+<app-data-table *ngIf="requestData.length>6"   [headers]="tableHeaders"
+  [data]="requestData"
+  [displayedProperties]="dataHeaders">
+</app-data-table>

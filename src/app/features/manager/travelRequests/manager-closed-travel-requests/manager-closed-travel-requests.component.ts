@@ -10,11 +10,15 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
 export class ManagerClosedTravelRequestsComponent {
   pageHeading: string = 'Closed Travel Requests'
 
-  constructor(private apiService: ManagerTravelRequestsService, private router: Router) { }
+  constructor(private apiService: ManagerTravelRequestsService, private router: Router) { 
+    const storedUserData = localStorage.getItem('userData');
+    const userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
+    this.managerId = userData.empId;
+  }
 
   travelRequest = []
 
-  managerId = 9; // to check the data
+  managerId : number; // to check the data
   itemsPerPage = 10;
   totalItems = 0;
   currentPage = 1;
