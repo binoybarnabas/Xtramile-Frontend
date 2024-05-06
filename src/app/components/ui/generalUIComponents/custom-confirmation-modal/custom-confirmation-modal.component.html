@@ -1,0 +1,17 @@
+<div class="confirmation_card">
+
+    <div class="top_bar">
+        <i (click)="onCloseIconClick()" class="icon ri-close-fill"></i>
+    </div>
+    
+    <div class="body">
+        <h6 class="title">{{mainText}}</h6>
+        <p class="desc">{{description}}</p>
+    </div>
+
+    <div class="bottom_actions">
+        <button (click)="onCancelBtnClick()" class="btn cancel">{{cancelBtnText}}</button>
+        <button (click)="onConfirmBtnClick()" [style.background]="confirmBtnColor" [style.border]="confirmBtnColor"   class="btn confirm">{{confirmBtnText}}</button>
+    </div>
+
+</div>

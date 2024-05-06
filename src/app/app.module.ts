@@ -143,6 +143,7 @@ import { TravelMessengerModalComponent } from './components/ui/dashboard-compone
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 import { TravelRequestInfoCardComponent } from './components/ui/travel-request-info-card/travel-request-info-card.component';
 import { ImageViewerComponent } from './components/ui/generalUIComponents/image-viewer/image-viewer.component';
+import { CustomConfirmationModalComponent } from './components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -271,7 +272,8 @@ import { ImageViewerComponent } from './components/ui/generalUIComponents/image-
     TravelMessengerModalComponent,
     TravelMessengerFullScreenComponent,
     TravelRequestInfoCardComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    CustomConfirmationModalComponent
   ]
   ,
 
