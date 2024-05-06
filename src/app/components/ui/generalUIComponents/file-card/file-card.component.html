@@ -3,12 +3,12 @@
     <div *ngFor="let item of fileCard" class="file_card">
 
         <div class="file_name_section">
-            <h4 class="file_name">{{item.fileName}} <i class="ri-checkbox-circle-fill"></i></h4>
+            <h4 class="file_name">{{item.fileType}} <i class="ri-checkbox-circle-fill"></i></h4>
             <span class="file_size">{{item.fileSize}}</span>
         </div>
 
         <div class="description_section">
-            <span>{{item.fileDescription}}</span>
+            <span>{{item.fileName}}</span>
         </div>
 
         <div class="actions">

@@ -16,6 +16,8 @@ export class TravellerDocumentsComponent {
 
   countryList = countries;
 
+  pageHeading = 'My Documents'
+
   documentUploadForm!: FormGroup;
   visaCountryVisible = false;
   expiryDateVisible = false;

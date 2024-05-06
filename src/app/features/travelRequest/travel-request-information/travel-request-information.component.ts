@@ -48,6 +48,8 @@ export class NewTravelRequestComponent {
 
   requestDetailsPageHeading : string = 'TRAVEL REQUEST INFORMATION';
 
+  isImageViewerOpen: boolean = false;
+
   //action bar items
   backBtnTitle : string = 'Back';
   forwardBtnTitle : string = 'Next';
@@ -209,6 +211,11 @@ export class NewTravelRequestComponent {
 
   ngOnInit() {
 
+
+    this.initializeComponent();
+
+    this.updateNavItemsBasedOnUserRole();
+
     // let argsForGetEmployeeDataById = this.empId;
 
     this.requestService.getEmployeeDataById(this.empId).subscribe({
@@ -221,7 +228,7 @@ export class NewTravelRequestComponent {
       error: (error: Error) => { console.log("problems in fetching data") },
       complete: () => { console.log("get employee by id is done") }
     });
-
+    
     //get an employee request based on an request Id
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
@@ -307,6 +314,22 @@ export class NewTravelRequestComponent {
     });
 
     //end of ngOnInit()
+  }
+
+  initializeComponent(){
+    // let argsForGetEmployeeDataById = this.empId;
+
+    this.requestService.getEmployeeDataById(this.empId).subscribe({
+
+      next: (data) => {
+        this.employeeDetails = data;
+        console.log(this.employeeDetails)
+
+      },
+      error: (error: Error) => { console.log("problems in fetching data") },
+      complete: () => { console.log("get employee by id is done") }
+    });
+
   }
 
   isLoading: boolean = false;
@@ -499,7 +522,10 @@ export class NewTravelRequestComponent {
   onBackBtnClick(){
 
     if(this.currentNavIndex === 0){
-      this.router.navigate(['/traveladmin/incomingrequests']);
+      if(this.currentLoggedInUserRole === 'travelAdmin')
+        this.router.navigate(['/traveladmin/incomingrequests']);
+      else if(this.currentLoggedInUserRole === 'manager')
+        this.router.navigate(['/manager/incoming'])
       return;
     }
 
@@ -694,8 +720,46 @@ export class NewTravelRequestComponent {
   value?: string;
   onSelect(data: TabDirective): void {
     this.value = data.heading;
-    console.log(data);
+    this.selectedImageOptionIndex = -1;
+    this.selectedTextOptionIndex = -1;
   }
+
+  openImageViewer() {
+    this.isImageViewerOpen = true;
+  }
+
+  closeImageViewer() {
+   this.isImageViewerOpen = false;
+   this.initializeComponent();
+  }
+
+
+  selectedImageOptionIndex: number = -1;
+  selectedTextOptionIndex: number = -1;
+
+  //on options selected
+  onOptionSelected(optionType:string, optionIndex: number){
+
+    if(optionType === 'img'){
+      this.selectedImageOptionIndex = optionIndex;
+    }else{
+      this.selectedTextOptionIndex = optionIndex;
+    }
+
+  }
+
+  deleteSelectedOption(){
+    if(this.selectedImageOptionIndex != -1){
+
+      this.removeImage(this.selectedImageOptionIndex);
+      this.selectedImageOptionIndex = -1;
+    }else{
+      this.removeTextOption(this.selectedTextOptionIndex);
+      this.selectedTextOptionIndex = -1;
+    }
+
+  }
+
 
   //EOF 
 }

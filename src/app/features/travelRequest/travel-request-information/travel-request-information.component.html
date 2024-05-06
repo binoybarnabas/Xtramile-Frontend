@@ -1,4 +1,4 @@
-<div class="req_forms_main_container">
+<div *ngIf="!isImageViewerOpen" class="req_forms_main_container">
 
   <!-- heading bar -->
   <div class="heading_section">
@@ -112,7 +112,7 @@
           >
             
             <div class="files_section">
-              <app-file-card> </app-file-card>
+              <app-file-card [requestId]="travelRequestDetailViewModel.requestId"> </app-file-card>
             </div>
   
           </div>
@@ -128,8 +128,8 @@
 
             <div class="head_section">
 
-                <div (click)="deleteSelectedOptions()" class="del_btn">
-                  <span><i class="ri-delete-bin-2-fill"></i></span>
+                <div (click)="deleteSelectedOption()" class="del_btn_container">
+                  <button [disabled] = 'selectedImageOptionIndex === -1 && selectedTextOptionIndex === -1' class="del_btn" ><i class="ri-delete-bin-2-fill"></i></button>
                 </div>
 
                 <div class="title">
@@ -142,87 +142,46 @@
             </div>
   
             <div class="option_container">
-                <!-- <div (click)="openAddOptionModal()" class="new_option_card">
-                  <div class="icon_container">
-                    <span><i class="add_icon ri-sticky-note-add-line"></i></span>
-                  </div>
-                  <div class="text_container">
-                        <span class="text">Add</span>
-                  </div>
-              ` </div>  -->
+
               <tabset  [justified]="true">
                 <tab heading="Images" (selectTab)="onSelect($event)">
                   <div class="selected-images-container">
-                    <p *ngIf="selectedImages.length == 0" class="option_default_message">No options are added, Click on Add to add options</p>
-                    <div *ngFor="let image of selectedImages; let i = index" class="image-item">
-                      <img [src]="imageUrls[i]" alt="Selected_Image">
-                      <p>{{ descriptions[i] }}</p>
-                      <button (click)="removeImage(i)" class="remove-btn"><i class="ri-delete-bin-line"></i></button>
+                    <div (click)="onOptionSelected('img', i)" (dblclick)="openImageViewer()" *ngFor="let image of selectedImages; let i = index" class="image-item">
+                      <div [ngClass]="selectedImageOptionIndex === i ? 'img_wrapper active' : 'img_wrapper' ">
+                        <img class="img" [src]="imageUrls[i]" alt="Selected_Image">
+                      </div>
+                      <!-- <p class="text">{{ descriptions[i] }}</p> -->
+                      <!-- <button (click)="removeImage(i)" class="remove-btn"><i class="ri-delete-bin-line"></i></button> -->
                     </div>
                   </div>
+                  <p *ngIf="selectedImages.length == 0" class="option_default_message">No options added yet!</p>
                 </tab>
                 <tab heading="Texts" (selectTab)="onSelect($event)">
-                  <p *ngIf="textOption.length == 0" class="option_default_message">No options are added, Click on Add to add options</p>
+
                   <div class="expansion-panel-container">
-                    <div 
+                    <div (click)="onOptionSelected('text', i)" 
                       *ngFor="let htmlContent of textOption; let i = index" 
                       class="expansion-panel"
                     >
                       <div 
-                        class="expansion-panel-header" 
+                        [ngClass]="selectedTextOptionIndex === i ? 'expansion-panel-header active' : 'expansion-panel-header' "
                         (click)="togglePanel(i)"
                       >
-                        Option {{ i + 1 }}
-                        <i class="ri-arrow-down-s-line" *ngIf="!isPanelOpen(i)"></i>
-                        <i class="ri-arrow-up-s-line" *ngIf="isPanelOpen(i)"></i>
-                        <button class="delete-button" (click)="removeTextOption(i)"><i class="ri-delete-bin-line"></i></button>
+                      <p class="title">Option {{ i + 1 }}</p>
+                        <i class="icon ri-arrow-down-wide-line" *ngIf="!isPanelOpen(i)"></i>
+                        <i class="icon ri-arrow-up-wide-line" *ngIf="isPanelOpen(i)"></i>
                       </div>
-                      <div 
+                      <div  
                         class="expansion-panel-content" 
                         *ngIf="isPanelOpen(i)"
                         [innerHTML]= "santizieHtml(htmlContent)"
                       ></div>
                     </div>
                   </div>
+
+                  <p *ngIf="textOption.length == 0" class="option_default_message">No options added yet!</p>
                 </tab>
               </tabset>
-                <!-- <ng-container *ngFor="let item of travelOptionsData">
-                    <div class="option_card" (click)="toggleOptionSelection(item)" [class.selected]="isSelected(item)">
-                        <div class="option_file">
-                            <img class="img" [src]="item.optionFileURL" alt="img_not_found">
-                        </div>
-                        <div class="description">
-                              <p>{{item.description}}</p>
-                        </div>
-                    </div>
-                </ng-container>
-
-                <div class="option_card">
-                    <div class="img_file">
-                      <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
-                    </div>
-                </div>
-                <div class="option_card active">
-                  <div class="img_file">
-                    <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
-                  </div>
-              </div>
-              <div class="option_card">
-                <div class="img_file">
-                  <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
-                </div>
-              </div>
-              <div class="option_card">
-                <div class="img_file">
-                  <img class="img" src="https://images.pexels.com/photos/1570541/pexels-photo-1570541.jpeg" alt="">
-                </div>
-              </div>
-
-              <div class="option_card">
-                <div class="text_option">
-                  <p>Lorem Ipsum is simply dummy text in the printing and typesetting industry</p>
-                </div>
-              </div> -->
 
             </div>
     
@@ -285,3 +244,5 @@
 
   <!-- req form main container ends -->
 </div>
+
+<app-image-viewer *ngIf="isImageViewerOpen" [images]="imageUrls" [descriptions]="descriptions" [currentImageIndex]="selectedImageOptionIndex" (close)="closeImageViewer()"></app-image-viewer>
