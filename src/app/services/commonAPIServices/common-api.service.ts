@@ -109,5 +109,8 @@ export class CommonAPIService {
   addOptionsForRequest(optionsData:any){
     return this.http.post('http://localhost:5190/api/availableoptions/addoption',optionsData,{ responseType: 'text' });
   }
+  getEmployeeRequestDetail(requestId:number){
+    return this.http.get(`http://localhost:5190/api/request/getbyid/${requestId}`);
+  }
 }
 

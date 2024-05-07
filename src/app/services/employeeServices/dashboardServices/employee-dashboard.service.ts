@@ -11,7 +11,7 @@ export class EmployeeDashboardService {
   constructor(private http: HttpClient) {
   }
   getCountryImage(): Observable<any> {
-    return this.http.get('https://mocki.io/v1/81ffc774-35e6-4b6b-ae5d-eb02129eb9e1');
+    return this.http.get('https://mocki.io/v1/72e0b863-963a-4bd7-b437-ad36cf814999');
   }
   getUpcomingTripDetails(employeeId: number): Observable<any> {
     return this.http.get(`http://localhost:5190/api/employee/dashboard/upcoming/trip/${employeeId}`);

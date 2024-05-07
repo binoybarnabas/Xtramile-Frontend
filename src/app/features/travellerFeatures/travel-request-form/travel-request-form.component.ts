@@ -275,7 +275,13 @@ export class TravelRequestFormComponent {
       // additionalComments: new FormControl('', Validators.nullValidator)
 
     })
-
+     // Fetch requestId from query parameters
+     this.route.queryParams.subscribe(params => {
+      const requestId = params['requestId'];
+      if (requestId) {
+        this.getEmployeeRequestDetails(requestId);
+      }
+    });
     // Subscribe to value changes in source and destination fields
     this.subscribeToOriginAndDestinationChanges();
 
@@ -631,6 +637,30 @@ export class TravelRequestFormComponent {
         this.commonApiService.updateRequestStatus(requestStatus).subscribe();      
       }
     });
+  }
+  getEmployeeRequestDetails(requestId: number) {
+    this.commonApiService.getEmployeeRequestDetail(requestId).subscribe(
+      (data: any) => {
+        // Patch form values with the response data
+        this.travelRequestForm.patchValue({
+          tripType: data.tripType,
+          travelModeId: data.travelModeId,
+          tripPurpose: data.tripPurpose,
+          departureDate: data.departureDate,
+          returnDate: data.returnDate,
+          sourceCity: data.sourceCity,
+          destinationCity: data.destinationCity,
+          sourceCountry: data.sourceCountry,
+          destinationCountry: data.destinationCountry,
+          prefDepartureTime: data.prefDepartureTime,
+          travelType: data.travelType,
+          cabRequired: data.cabRequired,
+          prefPickUpTime: data.prefPickUpTime,
+          accommodationRequired: data.accommodationRequired,
+          travelAuthorizationEmailCapture: data.travelAuthorizationEmailCapture
+        });
+      }
+    );
   }
   //eof
 }
