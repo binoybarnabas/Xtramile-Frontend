@@ -71,7 +71,7 @@ export class DescriptionModalComponent {
           },
           complete: () => {
             //this.toastr.warning('Request Rejected!', 'Warning');
-            this.toastService.showToast("Travel Request Rejected!")
+            this.toastService.showToast({ message: "Travel Request Rejected", toastType: "success", toastDuration: 3000 });
           }
         })
         if (this.cancelRequestSubscription) {

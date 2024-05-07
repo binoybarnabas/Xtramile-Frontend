@@ -113,7 +113,7 @@ export class TravelRequestCardModalComponent {
           //  console.log(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
           // Redirect to another page
           //alert("Approved");
-          this.toastService.showToast("Travel request Approved");
+          this.toastService.showToast({ message: "Travel Request Approved", toastType: "success", toastDuration: 3000 });
           this.router.navigate(['/manager/dashboard']);
         },
         complete: () => {

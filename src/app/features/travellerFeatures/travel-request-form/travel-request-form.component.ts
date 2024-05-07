@@ -613,7 +613,7 @@ export class TravelRequestFormComponent {
         console.log(response);
         this.requestId = response;
         setTimeout(() => {
-          this.toastService.showToast("Travel request Submitted");
+          this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
           this.router.navigate(['employee/pending']);
         },4000)
       },
