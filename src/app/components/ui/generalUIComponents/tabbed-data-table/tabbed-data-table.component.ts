@@ -80,7 +80,6 @@ onDownloadFileClick(url: string, docType: string, employeeName: string){
 
 onRowClick(heading: any, row:any){
   this.rowClick.emit([heading, row]);
-  console.log(row)
 }
 
 onTabChange(index: number){

@@ -50,13 +50,14 @@ export class ManagerForwadedRequestsComponent {
       this.tabs = [
         {
           name: 'Forwarded',
-          headings: ['RequestID', 'Employee', 'ProjectCode', 'Date', 'Status'],
+          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date', 'Status'],
           entries: forwardedRequests.map((item) => [
             item.requestId,
+            item.requestCode,
             item.employeeName,
             item.projectCode,
             item.date,
-            item.status
+            item.status,
           ])
         },
         // Placeholder objects for other tabs
@@ -69,9 +70,10 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Forwarded', headings: [], entries: [] },
         {
           name: 'Waiting',
-          headings: ['RequestID', 'Employee', 'ProjectCode', 'Date'],
+          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date'],
           entries: waitingOptions.map((item) => [
             item.requestId,
+            item.requestCode,
             item.employeeName,
             item.projectCode,
             item.createdOn,
@@ -86,9 +88,10 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Waiting', headings: [], entries: [] },
         {
           name: 'Selected',
-          headings: ['RequestID', 'Employee', 'ProjectCode', 'Date'],
+          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date'],
           entries: selectedOptions.map((item) => [
             item.requestId,
+            item.requestCode,
             item.employeeName,
             item.projectCode,
             item.createdOn,
@@ -197,9 +200,9 @@ export class ManagerForwadedRequestsComponent {
   // navigation 
   requestId!:number;
   handleSelectedRow(row: any){
+    console.log(row)
     if(this.activeTabIndex === 1 || this.activeTabIndex === 2){
       this.requestId = row[1][0];
-      console.log(row);
       const queryParams = {requestId: this.requestId}
       this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: queryParams});
     }

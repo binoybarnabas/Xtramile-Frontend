@@ -22,8 +22,8 @@ export class ManagerIncomingTravelRequestsComponent {
   requestId: number = 0;
   bsModalRef!: BsModalRef
 
-  tableHeaders: string[] = ['Request', 'Employee', 'Project Code', 'Date', 'Status'];
-  fieldsToDisplay: string[] = ['requestId', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
+  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Status'];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
 
 
   employeeRequest: any[] = [];

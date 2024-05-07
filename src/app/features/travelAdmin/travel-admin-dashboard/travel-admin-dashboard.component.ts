@@ -60,7 +60,7 @@ fetchDataAndUpdateTabs() {
 
     data.incomingRequests.forEach((request: any) => {
       this.tabs[0].entries.push([
-        request.requestId.toString(),
+        request.requestCode,
         request.name,
         request.sourceCity, 
         request.destinationCity, 
@@ -72,7 +72,7 @@ fetchDataAndUpdateTabs() {
     data.waitingSelectedRequests.forEach((request: any) => {
       var remarks=request.status==='Selected'?'Selected the option':'Selection pending';
       this.tabs[1].entries.push([
-        request.requestId.toString(),
+        request.requestCode,
         request.name,
         request.sourceCity, 
         request.destinationCity, 
@@ -83,7 +83,7 @@ fetchDataAndUpdateTabs() {
 
     data.ongoingRequests.forEach((request: any) => {
       this.tabs[2].entries.push([
-        request.requestId.toString(),
+        request.requestCode,
         request.name,
         request.sourceCity, 
         request.destinationCity, 
@@ -94,7 +94,7 @@ fetchDataAndUpdateTabs() {
 
     data.closedRequests.forEach((request: any) => {
       this.tabs[3].entries.push([
-        request.requestId.toString(),
+        request.requestCode,
         request.name,
         request.sourceCity, 
         request.destinationCity, 

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
@@ -10,7 +11,9 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
 export class ManagerClosedTravelRequestsComponent {
   pageHeading: string = 'Closed Travel Requests'
 
-  constructor(private apiService: ManagerTravelRequestsService, private router: Router) { 
+  constructor(private apiService: ManagerTravelRequestsService, private router: Router,
+    private datePipe: DatePipe
+  ) { 
     const storedUserData = localStorage.getItem('userData');
     const userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
     this.managerId = userData.empId;
@@ -22,8 +25,8 @@ export class ManagerClosedTravelRequestsComponent {
   itemsPerPage = 10;
   totalItems = 0;
   currentPage = 1;
-  tableHeaders = ['RequestID', 'Employee', 'ProjectCode', 'Date', 'Status'];
-  dataHeaders = ['requestId', 'employee', 'projectCode', 'date', 'status'];
+  tableHeaders = ['Request Code', 'Employee', 'Project Code', 'Date', 'Status'];
+  dataHeaders = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
 
   ngOnInit() {
     this.getManagerClosedRequests();
@@ -33,11 +36,13 @@ export class ManagerClosedTravelRequestsComponent {
   getManagerClosedRequests() {
     this.apiService.getManagerClosedRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
-        this.travelRequest = data.employeeRequest;
-        this.totalItems = data.totalCount;
-
-        console.log(data);
-        console.log(this.travelRequest);
+        this.travelRequest = data.employeeRequest.map((request: any) => {
+          return {
+            ...request,
+            date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+          };
+        });
       },
       error: (error) => {
         console.error('Error:', error);
