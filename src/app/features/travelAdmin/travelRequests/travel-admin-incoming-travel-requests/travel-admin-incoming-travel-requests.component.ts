@@ -16,8 +16,8 @@ export class TravelAdminIncomingTravelRequestsComponent {
 
   pageHeading: string = "Incoming Requests";
 
-  tableHeaders: string[] = ['Request ID', 'Employee', 'Project Code', 'Date', 'Mode', 'Priority', 'Status'];
-  fieldsToDisplay: string[] = ['requestId', 'employeeName', 'projectCode', 'createdOn', 'travelTypeName', 'priorityName', 'statusName'];
+  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Mode', 'Priority', 'Status'];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode', 'createdOn', 'travelTypeName', 'priorityName', 'statusName'];
   incomingRequestdata: any[] = [];
 
   requestData: any[] = [];

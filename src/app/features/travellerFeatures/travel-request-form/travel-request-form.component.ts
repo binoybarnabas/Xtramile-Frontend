@@ -275,7 +275,13 @@ export class TravelRequestFormComponent {
       // additionalComments: new FormControl('', Validators.nullValidator)
 
     })
-
+     // Fetch requestId from query parameters
+     this.route.queryParams.subscribe(params => {
+      const requestId = params['requestId'];
+      if (requestId) {
+        this.getEmployeeRequestDetails(requestId);
+      }
+    });
     // Subscribe to value changes in source and destination fields
     this.subscribeToOriginAndDestinationChanges();
 
@@ -367,9 +373,9 @@ export class TravelRequestFormComponent {
     }
     const filterValue = value.toLowerCase();
     if (field === 'sourceCity') {
-      this.sourceFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue));
+      this.sourceFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue) || city.country.toLowerCase().includes(filterValue));
     } else if (field === 'destinationCity') {
-      this.destinationFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue));
+      this.destinationFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue) || city.country.toLowerCase().includes(filterValue));
     }
   }
 
@@ -613,7 +619,7 @@ export class TravelRequestFormComponent {
         console.log(response);
         this.requestId = response;
         setTimeout(() => {
-          this.toastService.showToast("Travel request Submitted");
+          this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
           this.router.navigate(['employee/pending']);
         },4000)
       },
@@ -631,6 +637,30 @@ export class TravelRequestFormComponent {
         this.commonApiService.updateRequestStatus(requestStatus).subscribe();      
       }
     });
+  }
+  getEmployeeRequestDetails(requestId: number) {
+    this.commonApiService.getEmployeeRequestDetail(requestId).subscribe(
+      (data: any) => {
+        // Patch form values with the response data
+        this.travelRequestForm.patchValue({
+          tripType: data.tripType,
+          travelModeId: data.travelModeId,
+          tripPurpose: data.tripPurpose,
+          departureDate: data.departureDate,
+          returnDate: data.returnDate,
+          sourceCity: data.sourceCity,
+          destinationCity: data.destinationCity,
+          sourceCountry: data.sourceCountry,
+          destinationCountry: data.destinationCountry,
+          prefDepartureTime: data.prefDepartureTime,
+          travelType: data.travelType,
+          cabRequired: data.cabRequired,
+          prefPickUpTime: data.prefPickUpTime,
+          accommodationRequired: data.accommodationRequired,
+          travelAuthorizationEmailCapture: data.travelAuthorizationEmailCapture
+        });
+      }
+    );
   }
   //eof
 }

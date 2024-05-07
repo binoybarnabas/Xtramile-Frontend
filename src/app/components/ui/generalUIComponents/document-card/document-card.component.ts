@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +16,8 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
   private isFileSubscription!: Subscription;
 
   selectedDocCardId : number = -1;
+
+  @Output() openInPdfViewer = new EventEmitter<string>();
 
   constructor(private commonService: CommonAPIService,private http: HttpClient) { }
 
@@ -64,6 +66,7 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
       }
     );
   }
+  
   onDownloadFileClick(url: string, docType: string){
     this.http.get(url, {responseType: 'blob'}).subscribe({
       next: (data: Blob) =>{
@@ -93,6 +96,13 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
       this.selectedDocCardId = cardId;
     }
   }
+
+
+  openPdfViewer(fileUrl: string) {
+    this.openInPdfViewer.emit(fileUrl);
+  }
+
+
 
 
 }

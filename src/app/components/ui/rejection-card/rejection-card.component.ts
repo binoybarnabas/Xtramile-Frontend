@@ -15,23 +15,11 @@ export class RejectionCardComponent {
   constructor(public bsModalRef: BsModalRef,private router: Router) {}
 
   resubmitForm() {
-    alert('Resubmit form');
     const queryParams = { requestId: this.requestId }
 
    this.router.navigate(['employee/request'], { queryParams: queryParams });
 
     this.closeModal();
-    //to update the status as open denied after resubmitting
-    // this.apiservice.resubmitRequestStatus(this.requestId,this.employeeId).subscribe(
-    //   {
-    //     next: () => {
-    //       console.log('sucessfully set the status');
-
-    //     },
-    //     complete: () => {
-    //       console.log("Resubmit Request")
-    //     }
-    //   })
   }
 
   closeModal() {

@@ -15,7 +15,11 @@ export class ConfirmationModalComponent {
   confirm(): void {
     this.bsModalRef.hide();
     this.confirmed.emit(true);
-    window.location.reload(); // This line will refresh the page
+
+    //sus - Page Reloading May Trigger ALL API Calls if not handled properly
+    window.location.reload(); // This line will refresh the page - sus
+    //replace with another method call which loads only the necessary data 
+
   }
 
   cancel(): void {

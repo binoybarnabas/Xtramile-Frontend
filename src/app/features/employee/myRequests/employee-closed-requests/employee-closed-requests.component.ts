@@ -17,8 +17,8 @@ export class EmployeeClosedRequestsComponent {
   pageIndex = 1;
   totalCount = 0;
   currentPage = 1;
-  tableHeaders = ['RequestId', 'ProjectCode', 'ProjectName', 'TravelType', 'ClosedDate', 'Status']
-  dataHeaders = ['requestId', 'projectCode', 'projectName', 'travelType', 'closedDate', 'status']
+  tableHeaders = ['Request Code', 'Project Code', 'Project Name', 'Travel Type', 'Closed Date', 'Status']
+  dataHeaders = ['requestCode', 'projectCode', 'projectName', 'travelType', 'closedDate', 'status']
 
   pageHeading: string = 'Travel History'
 

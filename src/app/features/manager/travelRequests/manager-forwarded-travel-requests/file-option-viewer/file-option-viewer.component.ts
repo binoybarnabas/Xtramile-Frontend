@@ -99,7 +99,7 @@ export class FileOptionViewerComponent {
           // Reset the selectedOption after a successful post
           this.selectedOption = null;
           this.router.navigate(['/manager/dashboard']);
-          this.toastService.showToast("Travel Option Selected!");
+          this.toastService.showToast({ message: "Travel Option Selected", toastType: "success", toastDuration: 3000 });
         },
         error: (error: any) => {
           console.error('Post failed:', error);
@@ -132,7 +132,7 @@ export class FileOptionViewerComponent {
   }
 
   onTravelAdminConfirm(){
-    this.toastService.showToast("Confirmation sent successfully.")
+    this.toastService.showToast({ message: "Travel Option Confirmed", toastType: "success", toastDuration: 3000 });
     this.router.navigate(['/traveladmin/approved_requests']);
   }
   shouldDisplayButton(): boolean {
@@ -160,7 +160,7 @@ export class FileOptionViewerComponent {
       },
       complete:() =>{
         console.log('Option has been updated');
-        this.toastService.showToast("Option has been updated");
+        this.toastService.showToast({ message: "Travel Option Send", toastType: "success", toastDuration: 3000 });
         this.editable = false;
         this.selectedOption = null;
       }
@@ -198,7 +198,7 @@ export class FileOptionViewerComponent {
   }
 
   navigateToTAOngoing(){
-    this.toastService.showToast("Request is Ongoing");
+    this.toastService.showToast({ message: "Travel Request Ongoing", toastType: "success", toastDuration: 3000 });
     this.router.navigate(['traveladmin/approved_requests']);
   }
 }

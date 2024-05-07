@@ -352,7 +352,7 @@ export class NewTravelRequestComponent {
         },
         complete: () => {
           //this.toastr.success('Request approved!', 'Success');
-          this.toastService.showToast("Travel Request Approved!")
+          this.toastService.showToast({ message: "Travel Request Approved", toastType: "success", toastDuration: 3000 });
         }
       }
     );
@@ -386,7 +386,7 @@ export class NewTravelRequestComponent {
       complete: () => {
         console.log("Posting Request Status Complete");
         // alert("Posting Request Status Complete");
-        this.toastService.showToast("Travel Options Send!")
+        this.toastService.showToast({ message: "Travel Options Send", toastType: "success", toastDuration: 3000 });
       }
     });
   }
@@ -437,7 +437,6 @@ export class NewTravelRequestComponent {
     this.bsModalRef = this.modalService.show(DescriptionModalComponent, { initialState });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
-      console.log('Modal result:', result);
       // You can perform actions with the result data here
     });
   }
@@ -480,7 +479,7 @@ export class NewTravelRequestComponent {
         complete: () => {
           console.log("Posting Request Status Closed");
           // alert("Posting Request Status Complete");
-          this.toastService.showToast("Request closed")
+          this.toastService.showToast({ message: "Travel Request Closed", toastType: "success", toastDuration: 3000 });
         }
       });
     }
@@ -575,7 +574,7 @@ export class NewTravelRequestComponent {
         },
         complete: () => {
           console.log("Posting Request Status Complete");
-          this.toastService.showToast("Travel Options Send!")
+          this.toastService.showToast({ message: "Travel Options Send", toastType: "success", toastDuration: 3000 });
           this.router.navigate(['/traveladmin/waiting']);
           this.currentNavIndex = 0;
           this.newReqFormSubMenuValue = this.currentNavIndex;
@@ -652,7 +651,7 @@ export class NewTravelRequestComponent {
           console.error('Post failed:', error);
         },
         complete: () => {
-          this.toastService.showToast("Travel Option Added!")
+          this.toastService.showToast({ message: "Travel Option Added", toastType: "success", toastDuration: 3000 });
           console.log('Post request completed.');
         }
   });
@@ -741,9 +740,13 @@ export class NewTravelRequestComponent {
   onOptionSelected(optionType:string, optionIndex: number){
 
     if(optionType === 'img'){
-      this.selectedImageOptionIndex = optionIndex;
+        this.selectedImageOptionIndex = optionIndex;
     }else{
-      this.selectedTextOptionIndex = optionIndex;
+      if(this.selectedTextOptionIndex === optionIndex){
+        this.selectedTextOptionIndex = -1;
+      }else{
+        this.selectedTextOptionIndex = optionIndex;
+      }
     }
 
   }

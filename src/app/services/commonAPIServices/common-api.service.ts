@@ -21,7 +21,7 @@ export class CommonAPIService {
 
   private isFileSubject = new BehaviorSubject<boolean>(false);
   public isFile$ = this.isFileSubject.asObservable();
-  constructor(private http: HttpClient, private toastService: CustomToastService) {
+  constructor(private http: HttpClient) {
 
     //Getting the current Loggedin user based on session value
     this.currentLoggedInUserRole = 'employee';
@@ -82,9 +82,7 @@ export class CommonAPIService {
     return this.http.get(`http://localhost:5190/api/request/getbyid/${requestId}`);
   }
 
-  showToast(message: string) {
-    this.toastService.showToast(message);
-  }
+
   resubmitRequestStatus(requestId:number,employeeId:number):Observable<ResubmitRequest>{
     const body = {
       requestId: requestId,
@@ -110,6 +108,9 @@ export class CommonAPIService {
   }
   addOptionsForRequest(optionsData:any){
     return this.http.post('http://localhost:5190/api/availableoptions/addoption',optionsData,{ responseType: 'text' });
+  }
+  getEmployeeRequestDetail(requestId:number){
+    return this.http.get(`http://localhost:5190/api/request/getbyid/${requestId}`);
   }
 }
 

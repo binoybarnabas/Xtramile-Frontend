@@ -1,6 +1,6 @@
 <div
   [ngClass]="
-    isSideNavBarCollapsed === 1 ? 'side_bar_collapsed' : 'side_bar_container'
+    isSideNavBarCollapsed ? 'side_bar_collapsed' : 'side_bar_container'
   "
 >
   <div (click)="controlSideBar()" class="toggle">
@@ -11,7 +11,7 @@
   <!-- Dashboard -->
   <div class="side_bar_main">
 
-    <div *ngIf="isSideNavBarCollapsed === 1"
+    <div *ngIf="isSideNavBarCollapsed"
     class="collapsed_icon_card  active">
     <i
       class="collapsed_icon ri-dashboard-line"
@@ -27,7 +27,7 @@
   <!-- Travel Requests -->
   <div class="side_bar_main" (click)="toggleSubMenu('1')">
  
-    <div *ngIf="isSideNavBarCollapsed === 1"
+    <div *ngIf="isSideNavBarCollapsed"
       class="collapsed_icon_card">
       <i
       class="collapsed_icon ri-suitcase-2-line"
@@ -61,7 +61,7 @@
 
   <!-- Travel Docs -->
   <div class="side_bar_main">
-    <div *ngIf="isSideNavBarCollapsed === 1"
+    <div *ngIf="isSideNavBarCollapsed"
       class="collapsed_icon_card">
       <i
       class="collapsed_icon ri-article-line"
@@ -106,7 +106,7 @@
 
   <!-- My Requests -->
   <div class="side_bar_main" (click)="toggleSubMenu('3')">
-    <div *ngIf="isSideNavBarCollapsed === 1"
+    <div *ngIf="isSideNavBarCollapsed"
     class="collapsed_icon_card">
     <i
     class="collapsed_icon ri-bill-line"
@@ -171,7 +171,7 @@
   </div> -->
 
   <div class="side_bar_main">
-    <div *ngIf="isSideNavBarCollapsed === 1"
+    <div *ngIf="isSideNavBarCollapsed"
       class="collapsed_icon_card">
       <i
       class="collapsed_icon ri-user-line"
@@ -185,7 +185,7 @@
 
   <div class="side_bar_logout_section">
     <i
-      *ngIf="isSideNavBarCollapsed === 1"
+      *ngIf="isSideNavBarCollapsed"
       class="collapsed_icon ri-logout-box-r-line"
     ></i>
 
