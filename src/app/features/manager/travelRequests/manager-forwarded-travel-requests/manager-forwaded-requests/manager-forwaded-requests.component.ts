@@ -196,12 +196,18 @@ export class ManagerForwadedRequestsComponent {
 
   // navigation 
   requestId!:number;
+  queryParams: any = {};
   handleSelectedRow(row: any){
     if(this.activeTabIndex === 1 || this.activeTabIndex === 2){
       this.requestId = row[1][0];
       console.log(row);
-      const queryParams = {requestId: this.requestId}
-      this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: queryParams});
+      if(this.activeTabIndex == 1){
+        this.queryParams = {requestId: this.requestId}
+      }
+      if(this.activeTabIndex === 2){
+        this.queryParams = {requestId: this.requestId,IsSelectedPage:true}
+      }
+      this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: this.queryParams});
     }
   } 
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Toast } from 'ngx-toastr';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
@@ -14,8 +14,7 @@ import { CustomToastService } from 'src/app/services/toastServices/custom-toast.
 export class FileOptionViewerComponent {
 
   IsSelectedPage: boolean = false;
-  travelOptionsData: TravelOptionDetails[] = [];
-
+  @Input() travelOptionsData!:any[];
   reqId!: number;
 
   selectedOption: any;
@@ -57,9 +56,13 @@ export class FileOptionViewerComponent {
         console.log(this.IsSelectedPage)
       }
     })
-    this.getTravelOptionsByReqId(this.reqId)
-
-     //2
+    // this.getTravelOptionsByReqId(this.reqId)
+    console.log(this.travelOptionsData);
+    this.travelOptionsData.forEach((option: { optionId: number; }) => {
+    this.travelOptionId.push(option.optionId);
+    })
+    console.log(this.travelOptionId);
+    
     this.selectedOptionFromManager();
 
     //subject subscription
@@ -69,30 +72,6 @@ export class FileOptionViewerComponent {
       }
     })
   }
-
-  //Get Travel Options By Req Id
-  getTravelOptionsByReqId(reqId: number) {
-
-    this.requestService.getTravelOptionsByReqId(reqId).subscribe({
-      next: (data) => {
-        this.travelOptionsData = data;
-        console.log(this.travelOptionsData)
-        data.forEach((option: { optionId: number; }) => {
-          this.travelOptionId.push(option.optionId);
-        })
-
-        console.log(this.travelOptionsData)
-
-      },
-      error: (error: Error) => {
-        console.log("Error has occurred, " + error.message);
-      },
-      complete: () => {
-        console.log("Completed");
-      }
-    });
-  }
-
 
   selectOption(option: any): void {
     // alert(this.selectedOptionId);
@@ -161,6 +140,7 @@ export class FileOptionViewerComponent {
   }
   editable:boolean = false;
   editOption(){
+    this.selectedOption = null;
     this.editable = !this.editable;
   }
 
@@ -188,10 +168,11 @@ export class FileOptionViewerComponent {
   }
 
   selectedOptionFromManager(){
+    console.log(this.travelOptionsData)
     this.requestService.selectedOptionFromEmployee(this.reqId).subscribe({
       next: (data) =>{
       this.receveingOptionId = data
-      console.log(data)
+      console.log(data);
     },
     error: (error: any) => {
       console.error('Post failed:', error);

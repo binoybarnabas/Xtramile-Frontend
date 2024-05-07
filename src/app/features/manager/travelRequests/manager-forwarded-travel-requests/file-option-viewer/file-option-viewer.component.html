@@ -1,106 +1,108 @@
 <!-- Waiting -->
-<!-- <h3 class="main_heading  mt-5 mb-3 ">Images</h3> -->
-
-<ng-container *ngIf="travelOptionsData.length === 0; else elseblockone">
-  <p>There are no file options, click on text options</p>
-</ng-container>
-<ng-template #elseblockone>
-  <div class="travel_options_main_container">
-    <div class="travel_options_container">
-      <ng-container *ngFor="let item of travelOptionsData">
+<div class="file_main_container" [ngClass]="{ 'reverse_column': IsSelectedPage }">
+  <div>
+    <h3 class="main_heading mt-5 mb-3">Available options</h3>
+    <ng-container *ngIf="travelOptionsData.length === 0; else elseblockone">
+      <p>There are no file options, click on text options</p>
+    </ng-container>
+    <ng-template #elseblockone>
+      <div class="travel_options_main_container">
+        <div class="travel_options_container">
+          <ng-container *ngFor="let item of travelOptionsData">
+            <div
+              (click)="(receveingOptionId == null && buttonActivate)|| editable? selectOption(item) : null"
+              [ngClass]="{ selected: item === selectedOption }"
+              class="option_card"
+            >
+              <div class="option_file">
+                <img
+                  class="img"
+                  src="{{ item.optionFileURL }}"
+                  alt="img_not_found"
+                />
+              </div>
+              <div class="description">
+                <p>{{ item.description }}</p>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div *ngIf="editable" class="edit_container">
+          <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
+          <button class="update_btn" (click)="updateOption()" [disabled]="disableUpdateBtn()" [ngClass]="{ 'disabled_button': disableUpdateBtn() }">Update</button>
+        </div>
         <div
-          (click)="receveingOptionId == null || editable? selectOption(item) : null"
-          [ngClass]="{ selected: item === selectedOption }"
-          class="option_card"
+          class="actions_container"
+          *ngIf="buttonActivate && receveingOptionId == null"
         >
-          <div class="option_file">
-            <img
-              class="img"
-              src="{{ item.optionFileURL }}"
-              alt="img_not_found"
-            />
+          <div class="cancel_btn_container">
+            <button class="cancel_btn" type="button" (click)="resetSelection()">
+              Cancel
+            </button>
           </div>
-          <div class="description">
-            <p>{{ item.description }}</p>
+          <div class="submit_btn_container" *ngIf="buttonActivate" >
+            <app-change-status-button
+              [name]="name_rm"
+              [empId]="empId"
+              [requestId]="reqId"
+              [primaryStatusCode]="primaryStatusCode_rm"
+              [secondaryStatusCode]="secondaryStatusCode_rm"
+              (externalpostTriggered)="postSelection()"
+              [disabled]="disableUpdateBtn()"
+            ></app-change-status-button>
           </div>
         </div>
-      </ng-container>
-    </div>
-    <div *ngIf="editable" class="edit_container">
-      <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
-      <button class="update_btn" (click)="updateOption()" [disabled]="disableUpdateBtn()" [ngClass]="{ 'disabled_button': disableUpdateBtn() }">Update</button>
-    </div>
-    <div
-      class="actions_container"
-      *ngIf="buttonActivate && receveingOptionId == null"
-    >
-      <div class="cancel_btn_container">
-        <button class="cancel_btn" type="button" (click)="resetSelection()">
-          Cancel
-        </button>
       </div>
-      <div class="submit_btn_container" *ngIf="buttonActivate" >
+    </ng-template>
+  </div>
+    <!-- Selected -->
+    <div *ngIf="hideDiv">
+      <h3 class="main_heading mt-5 mb-3">Selected option</h3>
+      <ng-container
+        *ngIf="
+          receveingOptionId == null;
+          else elseblock
+        "
+      >
+      </ng-container>
+      <ng-template #elseblock>
+        <div class="travel_options_container">
+          <div *ngIf="!shouldDisplayButton()">
+            Click on text options to view the selected option
+          </div>
+          <ng-container *ngFor="let item of travelOptionsData; let i = index">
+            <div
+              *ngIf="travelOptionId[i] === receveingOptionId"
+              class="option_card"
+            >
+              <div class="option_file">
+                <img class="img" src="{{ item.optionFileURL }}" alt="" />
+              </div>
+              <div class="description">
+                <p>{{ item.description }}</p>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-template>
+      <div class="ta_action_btn">
+        <div
+        *ngIf="
+          !buttonActivate &&
+           shouldDisplayButton() && !editable
+        "
+      >
         <app-change-status-button
-          [name]="name_rm"
+          [name]="name_ta"
           [empId]="empId"
           [requestId]="reqId"
-          [primaryStatusCode]="primaryStatusCode_rm"
-          [secondaryStatusCode]="secondaryStatusCode_rm"
-          (externalpostTriggered)="postSelection()"
-          [disabled]="disableUpdateBtn()"
-        ></app-change-status-button>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-<!-- Selected -->
-<div *ngIf="hideDiv">
-  <h3 class="main_heading mt-5 mb-3">Selected option</h3>
-  <ng-container
-    *ngIf="
-      receveingOptionId == null;
-      else elseblock
-    "
-  >
-  </ng-container>
-  <ng-template #elseblock>
-    <div class="travel_options_container">
-      <div *ngIf="!shouldDisplayButton()">
-        Click on text options to view the selected option
-      </div>
-      <ng-container *ngFor="let item of travelOptionsData; let i = index">
-        <div
-          *ngIf="travelOptionId[i] === receveingOptionId"
-          class="option_card"
+          [primaryStatusCode]="primaryStatusCode_ta"
+          [secondaryStatusCode]="secondaryStatusCode_ta"
+          (externalpostTriggered)="navigateToTAOngoing()"
         >
-          <div class="option_file">
-            <img class="img" src="{{ item.optionFileURL }}" alt="" />
-          </div>
-          <div class="description">
-            <p>{{ item.description }}</p>
-          </div>
-        </div>
-      </ng-container>
+        </app-change-status-button>
+      </div>
+      <button *ngIf="!buttonActivate && travelOptionsData.length != 0" class= "edit_btn" (click)="editOption()">Edit Option</button>
+      </div>
     </div>
-  </ng-template>
-  <div class="ta_action_btn">
-    <div
-    *ngIf="
-      !buttonActivate &&
-       shouldDisplayButton() && !editable
-    "
-  >
-    <app-change-status-button
-      [name]="name_ta"
-      [empId]="empId"
-      [requestId]="reqId"
-      [primaryStatusCode]="primaryStatusCode_ta"
-      [secondaryStatusCode]="secondaryStatusCode_ta"
-      (externalpostTriggered)="navigateToTAOngoing()"
-    >
-    </app-change-status-button>
-  </div>
-  <button *ngIf="IsSelectedPage && travelOptionsData.length != 0" class= "edit_btn" (click)="editOption()">Edit Option</button>
-  </div>
 </div>
