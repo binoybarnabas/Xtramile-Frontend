@@ -119,7 +119,7 @@ confirmOption(): void {
     complete: () => {
       console.log('Post request completed.');
       this.router.navigate(['manager/dashboard']);
-      this.toastService.showToast("Travel Option Selected!");
+      this.toastService.showToast({ message: "Travel Options Selected", toastType: "success", toastDuration: 3000 });
     }
   });
 }
@@ -168,13 +168,13 @@ updateOption(){
       console.log('Update operation is failed')
     },
     complete:()=>{
-      this.toastService.showToast("Option has been updated");
+      this.toastService.showToast({ message: "Travel Options Updated", toastType: "success", toastDuration: 3000 });
       this.editable = false;
     }
   })
 }
 navigateToTAOngoing(){
-  this.toastService.showToast("Request is Ongoing");
+  this.toastService.showToast({ message: "Travel Request is Ongoing", toastType: "success", toastDuration: 3000 });
   this.router.navigate(['traveladmin/approved_requests']);
 }
 disableUpdateBtn(): boolean {

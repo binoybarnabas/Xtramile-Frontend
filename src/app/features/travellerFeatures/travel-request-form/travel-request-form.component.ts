@@ -373,9 +373,9 @@ export class TravelRequestFormComponent {
     }
     const filterValue = value.toLowerCase();
     if (field === 'sourceCity') {
-      this.sourceFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue));
+      this.sourceFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue) || city.country.toLowerCase().includes(filterValue));
     } else if (field === 'destinationCity') {
-      this.destinationFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue));
+      this.destinationFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue) || city.country.toLowerCase().includes(filterValue));
     }
   }
 
@@ -619,7 +619,7 @@ export class TravelRequestFormComponent {
         console.log(response);
         this.requestId = response;
         setTimeout(() => {
-          this.toastService.showToast("Travel request Submitted");
+          this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
           this.router.navigate(['employee/pending']);
         },4000)
       },

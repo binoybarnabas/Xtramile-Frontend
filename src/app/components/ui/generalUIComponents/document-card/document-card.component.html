@@ -1,7 +1,7 @@
 <div class="main_container" >
 
   <ng-container *ngFor="let card of employeeDocuments">
-    <div [ngClass]=" selectedDocCardId === card.fileId ? 'doc_card selected' : 'doc_card'" (click)="onDocCardSelected(card.fileId)" >
+    <div [ngClass]=" selectedDocCardId === card.fileId ? 'doc_card selected' : 'doc_card'" (click)="onDocCardSelected(card.fileId)" (dblclick)="openPdfViewer(card.documentURL)" >
 
       <div class="top_section">
         <span class="value">{{ card.documentType }} <i class="status_icon ri-checkbox-circle-fill"></i>
@@ -52,6 +52,5 @@
     </div>
   </ng-container>
 
-
-
 </div>
+

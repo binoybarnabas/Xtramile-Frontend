@@ -98,7 +98,7 @@ export class TravelOptionViewerComponent {
         complete: () => {
           console.log('Post request completed.');
           this.router.navigate(['employee/pending']);
-          this.toastService.showToast("Travel Option Selected!");
+          this.toastService.showToast({ message: "Travel Option Selected", toastType: "success", toastDuration: 3000 });
           // alert("Submitted!")
         }
       });

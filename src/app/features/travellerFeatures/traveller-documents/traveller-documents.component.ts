@@ -4,6 +4,9 @@ import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { countries } from 'src/app/services/commonAPIServices/countries';
 import { DatePipe } from '@angular/common';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { ConfirmationModalComponent } from 'src/app/components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 @Component({
   selector: 'app-traveller-documents',
   templateUrl: './traveller-documents.component.html',
@@ -24,13 +27,19 @@ export class TravellerDocumentsComponent {
   countryData: string[] = [];
   fileErrorMessage: string = '';
 
+  isPdfViewerOpen: boolean = false;
+  loadedFileUrl : string = '';
+
+  bsModalRef!: BsModalRef;
+
   constructor(
     private fb: FormBuilder,
     private documentService: DocumentsService,
     private elementRef: ElementRef,
     private renderer: Renderer2,
     private datepipe: DatePipe,
-    private commonService:CommonAPIService
+    private commonService:CommonAPIService,
+    private modalService: BsModalService,
   ) {
     this.isDocUploadModalOpen = false;
     this.selectedDocType = 'ID Card'
@@ -163,5 +172,26 @@ export class TravellerDocumentsComponent {
   changeDocType(newDocType: string) {
     this.selectedDocType = newDocType;
   }
+
+  onDeleteBtnClick(){
+
+ 
+    this.bsModalRef = this.modalService.show(CustomConfirmationModalComponent, {} );
+    this.bsModalRef.content.onClose.subscribe((result: any) => {
+      // Handle the result from the modal if needed
+      // You can perform actions with the result data here
+    });
+  }
+
+  openPdfViewer(fileUrl: string) {
+    this.loadedFileUrl = fileUrl;
+    this.isPdfViewerOpen = true;
+  }
+
+  closePdfViewer() {
+   this.isPdfViewerOpen = false;
+   //this.initializeComponent();
+  }
+
 
 }

@@ -1,16 +1,16 @@
-<app-page-header [headingInputData]="pageHeading"></app-page-header>
+<app-page-header *ngIf="!isPdfViewerOpen"  [headingInputData]="pageHeading"></app-page-header>
 
-<div class="main_container">
+<div *ngIf="!isPdfViewerOpen" class="main_container">
 
   <div class="btn_container">
 
-    <button class="del_btn"> <i class="ri-delete-bin-line"></i>  </button>
+    <button (click)="onDeleteBtnClick()" class="del_btn"> <i class="ri-delete-bin-line"></i>  </button>
     <div (click)="toggleDocUploadModal(true)" class="add_btn" type="button">
       <span class="btn_text">Add</span>
     </div>
   </div>
 
-  <app-document-card> </app-document-card>
+  <app-document-card (openInPdfViewer)="openPdfViewer($event)"> </app-document-card>
 
   <div *ngIf="isDocUploadModalOpen" class="upload_form_container">
     <div class="document_upload_form_modal">
@@ -197,3 +197,6 @@
   </div>
 
 </div>
+
+<app-custom-pdf-viewer *ngIf="isPdfViewerOpen" [fileUrl]="loadedFileUrl" (close)="closePdfViewer()"></app-custom-pdf-viewer>
+

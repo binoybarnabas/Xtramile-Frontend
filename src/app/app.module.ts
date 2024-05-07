@@ -143,7 +143,9 @@ import { TravelMessengerModalComponent } from './components/ui/dashboard-compone
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 import { TravelRequestInfoCardComponent } from './components/ui/travel-request-info-card/travel-request-info-card.component';
 import { ImageViewerComponent } from './components/ui/generalUIComponents/image-viewer/image-viewer.component';
-
+import { CustomConfirmationModalComponent } from './components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
+import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/custom-pdf-viewer/custom-pdf-viewer.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer'; // Import Ng2PdfViewerModule
 @NgModule({
   declarations: [
     AppComponent,
@@ -271,7 +273,9 @@ import { ImageViewerComponent } from './components/ui/generalUIComponents/image-
     TravelMessengerModalComponent,
     TravelMessengerFullScreenComponent,
     TravelRequestInfoCardComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    CustomConfirmationModalComponent,
+    CustomPdfViewerComponent
   ]
   ,
 
@@ -297,7 +301,8 @@ import { ImageViewerComponent } from './components/ui/generalUIComponents/image-
     ModalModule.forRoot(),
     ImageCropperModule,
     EditorModule,
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    PdfViewerModule
   ],
   providers: [DatePipe,
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true }],
