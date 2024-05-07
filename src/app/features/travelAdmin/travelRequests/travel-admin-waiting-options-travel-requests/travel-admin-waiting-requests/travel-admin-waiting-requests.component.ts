@@ -14,8 +14,8 @@ export class TravelAdminWaitingRequestsComponent {
 
   private subscription : Subscription | any
 
-  tableHeaders: string[] = ['Request ID', 'Employee', 'Project Code', 'Date','Mode','Priority'];
-  fieldsToDisplay: string[] = ['requestId', 'employeeName', 'projectCode','createdOn','travelTypeName','priorityName'];
+  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date','Mode',];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode','createdOn','travelTypeName'];
   incomingRequestdata:any[] = [];
   requestId: number = 0;
   row: any;

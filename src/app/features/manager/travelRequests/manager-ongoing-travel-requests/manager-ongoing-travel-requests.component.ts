@@ -10,8 +10,8 @@ import { DatePipe } from '@angular/common';
 export class ManagerOngoingTravelRequestsComponent {
   pageHeading: string = 'Ongoing Trips'
 
-  tableHeaders: string[] = ['Request ID', 'Employee', 'Project Code', 'Date', 'Mode', 'Priority', 'Status'];
-  fieldsToDisplay: string[] = ['requestId', 'employeeNameAndEmail', 'projectCode', 'createdOn', 'travelTypeName', 'priorityName', 'statusName'];
+  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Mode'];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'createdOn', 'travelTypeName'];
   incomingRequestdata: any[] = [];
   managerId!: number;
   constructor(private apiservice: ManagerTravelRequestsService) {
