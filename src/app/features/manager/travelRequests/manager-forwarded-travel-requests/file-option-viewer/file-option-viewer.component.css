@@ -190,3 +190,12 @@
     font-size: var(--span-font-size);
     margin-left: 1vw;
 }
+
+.file_main_container{
+    display: flex;
+    flex-direction: column;
+}
+
+.reverse_column {
+    flex-direction: column-reverse;
+}

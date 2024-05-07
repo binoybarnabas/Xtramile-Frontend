@@ -12,7 +12,6 @@
  padding: 5px;
  border: none;
  box-shadow: var(--normal-box-shadow);
- width: 175px;
 }
 
 ::ng-deep .nav-tabs .nav-link {
@@ -31,8 +30,6 @@
   color: var(--card-bg-color);
   font-weight: var(--active-font-weight);
 }
-
-
 
 .main_heading {
   font-size: var(--h4-font-size);
@@ -166,4 +163,9 @@
 
 .disabled_button {
   opacity: 0.5; 
+}
+
+.selected_notification{
+  padding-left: 5px;
+  font-size: 6px;
 }

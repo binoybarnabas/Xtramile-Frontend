@@ -32,8 +32,14 @@
           </p>
         </div>
         <div class="travel_mode">
-          <!-- <i [ngClass]=" item.travelMode ==='Cab'  ? 'icon ri-car-line' :'icon ri-plane-line' "></i> -->
-          <i class="icon ri-plane-line"></i>
+          <i
+          [ngClass]="{
+            'icon ri-car-line': travelRequestDetailViewModel.travelModeId === 'Cab',
+            'icon ri-plane-line': travelRequestDetailViewModel.travelModeId === 'Flight',
+            'icon ri-train-line': travelRequestDetailViewModel.travelModeId === 'Train',
+            'icon ri-bus-line': travelRequestDetailViewModel.travelModeId === 'Bus'
+          }"
+        ></i>
         </div>
         <div class="destination">
           <span class="city">{{

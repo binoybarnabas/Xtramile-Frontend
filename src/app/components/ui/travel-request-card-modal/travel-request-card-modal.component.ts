@@ -47,6 +47,7 @@ export class TravelRequestCardModalComponent {
     this.commonApiService.GetTravelRequestById(this._requestId).subscribe({
       next: (data) => {
         this.travelRequestDetailViewModel = data;
+        console.log(data);
       },
       error: (error: Error) => {
         console.log('problems in fetching data');

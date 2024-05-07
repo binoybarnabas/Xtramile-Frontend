@@ -202,8 +202,9 @@
 
 
 
-.main_container .body_section .table_container .table_body .no_records_container{
-    width: 100%;
+.main_container .body_section .no_record_container{
+    position: relative;
+    left: 19vw;
 }
 
 .main_container .footer_section{
@@ -245,3 +246,4 @@
     color: var(--card-bg-color);
     font-weight: var(--active-font-weight);
 }
+

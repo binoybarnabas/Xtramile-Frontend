@@ -1,14 +1,22 @@
 <tabset>
-  <tab class="tab" heading="Images">
-    <app-file-option-viewer></app-file-option-viewer>
+  <tab class="tab" heading="Images" *ngIf="travelOptionsData.length !== 0">
+    <ng-template tabHeading >
+      <span *ngIf="!selectedOption() && IsSelectedPage" class="selected_notification"><i class="ri-circle-fill"></i></span>
+    </ng-template>
+    <div>
+      <app-file-option-viewer [travelOptionsData]="travelOptionsData"></app-file-option-viewer>
+    </div>
   </tab>
-  <tab class="tab" heading="Texts">
+  <tab class="tab" heading="Texts" *ngIf="descriptions.length != 0">
+    <ng-template tabHeading >
+      <span *ngIf="selectedOption() && IsSelectedPage" class="selected_notification"><i class="ri-circle-fill"></i></span>
+    </ng-template>
     <!-- <h3 class="main_heading  mt-5 mb-3 ">Text Options</h3> -->
     <ng-container *ngIf="descriptions.length === 0; else elseblockone">
       <p>There are no text options, check file options</p>
     </ng-container>
     <ng-template #elseblockone>
-      <div *ngFor="let item of descriptions; let i = index" class="panel" [ngClass]="{ 'selected_panel': item.optionId === receveingOptionId, 'clicked_panel': (item.clicked && editable) ||(item.clicked && receveingOptionId == null)}">
+      <div *ngFor="let item of descriptions; let i = index" class="panel" [ngClass]="{ 'selected_panel': item.optionId === receveingOptionId, 'clicked_panel': (item.clicked && editable) ||(item.clicked && receveingOptionId == null && buttonActivate)}">
         <div class="panel_header" (click)="togglePanel(item)">
           Option {{ i + 1 }}
           <!-- Button to confirm option -->
@@ -48,7 +56,7 @@
             </app-change-status-button>
           </div>
         </div>
-        <button *ngIf="IsSelectedPage && descriptions.length != 0" class="edit_btn" (click)="editOption()">Edit Option</button>
+        <button *ngIf="!buttonActivate && descriptions.length != 0 && IsSelectedPage" class="edit_btn" (click)="editOption()">Edit Option</button>
         <div class="mx-2" *ngIf="editable">
           <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
           <button class="update_btn" (click)="updateOption()" [disabled]="disableUpdateBtn()" [ngClass]="{'disabled_button': disableUpdateBtn()}">Update</button>
