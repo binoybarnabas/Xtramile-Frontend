@@ -21,13 +21,9 @@ export class TravelAdminSideNavBarComponent {
   subMenu3ToggleValue = 0;
   subMenu4ToggleValue = 0;
 
-  isSideNavBarCollapsed: any;
-
   @Output() logoutEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private sideNavBarService: SideNavBarService, private router: Router) {
-
-    this.isSideNavBarCollapsed = 1;
 
     //travelRequestsMap contains values for Travel Requests sub menu
     this.travelRequestsMap.set('new ri-mail-download-line', "Incoming Requests");
@@ -54,6 +50,10 @@ export class TravelAdminSideNavBarComponent {
 
   }
 
+  // Getter to access the collapsed state from the service
+  get isSideNavBarCollapsed(): boolean {
+    return this.sideNavBarService.isSideNavBarCollapsed;
+  }
 
   //In general, hash maps (or hash tables) do not store their key-value pairs in contiguous memory locations;
   // So that the below code snippets will help us to iterate through the hashmap in a contiguos manner;
@@ -79,7 +79,7 @@ export class TravelAdminSideNavBarComponent {
   toggleSubMenu(menuNumber: string) {
 
     //side nav bar open
-    if (this.isSideNavBarCollapsed === 0) {
+    if (this.isSideNavBarCollapsed) {
 
       switch (menuNumber) {
 
@@ -125,7 +125,6 @@ export class TravelAdminSideNavBarComponent {
     this.subMenu4ToggleValue = 0;
 
     this.sideNavBarService.controlSideBar();
-    this.isSideNavBarCollapsed = this.sideNavBarService.isSideNavBarCollapsed;
   }
 
   // temp function - to avoid ghost clicking
