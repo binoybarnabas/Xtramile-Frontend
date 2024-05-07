@@ -12,8 +12,7 @@ export class MiddleConsoleComponent {
 
   subscription: any;
 
-
-  isSideNavBarCollapsed: any;
+  //isSideNavBarCollapsed: any;
   newReqFormSubMenuValue: number;
 
   currentRoutePath?: string
@@ -22,13 +21,11 @@ export class MiddleConsoleComponent {
 
   constructor(private sideNavBarService: SideNavBarService, private router: Router) {
     this.newReqFormSubMenuValue = 1;
-
-
   }
 
   //sus
   ngDoCheck() {
-    this.isSideNavBarCollapsed = this.sideNavBarService.isSideNavBarCollapsed;
+
     this.currentRoutePath = this.router.url;
 
     if (this.currentRoutePath == '/employee/request') {
@@ -46,13 +43,10 @@ export class MiddleConsoleComponent {
 
   }
 
-  ngOnInit() {
-
+  // Getter to access the collapsed state from the service
+  get isSideNavBarCollapsed(): boolean {
+    return this.sideNavBarService.isSideNavBarCollapsed;
   }
-
-
-
-
 
 
 }

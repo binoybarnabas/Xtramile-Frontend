@@ -2,7 +2,6 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { SideNavBarService } from '../../../../../services/employeeServices/layoutServices/side-nav-bar.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-side-nav-bar',
   templateUrl: './side-nav-bar.component.html',
@@ -16,15 +15,12 @@ export class SideNavBarComponent {
 
   @Output() logoutEvent: EventEmitter<string> = new EventEmitter<string>();
 
-
   subMenu1ToggleValue = 0;
   subMenu2ToggleValue = 0;
 
-  isSideNavBarCollapsed: any;
+  //isSideNavBarCollapsed: boolean = true;
   activeSideNavItem: string = 'dashboard'; // Variable to store the active item
   constructor(private sideNavBarService: SideNavBarService, private router: Router) {
-
-    this.isSideNavBarCollapsed = 1;
 
     //myRequestsMap contains values for My Requests sub menu
     this.myRequestsMap.set('new ri-add-line', "New Request");
@@ -32,7 +28,6 @@ export class SideNavBarComponent {
     this.myRequestsMap.set('ri-loader-line', "Pending Approval");
     this.myRequestsMap.set('ri-arrow-up-circle-line', "Ongoing Travel")
     this.myRequestsMap.set('ri-history-line', "Request History")
-
 
     //mySettlementsMap contains values for My Settlements sub menu
     // this.mySettlementsMap.set('new ri-add-line', "New Bill");
@@ -45,7 +40,6 @@ export class SideNavBarComponent {
   //In general, hash maps (or hash tables) do not store their key-value pairs in contiguous memory locations;
   // So that the below code snippets will help us to iterate through the hashmap in a contiguos manner;
   // This method returns an iterator over the key-value pairs in the map, where each element of the iterator is a tuple [key, value].
-
   myRequestsMapEntries(): IterableIterator<[string, string]> {
     return this.myRequestsMap.entries();
   }
@@ -56,8 +50,8 @@ export class SideNavBarComponent {
 
 
   toggleSubMenu(menuNumber: string) {
-
-    if (this.isSideNavBarCollapsed === 0) {
+  
+    if (!this.isSideNavBarCollapsed) {
 
       if (menuNumber === '1') {
         this.activeSideNavItem = 'my_requests'
@@ -90,11 +84,14 @@ export class SideNavBarComponent {
     this.subMenu1ToggleValue = 0;
     this.subMenu2ToggleValue = 0;
     this.sideNavBarService.controlSideBar();
-    this.isSideNavBarCollapsed = this.sideNavBarService.isSideNavBarCollapsed;
   }
 
+  // Getter to access the collapsed state from the service
+  get isSideNavBarCollapsed(): boolean {
+      return this.sideNavBarService.isSideNavBarCollapsed;
+  }
 
-  // temp function - to avoid ghost clicking
+  // temp function - to avoid ghost clicking // should repalce with separate divs and listeners
   doNothing() {
     this.subMenu1ToggleValue = 0;
     this.subMenu2ToggleValue = 0;
@@ -132,8 +129,5 @@ export class SideNavBarComponent {
 
     this.logoutEvent.emit("logout"); // Emit logout event
   }
-
-
-
 
 }

@@ -11,7 +11,6 @@ export class ManagerMiddleConsoleComponent {
 
   subscription: any;
 
-  isSideNavBarCollapsed: any;
   newReqFormSubMenuValue: number;
 
   //main heading of middle console 
@@ -25,7 +24,6 @@ export class ManagerMiddleConsoleComponent {
   //sus
   ngDoCheck() {
 
-    this.isSideNavBarCollapsed = this.sideNavBarService.isSideNavBarCollapsed;
     this.currentRoutePath = this.router.url;
 
     if (this.currentRoutePath == '/manager/newrequests') {
@@ -42,5 +40,11 @@ export class ManagerMiddleConsoleComponent {
     }
   }
 
+
+  // Getter to access the collapsed state from the service
+  get isSideNavBarCollapsed(): boolean {
+      return this.sideNavBarService.isSideNavBarCollapsed;
+  }
+  
 
 }
