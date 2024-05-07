@@ -79,7 +79,7 @@ export class TravelAdminSideNavBarComponent {
   toggleSubMenu(menuNumber: string) {
 
     //side nav bar open
-    if (this.isSideNavBarCollapsed) {
+    if (!this.isSideNavBarCollapsed) {
 
       switch (menuNumber) {
 

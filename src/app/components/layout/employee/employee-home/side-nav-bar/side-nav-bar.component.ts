@@ -50,8 +50,8 @@ export class SideNavBarComponent {
 
 
   toggleSubMenu(menuNumber: string) {
-
-    if (this.isSideNavBarCollapsed) {
+  
+    if (!this.isSideNavBarCollapsed) {
 
       if (menuNumber === '1') {
         this.activeSideNavItem = 'my_requests'
