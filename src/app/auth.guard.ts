@@ -40,7 +40,7 @@ export const travelAdminAuthGuard = ()=>{
     const router = inject(Router);
     const userData = localStorage.getItem('userData');
     const parsedUserData = userData ? JSON.parse(userData) : ''
-    if(Boolean(localStorage.getItem('isAuthenticated')) && parsedUserData.role=='Manager' && parsedUserData.department=='TA'){
+    if(Boolean(localStorage.getItem('isAuthenticated')) && (parsedUserData.role=='Manager' || parsedUserData.role=='Head') && parsedUserData.department=='TA'){
         return true;
     }
     else{
