@@ -1,18 +1,10 @@
-<!-- <p>top-bar works!</p> -->
 
 <div class="top_bar_container">
   <div class="left_section">
-    <!-- <div class="side_bar_controller">
-            <i (click)="controlSideBar()" class="icon ri-menu-line"></i>
-        </div> -->
 
     <div class="top_bar_logo_container">
       <h3 class="top_bar_logo" (click)="navigateTo('dashboard')">
-        <!-- <i class="ri-git-pr-draft-fill"></i> XtraMile -->
-        <!-- <i class="ri-scroll-to-bottom-fill"></i>  XtraMile -->
-        <!-- <img class="brand_img" src="../../../assets/images/brand.png" alt="">  -->
         <img class="logo_no_bg" src="../../../assets/images/v_logo_no_bg_1.png"> XtraMile
-        <!-- <p class="logo_text"><img class="logo_img" src="../../../assets/images/logo.png" alt=""> XtraMile</p> -->
       </h3>
     </div>
   </div>
@@ -20,27 +12,41 @@
   <div class="right_section">
     <div class="calendar_section">
       <p class="date">
-        <i class="cal_icon ri-calendar-2-line"></i>{{ date | customDate }}
+        <i class="cal_icon ri-calendar-2-line"></i> {{ date | customDate }}
       </p>
-      <!-- <i class="notification ri-notification-2-fill" (click)="openNotificationModal()"></i> -->
     </div>
 
     <div class="messenger_section">
       <i (click)=toggleTravelMessenger() class="icon ri-chat-3-line"></i>
     </div>
 
-
-    <div class="profile_info">
-      <p class="name">{{ employeeName }}</p>
-      <span class="designation">{{ designation }}</span>
+    <div (click)="toggleLogoutModal()" class="profile_section">
+      <div class="profile_info">
+        <p class="name">{{ employeeName }}</p>
+        <span class="designation">{{ designation }}</span>
+      </div>
+  
+      <div class="profile_photo">
+        <img class="profile_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&usqp=CAU" alt="">
+      </div>
     </div>
 
-    <div class="profile_photo" (click)="toggleDropdown($event)" s>
-      <!-- <img class="profile_img" src="assets\images\user (1).png" alt="" /> -->
-      <img (dblclick)="logout()" class="profile_img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&usqp=CAU" alt="">
-      <!-- <div class="dropdown" *ngIf="showDropdown">
-        <button (click)="logout()">Logout</button>
-      </div> -->
-    </div>
   </div>
+
+  <div *ngIf="isLogoutModalOpen" class="logout_modal">
+    <div class="item_card profile">
+      <i class=" icon ri-user-line"></i>
+      <p class="text">Profile</p>
+    </div>
+    <div class="item_card help">
+      <i class="icon ri-question-line"></i>
+      <p class="text">Help</p>
+    </div>
+    <div class="item_card logout">
+      <i class="icon ri-logout-box-r-line"></i>
+      <p class="text">Logout</p>
+    </div>
+
+  </div>
+
 </div>
