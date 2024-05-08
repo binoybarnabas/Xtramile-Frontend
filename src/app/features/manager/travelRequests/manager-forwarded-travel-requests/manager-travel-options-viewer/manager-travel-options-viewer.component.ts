@@ -20,6 +20,12 @@ import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDe
   ]
 })
 export class ManagerTravelOptionsViewerComponent {
+  
+pageHeading :string = 'Available Travel Options'
+
+backBtnText : string = 'Cancel';
+forwardBtnText : string = 'Submit';
+
 requestId!:number;
 descriptions!: any[];
 receveingOptionId !:number;
@@ -219,6 +225,18 @@ getTravelOptionsByReqId(reqId: number) {
 selectedOption(): boolean {
   return this.descriptions.some((item: { optionId: number; }) => item.optionId === this.receveingOptionId);
 }
+
+
+//actions
+
+onBackBtnClick(){
+  alert("Back")
+}
+
+onForwardBtnClick(){
+  alert("GO")
+}
+
 
 }
 

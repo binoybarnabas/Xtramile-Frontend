@@ -1,42 +1,28 @@
 .travel_options_container {
-    margin-top: 0.6rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
-    justify-content: center;
-    align-items: center;
-
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 0.5rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 75vh;
 }
 
 .travel_options_container .option_card {
     background-color: var(--card-bg-color);
     width: 100%;
-    border-radius: var(--normal-border-radius);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 3px;
-    /* margin: 0.5rem; */
-    transition: 0.3s;
-    padding: 6px;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 3px; */
+    /* transition: 0.3s; */
+    padding: 2px;
     cursor: pointer;
 }
 
-
-
-.travel_options_container .option_card:hover {
-    transform: scale(1.01);
-}
-
 .travel_options_container .option_card.selected {
-    /* border: 3px solid var(--first-color); */
-    /* or any other border style you prefer */
-    border: 2px solid var(--third-color);
-    padding: 3px;
+    background-color: var(--second-color);
 }
 .editMode {
     border: 2px solid blueviolet;
   }
-.travel_options_container .option_card.selected .description{
-    margin-top: 3px;
-}
 
 
 
@@ -46,7 +32,8 @@
 
 .travel_options_container .option_card .option_file .img {
     width: 100%;
-    border-radius: 6px;
+    object-fit: cover;
+    height: 180px;
 }
 
 .travel_options_container .option_card .description {

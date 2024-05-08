@@ -1,7 +1,8 @@
 <!-- Waiting -->
 <div class="file_main_container" [ngClass]="{ 'reverse_column': IsSelectedPage }">
+  
   <div>
-    <h3 class="main_heading mt-5 mb-3">Available options</h3>
+    <!-- <h3 class="main_heading mt-5 mb-3">Available option</h3> -->
     <ng-container *ngIf="travelOptionsData.length === 0; else elseblockone">
       <p>There are no file options, click on text options</p>
     </ng-container>
@@ -21,13 +22,11 @@
                   alt="img_not_found"
                 />
               </div>
-              <div class="description">
-                <p>{{ item.description }}</p>
-              </div>
             </div>
           </ng-container>
         </div>
-        <div *ngIf="editable" class="edit_container">
+
+        <!-- <div *ngIf="editable" class="edit_container">
           <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
           <button class="update_btn" (click)="updateOption()" [disabled]="disableUpdateBtn()" [ngClass]="{ 'disabled_button': disableUpdateBtn() }">Update</button>
         </div>
@@ -51,12 +50,14 @@
               [disabled]="disableUpdateBtn()"
             ></app-change-status-button>
           </div>
-        </div>
+        </div> -->
+
       </div>
     </ng-template>
   </div>
-    <!-- Selected -->
-    <div *ngIf="hideDiv">
+
+  <!-- Selected -->
+  <div *ngIf="hideDiv">
       <h3 class="main_heading mt-5 mb-3">Selected option</h3>
       <ng-container
         *ngIf="
@@ -104,5 +105,6 @@
       </div>
       <button *ngIf="!buttonActivate && travelOptionsData.length != 0" class= "edit_btn" (click)="editOption()">Edit Option</button>
       </div>
-    </div>
+  </div>
+
 </div>

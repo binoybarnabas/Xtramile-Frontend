@@ -81,12 +81,16 @@ export class LoginComponent {
               console.log(this.loginService.isLoggedIn);
               localStorage.setItem('userData', JSON.stringify(data));
               localStorage.setItem('isAuthenticated', 'true');
-
+              //console.log("travel admin",data.role);
               switch (data.role) {
-                case 'Employee': this.router.navigate(['employee/dashboard'])
+                case 'Employee': 
+                  this.router.navigate(['employee/dashboard'])
                   break;
-
-                case 'Manager': if (data.department == 'TA') {
+                case 'Head':
+                  this.router.navigate(['traveladmin/dashboard']);
+                  break;
+                case 'Manager': 
+                if (data.department == 'TA') {
                   this.router.navigate(['traveladmin/dashboard'])
                   break;
                 }
@@ -95,6 +99,7 @@ export class LoginComponent {
                   break;
                 }
                 else {
+                  
                   this.router.navigate(['manager/dashboard'])
                   break;
                 }
