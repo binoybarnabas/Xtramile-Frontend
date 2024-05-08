@@ -5,6 +5,7 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { Status } from 'src/app/utils/StatusEnum';
 
 @Component({
   selector: 'app-file-option-viewer',
@@ -28,14 +29,14 @@ export class FileOptionViewerComponent {
 
   //For change status button of rm.
   name_rm: string = 'Submit'
-  primaryStatusCode_rm: string = 'PE'
-  secondaryStatusCode_rm: string = 'SD'
+  primaryStatusCode_rm: number = Status.Pending
+  secondaryStatusCode_rm: number = Status.Selected
  
 
   //For change status button of ta.
   name_ta:string = "Confirm"
-  primaryStatusCode_ta:string = "OG"
-  secondaryStatusCode_ta:string = "OG"
+  primaryStatusCode_ta: number = Status.Ongoing
+  secondaryStatusCode_ta: number = Status.Ongoing
 
   hideDiv:boolean = true;
   constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute, private router: Router, private toastService: CustomToastService

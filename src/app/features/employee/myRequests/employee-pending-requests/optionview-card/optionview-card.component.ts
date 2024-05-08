@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { OptionCard } from './optionview-card';
 import { AvailableOptions } from 'src/app/services/interfaces/iavailable-options';
+import { Status } from 'src/app/utils/StatusEnum';
 
 @Component({
   selector: 'app-optionview-card',
@@ -13,8 +14,8 @@ export class OptionviewCardComponent {
 
   name: string = 'Submit';
   requestId: number = 0;
-  primaryStatusCode: string = 'SD';
-  secondaryStatusCode: string = 'SD'
+  primaryStatusCode: number = Status.Selected;
+  secondaryStatusCode: number = Status.Selected;
 
   optionsFromEmployee: AvailableOptions[] = [];
   selectedOption: any | null = null;

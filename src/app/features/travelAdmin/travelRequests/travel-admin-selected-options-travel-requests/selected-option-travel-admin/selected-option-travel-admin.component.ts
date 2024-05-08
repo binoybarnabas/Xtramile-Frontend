@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { UserData } from 'src/app/services/interfaces/iuserData';
+import { Status } from 'src/app/utils/StatusEnum';
 
 @Component({
   selector: 'app-selected-option-travel-admin',
@@ -17,8 +18,8 @@ export class SelectedOptionTravelAdminComponent {
   userData: UserData
   empId: number;
   name:string = "Confirm"
-  primaryStatusCode:string = "FD"
-  secondaryStatusCode:string = "FD"
+  primaryStatusCode:number = Status.Forwarded
+  secondaryStatusCode:number = Status.Forwarded
 
   
   constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute){
