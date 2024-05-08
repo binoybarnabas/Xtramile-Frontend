@@ -38,6 +38,7 @@ export class EmployeePendingRequestsComponent {
     this.subscription = this.requestService.getRequestsPendingStatus(empId).subscribe({
       next: (data) => {
         data.forEach((request) => {
+          (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName
           request.departureDate = this.datepipe.transform(request.departureDate, "dd/MM/yyyy") || ' '
           request.returnDate = this.datepipe.transform(request.returnDate, "dd/MM/yyyy") || ' '
         })

@@ -48,6 +48,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
           const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
           return {
             ...request,
+            statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
             priorityName: priorityName
           };
@@ -82,6 +83,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
           const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
           return {
             ...request,
+            statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
             priorityName: priorityName
           };
@@ -109,6 +111,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
         const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
         return {
           ...request,
+          statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
           createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
           priorityName: priorityName
         };
@@ -139,6 +142,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
             const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
             return {
               ...request,
+              statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
               createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
               priorityName: priorityName
             };
@@ -158,6 +162,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
             const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
             return {
               ...request,
+              statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
               createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
               priorityName: priorityName
             };
@@ -194,6 +199,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
         const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
         return {
           ...request,
+          statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
           createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
           priorityName: priorityName
 
@@ -214,6 +220,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
         const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
         return {
           ...request,
+          statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
           createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
           priorityName: priorityName
         };
