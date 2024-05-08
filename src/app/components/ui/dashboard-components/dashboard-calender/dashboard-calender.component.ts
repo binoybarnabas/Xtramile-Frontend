@@ -209,5 +209,9 @@ export class DashboardCalenderComponent implements OnInit {
       date1.getFullYear() === date2.getFullYear()
     );
   }
-
+  isCurrentMonth(day: Date): boolean {
+    return day.getMonth() === this.currentDate.getMonth() && day.getFullYear() === this.currentDate.getFullYear();
+  }
+  
+  
 }

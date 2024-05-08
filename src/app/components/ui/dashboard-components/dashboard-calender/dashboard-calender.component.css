@@ -101,3 +101,12 @@
 .highlighted-within-range {
   background-color: var(--menu-hover-color);
 } */
+/* Styles for days belonging to adjacent months */
+.calendar .date_container .adjacent-month {
+  color: var(--ternary-text-color); /* Set text color to grey */
+}
+
+/* Styles for days belonging to the current month */
+.calendar .date_container .current-month {
+  color: var(--primary-text-color); /* Set text color to black */
+}

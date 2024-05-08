@@ -1,42 +1,44 @@
 <div class="calendar">
-
   <div class="calendar-header">
     <p class="month_year">{{ getCurrentMonth() }} {{ getCurrentYear() }}</p>
-
     <div class="nav_btn_container">
-      <button (click)="previousMonth()" class="left_icon ri-arrow-left-s-line"></button>
-      <button (click)="nextMonth()" class="right_icon ri-arrow-right-s-line" ></button>
+      <button
+        (click)="previousMonth()"
+        class="left_icon ri-arrow-left-s-line"
+      ></button>
+      <button
+        (click)="nextMonth()"
+        class="right_icon ri-arrow-right-s-line"
+      ></button>
     </div>
-    
   </div>
 
   <table class="calendar_body">
-
     <thead>
       <tr class="day_container">
-        <th class="day"
-          *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"> {{ day }} </th>
+        <th
+          class="day"
+          *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']"
+        >
+          {{ day }}
+        </th>
       </tr>
     </thead>
 
     <tbody class="date_container">
-
       <tr *ngFor="let week of getWeeks()">
-
         <td
           *ngFor="let day of week"
           [ngClass]="{
             'highlighted-departure': isDepartureDate(day),
-            'highlighted-return': isReturnDate(day)  
+            'highlighted-return': isReturnDate(day),
+            'adjacent-month': !isCurrentMonth(day),
+            'current-month': isCurrentMonth(day)
           }"
         >
           {{ day ? day.getDate() : "" }}
         </td>
-
       </tr>
-
     </tbody>
-
   </table>
-
 </div>
