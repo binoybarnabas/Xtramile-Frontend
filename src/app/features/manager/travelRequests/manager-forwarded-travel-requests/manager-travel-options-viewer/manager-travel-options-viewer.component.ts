@@ -7,6 +7,7 @@ import { CustomToastService } from 'src/app/services/toastServices/custom-toast.
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
+
 @Component({
   selector: 'app-manager-travel-options-viewer',
   templateUrl: './manager-travel-options-viewer.component.html',
@@ -24,7 +25,7 @@ export class ManagerTravelOptionsViewerComponent {
 pageHeading :string = 'Available Travel Options'
 
 backBtnText : string = 'Cancel';
-forwardBtnText : string = 'Submit';
+//forwardBtnText : string = 'Submit';
 
 requestId!:number;
 descriptions!: any[];
@@ -47,6 +48,7 @@ constructor(private managerService:ManagerTravelRequestsService, private sanitiz
   this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
   this.empId = this.userData?.empId
 }
+
 ngOnInit(){
   this.activatedRoute.queryParamMap.subscribe((query) => {
     if (query.get('requestId')) {
@@ -55,7 +57,7 @@ ngOnInit(){
       this.IsSelectedPage = query.get('IsSelectedPage') === 'true';
       console.log(this.IsSelectedPage)
     }
-  })
+})
   
   this.getTravelOptionsByReqId(this.requestId);
   this.getAvailableOptionsDescription();
@@ -66,6 +68,7 @@ ngOnInit(){
     }
   })
 }
+
 
 getAvailableOptionsDescription(){
   this.managerService.getAvailableOptionsDescription(this.requestId).subscribe({

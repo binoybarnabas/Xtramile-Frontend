@@ -111,63 +111,14 @@
 .tab{
   padding: 1rem;
   font-size: var(--small-font-size);
-  /* background-color: var(--card-bg-color); */
-  /* box-shadow: var(--normal-box-shadow); */
 }
 
 .clicked_panel {
   background-color: var(--second-color);
 }
 
-.cancel_btn {
-  width: var(--normal-button-width);
-  height: var(--normal-button-height);
-  color: var(--second-color);
-  background-color: transparent;
-  border-radius: var(--small-border-radius);
-  justify-content: center;
-  align-items: center;
-  /* margin-right: 10px; */
-  font-weight: var(--active-font-weight);
-  border: var(--normal-button-border-size) solid var(--second-color);
-  font-size: var(--span-font-size);
-  margin-right: 10px;
-}
 
-.action_btn{
-  display: flex;
-  justify-content: flex-end;
-}
 
-.action_btn .edit_btn {
-  width: var(--normal-button-width);
-  height: var(--normal-button-height);
-  color: var(--card-bg-color);
-  background-color: var(--second-color);
-  border-radius: var(--small-border-radius);
-  justify-content: center;
-  align-items: center;
-  /* margin-right: 10px; */
-  font-weight: var(--active-font-weight);
-  border: var(--normal-button-border-size) solid var(--second-color);
-  font-size: var(--span-font-size);
-  margin-left: 1vw;
-}
-
-.update_btn {
-
-  width: var(--normal-button-width);
-  height: var(--normal-button-height);
-  color: var(--card-bg-color);
-  background-color: var(--second-color);
-  border-radius: var(--small-border-radius);
-  justify-content: center;
-  align-items: center;
-  /* margin-right: 10px; */
-  font-weight: var(--active-font-weight);
-  border: var(--normal-button-border-size) solid var(--second-color);
-  font-size: var(--span-font-size);  
-}
 
 .disabled_button {
   opacity: 0.5; 
@@ -186,8 +137,9 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--card-bg-color);
-  border-radius: 0 0 8px 8px;
+  border-radius: 8px;
   box-shadow: var(--normal-box-shadow);
+  height: 100%;
 }
 
 .main_container .option_container_main{

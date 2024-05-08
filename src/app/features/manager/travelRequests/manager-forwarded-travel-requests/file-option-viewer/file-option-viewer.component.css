@@ -5,14 +5,11 @@
     grid-gap: 0.5rem;
     justify-content: flex-start;
     align-items: flex-start;
-    height: 75vh;
 }
 
 .travel_options_container .option_card {
     background-color: var(--card-bg-color);
     width: 100%;
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 3px; */
-    /* transition: 0.3s; */
     padding: 2px;
     cursor: pointer;
 }
@@ -20,11 +17,10 @@
 .travel_options_container .option_card.selected {
     background-color: var(--second-color);
 }
+
 .editMode {
     border: 2px solid blueviolet;
-  }
-
-
+}
 
 .travel_options_container .option_card .option_file {
     width: 100%;
@@ -34,34 +30,6 @@
     width: 100%;
     object-fit: cover;
     height: 180px;
-}
-
-.travel_options_container .option_card .description {
-    width: 100%;
-    padding-left: 0.6rem;
-    padding-top: 0.6rem;
-    padding-right: 0.6rem;
-    background-color: var(--secondary-cyan-color);
-    border-radius: 6px;
-    margin-top: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.travel_options_container .option_card .description p {
-    font-size: var(--form-label-font-size);
-    color: var(--ternary-text-color);
-}
-
-.travel_options_container .option_card .description .del_icon {
-    font-size: var(--medium-font-size);
-    color: var(--danger-color);
-    font-weight: var(--active-font-weight);
-}
-
-.travel_options_container .option_card .description .del_icon:hover {
-    cursor: pointer;
 }
 
 

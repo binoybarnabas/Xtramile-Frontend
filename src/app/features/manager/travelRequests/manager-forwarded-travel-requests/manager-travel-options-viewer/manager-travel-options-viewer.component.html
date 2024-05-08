@@ -1,8 +1,11 @@
-<app-page-header [headingInputData]="pageHeading"></app-page-header>
 
 <div class="main_container">
 
+  <app-page-header [headingInputData]="pageHeading"></app-page-header>
+
+  <!-- Option View -->
   <div class="option_container_main">
+
     <tabset>
       
       <tab class="tab" heading="Images" *ngIf="travelOptionsData.length !== 0">
@@ -43,7 +46,6 @@
 
             </div>
 
-
           <!-- <div class="action_btn">
             <div class="cancel_btn_container">
               <button *ngIf="buttonActivate && receveingOptionId == null" class="cancel_btn" type="button" >
@@ -83,7 +85,9 @@
 
         </ng-template>
       </tab>
+
     </tabset>
+
   </div>
   
   <!-- action bar -->
@@ -96,7 +100,15 @@
       </div>
 
       <div class="forward_btn_card">
-        <button (click)="updateOption()" [disabled]="disableUpdateBtn()" class="btn" >{{forwardBtnText}}</button>
+        <app-change-status-button
+        [name]="name_rm"
+        [empId]="empId"
+        [requestId]="requestId"
+        [primaryStatusCode]="primaryStatusCode_ta"
+        [secondaryStatusCode]="secondaryStatusCode_ta"
+        (externalpostTriggered)="confirmOption()">
+      </app-change-status-button>
+        <!-- <button (click)="onForwardBtnClick()" [disabled]="disableUpdateBtn()" class="btn" >{{forwardBtnText}}</button> -->
       </div>
 
     </div>
