@@ -30,6 +30,8 @@ export class TopBarUserComponent {
 
   isTravelMessengerOpen: boolean = false;
 
+  isLogoutModalOpen : boolean = false;
+
   constructor(private sideNavBarService: SideNavBarService, private modalService: BsModalService,
     private requestService: RequestService, private managerService: ManagerTravelRequestsService, private router: Router) {
     this.isSideNavBarCollapsed = sideNavBarService.isSideNavBarCollapsed;
@@ -41,10 +43,6 @@ export class TopBarUserComponent {
     this.showDropdown = !this.showDropdown;
   }
 
-  logout() {
-    this.showDropdown = false; // Hide dropdown after logout
-    this.logoutEvent.emit("logout"); // Emit logout event
-  }
 
   ngOnInit() {
     if (localStorage.getItem('userData')) {
@@ -110,5 +108,10 @@ export class TopBarUserComponent {
     }
 
   }
+
+  toggleLogoutModal(){
+    this.isLogoutModalOpen = this.isLogoutModalOpen ? false : true;
+  }
+
 
 }

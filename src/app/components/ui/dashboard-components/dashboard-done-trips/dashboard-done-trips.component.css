@@ -1,5 +1,6 @@
 .done_trips_container{
   height: 100%;
+
 }
 
 .done_trips_container .heading_container {
@@ -41,7 +42,7 @@
   padding: 0.5rem;
   overflow-x: hidden;
   overflow-y: auto;
-  /* max-height: 40vh; */
+  height: 82%;
 }
 
 .done_trips_container .trip_history_container .trip_history_card {
@@ -57,9 +58,9 @@
   cursor: pointer;
 }
 
-.done_trips_container .trip_history_container .trip_history_card:hover {
+/* .done_trips_container .trip_history_container .trip_history_card:hover {
   transform: scale(1.01);
-}
+} */
 
 .done_trips_container
   .trip_history_container
