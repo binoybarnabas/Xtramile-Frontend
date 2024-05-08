@@ -50,11 +50,7 @@ export class TravelRequestCardComponent implements OnDestroy {
             },
             complete: () => {
               console.log("done");
-<<<<<<< HEAD
-              this.toastService.showToast("Travel Request Cancelled!");
-=======
               this.toastService.showToast({ message: "Travel Request Cancelled", toastType: "success", toastDuration: 3000 });
->>>>>>> 028d1cc50166cd6c918f3704fdd8ec80789f0680
             }
           });
         }
