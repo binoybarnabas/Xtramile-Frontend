@@ -3,11 +3,12 @@
     flex-direction: column;
     border-radius: var(--normal-border-radius);
     height: 100%;
-
 }
+
 .upcoming_trip_container .no_data_container{
     height: 100%;
 }
+
 .upcoming_trip_container .no_data_container .no_trip_card{
     height: 100%;
     display: flex;
@@ -19,7 +20,6 @@
     border-radius: var(--normal-border-radius);
     box-shadow: var(--normal-box-shadow);
 }
-
 
 .upcoming_trip_container .trip_heading {
     font-size: var(--normal-font-size);

@@ -6,6 +6,7 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
+import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 @Component({
   selector: 'app-manager-travel-options-viewer',
   templateUrl: './manager-travel-options-viewer.component.html',
@@ -50,6 +51,7 @@ ngOnInit(){
     }
   })
   
+  this.getTravelOptionsByReqId(this.requestId);
   this.getAvailableOptionsDescription();
   this.getSelectedOption(); 
   this.requestService.patchImageEvent$.subscribe({
@@ -68,7 +70,7 @@ getAvailableOptionsDescription(){
         item.clicked = false; 
         return item;
       });
-      console.log('get method is successful');
+      this.sortDescriptions();
     },
     error: (error: any) => {
       console.error('Post failed:', error);
@@ -84,7 +86,9 @@ getSelectedOption(){
    this.requestService.selectedOptionFromEmployee(this.requestId).subscribe({
     next: (data) =>{
     this.receveingOptionId = data
-    console.log(this.receveingOptionId)
+    console.log(this.receveingOptionId);
+    this.sortDescriptions();
+    this.selectedOption();
   },
   error: (error: any) => {
     console.error('Post failed:', error);
@@ -181,4 +185,40 @@ disableUpdateBtn(): boolean {
   const isAnyItemClicked = this.descriptions.some(item => item.clicked);
   return !isAnyItemClicked;
 }
+sortDescriptions(): void {
+  if (this.receveingOptionId) {
+    const selectedIndex = this.descriptions.findIndex(item => item.optionId === this.receveingOptionId);
+    if (selectedIndex !== -1) {
+      const selectedOption = this.descriptions.splice(selectedIndex, 1)[0];
+      this.descriptions.unshift(selectedOption);
+    }
+  }
 }
+
+travelOptionsData: TravelOptionDetails[] = [];
+
+getTravelOptionsByReqId(reqId: number) {
+
+  this.requestService.getTravelOptionsByReqId(reqId).subscribe({
+    next: (data) => {
+      this.travelOptionsData = data;
+      console.log(this.travelOptionsData)
+      // data.forEach((option: { optionId: number; }) => {
+      //   this.travelOptionId.push(option.optionId);
+      // })
+    },
+    error: (error: Error) => {
+      console.log("Error has occurred, " + error.message);
+    },
+    complete: () => {
+      console.log("Completed");
+    }
+  });
+}
+
+selectedOption(): boolean {
+  return this.descriptions.some((item: { optionId: number; }) => item.optionId === this.receveingOptionId);
+}
+
+}
+

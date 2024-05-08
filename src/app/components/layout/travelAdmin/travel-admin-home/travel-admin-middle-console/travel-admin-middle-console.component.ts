@@ -10,8 +10,6 @@ import { SideNavBarService } from 'src/app/services/employeeServices/layoutServi
 export class TravelAdminMiddleConsoleComponent {
   subscription: any;
 
-
-  isSideNavBarCollapsed: any;
   newReqFormSubMenuValue: number;
 
   //main heading of middle console 
@@ -26,7 +24,6 @@ export class TravelAdminMiddleConsoleComponent {
   //sus
   ngDoCheck() {
 
-    this.isSideNavBarCollapsed = this.sideNavBarService.isSideNavBarCollapsed;
     this.currentRoutePath = this.router.url;
     if (this.currentRoutePath == '/traveladmin/incomingrequests') {
       this.mainHeading = 'Incoming Travel Request'
@@ -46,6 +43,11 @@ export class TravelAdminMiddleConsoleComponent {
 
   }
 
+
+   // Getter to access the collapsed state from the service
+  get isSideNavBarCollapsed(): boolean {
+    return this.sideNavBarService.isSideNavBarCollapsed;
+  }
 
 
 }

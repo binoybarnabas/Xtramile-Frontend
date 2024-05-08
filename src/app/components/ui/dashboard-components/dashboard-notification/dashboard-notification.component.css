@@ -45,9 +45,9 @@
      color: var(--secondary-text-color);
  }
 
- .notification_container .notification_card:hover {
+ /* .notification_container .notification_card:hover {
      transform: scale(1.02);
- }
+ } */
 
 
  @media screen and (max-width: 860px) {

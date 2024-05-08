@@ -375,7 +375,7 @@
 
 
 
-.expansion-panel-container {
+.expansion_panel_container {
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
@@ -384,14 +384,14 @@
     
 }
 
-.expansion-panel-container .expansion-panel {
+.expansion_panel_container .expansion_panel {
     margin: 5px;
     width: 275px;
     background-color: var(--card-bg-color);
     border-radius: 6px;
 }
   
-.expansion-panel-container .expansion-panel .expansion-panel-header {
+.expansion_panel_container .expansion_panel .expansion_panel_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -402,25 +402,25 @@
     cursor: pointer;
 }
 
-.expansion-panel-container .expansion-panel .expansion-panel-header.active{
+.expansion_panel_container .expansion_panel .expansion_panel_header.active{
     border-radius: 6px 6px 0 0;
     background-color: var(--second-color);
     color: var(--card-bg-color);
 }
 
 
-.expansion-panel-container .expansion-panel .expansion-panel-header .title{
+.expansion_panel_container .expansion_panel .expansion_panel_header .title{
     margin-top: auto;
     margin-bottom: auto;
     font-size: var(--form-label-font-size);
 }
 
-.expansion-panel-container .expansion-panel .expansion-panel-header .icon{
+.expansion_panel_container .expansion_panel .expansion_panel_header .icon{
     margin-left: 10px;
     font-size: var(--medium-font-size);
 }
   
-.expansion-panel-container .expansion-panel  .expansion-panel-content {
+.expansion_panel_container .expansion_panel  .expansion_panel_content {
     padding: 0.5rem;
     border-radius: 0 0 6px 6px;
     background-color: var(--secondary-cyan-color);
@@ -548,5 +548,7 @@
 .option_default_message{
     font-size: var(--form-label-font-size);
     color: var(--ternary-text-color);
+    text-align: center;
+    margin-top: 1vw;
 }
 

@@ -158,13 +158,13 @@
                 </tab>
                 <tab heading="Texts" (selectTab)="onSelect($event)">
 
-                  <div class="expansion-panel-container">
+                  <div class="expansion_panel_container">
                     <div (click)="onOptionSelected('text', i)" 
                       *ngFor="let htmlContent of textOption; let i = index" 
-                      class="expansion-panel"
+                      class="expansion_panel"
                     >
                       <div 
-                        [ngClass]="selectedTextOptionIndex === i ? 'expansion-panel-header active' : 'expansion-panel-header' "
+                        [ngClass]="selectedTextOptionIndex === i ? 'expansion_panel_header active' : 'expansion_panel_header' "
                         (click)="togglePanel(i)"
                       >
                       <p class="title">Option {{ i + 1 }}</p>
@@ -172,7 +172,7 @@
                         <i class="icon ri-arrow-up-wide-line" *ngIf="isPanelOpen(i)"></i>
                       </div>
                       <div  
-                        class="expansion-panel-content" 
+                        class="expansion_panel_content" 
                         *ngIf="isPanelOpen(i)"
                         [innerHTML]= "santizieHtml(htmlContent)"
                       ></div>
