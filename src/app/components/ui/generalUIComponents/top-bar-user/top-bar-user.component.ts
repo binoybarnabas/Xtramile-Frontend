@@ -45,11 +45,21 @@ export class TopBarUserComponent {
 
 
   ngOnInit() {
+    let userData
     if (localStorage.getItem('userData')) {
-      const userData = JSON.parse(localStorage.getItem('userData')!)
+      userData = JSON.parse(localStorage.getItem('userData')!)
       this.empId = userData.empId;
     }
     this.getRequestNotification();
+   
+    if(userData.department == 'TA'){
+      if(this.designation == 'Head'){
+        this.designation = "Travel Admin Head";
+      }
+      else{
+        this.designation = "Travel Admin Manager";
+      }
+    }
   }
 
   openNotificationModal() {
