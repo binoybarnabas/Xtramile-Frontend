@@ -5,7 +5,6 @@
   border-radius: var(--normal-border-radius);
 }
 
-
 .data_table_container .dynamic_table {
   width: 100%;
   border-collapse: collapse;
@@ -29,11 +28,14 @@
 }
 
 .data_table_container .dynamic_table .table_heading .table_heading_row {
-
   width: 100%;
 }
 
-.data_table_container .dynamic_table .table_heading .table_heading_row .heading_text {
+.data_table_container
+  .dynamic_table
+  .table_heading
+  .table_heading_row
+  .heading_text {
   /* color: var(--secondary-text-color); */
   font-size: var(--small-font-size);
   margin-left: 5px;
@@ -41,7 +43,6 @@
   border-bottom: 1px solid #ddd; */
   padding: 0.5rem;
   text-align: left;
-
 }
 
 .data_table_container .dynamic_table .table_body {
@@ -65,18 +66,12 @@
   border-right: 2px solid var(--first-color);
 }
 
-
 .data_table_container .dynamic_table .table_body .table_body_row .table_data {
   border: none;
   border-bottom: 1px solid var(--menu-hover-color);
   padding: 0.2rem 0.5rem;
   text-align: left;
 }
-
-
-
-
-
 
 .data_table_container .dynamic_table .status_pending {
   color: var(--primary-orange-color);
@@ -86,7 +81,7 @@
   color: var(--first-color);
 }
 
-.data_table_container .dynamic_table.status_rejected {
+.data_table_container .dynamic_table .status_rejected {
   color: var(--danger-color);
 }
 
@@ -96,4 +91,12 @@
 
 .data_table_container .dynamic_table .mode_international {
   color: var(--primary-green-color);
+}
+
+.data_table_container .dynamic_table .status_waiting {
+  color: var(--primary-blue-color);
+}
+
+.data_table_container .dynamic_table .status_selected {
+  color: var(--danger-color);
 }
