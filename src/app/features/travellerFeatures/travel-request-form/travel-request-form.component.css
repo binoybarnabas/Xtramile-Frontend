@@ -27,11 +27,11 @@
     position: absolute;
     background-color: var(--card-bg-color);
     box-shadow: var(--normal-box-shadow);
-    max-height: 200px;
+    max-height: 240px;
     overflow-y: auto;
-    z-index: 1000;
+    z-index: 99999;
     border-radius: 5px;
-    bottom: -80%;
+    bottom: -56%;
     width: 100%;
     left: 0;
 }
@@ -285,10 +285,12 @@
     border-radius: 6px;
     box-shadow: var(--normal-box-shadow);
     position: absolute;
-    left: 46.5%;
-    top: 30%;
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
     cursor: pointer;
     z-index: 9999;
+    width: 30px;
+    height: 30px;
 }
 
 .main_container .req_form_container .bottom_section .first_row .origin_destination_section .icon_section .icon {
@@ -493,7 +495,7 @@
 .main_container .req_form_container .bottom_section .first_row .other_info_section .project_code_travel_purpose_container .project_code_section .project_code_selector_container{
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -511,7 +513,7 @@
     height: 32px;
     border-radius: 5px;
     margin-bottom: 5px;
-    margin-right: 5px;
+    margin-right: 8px;
     color: var(--ternary-text-color);
     font-weight: var(--active-font-weight);
     cursor: pointer;

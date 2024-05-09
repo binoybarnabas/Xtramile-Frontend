@@ -111,67 +111,70 @@
 .tab{
   padding: 1rem;
   font-size: var(--small-font-size);
+
   /* background-color: var(--card-bg-color); */
   /* box-shadow: var(--normal-box-shadow); */
+
 }
 
 .clicked_panel {
   background-color: var(--second-color);
 }
 
-.cancel_btn {
-  width: var(--normal-button-width);
-  height: var(--normal-button-height);
-  color: var(--second-color);
-  background-color: transparent;
-  border-radius: var(--small-border-radius);
-  justify-content: center;
-  align-items: center;
-  /* margin-right: 10px; */
-  font-weight: var(--active-font-weight);
-  border: var(--normal-button-border-size) solid var(--second-color);
-  font-size: var(--span-font-size);
-  margin-right: 10px;
-}
 
-.action_btn{
-  display: flex;
-  justify-content: flex-end;
-}
 
-.action_btn .edit_btn {
-  width: var(--normal-button-width);
-  height: var(--normal-button-height);
-  color: var(--card-bg-color);
-  background-color: var(--second-color);
-  border-radius: var(--small-border-radius);
-  justify-content: center;
-  align-items: center;
-  /* margin-right: 10px; */
-  font-weight: var(--active-font-weight);
-  border: var(--normal-button-border-size) solid var(--second-color);
-  font-size: var(--span-font-size);
-  margin-left: 1vw;
-}
-
-.update_btn {
-
-  width: var(--normal-button-width);
-  height: var(--normal-button-height);
-  color: var(--card-bg-color);
-  background-color: var(--second-color);
-  border-radius: var(--small-border-radius);
-  justify-content: center;
-  align-items: center;
-  /* margin-right: 10px; */
-  font-weight: var(--active-font-weight);
-  border: var(--normal-button-border-size) solid var(--second-color);
-  font-size: var(--span-font-size);  
-}
 
 .disabled_button {
   opacity: 0.5; 
 }
+
+
+/* updates */
+.main_container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  box-shadow: var(--normal-box-shadow);
+  height: 100%;
+}
+
+.main_container .option_container_main{
+  max-height: 68vh;
+  overflow-y: auto;
+}
+
+.main_container .action_section{
+  width: 100%;
+  min-height: 55px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0 0 8px 8px;
+  background-color: var(--card-bg-color);
+  padding: 10px;
+  box-shadow: var(--normal-box-shadow);
+}
+
+.main_container .action_section .btn_container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.main_container .action_section .btn_container .back_btn_card .btn,
+.main_container .action_section .btn_container .forward_btn_card .btn{
+  height: 38px;
+  width: 100px;
+  background-color: transparent;
+  color: var(--second-color);
+  font-size: var(--form-label-font-size);
+  font-weight: var(--active-font-weight);
+  border: 2px solid var(--second-color);
+}
+
 
 .selected_notification{
   padding-left: 5px;
@@ -223,6 +226,7 @@
   font-weight: var(--active-font-weight);
   border: 2px solid var(--second-color);
 }
+
 
 .main_container .action_section .btn_container .forward_btn_card .btn{
   background-color: var(--second-color);

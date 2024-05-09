@@ -9,6 +9,7 @@
 ></app-tabbed-data-table>
 
 <pagination
+  *ngIf="getTotalItems() > 10"
   [itemsPerPage]="itemsPerPage"
   [totalItems]="getTotalItems()"
   [(ngModel)]="currentPage"

@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -10,13 +10,11 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { EmployeeDetails } from '../../travelRequest/travel-request-information/request';
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { slLocale } from 'ngx-bootstrap/chronos';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
 import { RequestStatus } from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
 import { ConfirmationModalComponent } from 'src/app/components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
-
+import { Status } from 'src/app/utils/StatusEnum';
 @Component({
   selector: 'app-travel-request-form',
   templateUrl: './travel-request-form.component.html',
@@ -97,11 +95,9 @@ export class TravelRequestFormComponent {
     private route: ActivatedRoute,
     private datePipe: DatePipe,
     private router: Router,
-    private modalService: BsModalService,
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
-    private shortYearDateFormatPipe: ShortYearDateFormatPipe,
-    private datepipe: DatePipe
+    private shortYearDateFormatPipe: ShortYearDateFormatPipe
   ) {
 
     // Get current date
@@ -110,7 +106,7 @@ export class TravelRequestFormComponent {
     this.tomorrow.setDate(this.today.getDate() + 1);
 
     const storedUserData = localStorage.getItem('userData');
-    console.log("error check" + storedUserData);
+    //console.log("error check" + storedUserData);
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
 
     this.empId = this.userData?.empId
@@ -231,7 +227,7 @@ export class TravelRequestFormComponent {
 
     this.getAllDepartureTimes();
 
-    //Get Employee Date
+    //Get Employee Data
     this.requestService.getEmployeeDataById(this.empId).subscribe({
 
       next: (data) => {
@@ -272,9 +268,6 @@ export class TravelRequestFormComponent {
       accommodationRequired: new FormControl(false, Validators.required),
 
       travelAuthorizationEmailCapture: new FormControl('', Validators.nullValidator),
-      //passportAttachment: new FormControl(Validators.nullValidator),
-      //  idCardAttachment: new FormControl(Validators.nullValidator)
-      // additionalComments: new FormControl('', Validators.nullValidator)
 
     })
      // Fetch requestId from query parameters
@@ -383,6 +376,7 @@ export class TravelRequestFormComponent {
 
   selectCity(city: any, field: string): void {
     this.travelRequestForm.get(field)?.setValue(city.name);
+
     if (field === 'sourceCity') {
       this.travelRequestForm.get('sourceCountry')?.setValue(city.country); // Set the source country value
       this.sourceFilteredCities = []; // Clear source filtered list
@@ -390,6 +384,7 @@ export class TravelRequestFormComponent {
       this.travelRequestForm.get('destinationCountry')?.setValue(city.country); // Set the destination country value
       this.destinationFilteredCities = []; // Clear destination filtered list
     }
+
   }
 
   getAllProjectCodes(empId: number): void {
@@ -519,7 +514,9 @@ export class TravelRequestFormComponent {
     } else {
       // Reset to default value if countries are different
       travelTypeControl?.setValue('international'); // International
-      this.selectedTravelType = 'international'
+      this.selectedTravelType = 'international';
+      this.selectedTravelMode = 4;
+      this.travelRequestForm.get('accommodationRequired')?.setValue(true);
     }
   }
 
@@ -629,12 +626,13 @@ export class TravelRequestFormComponent {
         console.log(error);
       },
       complete: () => {
+        
         const requestStatus: RequestStatus = {
           requestId: this.requestId,
           empId: this.empId,
-          primaryStatusId: 1,
+          primaryStatusId: Status.Open,
           date: new Date(),
-          secondaryStatusId: 2
+          secondaryStatusId: Status.Pending
         };
         this.commonApiService.updateRequestStatus(requestStatus).subscribe();      
       }

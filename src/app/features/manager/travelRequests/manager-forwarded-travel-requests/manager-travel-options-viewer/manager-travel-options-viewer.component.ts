@@ -7,6 +7,9 @@ import { CustomToastService } from 'src/app/services/toastServices/custom-toast.
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
+import { Status } from 'src/app/utils/StatusEnum';
+
+
 @Component({
   selector: 'app-manager-travel-options-viewer',
   templateUrl: './manager-travel-options-viewer.component.html',
@@ -24,7 +27,11 @@ export class ManagerTravelOptionsViewerComponent {
 pageHeading :string = 'Available Travel Options'
 
 backBtnText : string = 'Cancel';
+
+//forwardBtnText : string = 'Submit';
+
 forwardBtnText : string = 'Submit';
+
 
 requestId!:number;
 descriptions!: any[];
@@ -34,19 +41,20 @@ userData: UserData;
 IsSelectedPage: boolean = false;
  //For change status button of rm.
  name_rm: string = 'Submit'
- primaryStatusCode_rm: string = 'PE'
- secondaryStatusCode_rm: string = 'SD'
+ primaryStatusCode_rm: number = Status.Pending
+ secondaryStatusCode_rm: number = Status.Selected
 
  //For change status button of ta.
  name_ta:string = "Confirm"
- primaryStatusCode_ta:string = "OG"
- secondaryStatusCode_ta:string = "OG"
+ primaryStatusCode_ta: number = Status.Ongoing
+ secondaryStatusCode_ta: number = Status.Ongoing
  
 constructor(private managerService:ManagerTravelRequestsService, private sanitizer: DomSanitizer,private requestService: RequestService,private toastService: CustomToastService,private activatedRoute:ActivatedRoute ,private router: Router){
   const storedUserData = localStorage.getItem('userData');
   this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
   this.empId = this.userData?.empId
 }
+
 ngOnInit(){
   this.activatedRoute.queryParamMap.subscribe((query) => {
     if (query.get('requestId')) {
@@ -55,7 +63,7 @@ ngOnInit(){
       this.IsSelectedPage = query.get('IsSelectedPage') === 'true';
       console.log(this.IsSelectedPage)
     }
-  })
+})
   
   this.getTravelOptionsByReqId(this.requestId);
   this.getAvailableOptionsDescription();
@@ -66,6 +74,7 @@ ngOnInit(){
     }
   })
 }
+
 
 getAvailableOptionsDescription(){
   this.managerService.getAvailableOptionsDescription(this.requestId).subscribe({

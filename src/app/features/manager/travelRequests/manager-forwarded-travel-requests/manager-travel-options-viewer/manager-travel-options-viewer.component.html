@@ -1,57 +1,130 @@
-<app-page-header [headingInputData]="pageHeading"></app-page-header>
 
 <div class="main_container">
+
+<app-page-header [headingInputData]="pageHeading"></app-page-header>
 
   <div class="option_container_main">
     <tabset>
       
       <tab class="tab" heading="Images" *ngIf="travelOptionsData.length !== 0">
-        <ng-template tabHeading >
-          <span *ngIf="!selectedOption() && IsSelectedPage" class="selected_notification"><i class="ri-circle-fill"></i></span>
+        <ng-template tabHeading>
+          <span
+            *ngIf="!selectedOption() && IsSelectedPage"
+            class="selected_notification"
+            ><i class="ri-circle-fill"></i
+          ></span>
         </ng-template>
         <div>
-          <app-file-option-viewer [travelOptionsData]="travelOptionsData"></app-file-option-viewer>
+          <app-file-option-viewer
+            [travelOptionsData]="travelOptionsData"
+          ></app-file-option-viewer>
         </div>
       </tab>
 
       <tab class="tab" heading="Texts" *ngIf="descriptions.length != 0">
 
-        <ng-template tabHeading >
-          <span *ngIf="selectedOption() && IsSelectedPage" class="selected_notification"><i class="ri-circle-fill"></i></span>
+        <ng-template tabHeading>
+          <span
+        *ngIf="selectedOption() && IsSelectedPage"
+        class="selected_notification"
+        ><i class="ri-circle-fill"></i
+      ></span>
+
         </ng-template>
 
         <!-- <h3 class="main_heading  mt-5 mb-3 ">Text Options</h3> -->
-        <ng-container *ngIf="descriptions.length === 0; else elseblockone">
+        <ng-container *ngIf="descriptions.length === 0;">
           <p>There are no text options, check file options</p>
         </ng-container>
 
-        <ng-template #elseblockone>
-        
-            <div class="text_option_container">
-              <ng-container *ngFor="let item of descriptions; let i = index">
-                <div (click)="togglePanel(item)" class="panel" [ngClass]="{ 'selected_panel': item.optionId === receveingOptionId, 'clicked_panel': (item.clicked && editable) ||(item.clicked && receveingOptionId == null && buttonActivate)}">
+        <ng-container *ngFor="let item of descriptions; let i = index">
+                <div (click)="togglePanel(item)" class="panel"
+        [ngClass]="{
+          selected_panel: item.optionId === receveingOptionId,
+          clicked_panel:
+            (item.clicked && editable) ||
+            (item.clicked && receveingOptionId == null && buttonActivate)
+        }"
+      >
                 <div class="panel_header" >
                   Option {{ i + 1 }}
-                  <div class="expansion_arrow" *ngIf="!item.expanded"><i class="ri-arrow-down-s-line"></i></div>
-                  <span class="selected_text" *ngIf="item.optionId === receveingOptionId"><i class="ri-arrow-right-s-line"></i>Selected</span>
+                  <div class="expansion_arrow" *ngIf="!item.expanded">
+            <i class="ri-arrow-down-s-line"></i>
+          </div>
+                  <span
+            class="selected_text"
+            *ngIf="item.optionId === receveingOptionId"
+            ><i class="ri-arrow-right-s-line"></i>Selected</span
+          >
                 </div>
-                <div class="panel_content" [@expandCollapse]="item.expanded ? 'expanded' : 'collapsed'">
+                <div
+          class="panel_content"
+          [@expandCollapse]="item.expanded ? 'expanded' : 'collapsed'"
+        >
+
                   <div [innerHTML]="item.htmlString"></div>
                 </div>
                 </div>
-              </ng-container>
+        </ng-container>
 
-            </div>
+      </tab>
+
+    </tabset>
+  </div>
+
+  <!-- action bar -->
+  <div class="action_section">
+    
+    <div class="btn_container">
+
+    <div class="back_btn_card">
+      <button (click)="onBackBtnClick()" class="btn">{{backBtnText}}</button>
+    </div>
+
+    <div class="forward_btn_card">
+
+      <app-change-status-button
+      [name]="name_rm"
+      [empId]="empId"
+      [requestId]="requestId"
+      [primaryStatusId] = "primaryStatusCode_rm"
+      [secondaryStatusId] = "secondaryStatusCode_rm"
+      (externalpostTriggered)="confirmOption()">
+      </app-change-status-button>
+      <!-- <button (click)="onForwardBtnClick()" [disabled]="disableUpdateBtn()" class="btn" >{{forwardBtnText}}</button> -->
+
+    </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
 
 
           <!-- <div class="action_btn">
             <div class="cancel_btn_container">
               <button *ngIf="buttonActivate && receveingOptionId == null" class="cancel_btn" type="button" >
+
+
+          <div class="action_btn">
+            <div class="cancel_btn_container">
+              <button
+            *ngIf="buttonActivate && receveingOptionId == null"
+            class="cancel_btn"
+            type="button"
+            
+          >
+
                 Cancel
               </button>
             </div>
             <span *ngIf="receveingOptionId == null && buttonActivate">
               <app-change-status-button
+
               [name]="name_rm"
               [empId]="empId"
               [requestId]="requestId"
@@ -60,6 +133,16 @@
               (externalpostTriggered)="confirmOption()"
               [disabled]="disableUpdateBtn()"
             ></app-change-status-button>
+
+                [name]="name_rm"
+                [empId]="empId"
+                [requestId]="requestId"
+                [primaryStatusId]="primaryStatusCode_rm"
+                [secondaryStatusId]="secondaryStatusCode_rm"
+                (externalpostTriggered)="confirmOption()"
+                [disabled]="disableUpdateBtn()"
+              ></app-change-status-button>
+
             </span>
             <div class="ta_action_btn">
               <div *ngIf="!buttonActivate && displayConfirmBtn() && !editable">
@@ -67,6 +150,7 @@
                   [name]="name_ta"
                   [empId]="empId"
                   [requestId]="requestId"
+
                   [primaryStatusCode]="primaryStatusCode_ta"
                   [secondaryStatusCode]="secondaryStatusCode_ta"
                   (externalpostTriggered)="navigateToTAOngoing()">
@@ -77,33 +161,38 @@
             <div class="mx-2" *ngIf="editable">
               <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
               <button class="update_btn" (click)="updateOption()" [disabled]="disableUpdateBtn()" [ngClass]="{'disabled_button': disableUpdateBtn()}">Update</button>
+
+                  [primaryStatusId]="primaryStatusCode_ta"
+                  [secondaryStatusId]="secondaryStatusCode_ta"
+                  (externalpostTriggered)="navigateToTAOngoing()"
+            >
+                </app-change-status-button>
+              </div>
+            </div>
+            <button
+          *ngIf="!buttonActivate && descriptions.length != 0 && IsSelectedPage"
+          class="edit_btn"
+          (click)="editOption()"
+        >
+          Edit Option
+        </button>
+            <div class="mx-2" *ngIf="editable">
+              <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
+              <button
+            class="update_btn"
+            (click)="updateOption()"
+            [disabled]="disableUpdateBtn()"
+            [ngClass]="{ disabled_button: disableUpdateBtn() }"
+          >
+            Update
+          </button>
+
             </div>
 
           </div> -->
 
-        </ng-template>
-      </tab>
-    </tabset>
-  </div>
   
-  <!-- action bar -->
-  <div class="action_section">
-    
-    <div class="btn_container">
-
-      <div class="back_btn_card">
-        <button (click)="onBackBtnClick()" class="btn">{{backBtnText}}</button>
-      </div>
-
-      <div class="forward_btn_card">
-        <button (click)="updateOption()" [disabled]="disableUpdateBtn()" class="btn" >{{forwardBtnText}}</button>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
+  
 
 
 

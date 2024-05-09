@@ -49,4 +49,14 @@ export class DocumentsService {
     return this.http.get(this.travelDocumentsURL + `/relevantDocuments/${requestId}`);
   }
 
+  getFilteredDocumentByEmployeeName(fileType: string, employeeName: string, filterId: number): Observable<any>{
+    const params = new HttpParams()
+    .set('filterId', filterId)
+    return this.http.get(this.travelDocumentsURL + `/${fileType}/searchbyEmployee/${employeeName}`,{params});    
+  }
+
+  getDocumentByEmployeeName(fileType: string, employeeName: string): Observable<any>{
+    return this.http.get(this.travelDocumentsURL + `/${fileType}/searchbyEmployee/${employeeName}`);    
+  }
+
 }

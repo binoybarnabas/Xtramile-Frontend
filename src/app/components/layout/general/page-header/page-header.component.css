@@ -14,4 +14,9 @@
     font-weight: var(--active-font-weight);
     color: var(--primary-text-color);
     text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: auto;
 }

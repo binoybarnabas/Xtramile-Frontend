@@ -5,6 +5,7 @@ import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDe
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { Status } from 'src/app/utils/StatusEnum';
 
 @Component({
   selector: 'app-travel-option-viewer',
@@ -26,8 +27,8 @@ export class TravelOptionViewerComponent {
   userData: UserData
 
   name: string = 'Submit'
-  primaryStatusCode: string = 'SD'
-  secondaryStatusCode: string = 'SD'
+  primaryStatusCode: number = Status.Selected
+  secondaryStatusCode: number = Status.Selected
 
   constructor(private requestService: RequestService, private activatedRoute: ActivatedRoute, private router: Router, private toastService: CustomToastService
   ) {
