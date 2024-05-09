@@ -1,8 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Toast } from 'ngx-toastr';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
-import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { Status } from 'src/app/utils/StatusEnum';
@@ -95,9 +93,6 @@ export class FileOptionViewerComponent {
         next: (response: any) => {
           
           console.log('Post successful:', response);
-          // alert("Option Submitted!")
-          //Change Alert to PopUp
-          // Reset the selectedOption after a successful post
           this.selectedOption = null;
           this.router.navigate(['/manager/dashboard']);
           this.toastService.showToast({ message: "Travel Option Selected", toastType: "success", toastDuration: 3000 });

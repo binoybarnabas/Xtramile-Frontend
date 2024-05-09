@@ -1,5 +1,10 @@
 <!-- Waiting -->
+
+<div class="file_main_container" [ngClass]="{ 'reverse_column': IsSelectedPage }">
+  
+
 <div class="file_main_container" [ngClass]="{ reverse_column: IsSelectedPage }">
+
   <div>
     <!-- <h3 class="main_heading mt-5 mb-3">Available option</h3> -->
     <ng-container *ngIf="travelOptionsData.length === 0; else elseblockone">
@@ -113,6 +118,12 @@
         >
         </app-change-status-button>
       </div>
+
+      <button *ngIf="!buttonActivate && travelOptionsData.length != 0" class= "edit_btn" (click)="editOption()">Edit Option</button>
+      </div>
+  </div>
+
+
       <button
         *ngIf="!buttonActivate && travelOptionsData.length != 0"
         class="edit_btn"
@@ -122,4 +133,5 @@
       </button>
     </div>
   </div>
+
 </div>

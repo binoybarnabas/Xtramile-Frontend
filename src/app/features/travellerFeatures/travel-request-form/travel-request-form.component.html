@@ -289,7 +289,7 @@
                             <label for="file_input" class="file_type">
                                 <i *ngIf="!isTravelAuthFileSelected" class="icon ri-upload-2-line"></i> Upload
                             </label>
-                            <input type="file" formControlName="travelAuthorizationEmailCapture" id="file_input" style="display: none;" (change)="onFileSelected($event)">
+                            <input type="file" accept=".jpg, .jpeg, .png, .pdf" formControlName="travelAuthorizationEmailCapture" id="file_input" style="display: none;" (change)="onFileSelected($event)">
                         </div>
 
                     </div>
