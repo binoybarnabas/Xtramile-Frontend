@@ -55,9 +55,12 @@ export class RequestService {
     return this.http.post(this.apiURL + '/employee/add/option', body);
   }
 
-  getRequestsPendingStatus(empId: number): Observable<PendingRequest[]> {
-    return this.http.get<PendingRequest[]>(
-      `http://localhost:5190/api/employee/viewpendingrequest/${empId}`
+  getRequestsPendingStatus(empId: number, pageNumber: number, itemsPerPage: number): Observable<any> {
+    const params = new HttpParams()
+    .set("pageNumber", pageNumber)
+    .set("itemsPerPage", itemsPerPage)
+    return this.http.get(
+      `http://localhost:5190/api/employee/viewpendingrequest/${empId}`,{params}
     );
   }
 

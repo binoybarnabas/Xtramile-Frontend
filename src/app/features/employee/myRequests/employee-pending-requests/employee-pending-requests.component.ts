@@ -17,10 +17,13 @@ export class EmployeePendingRequestsComponent {
   requestData: PendingRequest[] = [];
   empId: number;
   userData: UserData
-  tableHeaders = ['RequestID','ProjectCode','From','To', 'DepartureDate','ReturnDate','Status'];
-  dataHeaders = ['requestId', 'projectCode','sourceCity','destinationCity', 'departureDate','returnDate', 'statusName'];
+  tableHeaders = ['Request Code','Project Code','From','To', 'Departure Date','Return Date','Status'];
+  dataHeaders = ['requestCode', 'projectCode','sourceCity','destinationCity', 'departureDate','returnDate', 'statusName'];
 
   pageHeading: string = 'Pending Approval';
+  itemsPerPage: number = 10;
+  totalCount: number = 0
+  currentPage: number = 1;
 
   constructor(private requestService: RequestService, private router: Router, private activatedRoute: ActivatedRoute, private datepipe: DatePipe) {
     const storedUserData = localStorage.getItem('userData');
@@ -30,20 +33,20 @@ export class EmployeePendingRequestsComponent {
   }
 
   ngOnInit() {
-    this.getRequests(this.empId);
+    this.getRequests();
   }
 
   //function to get the requests that have status pending for employee screen
-  getRequests(empId: number) {
-    this.subscription = this.requestService.getRequestsPendingStatus(empId).subscribe({
+  getRequests() {
+    this.subscription = this.requestService.getRequestsPendingStatus(this.empId, this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
-        data.forEach((request) => {
+        data.items.forEach((request: PendingRequest) => {
           (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName
           request.departureDate = this.datepipe.transform(request.departureDate, "dd/MM/yyyy") || ' '
           request.returnDate = this.datepipe.transform(request.returnDate, "dd/MM/yyyy") || ' '
         })
-        this.requestData = data;
-        console.log('request data',this.requestData);
+        this.requestData = data.items;
+        this.totalCount = data.totalCount
       },
       error: (error: Error) => {
         console.log("Error has occurred, " + error.message);
@@ -64,6 +67,11 @@ export class EmployeePendingRequestsComponent {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  onPageChange(event: any){
+    this.currentPage = event.page
+    this.getRequests();
   }
 
 }
