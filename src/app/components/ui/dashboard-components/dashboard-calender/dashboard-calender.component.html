@@ -33,7 +33,9 @@
             'highlighted-departure': isDepartureDate(day),
             'highlighted-return': isReturnDate(day),
             'adjacent-month': !isCurrentMonth(day),
-            'current-month': isCurrentMonth(day)
+            'current-month': isCurrentMonth(day),
+            'current-date': isCurrentDate(day),
+            'future-departure': isFutureDeparture(day)
           }"
         >
           {{ day ? day.getDate() : "" }}

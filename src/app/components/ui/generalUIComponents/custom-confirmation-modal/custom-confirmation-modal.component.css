@@ -1,6 +1,6 @@
 .confirmation_card{
     background-color: var(--card-bg-color);
-    height: 200px;
+    height: 100%;
     /* width: 350px; */
     box-shadow: var(--normal-box-shadow);
     display: flex;

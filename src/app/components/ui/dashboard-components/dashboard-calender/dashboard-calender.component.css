@@ -101,12 +101,28 @@
 .highlighted-within-range {
   background-color: var(--menu-hover-color);
 } */
-/* Styles for days belonging to adjacent months */
 .calendar .date_container .adjacent-month {
-  color: var(--ternary-text-color); /* Set text color to grey */
+  color: var(--ternary-text-color); 
 }
 
-/* Styles for days belonging to the current month */
+
 .calendar .date_container .current-month {
-  color: var(--primary-text-color); /* Set text color to black */
+  color: var(--primary-text-color); 
+}
+
+.calendar .date_container .current-date {
+  background-color: var(--card-bg-color); 
+  color: var(--second-color); 
+  border: solid var(--second-color);
+}
+
+
+.calendar .date_container .highlighted-departure {
+  background-color: var(--ternary-text-color); 
+  color: var(--primary-text-color); 
+}
+
+.calendar .date_container .future-departure {
+  background-color: var(--second-color);
+  color: var(--card-bg-color); 
 }
