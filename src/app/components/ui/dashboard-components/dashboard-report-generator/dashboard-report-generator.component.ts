@@ -38,15 +38,16 @@ export class DashboardReportGeneratorComponent {
   }
 
   ngOnInit(): void {
-
-    this.progressCards = [
-
-      new ProgressCard("Users", 200, "cyan", "icon ri-user-line"),
-      new ProgressCard("Bookings", 300, "red", "icon ri-calendar-event-line"),
-      new ProgressCard("Locations", 15, "orange", "icon ri-map-pin-2-line"),
-      new ProgressCard("Trips", 100, "green", "icon ri-plane-line"),
-    ];
-
+    this.progressCards = [];
+  
+    this.travelAdminService.getDashboardCount().subscribe((data: any) => {
+      this.progressCards = [
+        new ProgressCard("Users", data.numberofTravellers, "cyan", "icon ri-user-line"),
+        new ProgressCard("Domestic", data.domesticTrips, "red", "icon ri-car-fill"),
+        new ProgressCard("International", data.internationalTrips, "green", "icon ri-plane-line"),
+        new ProgressCard("Projects", data.numberofProjects, "orange", "icon ri-macbook-fill")
+      ];
+    });
   }
 
   //upate selected month based on button clicks

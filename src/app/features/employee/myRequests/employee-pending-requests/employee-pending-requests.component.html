@@ -13,14 +13,22 @@
   (buttonClickEvent)="navigateToOption($event)"
 ></app-employee-view-card> -->
 
-<app-page-header [headingInputData]="pageHeading">
+<app-page-header [headingInputData]="pageHeading"> </app-page-header>
 
-</app-page-header>
-
-<app-travel-request-card *ngIf="requestData.length<=6" [data]="requestData">
-
+<app-travel-request-card *ngIf="totalCount <= 6" [data]="requestData">
 </app-travel-request-card>
-<app-data-table *ngIf="requestData.length>6"   [headers]="tableHeaders"
+<app-data-table
+  *ngIf="totalCount > 6"
+  [headers]="tableHeaders"
   [data]="requestData"
-  [displayedProperties]="dataHeaders">
+  [displayedProperties]="dataHeaders"
+>
 </app-data-table>
+
+<pagination
+  *ngIf="totalCount > 6"
+  [itemsPerPage]="itemsPerPage"
+  [totalItems]="totalCount"
+  [(ngModel)]="currentPage"
+  (pageChanged)="onPageChange($event)"
+></pagination>

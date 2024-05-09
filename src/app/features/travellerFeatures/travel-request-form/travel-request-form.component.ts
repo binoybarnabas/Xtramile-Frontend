@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -12,6 +12,7 @@ import { CustomToastService } from 'src/app/services/toastServices/custom-toast.
 import { EmployeeDetails } from '../../travelRequest/travel-request-information/request';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
 import { RequestStatus } from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
+import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { Status } from 'src/app/utils/StatusEnum';
 @Component({
   selector: 'app-travel-request-form',
@@ -95,6 +96,7 @@ export class TravelRequestFormComponent {
     private router: Router,
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
+    private modalservice:BsModalService,
     private shortYearDateFormatPipe: ShortYearDateFormatPipe
   ) {
 
@@ -125,7 +127,7 @@ export class TravelRequestFormComponent {
     this.isTravelAuthFileSelected = false;
 
   }
-
+  @ViewChild(CustomConfirmationModalComponent) confirmationModal!: CustomConfirmationModalComponent;
   //Format Date to 29 Feb' 24
   formatInputValue(date: Date): string {
     return this.shortYearDateFormatPipe.transform(date);
@@ -634,6 +636,25 @@ export class TravelRequestFormComponent {
         };
         this.commonApiService.updateRequestStatus(requestStatus).subscribe();      
       }
+    });
+  }
+  openConfirmationModal() {
+    const initialState = {
+      mainText: 'Travel Request Confirmation',
+      description: 'Please review all the information you have entered to ensure accuracy and completeness. Once submitted, the travel request cannot be modified directly. Any changes will require approval from your supervisor or the travel department.',
+      cancelBtnText: 'Cancel',
+      confirmBtnText: 'Submit',
+      confirmBtnColor: '#d63031'
+    };
+  
+    const modalRef = this.modalservice.show(CustomConfirmationModalComponent, { initialState });
+  
+    modalRef.content?.cancel.subscribe(() => {
+      console.log('Travel request submission canceled.');
+    });
+  
+    modalRef.content?.confirm.subscribe(() => {
+      this.submitTravelRequest();
     });
   }
   getEmployeeRequestDetails(requestId: number) {
