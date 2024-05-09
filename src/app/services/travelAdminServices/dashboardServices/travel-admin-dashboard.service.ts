@@ -32,4 +32,7 @@ export class TravelAdminDashboardService {
   getAllTravelRequestDashboard():Observable<any>{
     return this.http.get(this.apiURL+`/traveladmin/dashboardRequests`)
   }
+  getDashboardCount():Observable<any>{
+    return this.http.get(this.apiURL+`/traveladmin/dashboardCount`)
+  }
 }

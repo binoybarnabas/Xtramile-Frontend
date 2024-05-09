@@ -212,6 +212,20 @@ export class DashboardCalenderComponent implements OnInit {
   isCurrentMonth(day: Date): boolean {
     return day.getMonth() === this.currentDate.getMonth() && day.getFullYear() === this.currentDate.getFullYear();
   }
+  isCurrentDate(date: Date): boolean {
+    return this.isSameDay(date, new Date()) && this.isCurrentMonth(date);
+  }
+  isFutureDeparture(date: Date): boolean {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Set hours to 0 to compare only dates
   
+    return this.deptDates.some(deptDate => {
+      // Compare only the dates, ignoring the time
+      const deptDateWithoutTime = new Date(deptDate);
+      deptDateWithoutTime.setHours(0, 0, 0, 0);
   
+      // Check if today's date is less than the departure date
+      return date.getTime() === deptDateWithoutTime.getTime() && today.getTime() < deptDateWithoutTime.getTime();
+    });
+  }   
 }

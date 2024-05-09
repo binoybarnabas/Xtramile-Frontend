@@ -31,6 +31,7 @@ export class CustomConfirmationModalComponent {
 
   onConfirmBtnClick(){
     this.confirm.emit();
+    this.onCloseIconClick();
   }
 
   
