@@ -27,6 +27,7 @@
 ></app-tabbed-data-table>
 
 <pagination
+  *ngIf="totalItems[activeTabIndex] > 10"
   [itemsPerPage]="itemsPerPage"
   [totalItems]="totalItems[activeTabIndex]"
   [(ngModel)]="currentPage"

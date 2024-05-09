@@ -14,8 +14,8 @@ export class ChangeStatusButtonComponent {
   @Input() name: string = '';
   @Input() empId: number = 0;
   @Input() requestId: number = 0;
-  @Input() primaryStatusCode: string = '';
-  @Input() secondaryStatusCode: string = '';
+  @Input() primaryStatusId: number = 0;
+  @Input() secondaryStatusId: number = 0;
   @Output() externalpostTriggered = new EventEmitter<void>();
   @Input() disabled:boolean =false;
   private subscription : Subscription | any
@@ -39,15 +39,9 @@ export class ChangeStatusButtonComponent {
 
     this.requestStatus.requestId = this.requestId
     this.requestStatus.empId = this.empId;
-    //await and firstValueFrom are used to first get the id from the asynchronous function
-    //getStatusIdByCode and then execute the remaining code
-    this.statusId = await firstValueFrom(this.getStatusIdByCode(this.primaryStatusCode));
-    this.requestStatus.primaryStatusId = this.statusId;
-    console.log("primaryStatusId : " + this.requestStatus.primaryStatusId);
+    this.requestStatus.primaryStatusId = this.primaryStatusId;
     this.requestStatus.date = new Date();  
-    this.statusId = await firstValueFrom(this.getStatusIdByCode(this.secondaryStatusCode));
-    this.requestStatus.secondaryStatusId = this.statusId;
-    console.log("secondaryStatusId : " + this.requestStatus.secondaryStatusId); 
+    this.requestStatus.secondaryStatusId = this.secondaryStatusId
 
     this.subscription = this.commonApiService.updateRequestStatus(this.requestStatus).subscribe({
       next: (data) => {
