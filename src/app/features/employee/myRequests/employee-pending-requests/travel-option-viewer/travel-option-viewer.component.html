@@ -7,11 +7,7 @@
         class="option_card"
       >
         <div class="option_file">
-          <img
-            class="img"
-            src="{{item.optionFileURL}}" 
-            alt="img_not_found"
-          />
+          <img class="img" src="{{ item.optionFileURL }}" alt="img_not_found" />
         </div>
         <div class="description">
           <p>{{ item.description }}</p>
@@ -28,11 +24,10 @@
         [name]="name"
         [empId]="empId"
         [requestId]="reqId"
-        [primaryStatusCode]="primaryStatusCode"
-        [secondaryStatusCode]="secondaryStatusCode"
+        [primaryStatusId]="primaryStatusCode"
+        [secondaryStatusId]="secondaryStatusCode"
         (externalpostTriggered)="postSelection()"
       ></app-change-status-button>
-
     </div>
   </div>
 </div>

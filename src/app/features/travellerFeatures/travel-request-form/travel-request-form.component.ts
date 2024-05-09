@@ -12,7 +12,7 @@ import { CustomToastService } from 'src/app/services/toastServices/custom-toast.
 import { EmployeeDetails } from '../../travelRequest/travel-request-information/request';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
 import { RequestStatus } from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
-
+import { Status } from 'src/app/utils/StatusEnum';
 @Component({
   selector: 'app-travel-request-form',
   templateUrl: './travel-request-form.component.html',
@@ -624,12 +624,13 @@ export class TravelRequestFormComponent {
         console.log(error);
       },
       complete: () => {
+        
         const requestStatus: RequestStatus = {
           requestId: this.requestId,
           empId: this.empId,
-          primaryStatusId: 1,
+          primaryStatusId: Status.Open,
           date: new Date(),
-          secondaryStatusId: 2
+          secondaryStatusId: Status.Pending
         };
         this.commonApiService.updateRequestStatus(requestStatus).subscribe();      
       }

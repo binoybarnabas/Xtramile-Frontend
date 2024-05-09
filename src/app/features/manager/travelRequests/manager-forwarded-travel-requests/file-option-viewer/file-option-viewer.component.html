@@ -1,6 +1,10 @@
 <!-- Waiting -->
+
 <div class="file_main_container" [ngClass]="{ 'reverse_column': IsSelectedPage }">
   
+
+<div class="file_main_container" [ngClass]="{ reverse_column: IsSelectedPage }">
+
   <div>
     <!-- <h3 class="main_heading mt-5 mb-3">Available option</h3> -->
     <ng-container *ngIf="travelOptionsData.length === 0; else elseblockone">
@@ -11,7 +15,11 @@
         <div class="travel_options_container">
           <ng-container *ngFor="let item of travelOptionsData">
             <div
-              (click)="(receveingOptionId == null && buttonActivate)|| editable? selectOption(item) : null"
+              (click)="
+                (receveingOptionId == null && buttonActivate) || editable
+                  ? selectOption(item)
+                  : null
+              "
               [ngClass]="{ selected: item === selectedOption }"
               class="option_card"
             >
@@ -28,7 +36,14 @@
 
         <!-- <div *ngIf="editable" class="edit_container">
           <button class="cancel_btn" (click)="cancelEdit()">Cancel</button>
-          <button class="update_btn" (click)="updateOption()" [disabled]="disableUpdateBtn()" [ngClass]="{ 'disabled_button': disableUpdateBtn() }">Update</button>
+          <button
+            class="update_btn"
+            (click)="updateOption()"
+            [disabled]="disableUpdateBtn()"
+            [ngClass]="{ disabled_button: disableUpdateBtn() }"
+          >
+            Update
+          </button>
         </div>
         <div
           class="actions_container"
@@ -39,13 +54,13 @@
               Cancel
             </button>
           </div>
-          <div class="submit_btn_container" *ngIf="buttonActivate" >
+          <div class="submit_btn_container" *ngIf="buttonActivate">
             <app-change-status-button
               [name]="name_rm"
               [empId]="empId"
               [requestId]="reqId"
-              [primaryStatusCode]="primaryStatusCode_rm"
-              [secondaryStatusCode]="secondaryStatusCode_rm"
+              [primaryStatusId]="primaryStatusCode_rm"
+              [secondaryStatusId]="secondaryStatusCode_rm"
               (externalpostTriggered)="postSelection()"
               [disabled]="disableUpdateBtn()"
             ></app-change-status-button>
@@ -97,14 +112,26 @@
           [name]="name_ta"
           [empId]="empId"
           [requestId]="reqId"
-          [primaryStatusCode]="primaryStatusCode_ta"
-          [secondaryStatusCode]="secondaryStatusCode_ta"
+          [primaryStatusId]="primaryStatusCode_ta"
+          [secondaryStatusId]="secondaryStatusCode_ta"
           (externalpostTriggered)="navigateToTAOngoing()"
         >
         </app-change-status-button>
       </div>
+
       <button *ngIf="!buttonActivate && travelOptionsData.length != 0" class= "edit_btn" (click)="editOption()">Edit Option</button>
       </div>
+  </div>
+
+
+      <button
+        *ngIf="!buttonActivate && travelOptionsData.length != 0"
+        class="edit_btn"
+        (click)="editOption()"
+      >
+        Edit Option
+      </button>
+    </div>
   </div>
 
 </div>

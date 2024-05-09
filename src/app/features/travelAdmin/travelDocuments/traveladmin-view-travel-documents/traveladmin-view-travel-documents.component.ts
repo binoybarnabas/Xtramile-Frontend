@@ -34,6 +34,7 @@ export class TraveladminViewTravelDocumentsComponent {
   expiredPassportDocuments: TravelDocuments[][] = [];
   validVisaDocuments: TravelDocuments[][] = [];
   validPassportDocuments: TravelDocuments[][] = [];
+  filteredDocuments!: TravelDocuments[]
 
   //Initialize this tabs array
   tabs: any = [];
@@ -335,34 +336,35 @@ getRemainingDaysMessage(remainingDays: number): string {
 }
 
 onSearch(employeeName: string) {
-  let filteredVisaDocuments  = this.visaDocuments[this.currentPage - 1];
-  let filteredPassportDocuments = this.passportDocuments[this.currentPage - 1];
-  let filteredIdCardDocuments = this.idCardDocuments[this.currentPage - 1];
-  
-  if(this.filters[this.filterId].isActive === 'yes'){
-    if(this.filterId === 0){
-      filteredVisaDocuments = this.expiredVisaDocuments[this.currentPage - 1];
-      filteredPassportDocuments = this.expiredPassportDocuments[this.currentPage - 1];
-      filteredIdCardDocuments = this.idCardDocuments[this.currentPage - 1];      
+  if(this.activeTabIndex === 0){
+    if(this.filters[this.filterId].isActive === 'yes'){
+      if(employeeName === '')
+        this.filterId === 0 ? this.getExpiredVisas() : this.getValidVisas();
+      this.getFilteredDocuments('Visa', employeeName, this.filterId);
     }
-    else if(this.filterId === 1){
-      filteredVisaDocuments = this.validVisaDocuments[this.currentPage - 1];
-      filteredPassportDocuments = this.validPassportDocuments[this.currentPage - 1];
-      filteredIdCardDocuments = this.idCardDocuments[this.currentPage - 1];      
+    else{
+      if(employeeName === '')
+        this.getAllVisas();
+      this.getFilteredDocuments('Visa',employeeName,null);
     }
   }
-  // Perform search on filtered documents
-  if (employeeName !== '') {
-    if(this.activeTabIndex === 0)
-      filteredVisaDocuments = filteredVisaDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
-    else if(this.activeTabIndex === 1)
-      filteredPassportDocuments = filteredPassportDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
-    else if(this.activeTabIndex ===2)
-      filteredIdCardDocuments = filteredIdCardDocuments.filter(doc => doc.uploadedBy.toLowerCase().includes(employeeName.toLowerCase()));
+  if(this.activeTabIndex === 1){
+    if(this.filters[this.filterId].isActive === 'yes'){
+      if(employeeName === '')
+        this.filterId === 0 ? this.getExpiredPassports() : this.getValidPassports();
+      this.getFilteredDocuments('Passport', employeeName, this.filterId);
+    }
+    else{
+      if(employeeName === '')
+        this.getAllPassports();
+      this.getFilteredDocuments('Passport',employeeName,null);
+    }
   }
-
-  // Initialize tabs with the filtered documents
-  this.initializeTabs(filteredVisaDocuments, filteredPassportDocuments, filteredIdCardDocuments);
+  if(this.activeTabIndex === 2){
+    if(employeeName === '')
+      this.getAllIds();
+    this.getFilteredDocuments('ID Card',employeeName,null);
+  }
 }
 
   onTabChange(activeTabIndex: number){
@@ -393,6 +395,43 @@ onSearch(employeeName: string) {
       totalItem = this.totalItems[this.activeTabIndex];
     }
     return totalItem
+  }
+
+  getFilteredDocuments(fileType: string, employeeName: string, filterId: number | null){
+    if(!filterId){
+      this.documentService.getDocumentByEmployeeName(fileType, employeeName).subscribe({
+        next: (data) => {
+          data.forEach((doc: TravelDocuments) => {
+            doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
+            doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
+          })
+          this.filteredDocuments = data
+        },
+        error: (error: Error) => {
+          console.error(error.message)
+        },
+        complete: () => {
+          this.initializeTabs(this.filteredDocuments, this.filteredDocuments, this.filteredDocuments);
+        }
+      })
+    }
+    else{
+      this.documentService.getFilteredDocumentByEmployeeName(fileType, employeeName, filterId).subscribe({
+        next: (data) => {
+          data.forEach((doc: TravelDocuments) => {
+            doc.expiryDate = this.datepipe.transform(doc.expiryDate, "dd/MM/yyyy") || ' ',
+            doc.expiresIn = this.getRemainingDaysMessage(doc.remainingDays)
+          })
+          this.filteredDocuments = data
+        },
+        error: (error: Error) => {
+          console.error(error.message)
+        },
+        complete: () => {
+          this.initializeTabs(this.filteredDocuments, this.filteredDocuments, this.filteredDocuments);
+        }
+      })      
+    }
   }
 
 }

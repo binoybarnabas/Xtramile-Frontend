@@ -1,5 +1,4 @@
 <div class="main_container">
-
   <div class="header_section">
     <div class="tab_container">
       <ng-container *ngFor="let tab of tabs; let i = index">
@@ -57,8 +56,8 @@
           <tr class="heading_row">
             <th *ngFor="let heading of tab.headings">
               <div *ngIf="heading !== 'RequestId'">
-              {{ heading }}
-            </div>
+                {{ heading }}
+              </div>
             </th>
           </tr>
         </thead>
@@ -77,9 +76,9 @@
                 <ng-container
                   *ngIf="tab.headings[i] !== 'Actions'; else actionCell"
                 >
-                <div *ngIf="tab.headings[i] !== 'RequestId'">
-                  {{ entry }}
-                </div>
+                  <div *ngIf="tab.headings[i] !== 'RequestId'">
+                    {{ entry }}
+                  </div>
                 </ng-container>
                 <ng-template #actionCell>
                   <div class="action_icons">
@@ -119,5 +118,4 @@
       <i class="page_number ri-arrow-right-wide-fill"></i>
     </div>
   </div>
-
 </div>

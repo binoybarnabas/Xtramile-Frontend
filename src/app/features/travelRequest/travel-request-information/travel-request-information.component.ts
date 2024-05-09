@@ -232,7 +232,6 @@ export class NewTravelRequestComponent {
     //get an employee request based on an request Id
     this.route.queryParams.subscribe(params => {
       const requestId = params['requestId'];
-      console.log(requestId);
       this.managerTravelRequest.GetTravelRequest(requestId).subscribe({
         next: (data) => {
           data.departureDate = this.datePipe.transform(data.departureDate, "dd/MM/yyyy") || ' ';
@@ -246,7 +245,6 @@ export class NewTravelRequestComponent {
               this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId);
             }
           });
-          console.log(data)
 
           //if logged in user is travel admin and request status is ongoing, enable the close button
           if(this.userData.role =='Manager' && this.userData.department == 'TA' ){

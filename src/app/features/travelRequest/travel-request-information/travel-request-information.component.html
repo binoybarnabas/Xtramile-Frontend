@@ -1,9 +1,8 @@
 <div *ngIf="!isImageViewerOpen" class="req_forms_main_container">
-
   <!-- heading bar -->
   <div class="heading_section">
     <div class="section_heading_card">
-      <p class="text">{{requestDetailsPageHeading}}</p>
+      <p class="text">{{ requestDetailsPageHeading }}</p>
     </div>
   </div>
 
@@ -24,19 +23,13 @@
         </ng-container>
       </div>
     </div>
-  
+
     <div class="right_section">
-  
       <div class="form_container">
-  
         <div *ngIf="isLoading" class="loader"></div>
-        <form
-          [formGroup]="travelRequestForm"
-          class="new_req_form"
-        >
+        <form [formGroup]="travelRequestForm" class="new_req_form">
           <!-- general info section -->
           <div *ngIf="newReqFormSubMenuValue === 0" class="form_input_group">
-   
             <!-- View Mode  -->
             <div
               *ngIf="
@@ -53,12 +46,10 @@
                 </div>
               </ng-container>
             </div>
-  
           </div>
-  
+
           <!-- trip info section -->
           <div *ngIf="newReqFormSubMenuValue === 1" class="form_input_group">
-
             <!-- View Mode  -->
             <div
               *ngIf="
@@ -75,12 +66,10 @@
                 </div>
               </ng-container>
             </div>
-  
           </div>
-  
+
           <!-- additional info section -->
           <div *ngIf="newReqFormSubMenuValue === 2" class="form_input_group">
-
             <!-- View Mode  -->
             <div
               *ngIf="
@@ -96,11 +85,9 @@
                   <p class="item_value">{{ entry[1] }}</p>
                 </div>
               </ng-container>
-  
             </div>
-  
           </div>
-  
+
           <!-- Docs Attached -->
           <div
             *ngIf="
@@ -110,13 +97,14 @@
             "
             class="form_input_group"
           >
-            
             <div class="files_section">
-              <app-file-card [requestId]="travelRequestDetailViewModel.requestId"> </app-file-card>
+              <app-file-card
+                [requestId]="travelRequestDetailViewModel.requestId"
+              >
+              </app-file-card>
             </div>
-  
           </div>
-  
+
           <!--TA- add available options  section -->
           <div
             *ngIf="
@@ -125,69 +113,111 @@
             "
             class="travel_option_section"
           >
+            <div
+              *ngIf="status !== 'Approved by TA' && status !== 'Ongoing'"
+              class="head_section"
+            >
+              <div (click)="deleteSelectedOption()" class="del_btn_container">
+                <button
+                  [disabled]="
+                    selectedImageOptionIndex === -1 &&
+                    selectedTextOptionIndex === -1
+                  "
+                  class="del_btn"
+                >
+                  <i class="ri-delete-bin-2-fill"></i>
+                </button>
+              </div>
 
-            <div class="head_section">
+              <div class="title">
+                <span>Update Travel Options</span>
+              </div>
 
-                <div (click)="deleteSelectedOption()" class="del_btn_container">
-                  <button [disabled] = 'selectedImageOptionIndex === -1 && selectedTextOptionIndex === -1' class="del_btn" ><i class="ri-delete-bin-2-fill"></i></button>
-                </div>
-
-                <div class="title">
-                  <span>Update Travel Options</span>
-                </div>
-
-                <div (click)="openAddOptionModal()" class="add_btn">
-                  <span> Add</span>
-                </div>
+              <div (click)="openAddOptionModal()" class="add_btn">
+                <span> Add</span>
+              </div>
             </div>
-  
-            <div class="option_container">
 
-              <tabset  [justified]="true">
+            <div class="option_container">
+              <tabset [justified]="true">
                 <tab heading="Images" (selectTab)="onSelect($event)">
                   <div class="selected-images-container">
-                    <div (click)="onOptionSelected('img', i)" (dblclick)="openImageViewer()" *ngFor="let image of selectedImages; let i = index" class="image-item">
-                      <div [ngClass]="selectedImageOptionIndex === i ? 'img_wrapper active' : 'img_wrapper' ">
-                        <img class="img" [src]="imageUrls[i]" alt="Selected_Image">
+                    <div
+                      (click)="onOptionSelected('img', i)"
+                      (dblclick)="openImageViewer()"
+                      *ngFor="let image of selectedImages; let i = index"
+                      class="image-item"
+                    >
+                      <div
+                        [ngClass]="
+                          selectedImageOptionIndex === i
+                            ? 'img_wrapper active'
+                            : 'img_wrapper'
+                        "
+                      >
+                        <img
+                          class="img"
+                          [src]="imageUrls[i]"
+                          alt="Selected_Image"
+                        />
                       </div>
                       <!-- <p class="text">{{ descriptions[i] }}</p> -->
                       <!-- <button (click)="removeImage(i)" class="remove-btn"><i class="ri-delete-bin-line"></i></button> -->
                     </div>
                   </div>
-                  <p *ngIf="selectedImages.length == 0" class="option_default_message">No options added yet!</p>
+                  <p
+                    *ngIf="selectedImages.length == 0"
+                    class="option_default_message"
+                  >
+                    No options added yet!
+                  </p>
                 </tab>
                 <tab heading="Texts" (selectTab)="onSelect($event)">
-
                   <div class="expansion_panel_container">
-                    <div (click)="onOptionSelected('text', i)" 
-                      *ngFor="let htmlContent of textOption; let i = index" 
+                    <div
+                      (click)="onOptionSelected('text', i)"
+                      *ngFor="let htmlContent of textOption; let i = index"
                       class="expansion_panel"
                     >
-                      <div 
-                        [ngClass]="selectedTextOptionIndex === i ? 'expansion_panel_header active' : 'expansion_panel_header' "
+                      <div
+                        [ngClass]="
+                          selectedTextOptionIndex === i
+                            ? 'expansion_panel_header active'
+                            : 'expansion_panel_header'
+                        "
                         (click)="togglePanel(i)"
                       >
-                      <p class="title">Option {{ i + 1 }}</p>
-                        <i class="icon ri-arrow-down-wide-line" *ngIf="!isPanelOpen(i)"></i>
-                        <i class="icon ri-arrow-up-wide-line" *ngIf="isPanelOpen(i)"></i>
+                        <p class="title">Option {{ i + 1 }}</p>
+                        <i
+                          class="icon ri-arrow-down-wide-line"
+                          *ngIf="!isPanelOpen(i)"
+                        ></i>
+                        <i
+                          class="icon ri-arrow-up-wide-line"
+                          *ngIf="isPanelOpen(i)"
+                        ></i>
                       </div>
-                      <div  
-                        class="expansion_panel_content" 
+                      <div
+                        class="expansion_panel_content"
                         *ngIf="isPanelOpen(i)"
-                        [innerHTML]= "santizieHtml(htmlContent)"
+                        [innerHTML]="santizieHtml(htmlContent)"
                       ></div>
                     </div>
                   </div>
 
-                  <p *ngIf="textOption.length == 0" class="option_default_message">No options added yet!</p>
+                  <p
+                    *ngIf="textOption.length == 0"
+                    class="option_default_message"
+                  >
+                    No options added yet!
+                  </p>
                 </tab>
               </tabset>
-
             </div>
-    
+
             <!-- form input group ends -->
           </div>
-  
+
           <!-- FNP - PerDiem Allocation section -->
           <div
             *ngIf="
@@ -198,51 +228,59 @@
           >
             <div class="form_title">
               <h4>Per Diem Allocations</h4>
-  
+
               <div class="add_btn_container">
                 <button type="button" class="add_btn">Add</button>
               </div>
             </div>
-  
+
             <div class="form_elements">
               <!-- Modal -->
             </div>
-  
+
             <div class="perdiem_section">
               <app-perdiem-card> </app-perdiem-card>
             </div>
-  
+
             <!-- form input group ends -->
           </div>
-
         </form>
-  
+
         <!-- form container ends -->
       </div>
-  
+
       <!-- right section ends -->
     </div>
-  
   </div>
 
   <!-- action bar -->
   <div class="action_section">
-    
     <div class="btn_container">
-
       <div class="back_btn_card">
-        <button (click)="onBackBtnClick()" class="btn">{{backBtnTitle}}</button>
+        <button (click)="onBackBtnClick()" class="btn">
+          {{ backBtnTitle }}
+        </button>
       </div>
 
       <div class="forward_btn_card">
-        <button (click)="onForwardBtnClick()" class="btn" [disabled]="disableSubmitBtn()">{{forwardBtnTitle}}</button>
+        <button
+          (click)="onForwardBtnClick()"
+          class="btn"
+          [disabled]="disableSubmitBtn()"
+        >
+          {{ forwardBtnTitle }}
+        </button>
       </div>
-
     </div>
-
   </div>
 
   <!-- req form main container ends -->
 </div>
 
-<app-image-viewer *ngIf="isImageViewerOpen" [images]="imageUrls" [descriptions]="descriptions" [currentImageIndex]="selectedImageOptionIndex" (close)="closeImageViewer()"></app-image-viewer>
+<app-image-viewer
+  *ngIf="isImageViewerOpen"
+  [images]="imageUrls"
+  [descriptions]="descriptions"
+  [currentImageIndex]="selectedImageOptionIndex"
+  (close)="closeImageViewer()"
+></app-image-viewer>
