@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -12,7 +12,6 @@ import { CustomToastService } from 'src/app/services/toastServices/custom-toast.
 import { EmployeeDetails } from '../../travelRequest/travel-request-information/request';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
 import { RequestStatus } from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
-import { ConfirmationModalComponent } from 'src/app/components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { Status } from 'src/app/utils/StatusEnum';
 @Component({
@@ -97,6 +96,7 @@ export class TravelRequestFormComponent {
     private router: Router,
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
+    private modalservice:BsModalService,
     private shortYearDateFormatPipe: ShortYearDateFormatPipe
   ) {
 
@@ -647,7 +647,7 @@ export class TravelRequestFormComponent {
       confirmBtnColor: '#d63031'
     };
   
-    const modalRef = this.modalService.show(CustomConfirmationModalComponent, { initialState });
+    const modalRef = this.modalservice.show(CustomConfirmationModalComponent, { initialState });
   
     modalRef.content?.cancel.subscribe(() => {
       console.log('Travel request submission canceled.');
