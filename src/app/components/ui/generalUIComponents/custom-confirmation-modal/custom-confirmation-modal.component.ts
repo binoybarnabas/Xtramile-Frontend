@@ -7,6 +7,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./custom-confirmation-modal.component.css']
 })
 export class CustomConfirmationModalComponent {
+  
   @Input() mainText : string = 'Main';
   @Input() description: string = 'description';
   @Input() cancelBtnText : string = 'Cancel';

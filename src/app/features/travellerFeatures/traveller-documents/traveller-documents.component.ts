@@ -7,6 +7,7 @@ import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.
 import { ConfirmationModalComponent } from 'src/app/components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
+import { docCategories } from 'src/app/services/commonAPIServices/docCategories';
 @Component({
   selector: 'app-traveller-documents',
   templateUrl: './traveller-documents.component.html',
@@ -19,6 +20,8 @@ export class TravellerDocumentsComponent {
 
   countryList = countries;
 
+  docCategoryList = docCategories;
+
   pageHeading = 'My Documents'
 
   documentUploadForm!: FormGroup;
@@ -29,6 +32,10 @@ export class TravellerDocumentsComponent {
 
   isPdfViewerOpen: boolean = false;
   loadedFileUrl : string = '';
+
+
+  forwardBtnText : string = 'Add';
+
 
   bsModalRef!: BsModalRef;
 
@@ -50,6 +57,7 @@ export class TravellerDocumentsComponent {
     this.documentUploadForm = this.fb.group({
       // documentType: ['', Validators.required],
       docNumber: ['', Validators.required],
+      docCategory: ['', Validators.required],
       country: ['', Validators.required],
       expiryDate: ['', Validators.nullValidator],
       documentFile: [null, Validators.required], // Required validator for file upload
@@ -86,10 +94,9 @@ export class TravellerDocumentsComponent {
         formData.append('Size', fileInput.value.size);
       }
 
-
     this.documentService.sendDocumentData(formData).subscribe({
       next: (response) => {
-        this.toggleDocUploadModal(false);
+        this.isDocUploadModalOpen = false;
         this.commonService.setIsFile(true);
         console.log(response)
       },
@@ -163,9 +170,28 @@ export class TravellerDocumentsComponent {
   }
 
 
-  //modal controller
-  toggleDocUploadModal(toggleValue: boolean) {
-    this.isDocUploadModalOpen = toggleValue;
+  //Using the same button to open the form and later to save the form
+  onForwardBtnClick(){
+    //if form is not visible then open the form
+    if(!this.isDocUploadModalOpen){
+      this.isDocUploadModalOpen = true;
+      this.pageHeading = 'Upload Travel Documents'
+      this.forwardBtnText = 'Save';
+    }else{
+      //if form is visible then clicking the save button should save the form
+      this.saveForm();
+      //after the method call the page heading should be back to My Docs
+      //and button text should be Add - with the behaviour being changed to open the form
+      this.pageHeading = 'My Documents'
+      this.forwardBtnText = 'Add';
+    }
+  }
+
+  //cancel modal
+  onCancelBtnClick(){
+    this.isDocUploadModalOpen = false;
+    this.pageHeading = 'My Documents';
+    this.forwardBtnText = 'Add';
   }
 
   //doc type controller
