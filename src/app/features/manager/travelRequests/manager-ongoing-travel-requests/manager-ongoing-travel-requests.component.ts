@@ -14,6 +14,9 @@ export class ManagerOngoingTravelRequestsComponent {
   fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'createdOn', 'travelTypeName'];
   incomingRequestdata: any[] = [];
   managerId!: number;
+  currentPage: number = 1;
+  totalCount: number = 0;
+  itemsPerPage: number = 10;
   constructor(private apiservice: ManagerTravelRequestsService) {
     const userData = localStorage.getItem('userData');
     if (userData) {
@@ -24,8 +27,9 @@ export class ManagerOngoingTravelRequestsComponent {
 
   ngOnInit() {
     //get employee ongoing data such as requestId, employeeNameAndEmail, projectCode, createdOn, travelTypeName, priorityName, statusName
-    this.apiservice.getManagerOngoingTravelRequest(this.managerId).subscribe((data: any[]) => {
-      this.incomingRequestdata = this.formatData(data);
+    this.apiservice.getManagerOngoingTravelRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe((data: any) => {
+      this.incomingRequestdata = this.formatData(data.items);
+      this.totalCount = data.totalCount
     });
   }
 
@@ -39,5 +43,12 @@ export class ManagerOngoingTravelRequestsComponent {
       //this is to show two data in a single cell,
       employeeNameAndEmail: `${item.employeeName}\n${item.employeeEmail}`
     }));
+  }
+
+  onPageChange(event: any){
+    this.currentPage = event.page;
+    this.apiservice.getManagerOngoingTravelRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe((data: any) => {
+      this.incomingRequestdata = this.formatData(data.items);
+    });    
   }
 }

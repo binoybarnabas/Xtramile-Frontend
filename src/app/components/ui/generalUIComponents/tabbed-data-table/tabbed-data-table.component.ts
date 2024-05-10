@@ -14,15 +14,19 @@ export class TabbedDataTableComponent {
 @Input() tabs: any[] = [];
 @Input() filters: any[] = [];
 @Input() isSearchFilterNeeded: string;
+// @Input() totalItems!: number
 
 @Output() filterToggled: EventEmitter<any> = new EventEmitter<any>();
 @Output() search: EventEmitter<any> = new EventEmitter<any>();
 @Output() rowClick: EventEmitter<[string, any]> = new EventEmitter();
 @Output() tabChange: EventEmitter<any> = new EventEmitter<any>();
+@Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
 
 activeTabIndex: number = 0; // Initially set to show the first tab
 searchInputValue: string = ''
+// itemsPerPage: number = 10;
+// totalPages: number = 0
 
 constructor(private http: HttpClient){
   this.isSearchFilterNeeded = 'yes';
@@ -86,4 +90,18 @@ onTabChange(index: number){
   this.activeTabIndex = index;
   this.tabChange.emit(this.activeTabIndex);
 }
+
+// ngDoCheck(){
+//   this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+// }
+
+// getPageNumbers(): number[] {
+//   return Array(this.totalPages).fill(0).map((x, i) => i + 1);
+// }
+
+// onPageChange(currentPage: number){
+//   console.log("tabbed data table page = " , currentPage)
+//   this.pageChange.emit(currentPage)
+// }
+
 }
