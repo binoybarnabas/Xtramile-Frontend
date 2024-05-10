@@ -16,8 +16,8 @@ export class TravelAdminIncomingTravelRequestsComponent {
 
   pageHeading: string = "Incoming Requests";
 
-  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Mode', 'Priority', 'Status'];
-  fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode', 'createdOn', 'travelTypeName', 'priorityName', 'statusName'];
+  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Mode', 'Status'];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode', 'createdOn', 'travelTypeName', 'statusName'];
   incomingRequestdata: any[] = [];
 
   requestData: any[] = [];
@@ -45,12 +45,10 @@ export class TravelAdminIncomingTravelRequestsComponent {
     this.apiservice.getAllRequestByDate(this.sqlDatetimeFormat).subscribe({
       next: (data) => {
         this.requestData = data.map((request: any) => {
-          const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
           return {
             ...request,
             statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
-            priorityName: priorityName
           };
         });
         console.log(this.requestData)

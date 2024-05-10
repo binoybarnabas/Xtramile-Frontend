@@ -1,16 +1,18 @@
-<app-page-header [headingInputData]="pageHeading">
-
-</app-page-header>
+<app-page-header [headingInputData]="pageHeading"> </app-page-header>
 <div *ngIf="requestData.length > 0">
- 
-<app-data-table [headers]="tableHeaders"
-[data]="requestData"
-[displayedProperties]="dataHeaders"
-></app-data-table>
-<pagination [(ngModel)]="currentPage" [itemsPerPage]="pageSize" (pageChange)="pageChanged($event)"></pagination>
+  <app-data-table
+    [headers]="tableHeaders"
+    [data]="requestData"
+    [displayedProperties]="dataHeaders"
+  ></app-data-table>
+  <pagination
+    *ngIf="totalCount > 10"
+    [(ngModel)]="currentPage"
+    [itemsPerPage]="pageSize"
+    (pageChange)="pageChanged($event)"
+  ></pagination>
 </div>
- 
-<div *ngIf="requestData.length ===0">
-    <app-empty-data></app-empty-data>
 
+<div *ngIf="requestData.length === 0">
+  <app-empty-data></app-empty-data>
 </div>
