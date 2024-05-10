@@ -4,3 +4,10 @@
   [data]="incomingRequestdata"
   [displayedProperties]="fieldsToDisplay"
 ></app-data-table>
+<pagination
+  *ngIf="totalCount > 10"
+  [totalItems]="totalCount"
+  [itemsPerPage]="itemsPerPage"
+  [(ngModel)]="currentPage"
+  (pageChanged)="onPageChange($event)"
+></pagination>

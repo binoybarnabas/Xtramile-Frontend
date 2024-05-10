@@ -110,12 +110,16 @@
     </div>
   </div>
 
-  <div class="footer_section">
-    <div class="pagination_container">
+  <!-- <div class="footer_section">
+    <div *ngIf="totalPages > 1" class="pagination_container">
       <i class="page_number ri-arrow-left-wide-fill"></i>
-      <span class="page_number">1</span>
-      <span class="page_number">2</span>
+      <span
+        *ngFor="let currentPage of getPageNumbers()"
+        class="page_number"
+        (click)="onPageChange(currentPage)"
+        >{{ currentPage }}</span
+      >
       <i class="page_number ri-arrow-right-wide-fill"></i>
     </div>
-  </div>
+  </div> -->
 </div>

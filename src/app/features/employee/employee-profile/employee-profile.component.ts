@@ -100,7 +100,6 @@ export class EmployeeProfileComponent {
           projectName: data.projectName,
         });
         this.profilePicture = data.profilePicture;
-        console.log(this.profilePicture);
       },
       error: (error: any) => {
         console.error('Error fetching employee data:', error);

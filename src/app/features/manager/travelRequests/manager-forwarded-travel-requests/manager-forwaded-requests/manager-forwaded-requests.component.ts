@@ -197,6 +197,11 @@ export class ManagerForwadedRequestsComponent {
     this.upDateRequest();
   }
 
+  // pageChanged(currentPage: number){
+  //   this.currentPage = currentPage;
+  //   this.upDateRequest();
+  // }
+
   // navigation 
   requestId!:number;
   queryParams: any = {};
