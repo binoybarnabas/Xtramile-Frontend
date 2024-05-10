@@ -1,6 +1,5 @@
 .calendar {
   border-radius: 6px;
-  /* background: var(--dark-gradient-color); */
   color: var(--card-bg-color);
   display: flex;
   flex-direction: column;
@@ -8,7 +7,6 @@
   padding: 5px;
   height: 100%;
   background: var(--card-bg-color);
-  /* border: 1px dotted var(--ternary-text-color); */
   color: var(--primary-text-color);
   box-shadow: var(--normal-box-shadow);
 
@@ -20,7 +18,7 @@
   align-items: center;
   border-radius: 5px;
   width: 100%;
-  padding: 8px 10px;
+  padding: 7px 10px;
   background-color: var(--second-color);
   color: var(--card-bg-color);
   margin-bottom: 4px;
@@ -52,7 +50,10 @@
 }
 
 
-
+/* .calendar .calendar_body .day_container{
+  background-color: aqua;
+  margin-bottom: 3px;
+} */
 
 .calendar .day {
   font-size: var(--extra-small-font-size);
@@ -60,6 +61,7 @@
   text-transform: uppercase;
   padding-left: 7px;
   color: var(--ternary-text-color);
+  color: var(--second-color);
 }
 
 .date_container {
@@ -71,11 +73,12 @@
   padding: 5px 0;
   text-align: center;
   width: calc(100% / 7);
-
 }
 
 .calendar td {
-  padding: 5px;
+  width: 30px;
+  height: 30px;
+  /* padding: 5px; */
   font-size: var(--form-label-font-size);
 }
 
@@ -86,10 +89,6 @@
   color: var(--second-color);
 }
 
-.highlighted-departure {
-  background-color: var(--menu-hover-color);
-  border-radius: 5px 0 0 5px;
-}
 
 /*
 .highlighted-return {
@@ -100,6 +99,14 @@
 .highlighted-within-range {
   background-color: var(--menu-hover-color);
 } */
+
+
+.calendar .date_container .date_value{
+  height: 30px;
+  width: 30px;
+}
+
+
 .calendar .date_container .adjacent-month {
   color: var(--ternary-text-color); 
 }
@@ -111,17 +118,19 @@
 
 .calendar .date_container .current-date {
   background-color: var(--card-bg-color); 
+  font-weight: var(--active-font-weight);
   color: var(--second-color); 
-  border: solid var(--second-color);
 }
 
 
 .calendar .date_container .highlighted-departure {
-  background-color: var(--ternary-text-color); 
-  color: var(--primary-text-color); 
+  border-radius: 5px;
+  background-color: var(--menu-hover-color); 
+  color: var(--second-color); 
 }
 
 .calendar .date_container .future-departure {
   background-color: var(--second-color);
-  color: var(--card-bg-color); 
+  color: var(--card-bg-color);
+  border-radius: 5px; 
 }

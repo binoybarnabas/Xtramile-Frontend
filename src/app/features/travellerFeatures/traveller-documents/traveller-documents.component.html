@@ -1,121 +1,117 @@
-<app-page-header *ngIf="!isPdfViewerOpen"  [headingInputData]="pageHeading"></app-page-header>
 
 <div *ngIf="!isPdfViewerOpen" class="main_container">
 
-  <div class="btn_container">
+  <app-page-header *ngIf="!isPdfViewerOpen"  [headingInputData]="pageHeading"></app-page-header>
 
-    <button (click)="onDeleteBtnClick()" class="del_btn"> <i class="ri-delete-bin-line"></i>  </button>
-    <div (click)="toggleDocUploadModal(true)" class="add_btn" type="button">
-      <span class="btn_text">Add</span>
-    </div>
+  <div  class="btn_container">
+
+    <button *ngIf="!isDocUploadModalOpen" (click)="onDeleteBtnClick()" class="del_btn"> <i class="ri-delete-bin-line"></i></button>
+    <button *ngIf="isDocUploadModalOpen" (click)="onCancelBtnClick()" class="cancel_btn"> Cancel </button>
+    <button (click)="onForwardBtnClick()" class="add_btn">{{forwardBtnText}}</button>
+
   </div>
 
-  <app-document-card (openInPdfViewer)="openPdfViewer($event)"> </app-document-card>
+  <div *ngIf="!isDocUploadModalOpen" class="doc_container">
+    <app-document-card (openInPdfViewer)="openPdfViewer($event)"> </app-document-card>
+  </div>
 
+  <!-- Upload Form -->
   <div *ngIf="isDocUploadModalOpen" class="upload_form_container">
-    <div class="document_upload_form_modal">
-      <div class="form_container_main">
-        <div class="heading_section">
-          <div class="heading">
-            <span>Upload New Document</span>
-          </div>
-        </div>
 
-        <div class="body_section">
 
           <form [formGroup]="documentUploadForm" class="upload_form" (ngSubmit)="saveForm()">
 
-            <div class="input_field_container">
-              <div class="doc_type_container">
-                <div
-                  (click)="changeDocType('ID Card')"
-                  [ngClass]="
-                    selectedDocType === 'ID Card'
-                      ? 'doc_type_card active'
-                      : 'doc_type_card'
-                  "
-                >
-                  <span class="text">ID Card</span>
-                </div>
-                <div
-                  (click)="changeDocType('Passport')"
-                  [ngClass]="
-                    selectedDocType === 'Passport'
-                      ? 'doc_type_card active'
-                      : 'doc_type_card'
-                  "
-                >
-                  <span class="text">Passport</span>
-                </div>
-                <div
-                  (click)="changeDocType('Visa')"
-                  [ngClass]="
-                    selectedDocType === 'Visa'
-                      ? 'doc_type_card active'
-                      : 'doc_type_card'
-                  "
-                >
-                  <span class="text">Visa</span>
-                </div>
-              </div>
-  
-              <!-- file drop -->
+              <div class="left_section">
+
+                              <!-- file drop -->
               <div
-                class="file_drop_area_container"
-                (dragover)="onDragOver($event)"
-                (dragenter)="onDragEnter($event)"
-                (dragleave)="onDragLeave($event)"
-                (drop)="onDrop($event)"
+              class="file_drop_area_container"
+              (dragover)="onDragOver($event)"
+              (dragenter)="onDragEnter($event)"
+              (dragleave)="onDragLeave($event)"
+              (drop)="onDrop($event)"
+            >
+              <!-- <label for="documentUpload">Upload Document</label> -->
+              <input
+                type="file" accept=".pdf"
+                formControlName="documentFile"
+                id="documentFile"
+                style="display: none"
+                (change)="onFileSelected($event)"
+              />
+              <div
+                id="dragDropArea"
+                class="drag-drop-area"
+                (click)="clickInput()"
               >
-                <!-- <label for="documentUpload">Upload Document</label> -->
-                <input
-                  type="file" accept=".pdf"
-                  formControlName="documentFile"
-                  id="documentFile"
-                  style="display: none"
-                  (change)="onFileSelected($event)"
-                />
-                <div
-                  id="dragDropArea"
-                  class="drag-drop-area"
-                  (click)="clickInput()"
+                <i class="icon ri-upload-cloud-line"></i>
+                <p class="label_text_main">Drag & drop your file here</p>
+                <span class="label_text_sub"
+                  >or
+                  <a href="javascript:void(0);" (click)="clickInput()"
+                    >browse</a
+                  >
+                  file from device </span
+                ><br />
+                <span class="error_message" *ngIf="fileErrorMessage">{{
+                  fileErrorMessage
+                }}</span>
+                <span
+                  class="file_name"
+                  *ngIf="documentUploadForm.get('documentFile')?.value"
+                  >{{
+                    documentUploadForm.get("documentFile")?.value.name
+                  }}</span
                 >
-                  <i class="icon ri-upload-cloud-line"></i>
-                  <p class="label_text_main">Drag & drop your file here</p>
-                  <span class="label_text_sub"
-                    >or
-                    <a href="javascript:void(0);" (click)="clickInput()"
-                      >browse</a
-                    >
-                    file from device </span
-                  ><br />
-                  <span class="error_message" *ngIf="fileErrorMessage">{{
-                    fileErrorMessage
-                  }}</span>
-                  <span
-                    class="file_name"
-                    *ngIf="documentUploadForm.get('documentFile')?.value"
-                    >{{
-                      documentUploadForm.get("documentFile")?.value.name
-                    }}</span
-                  >
-                </div>
               </div>
-  
-              <!-- doc number expiry date -->
-              <div class="doc_number_and_date_section">
-                <!-- doc number -->
-                <div class="doc_number_container">
-                  <label class="label" for="docNumber"
-                    >Document Identification No.</label
-                  >
-                  <input
-                    type="text"
-                    formControlName="docNumber"
-                    class="text_input"
-                    placeholder="document identification number"
-                  />
-                  <span
+            </div>
+
+              </div>
+
+              <div class="right_section">
+
+                <div class="other_input_container">
+
+                  <div class="doc_type_container">
+                    <div
+                      (click)="changeDocType('ID Card')"
+                      [ngClass]="
+                        selectedDocType === 'ID Card'
+                          ? 'doc_type_card active'
+                          : 'doc_type_card'
+                      "
+                    >
+                      <span class="text">ID Card</span>
+                    </div>
+                    <div
+                      (click)="changeDocType('Passport')"
+                      [ngClass]="
+                        selectedDocType === 'Passport'
+                          ? 'doc_type_card active'
+                          : 'doc_type_card'
+                      "
+                    >
+                      <span class="text">Passport</span>
+                    </div>
+                    <div
+                      (click)="changeDocType('Visa')"
+                      [ngClass]="
+                        selectedDocType === 'Visa'
+                          ? 'doc_type_card active'
+                          : 'doc_type_card'
+                      "
+                    >
+                      <span class="text">Visa</span>
+                    </div>
+                  </div>
+
+                  <!-- doc number -->
+                  <div class="doc_number_container">
+                    <div class="label_error_section">
+                      <label class="label" for="docNumber"
+                      >Document Identification No<i class="star_icon">*</i> </label
+                    >
+                    <span
                     *ngIf="
                       documentUploadForm.get('docNumber')?.invalid &&
                       documentUploadForm.get('docNumber')?.touched
@@ -123,77 +119,128 @@
                     class="form_error"
                     >Enter the document identification number</span
                   >
-                </div>
-  
-                <!-- expiratiion date -->
-                <div
-                  *ngIf="selectedDocType != 'ID Card'"
-                  class="doc_expiration_date_container"
-                >
-                  <label class="label" for="docExpirationDate"
-                    >Document Expiration Date</label
-                  >
-                  <input
-                    type="date"
-                    formControlName="expiryDate"
-                    class="date_picker"
-                  />
-                </div>
-              </div>
-  
-              <!-- doc issued country -->
-              <div class="doc_country_container">
-                <label class="label" for="country"
-                  >Document Issuing Country</label
-                >
-                <input
-                  list="countryList"
-                  id="country"
-                  formControlName="country"
-                  class="text_input"
-                  placeholder="enter the country name"
-                />
-                <datalist class="country_list" id="countryList">
-                  <option
-                    class="county_name"
-                    *ngFor="let country of countryList"
-                    [value]="country.name"
-                  ></option>
-                </datalist>
-  
-                <span
-                  *ngIf="
-                    documentUploadForm.get('country')?.invalid &&
-                    documentUploadForm.get('country')?.touched
-                  "
-                  class="form_error"
-                  >Enter a country name</span
-                >
-              </div>
-            </div>
+                    </div>
+                  
+                    <input
+                      type="text"
+                      formControlName="docNumber"
+                      class="text_input"
+                      placeholder="document identification number"
+                    />
+                  
+                  </div>
 
-            <!-- actions -->
-            <div class="actions">
-              <button
-                class="cancel_btn"
-                (click)="toggleDocUploadModal(false)"
-                type="button"
-              >
-                Cancel
-              </button>
-              <button
-                class="submit_btn"
-                type="submit"
-                [disabled]="documentUploadForm.invalid"
-              >
-                Save
-              </button>
-            </div>
+                  <!-- doc issued country -->
+                  <div class="doc_country_container">
+                    <div class="label_error_section">
+                      <label class="label" for="country"
+                      >Document Issuing Country<i class="star_icon">*</i> </label
+                    >
+                    <span
+                    *ngIf="
+                      documentUploadForm.get('country')?.invalid &&
+                      documentUploadForm.get('country')?.touched
+                    "
+                    class="form_error"
+                    >Enter a country name</span
+                  >
+
+                    </div>
+                
+                  <input
+                    list="countryList"
+                    id="country"
+                    formControlName="country"
+                    class="text_input"
+                    placeholder="enter the country name"
+                  />
+                  <datalist class="country_list" id="countryList">
+                    <option
+                      class="county_name"
+                      *ngFor="let country of countryList"
+                      [value]="country.name"
+                    ></option>
+                  </datalist>
+    
+                  </div>
+
+                  <!-- doc category -->
+                  <div class="doc_category_container">
+                    <div class="label_error_section">
+                      <label class="label" for="docCategory"
+                      >Document Category<i class="star_icon">*</i> </label
+                    >
+                    <span
+                    *ngIf="
+                      documentUploadForm.get('docCategory')?.invalid &&
+                      documentUploadForm.get('docCategory')?.touched
+                    "
+                    class="form_error"
+                    >Enter the document category</span
+                    >
+                    </div>
+                  
+                    <input
+                      list="docCategoryList"
+                      type="text"
+                      formControlName="docCategory"
+                      class="text_input"
+                      placeholder="document category"
+                    />
+
+                    <datalist class="doc_category_list" id="docCategoryList">
+                      <option
+                        class="doc_category_item"
+                        *ngFor="let category of docCategoryList"
+                        [value]="category"
+                      ></option>
+                    </datalist>
+        
+                  </div>
+
+                  <!-- doc number expiry date -->
+                  <div class="date_section">
+  
+                  <!-- issue date -->
+                  <div
+                    *ngIf="selectedDocType != 'ID Card'"
+                    class="date_container issue_date"
+                  >
+                    <label class="label" for="docExpirationDate"
+                      >Document Issued On</label
+                    >
+                    <input
+                      type="date"
+                      formControlName="expiryDate"
+                      class="date_picker"
+                    />
+                  </div>                
+    
+                  <!-- expiratiion date -->
+                  <div
+                    *ngIf="selectedDocType != 'ID Card'"
+                    class="date_container"
+                  >
+                    <label class="label" for="docExpirationDate"
+                      >Document Expiration Date</label
+                    >
+                    <input
+                      type="date"
+                      formControlName="expiryDate"
+                      class="date_picker"
+                    />
+                  </div>
+  
+                  </div>
+    
+
+
+                </div>
+
+              </div>
 
           </form>
-        </div>
-      </div>
-    </div>
+        
   </div>
 
 </div>

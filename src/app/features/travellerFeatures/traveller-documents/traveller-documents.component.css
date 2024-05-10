@@ -3,9 +3,15 @@
   position: relative;
 }
 
+.main_container .doc_container{
+  overflow-y: auto;
+  padding: 0.5rem;
+  height: 77vh;
+}
+
 .main_container .btn_container{
   position: absolute;
-  top: -50px;
+  top: -8px;
   height: 50px;
   right: 0;
   display: flex;
@@ -14,7 +20,8 @@
   width: 100%;
 }
 
-.main_container .btn_container .add_btn{
+.main_container .btn_container .add_btn,
+.main_container .btn_container .cancel_btn{
   width: 100px;
   height: 38px;
   background-color: var(--second-color);
@@ -25,7 +32,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
+  border: 2px solid var(--second-color);
 }
+
+.main_container .btn_container .cancel_btn{
+  background-color: transparent;
+  color: var(--second-color);
+  border: 2px solid var(--second-color);
+}
+
 
 .main_container .btn_container .del_btn{
   width: 38px;
@@ -47,67 +63,40 @@
 }
 
 
+
+/* upload form */
 .main_container .upload_form_container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
+  /* height: 77.5vh; */
+  /* overflow-y: auto; */
+  /* background-color: var(--card-bg-color);
+  border-radius: 0 0 8px 8px;
+  box-shadow: var(--normal-box-shadow); */
 }
 
-.main_container .upload_form_container .document_upload_form_modal {
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  top: 0;
-  z-index: 9999;
-}
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .form_container_main {
+.main_container .upload_form_container .upload_form{
+  width: 100%;
+  height: 77vh;
   display: flex;
-  flex-direction: column;
-  background-color: var(--card-bg-color);
+  justify-content: space-between;
+}
+
+.main_container .upload_form_container .upload_form .left_section{
+  width: 55%;
   padding: 0.5rem;
-  border-radius: var(--normal-border-radius);
-  box-shadow: var(--normal-box-shadow);
 }
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .heading_section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: var(--active-font-weight);
-  background-color: var(--card-bg-color);
-  color: var(--primary-text-color);
-  border-bottom: 1px dashed var(--ternary-text-color);
-  border-radius: 0;
-}
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section {
-  border-radius: 0;
-  background-color: transparent;
-  box-shadow: none;
-}
-
-.main_container .upload_form_container .document_upload_form_modal .body_section .upload_form .input_field_container{
-  /* height: calc(100vh - 215px); */
-  overflow-y: auto;
+.main_container .upload_form_container .upload_form .right_section{
+  width: 45%;
   padding: 0.5rem;
 }
 
+
+
 .main_container
   .upload_form_container
-  .document_upload_form_modal
-  .body_section
   .form_error {
   font-size: var(--extra-small-font-size);
   color: var(--danger-color);
@@ -116,8 +105,6 @@
 
 .main_container
   .upload_form_container
-  .document_upload_form_modal
-  .body_section
   .doc_type_container {
   display: flex;
   justify-content: center;
@@ -134,8 +121,6 @@
 
 .main_container
   .upload_form_container
-  .document_upload_form_modal
-  .body_section
   .doc_type_container
   .doc_type_card {
   width: 100px;
@@ -143,13 +128,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: var(--secondary-orange-color);
-    color: var(--primary-orange-color); */
   border-radius: 20px;
   margin: 5px;
   cursor: pointer;
   transition: 0.3s;
-  /* background-color: var(--menu-hover-color); */
   color: var(--third-color);
   border: 2px solid var(--third-color);
   opacity: 0.7;
@@ -157,8 +139,6 @@
 
 .main_container
   .upload_form_container
-  .document_upload_form_modal
-  .body_section
   .doc_type_container
   .doc_type_card:hover {
   opacity: 1;
@@ -166,11 +146,8 @@
 
 .main_container
   .upload_form_container
-  .document_upload_form_modal
-  .body_section
   .doc_type_container
   .doc_type_card.active {
-  /* background-color: var(--primary-orange-color); */
   color: var(--card-bg-color);
   font-weight: var(--active-font-weight);
   background-color: var(--third-color);
@@ -179,251 +156,86 @@
 
 .main_container
   .upload_form_container
-  .document_upload_form_modal
-  .body_section
   .doc_type_container
   .doc_type_card
   .text {
   font-size: var(--form-label-font-size);
 }
 
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_number_container {
-  justify-content: space-between;
+.main_container .upload_form_container .right_section .other_input_container{
+  /* background-color: var(--card-bg-color);
+  box-shadow: var(--normal-box-shadow); */
+  border-radius: 8px;
+  padding: 10px;
 }
 
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .label,
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .label {
-  font-size: var(--form-label-font-size);
-  font-weight: var(--normal-font-weight);
-  color: var(--secondary-text-color);
-  margin-bottom: 3px;
-  /* width: 30%; */
-}
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_number_and_date_section {
+.main_container .upload_form_container .right_section .other_input_container .date_section{
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
-  padding: 0;
   margin-bottom: 10px;
 }
 
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_number_and_date_section
-  .doc_number_container,
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_number_and_date_section
-  .doc_expiration_date_container {
-  /* width: 49%; */
-  width: 100%;
-}
 
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_number_and_date_section
-  .doc_number_container {
-  margin-right: 3px;
-}
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_number_and_date_section
-  .doc_expiration_date_container {
-  margin-left: 3px;
-}
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_number_and_date_section
-  .doc_number_container
-  .text_input {
-  text-transform: uppercase;
-}
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_number_and_date_section
-  .doc_number_container
-  .text_input::placeholder {
-  text-transform: lowercase;
-}
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_number_and_date_section
-  .doc_number_container
-  .text_input,
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_number_and_date_section
-  .doc_expiration_date_container
-  .date_picker {
-  height: 42px;
-  border-radius: 5px;
-  padding: 5px;
-  outline: none;
-  /* margin-top: 2px; */
-  border: 2px solid var(--menu-hover-color);
-  font-size: var(--form-label-font-size);
-  /* font-weight: var(--active-font-weight); */
-  transition: 0.3s;
-  width: 100%;
-}
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_expiration_date_container
-  .date_picker:focus {
-  border: 2px solid var(--third-color);
-  outline: none;
-}
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .text_input:focus {
-  border: 2px solid var(--third-color);
-  outline: none;
-}
-
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_country_container {
+.main_container .upload_form_container .right_section .other_input_container .doc_number_container,
+.main_container .upload_form_container .right_section .other_input_container .doc_category_container,
+.main_container .upload_form_container .right_section .other_input_container .doc_country_container,
+.main_container .upload_form_container .right_section .other_input_container .date_container .date_container{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .doc_country_container
-  .text_input {
-  height: 42px;
-  border-radius: 5px;
-  padding: 5px;
-  border: 2px solid var(--menu-hover-color);
-  font-size: var(--form-label-font-size);
-  /* font-weight: var(--active-font-weight); */
-  transition: 0.3s;
-  /* width: 70%; */
+.main_container .upload_form_container .right_section .other_input_container .date_container{
+  width: 49%;
 }
 
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .actions {
+.main_container .upload_form_container .right_section .other_input_container .label_error_section{
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
 }
 
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .actions
-  .submit_btn,
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .actions
-  .cancel_btn {
-  border: 2px solid var(--third-color);
-  width: 100px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: var(--small-font-size);
-  border-radius: 5px;
-  background: none;
-  color: var(--third-color);
+.main_container .upload_form_container .right_section .other_input_container .label{
+  font-size: var(--extra-small-font-size);
   font-weight: var(--active-font-weight);
+  color: var(--ternary-text-color);
+  margin-bottom: 5px;
 }
 
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .actions
-  .submit_btn {
-  background-color: var(--third-color);
-  color: var(--card-bg-color);
-  transition: 0.3s;
+.main_container .upload_form_container .right_section .other_input_container .label .star_icon{
+  color: var(--primary-red-color);
+  font-size: var(--large-font-size);
+
 }
 
-.main_container
-  .upload_form_container
-  .document_upload_form_modal
-  .body_section
-  .actions
-  .submit_btn:hover:disabled {
-  background-color: var(--danger-color);
-  border: 2px solid var(--danger-color);
-  cursor: no-drop;
+
+.main_container .upload_form_container .right_section .other_input_container .text_input,
+.main_container .upload_form_container .right_section .other_input_container .date_picker{
+  border: 1px solid var(--ternary-text-color);
+  border-radius: 3px;
+  padding: 0 6px;
+  height: 43px;  
+  font-size: var(--small-font-size);
+  outline: none;
 }
 
-.main-container {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 20px;
+.main_container .upload_form_container .right_section .other_input_container .date_picker{
+  width: 100%;
+  font-size: var(--form-label-font-size);
 }
 
-.form-group {
-  margin-bottom: 20px;
+.main_container .upload_form_container .right_section .other_input_container .text_input:focus{
+  border-bottom: 2px solid var(--second-color);
 }
+
+
 
 .file_drop_area_container {
   position: relative;
-  margin-bottom: 20px;
   background-color: var(--card-bg-color);
   padding: 10px;
   box-shadow: var(--normal-box-shadow);
   border-radius: 6px;
+  height: 100%;
 }
 
 .file_drop_area_container .icon {
@@ -452,10 +264,15 @@
 #dragDropArea {
   border: 2px dashed var(--menu-hover-color);
   padding: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   cursor: pointer;
   border-radius: 6px;
   transition: 0.3s;
+  height: 100%;
+
 }
 
 #dragDropArea .label_text_main {
@@ -477,6 +294,7 @@
 #dragDropArea:hover {
   border: 2px dashed var(--third-color);
   background-color: rgba(128, 128, 128, 0.1);
+  background-color: var(--secondary-cyan-color);
 }
 
 #dragDropArea .file_name {
@@ -495,6 +313,13 @@
 #dragDropArea.drag-over {
   background-color: #f0f0f0;
 }
+
+
+
+
+
+
+
 
 /* Responsive Styles */
 @media only screen and (min-width: 768px) {
