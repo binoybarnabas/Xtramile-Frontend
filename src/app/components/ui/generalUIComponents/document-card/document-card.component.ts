@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./document-card.component.css']
 })
 export class DocumentCardComponent implements OnInit, OnDestroy {
+
   employeeId: number = 0;
   employeeDocuments: any;
   pollingInterval: number = 1000;
@@ -18,6 +19,7 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
   selectedDocCardId : number = -1;
 
   @Output() openInPdfViewer = new EventEmitter<string>();
+  @Output() updateSelectedDocCardId = new EventEmitter<number>();
 
   constructor(private commonService: CommonAPIService,private http: HttpClient) { }
 
@@ -38,10 +40,6 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
     this.isFileSubscription.unsubscribe();
   }
 
-  flipCard(card: any) {
-    this.isFlipping = true;
-    card.isFlipped = !card.isFlipped;
-  }
 
   getDocuments() {
     this.commonService.getEmployeeDocuments(this.employeeId).subscribe(
@@ -54,18 +52,7 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
       }
     );
   }
-  onDeleteDocument(fileId: number): void {
-    this.commonService.deleteEmployeeDetails(fileId).subscribe(
-      () => {
-        this.commonService.setIsFile(true) 
-        console.log('is set fiel',true)
-        console.log(`Document with ID ${fileId} deleted successfully.`);
-      },
-      (error: any) => {
-        console.error(`Error deleting document with ID ${fileId}:`, error);
-      }
-    );
-  }
+
   
   onDownloadFileClick(url: string, docType: string){
     this.http.get(url, {responseType: 'blob'}).subscribe({
@@ -88,21 +75,22 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
     })
   }
 
-
   onDocCardSelected(cardId: number){
+    
     if(this.selectedDocCardId === cardId){
       this.selectedDocCardId = -1;
-    }else{
+    }
+    else{
       this.selectedDocCardId = cardId;
     }
-  }
 
+    this.updateSelectedDocCardId.emit(this.selectedDocCardId);
+
+  }
 
   openPdfViewer(fileUrl: string) {
     this.openInPdfViewer.emit(fileUrl);
   }
-
-
 
 
 }

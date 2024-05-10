@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { countries } from 'src/app/services/commonAPIServices/countries';
@@ -8,6 +8,7 @@ import { ConfirmationModalComponent } from 'src/app/components/ui/travel-request
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { docCategories } from 'src/app/services/commonAPIServices/docCategories';
+import { DocumentCardComponent } from 'src/app/components/ui/generalUIComponents/document-card/document-card.component';
 @Component({
   selector: 'app-traveller-documents',
   templateUrl: './traveller-documents.component.html',
@@ -36,8 +37,11 @@ export class TravellerDocumentsComponent {
 
   forwardBtnText : string = 'Add';
 
+  //@ViewChild(DocumentCardComponent) documentCard!: DocumentCardComponent;
 
   bsModalRef!: BsModalRef;
+
+  selectedDocCardId : number = -1;
 
   constructor(
     private fb: FormBuilder,
@@ -49,20 +53,28 @@ export class TravellerDocumentsComponent {
     private modalService: BsModalService,
   ) {
     this.isDocUploadModalOpen = false;
+
+    //for upload form
     this.selectedDocType = 'ID Card'
+    
+
   }
 
 
   ngOnInit(): void {
+    
     this.documentUploadForm = this.fb.group({
       // documentType: ['', Validators.required],
       docNumber: ['', Validators.required],
       docCategory: ['', Validators.required],
       country: ['', Validators.required],
+      issueDate: ['', Validators.nullValidator],
       expiryDate: ['', Validators.nullValidator],
       documentFile: [null, Validators.required], // Required validator for file upload
     });
     this.commonService.setIsFile(false);
+
+
   }
 
 
@@ -201,12 +213,35 @@ export class TravellerDocumentsComponent {
 
   onDeleteBtnClick(){
 
- 
-    this.bsModalRef = this.modalService.show(CustomConfirmationModalComponent, {} );
-    this.bsModalRef.content.onClose.subscribe((result: any) => {
-      // Handle the result from the modal if needed
-      // You can perform actions with the result data here
+    const initialState = {
+      mainText: 'Delete Travel Document',
+      description: 'Are you sure ?',
+      cancelBtnText: 'Cancel',
+      confirmBtnText: 'Delete',
+      confirmBtnColor: '#d63031'
+    };
+  
+    this.bsModalRef = this.modalService.show(CustomConfirmationModalComponent, {initialState} );
+    
+    this.bsModalRef.content?.confirm.subscribe(() => {
+      this.deleteDocument(this.selectedDocCardId);
     });
+ 
+  }
+
+  
+
+  deleteDocument(fileId: number): void {
+
+    //logic to delete Doc
+    alert("Delete"+ fileId);
+
+    //to disable delete btn
+    this.selectedDocCardId = -1;
+  }
+
+  updateSelectedDocCardId(docCardId: number){
+    this.selectedDocCardId = docCardId;
   }
 
   openPdfViewer(fileUrl: string) {
@@ -216,6 +251,7 @@ export class TravellerDocumentsComponent {
 
   closePdfViewer() {
    this.isPdfViewerOpen = false;
+   this.selectedDocCardId = -1;
    //this.initializeComponent();
   }
 
