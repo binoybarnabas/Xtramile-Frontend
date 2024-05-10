@@ -26,8 +26,8 @@
     </thead>
 
     <tbody class="date_container">
-      <tr *ngFor="let week of getWeeks()">
-        <td
+      <tr class="date_row" *ngFor="let week of getWeeks()">
+        <td class="date_value"
           *ngFor="let day of week"
           [ngClass]="{
             'highlighted-departure': isDepartureDate(day),
