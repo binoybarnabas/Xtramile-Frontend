@@ -616,25 +616,13 @@ export class TravelRequestFormComponent {
     this.requestService.sendEmployeeNewTravelRequest(formData).subscribe({
       next: (response) => {
         console.log(response);
-        this.requestId = response;
-        setTimeout(() => {
-          this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
-          this.router.navigate(['employee/pending']);
-        },4000)
+        this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
+        this.router.navigate(['employee/pending']);
       },
       error: (error: Error) => {
         console.log(error);
       },
-      complete: () => {
-        
-        const requestStatus: RequestStatus = {
-          requestId: this.requestId,
-          empId: this.empId,
-          primaryStatusId: Status.Open,
-          date: new Date(),
-          secondaryStatusId: Status.Pending
-        };
-        this.commonApiService.updateRequestStatus(requestStatus).subscribe();      
+      complete: () => {   
       }
     });
   }
