@@ -11,9 +11,7 @@ import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { EmployeeDetails } from '../../travelRequest/travel-request-information/request';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
-import { RequestStatus } from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
-import { Status } from 'src/app/utils/StatusEnum';
 @Component({
   selector: 'app-travel-request-form',
   templateUrl: './travel-request-form.component.html',
