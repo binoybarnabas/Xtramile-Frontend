@@ -12,7 +12,7 @@
   </div>
 
   <div *ngIf="!isDocUploadModalOpen" class="doc_container">
-    <app-document-card (openInPdfViewer)="openPdfViewer($event)" (updateSelectedDocCardId)="updateSelectedDocCardId($event)"> </app-document-card>
+    <app-document-card [travellerDocuments]="travellerDocuments" (openInPdfViewer)="openPdfViewer($event)" (updateSelectedDocCardId)="updateSelectedDocCardId($event)"> </app-document-card>
   </div>
 
   <!-- Upload Form -->

@@ -4,11 +4,11 @@ import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { countries } from 'src/app/services/commonAPIServices/countries';
 import { DatePipe } from '@angular/common';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
-import { ConfirmationModalComponent } from 'src/app/components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { docCategories } from 'src/app/services/commonAPIServices/docCategories';
-import { DocumentCardComponent } from 'src/app/components/ui/generalUIComponents/document-card/document-card.component';
+import { Subscription } from 'rxjs';
+import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 @Component({
   selector: 'app-traveller-documents',
   templateUrl: './traveller-documents.component.html',
@@ -37,11 +37,19 @@ export class TravellerDocumentsComponent {
 
   forwardBtnText : string = 'Add';
 
+  employeeId: number = -1;
+
   //@ViewChild(DocumentCardComponent) documentCard!: DocumentCardComponent;
 
   bsModalRef!: BsModalRef;
 
   selectedDocCardId : number = -1;
+
+  private deleteSubscription: Subscription | undefined;
+
+  private isFileSubscription!: Subscription;
+
+  travellerDocuments: any = [];
 
   constructor(
     private fb: FormBuilder,
@@ -51,18 +59,26 @@ export class TravellerDocumentsComponent {
     private datepipe: DatePipe,
     private commonService:CommonAPIService,
     private modalService: BsModalService,
+    private toastService : CustomToastService
+
   ) {
     this.isDocUploadModalOpen = false;
 
     //for upload form
     this.selectedDocType = 'ID Card'
     
-
   }
 
 
   ngOnInit(): void {
     
+    if (localStorage.getItem('userData')) {
+      const userData = JSON.parse(localStorage.getItem('userData')!);
+      this.employeeId = userData.empId;
+    }
+
+    this.initializeDocuments();
+
     this.documentUploadForm = this.fb.group({
       // documentType: ['', Validators.required],
       docNumber: ['', Validators.required],
@@ -74,9 +90,36 @@ export class TravellerDocumentsComponent {
     });
     this.commonService.setIsFile(false);
 
+  }
+
+  initializeDocuments(){
+
+    
+    this.getDocuments();
+    
+    // this.isFileSubscription = this.commonService.isFile$.subscribe(isFile => {
+    //   if (isFile) {
+    //     this.getDocuments();
+    //   }
+    // });
 
   }
 
+  // ngOnDestroy() {
+  //   this.isFileSubscription.unsubscribe();
+  // }
+
+  getDocuments() {
+    this.commonService.getEmployeeDocuments(this.employeeId).subscribe(
+      (data) => {
+        this.travellerDocuments = data;
+        console.log('Fetched documents:', data);
+      },
+      (error) => {
+        console.error('Error fetching documents:', error);
+      }
+    );
+  }
 
   //submitting the form
   saveForm() {
@@ -181,7 +224,6 @@ export class TravellerDocumentsComponent {
     document.getElementById('documentFile')?.click();
   }
 
-
   //Using the same button to open the form and later to save the form
   onForwardBtnClick(){
     //if form is not visible then open the form
@@ -214,7 +256,7 @@ export class TravellerDocumentsComponent {
   onDeleteBtnClick(){
 
     const initialState = {
-      mainText: 'Delete Travel Document',
+      mainText: 'Delete Travel Document ? ',
       description: 'Are you sure ?',
       cancelBtnText: 'Cancel',
       confirmBtnText: 'Delete',
@@ -229,15 +271,25 @@ export class TravellerDocumentsComponent {
  
   }
 
-  
+  deleteDocument(documentId: number): void {
 
-  deleteDocument(fileId: number): void {
+    this.deleteSubscription = this.documentService.deleteDocument(documentId).subscribe(
+      (response) => {
+        // Handle successful deletion response
+        console.log('Document deleted successfully:', response);
+        this.selectedDocCardId = -1;
 
-    //logic to delete Doc
-    alert("Delete"+ fileId);
+        this.toastService.showToast({ message: "Travel Document Deleted", toastType: "success", toastDuration: 3000 });
 
-    //to disable delete btn
-    this.selectedDocCardId = -1;
+        //initialize components
+        this.initializeDocuments();
+      },
+      (error) => {
+        // Handle error response
+        this.toastService.showToast({ message: "Error Deleting Document!", toastType: "fail", toastDuration: 6000 });
+      }
+    );
+
   }
 
   updateSelectedDocCardId(docCardId: number){
@@ -254,6 +306,5 @@ export class TravellerDocumentsComponent {
    this.selectedDocCardId = -1;
    //this.initializeComponent();
   }
-
 
 }

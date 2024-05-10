@@ -64,13 +64,19 @@
     border-radius: 0;
 }
 
+.main_container .doc_card .body_section .left_section,
+.main_container .doc_card .body_section .right_section{
+    width: 50%;
+    height: 100%;
+}
+
 
 .main_container .doc_card .body_section .info_item{
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
     margin: 0;
-    height: 43px;
+    height: 45px;
 }
 
 .main_container .doc_card .body_section .info_item .title{

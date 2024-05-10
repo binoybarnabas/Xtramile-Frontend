@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
-import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -8,13 +7,9 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './document-card.component.html',
   styleUrls: ['./document-card.component.css']
 })
-export class DocumentCardComponent implements OnInit, OnDestroy {
+export class DocumentCardComponent{
 
-  employeeId: number = 0;
-  employeeDocuments: any;
-  pollingInterval: number = 1000;
-  isFlipping: boolean = false;
-  private isFileSubscription!: Subscription;
+  @Input() travellerDocuments: any;
 
   selectedDocCardId : number = -1;
 
@@ -22,37 +17,6 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
   @Output() updateSelectedDocCardId = new EventEmitter<number>();
 
   constructor(private commonService: CommonAPIService,private http: HttpClient) { }
-
-  ngOnInit() {
-    if (localStorage.getItem('userData')) {
-      const userData = JSON.parse(localStorage.getItem('userData')!);
-      this.employeeId = userData.empId;
-    }
-    this.getDocuments();
-    this.isFileSubscription = this.commonService.isFile$.subscribe(isFile => {
-      if (isFile) {
-        this.getDocuments();
-      }
-    });
-  }
-
-  ngOnDestroy() {
-    this.isFileSubscription.unsubscribe();
-  }
-
-
-  getDocuments() {
-    this.commonService.getEmployeeDocuments(this.employeeId).subscribe(
-      (data) => {
-        this.employeeDocuments = data;
-        console.log('Fetched documents:', data);
-      },
-      (error) => {
-        console.error('Error fetching documents:', error);
-      }
-    );
-  }
-
   
   onDownloadFileClick(url: string, docType: string){
     this.http.get(url, {responseType: 'blob'}).subscribe({

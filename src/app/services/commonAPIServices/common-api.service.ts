@@ -98,17 +98,23 @@ export class CommonAPIService {
     return this.http.get(`http://localhost:5190/api/request/request/reason/${requestId}`, { responseType: 'text' });
   }
   getEmployeeDocuments(employeeId:number){
-    return this.http.get<ResubmitRequest>(`http://localhost:5190/api/traveldocumentfile/traveldocumentfiles/${employeeId}`);
+    return this.http.get(`http://localhost:5190/api/traveldocumentfile/traveldocumentfiles/${employeeId}`);
   }
   setIsFile(value: boolean) {
     this.isFileSubject.next(value);
   }
+
+  //sus!!!
+
+  //!!!!!!!!!!!!!!!
   deleteEmployeeDetails(fileId:number){
-    return this.http.delete<ResubmitRequest>(`http://localhost:5190/api/traveldocumentfile/deleteDocument/${fileId}`);
+    return this.http.delete(`http://localhost:5190/api/traveldocumentfile/deleteDocument/${fileId}`);
   }
+
   addOptionsForRequest(optionsData:any){
     return this.http.post('http://localhost:5190/api/availableoptions/addoption',optionsData,{ responseType: 'text' });
   }
+
   getEmployeeRequestDetail(requestId:number){
     return this.http.get(`http://localhost:5190/api/request/getbyid/${requestId}`);
   }
