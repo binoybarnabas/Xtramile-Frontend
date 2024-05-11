@@ -1,0 +1,91 @@
+<div class="main_container">
+
+    <div class="heading_section">
+
+        <div *ngIf="isActionBarVisible" class="action_bar">
+            <button (click)="deleteSelectedOption()" [disabled]="selectedImageOptionIndex === -1 && selectedTextOptionIndex === -1" class="del_btn"><i class="ri-delete-bin-5-fill"></i></button>
+            <p class="main_title">{{actionBarTitle}}</p>
+            <button (click)="onAddBtnClick()" class="add_btn">Add</button>
+        </div>
+        <div class="tab_section">
+            <div class="tab_container">
+                <ng-container *ngFor="let tab of travelOptionViewerTabs; let i = index">
+                <div (click)="onTabChange(i, tab.name)" class="tab_item" [class.active]="activeTabIndex === i" >
+                    <span>{{tab.name}}</span>
+                </div>
+                </ng-container>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="body_section">
+
+        <div *ngIf="activeTabName === 'Files'" class="tab_body file">
+            <ng-container *ngFor="let item of optionImageUrls; let i = index">
+                <div (click)="onOptionSelected('img',i)" [ngClass]=" selectedImageOptionIndex === i ? 'file_card active':'file_card'">
+                    <img class="img" [src]="item" alt="">
+                </div>
+            </ng-container>
+
+            <div *ngIf="optionImageUrls.length === 0" class="empty_option_container">
+                <app-empty-data [mainTitle]="emptyOptionMessageTitle" [description]="emptyImageOptionMessage"></app-empty-data>
+            </div>
+
+        </div>
+
+        <div *ngIf="activeTabName === 'Texts'" class="tab_body text">
+
+            <div class="expansion_panel_container">
+                <div
+                  (click)="onOptionSelected('text', i)"
+                  *ngFor="let htmlContent of textOptions; let i = index"
+                  class="expansion_panel"
+                >
+                  <div
+                    [ngClass]="
+                      selectedTextOptionIndex === i
+                        ? 'expansion_panel_header active'
+                        : 'expansion_panel_header'
+                    "
+                    (click)="togglePanel(i)"
+                  >
+                    <p class="title">Option {{ i + 1 }}</p>
+                    <i
+                      class="icon ri-arrow-down-wide-line"
+                      *ngIf="!isPanelOpen(i)"
+                    ></i>
+                    <i
+                      class="icon ri-arrow-up-wide-line"
+                      *ngIf="isPanelOpen(i)"
+                    ></i>
+                  </div>
+                  <div
+                    class="expansion_panel_content"
+                    *ngIf="isPanelOpen(i)"
+                    [innerHTML]="santizieHtml(htmlContent)"
+                  ></div>
+                </div>
+            </div>
+            <div *ngIf="textOptions.length === 0" class="empty_option_container">
+                <app-empty-data [mainTitle]="emptyOptionMessageTitle" [description]="emptyTextOptionMessage"></app-empty-data>
+            </div>
+        </div>
+
+        <div *ngIf="activeTabName === 'Selected Option' || activeTabName === 'Confirmed Option'" class="tab_body text">
+            <div class="text_card">
+                <span>Selected Option</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<app-image-viewer
+  *ngIf="isImageViewerOpen"
+  [images]="optionImageUrls"
+  [descriptions]="fileOptionDescriptions"
+  [currentImageIndex]="selectedImageOptionIndex"
+  (close)="closeImageViewer()"
+></app-image-viewer>

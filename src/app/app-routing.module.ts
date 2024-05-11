@@ -44,6 +44,7 @@ import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRe
 import { ManagerForwadedRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwaded-requests/manager-forwaded-requests.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/custom-pdf-viewer/custom-pdf-viewer.component';
+import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },

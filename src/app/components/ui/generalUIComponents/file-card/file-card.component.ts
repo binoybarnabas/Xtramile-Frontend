@@ -46,7 +46,7 @@ export class FileCardComponent {
         }
         else{
           this.passportDocument = {
-            fileName: "Document not yet uploaded. Ask employee to upload relevant document.",
+            fileName: "Document not yet uploaded!. Ask traveller to upload relevant document or click on the email icon to send automated mail.",
             fileType: "Passport",
             fileSize: "",
           };        
@@ -63,7 +63,7 @@ export class FileCardComponent {
         }
         else{
           this.visaDocument = {
-            fileName: "Document not yet uploaded. Ask employee to upload relevant document.",
+            fileName: "Document not yet uploaded!. Ask traveller to upload relevant document or click on the email icon to send automated mail.",
             fileType: "Visa",
             fileSize: "",
           };        

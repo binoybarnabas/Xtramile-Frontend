@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
@@ -20,6 +20,7 @@ import { Observable, Subscription, forkJoin } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { TabDirective } from 'ngx-bootstrap/tabs';
+import { TabbedOptionViewerComponent } from 'src/app/components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -48,7 +49,6 @@ export class NewTravelRequestComponent {
 
   requestDetailsPageHeading : string = 'TRAVEL REQUEST INFORMATION';
 
-  isImageViewerOpen: boolean = false;
 
   //action bar items
   backBtnTitle : string = 'Back';
@@ -94,7 +94,7 @@ export class NewTravelRequestComponent {
 
   private isFileSubscription!: Subscription;
   
-  constructor(private sideNavBarService: SideNavBarService,
+  constructor(
     private requestService: RequestService,
     private route: ActivatedRoute,
     private datePipe: DatePipe,
@@ -108,7 +108,7 @@ export class NewTravelRequestComponent {
   ) {
 
     const storedUserData = localStorage.getItem('userData');
-    console.log("error check" + storedUserData);
+
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
 
     this.empId = this.userData?.empId
@@ -122,8 +122,7 @@ export class NewTravelRequestComponent {
 
     if (userData != null) {
       this.userData = JSON.parse(userData);
-      console.log("userdata" + this.userData);
-
+      
       switch (this.userData.role) {
 
         case 'Manager': if (this.userData.department == 'TA') {
@@ -143,11 +142,11 @@ export class NewTravelRequestComponent {
 
   }
 
-  ngDoCheck() {
+  // ngDoCheck() {
 
-    this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
+  //   this.isSideNavBarOpen = this.sideNavBarService.isSideNavBarCollapsed;
 
-  }
+  // }
 
   changeNewReqFormSubMenuValue(value: number) {
     this.newReqFormSubMenuValue = value;
@@ -366,7 +365,6 @@ export class NewTravelRequestComponent {
       primaryStatusId: 2, // Assign the primary status ID
       date: new Date(),  // Assign the current date
       secondaryStatusId: 10 // Assign the secondary status ID
-
     };
 
     this.commonApiService.updateRequestStatus(requestStatus).subscribe({
@@ -378,8 +376,9 @@ export class NewTravelRequestComponent {
 
       },
       error: (error: Error) => {
-        console.log("Error in posting request status");
-        console.log(error.message);
+        //console.log("Error in posting request status");
+        //console.log(error.message);
+        this.toastService.showToast({ message: error.message, toastType: "fail", toastDuration: 6000 });
       },
       complete: () => {
         console.log("Posting Request Status Complete");
@@ -393,39 +392,6 @@ export class NewTravelRequestComponent {
     console.log("clicked");
   }
   //EOF
-
-  // TRAVEL ADMIN
-  // openAddTextOptionModal(){
-  //   const initialState = {
-  //     requestId: this.travelRequestDetailViewModel.requestId
-  //   };
-
-  //   // this.getTravelOptionsByReqId(this.travelRequestDetailViewModel.requestId)
-
-
-  //   this.bsModalRef = this.modalService.show(TextEditorComponent, { initialState });
-  //   this.bsModalRef.content.onClose.subscribe((result: any) => {
-  //     // Handle the result from the modal if needed
-  //     console.log('Modal result:', result);
-
-
-  //     // You can perform actions with the result data here
-  //   });
-  // }
-
-//   openAddOptionModal() {
-//     const initialState = {
-//       requestId: this.travelRequestDetailViewModel.requestId
-//     };
- 
-//     this.bsModalRef = this.modalService.show(TextEditorComponent, { initialState });
-//     this.bsModalRef.content.onClose.subscribe((result: any) => {
-//       // Handle the result from the modal if needed
-//       console.log('Modal result:', result);
- 
-//       // You can perform actions with the result data here
-//   })
-// }
 
   openRejectionReasonModal() {
     const initialState = {
@@ -483,36 +449,6 @@ export class NewTravelRequestComponent {
     }
   }
 
-  //Deletion of Options
-  selectedOptionIds: number[] = [];
-
-  toggleOptionSelection(item: any) {
-      const index = this.selectedOptionIds.indexOf(item.optionId);
-      if (index === -1) {
-          this.selectedOptionIds.push(item.optionId);
-      } else {
-          this.selectedOptionIds.splice(index, 1);
-      }
-  }
-  
-  isSelected(item: any): boolean {
-      return this.selectedOptionIds.includes(item.optionId);
-  }
-  
-  deleteSelectedOptions() {
-      // Call your service method to delete selected option IDs
-      this.requestService.deleteOptions(this.selectedOptionIds).subscribe({
-          next: () => {
-              console.log("Selected options deleted successfully.");
-              // Clear the selectedOptionIds array
-              this.selectedOptionIds = [];
-              this.commonApiService.setIsFile(true);
-          },
-          error: (error: Error) => {
-              console.log("Error deleting selected options: " + error.message);
-          }
-      });
-  }
   
   //action bar methods
 
@@ -535,24 +471,26 @@ export class NewTravelRequestComponent {
 
   }
 
+  @ViewChild(TabbedOptionViewerComponent) tabbedOptionViewer!: TabbedOptionViewerComponent;
+
   onForwardBtnClick(){
 
     if(this.currentNavIndex === this.totalNavCount){
       const formData = new FormData();
 
       // Convert selectedImages to FormData
-      for (let i = 0; i < this.selectedImages.length; i++) {
-        formData.append('images', this.selectedImages[i], this.selectedImages[i].name);
+      for (let i = 0; i < this.tabbedOptionViewer.addedImageFiles.length; i++) {
+        formData.append('images', this.tabbedOptionViewer.addedImageFiles[i], this.tabbedOptionViewer.addedImageFiles[i].name);
       }
     
       // Convert descriptions to JSON string and append to FormData
       // Convert descriptions to FormData
-      this.descriptions.forEach((desc, index) => {
+      this.tabbedOptionViewer.fileOptionDescriptions.forEach((desc, index) => {
         formData.append(`description[${index}]`, desc);
       });
     
       // Convert texts to FormData
-      this.textOption.forEach((text, index) => {
+      this.tabbedOptionViewer.textOptions.forEach((text, index) => {
         formData.append(`texts[${index}]`, text);
       });
     
@@ -592,175 +530,33 @@ export class NewTravelRequestComponent {
 
   }
 
-  disableSubmitBtn(): boolean {
-    if (this.currentNavIndex === this.totalNavCount) {
-      if (this.selectedImages.length === 0 && this.textOption.length === 0) {
-        return true;
-      } else {
-        return false; // Explicitly return false if conditions are not met
-      }
-    } else {
-      return false; // Explicitly return false if conditions are not met
-    }
-  }
+  // disableSubmitBtn(): boolean {
+  //   if (this.currentNavIndex === this.totalNavCount) {
+  //     if (this.selectedImages.length === 0 && this.textOption.length === 0) {
+  //       return true;
+  //     } else {
+  //       return false; // Explicitly return false if conditions are not met
+  //     }
+  //   } else {
+  //     return false; // Explicitly return false if conditions are not met
+  //   }
+  // }
 
-  //AddOption
-  openAddTextOptionModal(){
-    const initialState = {
-      requestId: this.travelRequestDetailViewModel.requestId,
-      textOptions:this.addtextOption.bind(this)
-    };
-    this.bsModalRef = this.modalService.show(TextEditorComponent, { initialState });
-  }
-
-  textOption: string[] = [];
-
-  addtextOption(textOption: string): void {
-    this.textOption.push(textOption);
-  }
-
-  santizieHtml(html:string):SafeHtml{
-    return this.sanitizer.bypassSecurityTrustHtml(html);
-  }
-
-  panelOpenState: boolean[] = [];
-
-  togglePanel(index: number): void {
-    this.panelOpenState[index] = !this.panelOpenState[index];
-  }
-
-  isPanelOpen(index: number): boolean {
-    return this.panelOpenState[index] || false;
-  }
-  
-  removeTextOption(index: number): void {
-    if (index > -1) {
-      this.textOption.splice(index, 1);
-    }
-  }
-
-  saveTextTravelOption() {
-    this.travelAdminService.saveTravelOption(this.textOption, this.travelRequestDetailViewModel.requestId)
-      .subscribe({
-        next: (response: any) => {
-          console.log('Post successful:', response);
-        },
-        error: (error: any) => {
-          console.error('Post failed:', error);
-        },
-        complete: () => {
-          this.toastService.showToast({ message: "Travel Option Added", toastType: "success", toastDuration: 3000 });
-          console.log('Post request completed.');
-        }
-  });
-  }
-
-  //imag option
-  openAddOptionModal() {
-    if(this.value == 'Texts'){
-      const initialState = {
-        requestId: this.travelRequestDetailViewModel.requestId,
-        textOptions:this.addtextOption.bind(this)
-      };
-      this.bsModalRef = this.modalService.show(TextEditorComponent, { initialState });
-    }
-    else{
-      const initialState = {
-        requestId: this.travelRequestDetailViewModel.requestId,
-        onImagesSelected: this.addNewTravelOptions.bind(this)
-      };
-      this.bsModalRef = this.modalService.show(ModalComponent, { initialState });
-    }
-  }
-
-  selectedImages: File[] = [];
-  imageUrls: string[] = [];
-  descriptions: string[] = [];
-
-  addNewTravelOptions(images: File[], description: string): void {
-    this.selectedImages = [...this.selectedImages, ...images];
-    this.descriptions.push(description);
-
-    const observables = images.map((image) => this.getImageUrl(image));
-  
-    forkJoin(observables).subscribe((urls: string[]) => {
-      this.imageUrls = [...this.imageUrls, ...urls];
-    });
-  }
-  
-  removeImage(index: number): void {
-    if (index >= 0 && index < this.selectedImages.length) {
-      this.selectedImages.splice(index, 1);
-      this.imageUrls.splice(index, 1);
-      this.descriptions.splice(index, 1);
-    }
-  }
-
-  getImageUrl(image: File): Observable<string> {
-    return new Observable<string>((observer) => {
-      const reader = new FileReader();
-      
-      reader.onload = (event: ProgressEvent<FileReader>) => {
-        const dataUrl = event.target?.result as string;
-        observer.next(dataUrl);
-        observer.complete();
-      };
-      
-      reader.onerror = (error) => {
-        observer.error(error);
-      };
-  
-      reader.readAsDataURL(image);
-    });
-  }
-
-  value?: string;
-  onSelect(data: TabDirective): void {
-    this.value = data.heading;
-    this.selectedImageOptionIndex = -1;
-    this.selectedTextOptionIndex = -1;
-  }
-
-  openImageViewer() {
-    this.isImageViewerOpen = true;
-  }
-
-  closeImageViewer() {
-   this.isImageViewerOpen = false;
-   this.initializeComponent();
-  }
-
-
-  selectedImageOptionIndex: number = -1;
-  selectedTextOptionIndex: number = -1;
-
-  //on options selected
-  onOptionSelected(optionType:string, optionIndex: number){
-
-    if(optionType === 'img'){
-        this.selectedImageOptionIndex = optionIndex;
-    }else{
-      if(this.selectedTextOptionIndex === optionIndex){
-        this.selectedTextOptionIndex = -1;
-      }else{
-        this.selectedTextOptionIndex = optionIndex;
-      }
-    }
-
-  }
-
-  deleteSelectedOption(){
-    if(this.selectedImageOptionIndex != -1){
-
-      this.removeImage(this.selectedImageOptionIndex);
-      this.selectedImageOptionIndex = -1;
-    }else{
-      this.removeTextOption(this.selectedTextOptionIndex);
-      this.selectedTextOptionIndex = -1;
-    }
-
-  }
-
+  // saveTextTravelOption() {
+  //   this.travelAdminService.saveTravelOption(this.textOption, this.requestId)
+  //     .subscribe({
+  //       next: (response: any) => {
+  //         console.log('Post successful:', response);
+  //       },
+  //       error: (error: any) => {
+  //         console.error('Post failed:', error);
+  //       },
+  //       complete: () => {
+  //         this.toastService.showToast({ message: "Travel Option Added", toastType: "success", toastDuration: 3000 });
+  //         console.log('Post request completed.');
+  //       }
+  // });
+  // }
 
   //EOF 
 }

@@ -20,31 +20,48 @@
     position: relative;
     width: 16rem;
     margin: 0.5rem;
-
 }
 
-.file_container .file_card .file_name_section{
+.file_container .file_card .email_reminder{
+    color: var(--second-color);
+    width: 25px;
+    height: 25px;
+    background-color: var(--secondary-cyan-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+}
+
+
+.file_container .file_card .file_heading_section{
     display: flex;
     justify-content: space-between;
     border-bottom: 1px dotted var(--ternary-text-color);
     padding-bottom: 0.5rem;
 }
 
+.file_container .file_card .file_heading_section.no_file{
+    border-bottom: 1px solid var(--primary-red-color);
+}
 
-.file_container .file_card .file_name_section .file_name {
+
+
+.file_container .file_card .file_heading_section .file_type {
     font-size: var(--normal-font-size);
     font-weight: var(--active-font-weight);
     color: var(--secondary-text-color);
     margin-bottom: 0;
 }
 
-.file_container .file_card .file_name_section .file_size{
+
+.file_container .file_card .file_heading_section .file_size{
     font-size: var(--extra-small-font-size);
     color: var(--ternary-text-color);
 }
 
 
-.file_container .file_card .file_name_section .file_name i {
+.file_container .file_card .file_heading_section .file_type i {
     color: var(--second-color);
 }
 
@@ -54,10 +71,16 @@
     flex-direction: column;
 }
 
-.file_container .file_card .description_section span {
+
+
+.file_container .file_card .description_section .file_name {
     font-size: var(--extra-small-font-size);
     color: var(--ternary-text-color);
     margin: 2.5px;
+}
+
+.file_container .file_card .description_section .file_name.no_file{
+    color: var(--primary-red-color);
 }
 
 
@@ -69,8 +92,12 @@
     width: 100%;
 }
 
+.file_container .file_card .actions.right_align{
+    justify-content: flex-end;
+}
 
-.file_container .file_card .actions .action_btn{
+
+.file_container .file_card .action_btn{
     background-color: var(--secondary-cyan-color);
     color: var(--second-color);
     padding: 5px 8px;
@@ -80,7 +107,7 @@
     cursor: pointer;
 }
 
-.file_container .file_card .actions .action_btn:hover{
+.file_container .file_card .action_btn:hover{
     background-color: var(--second-color);
     color: var(--card-bg-color);
 }

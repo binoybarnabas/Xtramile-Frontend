@@ -145,7 +145,8 @@ import { TravelRequestInfoCardComponent } from './components/ui/travel-request-i
 import { ImageViewerComponent } from './components/ui/generalUIComponents/image-viewer/image-viewer.component';
 import { CustomConfirmationModalComponent } from './components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/custom-pdf-viewer/custom-pdf-viewer.component';
-import { PdfViewerModule } from 'ng2-pdf-viewer'; // Import Ng2PdfViewerModule
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component'; // Import Ng2PdfViewerModule
 @NgModule({
   declarations: [
     AppComponent,
@@ -275,7 +276,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer'; // Import Ng2PdfViewerModule
     TravelRequestInfoCardComponent,
     ImageViewerComponent,
     CustomConfirmationModalComponent,
-    CustomPdfViewerComponent
+    CustomPdfViewerComponent,
+    TabbedOptionViewerComponent
   ]
   ,
 
