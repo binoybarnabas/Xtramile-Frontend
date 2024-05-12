@@ -603,9 +603,9 @@ export class TravelRequestFormComponent {
     formData.append("prefDepartureTime", this.selectedPrefDepTime);
     formData.append("travelType", this.selectedTravelType);
     formData.append("projectId", this.selectedProjectId.toString());
-    formData.append("cabRequired", this.travelRequestForm.value.accommodationRequired === true ? 'Yes' : 'No');
-    formData.append("prefPickUpTime", this.selectedPrefPickUpTime);
-    formData.append("accommodationRequired", this.travelRequestForm.value.cabRequired === true ? 'Yes' : 'No');
+    formData.append("accommodationRequired", this.travelRequestForm.value.accommodationRequired === true ? 'Yes' : 'No');
+    formData.append("prefPickUpTime", this.isPickUpTimeDisabled() ? '' :this.selectedPrefPickUpTime);
+    formData.append("cabRequired", this.travelRequestForm.value.cabRequired === true ? 'Yes' : 'No');
     const fileInput = this.travelRequestForm.get('travelAuthorizationEmailCapture');
     if (fileInput && fileInput.value) {
       formData.append('travelAuthorizationEmailCapture', fileInput.value);
@@ -645,7 +645,7 @@ export class TravelRequestFormComponent {
       description: 'Please review all the information you have entered to ensure accuracy and completeness. Once submitted, the travel request cannot be modified directly. Any changes will require approval from your supervisor or the travel department.',
       cancelBtnText: 'Cancel',
       confirmBtnText: 'Submit',
-      confirmBtnColor: '#d63031'
+      confirmBtnColor: '#9a4cfa'
     };
   
     const modalRef = this.modalservice.show(CustomConfirmationModalComponent, { initialState });
