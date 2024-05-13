@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
-import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -8,64 +7,16 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './document-card.component.html',
   styleUrls: ['./document-card.component.css']
 })
-export class DocumentCardComponent implements OnInit, OnDestroy {
-  employeeId: number = 0;
-  employeeDocuments: any;
-  pollingInterval: number = 1000;
-  isFlipping: boolean = false;
-  private isFileSubscription!: Subscription;
+export class DocumentCardComponent{
+
+  @Input() travellerDocuments: any;
 
   selectedDocCardId : number = -1;
 
   @Output() openInPdfViewer = new EventEmitter<string>();
+  @Output() updateSelectedDocCardId = new EventEmitter<number>();
 
   constructor(private commonService: CommonAPIService,private http: HttpClient) { }
-
-  ngOnInit() {
-    if (localStorage.getItem('userData')) {
-      const userData = JSON.parse(localStorage.getItem('userData')!);
-      this.employeeId = userData.empId;
-    }
-    this.getDocuments();
-    this.isFileSubscription = this.commonService.isFile$.subscribe(isFile => {
-      if (isFile) {
-        this.getDocuments();
-      }
-    });
-  }
-
-  ngOnDestroy() {
-    this.isFileSubscription.unsubscribe();
-  }
-
-  flipCard(card: any) {
-    this.isFlipping = true;
-    card.isFlipped = !card.isFlipped;
-  }
-
-  getDocuments() {
-    this.commonService.getEmployeeDocuments(this.employeeId).subscribe(
-      (data) => {
-        this.employeeDocuments = data;
-        console.log('Fetched documents:', data);
-      },
-      (error) => {
-        console.error('Error fetching documents:', error);
-      }
-    );
-  }
-  onDeleteDocument(fileId: number): void {
-    this.commonService.deleteEmployeeDetails(fileId).subscribe(
-      () => {
-        this.commonService.setIsFile(true) 
-        console.log('is set fiel',true)
-        console.log(`Document with ID ${fileId} deleted successfully.`);
-      },
-      (error: any) => {
-        console.error(`Error deleting document with ID ${fileId}:`, error);
-      }
-    );
-  }
   
   onDownloadFileClick(url: string, docType: string){
     this.http.get(url, {responseType: 'blob'}).subscribe({
@@ -88,21 +39,22 @@ export class DocumentCardComponent implements OnInit, OnDestroy {
     })
   }
 
-
   onDocCardSelected(cardId: number){
+    
     if(this.selectedDocCardId === cardId){
       this.selectedDocCardId = -1;
-    }else{
+    }
+    else{
       this.selectedDocCardId = cardId;
     }
-  }
 
+    this.updateSelectedDocCardId.emit(this.selectedDocCardId);
+
+  }
 
   openPdfViewer(fileUrl: string) {
     this.openInPdfViewer.emit(fileUrl);
   }
-
-
 
 
 }

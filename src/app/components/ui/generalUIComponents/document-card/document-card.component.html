@@ -1,6 +1,6 @@
 <div class="main_container" >
 
-  <ng-container *ngFor="let card of employeeDocuments">
+  <ng-container *ngFor="let card of travellerDocuments">
     <div [ngClass]=" selectedDocCardId === card.fileId ? 'doc_card selected' : 'doc_card'" (click)="onDocCardSelected(card.fileId)" (dblclick)="openPdfViewer(card.documentURL)" >
 
       <div class="top_section">
@@ -22,8 +22,8 @@
           </div>
 
           <div class="info_item">
-            <span class="title">Category</span>
-            <p class="value">H1B Visa</p>
+            <span class="title">Issued By </span>
+            <p class="value">{{ card.country }}</p>
           </div>
 
         </div>
@@ -31,19 +31,19 @@
         <div class="right_section">
           
           <div class="info_item">
-            <span class="title">Issued By </span>
-            <p class="value">{{ card.identificationNumber }}</p>
+            <span class="title">Category</span>
+            <p class="value">H1B Visa</p>
           </div>
 
           <div class="info_item">
             <span class="title">Valid Thru</span>
             <p class="value">{{ card.expiryDate | date : "dd-MM-yyyy" }}</p>
           </div>
-
+<!-- 
           <div class="info_item">
             <span class="title">File Type</span>
             <p class="value">PDF</p>
-          </div>
+          </div> -->
 
         </div>
         

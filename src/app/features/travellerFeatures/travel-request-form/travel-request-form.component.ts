@@ -624,6 +624,7 @@ export class TravelRequestFormComponent {
       }
     });
   }
+
   openConfirmationModal() {
     const initialState = {
       mainText: 'Travel Request Confirmation',
@@ -643,6 +644,7 @@ export class TravelRequestFormComponent {
       this.submitTravelRequest();
     });
   }
+
   getEmployeeRequestDetails(requestId: number) {
     this.commonApiService.getEmployeeRequestDetail(requestId).subscribe(
       (data: any) => {

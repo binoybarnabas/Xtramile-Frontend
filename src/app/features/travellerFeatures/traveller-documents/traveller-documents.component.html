@@ -5,14 +5,14 @@
 
   <div  class="btn_container">
 
-    <button *ngIf="!isDocUploadModalOpen" (click)="onDeleteBtnClick()" class="del_btn"> <i class="ri-delete-bin-line"></i></button>
+    <button *ngIf="!isDocUploadModalOpen" [disabled]="selectedDocCardId === -1 ? 'true' : null " (click)="onDeleteBtnClick()" class="del_btn"> <i class="ri-delete-bin-line"></i></button>
     <button *ngIf="isDocUploadModalOpen" (click)="onCancelBtnClick()" class="cancel_btn"> Cancel </button>
     <button (click)="onForwardBtnClick()" class="add_btn">{{forwardBtnText}}</button>
 
   </div>
 
   <div *ngIf="!isDocUploadModalOpen" class="doc_container">
-    <app-document-card (openInPdfViewer)="openPdfViewer($event)"> </app-document-card>
+    <app-document-card [travellerDocuments]="travellerDocuments" (openInPdfViewer)="openPdfViewer($event)" (updateSelectedDocCardId)="updateSelectedDocCardId($event)"> </app-document-card>
   </div>
 
   <!-- Upload Form -->
@@ -211,7 +211,7 @@
                     >
                     <input
                       type="date"
-                      formControlName="expiryDate"
+                      formControlName="IssueDate"
                       class="date_picker"
                     />
                   </div>                

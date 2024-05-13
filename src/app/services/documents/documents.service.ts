@@ -59,4 +59,11 @@ export class DocumentsService {
     return this.http.get(this.travelDocumentsURL + `/${fileType}/searchbyEmployee/${employeeName}`);    
   }
 
+
+  //method to delete travel documents
+  deleteDocument(documentId: number):Observable<any>{
+    return this.http.delete(`http://localhost:5190/api/traveldocumentfile/deleteDocument/${documentId}`);
+  }
+
+
 }
