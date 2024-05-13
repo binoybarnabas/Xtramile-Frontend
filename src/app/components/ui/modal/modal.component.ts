@@ -153,7 +153,7 @@ export class ModalComponent {
   @Input()
   onImagesSelected!: Function;
 
-  selectImages(): void {
+  addImageFile(): void {
     const images: File[] = this.selectedImages;
     const descriptions: string[] = this.travelOptionForm.get('description')?.value;
   

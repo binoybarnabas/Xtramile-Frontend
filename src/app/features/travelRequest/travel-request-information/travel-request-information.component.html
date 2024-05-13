@@ -1,4 +1,4 @@
-<div *ngIf="!isImageViewerOpen" class="req_forms_main_container">
+<div class="req_forms_main_container">
   <!-- heading bar -->
   <div class="heading_section">
     <div class="section_heading_card">
@@ -113,7 +113,10 @@
             "
             class="travel_option_section"
           >
-            <div
+
+          <app-tabbed-option-viewer [currentLoggedInUserRole]="currentLoggedInUserRole"></app-tabbed-option-viewer>
+          <!-- heading -->
+            <!-- <div
               *ngIf="status !== 'Approved by TA' && status !== 'Ongoing'"
               class="head_section"
             >
@@ -136,41 +139,22 @@
               <div (click)="openAddOptionModal()" class="add_btn">
                 <span> Add</span>
               </div>
-            </div>
+            </div> -->
 
-            <div class="option_container">
+            <!-- <div class="option_container">
               <tabset [justified]="true">
                 <tab heading="Images" (selectTab)="onSelect($event)">
-                  <div class="selected-images-container">
-                    <div
-                      (click)="onOptionSelected('img', i)"
-                      (dblclick)="openImageViewer()"
-                      *ngFor="let image of selectedImages; let i = index"
-                      class="image-item"
-                    >
-                      <div
-                        [ngClass]="
-                          selectedImageOptionIndex === i
-                            ? 'img_wrapper active'
-                            : 'img_wrapper'
-                        "
-                      >
-                        <img
-                          class="img"
-                          [src]="imageUrls[i]"
-                          alt="Selected_Image"
-                        />
+
+                  <div class="img_option_container"  >
+
+                    <ng-container *ngFor="let image of selectedImages; let i = index">
+                      <div (click)="onOptionSelected('img', i)" (dblclick)="openImageViewer()" [ngClass]="selectedImageOptionIndex === i ? 'img_card active':'img_card' ">
+                        <img class="img" [src]="imageUrls[i]" alt="">
                       </div>
-                      <!-- <p class="text">{{ descriptions[i] }}</p> -->
-                      <!-- <button (click)="removeImage(i)" class="remove-btn"><i class="ri-delete-bin-line"></i></button> -->
-                    </div>
+                    </ng-container>
+
                   </div>
-                  <p
-                    *ngIf="selectedImages.length == 0"
-                    class="option_default_message"
-                  >
-                    No options added yet!
-                  </p>
+
                 </tab>
                 <tab heading="Texts" (selectTab)="onSelect($event)">
                   <div class="expansion_panel_container">
@@ -213,7 +197,7 @@
                   </p>
                 </tab>
               </tabset>
-            </div>
+            </div> -->
 
             <!-- form input group ends -->
           </div>
@@ -266,7 +250,7 @@
         <button
           (click)="onForwardBtnClick()"
           class="btn"
-          [disabled]="disableSubmitBtn()"
+          
         >
           {{ forwardBtnTitle }}
         </button>
@@ -277,10 +261,4 @@
   <!-- req form main container ends -->
 </div>
 
-<app-image-viewer
-  *ngIf="isImageViewerOpen"
-  [images]="imageUrls"
-  [descriptions]="descriptions"
-  [currentImageIndex]="selectedImageOptionIndex"
-  (close)="closeImageViewer()"
-></app-image-viewer>
+
