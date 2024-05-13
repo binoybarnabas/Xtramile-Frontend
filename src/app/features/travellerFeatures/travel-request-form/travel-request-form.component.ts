@@ -111,7 +111,7 @@ export class TravelRequestFormComponent {
     this.isProjectDetailsSectionOpen = false;
     this.selectedTripType = 'round_trip';
     this.selectedTravelMode = 1;
-    this.selectedOrigin = 'Trivandrum';
+    this.selectedOrigin = 'Thiruvananthapuram';
     this.selectedDestination = 'Kochi';
     this.selectedTravelType = 'domestic'
     this.selectedTravelPurpose = 'Business Meet';
@@ -366,14 +366,14 @@ export class TravelRequestFormComponent {
     }
     const filterValue = value.toLowerCase();
     if (field === 'sourceCity') {
-      this.sourceFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue) || city.country.toLowerCase().includes(filterValue));
+      this.sourceFilteredCities = this.cities.filter(city => city.city.toLowerCase().includes(filterValue) || city.country.toLowerCase().includes(filterValue));
     } else if (field === 'destinationCity') {
-      this.destinationFilteredCities = this.cities.filter(city => city.name.toLowerCase().includes(filterValue) || city.country.toLowerCase().includes(filterValue));
+      this.destinationFilteredCities = this.cities.filter(city => city.city.toLowerCase().includes(filterValue) || city.country.toLowerCase().includes(filterValue));
     }
   }
 
   selectCity(city: any, field: string): void {
-    this.travelRequestForm.get(field)?.setValue(city.name);
+    this.travelRequestForm.get(field)?.setValue(city.city);
 
     if (field === 'sourceCity') {
       this.travelRequestForm.get('sourceCountry')?.setValue(city.country); // Set the source country value
