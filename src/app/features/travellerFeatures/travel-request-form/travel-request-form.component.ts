@@ -11,9 +11,7 @@ import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { EmployeeDetails } from '../../travelRequest/travel-request-information/request';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
-import { RequestStatus } from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
-import { Status } from 'src/app/utils/StatusEnum';
 @Component({
   selector: 'app-travel-request-form',
   templateUrl: './travel-request-form.component.html',
@@ -616,25 +614,13 @@ export class TravelRequestFormComponent {
     this.requestService.sendEmployeeNewTravelRequest(formData).subscribe({
       next: (response) => {
         console.log(response);
-        this.requestId = response;
-        setTimeout(() => {
-          this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
-          this.router.navigate(['employee/pending']);
-        },4000)
+        this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
+        this.router.navigate(['employee/pending']);
       },
       error: (error: Error) => {
         console.log(error);
       },
-      complete: () => {
-        
-        const requestStatus: RequestStatus = {
-          requestId: this.requestId,
-          empId: this.empId,
-          primaryStatusId: Status.Open,
-          date: new Date(),
-          secondaryStatusId: Status.Pending
-        };
-        this.commonApiService.updateRequestStatus(requestStatus).subscribe();      
+      complete: () => {   
       }
     });
   }
