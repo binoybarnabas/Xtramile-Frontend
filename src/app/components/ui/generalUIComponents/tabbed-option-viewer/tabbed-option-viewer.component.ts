@@ -50,7 +50,6 @@ export class TabbedOptionViewerComponent {
 
   ngOnInit(){
     this.initializeTabs(this.requestStatus, this.currentLoggedInUserRole);
-
   }
 
   onTabChange(index: number, tabName:string){
@@ -82,6 +81,9 @@ export class TabbedOptionViewerComponent {
     
     if(currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'travelAdmin') {
 
+      this.getTravelOptionsWithImageByReqId(this.requestId)
+      this.getTravelOptionsWithoutImages();
+
       if (requestStatus === 'Waiting' || requestStatus === 'Approved by RM') {
         this.travelOptionViewerTabs = commonTabs;
       } else if (requestStatus === 'Selected') {
@@ -99,8 +101,8 @@ export class TabbedOptionViewerComponent {
     }else if(currentLoggedInUserRole === 'manager' && requestStatus === 'Waiting'){
       this.isActionBarVisible = true;
       this.actionBarTitle = 'Select a Travel Option';
-      this.getTravelOptionsWithImageByReqId(this.requestId)
-      this.getTravelOptionsWithoutImages();
+      //this.getTravelOptionsWithImageByReqId(this.requestId)
+      //this.getTravelOptionsWithoutImages();
     }
     
   }
