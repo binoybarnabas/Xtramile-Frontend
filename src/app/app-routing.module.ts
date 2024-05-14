@@ -82,10 +82,10 @@ const routes: Routes = [
       { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent,children: [
         {
           path:'',component: ManagerForwadedRequestsComponent
-        },
-        {
-          path: 'view_options_travel', component: ManagerTravelOptionsViewerComponent
         }
+        //{
+          //path: 'view_options_travel', component: ManagerTravelOptionsViewerComponent
+        //}
       ] },
       { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
       { path: 'closed', component: ManagerClosedTravelRequestsComponent },
@@ -105,7 +105,7 @@ const routes: Routes = [
       {
         path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
           { path: '', component: TravelAdminWaitingRequestsComponent },
-          { path: 'view_travel_options', component: ManagerTravelOptionsViewerComponent }
+          //{ path: 'view_travel_options', component: ManagerTravelOptionsViewerComponent }
         ]
       },
       {
@@ -117,6 +117,7 @@ const routes: Routes = [
       { path: 'approved_requests', component: TravelAdminOngoingTravelRequestsComponent },
       { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },
       // { path: 'profile', component: TravelAdminProfileComponent },
+      //Component Name - Updated to newTravelRequestComponent
       { path: 'requestdetail', component: NewTravelRequestComponent },
       { path: 'request', component: TravelRequestFormComponent },
       { path: 'pending', component: TravellerPendingRequestsComponent },

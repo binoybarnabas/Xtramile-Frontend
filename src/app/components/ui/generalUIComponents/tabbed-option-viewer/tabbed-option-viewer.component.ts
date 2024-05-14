@@ -6,6 +6,9 @@ import { Observable, forkJoin } from 'rxjs';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
+import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
+import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
 @Component({
   selector: 'app-tabbed-option-viewer',
@@ -14,16 +17,18 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class TabbedOptionViewerComponent {
 
-  //@Input() isDelBtnVisible: boolean = false;
-  //@Input() isAddBtnVisible: boolean = false;
+
 
   @Input() actionBarTitle : string = "Update Travel Options";  
   @Input() currentLoggedInUserRole : string = 'travelAdmin';
   @Input() requestId : number = -1;
-  @Input() requestStatus: string = 'Forwarded';
+  @Input() requestStatus: string = '';
   //fetch from calling component !!!!!!
 
   isActionBarVisible: boolean = false;
+  isDelBtnVisible: boolean = false;
+  isAddBtnVisible: boolean = false;
+
   activeTabIndex: number = 0;
   activeTabName : string = 'Files';
 
@@ -32,12 +37,12 @@ export class TabbedOptionViewerComponent {
 
   emptyOptionMessageTitle : string = 'No Options Added Yet!';
   emptyImageOptionMessage : string = 'No Travel Options added as an image. Click on Add to add an option'
-  emptyTextOptionMessage : string = 'No Travel Options added as in the plain text form. Click on Add to add an option'
+  emptyTextOptionMessage : string = 'No Travel Options added as plain text. Click on Add to add an option'
 
 
   bsModalRef!: BsModalRef;
 
-  constructor(private modalService: BsModalService,
+  constructor(private modalService: BsModalService, private requestService: RequestService, private managerService:ManagerTravelRequestsService,
     private sanitizer: DomSanitizer
   ){
 
@@ -74,19 +79,30 @@ export class TabbedOptionViewerComponent {
       { name: 'Confirmed Option' }
     ];
     
-    if(currentLoggedInUserRole === 'Manager' || currentLoggedInUserRole === 'travelAdmin') {
+    if(currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'travelAdmin') {
 
-      if (requestStatus === 'Waiting' || requestStatus === 'Forwarded') {
+      this.getTravelOptionsWithImageByReqId(this.requestId)
+      this.getTravelOptionsWithoutImages();
+
+      if (requestStatus === 'Waiting' || requestStatus === 'Approved by RM') {
         this.travelOptionViewerTabs = commonTabs;
       } else if (requestStatus === 'Selected') {
         this.travelOptionViewerTabs = tabsWithSelectedOption;
-      } else if (requestStatus === 'Approved') {
+      } else if (requestStatus === 'Approved by TA') {
         this.travelOptionViewerTabs = tabsWithConfirmedOption;
       }
 
     } 
-    if(currentLoggedInUserRole === 'travelAdmin' && requestStatus === 'Forwarded' ){
+
+    if(currentLoggedInUserRole === 'travelAdmin' && requestStatus === 'Approved by RM' ){
       this.isActionBarVisible = true;
+      this.isDelBtnVisible = true;
+      this.isAddBtnVisible = true;
+    }else if(currentLoggedInUserRole === 'manager' && requestStatus === 'Waiting'){
+      this.isActionBarVisible = true;
+      this.actionBarTitle = 'Select a Travel Option';
+      //this.getTravelOptionsWithImageByReqId(this.requestId)
+      //this.getTravelOptionsWithoutImages();
     }
     
   }
@@ -162,6 +178,9 @@ export class TabbedOptionViewerComponent {
   selectedImageOptionIndex: number = -1;
   selectedTextOptionIndex: number = -1;
 
+  //to get the id of the selected option/ option chosen by manager
+  selectedTravelOptionId : number = -1;
+
   //on options selected
   onOptionSelected(optionType:string, optionIndex: number){
 
@@ -169,16 +188,25 @@ export class TabbedOptionViewerComponent {
         
         if(this.selectedImageOptionIndex === optionIndex){
           this.selectedImageOptionIndex = -1;
-        }else{
+          this.selectedTravelOptionId = -1;
+        }
+        else{
           this.selectedImageOptionIndex = optionIndex;
+          this.selectedTravelOptionId = this.travelOptionsWithImagesData[optionIndex].optionId;
         }
 
-    }else{
+    }
+    else{
+
       if(this.selectedTextOptionIndex === optionIndex){
         this.selectedTextOptionIndex = -1;
-      }else{
-        this.selectedTextOptionIndex = optionIndex;
+        this.selectedTravelOptionId = -1;
       }
+      else{
+        this.selectedTextOptionIndex = optionIndex;
+        this.selectedTravelOptionId = this.descriptions[optionIndex].optionId;
+      }
+
     }
 
   }
@@ -203,6 +231,7 @@ export class TabbedOptionViewerComponent {
       this.bsModalRef = this.modalService.show(TextEditorComponent, { initialState });
   }
 
+  //deprecated method!!!!
   santizieHtml(html:string):SafeHtml{
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
@@ -230,37 +259,21 @@ export class TabbedOptionViewerComponent {
   }
 
   //Deletion of Options
-  selectedOptionIds: number[] = [];
+  // selectedOptionIds: number[] = [];
 
-  toggleOptionSelection(item: any) {
-      const index = this.selectedOptionIds.indexOf(item.optionId);
-      if (index === -1) {
-          this.selectedOptionIds.push(item.optionId);
-      } else {
-          this.selectedOptionIds.splice(index, 1);
-      }
-  }
-  
-  isSelected(item: any): boolean {
-      return this.selectedOptionIds.includes(item.optionId);
-  }
-  
-  // deleteSelectedOptions() {
-  //     // Call your service method to delete selected option IDs
-  //     this.requestService.deleteOptions(this.selectedOptionIds).subscribe({
-  //         next: () => {
-  //             console.log("Selected options deleted successfully.");
-  //             // Clear the selectedOptionIds array
-  //             this.selectedOptionIds = [];
-  //             this.commonApiService.setIsFile(true);
-  //         },
-  //         error: (error: Error) => {
-  //             console.log("Error deleting selected options: " + error.message);
-  //         }
-  //     });
+  // toggleOptionSelection(item: any) {
+  //     const index = this.selectedOptionIds.indexOf(item.optionId);
+  //     if (index === -1) {
+  //         this.selectedOptionIds.push(item.optionId);
+  //     } else {
+  //         this.selectedOptionIds.splice(index, 1);
+  //     }
   // }
-
-
+  
+  // isSelected(item: any): boolean {
+  //     return this.selectedOptionIds.includes(item.optionId);
+  // }
+  
   value?: string;
 
   openImageViewer() {
@@ -270,6 +283,94 @@ export class TabbedOptionViewerComponent {
   closeImageViewer() {
    this.isImageViewerOpen = false;
   }
+
+  
+  travelOptionsWithImagesData: TravelOptionDetails[] = [];
+
+  //get uploaded travel options with images
+  getTravelOptionsWithImageByReqId(reqId: number) {
+
+    this.requestService.getTravelOptionsByReqId(reqId).subscribe({
+      next: (data) => {
+        this.travelOptionsWithImagesData = data;
+      },
+      error: (error: Error) => {
+        console.log("Error has occurred, " + error.message);
+      },
+      complete: () => {
+        //console.log("Completed");
+        if(this.travelOptionsWithImagesData.length === 0){
+          this.emptyImageOptionMessage = 'No Travel options added as image.'
+        }
+      }
+    });
+  
+
+  }
+
+  receivingOptionId !:number;
+  //change array name 
+  descriptions!: any[];
+
+  //get text options
+  getTravelOptionsWithoutImages(){
+    this.managerService.getAvailableOptionsDescription(this.requestId).subscribe({
+      next: (response: any) =>{
+        this.descriptions = response.map((item: { htmlString: SafeHtml; description: string; expanded:boolean; clicked:boolean }) => {
+          item.htmlString = this.sanitizer.bypassSecurityTrustHtml(item.description);
+          item.expanded = false;
+          item.clicked = false; 
+          return item;
+        });
+        this.sortDescriptions();
+        
+      },
+      error: (error: any) => {
+        console.error('Post failed:', error);
+      },
+      complete: () => {
+      if(this.descriptions.length === 0) {
+        this.emptyTextOptionMessage = 'No Travel options added as plain text'
+      }
+      }
+   })
+  }
+
+  getSelectedOption(){
+   this.requestService.selectedOptionFromEmployee(this.requestId).subscribe({
+    next: (data) =>{
+    this.receivingOptionId = data
+    console.log(this.receivingOptionId);
+    this.sortDescriptions();
+    this.selectedOption();
+  },
+  error: (error: any) => {
+    console.error('Post failed:', error);
+  },
+  complete: () => {
+    console.log('Post request completed.');
+  }
+
+  })
+  }
+
+  sortDescriptions(): void {
+    if (this.receivingOptionId) {
+      const selectedIndex = this.descriptions.findIndex(item => item.optionId === this.receivingOptionId);
+      if (selectedIndex !== -1) {
+        const selectedOption = this.descriptions.splice(selectedIndex, 1)[0];
+        this.descriptions.unshift(selectedOption);
+      }
+    }
+  }
+
+  selectedOption(): boolean {
+    return this.descriptions.some((item: { optionId: number; }) => item.optionId === this.receivingOptionId);
+  }
+
+
+
+
 
 
 }

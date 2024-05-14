@@ -204,17 +204,20 @@ export class ManagerForwadedRequestsComponent {
   queryParams: any = {};
   handleSelectedRow(row: any){
     console.log(row)
-    if(this.activeTabIndex === 1 || this.activeTabIndex === 2){
-      this.requestId = row[1][0];
-      console.log(row);
-      if(this.activeTabIndex == 1){
-        this.queryParams = {requestId: this.requestId}
-      }
-      if(this.activeTabIndex === 2){
-        this.queryParams = {requestId: this.requestId,IsSelectedPage:true}
-      }
-      this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: this.queryParams});
-    }
+    // if(this.activeTabIndex === 1 || this.activeTabIndex === 2){
+    //   this.requestId = row[1][0];
+    //   console.log(row);
+    //   if(this.activeTabIndex == 1){
+    //     this.queryParams = {requestId: this.requestId}
+    //   }
+    //   if(this.activeTabIndex === 2){
+    //     this.queryParams = {requestId: this.requestId,IsSelectedPage:true}
+    //   }
+    //   this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: this.queryParams});
+    // }
+    this.requestId = row[1][0];
+    this.queryParams = {requestId: this.requestId}
+    this.router.navigate(['manager/requestdetail'], {queryParams: this.queryParams});
   } 
 
   handleTabChange(activeTabIndex : number){

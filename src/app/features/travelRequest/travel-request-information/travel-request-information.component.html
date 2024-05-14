@@ -107,97 +107,12 @@
 
           <!--TA- add available options  section -->
           <div
-            *ngIf="
-              currentLoggedInUserRole === 'travelAdmin' &&
-              newReqFormSubMenuValue === 4
-            "
+            *ngIf=" newReqFormSubMenuValue === 4 &&
+             (currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole === 'manager')"
             class="travel_option_section"
           >
 
-          <app-tabbed-option-viewer [currentLoggedInUserRole]="currentLoggedInUserRole"></app-tabbed-option-viewer>
-          <!-- heading -->
-            <!-- <div
-              *ngIf="status !== 'Approved by TA' && status !== 'Ongoing'"
-              class="head_section"
-            >
-              <div (click)="deleteSelectedOption()" class="del_btn_container">
-                <button
-                  [disabled]="
-                    selectedImageOptionIndex === -1 &&
-                    selectedTextOptionIndex === -1
-                  "
-                  class="del_btn"
-                >
-                  <i class="ri-delete-bin-2-fill"></i>
-                </button>
-              </div>
-
-              <div class="title">
-                <span>Update Travel Options</span>
-              </div>
-
-              <div (click)="openAddOptionModal()" class="add_btn">
-                <span> Add</span>
-              </div>
-            </div> -->
-
-            <!-- <div class="option_container">
-              <tabset [justified]="true">
-                <tab heading="Images" (selectTab)="onSelect($event)">
-
-                  <div class="img_option_container"  >
-
-                    <ng-container *ngFor="let image of selectedImages; let i = index">
-                      <div (click)="onOptionSelected('img', i)" (dblclick)="openImageViewer()" [ngClass]="selectedImageOptionIndex === i ? 'img_card active':'img_card' ">
-                        <img class="img" [src]="imageUrls[i]" alt="">
-                      </div>
-                    </ng-container>
-
-                  </div>
-
-                </tab>
-                <tab heading="Texts" (selectTab)="onSelect($event)">
-                  <div class="expansion_panel_container">
-                    <div
-                      (click)="onOptionSelected('text', i)"
-                      *ngFor="let htmlContent of textOption; let i = index"
-                      class="expansion_panel"
-                    >
-                      <div
-                        [ngClass]="
-                          selectedTextOptionIndex === i
-                            ? 'expansion_panel_header active'
-                            : 'expansion_panel_header'
-                        "
-                        (click)="togglePanel(i)"
-                      >
-                        <p class="title">Option {{ i + 1 }}</p>
-                        <i
-                          class="icon ri-arrow-down-wide-line"
-                          *ngIf="!isPanelOpen(i)"
-                        ></i>
-                        <i
-                          class="icon ri-arrow-up-wide-line"
-                          *ngIf="isPanelOpen(i)"
-                        ></i>
-                      </div>
-                      <div
-                        class="expansion_panel_content"
-                        *ngIf="isPanelOpen(i)"
-                        [innerHTML]="santizieHtml(htmlContent)"
-                      ></div>
-                    </div>
-                  </div>
-
-                  <p
-                    *ngIf="textOption.length == 0"
-                    class="option_default_message"
-                  >
-                    No options added yet!
-                  </p>
-                </tab>
-              </tabset>
-            </div> -->
+          <app-tabbed-option-viewer [requestId]="requestId" [requestStatus]="status" [currentLoggedInUserRole]="currentLoggedInUserRole"></app-tabbed-option-viewer>
 
             <!-- form input group ends -->
           </div>
@@ -228,6 +143,7 @@
 
             <!-- form input group ends -->
           </div>
+
         </form>
 
         <!-- form container ends -->

@@ -19,6 +19,16 @@
     border-radius: 5px;
 }
 
+.main_container .heading_section .action_bar.single_item{
+    color: var(--second-color);
+    box-shadow: none;
+    background:none;
+    border-bottom: 1px solid var(--menu-hover-color);
+    border-top: 1px solid var(--menu-hover-color);
+    border-radius: 0;
+}
+
+
 .main_container .heading_section .action_bar .del_btn{
     height: 32px;
     width: 32px;
