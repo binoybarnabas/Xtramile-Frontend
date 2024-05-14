@@ -71,6 +71,8 @@ export class NewTravelRequestComponent {
 
   status: string = '';
 
+  requestId: number =-1;
+
   // Function to convert the Map into an array of key-value pairs
   getGeneralInfoMapEntries(): [string, any][] {
     return Array.from(this.generalInformationsMap.entries());
@@ -166,8 +168,13 @@ export class NewTravelRequestComponent {
     switch (this.currentLoggedInUserRole) {
 
       case 'manager':
-        this.leftSectionNavItems = ["General Information", "Trip Information", "Additional Information", "Documents Attached"];
-        this.totalNavCount = 3;
+        if(this.status === 'Waiting'){
+          this.leftSectionNavItems = ["General Information", "Trip Information", "Additional Information", "Documents Attached", "Travel Options"];
+          this.totalNavCount = 4;
+        }else{
+          this.leftSectionNavItems = ["General Information", "Trip Information", "Additional Information", "Documents Attached"];
+          this.totalNavCount = 3;
+        }
         break;
 
       case 'travelAdmin':
@@ -230,8 +237,8 @@ export class NewTravelRequestComponent {
     
     //get an employee request based on an request Id
     this.route.queryParams.subscribe(params => {
-      const requestId = params['requestId'];
-      this.managerTravelRequest.GetTravelRequest(requestId).subscribe({
+      this.requestId = params['requestId'];
+      this.managerTravelRequest.GetTravelRequest(this.requestId).subscribe({
         next: (data) => {
           data.departureDate = this.datePipe.transform(data.departureDate, "dd/MM/yyyy") || ' ';
           data.returnDate = this.datePipe.transform(data.returnDate, "dd/MM/yyyy") || ' '
@@ -245,21 +252,24 @@ export class NewTravelRequestComponent {
             }
           });
 
+          this.requestService.getStatusName(this.requestId).subscribe(({
+            next: (data) => {
+              //reqstatus in string 
+              this.status = data;
+              console.log("TA")
+             
+            },
+            complete: () => {
+              this.updateNavItemsBasedOnUserRole();
+            }
+          })
+          );
+
           //if logged in user is travel admin and request status is ongoing, enable the close button
           if(this.userData.role =='Manager' && this.userData.department == 'TA' ){
-            this.requestService.getStatusName(requestId).subscribe(({
-              next: (data) => {
-                this.status = data;
-                console.log("TA")
-                if(data=='Ongoing'){
-                  this.isCloseVisible=true;
-                }
-              },
-              complete: () => {
-                this.updateNavItemsBasedOnUserRole();
-              }
-            })
-            );
+            if(this.status === 'Ongoing'){
+              this.isCloseVisible=true;
+            }
           }
 
           this.requestService.getEmployeeDataById(Number(this.travelRequestDetailViewModel.createdBy)).subscribe({
@@ -473,62 +483,115 @@ export class NewTravelRequestComponent {
 
   @ViewChild(TabbedOptionViewerComponent) tabbedOptionViewer!: TabbedOptionViewerComponent;
 
+
+  //handling forward btn click 
   onForwardBtnClick(){
 
     if(this.currentNavIndex === this.totalNavCount){
-      const formData = new FormData();
 
-      // Convert selectedImages to FormData
-      for (let i = 0; i < this.tabbedOptionViewer.addedImageFiles.length; i++) {
-        formData.append('images', this.tabbedOptionViewer.addedImageFiles[i], this.tabbedOptionViewer.addedImageFiles[i].name);
-      }
-    
-      // Convert descriptions to JSON string and append to FormData
-      // Convert descriptions to FormData
-      this.tabbedOptionViewer.fileOptionDescriptions.forEach((desc, index) => {
-        formData.append(`description[${index}]`, desc);
-      });
-    
-      // Convert texts to FormData
-      this.tabbedOptionViewer.textOptions.forEach((text, index) => {
-        formData.append(`texts[${index}]`, text);
-      });
-    
-      // Append other fields to FormData
-      formData.append('requestId', String(this.travelRequestDetailViewModel.requestId));
-      formData.append('empId', String(this.empId));
-      formData.append('primaryStatusId', '2'); // Assign the primary status ID
-      formData.append('date', new Date().toISOString()); // Assign the current date
-      formData.append('secondaryStatusId', '10'); // Assign the secondary status ID 
-      console.log(formData);
-      this.commonApiService.addOptionsForRequest(formData).subscribe({
-        next: (data: string) => {
-        },
-        error: (error: Error) => {
-          console.log("Error in posting request status");
-          console.log(error.message);
-        },
-        complete: () => {
-          console.log("Posting Request Status Complete");
-          this.toastService.showToast({ message: "Travel Options Send", toastType: "success", toastDuration: 3000 });
-          this.router.navigate(['/traveladmin/waiting']);
-          this.currentNavIndex = 0;
-          this.newReqFormSubMenuValue = this.currentNavIndex;
-          this.forwardBtnTitle = 'Next';
+      //handle manager submission - forwarding, option selections
+      if(this.currentLoggedInUserRole === 'manager'){
+
+        if(this.status === 'Open'){
+          //Forward Requests
+          
         }
-      });
+        //Options Sent by TA
+        else if(this.status === 'Waiting'){
+          //choose and submit the option
+          this.submitSelectedTravelOption(this.tabbedOptionViewer.selectedTravelOptionId)
+        }
+
+      }
+      else if(this.currentLoggedInUserRole === 'travelAdmin' && this.status !== 'Open'){
+        //TA events
+
+        if(this.status === 'Approved by RM'){
+          const formData = new FormData();
+
+          // Convert selectedImages to FormData
+          for (let i = 0; i < this.tabbedOptionViewer.addedImageFiles.length; i++) {
+            formData.append('images', this.tabbedOptionViewer.addedImageFiles[i], this.tabbedOptionViewer.addedImageFiles[i].name);
+          }
+        
+          // Convert descriptions to JSON string and append to FormData
+          // Convert descriptions to FormData
+          this.tabbedOptionViewer.fileOptionDescriptions.forEach((desc, index) => {
+            formData.append(`description[${index}]`, desc);
+          });
+        
+          // Convert texts to FormData
+          this.tabbedOptionViewer.textOptions.forEach((text, index) => {
+            formData.append(`texts[${index}]`, text);
+          });
+        
+          // Append other fields to FormData
+          //sus - 
+          formData.append('requestId', String(this.travelRequestDetailViewModel.requestId));
+          formData.append('empId', String(this.empId));
+          formData.append('primaryStatusId', '2'); // Assign the primary status ID
+          formData.append('date', new Date().toISOString()); // Assign the current date
+          formData.append('secondaryStatusId', '10'); // Assign the secondary status ID 
+          console.log(formData);
+          this.commonApiService.addOptionsForRequest(formData).subscribe({
+            next: (data: string) => {
+            },
+            error: (error: Error) => {
+              console.log("Error in posting request status");
+              console.log(error.message);
+            },
+            complete: () => {
+              console.log("Posting Request Status Complete");
+              this.toastService.showToast({ message: "Travel Options Send", toastType: "success", toastDuration: 3000 });
+              this.router.navigate(['/traveladmin/waiting']);
+              this.currentNavIndex = 0;
+              this.newReqFormSubMenuValue = this.currentNavIndex;
+              this.forwardBtnTitle = 'Next';
+            }
+          });
+
+        }
+        else if(this.status === 'Selected'){
+          //Confirm / Edit Selcted Travel Option
+        }
+
+      }
+
+
     }
 
     if(this.currentNavIndex+1 === this.totalNavCount){
-      // console.log(this.currentNavIndex);
       this.forwardBtnTitle = 'Submit';
     }
 
     this.currentNavIndex++;
     this.newReqFormSubMenuValue = this.currentNavIndex;
-    console.log(this.currentNavIndex);
+    //console.log(this.currentNavIndex);
 
   }
+
+
+  //submit chosen travel option - //status - update - dependency - change status button
+  submitSelectedTravelOption(selectedTravelOptionId: number): void {  
+    
+    console.log('Option confirmed:', selectedTravelOptionId);
+    this.requestService.submitSelectedOption(this.requestId, this.empId, selectedTravelOptionId).subscribe({
+      next: (response: any) => {
+        console.log('Post successful:', response);
+        //this.getAvailableOptionsDescription();
+      },
+      error: (error: any) => {
+        console.error('Post failed:', error);
+      },
+      complete: () => {
+        console.log('Post request completed.');
+        this.router.navigate(['manager/dashboard']);
+        this.toastService.showToast({ message: "Travel Options Selected", toastType: "success", toastDuration: 3000 });
+      }
+    });
+  }
+  
+
 
   // disableSubmitBtn(): boolean {
   //   if (this.currentNavIndex === this.totalNavCount) {
