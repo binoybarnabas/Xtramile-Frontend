@@ -69,12 +69,16 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Forwarded', headings: [], entries: [] },
         {
           name: 'Waiting',
-          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Return Date','Travel type','Travel Mode', 'Forwarded On','Option Sent On'],
+          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel type','Option Sent On'],
           entries: waitingOptions.map((item) => [
             item.requestCode,
             item.employeeName,
             item.projectCode,
-            item.createdOn,
+            item.from,
+            item.to,
+            item.departureDate,
+            item.travelType,
+            item.approvalDate,
           ])
         },
         { name: 'Selected', headings: [], entries: [] }
@@ -86,12 +90,16 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Waiting', headings: [], entries: [] },
         {
           name: 'Selected',
-          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Travel Mode', 'Updated On'],
+          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Updated On'],
           entries: selectedOptions.map((item) => [
             item.requestCode,
             item.employeeName,
             item.projectCode,
-            item.createdOn,
+            item.from,
+            item.to,
+            item.departureDate,
+            item.travelType,
+            item.approvalDate,
           ])
         }
       ];
@@ -126,7 +134,8 @@ export class ManagerForwadedRequestsComponent {
         this.waitingRequests[this.currentPage-1] = data.items.map((request: any) => {
           return {
             ...request,
-            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
+            approvalDate: this.datePipe.transform(request.approvalDate, 'dd/MM/yyyy')
           };
         });
         this.waitingTotalItems = data.totalCount;        
@@ -147,7 +156,8 @@ export class ManagerForwadedRequestsComponent {
         this.selectedRequests[this.currentPage-1] = data.items.map((request: any) => {
           return {
             ...request,
-            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
+            approvalDate: this.datePipe.transform(request.approvalDate, 'dd/MM/yyyy')
           };
         });
         this.selectedTotalItems = data.totalCount;        

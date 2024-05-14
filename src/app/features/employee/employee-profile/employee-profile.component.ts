@@ -75,7 +75,7 @@ export class EmployeeProfileComponent {
   fetchEmployeeData() {
     this.service.getEmployeeData(this.employeeId).subscribe({
       next: (data: any) => {
-        console.log(data);
+        console.log('profile data',data);
         //store the initial data of the employee
         this.initialValue = { contactNumber: data.contactNumber, address: data.address }
         this.initialData = {
@@ -118,10 +118,6 @@ export class EmployeeProfileComponent {
       contactNumber: '',
       address: ''
     };
-
-    console.log('upadted Data', updatedData)
-    console.log('initial value', this.initialValue)
-    console.log(this.form.controls);
 
     //  check if the initially stored value is same as the value in the form after the user click on save button.
     //  if the value is same make updatedData value as undefined otherwise assign the new value to the updated.
