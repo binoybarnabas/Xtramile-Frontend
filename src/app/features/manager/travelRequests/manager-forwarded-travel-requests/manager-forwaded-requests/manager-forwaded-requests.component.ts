@@ -26,8 +26,8 @@ export class ManagerForwadedRequestsComponent {
   selectedTotalItems = 0
   totalItems: number[] = [this.forwardedTotalItems,this.waitingTotalItems, this.selectedTotalItems]
   currentPage = 1;
-  tableHeaders = ['RequestID', 'Employee', 'ProjectCode', 'Date', 'Status'];
-  dataHeaders = ['requestId', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
+  tableHeaders = ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Travel Mode', 'Updated On'];
+  dataHeaders = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to','departureDate','travelType','TravelMode','updatedOn'];
   constructor(private apiService: ManagerTravelRequestsService, private router: Router, private datePipe: DatePipe,private activatedRoute:ActivatedRoute) {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
@@ -50,9 +50,8 @@ export class ManagerForwadedRequestsComponent {
       this.tabs = [
         {
           name: 'Forwarded',
-          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date', 'Status'],
+          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Return Date', 'Requested On', 'Forwarded On'],
           entries: forwardedRequests.map((item) => [
-            item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
@@ -70,9 +69,8 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Forwarded', headings: [], entries: [] },
         {
           name: 'Waiting',
-          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date'],
+          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Return Date','Travel type','Travel Mode', 'Forwarded On','Option Sent On'],
           entries: waitingOptions.map((item) => [
-            item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
@@ -88,9 +86,8 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Waiting', headings: [], entries: [] },
         {
           name: 'Selected',
-          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date'],
+          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Travel Mode', 'Updated On'],
           entries: selectedOptions.map((item) => [
-            item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,

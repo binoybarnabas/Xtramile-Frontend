@@ -25,8 +25,8 @@ export class ManagerClosedTravelRequestsComponent {
   itemsPerPage = 10;
   totalItems = 0;
   currentPage = 1;
-  tableHeaders = ['Request Code', 'Employee', 'Project Code', 'Date', 'Status'];
-  dataHeaders = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
+  tableHeaders = ['Request Code', 'Requested By', 'Project Code','From','To','Requested On','Forwarded On', 'Approved On', 'Closed On'];
+  dataHeaders = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to','requestedOn','forwardedOn','approvedOn','closedOn'];
 
   ngOnInit() {
     this.getManagerClosedRequests();
