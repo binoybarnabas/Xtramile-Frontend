@@ -75,11 +75,11 @@
         </div>
 
         <!-- View Options from API -->
-        <div *ngIf="activeTabName === 'Files' && requestStatus === 'Waiting' " class="tab_body file">
+        <div *ngIf="activeTabName === 'Files' && requestStatus === 'Waiting' || activeTabName === 'Files' && requestStatus === 'Selected' " class="tab_body file">
           <ng-container *ngFor="let item of travelOptionsWithImagesData; let i = index">
             <div (click)="onOptionSelected('img',i)" [ngClass]=" selectedImageOptionIndex === i ? 'file_card active':'file_card'">
               <img class="img" [src]="item.optionFileURL" alt="">
-          </div>
+            </div>
           </ng-container>
           <div *ngIf="travelOptionsWithImagesData.length === 0" class="empty_option_container">
             <app-empty-data [mainTitle]="emptyOptionMessageTitle" [description]="emptyImageOptionMessage"></app-empty-data>
@@ -125,10 +125,12 @@
     
         </div>
 
-        <div *ngIf="activeTabName === 'Selected Option' || activeTabName === 'Confirmed Option'" class="tab_body text">
-            <div class="text_card">
-                <span>Selected Option</span>
+        <div *ngIf="activeTabName === 'Selected Option' || activeTabName === 'Confirmed Option'" class="tab_body selected_option">
+            
+            <div *ngIf="managerSelectedOptionType === 'image'" class="file_card">
+              <img class="img" [src]="travelOptionsWithImagesData[managerSelectedOptionIndex].optionFileURL" alt="alt">
             </div>
+
         </div>
 
     </div>
