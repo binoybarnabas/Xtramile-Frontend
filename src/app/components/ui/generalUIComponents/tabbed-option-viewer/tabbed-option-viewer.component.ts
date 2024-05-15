@@ -83,12 +83,19 @@ export class TabbedOptionViewerComponent {
 
       this.getTravelOptionsWithImageByReqId(this.requestId)
       this.getTravelOptionsWithoutImages();
-
+      
+  
       if (requestStatus === 'Waiting' || requestStatus === 'Approved by RM') {
         this.travelOptionViewerTabs = commonTabs;
-      } else if (requestStatus === 'Selected') {
+      }
+      else if (requestStatus === 'Selected') {
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Confirm a Travel Option';
         this.travelOptionViewerTabs = tabsWithSelectedOption;
-      } else if (requestStatus === 'Approved by TA') {
+        this.activeTabName = 'Selected Option';
+        this.getManagerSelectedOptionIdByRequestId(this.requestId);
+      }
+      else if (requestStatus === 'Approved by TA') {
         this.travelOptionViewerTabs = tabsWithConfirmedOption;
       }
 
@@ -98,11 +105,10 @@ export class TabbedOptionViewerComponent {
       this.isActionBarVisible = true;
       this.isDelBtnVisible = true;
       this.isAddBtnVisible = true;
-    }else if(currentLoggedInUserRole === 'manager' && requestStatus === 'Waiting'){
+    }
+    else if(currentLoggedInUserRole === 'manager' && requestStatus === 'Waiting'){
       this.isActionBarVisible = true;
       this.actionBarTitle = 'Select a Travel Option';
-      //this.getTravelOptionsWithImageByReqId(this.requestId)
-      //this.getTravelOptionsWithoutImages();
     }
     
   }
@@ -178,8 +184,11 @@ export class TabbedOptionViewerComponent {
   selectedImageOptionIndex: number = -1;
   selectedTextOptionIndex: number = -1;
 
-  //to get the id of the selected option/ option chosen by manager
+  //to get the id of the selected option/ option chosen by manager 
+  //change name to ClickedOptionId
   selectedTravelOptionId : number = -1;
+
+
 
   //on options selected
   onOptionSelected(optionType:string, optionIndex: number){
@@ -336,23 +345,6 @@ export class TabbedOptionViewerComponent {
    })
   }
 
-  getSelectedOption(){
-   this.requestService.selectedOptionFromEmployee(this.requestId).subscribe({
-    next: (data) =>{
-    this.receivingOptionId = data
-    console.log(this.receivingOptionId);
-    this.sortDescriptions();
-    this.selectedOption();
-  },
-  error: (error: any) => {
-    console.error('Post failed:', error);
-  },
-  complete: () => {
-    console.log('Post request completed.');
-  }
-
-  })
-  }
 
   sortDescriptions(): void {
     if (this.receivingOptionId) {
@@ -364,9 +356,70 @@ export class TabbedOptionViewerComponent {
     }
   }
 
-  selectedOption(): boolean {
-    return this.descriptions.some((item: { optionId: number; }) => item.optionId === this.receivingOptionId);
+
+
+//  selectedOption(): boolean {
+//   return this.descriptions.some((item: { optionId: number; }) => item.optionId === this.receivingOptionId);
+// }
+
+
+  //managerSelectedOptionId : number = -1;
+  managerSelectedOptionType : string = '';
+  managerSelectedOptionIndex: number = -1;
+
+  //To get the id of manager selected option
+  getManagerSelectedOptionIdByRequestId(requestId : number){
+
+    this.requestService.getSelectedTravelOptionByRequestId(this.requestId).subscribe({
+      next: (response: any) =>{
+          
+          //this.managerSelectedOptionId = response;
+          this.getManagerSelectedOptionWithOptionId(response);
+          //alert(this.managerSelectedOptionIndex);
+      },
+      error: (error: any) => {
+
+      },
+      complete: () => {
+        //alert(this.managerSelectedOptionIndex)
+      }
+   })
+
   }
+
+  //fetching manager selected option from the already loaded options array
+  //also updating the managerSelectedOptionType
+  getManagerSelectedOptionWithOptionId(optionId: number){
+
+    //alert(optionId);
+
+  // Search in travelOptionsWithImagesData
+  for (let i = 0; i < this.travelOptionsWithImagesData.length; i++) {
+    
+    if (this.travelOptionsWithImagesData[i].optionId === optionId) {
+      this.managerSelectedOptionIndex = i;
+      this.managerSelectedOptionType = "image";
+      //alert(this.managerSelectedOptionIndex);
+      break;
+    }
+    //alert(this.managerSelectedOptionIndex)
+  }
+
+  // If not found in the first array, search in descriptions
+  if (this.managerSelectedOptionIndex === -1) {
+    const descriptionIndex = this.descriptions.indexOf(optionId);
+    if (descriptionIndex !== -1) {
+      this.managerSelectedOptionIndex = descriptionIndex;
+      this.managerSelectedOptionType = "text";
+    }
+  }  
+
+
+  //eof
+  }
+
+
+
 
 
 
