@@ -40,6 +40,10 @@ export class TabbedOptionViewerComponent {
   emptyTextOptionMessage : string = 'No Travel Options added as plain text. Click on Add to add an option'
 
 
+  managerSelectedOptionId : number = -1;
+  managerSelectedOptionType : string = '';
+  managerSelectedOptionIndex: number = -1;
+
   bsModalRef!: BsModalRef;
 
   constructor(private modalService: BsModalService, private requestService: RequestService, private managerService:ManagerTravelRequestsService,
@@ -49,7 +53,10 @@ export class TabbedOptionViewerComponent {
   }
 
   ngOnInit(){
+    this.getTravelOptionsWithImageByReqId(this.requestId)
+    this.getTravelOptionsWithoutImages();
     this.initializeTabs(this.requestStatus, this.currentLoggedInUserRole);
+
   }
 
   onTabChange(index: number, tabName:string){
@@ -80,9 +87,6 @@ export class TabbedOptionViewerComponent {
     ];
     
     if(currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'travelAdmin') {
-
-      this.getTravelOptionsWithImageByReqId(this.requestId)
-      this.getTravelOptionsWithoutImages();
       
   
       if (requestStatus === 'Waiting' || requestStatus === 'Approved by RM') {
@@ -266,22 +270,6 @@ export class TabbedOptionViewerComponent {
       this.textOptions.splice(index, 1);
     }
   }
-
-  //Deletion of Options
-  // selectedOptionIds: number[] = [];
-
-  // toggleOptionSelection(item: any) {
-  //     const index = this.selectedOptionIds.indexOf(item.optionId);
-  //     if (index === -1) {
-  //         this.selectedOptionIds.push(item.optionId);
-  //     } else {
-  //         this.selectedOptionIds.splice(index, 1);
-  //     }
-  // }
-  
-  // isSelected(item: any): boolean {
-  //     return this.selectedOptionIds.includes(item.optionId);
-  // }
   
   value?: string;
 
@@ -311,6 +299,7 @@ export class TabbedOptionViewerComponent {
         if(this.travelOptionsWithImagesData.length === 0){
           this.emptyImageOptionMessage = 'No Travel options added as image.'
         }
+        
       }
     });
   
@@ -341,6 +330,8 @@ export class TabbedOptionViewerComponent {
       if(this.descriptions.length === 0) {
         this.emptyTextOptionMessage = 'No Travel options added as plain text'
       }
+
+      
       }
    })
   }
@@ -358,71 +349,26 @@ export class TabbedOptionViewerComponent {
 
 
 
-//  selectedOption(): boolean {
-//   return this.descriptions.some((item: { optionId: number; }) => item.optionId === this.receivingOptionId);
-// }
-
-
-  //managerSelectedOptionId : number = -1;
-  managerSelectedOptionType : string = '';
-  managerSelectedOptionIndex: number = -1;
-
   //To get the id of manager selected option
+  //Temporary Solution Need Back End API Fixes
   getManagerSelectedOptionIdByRequestId(requestId : number){
 
-    this.requestService.getSelectedTravelOptionByRequestId(this.requestId).subscribe({
+    this.requestService.getSelectedTravelOptionDetailsByRequestId(this.requestId).subscribe({
       next: (response: any) =>{
-          
-          //this.managerSelectedOptionId = response;
-          this.getManagerSelectedOptionWithOptionId(response);
-          //alert(this.managerSelectedOptionIndex);
+    
+        this.managerSelectedOptionId = response.optionId;
+        //this.managerSelectedOptionType = response.optionFile === null ? 'text' : 'image';
+      
       },
       error: (error: any) => {
 
       },
       complete: () => {
-        //alert(this.managerSelectedOptionIndex)
+        
       }
    })
 
   }
-
-  //fetching manager selected option from the already loaded options array
-  //also updating the managerSelectedOptionType
-  getManagerSelectedOptionWithOptionId(optionId: number){
-
-    //alert(optionId);
-
-  // Search in travelOptionsWithImagesData
-  for (let i = 0; i < this.travelOptionsWithImagesData.length; i++) {
-    
-    if (this.travelOptionsWithImagesData[i].optionId === optionId) {
-      this.managerSelectedOptionIndex = i;
-      this.managerSelectedOptionType = "image";
-      //alert(this.managerSelectedOptionIndex);
-      break;
-    }
-    //alert(this.managerSelectedOptionIndex)
-  }
-
-  // If not found in the first array, search in descriptions
-  if (this.managerSelectedOptionIndex === -1) {
-    const descriptionIndex = this.descriptions.indexOf(optionId);
-    if (descriptionIndex !== -1) {
-      this.managerSelectedOptionIndex = descriptionIndex;
-      this.managerSelectedOptionType = "text";
-    }
-  }  
-
-
-  //eof
-  }
-
-
-
-
-
-
 
 
 

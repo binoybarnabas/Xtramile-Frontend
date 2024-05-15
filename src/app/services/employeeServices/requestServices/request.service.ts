@@ -162,8 +162,8 @@ export class RequestService {
   //get selected travel option
   //Author : Muhammed Suhail 
   //Need to specify type of api response
-  getSelectedTravelOptionByRequestId(requestId: number):Observable<any>{
-    return this.http.get(this.apiURL+ `/traveladmin/selectedoption/${requestId}`)
+  getSelectedTravelOptionDetailsByRequestId(requestId: number):Observable<any>{
+    return this.http.get(this.apiURL+ '/availableoptions/selected-travel-option-details/'+requestId)  
   }
 
 
