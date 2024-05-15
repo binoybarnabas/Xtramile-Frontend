@@ -25,8 +25,8 @@ export class ManagerClosedTravelRequestsComponent {
   itemsPerPage = 10;
   totalItems = 0;
   currentPage = 1;
-  tableHeaders = ['Request Code', 'Employee', 'Project Code', 'Date', 'Status'];
-  dataHeaders = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
+  tableHeaders = ['Request Code', 'Requested By', 'Project Code','From','To','Requested On', 'Closed On'];
+  dataHeaders = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to','date','statusDate'];
 
   ngOnInit() {
     this.getManagerClosedRequests();
@@ -40,6 +40,7 @@ export class ManagerClosedTravelRequestsComponent {
           return {
             ...request,
             date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            statusDate: this.datePipe.transform(request.statusDate, 'dd/MM/yyyy'),
             employeeNameAndEmail: `${request.employeeName}\n${request.email}`
           };
         });

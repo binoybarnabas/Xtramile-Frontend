@@ -26,8 +26,8 @@ export class ManagerForwadedRequestsComponent {
   selectedTotalItems = 0
   totalItems: number[] = [this.forwardedTotalItems,this.waitingTotalItems, this.selectedTotalItems]
   currentPage = 1;
-  tableHeaders = ['RequestID', 'Employee', 'ProjectCode', 'Date', 'Status'];
-  dataHeaders = ['requestId', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
+  tableHeaders = ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Travel Mode', 'Updated On'];
+  dataHeaders = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to','departureDate','travelType','TravelMode','updatedOn'];
   constructor(private apiService: ManagerTravelRequestsService, private router: Router, private datePipe: DatePipe,private activatedRoute:ActivatedRoute) {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
@@ -50,9 +50,8 @@ export class ManagerForwadedRequestsComponent {
       this.tabs = [
         {
           name: 'Forwarded',
-          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date', 'Status'],
+          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Return Date', 'Requested On', 'Forwarded On'],
           entries: forwardedRequests.map((item) => [
-            item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
@@ -70,13 +69,16 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Forwarded', headings: [], entries: [] },
         {
           name: 'Waiting',
-          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date'],
+          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel type','Option Sent On'],
           entries: waitingOptions.map((item) => [
-            item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
-            item.createdOn,
+            item.from,
+            item.to,
+            item.departureDate,
+            item.travelType,
+            item.approvalDate,
           ])
         },
         { name: 'Selected', headings: [], entries: [] }
@@ -88,13 +90,16 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Waiting', headings: [], entries: [] },
         {
           name: 'Selected',
-          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date'],
+          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Updated On'],
           entries: selectedOptions.map((item) => [
-            item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
-            item.createdOn,
+            item.from,
+            item.to,
+            item.departureDate,
+            item.travelType,
+            item.approvalDate,
           ])
         }
       ];
@@ -129,7 +134,8 @@ export class ManagerForwadedRequestsComponent {
         this.waitingRequests[this.currentPage-1] = data.items.map((request: any) => {
           return {
             ...request,
-            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
+            approvalDate: this.datePipe.transform(request.approvalDate, 'dd/MM/yyyy')
           };
         });
         this.waitingTotalItems = data.totalCount;        
@@ -150,7 +156,8 @@ export class ManagerForwadedRequestsComponent {
         this.selectedRequests[this.currentPage-1] = data.items.map((request: any) => {
           return {
             ...request,
-            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
+            approvalDate: this.datePipe.transform(request.approvalDate, 'dd/MM/yyyy')
           };
         });
         this.selectedTotalItems = data.totalCount;        

@@ -71,11 +71,7 @@
             <div class="profile_picture" (click)="onProfilePictureClick()">
               <img
                 class="img-fluid"
-                src="{{
-                  profilePicture
-                    ? profilePicture
-                    : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&usqp=CAU'
-                }}"
+                src="{{ profileImage ? croppedImage : profilePicture }}"
               />
               <i class="ri-pencil-fill" *ngIf="editMode"></i>
             </div>
