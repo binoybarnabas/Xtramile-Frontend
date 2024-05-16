@@ -869,4 +869,8 @@ body {
   }
 }
 
+.info_icon{
+  color:var(--ternary-text-color);
+}
+
 /*=========================== Middle Console Styles Ends ==================================*/
