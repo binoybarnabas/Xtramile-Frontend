@@ -44,6 +44,9 @@ export class TabbedOptionViewerComponent {
   managerSelectedOptionType : string = '';
   managerSelectedOptionIndex: number = -1;
 
+  travelAdminConfirmedOptionId : number =-1;
+  isSelectedOptionChanged: boolean = false;
+
   bsModalRef!: BsModalRef;
 
   constructor(private modalService: BsModalService, private requestService: RequestService, private managerService:ManagerTravelRequestsService,
@@ -53,10 +56,14 @@ export class TabbedOptionViewerComponent {
   }
 
   ngOnInit(){
+    this.initializeComponent();
+  }
+
+
+  initializeComponent(){
     this.getTravelOptionsWithImageByReqId(this.requestId)
     this.getTravelOptionsWithoutImages();
     this.initializeTabs(this.requestStatus, this.currentLoggedInUserRole);
-
   }
 
   onTabChange(index: number, tabName:string){
@@ -88,7 +95,6 @@ export class TabbedOptionViewerComponent {
     
     if(currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'travelAdmin') {
       
-  
       if (requestStatus === 'Waiting' || requestStatus === 'Approved by RM') {
         this.travelOptionViewerTabs = commonTabs;
       }
@@ -193,19 +199,34 @@ export class TabbedOptionViewerComponent {
   selectedTravelOptionId : number = -1;
 
 
-
   //on options selected
   onOptionSelected(optionType:string, optionIndex: number){
 
     if(optionType === 'img'){
         
         if(this.selectedImageOptionIndex === optionIndex){
+
           this.selectedImageOptionIndex = -1;
           this.selectedTravelOptionId = -1;
+
+          //Detecting Option Changes by TA
+          if(this.requestStatus === 'Selected'){
+            this.travelAdminConfirmedOptionId = this.managerSelectedOptionId;
+            this.isSelectedOptionChanged = false;
+          }
+
         }
         else{
+
           this.selectedImageOptionIndex = optionIndex;
           this.selectedTravelOptionId = this.travelOptionsWithImagesData[optionIndex].optionId;
+          
+          //Detecting option changes by TA
+          if(this.requestStatus === 'Selected'){
+            this.travelAdminConfirmedOptionId = this.travelOptionsWithImagesData[optionIndex].optionId;
+            this.isSelectedOptionChanged = true;
+          }
+
         }
 
     }
@@ -214,15 +235,28 @@ export class TabbedOptionViewerComponent {
       if(this.selectedTextOptionIndex === optionIndex){
         this.selectedTextOptionIndex = -1;
         this.selectedTravelOptionId = -1;
+
+        if(this.requestStatus === 'Selected'){
+          this.travelAdminConfirmedOptionId = this.managerSelectedOptionId;
+          this.isSelectedOptionChanged = false;
+        }
       }
       else{
+
         this.selectedTextOptionIndex = optionIndex;
         this.selectedTravelOptionId = this.descriptions[optionIndex].optionId;
+        
+        if(this.requestStatus === 'Selected'){
+          this.travelAdminConfirmedOptionId = this.descriptions[optionIndex].optionId;
+          this.isSelectedOptionChanged = true;
+        }
+
       }
 
     }
 
   }
+
 
   //to remove selected option from the array
   deleteSelectedOption(){
@@ -281,7 +315,6 @@ export class TabbedOptionViewerComponent {
    this.isImageViewerOpen = false;
   }
 
-  
   travelOptionsWithImagesData: TravelOptionDetails[] = [];
 
   //get uploaded travel options with images
@@ -357,6 +390,7 @@ export class TabbedOptionViewerComponent {
       next: (response: any) =>{
     
         this.managerSelectedOptionId = response.optionId;
+        this.travelAdminConfirmedOptionId = response.optionId;
         //this.managerSelectedOptionType = response.optionFile === null ? 'text' : 'image';
       
       },
@@ -369,6 +403,10 @@ export class TabbedOptionViewerComponent {
    })
 
   }
+
+
+
+
 
 
 

@@ -21,6 +21,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { TabDirective } from 'ngx-bootstrap/tabs';
 import { TabbedOptionViewerComponent } from 'src/app/components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
+import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -106,7 +107,8 @@ export class NewTravelRequestComponent {
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
     private travelAdminService:TravelAdminTravelRequestsService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private modalservice:BsModalService
   ) {
 
     const storedUserData = localStorage.getItem('userData');
@@ -155,8 +157,13 @@ export class NewTravelRequestComponent {
     this.currentNavIndex = value;
     
     if(value === this.totalNavCount){
-      this.forwardBtnTitle = 'Submit';
-    }else{
+      if(this.status === 'Selected'){
+        this.forwardBtnTitle = 'Confirm'
+      }else{
+        this.forwardBtnTitle = 'Submit';
+      }
+    }
+    else{
       this.forwardBtnTitle = 'Next';
     }
 
@@ -494,7 +501,6 @@ export class NewTravelRequestComponent {
 
         if(this.status === 'Open'){
           //Forward Requests
-          
         }
         //Options Sent by TA
         else if(this.status === 'Waiting'){
@@ -553,6 +559,7 @@ export class NewTravelRequestComponent {
         }
         else if(this.status === 'Selected'){
           //Confirm / Edit Selcted Travel Option
+          this.openOptionConfirmationModal();
         }
 
       }
@@ -570,6 +577,29 @@ export class NewTravelRequestComponent {
 
   }
 
+  openOptionConfirmationModal() {
+    const initialState = {
+      mainText: 'Travel Option Confirmation',
+      description: this.tabbedOptionViewer.isSelectedOptionChanged ?'You have modified the selected option, proceed with these changes?':'Proceed with the current option selection?',
+      cancelBtnText: 'Cancel',
+      confirmBtnText: 'Submit',
+      confirmBtnColor: '#9a4cfa'
+    };
+  
+    const modalRef = this.modalservice.show(CustomConfirmationModalComponent, { initialState });
+  
+    modalRef.content?.cancel.subscribe(() => {
+      //console.log('Travel request submission canceled.');
+      //Initialize the options component
+
+    });
+  
+    modalRef.content?.confirm.subscribe(() => {
+    
+      this.onTravelAdminConfirmTravelOption(this.tabbedOptionViewer.travelAdminConfirmedOptionId);
+
+    });
+  }
 
   //submit chosen travel option - //status - update - dependency - change status button
   submitSelectedTravelOption(selectedTravelOptionId: number): void {  
@@ -591,6 +621,27 @@ export class NewTravelRequestComponent {
     });
   }
   
+
+  //Travel Admin Confirm Travel Option
+  onTravelAdminConfirmTravelOption(confirmedOptionId:number){
+
+    const confirmedOptionData = { requestId: this.requestId, empId: this.empId, optionId: confirmedOptionId };
+
+    this.requestService.confirmSelectedTravelOption(confirmedOptionData).subscribe({
+      next: (response: any) =>{
+    
+        alert(response);
+
+      },
+      error: (error: any) => {
+
+      },
+      complete: () => {
+        
+      }
+   })
+
+  }
 
 
   // disableSubmitBtn(): boolean {
