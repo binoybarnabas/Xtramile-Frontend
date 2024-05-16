@@ -244,6 +244,5 @@
 }
 
 .main_container .body_section .expansion_panel_container .expansion_panel  .expansion_panel_content.active{
-    border: 2px solid var(--second-color);
-    background-color: rgb(0, 0, 0);
+    border: 1.5px solid var(--second-color);
 }

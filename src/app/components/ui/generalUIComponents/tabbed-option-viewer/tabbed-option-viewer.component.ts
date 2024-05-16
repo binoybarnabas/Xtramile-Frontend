@@ -8,6 +8,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
+import { CustomConfirmationModalComponent } from '../custom-confirmation-modal/custom-confirmation-modal.component';
 
 @Component({
   selector: 'app-tabbed-option-viewer',
@@ -47,7 +48,7 @@ export class TabbedOptionViewerComponent {
   isSelectedOptionChanged: boolean = false;
 
   bsModalRef!: BsModalRef;
-
+  
   constructor(private modalService: BsModalService, private requestService: RequestService, private managerService:ManagerTravelRequestsService,
     private sanitizer: DomSanitizer
   ){
@@ -422,9 +423,10 @@ export class TabbedOptionViewerComponent {
       }
    })
 
-   
-
   }
+
+
+
 
 
 
