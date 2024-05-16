@@ -5,6 +5,7 @@
         <div *ngIf="isActionBarVisible" class="action_bar" [class.single_item]="!isDelBtnVisible && !isAddBtnVisible">
             <button *ngIf="isDelBtnVisible" (click)="deleteSelectedOption()" [disabled]="selectedImageOptionIndex === -1 && selectedTextOptionIndex === -1" class="del_btn"><i class="ri-delete-bin-5-fill"></i></button>
             <p class="main_title">{{actionBarTitle}}</p>
+            <!-- <span class="task_icon"><i class="ri-donut-chart-line"></i></span> -->
             <button *ngIf="isAddBtnVisible" (click)="onAddBtnClick()" class="add_btn">Add</button>
         </div>
         <div class="tab_section">
@@ -63,7 +64,7 @@
                   ></i>
                 </div>
                 <div
-                  class="expansion_panel_content"
+                  [ngClass]="selectedTextOptionIndex === i ? 'expansion_panel_content active':' expansion_panel_content'"
                   *ngIf="isPanelOpen(i)"
                   [innerHTML]="santizieHtml(htmlContent)"
                 ></div>

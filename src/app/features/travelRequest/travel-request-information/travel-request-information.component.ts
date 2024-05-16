@@ -175,7 +175,7 @@ export class NewTravelRequestComponent {
     switch (this.currentLoggedInUserRole) {
 
       case 'manager':
-        if(this.status === 'Waiting'){
+        if(this.status === 'Waiting' || this.status === 'Selected'){
           this.leftSectionNavItems = ["General Information", "Trip Information", "Additional Information", "Documents Attached", "Travel Options"];
           this.totalNavCount = 4;
         }else{
@@ -505,6 +505,7 @@ export class NewTravelRequestComponent {
         //Options Sent by TA
         else if(this.status === 'Waiting'){
           //choose and submit the option
+          //alert(this.tabbedOptionViewer.selectedTravelOptionId)
           this.submitSelectedTravelOption(this.tabbedOptionViewer.selectedTravelOptionId)
         }
 
