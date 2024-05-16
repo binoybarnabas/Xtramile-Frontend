@@ -52,6 +52,7 @@ export class ManagerForwadedRequestsComponent {
           name: 'Forwarded',
           headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Return Date', 'Requested On', 'Forwarded On'],
           entries: forwardedRequests.map((item) => [
+            item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
@@ -71,6 +72,7 @@ export class ManagerForwadedRequestsComponent {
           name: 'Waiting',
           headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel type','Option Sent On'],
           entries: waitingOptions.map((item) => [
+            item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
@@ -92,6 +94,7 @@ export class ManagerForwadedRequestsComponent {
           name: 'Selected',
           headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Updated On'],
           entries: selectedOptions.map((item) => [
+            item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
@@ -225,6 +228,7 @@ export class ManagerForwadedRequestsComponent {
     //   }
     //   this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: this.queryParams});
     // }
+    console.log('row details forward',row)
     this.requestId = row[1][0];
     this.queryParams = {requestId: this.requestId}
     this.router.navigate(['manager/requestdetail'], {queryParams: this.queryParams});

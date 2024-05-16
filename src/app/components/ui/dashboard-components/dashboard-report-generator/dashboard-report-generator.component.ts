@@ -42,8 +42,8 @@ export class DashboardReportGeneratorComponent {
   
     this.travelAdminService.getDashboardCount().subscribe((data: any) => {
       this.progressCards = [
-        new ProgressCard("Pending Requests", data.domesticTrips, "red", "icon ri-progress-5-line"),
-        new ProgressCard("Upcoming Trips", data.numberofProjects, "orange", "icon ri-suitcase-2-fill"),
+        new ProgressCard("Pending Requests", data.pendingRequest, "red", "icon ri-progress-5-line"),
+        new ProgressCard("Upcoming Trips", data.numberofUpcomingTrips, "orange", "icon ri-suitcase-2-fill"),
         new ProgressCard("Travellers", data.numberofTravellers, "cyan", "icon ri-user-line"),
         new ProgressCard("Total Trips", data.internationalTrips, "green", "icon ri-plane-line")
       ];
