@@ -50,7 +50,7 @@ export class ManagerForwadedRequestsComponent {
       this.tabs = [
         {
           name: 'Forwarded',
-          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Return Date', 'Requested On', 'Forwarded On'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Return Date', 'Requested On', 'Forwarded On'],
           entries: forwardedRequests.map((item) => [
             item.requestId,
             item.requestCode,
@@ -70,7 +70,7 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Forwarded', headings: [], entries: [] },
         {
           name: 'Waiting',
-          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel type','Option Sent On'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel type','Option Sent On'],
           entries: waitingOptions.map((item) => [
             item.requestId,
             item.requestCode,
@@ -92,7 +92,7 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Waiting', headings: [], entries: [] },
         {
           name: 'Selected',
-          headings: ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Updated On'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Updated On'],
           entries: selectedOptions.map((item) => [
             item.requestId,
             item.requestCode,
