@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { DatePipe } from '@angular/common';
-
+import { StatusCodes } from 'src/app/utils/StatusEnum';
 @Component({
   selector: 'app-manager-ongoing-travel-requests',
   templateUrl: './manager-ongoing-travel-requests.component.html',
@@ -17,7 +17,12 @@ export class ManagerOngoingTravelRequestsComponent {
   currentPage: number = 1;
   totalCount: number = 0;
   itemsPerPage: number = 10;
-  constructor(private apiservice: ManagerTravelRequestsService) {
+  sqlDatetimeFormat!: string;
+
+  totalItems = 0;
+  selectedSortOption!: string;
+
+  constructor(private apiservice: ManagerTravelRequestsService, private datePipe:DatePipe) {
     const userData = localStorage.getItem('userData');
     if (userData) {
       const parsedUserData = JSON.parse(userData);
@@ -51,4 +56,133 @@ export class ManagerOngoingTravelRequestsComponent {
       this.incomingRequestdata = this.formatData(data.items);
     });    
   }
+
+  //get the selected date and filter data based on selected dates
+  handleDateSelection(selectedDate: Date): void {
+    //To convert date from standard js Date format to YYYY-MM-DD format
+    this.sqlDatetimeFormat = selectedDate.toISOString().slice(0, 10);
+    this.apiservice.getEmployeeRequestByDate(this.managerId, this.sqlDatetimeFormat, this.currentPage, this.itemsPerPage).subscribe({
+      next: (data) => {
+        this.incomingRequestdata = data.employeeRequest.map((request: any) => {
+          return {
+            ...request,
+            date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+          };
+        });
+      },
+      error: (err) => {
+        // Handle the error
+        console.error('Error:', err);
+      },
+      complete: () => {
+        // Handle the completion (if needed)
+        console.log('Request completed');
+      }
+    });
+    console.log(this.sqlDatetimeFormat);
+  }
+
+   // get all the requests that comes under a manager
+   handleSeeAllClick(): void {
+    // Handle the "See All" click
+    this.fetchEmployeeRequest();
+  }
+
+  //needs to be done
+  handleSortOptionSelection(selectedSortOption: string): void {
+    // Handle the selected sort option
+    console.log('Selected Sort Option:', selectedSortOption);
+    this.selectedSortOption = selectedSortOption;
+    this.sortData(selectedSortOption);
+  }
+
+    // Fetch all the employee requests
+    fetchEmployeeRequest() {
+      this.apiservice.getEmployeeRequest(this.managerId, StatusCodes.Ongoing,this.currentPage, this.itemsPerPage).subscribe({
+        next: (data: any) => {
+          this.incomingRequestdata = data.employeeRequest.map((request: any) => {
+            return {
+              ...request,
+              date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+              employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+            };
+          });
+          console.log(this.incomingRequestdata)
+          this.totalItems = data.totalCount;
+        },
+        error: (error: any) => {
+          console.error('Error fetching employee requests', error);
+        }
+      });
+    }
+      //Sort employee requests based on the selected option
+  sortData(option: string): void {
+    if (option == "name") {
+      this.apiservice.getEmployeeRequestSortByEmployeeName(this.managerId,StatusCodes.Ongoing, this.currentPage, this.itemsPerPage).subscribe({
+        next: (data: any) => {
+          this.incomingRequestdata = data.employeeRequest.map((request: any) => {
+            return {
+              ...request,
+              date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+              employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+            };
+          });
+          this.totalItems = data.totalCount;
+        },
+        error: (error: any) => {
+          console.log("Error fetching the requests", error)
+        }
+      });
+    }
+    if (option == "date") {
+      this.apiservice.getEmployeeRequestSortByDate(this.managerId, StatusCodes.Ongoing, this.currentPage, this.itemsPerPage).subscribe({
+        next: (data: any) => {
+          this.incomingRequestdata = data.employeeRequest.map((request: any) => {
+            return {
+              ...request,
+              date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+              employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+            };
+          });
+          this.totalItems = data.totalCount;
+        },
+        error: (error: any) => {
+          console.log("Error fetching the requests", error)
+        }
+      });
+    }
+  }
+    // list the requests based on the employee name
+    handleSearchByName(searchByName: string): void {
+      // Handle the list by listing all the requests based on empoyee name
+      console.log(searchByName);
+      //when the search name is empty show all the names by default
+      if (searchByName == '') {
+        this.fetchEmployeeRequest();
+      }
+  
+      this.apiservice.getEmployeeRequestByEmployeeName(searchByName,StatusCodes.Ongoing, this.managerId, this.currentPage, this.itemsPerPage).subscribe({
+        next: (data) => {
+          this.incomingRequestdata = data.employeeRequest.map((request: any) => {
+            return {
+              ...request,
+              date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+              employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+            };
+          });
+          console.log("employee request search by name list");
+          console.log(data);
+          console.log(this.incomingRequestdata);
+        },
+        error: (error) => {
+          console.error('Error:', error);
+          // Handle error if needed
+        },
+        complete: () => {
+          console.log('Request completed');
+          // Additional logic after the request is completed
+        }
+      });
+    }
 }
