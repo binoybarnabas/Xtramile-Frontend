@@ -11,6 +11,8 @@ export class TableFilterComponent {
   selectedSortOption: string = 'select';
   searchName: string = ''
 
+  searchNameCheck:string = "hello"
+
   @Output() dateSelected: EventEmitter<any> = new EventEmitter<any>();
   @Output() sortOptionSelected: EventEmitter<string> = new EventEmitter<string>();
   @Output() searchByName: EventEmitter<string> = new EventEmitter<string>();

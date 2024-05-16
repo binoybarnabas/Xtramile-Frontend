@@ -5,6 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-request-card-modal/travel-request-card-modal.component';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
+import { StatusCodes } from 'src/app/utils/StatusEnum';
 
 @Component({
   selector: 'app-manager-incoming-travel-requests',
@@ -70,7 +71,7 @@ export class ManagerIncomingTravelRequestsComponent {
       this.fetchEmployeeRequest();
     }
 
-    this.apiservice.getEmployeeRequestByEmployeeName(searchByName, this.managerId, this.currentPage, this.itemsPerPage).subscribe({
+    this.apiservice.getEmployeeRequestByEmployeeName(searchByName, StatusCodes.Open,this.managerId, this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
         this.employeeRequest = data.employeeRequest.map((request: any) => {
           return {
@@ -124,7 +125,7 @@ export class ManagerIncomingTravelRequestsComponent {
 
   // Fetch all the employee requests
   fetchEmployeeRequest() {
-    this.apiservice.getEmployeeRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
+    this.apiservice.getEmployeeRequest(this.managerId, StatusCodes.Open, this.currentPage, this.itemsPerPage).subscribe({
       next: (data: any) => {
         this.employeeRequest = data.employeeRequest.map((request: any) => {
           return {
@@ -156,7 +157,7 @@ export class ManagerIncomingTravelRequestsComponent {
   //Sort employee requests based on the selected option
   sortData(option: string): void {
     if (option == "name") {
-      this.apiservice.getEmployeeRequestSortByEmployeeName(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
+      this.apiservice.getEmployeeRequestSortByEmployeeName(this.managerId,StatusCodes.Open, this.currentPage, this.itemsPerPage).subscribe({
         next: (data: any) => {
           this.employeeRequest = data.employeeRequest.map((request: any) => {
             return {
@@ -173,7 +174,7 @@ export class ManagerIncomingTravelRequestsComponent {
       });
     }
     if (option == "date") {
-      this.apiservice.getEmployeeRequestSortByDate(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
+      this.apiservice.getEmployeeRequestSortByDate(this.managerId,StatusCodes.Open, this.currentPage, this.itemsPerPage).subscribe({
         next: (data: any) => {
           this.employeeRequest = data.employeeRequest.map((request: any) => {
             return {
