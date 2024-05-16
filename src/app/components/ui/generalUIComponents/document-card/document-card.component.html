@@ -1,16 +1,21 @@
-<div class="main_container" >
-
+<div class="main_container">
   <ng-container *ngFor="let card of travellerDocuments">
-    <div [ngClass]=" selectedDocCardId === card.fileId ? 'doc_card selected' : 'doc_card'" (click)="onDocCardSelected(card.fileId)" (dblclick)="openPdfViewer(card.documentURL)" >
-
+    <div
+      [ngClass]="
+        selectedDocCardId === card.fileId ? 'doc_card selected' : 'doc_card'
+      "
+      (click)="onDocCardSelected(card.fileId)"
+      (dblclick)="openPdfViewer(card.documentURL)"
+    >
       <div class="top_section">
-        <span class="value">{{ card.documentType }} <i class="status_icon ri-checkbox-circle-fill"></i>
+        <span class="value"
+          >{{ card.documentType }}
+          <i class="status_icon ri-checkbox-circle-fill"></i>
         </span>
         <span class="file_size">20KB</span>
       </div>
 
       <div class="body_section">
-
         <div class="left_section">
           <div class="info_item">
             <span class="title">Document Number </span>
@@ -25,11 +30,9 @@
             <span class="title">Issued By </span>
             <p class="value">{{ card.country }}</p>
           </div>
-
         </div>
-        
+
         <div class="right_section">
-          
           <div class="info_item">
             <span class="title">Category</span>
             <p class="value">H1B Visa</p>
@@ -39,18 +42,13 @@
             <span class="title">Valid Thru</span>
             <p class="value">{{ card.expiryDate | date : "dd-MM-yyyy" }}</p>
           </div>
-<!-- 
+          <!-- 
           <div class="info_item">
             <span class="title">File Type</span>
             <p class="value">PDF</p>
           </div> -->
-
         </div>
-        
       </div>
-
     </div>
   </ng-container>
-
 </div>
-
