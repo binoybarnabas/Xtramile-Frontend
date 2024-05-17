@@ -34,7 +34,6 @@ export class TravellerDocumentsComponent {
   isPdfViewerOpen: boolean = false;
   loadedFileUrl : string = '';
 
-
   forwardBtnText : string = 'Add';
 
   employeeId: number = -1;
@@ -93,21 +92,10 @@ export class TravellerDocumentsComponent {
   }
 
   initializeDocuments(){
-
     
     this.getDocuments();
-    
-    // this.isFileSubscription = this.commonService.isFile$.subscribe(isFile => {
-    //   if (isFile) {
-    //     this.getDocuments();
-    //   }
-    // });
 
   }
-
-  // ngOnDestroy() {
-  //   this.isFileSubscription.unsubscribe();
-  // }
 
   getDocuments() {
     this.commonService.getEmployeeDocuments(this.employeeId).subscribe(
@@ -164,13 +152,6 @@ export class TravellerDocumentsComponent {
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    // if(file.type !== 'application/pdf'){
-    //   event.target.value = '';
-    //   this.documentUploadForm.get('documentFile')?.setValue('');
-    //   this.fileErrorMessage = "* Select a PDF File";
-    //   return;
-    // }
-    // this.fileErrorMessage = ''
     this.documentUploadForm.patchValue({
       documentFile: file,
     });
@@ -206,13 +187,6 @@ export class TravellerDocumentsComponent {
     event.preventDefault();
     event.stopPropagation();
     const file = event.dataTransfer.files[0];
-    // if(file.type !== 'application/pdf'){
-    //   event.dataTransfer.value = '';
-    //   this.documentUploadForm.get('documentFile')?.setValue('');
-    //   this.fileErrorMessage = "* Select a PDF File";
-    //   return;
-    // }
-    // this.fileErrorMessage = ''
     this.documentUploadForm.patchValue({
       documentFile: file,
     });
