@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { DatePipe } from '@angular/common';
 import { StatusCodes } from 'src/app/utils/StatusEnum';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-request-card-modal/travel-request-card-modal.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-manager-ongoing-travel-requests',
   templateUrl: './manager-ongoing-travel-requests.component.html',
@@ -22,7 +25,7 @@ export class ManagerOngoingTravelRequestsComponent {
   totalItems = 0;
   selectedSortOption!: string;
 
-  constructor(private apiservice: ManagerTravelRequestsService, private datePipe:DatePipe) {
+  constructor(private apiservice: ManagerTravelRequestsService, private datePipe:DatePipe,private router: Router, ) {
     const userData = localStorage.getItem('userData');
     if (userData) {
       const parsedUserData = JSON.parse(userData);
@@ -37,6 +40,19 @@ export class ManagerOngoingTravelRequestsComponent {
       this.totalCount = data.totalCount
     });
   }
+
+  selectedRow: any | null = null;
+  requestId: number = 0;
+  bsModalRef!: BsModalRef
+
+  handleSelectedRow(row: any) {
+
+    this.requestId = row.requestId;
+    const queryParams = { requestId: this.requestId }
+    this.router.navigate(['manager/requestdetail'],{ queryParams: queryParams });
+    
+  }
+
 
   formatData(data: any[]): any[] {
     //using DatePipe to convert the date into dd/LL/yyyy format

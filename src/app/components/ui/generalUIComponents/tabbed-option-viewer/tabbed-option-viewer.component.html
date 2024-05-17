@@ -6,7 +6,7 @@
             <button *ngIf="isDelBtnVisible" (click)="deleteSelectedOption()" [disabled]="selectedImageOptionIndex === -1 && selectedTextOptionIndex === -1" class="del_btn"><i class="ri-delete-bin-5-fill"></i></button>
             <p class="main_title">{{actionBarTitle}}</p>
             <!-- <span class="task_icon"><i class="ri-donut-chart-line"></i></span> -->
-            <button *ngIf="isAddBtnVisible" (click)="onAddBtnClick()" class="add_btn">Add</button>
+            <button *ngIf="isAddBtnVisible" (click)="onAddBtnClick()" class="add_btn">{{addBtnTitle}}</button>
         </div>
         <div class="tab_section">
             <div class="tab_container">
@@ -126,10 +126,11 @@
     
         </div>
 
+        <!-- Display Selected Option -->
         <div *ngIf="activeTabName === 'Selected Option' || activeTabName === 'Confirmed Option'" class="tab_body selected_option">
-            
+          
           <ng-container *ngFor="let item of travelOptionsWithImagesData; let i = index">
-            <div *ngIf="item.optionId === managerSelectedOptionId" class="file_card">
+            <div *ngIf="item.optionId === managerSelectedOptionId || item.optionId === travelAdminConfirmedOptionId" class="file_card">
               <img class="img" [src]="travelOptionsWithImagesData[i].optionFileURL" alt="alt">
             </div>
           </ng-container>
@@ -167,6 +168,12 @@
         </div>
 
         </div>
+
+        <!-- Display Selected Option -->
+        <div *ngIf="activeTabName === 'Ticket Details'" class="tab_body selected_option">
+          <p>Ticket Not Uploaded</p>  
+        </div>
+
 
     </div>
 

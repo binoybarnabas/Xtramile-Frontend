@@ -29,6 +29,8 @@ export class TabbedOptionViewerComponent {
   isDelBtnVisible: boolean = false;
   isAddBtnVisible: boolean = false;
 
+  addBtnTitle : string = 'Add';
+
   activeTabIndex: number = 0;
   activeTabName : string = 'Files';
 
@@ -90,10 +92,16 @@ export class TabbedOptionViewerComponent {
     ];
     
     let tabsWithConfirmedOption = [
-      { name: 'Confirmed Option' }
+      {name : 'Ticket Details'},
+      {name: 'Confirmed Option'}
+    ];
+
+    let tabsWithLiveTicket = [
+      {name : 'Ticket Details'}
     ];
     
-    if(requestStatus === 'Selected'){
+    
+    if(requestStatus === 'Selected' || requestStatus === 'Ongoing'){
       this.getManagerSelectedOptionIdByRequestId(this.requestId);
     }
 
@@ -111,15 +119,22 @@ export class TabbedOptionViewerComponent {
         this.travelOptionViewerTabs = tabsWithSelectedOption;
         this.activeTabName = 'Selected Option';
       }
-      else if (requestStatus === 'Approved by TA') {
+      //change status to Approved by TA
+      else if (requestStatus === 'Ongoing') {
         this.travelOptionViewerTabs = tabsWithConfirmedOption;
+        this.activeTabName = 'Ticket Details';
       }
+
+      // else if(requestStatus === 'Approved by TA' && ticketStatus ==='Sent'){
+      //   this.travelOptionViewerTabs = tabsWithLiveTicket;
+      //   this.isActionBarVisible = false;
+      // }
 
     } 
 
     //travel admin
     if(currentLoggedInUserRole === 'travelAdmin'){
-
+      
       this.isActionBarVisible = true;
       this.isDelBtnVisible = true;
       this.isAddBtnVisible = true;
@@ -140,6 +155,20 @@ export class TabbedOptionViewerComponent {
         this.travelOptionViewerTabs = tabsWithSelectedOption;
         this.activeTabName = 'Selected Option';
       }
+      //approved by ta && ticket status not sent
+      else if(requestStatus === 'Ongoing'){
+        this.travelOptionViewerTabs = tabsWithConfirmedOption;
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Upload Ticket' 
+        this.addBtnTitle = 'Upload';
+        this.activeTabName = 'Ticket Details';
+      }
+      //TA sent ticket to traveller
+      // eles if(requestStatus === 'Approved by TA' && ticketStatus === 'Sent'){
+          //this.travelOptionViewerTabs = tabsWithLiveTicket;
+          //this.isActionBarVisible = true;
+          //this.actionBarTitle = 'Uploaded Ticket'
+      // }
     
     }
 
@@ -406,6 +435,7 @@ export class TabbedOptionViewerComponent {
 
 
   //To get the id of manager selected option
+  //Also used to get the option confirmed by the manager
   //Temporary Solution Need Back End API Fixes
   getManagerSelectedOptionIdByRequestId(requestId : number){
 

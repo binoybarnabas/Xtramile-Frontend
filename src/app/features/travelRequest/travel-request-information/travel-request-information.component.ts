@@ -175,12 +175,13 @@ export class NewTravelRequestComponent {
     switch (this.currentLoggedInUserRole) {
 
       case 'manager':
-        if(this.status === 'Waiting' || this.status === 'Selected'){
+        if(this.status === 'Waiting' || this.status === 'Selected' ||this.status === 'Ongoing'){
           this.leftSectionNavItems = ["General Information", "Trip Information", "Additional Information", "Documents Attached", "Travel Options"];
           this.totalNavCount = 4;
           this.newReqFormSubMenuValue = 4;
           this.currentNavIndex = 4;
-        }else{
+        }
+        else{
           this.leftSectionNavItems = ["General Information", "Trip Information", "Additional Information", "Documents Attached"];
           this.totalNavCount = 3;
         }
