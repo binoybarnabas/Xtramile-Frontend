@@ -10,14 +10,27 @@ import { TravelRequestInfoCardComponent } from 'src/app/components/ui/travel-req
 @Component({
   selector: 'app-travel-admin-incoming-travel-requests',
   templateUrl: './travel-admin-incoming-travel-requests.component.html',
-  styleUrls: ['./travel-admin-incoming-travel-requests.component.css']
+  styleUrls: ['./travel-admin-incoming-travel-requests.component.css'],
 })
 export class TravelAdminIncomingTravelRequestsComponent {
+  pageHeading: string = 'Incoming Requests';
 
-  pageHeading: string = "Incoming Requests";
-
-  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Mode', 'Status'];
-  fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode', 'createdOn', 'travelTypeName', 'statusName'];
+  tableHeaders: string[] = [
+    'Request Code',
+    'Employee',
+    'Project Code',
+    'Date',
+    'Mode',
+    'Status',
+  ];
+  fieldsToDisplay: string[] = [
+    'requestCode',
+    'employeeName',
+    'projectCode',
+    'createdOn',
+    'travelTypeName',
+    'statusName',
+  ];
   incomingRequestdata: any[] = [];
 
   requestData: any[] = [];
@@ -29,7 +42,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
   bsModalRef!: BsModalRef;
 
   //travel req info card
-  isTravelRequestInfoCardVisible : boolean = false;
+  isTravelRequestInfoCardVisible: boolean = false;
 
   selectedDate!: Date;
   searchByName!: string;
@@ -47,11 +60,15 @@ export class TravelAdminIncomingTravelRequestsComponent {
         this.requestData = data.map((request: any) => {
           return {
             ...request,
-            statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
+            statusName:
+              request.statusName === 'Approved by RM' ||
+              request.statusName === 'Approved by TA'
+                ? (request.statusName = 'Approved')
+                : (request.statusName = request.statusName),
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
           };
         });
-        console.log(this.requestData)
+        console.log(this.requestData);
       },
       error: (err) => {
         // Handle the error
@@ -60,11 +77,10 @@ export class TravelAdminIncomingTravelRequestsComponent {
       complete: () => {
         // Handle the completion (if needed)
         console.log('Request completed');
-      }
+      },
     });
     console.log(this.sqlDatetimeFormat);
   }
-
 
   // list the requests based on the employee name
   handleSearchByName(searchByName: string): void {
@@ -78,15 +94,20 @@ export class TravelAdminIncomingTravelRequestsComponent {
     this.apiservice.getAllRequestByEmployeeName(searchByName).subscribe({
       next: (data: any) => {
         this.requestData = data.map((request: any) => {
-          const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+          const priorityName =
+            request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
           return {
             ...request,
-            statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
+            statusName:
+              request.statusName === 'Approved by RM' ||
+              request.statusName === 'Approved by TA'
+                ? (request.statusName = 'Approved')
+                : (request.statusName = request.statusName),
             createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
-            priorityName: priorityName
+            priorityName: priorityName,
           };
         });
-        console.log("employee request search by name list");
+        console.log('employee request search by name list');
         console.log(data);
         console.log(this.requestData);
       },
@@ -97,33 +118,37 @@ export class TravelAdminIncomingTravelRequestsComponent {
       complete: () => {
         console.log('Request completed');
         // Additional logic after the request is completed
-      }
+      },
     });
   }
-
 
   // Fetch all the employee requests
   fetchEmployeeRequest() {
-    this.apiservice.getIncomingRequests(this.currentPage, this.pageSize).subscribe((data: any) => {
-      this.requestData = data.travelRequest.map((request: any) => {
-        const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
-        return {
-          ...request,
-          statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
-          createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
-          priorityName: priorityName
-        };
+    this.apiservice
+      .getIncomingRequests(this.currentPage, this.pageSize)
+      .subscribe((data: any) => {
+        this.requestData = data.travelRequest.map((request: any) => {
+          const priorityName =
+            request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+          return {
+            ...request,
+            statusName:
+              request.statusName === 'Approved by RM' ||
+              request.statusName === 'Approved by TA'
+                ? (request.statusName = 'Approved')
+                : (request.statusName = request.statusName),
+            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+            priorityName: priorityName,
+          };
+        });
+        this.totalItems = data.pageCount;
       });
-      this.totalItems = data.pageCount;
-    });
   }
-
 
   // Fetch all employee requests when SeeAll button is pressed
   seeAllRequest() {
     this.fetchEmployeeRequest();
   }
-
 
   handleSeeAllClick(): void {
     // Handle the "See All" click
@@ -132,45 +157,69 @@ export class TravelAdminIncomingTravelRequestsComponent {
 
   //Sort employee requests based on the selected option
   sortData(option: string): void {
-    if (option == "name") {
-      this.apiservice.getAllRequestSortByEmployeeName(this.currentPage, this.pageSize).subscribe({
-        next: (data: any) => {
-          console.log(data);
-          this.requestData = data.travelRequest.map((request: any) => {
-            const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
-            return {
-              ...request,
-              statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
-              createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
-              priorityName: priorityName
-            };
-          });
-          this.totalItems = data.totalPages;
-        },
-        error: (error: any) => {
-          console.log("Error fetching the requests", error)
-        }
-      });
+    if (option == 'name') {
+      this.apiservice
+        .getAllRequestSortByEmployeeName(this.currentPage, this.pageSize)
+        .subscribe({
+          next: (data: any) => {
+            console.log(data);
+            this.requestData = data.travelRequest.map((request: any) => {
+              const priorityName =
+                request.priorityName === 'Null'
+                  ? 'Not Set'
+                  : request.priorityName;
+              return {
+                ...request,
+                statusName:
+                  request.statusName === 'Approved by RM' ||
+                  request.statusName === 'Approved by TA'
+                    ? (request.statusName = 'Approved')
+                    : (request.statusName = request.statusName),
+                createdOn: this.datePipe.transform(
+                  request.createdOn,
+                  'dd/MM/yyyy'
+                ),
+                priorityName: priorityName,
+              };
+            });
+            this.totalItems = data.totalPages;
+          },
+          error: (error: any) => {
+            console.log('Error fetching the requests', error);
+          },
+        });
     }
-    if (option == "date") {
-      this.apiservice.getAllRequestSortByDate(this.currentPage, this.pageSize).subscribe({
-        next: (data: any) => {
-          console.log(data);
-          this.requestData = data.travelRequest.map((request: any) => {
-            const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
-            return {
-              ...request,
-              statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
-              createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
-              priorityName: priorityName
-            };
-          });
-          this.totalItems = data.totalPages;
-        },
-        error: (error: any) => {
-          console.log("Error fetching the requests", error)
-        }
-      });
+    if (option == 'date') {
+      this.apiservice
+        .getAllRequestSortByDate(this.currentPage, this.pageSize)
+        .subscribe({
+          next: (data: any) => {
+            console.log(data);
+            this.requestData = data.travelRequest.map((request: any) => {
+              const priorityName =
+                request.priorityName === 'Null'
+                  ? 'Not Set'
+                  : request.priorityName;
+              return {
+                ...request,
+                statusName:
+                  request.statusName === 'Approved by RM' ||
+                  request.statusName === 'Approved by TA'
+                    ? (request.statusName = 'Approved')
+                    : (request.statusName = request.statusName),
+                createdOn: this.datePipe.transform(
+                  request.createdOn,
+                  'dd/MM/yyyy'
+                ),
+                priorityName: priorityName,
+              };
+            });
+            this.totalItems = data.totalPages;
+          },
+          error: (error: any) => {
+            console.log('Error fetching the requests', error);
+          },
+        });
     }
   }
 
@@ -182,82 +231,84 @@ export class TravelAdminIncomingTravelRequestsComponent {
     this.sortData(selectedSortOption);
   }
 
-
-  constructor(private apiservice: TravelAdminTravelRequestsService, private router: Router, private datePipe: DatePipe, private modalService: BsModalService,
-  ) {
-
-  }
-
+  constructor(
+    private apiservice: TravelAdminTravelRequestsService,
+    private router: Router,
+    private datePipe: DatePipe,
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit() {
     //api service to receive all incoming requests.
 
-    this.apiservice.getIncomingRequests(this.currentPage, this.pageSize).subscribe((data: any) => {
-      this.requestData = data.travelRequest.map((request: any) => {
-        const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
-        return {
-          ...request,
-          statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
-          createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
-          priorityName: priorityName
-
-        };
+    this.apiservice
+      .getIncomingRequests(this.currentPage, this.pageSize)
+      .subscribe((data: any) => {
+        this.requestData = data.travelRequest.map((request: any) => {
+          const priorityName =
+            request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+          return {
+            ...request,
+            statusName:
+              request.statusName === 'Approved by RM' ||
+              request.statusName === 'Approved by TA'
+                ? (request.statusName = 'Approved')
+                : (request.statusName = request.statusName),
+            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+            priorityName: priorityName,
+          };
+        });
+        console.log(this.requestData);
+        this.totalItems = data.pageCount;
       });
-      console.log(this.requestData)
-      this.totalItems = data.pageCount;
-    });
-
   }
 
   pageChanged(event: any): void {
     this.currentPage = event.page;
-    this.apiservice.getIncomingRequests(this.currentPage, this.pageSize).subscribe((data: any) => {
-      this.incomingRequestdata = data.travelRequest;
+    this.apiservice
+      .getIncomingRequests(this.currentPage, this.pageSize)
+      .subscribe((data: any) => {
+        this.incomingRequestdata = data.travelRequest;
 
-      this.requestData = data.travelRequest.map((request: any) => {
-        const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
-        return {
-          ...request,
-          statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
-          createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
-          priorityName: priorityName
-        };
+        this.requestData = data.travelRequest.map((request: any) => {
+          const priorityName =
+            request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+          return {
+            ...request,
+            statusName:
+              request.statusName === 'Approved by RM' ||
+              request.statusName === 'Approved by TA'
+                ? (request.statusName = 'Approved')
+                : (request.statusName = request.statusName),
+            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+            priorityName: priorityName,
+          };
+        });
+        this.totalItems = data.pageCount;
       });
-      this.totalItems = data.pageCount;
-    });
   }
 
-
   handleSelectedRow(row: any) {
-
     //this.isTravelRequestInfoCardVisible = true;
 
     this.selectedRow = row;
-    console.log(this.selectedRow.requestId)
-    this.requestId = this.selectedRow.requestId
+    console.log(this.selectedRow.requestId);
+    this.requestId = this.selectedRow.requestId;
     // const queryParams = { requestId: this.requestId }
     // this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
 
     const initialState = {
-      requestId: this.selectedRow.requestId
+      requestId: this.selectedRow.requestId,
     };
 
-//    this.bsModalRef = this.modalService.show(TravelRequestCardModalComponent, { initialState });
-    this.bsModalRef = this.modalService.show(TravelRequestInfoCardComponent, { initialState });
+    //    this.bsModalRef = this.modalService.show(TravelRequestCardModalComponent, { initialState });
+    this.bsModalRef = this.modalService.show(TravelRequestInfoCardComponent, {
+      initialState,
+    });
     this.bsModalRef.content.onClose.subscribe((result: any) => {
       // Handle the result from the modal if needed
       console.log('Modal result:', result);
       // You can perform actions with the result data here
     });
-
   }
-
-
-
-  // selectRow(requestId:number){
-  //   this.selectedRow[requestId] = requestId;
-  //   console.log(requestId);
-  //   const queryParams = {requestId:requestId}
-  //   this.router.navigate(['traveladmin/requestdetail'],{ queryParams: queryParams });
-  // }
 }
