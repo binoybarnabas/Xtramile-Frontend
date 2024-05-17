@@ -50,14 +50,16 @@ export class ManagerForwadedRequestsComponent {
       this.tabs = [
         {
           name: 'Forwarded',
-          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Return Date', 'Requested On', 'Forwarded On'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date', 'Forwarded On'],
           entries: forwardedRequests.map((item) => [
             item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
+            item.from,
+            item.to,
+            item.departureDate,
             item.date,
-            item.status,
           ])
         },
         // Placeholder objects for other tabs
@@ -70,7 +72,7 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Forwarded', headings: [], entries: [] },
         {
           name: 'Waiting',
-          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel type','Option Sent On'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date' ,'Option Sent On'],
           entries: waitingOptions.map((item) => [
             item.requestId,
             item.requestCode,
@@ -79,7 +81,6 @@ export class ManagerForwadedRequestsComponent {
             item.from,
             item.to,
             item.departureDate,
-            item.travelType,
             item.approvalDate,
           ])
         },
@@ -92,7 +93,7 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Waiting', headings: [], entries: [] },
         {
           name: 'Selected',
-          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Updated On'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date', 'Updated On'],
           entries: selectedOptions.map((item) => [
             item.requestId,
             item.requestCode,
@@ -101,7 +102,6 @@ export class ManagerForwadedRequestsComponent {
             item.from,
             item.to,
             item.departureDate,
-            item.travelType,
             item.approvalDate,
           ])
         }
@@ -116,6 +116,7 @@ export class ManagerForwadedRequestsComponent {
           return {
             ...request,
             date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
           };
         });        
         this.forwardedTotalItems = data.totalCount;

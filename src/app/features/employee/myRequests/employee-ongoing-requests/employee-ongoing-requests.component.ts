@@ -9,8 +9,8 @@ import { DatePipe } from '@angular/common';
 })
 export class EmployeeOngoingRequestsComponent {
 
-  tableHeaders: string[] = ['Request Code', 'Project Code', 'Project Name', 'Start Date', 'End Date', 'Reason', 'Status'];
-  fieldsToDisplay: string[] = ['requestCode', 'projectCode', 'projectName', 'startDate', 'endDate', 'reason', 'statusName'];
+  tableHeaders: string[] = ['Request Code', 'Project Code', 'From', 'To', 'Departure Date', 'Return Date', 'Purpose','Status'];
+  fieldsToDisplay: string[] = ['requestCode', 'projectCode', 'from', 'to', 'startDate', 'endDate', 'reason', 'statusName'];
   incomingRequestdata: any[] = [];
 
   constructor(private apiservice: RequestService) { }

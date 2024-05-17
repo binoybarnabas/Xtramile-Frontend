@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 export class ManagerOngoingTravelRequestsComponent {
   pageHeading: string = 'Ongoing Trips'
 
-  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Mode'];
-  fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'createdOn', 'travelTypeName'];
+  tableHeaders: string[] = ['Request Code', 'Requested By', 'Project Code', 'From', 'To','Departure Date', 'Ticket Status', 'Trip Status'];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to', 'departureDate', 'ticketStatus', 'statusName'];
   incomingRequestdata: any[] = [];
   managerId!: number;
   currentPage: number = 1;
@@ -59,7 +59,7 @@ export class ManagerOngoingTravelRequestsComponent {
     const datePipe = new DatePipe('en-US');
     return data.map(item => ({
       ...item,
-      createdOn: datePipe.transform(item.createdOn, 'dd/LL/yyyy'),
+      departureDate: datePipe.transform(item.createdOn, 'dd/LL/yyyy'),
       //concatinating the employeeName and employeeemail, we can split the data using \n
       //this is to show two data in a single cell,
       employeeNameAndEmail: `${item.employeeName}\n${item.employeeEmail}`
