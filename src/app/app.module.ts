@@ -23,7 +23,6 @@ import { TravelAdminMiddleConsoleComponent } from './components/layout/travelAdm
 import { FinancePersonnelHomeComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-home.component';
 import { FinancePersonnelSideNavBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
 import { FinancePersonnelMiddleConsoleComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-middle-console/finance-personnel-middle-console.component';
-import { EmployeeDashboardComponent } from './features/employee/employee-dashboard/employee-dashboard.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
 import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
@@ -134,9 +133,7 @@ import { TravellerTravelHistoryComponent } from './features/travellerFeatures/tr
 import { TabbedDataTableComponent } from './components/ui/generalUIComponents/tabbed-data-table/tabbed-data-table.component';
 import { TextEditorComponent } from './components/ui/text-editor/text-editor.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { FileOptionViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/file-option-viewer/file-option-viewer.component';
 import { ManagerForwadedRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwaded-requests/manager-forwaded-requests.component';
 import { DashCalendarComponent } from './components/ui/dashboard-components/dash-calendar/dash-calendar.component';
 import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
@@ -165,7 +162,6 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     FinancePersonnelHomeComponent,
     FinancePersonnelSideNavBarComponent,
     FinancePersonnelMiddleConsoleComponent,
-    EmployeeDashboardComponent,
     EmployeeProfileComponent,
     EmployeeClosedRequestsComponent,
     EmployeePendingRequestsComponent,
@@ -261,8 +257,6 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     TaskManagerComponent,
     DashboardReportGeneratorComponent,
     TextEditorComponent,
-    ManagerTravelOptionsViewerComponent,
-    FileOptionViewerComponent,
     TraveladminViewTravelDocumentsComponent,
     TravellerPendingRequestsComponent,
     TravellerOngoingTravelComponent,

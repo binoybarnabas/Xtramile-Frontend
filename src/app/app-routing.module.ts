@@ -40,7 +40,6 @@ import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmi
 import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
 import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
-import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
 import { ManagerForwadedRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwaded-requests/manager-forwaded-requests.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/custom-pdf-viewer/custom-pdf-viewer.component';
@@ -111,7 +110,6 @@ const routes: Routes = [
       {
         path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
           { path: '', component: TravelAdminSelectedRequestsComponent },
-          { path: 'view_selected_options', component: ManagerTravelOptionsViewerComponent }
         ]
       },
       { path: 'approved_requests', component: TravelAdminOngoingTravelRequestsComponent },

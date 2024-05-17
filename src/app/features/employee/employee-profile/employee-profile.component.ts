@@ -9,6 +9,7 @@ import { ProfileService } from 'src/app/services/employeeServices/profileService
   templateUrl: './employee-profile.component.html',
   styleUrls: ['./employee-profile.component.css']
 })
+
 export class EmployeeProfileComponent {
   editMode: boolean = false;
   employeeId!: number;
@@ -18,18 +19,15 @@ export class EmployeeProfileComponent {
 
   profileImage: string | null = null;
   newImageSelected: boolean = false;
-
   profilePicture: string | null | undefined = null;
 
-
-
   @ViewChild('imageCropModal') imageCropModal: any; // Reference to the image cropping modal
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
   display: string = '';
   bsModalRef!: BsModalRef<unknown>;
   profileImageFile!: File;
-
 
   constructor(private service: ProfileService) {
 
@@ -39,6 +37,7 @@ export class EmployeeProfileComponent {
       this.employeeId = parsedUserData.empId;
     }
   }
+
   form = new FormGroup({
     firstName: new FormControl({ value: '', disabled: true }, Validators.required),
     lastName: new FormControl({ value: '', disabled: true }, Validators.required),
@@ -56,6 +55,7 @@ export class EmployeeProfileComponent {
     address: new FormControl('', Validators.required),
     profilePicture: new FormControl('')
   });
+  
   ngOnInit() {
     this.form.disable();
     this.fetchEmployeeData();
@@ -71,6 +71,7 @@ export class EmployeeProfileComponent {
       this.form.disable();
     }
   }
+
   //get the employee details that needs to be shown in the profile page
   fetchEmployeeData() {
     this.service.getEmployeeData(this.employeeId).subscribe({
@@ -129,8 +130,6 @@ export class EmployeeProfileComponent {
     this.initialValue['address'] === this.form.get('address')?.value
       ? (updatedData.address = undefined)
       : (updatedData.address = this.form.get('address')?.value ?? undefined);
-
-
 
     //store the values in form as the initial value, it is for to not to make API call.
     this.initialValue = { contactNumber: this.form.get('contactNumber')?.value, address: this.form.get('address')?.value }
@@ -247,6 +246,7 @@ export class EmployeeProfileComponent {
 
     this.closeModal();
   }
+
   // Method to close the modal
   closeModal() {
     this.display = 'none'; // Hide the modal
@@ -257,4 +257,5 @@ export class EmployeeProfileComponent {
       fileInput.value = ''; // Clear the file input after closing the modal
     }
   }
+  
 }
