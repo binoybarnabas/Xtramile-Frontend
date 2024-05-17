@@ -8,7 +8,6 @@
   [displayedProperties]="dataHeaders"
   ></app-data-table>
  
- 
   <pagination [itemsPerPage]="itemsPerPage" [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" ></pagination></div>
  
 <div *ngIf="travelRequest?.length === 0">

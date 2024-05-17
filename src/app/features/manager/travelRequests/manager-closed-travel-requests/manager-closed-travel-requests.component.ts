@@ -32,7 +32,6 @@ export class ManagerClosedTravelRequestsComponent {
     this.getManagerClosedRequests();
   }
 
-
   getManagerClosedRequests() {
     this.apiService.getManagerClosedRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
@@ -52,10 +51,10 @@ export class ManagerClosedTravelRequestsComponent {
     });
   }
 
-
   // handle page change event
   pageChanged(event: any): void {
     this.currentPage = event.page;
     this.getManagerClosedRequests();
   }
+
 }

@@ -13,7 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
-import { NewTravelRequestComponent } from './features/travelRequest/travel-request-information/travel-request-information.component';
+import { NewTravelRequestComponent } from './components/layout/travel-request-information/travel-request-information.component';
 import { ManagerSideNavBarComponent } from './components/layout/manager/manager-home/manager-side-nav-bar/manager-side-nav-bar.component';
 import { ManagerMiddleConsoleComponent } from './components/layout/manager/manager-home/manager-middle-console/manager-middle-console.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
@@ -23,7 +23,6 @@ import { TravelAdminMiddleConsoleComponent } from './components/layout/travelAdm
 import { FinancePersonnelHomeComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-home.component';
 import { FinancePersonnelSideNavBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
 import { FinancePersonnelMiddleConsoleComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-middle-console/finance-personnel-middle-console.component';
-import { EmployeeDashboardComponent } from './features/employee/employee-dashboard/employee-dashboard.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
 import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
@@ -34,7 +33,6 @@ import { EmployeeClosedBillsComponent } from './features/employee/mySettlements/
 import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
 import { ManagerProfileComponent } from './features/manager/manager-profile/manager-profile.component';
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
-import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
 import { ManagerOngoingTravelRequestsComponent } from './features/manager/travelRequests/manager-ongoing-travel-requests/manager-ongoing-travel-requests.component';
 import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
 import { ManagerIncomingTravelSettlementsComponent } from './features/manager/travelSettlements/manager-incoming-travel-settlements/manager-incoming-travel-settlements.component';
@@ -134,10 +132,7 @@ import { TravellerTravelHistoryComponent } from './features/travellerFeatures/tr
 import { TabbedDataTableComponent } from './components/ui/generalUIComponents/tabbed-data-table/tabbed-data-table.component';
 import { TextEditorComponent } from './components/ui/text-editor/text-editor.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { FileOptionViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/file-option-viewer/file-option-viewer.component';
-import { ManagerForwadedRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwaded-requests/manager-forwaded-requests.component';
 import { DashCalendarComponent } from './components/ui/dashboard-components/dash-calendar/dash-calendar.component';
 import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
@@ -146,7 +141,8 @@ import { ImageViewerComponent } from './components/ui/generalUIComponents/image-
 import { CustomConfirmationModalComponent } from './components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/custom-pdf-viewer/custom-pdf-viewer.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component'; // Import Ng2PdfViewerModule
+import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
+import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component'; // Import Ng2PdfViewerModule
 @NgModule({
   declarations: [
     AppComponent,
@@ -165,7 +161,6 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     FinancePersonnelHomeComponent,
     FinancePersonnelSideNavBarComponent,
     FinancePersonnelMiddleConsoleComponent,
-    EmployeeDashboardComponent,
     EmployeeProfileComponent,
     EmployeeClosedRequestsComponent,
     EmployeePendingRequestsComponent,
@@ -176,7 +171,6 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     ManagerDashboardComponent,
     ManagerProfileComponent,
     ManagerIncomingTravelRequestsComponent,
-    ManagerForwardedTravelRequestsComponent,
     ManagerOngoingTravelRequestsComponent,
     ManagerClosedTravelRequestsComponent,
     ManagerIncomingTravelSettlementsComponent,
@@ -261,14 +255,11 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     TaskManagerComponent,
     DashboardReportGeneratorComponent,
     TextEditorComponent,
-    ManagerTravelOptionsViewerComponent,
-    FileOptionViewerComponent,
     TraveladminViewTravelDocumentsComponent,
     TravellerPendingRequestsComponent,
     TravellerOngoingTravelComponent,
     TravellerTravelHistoryComponent,
     TabbedDataTableComponent,
-    ManagerForwadedRequestsComponent,
     TabbedDataTableComponent,
     DashCalendarComponent,
     TravelMessengerModalComponent,
@@ -277,7 +268,8 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     ImageViewerComponent,
     CustomConfirmationModalComponent,
     CustomPdfViewerComponent,
-    TabbedOptionViewerComponent
+    TabbedOptionViewerComponent,
+    ManagerForwardedTravelRequestsComponent
   ]
   ,
 
