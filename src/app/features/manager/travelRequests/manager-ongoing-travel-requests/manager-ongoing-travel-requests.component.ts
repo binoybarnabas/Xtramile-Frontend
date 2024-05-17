@@ -59,7 +59,7 @@ export class ManagerOngoingTravelRequestsComponent {
     const datePipe = new DatePipe('en-US');
     return data.map(item => ({
       ...item,
-      departureDate: datePipe.transform(item.createdOn, 'dd/LL/yyyy'),
+      departureDate: datePipe.transform(item.departureDate, 'dd/LL/yyyy'),
       //concatinating the employeeName and employeeemail, we can split the data using \n
       //this is to show two data in a single cell,
       employeeNameAndEmail: `${item.employeeName}\n${item.employeeEmail}`
@@ -82,7 +82,7 @@ export class ManagerOngoingTravelRequestsComponent {
         this.incomingRequestdata = data.employeeRequest.map((request: any) => {
           return {
             ...request,
-            date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
             employeeNameAndEmail: `${request.employeeName}\n${request.email}`
           };
         });
@@ -120,7 +120,7 @@ export class ManagerOngoingTravelRequestsComponent {
           this.incomingRequestdata = data.employeeRequest.map((request: any) => {
             return {
               ...request,
-              date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+              departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
               employeeNameAndEmail: `${request.employeeName}\n${request.email}`
             };
           });
@@ -140,7 +140,7 @@ export class ManagerOngoingTravelRequestsComponent {
           this.incomingRequestdata = data.employeeRequest.map((request: any) => {
             return {
               ...request,
-              date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+              departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
               employeeNameAndEmail: `${request.employeeName}\n${request.email}`
             };
           });
@@ -157,7 +157,7 @@ export class ManagerOngoingTravelRequestsComponent {
           this.incomingRequestdata = data.employeeRequest.map((request: any) => {
             return {
               ...request,
-              date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+              departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
               employeeNameAndEmail: `${request.employeeName}\n${request.email}`
             };
           });
@@ -183,7 +183,7 @@ export class ManagerOngoingTravelRequestsComponent {
           this.incomingRequestdata = data.employeeRequest.map((request: any) => {
             return {
               ...request,
-              date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+              departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
               employeeNameAndEmail: `${request.employeeName}\n${request.email}`
             };
           });

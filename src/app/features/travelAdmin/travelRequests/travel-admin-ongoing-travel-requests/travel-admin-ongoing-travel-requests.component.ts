@@ -12,8 +12,8 @@ import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminSe
 export class TravelAdminOngoingTravelRequestsComponent {
 
   pageHeading: string = 'Ongoing Travel';
-  tableHeaders: string[] = ['Request Code','Project Code','Project Name','Employee','Source City','Destination City'];
-  fieldsToDisplay: string[] = ['requestCode', 'projectCode','projectName', 'name','sourceCity','destinationCity'];
+  tableHeaders: string[] = ['Request Code','Requested By','Project Code','From','To','Departure Date', 'Return Date', 'PickUp Requested', 'Ticket Status', 'Trip Status'];
+  fieldsToDisplay: string[] = ['requestCode', 'name','projectCode', 'from','to','departureDate', 'returnDate', 'pickUpRequested', 'ticketStatus', 'tripStatus'];
   requestData: any[] = [];
   requestId: number = 0;
   currentPage = 1;
@@ -32,14 +32,14 @@ export class TravelAdminOngoingTravelRequestsComponent {
   pageChanged(event: any): void {
     this.currentPage = event.page;
     this.apiservice.getOngoingTravel(this.currentPage, this.pageSize).subscribe((data: any) => {
-      this.requestData = data.ongoingTravel;
+      this.requestData = this.formatData(data.ongoingTravel);
       this.totalItems = data.pageCount;
     });
   }
 
   fetchTravelRequest(){
     this.apiservice.getOngoingTravel(this.currentPage, this.pageSize).subscribe((data: any) => {
-      this.requestData = data.ongoingTravel;
+      this.requestData = this.formatData(data.ongoingTravel);
       this.totalItems = data.pageCount;
     });
   }
@@ -63,5 +63,16 @@ export class TravelAdminOngoingTravelRequestsComponent {
     });
 
   }
+
+  formatData(data: any[]): any[] {
+    //using DatePipe to convert the date into dd/LL/yyyy format
+    const datePipe = new DatePipe('en-US');
+    return data.map(item => ({
+      ...item,
+      departureDate: datePipe.transform(item.departureDate, 'dd/LL/yyyy'),
+      returnDate: item.returnDate ? datePipe.transform(item.returnDate, 'dd/LL/yyyy'): ''
+    }));
+  }
+
 
 }
