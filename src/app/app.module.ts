@@ -67,9 +67,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TableFilterComponent } from './components/ui/table-components/table-filter/table-filter.component';
 import { ChangeStatusButtonComponent } from './components/ui/referenceComponents/change-status-button/change-status-button.component';
 import { ModalComponent } from './components/ui/modal/modal.component';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
-//import { ToastrModule } from 'ngx-toastr';
 import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { EmployeeViewCardComponent } from './components/ui/referenceComponents/employee-view-card/employee-view-card.component';
@@ -93,7 +91,6 @@ import { StatusPipe } from './pipes/Status/status.pipe';
 import { NotificationsComponent } from './components/ui/referenceComponents/notifications/notifications.component';
 import { DashboardMapComponent } from './components/ui/referenceComponents/dashboard-map/dashboard-map.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-// import { BarChartComponent } from './components/ui/bar-chart/bar-chart.component';import { FileUploadComponent } from './file-upload/file-upload.component';
 import { TravelRequestCardModalComponent } from './components/ui/travel-request-card-modal/travel-request-card-modal.component';
 import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
@@ -138,7 +135,9 @@ import { CustomConfirmationModalComponent } from './components/ui/generalUICompo
 import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/custom-pdf-viewer/custom-pdf-viewer.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
-import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component'; // Import Ng2PdfViewerModule
+import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
+import { CustomLoaderComponent } from './components/ui/custom-loader/custom-loader.component'; // Import Ng2PdfViewerModule
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -216,7 +215,6 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     TravelRequestCardModalComponent,
     TravelOptionViewerComponent,
     ForgotPasswordModalComponent,
-    // BarChartComponent,
     DashboardUpcomingTripComponent,
     DashboardProgressComponent,
     DashboardCardComponent,
@@ -261,10 +259,9 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     CustomConfirmationModalComponent,
     CustomPdfViewerComponent,
     TabbedOptionViewerComponent,
-    ManagerForwardedTravelRequestsComponent
-  ]
-  ,
-
+    ManagerForwardedTravelRequestsComponent,
+    CustomLoaderComponent,
+  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -278,21 +275,16 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
     TypeaheadModule.forRoot(),
-    // ToastrModule.forRoot({
-    //   timeOut: 3000,
-    //   positionClass: 'toast-center', // Set to center of the screen
-    //   preventDuplicates: true,
-    // }),
-
     ModalModule.forRoot(),
     ImageCropperModule,
     EditorModule,
     TabsModule.forRoot(),
-    PdfViewerModule
+    PdfViewerModule,
   ],
-  providers: [DatePipe,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [
+    DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}
