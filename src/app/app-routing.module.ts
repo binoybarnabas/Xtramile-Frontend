@@ -7,7 +7,6 @@ import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
-import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
 import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
@@ -40,10 +39,10 @@ import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmi
 import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
 import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
-import { ManagerForwadedRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwaded-requests/manager-forwaded-requests.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/custom-pdf-viewer/custom-pdf-viewer.component';
 import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
+import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -78,14 +77,7 @@ const routes: Routes = [
       { path: 'request', component: TravelRequestFormComponent },
       { path: 'incoming', component: ManagerIncomingTravelRequestsComponent },
       { path: 'newrequest', component: ManagerIncomingTravelRequestsComponent },
-      { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent,children: [
-        {
-          path:'',component: ManagerForwadedRequestsComponent
-        }
-        //{
-          //path: 'view_options_travel', component: ManagerTravelOptionsViewerComponent
-        //}
-      ] },
+      { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
       { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
       { path: 'closed', component: ManagerClosedTravelRequestsComponent },
       // { path: 'request', component: NewTravelRequestComponent },

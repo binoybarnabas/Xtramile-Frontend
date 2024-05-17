@@ -3,14 +3,16 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
 import { DatePipe } from '@angular/common';
 import { StatusCodes } from 'src/app/utils/StatusEnum';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-request-card-modal/travel-request-card-modal.component';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-manager-ongoing-travel-requests',
   templateUrl: './manager-ongoing-travel-requests.component.html',
   styleUrls: ['./manager-ongoing-travel-requests.component.css']
 })
+
 export class ManagerOngoingTravelRequestsComponent {
+
   pageHeading: string = 'Ongoing Trips'
 
   tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Mode'];
@@ -49,10 +51,8 @@ export class ManagerOngoingTravelRequestsComponent {
 
     this.requestId = row.requestId;
     const queryParams = { requestId: this.requestId }
-    this.router.navigate(['manager/requestdetail'],{ queryParams: queryParams });
-    
+    this.router.navigate(['manager/requestdetail'],{ queryParams: queryParams }); 
   }
-
 
   formatData(data: any[]): any[] {
     //using DatePipe to convert the date into dd/LL/yyyy format
@@ -201,4 +201,5 @@ export class ManagerOngoingTravelRequestsComponent {
         }
       });
     }
+
 }

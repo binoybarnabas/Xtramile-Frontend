@@ -12,7 +12,9 @@ import { StatusCodes } from 'src/app/utils/StatusEnum';
   templateUrl: './manager-incoming-travel-requests.component.html',
   styleUrls: ['./manager-incoming-travel-requests.component.css']
 })
+
 export class ManagerIncomingTravelRequestsComponent {
+
   pageHeading: string = 'Incoming Travel Requests'
 
   selectedDate!: Date;
@@ -25,7 +27,6 @@ export class ManagerIncomingTravelRequestsComponent {
 
   tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Status'];
   fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
-
 
   employeeRequest: any[] = [];
 
@@ -121,7 +122,6 @@ export class ManagerIncomingTravelRequestsComponent {
     this.managerId = this.userData.empId;
     this.apiservice.managerId = this.managerId;
   }
-
 
   // Fetch all the employee requests
   fetchEmployeeRequest() {
