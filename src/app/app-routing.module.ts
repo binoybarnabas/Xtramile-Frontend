@@ -14,8 +14,6 @@ import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel
 
 import { TravelAdminDashboardComponent } from './features/travelAdmin/travel-admin-dashboard/travel-admin-dashboard.component';
 import { TravelAdminIncomingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-incoming-travel-requests/travel-admin-incoming-travel-requests.component';
-import { TravelAdminWaitingOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-options-travel-requests.component';
-import { TravelAdminSelectedOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-options-travel-requests.component';
 import { TravelAdminClosedTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-closed-travel-requests/travel-admin-closed-travel-requests.component';
 import { FinancePersonnelHomeComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-home.component';
 import { FinancePersonnelDashboardComponent } from './features/financePersonnel/finance-personnel-dashboard/finance-personnel-dashboard.component';
@@ -25,8 +23,8 @@ import { FinancePersonnelClosedTravelSettlementsComponent } from './features/fin
 import { FinancePersonnelProfileComponent } from './features/financePersonnel/finance-personnel-profile/finance-personnel-profile.component';
 import { ManagerOngoingTravelRequestsComponent } from './features/manager/travelRequests/manager-ongoing-travel-requests/manager-ongoing-travel-requests.component';
 
-import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
-import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
+import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
+import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { employeeAuthGuard, managerAuthGuard, travelAdminAuthGuard } from './auth.guard';
 import { LoginComponent } from './components/ui/login/login.component';
 
@@ -94,15 +92,10 @@ const routes: Routes = [
       {path: 'view_all_messages', component : TravelMessengerFullScreenComponent},
       { path: 'incomingrequests', component: TravelAdminIncomingTravelRequestsComponent },
       {
-        path: 'waiting', component: TravelAdminWaitingOptionsTravelRequestsComponent, children: [
-          { path: '', component: TravelAdminWaitingRequestsComponent },
-          //{ path: 'view_travel_options', component: ManagerTravelOptionsViewerComponent }
-        ]
+        path: 'waiting', component: TravelAdminWaitingRequestsComponent
       },
       {
-        path: 'selected', component: TravelAdminSelectedOptionsTravelRequestsComponent, children: [
-          { path: '', component: TravelAdminSelectedRequestsComponent },
-        ]
+        path: 'selected', component: TravelAdminSelectedRequestsComponent
       },
       { path: 'approved_requests', component: TravelAdminOngoingTravelRequestsComponent },
       { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },

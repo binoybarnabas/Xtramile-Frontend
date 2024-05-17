@@ -44,8 +44,6 @@ import { ManagerClosedBillsComponent } from './features/manager/mySettlements/ma
 import { TravelAdminDashboardComponent } from './features/travelAdmin/travel-admin-dashboard/travel-admin-dashboard.component';
 import { TravelAdminProfileComponent } from './features/travelAdmin/travel-admin-profile/travel-admin-profile.component';
 import { TravelAdminIncomingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-incoming-travel-requests/travel-admin-incoming-travel-requests.component';
-import { TravelAdminWaitingOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-options-travel-requests.component';
-import { TravelAdminSelectedOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-options-travel-requests.component';
 import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-ongoing-travel-requests/travel-admin-ongoing-travel-requests.component';
 import { TravelAdminClosedTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-closed-travel-requests/travel-admin-closed-travel-requests.component';
 import { TravelAdminIncomingTravelSettlementsComponent } from './features/travelAdmin/travelSettlements/travel-admin-incoming-travel-settlements/travel-admin-incoming-travel-settlements.component';
@@ -72,9 +70,8 @@ import { ModalComponent } from './components/ui/modal/modal.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
 //import { ToastrModule } from 'ngx-toastr';
-import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequests/view-available-options/view-available-options.component';
-import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
-import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
+import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
+import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { EmployeeViewCardComponent } from './components/ui/referenceComponents/employee-view-card/employee-view-card.component';
 import { LoginPageComponent } from './components/layout/login-page/login-page.component';
 import { TopBarUserComponent } from './components/ui/generalUIComponents/top-bar-user/top-bar-user.component';
@@ -102,7 +99,6 @@ import { TravelOptionViewerComponent } from './features/employee/myRequests/empl
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ConfirmationModalComponent } from './components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
 import { DashboardGaugeComponent } from './components/ui/referenceComponents/dashboard-gauge/dashboard-gauge.component';
-import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/selected-option-travel-admin/selected-option-travel-admin.component';
 
 import { DashboardCalenderComponent } from './components/ui/dashboard-components/dashboard-calender/dashboard-calender.component';
 import { CustomToastComponent } from './components/ui/generalUIComponents/custom-toast/custom-toast.component';
@@ -182,8 +178,6 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     TravelAdminDashboardComponent,
     TravelAdminProfileComponent,
     TravelAdminIncomingTravelRequestsComponent,
-    TravelAdminWaitingOptionsTravelRequestsComponent,
-    TravelAdminSelectedOptionsTravelRequestsComponent,
     TravelAdminOngoingTravelRequestsComponent,
     TravelAdminClosedTravelRequestsComponent,
     TravelAdminIncomingTravelSettlementsComponent,
@@ -210,7 +204,6 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     LoginComponent,
     ModalComponent,
     EmployeeViewCardComponent,
-    ViewAvailableOptionsComponent,
     TravelAdminWaitingRequestsComponent,
     TravelAdminSelectedRequestsComponent,
     LoginPageComponent,
@@ -234,7 +227,6 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     DashboardMapComponent,
     DashboardGaugeComponent,
     DashboardCalenderComponent,
-    SelectedOptionTravelAdminComponent,
     CustomToastComponent,
     TravelRequestFormComponent,
     TravellerDashboardComponent,
