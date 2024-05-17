@@ -107,12 +107,18 @@
 
           <!--TA- add available options  section -->
           <div
-            *ngIf=" newReqFormSubMenuValue === 4 &&
-             (currentLoggedInUserRole === 'travelAdmin' || currentLoggedInUserRole === 'manager')"
+            *ngIf="
+              newReqFormSubMenuValue === 4 &&
+              (currentLoggedInUserRole === 'travelAdmin' ||
+                currentLoggedInUserRole === 'manager')
+            "
             class="travel_option_section"
           >
-
-          <app-tabbed-option-viewer [requestId]="requestId" [requestStatus]="status" [currentLoggedInUserRole]="currentLoggedInUserRole"></app-tabbed-option-viewer>
+            <app-tabbed-option-viewer
+              [requestId]="requestId"
+              [requestStatus]="status"
+              [currentLoggedInUserRole]="currentLoggedInUserRole"
+            ></app-tabbed-option-viewer>
 
             <!-- form input group ends -->
           </div>
@@ -143,7 +149,6 @@
 
             <!-- form input group ends -->
           </div>
-
         </form>
 
         <!-- form container ends -->
@@ -163,11 +168,7 @@
       </div>
 
       <div class="forward_btn_card">
-        <button
-          (click)="onForwardBtnClick()"
-          class="btn"
-          
-        >
+        <button (click)="onForwardBtnClick()" class="btn">
           {{ forwardBtnTitle }}
         </button>
       </div>
@@ -176,5 +177,3 @@
 
   <!-- req form main container ends -->
 </div>
-
-
