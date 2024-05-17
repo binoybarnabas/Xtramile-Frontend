@@ -14,7 +14,6 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
 
 
 export class ManagerForwardedTravelRequestsComponent {
-
   travelRequest: TravelRequestDetailViewModel[][] = [];
   waitingRequests: WaitingOrSelectedRequests[][] = [];
   selectedRequests: WaitingOrSelectedRequests[][] = [];
@@ -53,14 +52,16 @@ export class ManagerForwardedTravelRequestsComponent {
       this.tabs = [
         {
           name: 'Forwarded',
-          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Return Date', 'Requested On', 'Forwarded On'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date', 'Forwarded On'],
           entries: forwardedRequests.map((item) => [
             item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
+            item.from,
+            item.to,
+            item.departureDate,
             item.date,
-            item.status,
           ])
         },
         // Placeholder objects for other tabs
@@ -73,7 +74,7 @@ export class ManagerForwardedTravelRequestsComponent {
         { name: 'Forwarded', headings: [], entries: [] },
         {
           name: 'Waiting',
-          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel type','Option Sent On'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date' ,'Option Sent On'],
           entries: waitingOptions.map((item) => [
             item.requestId,
             item.requestCode,
@@ -82,7 +83,6 @@ export class ManagerForwardedTravelRequestsComponent {
             item.from,
             item.to,
             item.departureDate,
-            item.travelType,
             item.approvalDate,
           ])
         },
@@ -95,7 +95,7 @@ export class ManagerForwardedTravelRequestsComponent {
         { name: 'Waiting', headings: [], entries: [] },
         {
           name: 'Selected',
-          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Updated On'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date', 'Updated On'],
           entries: selectedOptions.map((item) => [
             item.requestId,
             item.requestCode,
@@ -104,7 +104,6 @@ export class ManagerForwardedTravelRequestsComponent {
             item.from,
             item.to,
             item.departureDate,
-            item.travelType,
             item.approvalDate,
           ])
         }
@@ -119,6 +118,7 @@ export class ManagerForwardedTravelRequestsComponent {
           return {
             ...request,
             date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
           };
         });        
         this.forwardedTotalItems = data.totalCount;
@@ -219,6 +219,18 @@ export class ManagerForwardedTravelRequestsComponent {
   requestId!:number;
   queryParams: any = {};
   handleSelectedRow(row: any){
+    console.log(row)
+    // if(this.activeTabIndex === 1 || this.activeTabIndex === 2){
+    //   this.requestId = row[1][0];
+    //   console.log(row);
+    //   if(this.activeTabIndex == 1){
+    //     this.queryParams = {requestId: this.requestId}
+    //   }
+    //   if(this.activeTabIndex === 2){
+    //     this.queryParams = {requestId: this.requestId,IsSelectedPage:true}
+    //   }
+    //   this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: this.queryParams});
+    // }
     console.log('row details forward',row)
     this.requestId = row[1][0];
     this.queryParams = {requestId: this.requestId}
