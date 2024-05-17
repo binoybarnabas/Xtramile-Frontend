@@ -67,6 +67,25 @@
     font-weight: var(--active-font-weight);
 }
 
+
+.main_container .heading_section .action_bar .task_icon{
+    animation: rotateAnimation 2s linear infinite;
+}
+
+@keyframes rotateAnimation {
+    0%{
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+
+    100%{
+        transform: rotate(0deg);
+
+    }
+}
+
 .main_container .heading_section .tab_section{
     display: flex;
     justify-content: center;
@@ -194,9 +213,12 @@
 
 .main_container .body_section .expansion_panel_container .expansion_panel .expansion_panel_header.active{
     border-radius: 6px 6px 0 0;
-    background-color: var(--second-color);
-    color: var(--card-bg-color);
+    border: 1.5px solid var(--second-color);
+    /* background-color: var(--second-color); */
+    /* color: var(--card-bg-color); */
 }
+
+
 
 
 .main_container .body_section .expansion_panel_container .expansion_panel .expansion_panel_header .title{
@@ -204,6 +226,9 @@
     margin-bottom: auto;
     font-size: var(--form-label-font-size);
 }
+
+
+
 
 .main_container .body_section .expansion_panel_container .expansion_panel .expansion_panel_header .icon{
     margin-left: 10px;
@@ -216,4 +241,8 @@
     background-color: var(--secondary-cyan-color);
     border-top: 2px solid var(--card-bg-color);
     font-size: var(--small-font-size);
+}
+
+.main_container .body_section .expansion_panel_container .expansion_panel  .expansion_panel_content.active{
+    border: 1.5px solid var(--second-color);
 }

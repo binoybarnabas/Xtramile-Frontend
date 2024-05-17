@@ -4,11 +4,11 @@ import { TextEditorComponent } from '../../text-editor/text-editor.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { Observable, forkJoin } from 'rxjs';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
-import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
+import { CustomConfirmationModalComponent } from '../custom-confirmation-modal/custom-confirmation-modal.component';
 
 @Component({
   selector: 'app-tabbed-option-viewer',
@@ -29,6 +29,8 @@ export class TabbedOptionViewerComponent {
   isDelBtnVisible: boolean = false;
   isAddBtnVisible: boolean = false;
 
+  addBtnTitle : string = 'Add';
+
   activeTabIndex: number = 0;
   activeTabName : string = 'Files';
 
@@ -48,7 +50,7 @@ export class TabbedOptionViewerComponent {
   isSelectedOptionChanged: boolean = false;
 
   bsModalRef!: BsModalRef;
-
+  
   constructor(private modalService: BsModalService, private requestService: RequestService, private managerService:ManagerTravelRequestsService,
     private sanitizer: DomSanitizer
   ){
@@ -90,36 +92,86 @@ export class TabbedOptionViewerComponent {
     ];
     
     let tabsWithConfirmedOption = [
-      { name: 'Confirmed Option' }
+      {name : 'Ticket Details'},
+      {name: 'Confirmed Option'}
+    ];
+
+    let tabsWithLiveTicket = [
+      {name : 'Ticket Details'}
     ];
     
-    if(currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'travelAdmin') {
+    
+    if(requestStatus === 'Selected' || requestStatus === 'Ongoing'){
+      this.getManagerSelectedOptionIdByRequestId(this.requestId);
+    }
+
+    //manager
+    if(currentLoggedInUserRole === 'manager') {
       
-      if (requestStatus === 'Waiting' || requestStatus === 'Approved by RM') {
+      if (requestStatus === 'Waiting') {
         this.travelOptionViewerTabs = commonTabs;
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Choose a Travel Option';
       }
       else if (requestStatus === 'Selected') {
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Selected Travel Option';
+        this.travelOptionViewerTabs = tabsWithSelectedOption;
+        this.activeTabName = 'Selected Option';
+      }
+      //change status to Approved by TA
+      else if (requestStatus === 'Ongoing') {
+        this.travelOptionViewerTabs = tabsWithConfirmedOption;
+        this.activeTabName = 'Ticket Details';
+      }
+
+      // else if(requestStatus === 'Approved by TA' && ticketStatus ==='Sent'){
+      //   this.travelOptionViewerTabs = tabsWithLiveTicket;
+      //   this.isActionBarVisible = false;
+      // }
+
+    } 
+
+    //travel admin
+    if(currentLoggedInUserRole === 'travelAdmin'){
+      
+      this.isActionBarVisible = true;
+      this.isDelBtnVisible = true;
+      this.isAddBtnVisible = true;
+
+      if(requestStatus === 'Approved by RM'){
+        this.travelOptionViewerTabs = commonTabs;
+      }
+
+      if(requestStatus === 'Waiting'){
+        this.travelOptionViewerTabs = commonTabs;
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Waiting Options';
+      }
+
+      else if(requestStatus === 'Selected'){
         this.isActionBarVisible = true;
         this.actionBarTitle = 'Confirm a Travel Option';
         this.travelOptionViewerTabs = tabsWithSelectedOption;
         this.activeTabName = 'Selected Option';
-        this.getManagerSelectedOptionIdByRequestId(this.requestId);
       }
-      else if (requestStatus === 'Approved by TA') {
+      //approved by ta && ticket status not sent
+      else if(requestStatus === 'Ongoing'){
         this.travelOptionViewerTabs = tabsWithConfirmedOption;
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Upload Ticket' 
+        this.addBtnTitle = 'Upload';
+        this.activeTabName = 'Ticket Details';
       }
-
-    } 
-
-    if(currentLoggedInUserRole === 'travelAdmin' && requestStatus === 'Approved by RM' ){
-      this.isActionBarVisible = true;
-      this.isDelBtnVisible = true;
-      this.isAddBtnVisible = true;
+      //TA sent ticket to traveller
+      // eles if(requestStatus === 'Approved by TA' && ticketStatus === 'Sent'){
+          //this.travelOptionViewerTabs = tabsWithLiveTicket;
+          //this.isActionBarVisible = true;
+          //this.actionBarTitle = 'Uploaded Ticket'
+      // }
+    
     }
-    else if(currentLoggedInUserRole === 'manager' && requestStatus === 'Waiting'){
-      this.isActionBarVisible = true;
-      this.actionBarTitle = 'Select a Travel Option';
-    }
+
     
   }
 
@@ -222,14 +274,14 @@ export class TabbedOptionViewerComponent {
           this.selectedTravelOptionId = this.travelOptionsWithImagesData[optionIndex].optionId;
           
           //Detecting option changes by TA
-          if(this.requestStatus === 'Selected'){
+          if(this.requestStatus === 'Selected' && this.selectedTravelOptionId !== this.managerSelectedOptionId){
             this.travelAdminConfirmedOptionId = this.travelOptionsWithImagesData[optionIndex].optionId;
             this.isSelectedOptionChanged = true;
           }
 
         }
 
-    }
+    }//text options
     else{
 
       if(this.selectedTextOptionIndex === optionIndex){
@@ -246,7 +298,7 @@ export class TabbedOptionViewerComponent {
         this.selectedTextOptionIndex = optionIndex;
         this.selectedTravelOptionId = this.descriptions[optionIndex].optionId;
         
-        if(this.requestStatus === 'Selected'){
+        if(this.requestStatus === 'Selected' && this.selectedTravelOptionId !== this.managerSelectedOptionId){
           this.travelAdminConfirmedOptionId = this.descriptions[optionIndex].optionId;
           this.isSelectedOptionChanged = true;
         }
@@ -383,16 +435,15 @@ export class TabbedOptionViewerComponent {
 
 
   //To get the id of manager selected option
+  //Also used to get the option confirmed by the manager
   //Temporary Solution Need Back End API Fixes
   getManagerSelectedOptionIdByRequestId(requestId : number){
 
     this.requestService.getSelectedTravelOptionDetailsByRequestId(this.requestId).subscribe({
       next: (response: any) =>{
-    
         this.managerSelectedOptionId = response.optionId;
         this.travelAdminConfirmedOptionId = response.optionId;
         //this.managerSelectedOptionType = response.optionFile === null ? 'text' : 'image';
-      
       },
       error: (error: any) => {
 
@@ -403,6 +454,9 @@ export class TabbedOptionViewerComponent {
    })
 
   }
+
+
+
 
 
 

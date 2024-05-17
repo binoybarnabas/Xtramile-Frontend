@@ -166,7 +166,7 @@ export class RequestService {
     return this.http.get(this.apiURL+ '/availableoptions/selected-travel-option-details/'+requestId)  
   }
 
-  //
+  //Need review - changed option id not getting updated!!!
   confirmSelectedTravelOption(confirmedOptionData:any):Observable<any>{
 
     return this.http.patch<any>('http://localhost:5190/api/availableoptions/confirm-selected-travel-option',confirmedOptionData,{ responseType: 'text' as 'json' });
