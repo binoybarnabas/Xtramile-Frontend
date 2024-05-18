@@ -23,7 +23,6 @@ import { TravelAdminMiddleConsoleComponent } from './components/layout/travelAdm
 import { FinancePersonnelHomeComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-home.component';
 import { FinancePersonnelSideNavBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
 import { FinancePersonnelMiddleConsoleComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-middle-console/finance-personnel-middle-console.component';
-import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
 import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
 import { EmployeePendingRequestsComponent } from './features/employee/myRequests/employee-pending-requests/employee-pending-requests.component';
@@ -132,7 +131,8 @@ import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/cu
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
 import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
-import { CustomLoaderComponent } from './components/ui/custom-loader/custom-loader.component'; // Import Ng2PdfViewerModule
+import { CustomLoaderComponent } from './components/ui/generalUIComponents/custom-loader/custom-loader.component';
+import { UserProfileComponent } from './features/travellerFeatures/user-profile/user-profile.component'; // Import Ng2PdfViewerModule
 
 @NgModule({
   declarations: [
@@ -152,7 +152,6 @@ import { CustomLoaderComponent } from './components/ui/custom-loader/custom-load
     FinancePersonnelHomeComponent,
     FinancePersonnelSideNavBarComponent,
     FinancePersonnelMiddleConsoleComponent,
-    EmployeeProfileComponent,
     EmployeeClosedRequestsComponent,
     EmployeePendingRequestsComponent,
     EmployeeOngoingRequestsComponent,
@@ -253,6 +252,7 @@ import { CustomLoaderComponent } from './components/ui/custom-loader/custom-load
     TabbedOptionViewerComponent,
     ManagerForwardedTravelRequestsComponent,
     CustomLoaderComponent,
+    UserProfileComponent,
   ],
   imports: [
     CommonModule,

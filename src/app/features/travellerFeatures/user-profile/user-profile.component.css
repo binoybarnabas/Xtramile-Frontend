@@ -1,0 +1,324 @@
+.main_container {
+    background-color: var(--card-bg-color);
+    box-shadow: var(--normal-box-shadow);
+    border-radius: var(--normal-border-radius);
+    border-bottom: 2px solid var(--secondary-text-color);
+  }
+  
+  .main_container .inner_container .top_container {
+    height: 40%;
+    border-bottom: 2px solid var(--primary-text-color);
+  }
+  
+  .main_container .inner_container .top_container .background_image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.9) 100%);
+  }
+  
+  .main_container .inner_container .top_container .background_image img {
+    width: 100%;
+    margin: 0 auto;
+    height: 180px;
+    flex-wrap: wrap;
+    object-fit: cover;
+    border-radius: var(--normal-border-radius) var(--normal-border-radius) 0 0;
+  }
+  
+  .main_container .inner_container .top_container .background_image {
+    position: relative;
+    background-color: white;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .main_container .inner_container .top_container .background_image .action_btn_container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    right: 1rem;
+  }
+  
+  .main_container .inner_container .top_container .background_image .action_btn_container .action_btn {
+    width: 100px;
+    height: 40px;
+    font-size: var(--small-font-size);
+    font-weight: var(--active-font-weight);
+    border: 2px solid var(--third-color);
+    color: var(--third-color);
+    border-radius: 5px;
+    color: var(--third-color);
+    background: none;
+    transition: 0.3s;
+  }
+  
+  .main_container .inner_container .top_container .background_image .action_btn_container .action_btn_edit_mode {
+    width: 100px;
+    height: 40px;
+    font-size: var(--small-font-size);
+    font-weight: var(--active-font-weight);
+    border: 2px solid var(--third-color);
+    color: var(--card-bg-color);
+    border-radius: 5px;
+    background: var(--third-color);
+    background-color: var(--primary-green-color);
+    border: 2px solid var(--primary-green-color);
+  }
+  
+  .main_container .inner_container .top_container .background_image .cover_name_container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    right: 8%;
+  }
+  
+  .main_container .inner_container .top_container .background_image .cover_name_container .cover_name {
+    font-size: 8rem;
+    font-weight: var(--active-font-weight);
+    margin-top: auto;
+    margin-bottom: auto;
+    color: var(--secondary-cyan-color);
+    opacity: 0.3;
+    text-transform: capitalize;
+  }
+  
+  @keyframes moveLeft {
+    0% {
+      transform: translateX(100px);
+    }
+  
+    100% {
+      transform: translateX(-100%);
+      /* Adjust the distance to move */
+    }
+  }
+  
+  .main_container .inner_container {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: block;
+    justify-content: space-between;
+  }
+  
+  .main_container .inner_container .top_container .background_image .profile_picture {
+    position: relative;
+    position: absolute;
+    bottom: 0.4em;
+    left: 4em;
+    transform: translateX(-50%);
+    z-index: 1;
+    margin-right: 1rem;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+  }
+  
+  .main_container .inner_container .top_container .background_image .profile_picture img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--card-bg-color);
+  }
+  
+  .main_container .inner_container .top_container .background_image .black_container {
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 75px;
+    border-bottom-right-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .main_container .inner_container .top_container .background_image .black_container .button {
+    overflow: hidden;
+    height: 38px;
+    width: 100px;
+    padding: 0 2rem;
+    border-radius: 5px;
+    background: var(--first-color);
+    background-size: 400%;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: var(--form-label-font-size);
+    font-weight: var(--active-font-weight);
+    left: 95%;
+    transform: translateX(-50%);
+    position: absolute;
+    float: right;
+  }
+  
+  .main_container .inner_container .top_container .background_image .black_container .button:hover::before {
+    transform: scaleX(1);
+  }
+  
+  .main_container .inner_container .top_container .background_image .black_container .button_content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .main_container .inner_container .top_container .background_image .black_container .button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: inherit;
+    border-radius: inherit;
+    background: linear-gradient(82.3deg,
+        #4F80E1 10.8%,
+        #80bdff 94.3%);
+    transition: all 0.475s;
+  }
+  
+  .main_container .inner_container .top_container .background_image .text_details {
+    position: absolute;
+    bottom: 1em;
+    left: 8rem;
+    color: white;
+    line-height: 1em;
+    flex-grow: 1;
+    align-items: center;
+  }
+  
+  .main_container .inner_container .top_container .background_image .text_details .name {
+    font-size: var(--large-font-size);
+    font-weight: var(--active-font-weight);
+  }
+  
+  .main_container .inner_container .top_container .background_image .text_details .department {
+    font-size: var(--small-font-size);
+    color: var(--secondary-orange-color);
+    margin: 0;
+  }
+  
+  .main_container .inner_container .bottom_section {
+    height: 60%;
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .main_container .inner_container .bottom_section .form-row label {
+    font-size: var(--form-label-font-size);
+    font-weight: var(--active-font-weight);
+    color: var(--ternary-text-color);
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-gap: 0em;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-gap: 0em;
+  }
+  
+  .form-column {
+    padding: 10px;
+    text-align: start;
+  }
+  
+  .form-control {
+    width: 100%;
+    max-width: 400px;
+    height: 42px;
+    box-sizing: border-box;
+    border: 1px solid var(--menu-hover-color);
+    border-radius: 6px;
+    outline: none;
+    font-size: var(--small-font-size);
+    color: var(--secondary-text-color);
+  }
+  
+  .form-control[readonly] {
+    background-color: var(--card-bg-color);
+    outline: none;
+  }
+  
+  .form-control[readonly]:focus {
+    cursor: no-drop;
+    outline: none;
+    box-shadow: none;
+  }
+  
+  .form-control:not([readonly]) {
+    border-bottom: 2px solid var(--third-color);
+    outline: none;
+  }
+  
+  .form-control:not([readonly]):focus {
+    border-bottom: 2px solid var(--third-color);
+    outline: none;
+  }
+  
+  .main_container .inner_container .profile_validation_color {
+    color: rgb(246, 51, 51);
+    font-size: 0.8em;
+  }
+  
+  @media only screen and (max-width: 768px) {
+  
+    .form-grid,
+    .form-row {
+      grid-template-columns: 2fr;
+    }
+  
+    .button {
+      left: 90%;
+      transform: translateX(-70%);
+    }
+  
+    .text_details h3 {
+      font-size: medium;
+    }
+  
+    .text_details p {
+      font-size: small;
+    }
+  
+    .text_details {
+      left: 8rem;
+    }
+  }
+  
+  @media only screen and (max-width: 1200px) {
+  
+    .black_container,
+    .inner_container {
+      max-width: 100%;
+    }
+  }
+  .main_container .inner_container .top_container .background_image .profile_data_container .profile_picture .ri-pencil-fill {
+    position: absolute;
+    z-index: 2;
+    font-size: 1.5em;
+    color: var(--primary-text-color);
+    top: 2.5em; 
+    right: 0.5em; 
+  }
+  .modal_50w {
+    width: 28% !important;
+    margin-top: 5em;
+  }

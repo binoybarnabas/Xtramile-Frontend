@@ -22,7 +22,6 @@ export class TravelRequestInfoCardComponent {
   @Input()
   set requestId(value: number) {
     this._requestId = value;
-    // console.log(this._requestId)
   }
 
   travelRequestDetailViewModel!: TravelRequestDetailViewModel;
@@ -103,16 +102,11 @@ export class TravelRequestInfoCardComponent {
         .subscribe({
           next: (data) => {
             console.log(data);
-            // window.alert(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
-            //  console.log(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
-            // Redirect to another page
-            //alert("Approved");
+         
             this.toastService.showToast({ message: "Travel Request Approved", toastType: "success", toastDuration: 3000 });
             this.router.navigate(['/manager/dashboard']);
           },
           complete: () => {
-            //this.toastr.success('Request approved!', 'Success');
-            // this.toastService.showToast("Travel Request Approved!")
             this.bsModalRef.hide();
           },
         });

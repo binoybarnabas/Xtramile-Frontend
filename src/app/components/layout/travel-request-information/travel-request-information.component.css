@@ -19,7 +19,7 @@
   border-radius: 8px 8px 0 0;
   background-color: var(--card-bg-color);
   z-index: 999;
-  border-bottom: 1px dashed var(--ternary-text-color);
+  border-bottom: 1.3px solid var(--menu-hover-color);
 }
 
 .req_forms_main_container .heading_section .section_heading_card {
@@ -41,12 +41,15 @@
   width: 100%;
   flex: 80%;
   border-radius: 0;
+  padding: 0;
 }
 
 .req_forms_main_container .left_section {
   width: 20%;
   transition: 0.6s;
   margin-right: 0.5rem;
+  box-shadow: var(--normal-box-shadow);
+  padding: 0.5rem;
 }
 
 .req_forms_main_container .left_section .nav_items {
@@ -72,13 +75,13 @@
   border-radius: var(--extra-small-border-radius);
   color: var(--second-color);
   cursor: pointer;
-  font-weight: var(--active-font-weight);
+  /* font-weight: var(--active-font-weight); */
 }
 
 .req_forms_main_container .right_section {
   right: 0;
   width: 80%;
-  border-left: 1px dashed var(--ternary-text-color);
+  /* border-left: 1px dashed var(--ternary-text-color); */
   transition: 0.6s;
 }
 
@@ -119,7 +122,6 @@
   margin-bottom: 2px;
   color: var(--ternary-text-color);
   font-size: var(--extra-small-font-size);
-  font-size: var(--form-label-font-size);
 }
 
 .req_forms_main_container
@@ -131,10 +133,13 @@
   .item_card
   .item_value {
   font-size: var(--form-label-font-size);
-  padding: 0.5rem;
-  border-radius: 3.5px;
-  border: 1px solid var(--menu-hover-color);
-  height: 2.5rem;
+  font-weight: var(--active-font-weight);
+  margin-top: 3px;
+  /* border-bottom: 1.5px solid var(--menu-hover-color); */
+  /* padding: 0.5rem; */
+  /* border-radius: 3.5px; */
+  /* border: 1px solid var(--menu-hover-color); */
+  /* height: 2.5rem; */
 }
 
 .req_forms_main_container

@@ -6,12 +6,11 @@ import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-lo
 import { ProfileService } from 'src/app/services/employeeServices/profileServices/profile.service';
 
 @Component({
-  selector: 'app-employee-profile',
-  templateUrl: './employee-profile.component.html',
-  styleUrls: ['./employee-profile.component.css']
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.css'],
 })
-
-export class EmployeeProfileComponent {
+export class UserProfileComponent {
   editMode: boolean = false;
   employeeId!: number;
   initialValue: { [key: string]: any } = {}; //to store the initial value of contact and address
@@ -30,8 +29,10 @@ export class EmployeeProfileComponent {
   bsModalRef!: BsModalRef<unknown>;
   profileImageFile!: File;
 
-  constructor(private service: ProfileService, private loaderService: CustomLoaderService) {
-
+  constructor(
+    private service: ProfileService,
+    private loaderService: CustomLoaderService
+  ) {
     const userData = localStorage.getItem('userData');
     if (userData) {
       const parsedUserData = JSON.parse(userData);
@@ -40,23 +41,29 @@ export class EmployeeProfileComponent {
   }
 
   form = new FormGroup({
-    firstName: new FormControl({ value: '', disabled: true }, Validators.required),
-    lastName: new FormControl({ value: '', disabled: true }, Validators.required),
+    firstName: new FormControl(
+      { value: '', disabled: true },
+      Validators.required
+    ),
+    lastName: new FormControl(
+      { value: '', disabled: true },
+      Validators.required
+    ),
     email: new FormControl({ value: '', disabled: true }, Validators.email),
     contactNumber: new FormControl('', [
       Validators.required,
       Validators.pattern(/^[0-9]+$/),
       Validators.maxLength(10),
-      Validators.minLength(10)
+      Validators.minLength(10),
     ]),
     department: new FormControl({ value: '', disabled: true }),
     reportsTo: new FormControl({ value: '', disabled: true }),
     projectId: new FormControl({ value: '', disabled: true }),
     projectName: new FormControl({ value: '', disabled: true }),
     address: new FormControl('', Validators.required),
-    profilePicture: new FormControl('')
+    profilePicture: new FormControl(''),
   });
-  
+
   ngOnInit() {
     this.form.disable();
     this.fetchEmployeeData();
@@ -78,12 +85,14 @@ export class EmployeeProfileComponent {
     this.loaderService.show();
     this.service.getEmployeeData(this.employeeId).subscribe({
       next: (data: any) => {
-
         this.loaderService.hide();
-        
-    console.log('profile data',data);
+
+        console.log('profile data', data);
         //store the initial data of the employee
-        this.initialValue = { contactNumber: data.contactNumber, address: data.address }
+        this.initialValue = {
+          contactNumber: data.contactNumber,
+          address: data.address,
+        };
         this.initialData = {
           firstName: data.firstName,
           lastName: data.lastName,
@@ -92,8 +101,8 @@ export class EmployeeProfileComponent {
           department: data.departmentName,
           projectId: data.projectCode,
           projectName: data.projectName,
-          profilePicture: data.profilePicture          
-        }
+          profilePicture: data.profilePicture,
+        };
         this.form.patchValue({
           firstName: data.firstName,
           lastName: data.lastName,
@@ -118,11 +127,10 @@ export class EmployeeProfileComponent {
   }
   //to patch the values after the user click on the save button
   onSubmit() {
-
     //making the initial values as empty
     let updatedData: { contactNumber?: String; address?: String } = {
       contactNumber: '',
-      address: ''
+      address: '',
     };
 
     //  check if the initially stored value is same as the value in the form after the user click on save button.
@@ -130,45 +138,55 @@ export class EmployeeProfileComponent {
 
     this.initialValue['contactNumber'] === this.form.get('contactNumber')?.value
       ? (updatedData.contactNumber = undefined)
-      : (updatedData.contactNumber = this.form.get('contactNumber')?.value ?? undefined);
+      : (updatedData.contactNumber =
+          this.form.get('contactNumber')?.value ?? undefined);
 
     this.initialValue['address'] === this.form.get('address')?.value
       ? (updatedData.address = undefined)
       : (updatedData.address = this.form.get('address')?.value ?? undefined);
 
     //store the values in form as the initial value, it is for to not to make API call.
-    this.initialValue = { contactNumber: this.form.get('contactNumber')?.value, address: this.form.get('address')?.value }
+    this.initialValue = {
+      contactNumber: this.form.get('contactNumber')?.value,
+      address: this.form.get('address')?.value,
+    };
 
     //if the updatedData is undefined for both contactNumber and address dont need to patch the value
     //so this condition is to avoid unnecessary API call
-    if ((updatedData.contactNumber !== undefined || updatedData.address !== undefined)) {
+    if (
+      updatedData.contactNumber !== undefined ||
+      updatedData.address !== undefined
+    ) {
       //only allow to patch the data when the form is dirty, touched and valid.
       //whenever user click on edit and save button unnecessary API call won't go
       if (this.form.dirty && this.form.touched && this.form.valid) {
-        console.log('updated value', updatedData)
-        this.service.updateProfile(this.employeeId, updatedData).subscribe(() => {
-          console.log('PATCH request successful');
-          this.toggleEditMode();
+        console.log('updated value', updatedData);
+        this.service.updateProfile(this.employeeId, updatedData).subscribe(
+          () => {
+            console.log('PATCH request successful');
+            this.toggleEditMode();
 
-          //to reset the form state, make it empty
-          this.form.reset();
+            //to reset the form state, make it empty
+            this.form.reset();
 
-          //assign the values in the initialData and initialValue to the formcontrol name
-          //this is to avoid API call
-          this.form.patchValue({
-            firstName: this.initialData['firstName'],
-            lastName: this.initialData['lastName'],
-            email: this.initialData['email'],
-            reportsTo: this.initialData['reportsTo'],
-            contactNumber: this.initialValue['contactNumber'],
-            address: this.initialValue['address'],
-            department: this.initialData['department'],
-            projectId: this.initialData['projectId'],
-            projectName: this.initialData['projectName']
-          });
-        }, (error) => {
-          console.error('Error in PATCH request:', error);
-        });
+            //assign the values in the initialData and initialValue to the formcontrol name
+            //this is to avoid API call
+            this.form.patchValue({
+              firstName: this.initialData['firstName'],
+              lastName: this.initialData['lastName'],
+              email: this.initialData['email'],
+              reportsTo: this.initialData['reportsTo'],
+              contactNumber: this.initialValue['contactNumber'],
+              address: this.initialValue['address'],
+              department: this.initialData['department'],
+              projectId: this.initialData['projectId'],
+              projectName: this.initialData['projectName'],
+            });
+          },
+          (error) => {
+            console.error('Error in PATCH request:', error);
+          }
+        );
       } else {
         alert('The data you have entered is not valid!!!');
       }
@@ -179,7 +197,9 @@ export class EmployeeProfileComponent {
 
   onProfilePictureClick() {
     // Explicitly cast the result to HTMLInputElement
-    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = document.querySelector(
+      'input[type="file"]'
+    ) as HTMLInputElement;
 
     if (fileInput) {
       fileInput.click();
@@ -189,7 +209,7 @@ export class EmployeeProfileComponent {
     const fileInput = event.target;
     if (fileInput.files && fileInput.files.length > 0) {
       this.imageChangedEvent = event; // Save the event for cropping
-      console.log('imagechangedevent', this.imageChangedEvent)
+      console.log('imagechangedevent', this.imageChangedEvent);
       this.openImageCropModal();
     }
   }
@@ -206,7 +226,10 @@ export class EmployeeProfileComponent {
       };
       reader.readAsDataURL(event.blob);
     } else {
-      console.error('Error: Blob data is not available in ImageCroppedEvent.', event);
+      console.error(
+        'Error: Blob data is not available in ImageCroppedEvent.',
+        event
+      );
     }
   }
 
@@ -217,35 +240,34 @@ export class EmployeeProfileComponent {
     const blob = base64ToFile(this.croppedImage);
     const imageName = `profile_${this.employeeId}.png`; // Example filename with timestamp
     const imageFile = new File([blob], imageName, { type: 'image/png' });
-    console.log('image name', imageName, ' and image file ', imageFile)
+    console.log('image name', imageName, ' and image file ', imageFile);
 
     this.profileImageFile = imageFile; // Now, this.profileImage is a File object
     this.newImageSelected = true;
 
-    if(this.profilePicture == null){
+    if (this.profilePicture == null) {
       const formData = new FormData();
-      formData.append("profilePicture",this.profileImageFile);
-      this.service.uploadProfilePicture(formData,this.employeeId).subscribe({
+      formData.append('profilePicture', this.profileImageFile);
+      this.service.uploadProfilePicture(formData, this.employeeId).subscribe({
         error: (error: Error) => {
-          console.log("Error in posting profile image");
+          console.log('Error in posting profile image');
           console.log(error.message);
         },
         complete: () => {
-          console.log("Posting Profile Image Complete");
-        }      
+          console.log('Posting Profile Image Complete');
+        },
       });
-    }
-    else{
+    } else {
       const formData = new FormData();
-      formData.append("profilePicture",this.profileImageFile);
-      this.service.updateProfilePicture(formData,this.employeeId).subscribe({
+      formData.append('profilePicture', this.profileImageFile);
+      this.service.updateProfilePicture(formData, this.employeeId).subscribe({
         error: (error: Error) => {
-          console.log("Error in posting profile image");
+          console.log('Error in posting profile image');
           console.log(error.message);
         },
         complete: () => {
-          console.log("Posting Profile Image Complete");
-        }      
+          console.log('Posting Profile Image Complete');
+        },
       });
     }
 
@@ -257,10 +279,11 @@ export class EmployeeProfileComponent {
     this.display = 'none'; // Hide the modal
 
     // Reset the input value
-    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    const fileInput = document.querySelector(
+      'input[type="file"]'
+    ) as HTMLInputElement;
     if (fileInput) {
       fileInput.value = ''; // Clear the file input after closing the modal
     }
   }
-  
 }

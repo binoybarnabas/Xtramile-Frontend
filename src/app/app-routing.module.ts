@@ -8,7 +8,6 @@ import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
 import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
-import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-home.component';
 
 import { TravelAdminDashboardComponent } from './features/travelAdmin/travel-admin-dashboard/travel-admin-dashboard.component';
@@ -41,6 +40,7 @@ import { TravellerOngoingTravelComponent } from './features/travellerFeatures/tr
 import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
+import { UserProfileComponent } from './features/travellerFeatures/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -58,7 +58,7 @@ const routes: Routes = [
       { path: 'pending', component: EmployeePendingRequestsComponent },
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },
-      { path: 'profile', component: EmployeeProfileComponent },
+      { path: 'profile', component: UserProfileComponent },
       { path: 'documents', component: TravellerDocumentsComponent },
     ],
   },
@@ -78,7 +78,7 @@ const routes: Routes = [
       { path: 'pending', component: TravellerPendingRequestsComponent },
       { path: 'ongoing', component: TravellerOngoingTravelComponent },
       { path: 'history', component: TravellerTravelHistoryComponent },
-      { path: 'profile', component: EmployeeProfileComponent },
+      { path: 'profile', component: UserProfileComponent },
     ],
   },
   {
@@ -118,7 +118,7 @@ const routes: Routes = [
       { path: 'pending', component: TravellerPendingRequestsComponent },
       { path: 'ongoing', component: TravellerOngoingTravelComponent },
       { path: 'history', component: TravellerTravelHistoryComponent },
-      { path: 'profile', component: EmployeeProfileComponent },
+      { path: 'profile', component: UserProfileComponent },
     ],
   },
   {
