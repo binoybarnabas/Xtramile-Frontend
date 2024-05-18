@@ -4,13 +4,13 @@ import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-lo
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 
 @Component({
-  selector: 'app-traveller-ongoing-travel',
-  templateUrl: './traveller-ongoing-travel.component.html',
-  styleUrls: ['./traveller-ongoing-travel.component.css']
+  selector: 'app-traveller-approved-requests',
+  templateUrl: './traveller-approved-requests.component.html',
+  styleUrls: ['./traveller-approved-requests.component.css']
 })
-export class TravellerOngoingTravelComponent {
+export class TravellerApprovedRequestsComponent {
 
-  pageHeading: string = 'Ongoing Travel'
+  pageHeading: string = 'Approved Requests'
   
   tableHeaders: string[] = ['Request Code', 'Project Code', 'From', 'To', 'Departure Date', 'Return Date', 'Purpose','Status'];
   fieldsToDisplay: string[] = ['requestCode', 'projectCode', 'from', 'to', 'startDate', 'endDate', 'reason', 'statusName'];
@@ -61,5 +61,3 @@ export class TravellerOngoingTravelComponent {
     this.getOngoingRequests();
   }
 }
-
-

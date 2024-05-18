@@ -33,11 +33,11 @@ import { TravellerDocumentsComponent } from './features/travellerFeatures/travel
 import { TraveladminViewTravelDocumentsComponent } from './features/travelAdmin/travelDocuments/traveladmin-view-travel-documents/traveladmin-view-travel-documents.component';
 import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-ongoing-travel-requests/travel-admin-ongoing-travel-requests.component';
 import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
-import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
 import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
 import { UserProfileComponent } from './features/travellerFeatures/user-profile/user-profile.component';
 import { TravellerRequestHistoryComponent } from './features/travellerFeatures/traveller-request-history/traveller-request-history.component';
+import { TravellerApprovedRequestsComponent } from './features/travellerFeatures/traveller-approved-requests/traveller-approved-requests.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -46,15 +46,15 @@ const routes: Routes = [
 
   {
     // path: 'employee', component: EmployeeHomeComponent,canActivate:[authGuard], children: [
-    path: 'employee',
+    path: 'traveller',
     component: EmployeeHomeComponent,
     canActivate: [employeeAuthGuard],
     children: [
       { path: 'dashboard', component: TravellerDashboardComponent },
-      { path: 'request', component: TravelRequestFormComponent },
-      { path: 'pending', component: TravellerPendingRequestsComponent },
-      { path: 'ongoing', component: TravellerOngoingTravelComponent },
-      { path: 'history', component: TravellerRequestHistoryComponent },
+      { path: 'new-travel-request', component: TravelRequestFormComponent },
+      { path: 'requests/pending', component: TravellerPendingRequestsComponent },
+      { path: 'requests/ongoing', component: TravellerApprovedRequestsComponent },
+      { path: 'requests/history', component: TravellerRequestHistoryComponent },
       { path: 'profile', component: UserProfileComponent },
       { path: 'documents', component: TravellerDocumentsComponent },
     ],
@@ -66,15 +66,15 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: TravellerDashboardComponent },
       { path: 'requestdetail', component: NewTravelRequestComponent },
-      { path: 'request', component: TravelRequestFormComponent },
-      { path: 'incoming', component: ManagerIncomingTravelRequestsComponent },
-      { path: 'newrequest', component: ManagerIncomingTravelRequestsComponent },
-      { path: 'forwarded', component: ManagerForwardedTravelRequestsComponent },
-      { path: 'ongoing', component: ManagerOngoingTravelRequestsComponent },
-      { path: 'closed', component: ManagerClosedTravelRequestsComponent },
-      { path: 'pending', component: TravellerPendingRequestsComponent },
-      { path: 'ongoing', component: TravellerOngoingTravelComponent },
-      { path: 'history', component: TravellerRequestHistoryComponent },
+      { path: 'incoming-requests', component: ManagerIncomingTravelRequestsComponent },
+      { path: 'forwarded-requests', component: ManagerForwardedTravelRequestsComponent },
+      { path: 'approved-requests', component: ManagerOngoingTravelRequestsComponent },
+      { path: 'closed-requests', component: ManagerClosedTravelRequestsComponent },
+
+      { path: 'new-request', component: TravelRequestFormComponent },
+      { path: 'my-pending-requests', component: TravellerPendingRequestsComponent },
+      { path: 'my-approved-requests', component: TravellerApprovedRequestsComponent },
+      { path: 'my-request-history', component: TravellerRequestHistoryComponent },
       { path: 'profile', component: UserProfileComponent },
     ],
   },
@@ -85,36 +85,36 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: TravelAdminDashboardComponent },
       {
-        path: 'view_travel_documents',
+        path: 'view-travel-documents',
         component: TraveladminViewTravelDocumentsComponent,
       },
       {
-        path: 'view_all_messages',
+        path: 'view-all-messages',
         component: TravelMessengerFullScreenComponent,
       },
       {
-        path: 'incomingrequests',
+        path: 'requests/incoming',
         component: TravelAdminIncomingTravelRequestsComponent,
       },
       {
-        path: 'waiting',
+        path: 'requests/waiting-options',
         component: TravelAdminWaitingRequestsComponent,
       },
       {
-        path: 'selected',
+        path: 'requests/selected-options',
         component: TravelAdminSelectedRequestsComponent,
       },
       {
-        path: 'approved_requests',
+        path: 'requests/approved',
         component: TravelAdminOngoingTravelRequestsComponent,
       },
-      { path: 'closed', component: TravelAdminClosedTravelRequestsComponent },
+      { path: 'requests/closed', component: TravelAdminClosedTravelRequestsComponent },
       //Component Name - Updated to newTravelRequestComponent
       { path: 'requestdetail', component: NewTravelRequestComponent },
-      { path: 'request', component: TravelRequestFormComponent },
-      { path: 'pending', component: TravellerPendingRequestsComponent },
-      { path: 'ongoing', component: TravellerOngoingTravelComponent },
-      { path: 'history', component: TravellerRequestHistoryComponent },
+      { path: 'new-travel-request', component: TravelRequestFormComponent },
+      { path: 'my-pending-requests', component: TravellerPendingRequestsComponent },
+      { path: 'my-approved-requests', component: TravellerApprovedRequestsComponent },
+      { path: 'my-request-history', component: TravellerRequestHistoryComponent },
       { path: 'profile', component: UserProfileComponent },
     ],
   },

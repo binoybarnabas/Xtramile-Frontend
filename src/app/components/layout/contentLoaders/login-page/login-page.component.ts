@@ -77,7 +77,7 @@ export class LoginPageComponent {
           localStorage.setItem('isAuthenticated','true');
 
         switch(data.role){
-          case 'Employee': this.router.navigate(['employee/dashboard'])
+          case 'Employee': this.router.navigate(['traveller/dashboard'])
                            break;
 
           case 'Manager': if(data.department == 'TA'){

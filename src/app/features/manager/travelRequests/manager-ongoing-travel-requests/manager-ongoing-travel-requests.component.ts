@@ -14,7 +14,7 @@ import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-lo
 
 export class ManagerOngoingTravelRequestsComponent {
 
-  pageHeading: string = 'Ongoing Trips'
+  pageHeading: string = 'Approved Travel Requests'
 
   tableHeaders: string[] = ['Request Code', 'Requested By', 'Project Code', 'From', 'To','Departure Date', 'Ticket Status', 'Trip Status'];
   fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to', 'departureDate', 'ticketStatus', 'statusName'];

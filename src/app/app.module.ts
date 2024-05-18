@@ -109,7 +109,6 @@ import { TaskManagerComponent } from './components/ui/dashboard-components/task-
 import { DashboardReportGeneratorComponent } from './components/ui/dashboard-components/dashboard-report-generator/dashboard-report-generator.component';
 import { TraveladminViewTravelDocumentsComponent } from './features/travelAdmin/travelDocuments/traveladmin-view-travel-documents/traveladmin-view-travel-documents.component';
 import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
-import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
 import { TabbedDataTableComponent } from './components/ui/generalUIComponents/tabbed-data-table/tabbed-data-table.component';
 import { TextEditorComponent } from './components/ui/text-editor/text-editor.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -126,7 +125,8 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
 import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
 import { CustomLoaderComponent } from './components/ui/generalUIComponents/custom-loader/custom-loader.component';
 import { UserProfileComponent } from './features/travellerFeatures/user-profile/user-profile.component';
-import { TravellerRequestHistoryComponent } from './features/travellerFeatures/traveller-request-history/traveller-request-history.component'; // Import Ng2PdfViewerModule
+import { TravellerRequestHistoryComponent } from './features/travellerFeatures/traveller-request-history/traveller-request-history.component';
+import { TravellerApprovedRequestsComponent } from './features/travellerFeatures/traveller-approved-requests/traveller-approved-requests.component'; // Import Ng2PdfViewerModule
 
 @NgModule({
   declarations: [
@@ -226,7 +226,6 @@ import { TravellerRequestHistoryComponent } from './features/travellerFeatures/t
     TextEditorComponent,
     TraveladminViewTravelDocumentsComponent,
     TravellerPendingRequestsComponent,
-    TravellerOngoingTravelComponent,
     TabbedDataTableComponent,
     TabbedDataTableComponent,
     DashCalendarComponent,
@@ -241,6 +240,7 @@ import { TravellerRequestHistoryComponent } from './features/travellerFeatures/t
     CustomLoaderComponent,
     UserProfileComponent,
     TravellerRequestHistoryComponent,
+    TravellerApprovedRequestsComponent,
   ],
   imports: [
     CommonModule,
