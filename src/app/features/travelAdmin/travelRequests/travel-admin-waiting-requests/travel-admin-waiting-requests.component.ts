@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-travel-admin-waiting-requests',
@@ -28,15 +29,21 @@ export class TravelAdminWaitingRequestsComponent {
   constructor(private travelAdminTravelRequestService: TravelAdminTravelRequestsService, private commonService: CommonAPIService,
     private datePipe : DatePipe, 
     private router: Router,
-    private activatedRoute: ActivatedRoute) {}
+    private activatedRoute: ActivatedRoute, private loaderService : CustomLoaderService) {}
 
   ngOnInit(){
     this.getRequests();
   }
 
   getRequests(){
+
+    this.loaderService.show();
+
     this.subscription = this.travelAdminTravelRequestService.getWaitingOrSelectedRequests('PE','WT',this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
+
+        this.loaderService.hide();
+
         this.incomingRequestdata = data.items.map((request: any) => {
           return {
             ...request,
@@ -46,6 +53,9 @@ export class TravelAdminWaitingRequestsComponent {
         this.totalItems = data.totalCount      
       },
       error: (error: Error) => {
+
+        this.loaderService.hide();
+
         console.log("Error while fetching requests")
         console.log(error.message)
       },

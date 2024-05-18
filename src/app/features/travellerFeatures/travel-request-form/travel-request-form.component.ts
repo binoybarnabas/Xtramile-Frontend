@@ -12,6 +12,7 @@ import { CustomToastService } from 'src/app/services/toastServices/custom-toast.
 import { EmployeeDetails } from '../../../components/layout/travel-request-information/request';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-travel-request-form',
@@ -97,7 +98,8 @@ export class TravelRequestFormComponent {
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
     private modalservice:BsModalService,
-    private shortYearDateFormatPipe: ShortYearDateFormatPipe
+    private shortYearDateFormatPipe: ShortYearDateFormatPipe,
+    private loaderService : CustomLoaderService
   ) {
 
     // Get current date
@@ -225,15 +227,20 @@ export class TravelRequestFormComponent {
 
     this.getAllDepartureTimes();
 
+    this.loaderService.show();
     //Get Employee Data
     this.requestService.getEmployeeDataById(this.empId).subscribe({
 
       next: (data) => {
+        this.loaderService.hide();
         this.employeeDetails = data;
         console.log(this.employeeDetails)
 
       },
-      error: (error: Error) => { console.log("problems in fetching data") },
+      error: (error: Error) => { 
+        
+        this.loaderService.hide();
+        console.log("problems in fetching data") },
       complete: () => { console.log("get employee by id is done") }
     });
 
@@ -378,8 +385,14 @@ export class TravelRequestFormComponent {
   }
 
   getAllProjectCodes(empId: number): void {
+
+    this.loaderService.show();
+
     this.commonApiService.getAllProjectCodesByEmployeeId(empId)
       .subscribe((data: any) => {
+
+        this.loaderService.hide();
+
         // Assuming data is an array of project codes
         this.projectCodes = data;
         console.log(data);
@@ -391,8 +404,11 @@ export class TravelRequestFormComponent {
 
   getAllTravelModes(): void {
 
+    this.loaderService.show();
+
     this.commonApiService.getAllTravelModes()
       .subscribe((data: any) => {
+        this.loaderService.hide();
         // Assuming data is an array of project codes
         this.travelModes = data;
 
@@ -572,7 +588,8 @@ export class TravelRequestFormComponent {
 
   //travel req submit method
   submitTravelRequest() {
-    console.log("TEST SUBMITTED DATA");
+
+    this.loaderService.show();
 
     const formData = new FormData();
 
@@ -602,11 +619,13 @@ export class TravelRequestFormComponent {
 
     this.requestService.sendEmployeeNewTravelRequest(formData).subscribe({
       next: (response) => {
+      this.loaderService.hide();
         console.log(response);
         this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
         this.router.navigate(['employee/pending']);
       },
       error: (error: Error) => {
+      this.loaderService.hide();
         console.log(error);
       },
       complete: () => {   
@@ -635,8 +654,14 @@ export class TravelRequestFormComponent {
   }
 
   getEmployeeRequestDetails(requestId: number) {
+
+    this.loaderService.show();
+
     this.commonApiService.getEmployeeRequestDetail(requestId).subscribe(
       (data: any) => {
+
+        this.loaderService.hide();
+        
         // Patch form values with the response data
         this.travelRequestForm.patchValue({
           tripType: data.tripType,
