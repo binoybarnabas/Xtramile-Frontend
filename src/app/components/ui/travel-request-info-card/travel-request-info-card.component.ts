@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { TravelRequestDetailViewModel } from 'src/app/models/dtoModels/iTravelRequestDetails';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
-import { TravelRequestDetailViewModel } from 'src/app/services/interfaces/iTravelRequestDetails';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 

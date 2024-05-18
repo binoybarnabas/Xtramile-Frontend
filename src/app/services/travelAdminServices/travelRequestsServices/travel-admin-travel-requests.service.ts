@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { WaitingOrSelectedRequests } from '../../interfaces/iwaiting-or-selected-requests';
-import { AvailableOptions } from '../../interfaces/iavailable-options';
+import { AvailableOptions } from '../../../models/viewModels/iavailable-options';
 import { TravelOptionDetails } from '../../interfaces/iTravelOptionDetails';
 
 @Injectable({

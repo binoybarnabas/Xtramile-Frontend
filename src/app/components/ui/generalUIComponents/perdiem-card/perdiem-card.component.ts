@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PerdiemCard } from 'src/app/services/interfaces/iPerdiemCard';
+import { PerdiemCard } from 'src/app/models/viewModels/iPerdiemCard';
 
 @Component({
   selector: 'app-perdiem-card',

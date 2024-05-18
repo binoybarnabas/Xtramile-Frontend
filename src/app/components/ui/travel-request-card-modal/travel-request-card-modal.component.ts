@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
-import { TravelRequestDetailViewModel } from 'src/app/services/interfaces/iTravelRequestDetails';
 import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { TextEditorComponent } from '../text-editor/text-editor.component';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { TravelRequestDetailViewModel } from 'src/app/models/dtoModels/iTravelRequestDetails';
 
 @Component({
   selector: 'app-travel-request-card-modal',

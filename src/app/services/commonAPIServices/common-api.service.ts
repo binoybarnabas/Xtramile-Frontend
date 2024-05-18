@@ -6,7 +6,7 @@ import { LoginService } from '../loginService/login.service';
 // import { UserData } from '../interfaces/iuserData';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
-import { ResubmitRequest } from 'src/app/services/interfaces/iResubmitRequest'
+import { ResubmitRequest } from 'src/app/models/dtoModels/iResubmitRequest'
 
 @Injectable({
   providedIn: 'root'

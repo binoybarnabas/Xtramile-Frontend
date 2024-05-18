@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { EmployeeDetails } from './request';
-import { TravelRequestDetailViewModel } from 'src/app/services/interfaces/iTravelRequestDetails';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
@@ -18,6 +17,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { TabbedOptionViewerComponent } from 'src/app/components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
+import { TravelRequestDetailViewModel } from 'src/app/models/dtoModels/iTravelRequestDetails';
 
 @Component({
   selector: 'app-new-travel-request',
