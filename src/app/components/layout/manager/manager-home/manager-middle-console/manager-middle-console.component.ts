@@ -22,23 +22,23 @@ export class ManagerMiddleConsoleComponent {
   }
 
   //sus
-  ngDoCheck() {
+  // ngDoCheck() {
 
-    this.currentRoutePath = this.router.url;
+  //   this.currentRoutePath = this.router.url;
 
-    if (this.currentRoutePath == '/manager/newrequests') {
-      this.mainHeading = 'Incoming Travel Request'
-    }
-    else if (this.currentRoutePath == '/manager/forwarded') {
-      this.mainHeading = 'Approved Requests'
-    }
-    else if (this.currentRoutePath == '/manager/ongoing') {
-      this.mainHeading = 'Ongoing Travel details'
-    }
-    else if (this.currentRoutePath == '/manager/closed') {
-      this.mainHeading = 'Closed request History'
-    }
-  }
+  //   if (this.currentRoutePath == '/manager/newrequests') {
+  //     this.mainHeading = 'Incoming Travel Request'
+  //   }
+  //   else if (this.currentRoutePath == '/manager/forwarded') {
+  //     this.mainHeading = 'Approved Requests'
+  //   }
+  //   else if (this.currentRoutePath == '/manager/ongoing') {
+  //     this.mainHeading = 'Ongoing Travel details'
+  //   }
+  //   else if (this.currentRoutePath == '/manager/closed') {
+  //     this.mainHeading = 'Closed request History'
+  //   }
+  // }
 
 
   // Getter to access the collapsed state from the service

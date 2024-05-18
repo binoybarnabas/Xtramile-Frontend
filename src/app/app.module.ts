@@ -24,8 +24,6 @@ import { FinancePersonnelHomeComponent } from './components/layout/financePerson
 import { FinancePersonnelSideNavBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
 import { FinancePersonnelMiddleConsoleComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-middle-console/finance-personnel-middle-console.component';
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
-import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
-import { EmployeePendingRequestsComponent } from './features/employee/myRequests/employee-pending-requests/employee-pending-requests.component';
 import { EmployeeNewBillComponent } from './features/employee/mySettlements/employee-new-bill/employee-new-bill.component';
 import { EmployeePendingBillComponent } from './features/employee/mySettlements/employee-pending-bill/employee-pending-bill.component';
 import { EmployeeClosedBillsComponent } from './features/employee/mySettlements/employee-closed-bills/employee-closed-bills.component';
@@ -153,8 +151,6 @@ import { UserProfileComponent } from './features/travellerFeatures/user-profile/
     FinancePersonnelSideNavBarComponent,
     FinancePersonnelMiddleConsoleComponent,
     EmployeeClosedRequestsComponent,
-    EmployeePendingRequestsComponent,
-    EmployeeOngoingRequestsComponent,
     EmployeeNewBillComponent,
     EmployeePendingBillComponent,
     EmployeeClosedBillsComponent,

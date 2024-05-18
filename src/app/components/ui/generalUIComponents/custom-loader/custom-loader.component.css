@@ -22,10 +22,10 @@
 .spinner_container {
   display: flex;
   justify-content: center;
-  width: 55px;
-  padding: 1rem 4px;
+  width: 37px;
+  padding: 1rem 0px;
   background-color: var(--card-bg-color);
-  border-radius: 10px 3px;
+  border-radius: 6px 1px;
   animation: moveContainer 2s ease-in-out infinite;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .spinner_container .icon .img {
-  width: 20px;
+  width: 10px;
 }
 
 @keyframes spin {

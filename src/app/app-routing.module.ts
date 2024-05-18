@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
 import { NewTravelRequestComponent } from './components/layout/travel-request-information/travel-request-information.component';
-import { EmployeePendingRequestsComponent } from './features/employee/myRequests/employee-pending-requests/employee-pending-requests.component';
-import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
@@ -55,8 +53,8 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: TravellerDashboardComponent },
       { path: 'request', component: TravelRequestFormComponent },
-      { path: 'pending', component: EmployeePendingRequestsComponent },
-      { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
+      { path: 'pending', component: TravellerPendingRequestsComponent },
+      { path: 'ongoing', component: TravellerOngoingTravelComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },
       { path: 'profile', component: UserProfileComponent },
       { path: 'documents', component: TravellerDocumentsComponent },

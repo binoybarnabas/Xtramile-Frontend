@@ -1,1 +1,16 @@
-<app-page-header [headingInputData]="pageHeading"></app-page-header>
+<app-page-header [headingInputData]="pageHeading">
+
+</app-page-header>
+
+<app-data-table
+  [headers]="tableHeaders"
+  [data]="incomingRequestdata"
+  [displayedProperties]="fieldsToDisplay"
+></app-data-table>
+
+<pagination
+[totalItems]="totalCount"
+[(ngModel)]="currentPage"
+[itemsPerPage]="itemsPerPage"
+(pageChanged)="onPageChange($event)"
+></pagination>
