@@ -2,10 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 import { CustomDatePipe } from 'src/app/pipes/CustomDate/custom-date.pipe';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { NotificationsComponent } from '../../ui/referenceComponents/notifications/notifications.component';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { Router } from '@angular/router';
+import { NotificationsComponent } from 'src/app/components/ui/referenceComponents/notifications/notifications.component';
 
 
 @Component({

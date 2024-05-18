@@ -10,18 +10,16 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
-import { MiddleConsoleComponent } from './components/layout/middle-console/middle-console.component';
-import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
+import { SideNavBarComponent } from './components/layout/navigators/sideNavigators/side-nav-bar/side-nav-bar.component';
+import { MiddleConsoleComponent } from './components/layout/contentLoaders/middle-console/middle-console.component';
+import { EmployeeHomeComponent } from './components/layout/contentLoaders/employee-home/employee-home.component';
 import { NewTravelRequestComponent } from './components/ui/generalUIComponents/travel-request-information/travel-request-information.component';
-import { ManagerSideNavBarComponent } from './components/layout/manager/manager-home/manager-side-nav-bar/manager-side-nav-bar.component';
-import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
-import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-home.component';
-import { TravelAdminSideNavBarComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-side-nav-bar/travel-admin-side-nav-bar.component';
-import { FinancePersonnelHomeComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-home.component';
-import { FinancePersonnelSideNavBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
-import { FinancePersonnelMiddleConsoleComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-middle-console/finance-personnel-middle-console.component';
-import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
+import { ManagerSideNavBarComponent } from './components/layout/navigators/sideNavigators/manager-side-nav-bar/manager-side-nav-bar.component';
+import { ManagerHomeComponent } from './components/layout/contentLoaders/manager-home/manager-home.component';
+import { TravelAdminHomeComponent } from './components/layout/contentLoaders/travel-admin-home/travel-admin-home.component';
+import { TravelAdminSideNavBarComponent } from './components/layout/navigators/sideNavigators/travel-admin-side-nav-bar/travel-admin-side-nav-bar.component';
+import { FinancePersonnelHomeComponent } from './components/layout/contentLoaders/finance-personnel-home/finance-personnel-home.component';
+import { FinancePersonnelSideNavBarComponent } from './components/layout/navigators/sideNavigators/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
 import { EmployeeNewBillComponent } from './features/employee/mySettlements/employee-new-bill/employee-new-bill.component';
 import { EmployeePendingBillComponent } from './features/employee/mySettlements/employee-pending-bill/employee-pending-bill.component';
 import { EmployeeClosedBillsComponent } from './features/employee/mySettlements/employee-closed-bills/employee-closed-bills.component';
@@ -63,8 +61,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { EmployeeViewCardComponent } from './components/ui/referenceComponents/employee-view-card/employee-view-card.component';
-import { LoginPageComponent } from './components/layout/login-page/login-page.component';
-import { TopBarUserComponent } from './components/layout/top-bar-user/top-bar-user.component';
+import { LoginPageComponent } from './components/layout/contentLoaders/login-page/login-page.component';
+import { TopBarUserComponent } from './components/layout/navigators/top-bar-user/top-bar-user.component';
 import { CustomDatePipe } from './pipes/CustomDate/custom-date.pipe';
 
 //import { ChangeStatusButtonComponent } from './components/ui/change-status-button/change-status-button.component';
@@ -91,7 +89,7 @@ import { DashboardGaugeComponent } from './components/ui/referenceComponents/das
 import { DashboardCalenderComponent } from './components/ui/dashboard-components/dashboard-calender/dashboard-calender.component';
 import { CustomToastComponent } from './components/ui/generalUIComponents/custom-toast/custom-toast.component';
 import { TravelRequestFormComponent } from './features/travellerFeatures/travel-request-form/travel-request-form.component';
-import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
+import { TravellerDashboardComponent } from './components/layout/contentLoaders/traveller-dashboard/traveller-dashboard.component';
 import { DashboardNotificationComponent } from './components/ui/dashboard-components/dashboard-notification/dashboard-notification.component';
 import { DashboardDoneTripsComponent } from './components/ui/dashboard-components/dashboard-done-trips/dashboard-done-trips.component';
 import { DashboardUpcomingTripsComponent } from './components/ui/dashboard-components/dashboard-upcoming-trips/dashboard-upcoming-trips.component';
@@ -102,7 +100,7 @@ import { FileUploaderComponent } from './components/ui/form-components/file-uplo
 import { DocumentsComponent } from './components/ui/form-components/documents/documents.component';
 import { DocumentCardComponent } from './components/ui/generalUIComponents/document-card/document-card.component';
 import { TravellerDocumentsComponent } from './features/travellerFeatures/traveller-documents/traveller-documents.component';
-import { PageHeaderComponent } from './components/layout/general/page-header/page-header.component';
+import { PageHeaderComponent } from './components/ui/generalUIComponents/page-header/page-header.component';
 import { RejectionCardComponent } from './components/ui/rejection-card/rejection-card.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { EmptyDataComponent } from './components/ui/generalUIComponents/empty-data/empty-data.component';
@@ -112,7 +110,6 @@ import { DashboardReportGeneratorComponent } from './components/ui/dashboard-com
 import { TraveladminViewTravelDocumentsComponent } from './features/travelAdmin/travelDocuments/traveladmin-view-travel-documents/traveladmin-view-travel-documents.component';
 import { TravellerPendingRequestsComponent } from './features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
 import { TravellerOngoingTravelComponent } from './features/travellerFeatures/traveller-ongoing-travel/traveller-ongoing-travel.component';
-import { TravellerTravelHistoryComponent } from './features/travellerFeatures/traveller-travel-history/traveller-travel-history.component';
 import { TabbedDataTableComponent } from './components/ui/generalUIComponents/tabbed-data-table/tabbed-data-table.component';
 import { TextEditorComponent } from './components/ui/text-editor/text-editor.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -120,7 +117,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { DashCalendarComponent } from './components/ui/dashboard-components/dash-calendar/dash-calendar.component';
 import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
-import { TravelRequestInfoCardComponent } from './components/ui/travel-request-info-card/travel-request-info-card.component';
+import { TravelRequestInfoCardComponent } from './components/ui/generalUIComponents/travel-request-info-card/travel-request-info-card.component';
 import { ImageViewerComponent } from './components/ui/generalUIComponents/image-viewer/image-viewer.component';
 import { CustomConfirmationModalComponent } from './components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/custom-pdf-viewer/custom-pdf-viewer.component';
@@ -128,7 +125,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
 import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
 import { CustomLoaderComponent } from './components/ui/generalUIComponents/custom-loader/custom-loader.component';
-import { UserProfileComponent } from './features/travellerFeatures/user-profile/user-profile.component'; // Import Ng2PdfViewerModule
+import { UserProfileComponent } from './features/travellerFeatures/user-profile/user-profile.component';
+import { TravellerRequestHistoryComponent } from './features/travellerFeatures/traveller-request-history/traveller-request-history.component'; // Import Ng2PdfViewerModule
 
 @NgModule({
   declarations: [
@@ -145,8 +143,6 @@ import { UserProfileComponent } from './features/travellerFeatures/user-profile/
     TravelAdminSideNavBarComponent,
     FinancePersonnelHomeComponent,
     FinancePersonnelSideNavBarComponent,
-    FinancePersonnelMiddleConsoleComponent,
-    EmployeeClosedRequestsComponent,
     EmployeeNewBillComponent,
     EmployeePendingBillComponent,
     EmployeeClosedBillsComponent,
@@ -231,7 +227,6 @@ import { UserProfileComponent } from './features/travellerFeatures/user-profile/
     TraveladminViewTravelDocumentsComponent,
     TravellerPendingRequestsComponent,
     TravellerOngoingTravelComponent,
-    TravellerTravelHistoryComponent,
     TabbedDataTableComponent,
     TabbedDataTableComponent,
     DashCalendarComponent,
@@ -245,6 +240,7 @@ import { UserProfileComponent } from './features/travellerFeatures/user-profile/
     ManagerForwardedTravelRequestsComponent,
     CustomLoaderComponent,
     UserProfileComponent,
+    TravellerRequestHistoryComponent,
   ],
   imports: [
     CommonModule,
