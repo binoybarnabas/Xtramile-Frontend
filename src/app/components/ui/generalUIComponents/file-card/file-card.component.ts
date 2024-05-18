@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { DocumentsService } from 'src/app/services/documents/documents.service';
 import { FileCard } from 'src/app/services/interfaces/iFileCard';
 
@@ -17,15 +18,21 @@ export class FileCardComponent {
   visaDocument!: FileCard
   @Input() requestId!: number
 
-  constructor( private documentService: DocumentsService, private http: HttpClient ) {}
+  constructor( private documentService: DocumentsService, private http: HttpClient , private loaderService : CustomLoaderService) {}
 
   ngOnInit(){
     this.getAllRelevantDocuments();
   }
 
   getAllRelevantDocuments(){
+
+    this.loaderService.show();
+
     this.documentService.getRelevantTravelDocuments(this.requestId).subscribe({
       next: (data) => {
+
+        this.loaderService.hide();
+
         if(data.travelAuthDocument != null){
           this.travelAuthDocument = {
             fileName: data.travelAuthDocument.filename,
@@ -70,18 +77,21 @@ export class FileCardComponent {
           this.fileCard?.push(this.visaDocument)          
         }      },
       error: (error: Error) => {
+        this.loaderService.hide();
         console.error(error.message)
       }
     })
   }
 
   downloadFile(url: string, fileName: string){
+    this.loaderService.show();
     const header = new HttpHeaders({
       'Cache-Control': 'no-cache, no-store',
       'Expires': '0'    
     })
     this.http.get(url, {responseType: 'blob', headers: header}).subscribe({
       next: (data: Blob) =>{
+        this.loaderService.hide();
         const blob = new Blob([data], {type: data.type});
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
@@ -92,6 +102,7 @@ export class FileCardComponent {
         window.URL.revokeObjectURL(link.href);      
       },
       error: (error : Error) => {
+        this.loaderService.hide();
         console.error("Error Downloading File");
         console.error(error.message);
       },

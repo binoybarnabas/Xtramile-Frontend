@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-custom-pdf-viewer',
@@ -14,15 +15,21 @@ export class CustomPdfViewerComponent {
 
   zoomLevel = 1; // Initial zoom level
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private loaderService : CustomLoaderService){}
 
   onDownloadFileClick(url: string){
+
+    this.loaderService.show();
+
     const header = new HttpHeaders({
       'Cache-Control': 'no-cache, no-store',
       'Expires': '0'    
     })
     this.http.get(url, {responseType: 'blob', headers: header}).subscribe({
       next: (data: Blob) =>{
+
+        this.loaderService.hide()
+
         const blob = new Blob([data], {type: data.type});
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
@@ -33,6 +40,7 @@ export class CustomPdfViewerComponent {
         window.URL.revokeObjectURL(link.href);      
       },
       error: (error : Error) => {
+        this.loaderService.hide()
         console.error("Error Downloading File");
         console.error(error.message);
       },
