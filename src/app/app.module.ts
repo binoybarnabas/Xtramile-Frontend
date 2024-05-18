@@ -31,7 +31,6 @@ import { EmployeeNewBillComponent } from './features/employee/mySettlements/empl
 import { EmployeePendingBillComponent } from './features/employee/mySettlements/employee-pending-bill/employee-pending-bill.component';
 import { EmployeeClosedBillsComponent } from './features/employee/mySettlements/employee-closed-bills/employee-closed-bills.component';
 import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
-import { ManagerProfileComponent } from './features/manager/manager-profile/manager-profile.component';
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
 import { ManagerOngoingTravelRequestsComponent } from './features/manager/travelRequests/manager-ongoing-travel-requests/manager-ongoing-travel-requests.component';
 import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
@@ -42,7 +41,6 @@ import { ManagerNewBillComponent } from './features/manager/mySettlements/manage
 import { ManagerPendingBillsComponent } from './features/manager/mySettlements/manager-pending-bills/manager-pending-bills.component';
 import { ManagerClosedBillsComponent } from './features/manager/mySettlements/manager-closed-bills/manager-closed-bills.component';
 import { TravelAdminDashboardComponent } from './features/travelAdmin/travel-admin-dashboard/travel-admin-dashboard.component';
-import { TravelAdminProfileComponent } from './features/travelAdmin/travel-admin-profile/travel-admin-profile.component';
 import { TravelAdminIncomingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-incoming-travel-requests/travel-admin-incoming-travel-requests.component';
 import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-ongoing-travel-requests/travel-admin-ongoing-travel-requests.component';
 import { TravelAdminClosedTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-closed-travel-requests/travel-admin-closed-travel-requests.component';
@@ -61,15 +59,12 @@ import { FinancePersonnelNewBillComponent } from './features/financePersonnel/my
 import { FinancePersonnelPendingBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-pending-bills/finance-personnel-pending-bills.component';
 import { FinancePersonnelClosedBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-closed-bills/finance-personnel-closed-bills.component';
 import { OptionCardComponent } from './components/ui/referenceComponents/option-card/option-card.component';
-import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
 import { DataTableComponent } from './components/ui/table-components/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TableFilterComponent } from './components/ui/table-components/table-filter/table-filter.component';
 import { ChangeStatusButtonComponent } from './components/ui/referenceComponents/change-status-button/change-status-button.component';
 import { ModalComponent } from './components/ui/modal/modal.component';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
-//import { ToastrModule } from 'ngx-toastr';
 import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
 import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { EmployeeViewCardComponent } from './components/ui/referenceComponents/employee-view-card/employee-view-card.component';
@@ -93,9 +88,7 @@ import { StatusPipe } from './pipes/Status/status.pipe';
 import { NotificationsComponent } from './components/ui/referenceComponents/notifications/notifications.component';
 import { DashboardMapComponent } from './components/ui/referenceComponents/dashboard-map/dashboard-map.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-// import { BarChartComponent } from './components/ui/bar-chart/bar-chart.component';import { FileUploadComponent } from './file-upload/file-upload.component';
 import { TravelRequestCardModalComponent } from './components/ui/travel-request-card-modal/travel-request-card-modal.component';
-import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ConfirmationModalComponent } from './components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
 import { DashboardGaugeComponent } from './components/ui/referenceComponents/dashboard-gauge/dashboard-gauge.component';
@@ -138,7 +131,9 @@ import { CustomConfirmationModalComponent } from './components/ui/generalUICompo
 import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/custom-pdf-viewer/custom-pdf-viewer.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
-import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component'; // Import Ng2PdfViewerModule
+import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
+import { CustomLoaderComponent } from './components/ui/custom-loader/custom-loader.component'; // Import Ng2PdfViewerModule
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -165,7 +160,6 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     EmployeePendingBillComponent,
     EmployeeClosedBillsComponent,
     ManagerDashboardComponent,
-    ManagerProfileComponent,
     ManagerIncomingTravelRequestsComponent,
     ManagerOngoingTravelRequestsComponent,
     ManagerClosedTravelRequestsComponent,
@@ -176,7 +170,6 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     ManagerPendingBillsComponent,
     ManagerClosedBillsComponent,
     TravelAdminDashboardComponent,
-    TravelAdminProfileComponent,
     TravelAdminIncomingTravelRequestsComponent,
     TravelAdminOngoingTravelRequestsComponent,
     TravelAdminClosedTravelRequestsComponent,
@@ -195,7 +188,6 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     FinancePersonnelPendingBillsComponent,
     FinancePersonnelClosedBillsComponent,
     OptionCardComponent,
-    OptionviewCardComponent,
     DataTableComponent,
     TableFilterComponent,
     ChangeStatusButtonComponent,
@@ -214,9 +206,7 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     TimestampToDatePipe,
     FileUploadComponent,
     TravelRequestCardModalComponent,
-    TravelOptionViewerComponent,
     ForgotPasswordModalComponent,
-    // BarChartComponent,
     DashboardUpcomingTripComponent,
     DashboardProgressComponent,
     DashboardCardComponent,
@@ -261,10 +251,9 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     CustomConfirmationModalComponent,
     CustomPdfViewerComponent,
     TabbedOptionViewerComponent,
-    ManagerForwardedTravelRequestsComponent
-  ]
-  ,
-
+    ManagerForwardedTravelRequestsComponent,
+    CustomLoaderComponent,
+  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -278,21 +267,16 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
     TypeaheadModule.forRoot(),
-    // ToastrModule.forRoot({
-    //   timeOut: 3000,
-    //   positionClass: 'toast-center', // Set to center of the screen
-    //   preventDuplicates: true,
-    // }),
-
     ModalModule.forRoot(),
     ImageCropperModule,
     EditorModule,
     TabsModule.forRoot(),
-    PdfViewerModule
+    PdfViewerModule,
   ],
-  providers: [DatePipe,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [
+    DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

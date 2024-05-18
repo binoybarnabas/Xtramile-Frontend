@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-travel-admin-selected-requests',
@@ -25,15 +26,21 @@ export class TravelAdminSelectedRequestsComponent {
   requestId: number = 0;
 
   constructor(private travelAdminTravelRequestService: TravelAdminTravelRequestsService, private datePipe : DatePipe,
-    private router: Router,private activatedRoute: ActivatedRoute) {}
+    private router: Router,private activatedRoute: ActivatedRoute, private loaderService : CustomLoaderService) {}
 
   ngOnInit(){
     this.getRequests();
   }
 
   getRequests(){
+
+    this.loaderService.show();
+
     this.subscription = this.travelAdminTravelRequestService.getWaitingOrSelectedRequests('PE','SD',this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
+
+        this.loaderService.hide();
+
         this.incomingRequestdata = data.items.map((request: any) => {
           return {
             ...request,
@@ -43,6 +50,9 @@ export class TravelAdminSelectedRequestsComponent {
         this.totalItems = data.totalCount;
       },
       error: (error: Error) => {
+
+        this.loaderService.hide();
+
         console.log("Error while fetching requests")
         console.log(error.message)
       },

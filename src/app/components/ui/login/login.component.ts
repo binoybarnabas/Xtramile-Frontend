@@ -7,21 +7,20 @@ import { Router } from '@angular/router';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
   isLoading: boolean = false;
   invalidCredentials: boolean = false;
-  loginForm!: FormGroup
+  loginForm!: FormGroup;
   bsModalRef!: BsModalRef;
 
   ngOnInit() {
-
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
@@ -33,21 +32,25 @@ export class LoginComponent {
     });
 
     //to check whether the user already authenticated is true then skip the login and redirect to the page
-
   }
 
-  constructor(private loginService: LoginService, private userDataService: CommonAPIService, private router: Router, private modalService: BsModalService) {
-
-  }
+  constructor(
+    private loginService: LoginService,
+    private userDataService: CommonAPIService,
+    private router: Router,
+    private modalService: BsModalService,
+    private loaderService: CustomLoaderService
+  ) {}
 
   credentialData: CredentialData = {
     Email: '',
-    Password: ''
+    Password: '',
   };
 
   //login using email and password
   login() {
 
+    this.loaderService.show();
 
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value;
@@ -56,23 +59,19 @@ export class LoginComponent {
       //setting credential data
       this.credentialData = { Email: email, Password: password };
 
-      //loading spinner
-      this.isLoading = true;
-
-      if (email == "" || password == "") {
+      if (email == '' || password == '') {
         this.invalidCredentials = true;
       }
       //sending the login data to the backend.
       this.loginService.postData(this.credentialData).subscribe({
-
         next: (data: UserData) => {
+          this.loaderService.hide();
+
           console.log(data);
           if (data == null) {
             this.invalidCredentials = true;
-            console.log("illa");
-          }
-
-          else {
+            console.log('illa');
+          } else {
             //user data which contains employeeName, role, department, token, empId
             this.userDataService.userData = data;
             if (this.userDataService.userData) {
@@ -83,47 +82,43 @@ export class LoginComponent {
               localStorage.setItem('isAuthenticated', 'true');
               //console.log("travel admin",data.role);
               switch (data.role) {
-                case 'Employee': 
-                  this.router.navigate(['employee/dashboard'])
+                case 'Employee':
+                  this.router.navigate(['employee/dashboard']);
                   break;
                 case 'Head':
                   this.router.navigate(['traveladmin/dashboard']);
                   break;
-                case 'Manager': 
-                if (data.department == 'TA') {
-                  this.router.navigate(['traveladmin/dashboard'])
-                  break;
-                }
-                else if (data.department == 'FD') {
-                  this.router.navigate(['finance/dashboard'])
-                  break;
-                }
-                else {
-                  
-                  this.router.navigate(['manager/dashboard'])
-                  break;
-                }
+                case 'Manager':
+                  if (data.department == 'TA') {
+                    this.router.navigate(['traveladmin/dashboard']);
+                    break;
+                  } else if (data.department == 'FD') {
+                    this.router.navigate(['finance/dashboard']);
+                    break;
+                  } else {
+                    this.router.navigate(['manager/dashboard']);
+                    break;
+                  }
               }
 
               this.invalidCredentials = false;
               // a fix is required for jwt token handling
-              localStorage.setItem('JwtToken', data.token)
+              localStorage.setItem('JwtToken', data.token);
             }
           }
         },
         error: (error: Error) => {
-          console.log("error hit", error)
+          console.log('error hit', error);
         },
         complete: () => {
           this.isLoading = false;
           this.loginForm.patchValue({
             email: '',
-            password: ''
+            password: '',
           });
-        }
+        },
       });
-    }
-    else {
+    } else {
       console.log('Form is invalid. Please check the fields.');
     }
   }
@@ -131,5 +126,4 @@ export class LoginComponent {
   openForgotPasswordModal() {
     this.bsModalRef = this.modalService.show(ForgotPasswordModalComponent);
   }
-
 }

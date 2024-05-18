@@ -9,6 +9,7 @@ import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalU
 import { docCategories } from 'src/app/services/commonAPIServices/docCategories';
 import { Subscription } from 'rxjs';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 @Component({
   selector: 'app-traveller-documents',
   templateUrl: './traveller-documents.component.html',
@@ -58,7 +59,8 @@ export class TravellerDocumentsComponent {
     private datepipe: DatePipe,
     private commonService:CommonAPIService,
     private modalService: BsModalService,
-    private toastService : CustomToastService
+    private toastService : CustomToastService,
+    private loaderService : CustomLoaderService
 
   ) {
     this.isDocUploadModalOpen = false;
@@ -98,12 +100,21 @@ export class TravellerDocumentsComponent {
   }
 
   getDocuments() {
+
+    this.loaderService.show();
+
     this.commonService.getEmployeeDocuments(this.employeeId).subscribe(
       (data) => {
+
+        this.loaderService.hide();
+
         this.travellerDocuments = data;
         console.log('Fetched documents:', data);
       },
       (error) => {
+
+        this.loaderService.hide();
+
         console.error('Error fetching documents:', error);
       }
     );
@@ -247,8 +258,13 @@ export class TravellerDocumentsComponent {
 
   deleteDocument(documentId: number): void {
 
+    this.loaderService.show();
+
     this.deleteSubscription = this.documentService.deleteDocument(documentId).subscribe(
       (response) => {
+
+        this.loaderService.hide();
+
         // Handle successful deletion response
         console.log('Document deleted successfully:', response);
         this.selectedDocCardId = -1;
@@ -259,6 +275,7 @@ export class TravellerDocumentsComponent {
         this.initializeDocuments();
       },
       (error) => {
+        this.loaderService.hide();
         // Handle error response
         this.toastService.showToast({ message: "Error Deleting Document!", toastType: "fail", toastDuration: 6000 });
       }

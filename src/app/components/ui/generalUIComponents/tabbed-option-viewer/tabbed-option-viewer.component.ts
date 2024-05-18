@@ -3,12 +3,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TextEditorComponent } from '../../text-editor/text-editor.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { Observable, forkJoin } from 'rxjs';
-import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
-import { CustomConfirmationModalComponent } from '../custom-confirmation-modal/custom-confirmation-modal.component';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-tabbed-option-viewer',
@@ -52,7 +51,7 @@ export class TabbedOptionViewerComponent {
   bsModalRef!: BsModalRef;
   
   constructor(private modalService: BsModalService, private requestService: RequestService, private managerService:ManagerTravelRequestsService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer, private loaderService : CustomLoaderService
   ){
 
   }
@@ -372,11 +371,15 @@ export class TabbedOptionViewerComponent {
   //get uploaded travel options with images
   getTravelOptionsWithImageByReqId(reqId: number) {
 
+    this.loaderService.show();
+
     this.requestService.getTravelOptionsByReqId(reqId).subscribe({
       next: (data) => {
+        this.loaderService.hide();
         this.travelOptionsWithImagesData = data;
       },
       error: (error: Error) => {
+        this.loaderService.hide();
         console.log("Error has occurred, " + error.message);
       },
       complete: () => {
@@ -397,8 +400,10 @@ export class TabbedOptionViewerComponent {
 
   //get text options
   getTravelOptionsWithoutImages(){
+    this.loaderService.show();
     this.managerService.getAvailableOptionsDescription(this.requestId).subscribe({
       next: (response: any) =>{
+        this.loaderService.hide();
         this.descriptions = response.map((item: { htmlString: SafeHtml; description: string; expanded:boolean; clicked:boolean }) => {
           item.htmlString = this.sanitizer.bypassSecurityTrustHtml(item.description);
           item.expanded = false;
@@ -409,6 +414,7 @@ export class TabbedOptionViewerComponent {
         
       },
       error: (error: any) => {
+        this.loaderService.hide();
         console.error('Post failed:', error);
       },
       complete: () => {
@@ -439,14 +445,17 @@ export class TabbedOptionViewerComponent {
   //Temporary Solution Need Back End API Fixes
   getManagerSelectedOptionIdByRequestId(requestId : number){
 
+    this.loaderService.show();
+
     this.requestService.getSelectedTravelOptionDetailsByRequestId(this.requestId).subscribe({
       next: (response: any) =>{
+        this.loaderService.hide();
         this.managerSelectedOptionId = response.optionId;
         this.travelAdminConfirmedOptionId = response.optionId;
         //this.managerSelectedOptionType = response.optionFile === null ? 'text' : 'image';
       },
       error: (error: any) => {
-
+        this.loaderService.hide();
       },
       complete: () => {
         

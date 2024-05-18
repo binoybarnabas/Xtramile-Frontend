@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CustomLoaderComponent } from 'src/app/components/ui/custom-loader/custom-loader.component';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
 @Component({
@@ -12,7 +14,7 @@ export class ManagerClosedTravelRequestsComponent {
   pageHeading: string = 'Closed Travel Requests'
 
   constructor(private apiService: ManagerTravelRequestsService, private router: Router,
-    private datePipe: DatePipe
+    private datePipe: DatePipe, private loaderService : CustomLoaderService
   ) { 
     const storedUserData = localStorage.getItem('userData');
     const userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
@@ -33,8 +35,14 @@ export class ManagerClosedTravelRequestsComponent {
   }
 
   getManagerClosedRequests() {
+
+    this.loaderService.show();
+
     this.apiService.getManagerClosedRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
+
+        this.loaderService.hide();
+
         this.travelRequest = data.employeeRequest.map((request: any) => {
           return {
             ...request,

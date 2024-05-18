@@ -3,9 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { TravelRequestCardComponent } from 'src/app/components/ui/travel-request-card/travel-request-card.component';
-import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-request-card-modal/travel-request-card-modal.component';
 import { TravelRequestInfoCardComponent } from 'src/app/components/ui/travel-request-info-card/travel-request-info-card.component';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-travel-admin-incoming-travel-requests',
@@ -216,15 +215,21 @@ export class TravelAdminIncomingTravelRequestsComponent {
     private apiservice: TravelAdminTravelRequestsService,
     private router: Router,
     private datePipe: DatePipe,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private loaderService : CustomLoaderService
   ) {}
 
   ngOnInit() {
     //api service to receive all incoming requests.
 
+    this.loaderService.show();
+
     this.apiservice
       .getIncomingRequests(this.currentPage, this.pageSize)
       .subscribe((data: any) => {
+
+        this.loaderService.hide();
+
         this.requestData = data.travelRequest.map((request: any) => {
           const priorityName =
             request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
@@ -241,10 +246,16 @@ export class TravelAdminIncomingTravelRequestsComponent {
   }
 
   pageChanged(event: any): void {
+
+    this.loaderService.show();
+
     this.currentPage = event.page;
     this.apiservice
       .getIncomingRequests(this.currentPage, this.pageSize)
       .subscribe((data: any) => {
+
+        this.loaderService.hide();
+
         this.incomingRequestdata = data.travelRequest;
 
         this.requestData = data.travelRequest.map((request: any) => {

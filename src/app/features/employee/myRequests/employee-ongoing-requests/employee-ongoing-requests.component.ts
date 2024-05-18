@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { DatePipe } from '@angular/common';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-employee-ongoing-requests',
@@ -13,7 +14,7 @@ export class EmployeeOngoingRequestsComponent {
   fieldsToDisplay: string[] = ['requestCode', 'projectCode', 'from', 'to', 'startDate', 'endDate', 'reason', 'statusName'];
   incomingRequestdata: any[] = [];
 
-  constructor(private apiservice: RequestService) { }
+  constructor(private apiservice: RequestService, private loaderService : CustomLoaderService) { }
 
   userData = localStorage.getItem('userData');
   parsedUserData = this.userData ? JSON.parse(this.userData) : ''
@@ -33,7 +34,13 @@ export class EmployeeOngoingRequestsComponent {
   }
 
   getOngoingRequests(){
+
+    this.loaderService.show();
+
     this.apiservice.getEmployeeOngoingRequest(this.employeeId, this.currentPage, this.itemsPerPage).subscribe((data) => {
+
+      this.loaderService.hide();
+
       this.incomingRequestdata = this.formatData(data.items);
       this.totalCount = data.totalCount;
     });

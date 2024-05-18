@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { ProfileService } from 'src/app/services/employeeServices/profileServices/profile.service';
 
 @Component({
@@ -29,7 +30,7 @@ export class EmployeeProfileComponent {
   bsModalRef!: BsModalRef<unknown>;
   profileImageFile!: File;
 
-  constructor(private service: ProfileService) {
+  constructor(private service: ProfileService, private loaderService: CustomLoaderService) {
 
     const userData = localStorage.getItem('userData');
     if (userData) {
@@ -74,9 +75,13 @@ export class EmployeeProfileComponent {
 
   //get the employee details that needs to be shown in the profile page
   fetchEmployeeData() {
+    this.loaderService.show();
     this.service.getEmployeeData(this.employeeId).subscribe({
       next: (data: any) => {
-        console.log('profile data',data);
+
+        this.loaderService.hide();
+        
+    console.log('profile data',data);
         //store the initial data of the employee
         this.initialValue = { contactNumber: data.contactNumber, address: data.address }
         this.initialData = {
