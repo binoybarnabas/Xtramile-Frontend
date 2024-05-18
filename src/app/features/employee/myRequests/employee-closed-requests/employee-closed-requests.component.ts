@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
 })
 export class EmployeeClosedRequestsComponent {
 
-  constructor(private employeeService: RequestService, private datepipe: DatePipe) { }
+  constructor(private employeeService: RequestService, private datepipe: DatePipe, private loaderService : CustomLoaderService) { }
 
   requestData = []
 
@@ -33,9 +34,15 @@ export class EmployeeClosedRequestsComponent {
   }
 
   fetchRequestHistory() {
+
+    this.loaderService.show();
+    
     this.employeeService.getEmployeeRequestHisory(this.empId, this.pageIndex, this.pageSize).subscribe(
       {
         next: (data) => {
+
+          this.loaderService.hide();
+
           data.employeeRequest.forEach((request: any) => {
             request.requestedOn = this.datepipe.transform(request.requestedOn, "dd/MM/yyyy"),
             request.closedOn = this.datepipe.transform(request.closedOn, "dd/MM/yyyy")

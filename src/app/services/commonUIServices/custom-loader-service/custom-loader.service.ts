@@ -16,7 +16,14 @@ export class CustomLoaderService {
     this.loadingSubject.next(true);
   }
 
+  // hide() {
+  //   this.loadingSubject.next(false);
+  // }
+
   hide() {
-    this.loadingSubject.next(false);
+    setTimeout(() => {
+      this.loadingSubject.next(false);
+    }, 500);
   }
+  
 }

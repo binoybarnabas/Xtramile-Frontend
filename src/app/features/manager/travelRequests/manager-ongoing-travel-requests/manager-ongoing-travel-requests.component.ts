@@ -4,6 +4,7 @@ import { DatePipe } from '@angular/common';
 import { StatusCodes } from 'src/app/utils/StatusEnum';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-manager-ongoing-travel-requests',
@@ -27,7 +28,7 @@ export class ManagerOngoingTravelRequestsComponent {
   totalItems = 0;
   selectedSortOption!: string;
 
-  constructor(private apiservice: ManagerTravelRequestsService, private datePipe:DatePipe,private router: Router, ) {
+  constructor(private apiservice: ManagerTravelRequestsService, private datePipe:DatePipe,private router: Router, private loaderService : CustomLoaderService ) {
     const userData = localStorage.getItem('userData');
     if (userData) {
       const parsedUserData = JSON.parse(userData);
@@ -36,8 +37,12 @@ export class ManagerOngoingTravelRequestsComponent {
   }
 
   ngOnInit() {
+    this.loaderService.show();
     //get employee ongoing data such as requestId, employeeNameAndEmail, projectCode, createdOn, travelTypeName, priorityName, statusName
     this.apiservice.getManagerOngoingTravelRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe((data: any) => {
+
+      this.loaderService.hide();
+
       this.incomingRequestdata = this.formatData(data.items);
       this.totalCount = data.totalCount
     });
@@ -67,18 +72,30 @@ export class ManagerOngoingTravelRequestsComponent {
   }
 
   onPageChange(event: any){
+
+    this.loaderService.show();
+
     this.currentPage = event.page;
     this.apiservice.getManagerOngoingTravelRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe((data: any) => {
+
+      this.loaderService.hide();
+
       this.incomingRequestdata = this.formatData(data.items);
     });    
   }
 
   //get the selected date and filter data based on selected dates
   handleDateSelection(selectedDate: Date): void {
+
+    this.loaderService.show();
+
     //To convert date from standard js Date format to YYYY-MM-DD format
     this.sqlDatetimeFormat = selectedDate.toISOString().slice(0, 10);
     this.apiservice.getEmployeeRequestByDate(this.managerId, this.sqlDatetimeFormat, this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
+
+        this.loaderService.hide();
+
         this.incomingRequestdata = data.employeeRequest.map((request: any) => {
           return {
             ...request,
@@ -115,8 +132,14 @@ export class ManagerOngoingTravelRequestsComponent {
 
     // Fetch all the employee requests
     fetchEmployeeRequest() {
+
+      this.loaderService.show();
+
       this.apiservice.getEmployeeRequest(this.managerId, StatusCodes.Ongoing,this.currentPage, this.itemsPerPage).subscribe({
         next: (data: any) => {
+
+          this.loaderService.hide();
+
           this.incomingRequestdata = data.employeeRequest.map((request: any) => {
             return {
               ...request,
@@ -134,9 +157,15 @@ export class ManagerOngoingTravelRequestsComponent {
     }
       //Sort employee requests based on the selected option
   sortData(option: string): void {
+
+    this.loaderService.show();
+
     if (option == "name") {
       this.apiservice.getEmployeeRequestSortByEmployeeName(this.managerId,StatusCodes.Ongoing, this.currentPage, this.itemsPerPage).subscribe({
         next: (data: any) => {
+
+          this.loaderService.hide();
+
           this.incomingRequestdata = data.employeeRequest.map((request: any) => {
             return {
               ...request,
@@ -154,6 +183,9 @@ export class ManagerOngoingTravelRequestsComponent {
     if (option == "date") {
       this.apiservice.getEmployeeRequestSortByDate(this.managerId, StatusCodes.Ongoing, this.currentPage, this.itemsPerPage).subscribe({
         next: (data: any) => {
+
+          this.loaderService.hide();
+
           this.incomingRequestdata = data.employeeRequest.map((request: any) => {
             return {
               ...request,
@@ -168,9 +200,15 @@ export class ManagerOngoingTravelRequestsComponent {
         }
       });
     }
+
+    this.loaderService.hide();
+
   }
     // list the requests based on the employee name
     handleSearchByName(searchByName: string): void {
+
+      //this.loaderService.show();
+
       // Handle the list by listing all the requests based on empoyee name
       console.log(searchByName);
       //when the search name is empty show all the names by default
@@ -180,6 +218,9 @@ export class ManagerOngoingTravelRequestsComponent {
   
       this.apiservice.getEmployeeRequestByEmployeeName(searchByName,StatusCodes.Ongoing, this.managerId, this.currentPage, this.itemsPerPage).subscribe({
         next: (data) => {
+
+          //this.loaderService.hide();
+
           this.incomingRequestdata = data.employeeRequest.map((request: any) => {
             return {
               ...request,

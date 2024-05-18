@@ -49,6 +49,7 @@ export class LoginComponent {
 
   //login using email and password
   login() {
+
     this.loaderService.show();
 
     if (this.loginForm.valid) {
@@ -57,9 +58,6 @@ export class LoginComponent {
 
       //setting credential data
       this.credentialData = { Email: email, Password: password };
-
-      //loading spinner
-      //this.isLoading = true;
 
       if (email == '' || password == '') {
         this.invalidCredentials = true;

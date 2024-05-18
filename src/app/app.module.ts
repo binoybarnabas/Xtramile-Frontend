@@ -31,7 +31,6 @@ import { EmployeeNewBillComponent } from './features/employee/mySettlements/empl
 import { EmployeePendingBillComponent } from './features/employee/mySettlements/employee-pending-bill/employee-pending-bill.component';
 import { EmployeeClosedBillsComponent } from './features/employee/mySettlements/employee-closed-bills/employee-closed-bills.component';
 import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
-import { ManagerProfileComponent } from './features/manager/manager-profile/manager-profile.component';
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
 import { ManagerOngoingTravelRequestsComponent } from './features/manager/travelRequests/manager-ongoing-travel-requests/manager-ongoing-travel-requests.component';
 import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
@@ -42,7 +41,6 @@ import { ManagerNewBillComponent } from './features/manager/mySettlements/manage
 import { ManagerPendingBillsComponent } from './features/manager/mySettlements/manager-pending-bills/manager-pending-bills.component';
 import { ManagerClosedBillsComponent } from './features/manager/mySettlements/manager-closed-bills/manager-closed-bills.component';
 import { TravelAdminDashboardComponent } from './features/travelAdmin/travel-admin-dashboard/travel-admin-dashboard.component';
-import { TravelAdminProfileComponent } from './features/travelAdmin/travel-admin-profile/travel-admin-profile.component';
 import { TravelAdminIncomingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-incoming-travel-requests/travel-admin-incoming-travel-requests.component';
 import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-ongoing-travel-requests/travel-admin-ongoing-travel-requests.component';
 import { TravelAdminClosedTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-closed-travel-requests/travel-admin-closed-travel-requests.component';
@@ -61,7 +59,6 @@ import { FinancePersonnelNewBillComponent } from './features/financePersonnel/my
 import { FinancePersonnelPendingBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-pending-bills/finance-personnel-pending-bills.component';
 import { FinancePersonnelClosedBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-closed-bills/finance-personnel-closed-bills.component';
 import { OptionCardComponent } from './components/ui/referenceComponents/option-card/option-card.component';
-import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
 import { DataTableComponent } from './components/ui/table-components/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TableFilterComponent } from './components/ui/table-components/table-filter/table-filter.component';
@@ -92,7 +89,6 @@ import { NotificationsComponent } from './components/ui/referenceComponents/noti
 import { DashboardMapComponent } from './components/ui/referenceComponents/dashboard-map/dashboard-map.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { TravelRequestCardModalComponent } from './components/ui/travel-request-card-modal/travel-request-card-modal.component';
-import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ConfirmationModalComponent } from './components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
 import { DashboardGaugeComponent } from './components/ui/referenceComponents/dashboard-gauge/dashboard-gauge.component';
@@ -164,7 +160,6 @@ import { CustomLoaderComponent } from './components/ui/custom-loader/custom-load
     EmployeePendingBillComponent,
     EmployeeClosedBillsComponent,
     ManagerDashboardComponent,
-    ManagerProfileComponent,
     ManagerIncomingTravelRequestsComponent,
     ManagerOngoingTravelRequestsComponent,
     ManagerClosedTravelRequestsComponent,
@@ -175,7 +170,6 @@ import { CustomLoaderComponent } from './components/ui/custom-loader/custom-load
     ManagerPendingBillsComponent,
     ManagerClosedBillsComponent,
     TravelAdminDashboardComponent,
-    TravelAdminProfileComponent,
     TravelAdminIncomingTravelRequestsComponent,
     TravelAdminOngoingTravelRequestsComponent,
     TravelAdminClosedTravelRequestsComponent,
@@ -194,7 +188,6 @@ import { CustomLoaderComponent } from './components/ui/custom-loader/custom-load
     FinancePersonnelPendingBillsComponent,
     FinancePersonnelClosedBillsComponent,
     OptionCardComponent,
-    OptionviewCardComponent,
     DataTableComponent,
     TableFilterComponent,
     ChangeStatusButtonComponent,
@@ -213,7 +206,6 @@ import { CustomLoaderComponent } from './components/ui/custom-loader/custom-load
     TimestampToDatePipe,
     FileUploadComponent,
     TravelRequestCardModalComponent,
-    TravelOptionViewerComponent,
     ForgotPasswordModalComponent,
     DashboardUpcomingTripComponent,
     DashboardProgressComponent,

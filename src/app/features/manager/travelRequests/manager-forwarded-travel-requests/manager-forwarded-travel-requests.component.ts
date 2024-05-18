@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { TravelRequestDetailViewModel } from 'src/app/services/interfaces/iTravelRequestDetails';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { WaitingOrSelectedRequests } from 'src/app/services/interfaces/iwaiting-or-selected-requests';
@@ -30,7 +31,7 @@ export class ManagerForwardedTravelRequestsComponent {
   currentPage = 1;
   tableHeaders = ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Travel Mode', 'Updated On'];
   dataHeaders = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to','departureDate','travelType','TravelMode','updatedOn'];
-  constructor(private apiService: ManagerTravelRequestsService, private router: Router, private datePipe: DatePipe,private activatedRoute:ActivatedRoute) {
+  constructor(private apiService: ManagerTravelRequestsService, private router: Router, private datePipe: DatePipe,private activatedRoute:ActivatedRoute, private loaderService : CustomLoaderService) {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
     this.managerId = this.userData.empId;
@@ -112,8 +113,14 @@ export class ManagerForwardedTravelRequestsComponent {
   }
 
   getManagerForwardRequests() {
+
+    this.loaderService.show();
+
     this.apiService.getManagerForwardedRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
       next: (data: any) => {
+
+        this.loaderService.hide();
+
         this.travelRequest[this.currentPage-1] = data.employeeRequest.map((request: any) => {
           return {
             ...request,
@@ -135,8 +142,14 @@ export class ManagerForwardedTravelRequestsComponent {
   }
 
   getWaitingRequests(){
+
+    this.loaderService.show();
+
     this.apiService.getWaitingOrSelectedRequests(this.managerId,'PE','WT',this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
+
+        this.loaderService.hide();
+
         this.waitingRequests[this.currentPage-1] = data.items.map((request: any) => {
           return {
             ...request,
@@ -157,8 +170,14 @@ export class ManagerForwardedTravelRequestsComponent {
   }
 
   getSelectedRequests(){
+
+    this.loaderService.show();
+
     this.apiService.getWaitingOrSelectedRequests(this.managerId,'PE','SD',this.currentPage,this.itemsPerPage).subscribe({
       next: (data) => {
+
+        this.loaderService.hide();
+
         this.selectedRequests[this.currentPage-1] = data.items.map((request: any) => {
           return {
             ...request,

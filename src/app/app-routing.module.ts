@@ -9,7 +9,6 @@ import { ManagerHomeComponent } from './components/layout/manager/manager-home/m
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
 import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
-import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
 import { TravelAdminHomeComponent } from './components/layout/travelAdmin/travel-admin-home/travel-admin-home.component';
 
 import { TravelAdminDashboardComponent } from './features/travelAdmin/travel-admin-dashboard/travel-admin-dashboard.component';
@@ -32,7 +31,6 @@ import {
 } from './auth.guard';
 import { LoginComponent } from './components/ui/login/login.component';
 
-import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 import { TravelRequestFormComponent } from './features/travellerFeatures/travel-request-form/travel-request-form.component';
 import { TravellerDashboardComponent } from './components/layout/traveller-dashboard/traveller-dashboard.component';
 import { TravellerDocumentsComponent } from './features/travellerFeatures/traveller-documents/traveller-documents.component';
@@ -58,8 +56,6 @@ const routes: Routes = [
       { path: 'dashboard', component: TravellerDashboardComponent },
       { path: 'request', component: TravelRequestFormComponent },
       { path: 'pending', component: EmployeePendingRequestsComponent },
-      { path: 'available_options', component: OptionviewCardComponent },
-      { path: 'view_travel_options', component: TravelOptionViewerComponent },
       { path: 'ongoing', component: EmployeeOngoingRequestsComponent },
       { path: 'history', component: EmployeeClosedRequestsComponent },
       { path: 'profile', component: EmployeeProfileComponent },
