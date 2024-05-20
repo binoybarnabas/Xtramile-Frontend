@@ -339,7 +339,7 @@ body {
 
 .top_bar_container .logout_modal .item_card.logout {
   border-radius: 0 0 6px 6px;
-  border-top: 1.4px dotted var(--menu-hover-color);
+  border-top: 1.2px solid var(--menu-hover-color);
 }
 
 .top_bar_container .logout_modal .item_card:hover {
@@ -575,7 +575,7 @@ body {
 }
 
 .side_bar_container .side_bar_main .main_title .left_icon {
-  font-size: var(--medium-font-size);
+  font-size: var(--small-font-size);
   font-weight: var(--extra-font-weight);
   /* color: var(--second-color); */
 }
@@ -603,7 +603,7 @@ body {
 .side_bar_container .side_bar_main .main_title:hover {
   border-radius: 0.3rem;
   cursor: pointer;
-  font-weight: var(--active-font-weight);
+  /* font-weight: var(--active-font-weight); */
   /* background-color: var(--menu-hover-color); */
   color: var(--third-color);
   background-color: var(--secondary-cyan-color);
@@ -760,7 +760,7 @@ body {
   height: calc(100vh - 65px);
   margin-left: 19.2%;
   margin-top: 65px;
-  border-radius: 6px;
+  /* border-radius: 5px; */
   z-index: -100;
   /* box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 3px 0px; */
   transition: 0.6s;
@@ -771,6 +771,7 @@ body {
 
   background-position: center;
   padding: 0.5rem 1rem;
+  background-color: var(--menu-hover-color);
 }
 
 .middle_console_container.collapsed {
@@ -796,7 +797,7 @@ body {
 
 .middle_console_container .body_section {
   background-color: var(--card-bg-color);
-  border-radius: var(--normal-border-radius);
+  /* border-radius: var(--normal-border-radius); */
   box-shadow: var(--normal-box-shadow);
   transition: 0.6s;
   /* padding: 1rem; */
@@ -804,6 +805,7 @@ body {
   height: calc(100vh - 75px);
   padding: 0.5rem;
   overflow-y: auto;
+  border-radius: 5px;
 }
 
 /* Common Button Styles */
