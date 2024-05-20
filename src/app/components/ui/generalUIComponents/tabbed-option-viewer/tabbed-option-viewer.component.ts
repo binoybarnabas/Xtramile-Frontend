@@ -22,6 +22,7 @@ export class TabbedOptionViewerComponent {
   @Input() currentLoggedInUserRole : string = 'travelAdmin';
   @Input() requestId : number = -1;
   @Input() requestStatus: string = '';
+  @Input() ticketStatus: string = ''
   //fetch from calling component !!!!!!
 
   isActionBarVisible: boolean = false;
