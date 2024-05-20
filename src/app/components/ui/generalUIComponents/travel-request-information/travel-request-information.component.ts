@@ -207,6 +207,8 @@ export class NewTravelRequestComponent {
           if (this.status === 'Waiting' || this.status === 'Selected') {
             this.newReqFormSubMenuValue = 4;
             this.currentNavIndex = 4;
+            this.forwardBtnTitle = 'Confirm';
+            this.isSubmitBtnActive = true;
           }
         }
         break;
@@ -449,7 +451,7 @@ export class NewTravelRequestComponent {
         console.log(data);
         //Pop-up when options are submitted
         //Redirect to another page on submit click
-        this.router.navigate(['/traveladmin/waiting']);
+        this.router.navigate(['/traveladmin/requests/waiting']);
       },
       error: (error: Error) => {
         //console.log("Error in posting request status");
@@ -593,7 +595,8 @@ export class NewTravelRequestComponent {
             this.tabbedOptionViewer.selectedTravelOptionId
           );
         }
-      } else if (
+      } 
+      else if (
         this.currentLoggedInUserRole === 'travelAdmin' &&
         this.status !== 'Open'
       ) {
@@ -662,7 +665,7 @@ export class NewTravelRequestComponent {
           //Confirm / Edit Selcted Travel Option
           //this.openOptionConfirmationModal();
           this.openOptionConfirmationModal();
-          //this.ngOnInit();
+          
 
           this.initializeComponent();
         }
@@ -750,7 +753,9 @@ export class NewTravelRequestComponent {
           });
         },
         error: (error: any) => {},
-        complete: () => {},
+        complete: () => {
+          this.router.navigate(['/traveladmin/requests/selected-options']);
+        },
       });
   }
 

@@ -248,7 +248,7 @@ export class TabbedOptionViewerComponent {
       if (this.selectedImageOptionIndex === optionIndex) {
         this.selectedImageOptionIndex = -1;
         this.selectedTravelOptionId = -1;
-
+        this.isSubmitBtnActive = false;
         //Detecting Option Changes by TA
         if (this.requestStatus === 'Selected') {
           this.travelAdminConfirmedOptionId = this.managerSelectedOptionId;
@@ -258,6 +258,7 @@ export class TabbedOptionViewerComponent {
         this.selectedImageOptionIndex = optionIndex;
         this.selectedTravelOptionId =
           this.travelOptionsWithImagesData[optionIndex].optionId;
+          this.isSubmitBtnActive = true;
 
         //Detecting option changes by TA
         if (
@@ -274,6 +275,7 @@ export class TabbedOptionViewerComponent {
       if (this.selectedTextOptionIndex === optionIndex) {
         this.selectedTextOptionIndex = -1;
         this.selectedTravelOptionId = -1;
+        this.isSubmitBtnActive = false;
 
         if (this.requestStatus === 'Selected') {
           this.travelAdminConfirmedOptionId = this.managerSelectedOptionId;
@@ -282,6 +284,7 @@ export class TabbedOptionViewerComponent {
       } else {
         this.selectedTextOptionIndex = optionIndex;
         this.selectedTravelOptionId = this.descriptions[optionIndex].optionId;
+        this.isSubmitBtnActive = true;
 
         if (
           this.requestStatus === 'Selected' &&
@@ -293,6 +296,7 @@ export class TabbedOptionViewerComponent {
         }
       }
     }
+    this.isSubmitBtnActiveChange.emit(this.isSubmitBtnActive);
   }
 
   //to remove selected option from the array
