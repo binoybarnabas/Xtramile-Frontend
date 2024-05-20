@@ -119,6 +119,7 @@
               [requestStatus]="status"
               [currentLoggedInUserRole]="currentLoggedInUserRole"
               [ticketStatus]="travelRequestDetailViewModel.ticketStatus"
+              (isSubmitBtnActiveChange)="handleIsSubmitBtnActiveChange($event)"
             ></app-tabbed-option-viewer>
 
             <!-- form input group ends -->
@@ -168,8 +169,8 @@
         </button>
       </div>
 
-      <div *ngIf="(currentLoggedInUserRole === 'manager' && status === 'Open' || status === 'Waiting' || ( (status === 'Approved by RM' || status === 'Selected' || status === 'Ongoing') && this.currentNavIndex !== this.totalNavCount))" class="forward_btn_card">
-        <button (click)="onForwardBtnClick()" class="btn">
+      <div *ngIf="(currentLoggedInUserRole === 'manager' && status === 'Open' || status === 'Waiting' || ( (status === 'Approved by RM' || status === 'Selected' || status === 'Ongoing') && this.currentNavIndex !== this.totalNavCount)) || (currentLoggedInUserRole === 'travelAdmin')" class="forward_btn_card">
+        <button [disabled]="currentNavIndex === totalNavCount && !isSubmitBtnActive" (click)="onForwardBtnClick()" class="btn">
           {{ forwardBtnTitle }}
         </button>
       </div>

@@ -37,13 +37,13 @@ export class TextEditorComponent {
   //       }
   // });
   // }
-  openAddOptionModal() {
-    this.bsModalRef = this.modalService.show(ModalComponent);
-    this.bsModalRef.content.onClose.subscribe((result: any) => {
-      // Handle the result from the modal if needed
-      console.log('Modal result:', result);
-    });
-  }
+  // openAddOptionModal() {
+  //   this.bsModalRef = this.modalService.show(ModalComponent);
+  //   this.bsModalRef.content.onClose.subscribe((result: any) => {
+  //     // Handle the result from the modal if needed
+  //     console.log('Modal result:', result);
+  //   });
+  // }
   @Input()
   textOptions!: Function;
   selectTextOptions(): void {

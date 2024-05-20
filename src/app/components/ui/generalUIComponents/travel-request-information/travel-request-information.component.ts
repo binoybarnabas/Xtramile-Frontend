@@ -49,7 +49,8 @@ export class NewTravelRequestComponent {
   backBtnTitle: string = 'Back';
   forwardBtnTitle: string = 'Next';
 
-  isForwardBtnVisible: boolean = true;
+  //isForwardBtnVisible: boolean = true;
+  isSubmitBtnActive: boolean = false;
 
   totalNavCount: number = 0;
   currentNavIndex: number = 0;
@@ -102,9 +103,6 @@ export class NewTravelRequestComponent {
     private modalService: BsModalService,
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
-    private travelAdminService: TravelAdminTravelRequestsService,
-    private sanitizer: DomSanitizer,
-    private modalservice: BsModalService,
     private travelRequestUIService: TravelRequestUiService
   ) {
     const storedUserData = localStorage.getItem('userData');
@@ -158,6 +156,9 @@ export class NewTravelRequestComponent {
   updateNavItemsBasedOnUserRole() {
     switch (this.currentLoggedInUserRole) {
       case 'manager':
+        if(this.status === 'Open'){
+          this.isSubmitBtnActive = true;
+        }
         if (
           this.status === 'Waiting' ||
           this.status === 'Selected' ||
@@ -174,8 +175,7 @@ export class NewTravelRequestComponent {
           this.newReqFormSubMenuValue = 4;
           this.currentNavIndex = 4;
           this.forwardBtnTitle = 'Submit';
-        }
-        else {
+        } else {
           this.leftSectionNavItems = [
             'General Information',
             'Trip Information',
@@ -433,8 +433,6 @@ export class NewTravelRequestComponent {
 
   isLoading: boolean = false;
 
-
-
   //Travel Admin Send Options
   //There by status changes
   onTravelAdminOptionsSend() {
@@ -547,12 +545,14 @@ export class NewTravelRequestComponent {
     if (this.currentNavIndex === 0) {
       if (this.currentLoggedInUserRole === 'travelAdmin')
         this.router.navigate(['/traveladmin/incomingrequests']);
-      else if (this.currentLoggedInUserRole === 'manager'){
-
-        if(this.status === 'Open'){
+      else if (this.currentLoggedInUserRole === 'manager') {
+        if (this.status === 'Open') {
           this.router.navigate(['/manager/incoming-requests']);
-        }
-        else if(this.status === 'Approved by RM' ||this.status === 'Waiting' || this.status === 'Selected'){
+        } else if (
+          this.status === 'Approved by RM' ||
+          this.status === 'Waiting' ||
+          this.status === 'Selected'
+        ) {
           this.router.navigate(['/manager/forwarded-requests']);
         }
       }
@@ -579,7 +579,10 @@ export class NewTravelRequestComponent {
           //Forward Requests
           //replace with actaul emp id
           const managerId = 4;
-          this.travelRequestUIService.onManagerForwardTravelRequestForm(this.requestId, managerId);
+          this.travelRequestUIService.onManagerForwardTravelRequestForm(
+            this.requestId,
+            managerId
+          );
           this.router.navigate(['manager/incoming-requests']);
         }
         //Options Sent by TA
@@ -590,9 +593,7 @@ export class NewTravelRequestComponent {
             this.tabbedOptionViewer.selectedTravelOptionId
           );
         }
-     
-      } 
-      else if (
+      } else if (
         this.currentLoggedInUserRole === 'travelAdmin' &&
         this.status !== 'Open'
       ) {
@@ -651,7 +652,7 @@ export class NewTravelRequestComponent {
                 toastType: 'success',
                 toastDuration: 3000,
               });
-              this.router.navigate(['/traveladmin/waiting']);
+              this.router.navigate(['/traveladmin/requests/incoming']);
               this.currentNavIndex = 0;
               this.newReqFormSubMenuValue = this.currentNavIndex;
               this.forwardBtnTitle = 'Next';
@@ -753,33 +754,9 @@ export class NewTravelRequestComponent {
       });
   }
 
-  // disableSubmitBtn(): boolean {
-  //   if (this.currentNavIndex === this.totalNavCount) {
-  //     if (this.selectedImages.length === 0 && this.textOption.length === 0) {
-  //       return true;
-  //     } else {
-  //       return false; // Explicitly return false if conditions are not met
-  //     }
-  //   } else {
-  //     return false; // Explicitly return false if conditions are not met
-  //   }
-  // }
-
-  // saveTextTravelOption() {
-  //   this.travelAdminService.saveTravelOption(this.textOption, this.requestId)
-  //     .subscribe({
-  //       next: (response: any) => {
-  //         console.log('Post successful:', response);
-  //       },
-  //       error: (error: any) => {
-  //         console.error('Post failed:', error);
-  //       },
-  //       complete: () => {
-  //         this.toastService.showToast({ message: "Travel Option Added", toastType: "success", toastDuration: 3000 });
-  //         console.log('Post request completed.');
-  //       }
-  // });
-  // }
+  handleIsSubmitBtnActiveChange(newValue: boolean): void {
+    this.isSubmitBtnActive = newValue;
+  }
 
   //EOF
 }
