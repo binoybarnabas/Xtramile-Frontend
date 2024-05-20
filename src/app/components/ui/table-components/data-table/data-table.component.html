@@ -28,6 +28,7 @@
                 headers[i] === 'Mode' && row[prop] === 'International',
               status_waiting: headers[i] === 'Status' && row[prop] === 'Waiting',
               status_selected: headers[i] === 'Status' && row[prop] === 'Selected',
+              status_ongoing: headers[i] === 'Status' && row[prop] === 'Ongoing',
             }"
         >
           <ng-container *ngIf="isMultilineProperty(prop); else singleLine">

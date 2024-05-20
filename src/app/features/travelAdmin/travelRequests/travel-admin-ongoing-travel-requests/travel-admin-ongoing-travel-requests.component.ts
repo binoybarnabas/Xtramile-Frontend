@@ -13,7 +13,7 @@ import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminSe
 export class TravelAdminOngoingTravelRequestsComponent {
 
   pageHeading: string = 'Ongoing Travel';
-  tableHeaders: string[] = ['Request Code','Requested By','Project Code','From','To','Departure Date', 'Return Date', 'PickUp Requested', 'Ticket Status', 'Trip Status'];
+  tableHeaders: string[] = ['Request Code','Requested By','Project Code','From','To','Departure Date', 'Return Date', 'Pickup', 'Ticket Status', 'Trip Status'];
   fieldsToDisplay: string[] = ['requestCode', 'name','projectCode', 'from','to','departureDate', 'returnDate', 'pickUpRequested', 'ticketStatus', 'tripStatus'];
   requestData: any[] = [];
   requestId: number = 0;
