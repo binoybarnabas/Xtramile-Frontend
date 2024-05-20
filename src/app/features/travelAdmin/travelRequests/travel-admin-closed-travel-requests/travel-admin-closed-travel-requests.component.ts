@@ -11,8 +11,8 @@ import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminSe
 export class TravelAdminClosedTravelRequestsComponent {
 
   pageHeading: string = 'Closed Travel Requests'
-  tableHeaders: string[] = ['Request Code','Project Code','Project Name','Employee','Source City','Destination City','Closed On'];
-  fieldsToDisplay: string[] = ['requestCode', 'projectCode','projectName', 'name','sourceCity','destinationCity','date'];
+  tableHeaders: string[] = ['Request Code','Requested By','Project Code','From','To','Requested On','Closed On'];
+  fieldsToDisplay: string[] = ['requestCode', 'name', 'projectCode','sourceCity','destinationCity','createdOn','date'];
   requestData: any[] = [];
   requestId: number = 0;
   currentPage = 1;
@@ -39,6 +39,7 @@ export class TravelAdminClosedTravelRequestsComponent {
     this.apiservice.getClosedTravel(this.currentPage, this.pageSize).subscribe((data: any) => {
       this.requestData = data.closedTravel;
       this.totalItems = data.totalCount;
+      console.log(this.requestData);
     });
   }
   

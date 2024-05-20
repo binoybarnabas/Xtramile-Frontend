@@ -15,9 +15,8 @@ import { TravelRequestInfoCardComponent } from 'src/app/components/ui/travel-req
 export class TravelAdminIncomingTravelRequestsComponent {
 
   pageHeading: string = "Incoming Requests";
-
-  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Mode', 'Status'];
-  fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode', 'createdOn', 'travelTypeName', 'statusName'];
+  tableHeaders: string[] = ['Request Code', 'Requested By', 'Project Code', 'From', 'To', 'Date of Travel','Status'];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode', 'from', 'to','departureDate','statusName'];
   incomingRequestdata: any[] = [];
 
   requestData: any[] = [];
@@ -198,7 +197,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
         return {
           ...request,
           statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
-          createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+          departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
           priorityName: priorityName
 
         };

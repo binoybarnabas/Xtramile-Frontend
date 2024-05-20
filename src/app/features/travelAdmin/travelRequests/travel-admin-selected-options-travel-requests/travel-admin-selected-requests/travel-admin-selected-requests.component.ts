@@ -14,8 +14,8 @@ export class TravelAdminSelectedRequestsComponent {
     
   private subscription : Subscription | any
 
-  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date','Mode'];
-  fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode','createdOn','travelTypeName'];
+  tableHeaders: string[] = ['Request Code', 'Requested By', 'Project Code', 'From','To','Date of Trip','Selected On'];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode','from','to','departureDate','approvalDate'];
   incomingRequestdata:any[] = [];
   requestData: any[] = [];
   itemsPerPage = 10;
@@ -37,9 +37,11 @@ export class TravelAdminSelectedRequestsComponent {
         this.incomingRequestdata = data.items.map((request: any) => {
           return {
             ...request,
-            createdOn: this.datePipe.transform(request.createdOn,'dd/MM/yyyy')
+            departureDate: this.datePipe.transform(request.departureDate,'dd/MM/yyyy'),
+            approvalDate: this.datePipe.transform(request.approvalDate,'dd/MM/yyyy')
           }
-        });  
+        });
+        console.log(this.incomingRequestdata)  
         this.totalItems = data.totalCount;
       },
       error: (error: Error) => {
