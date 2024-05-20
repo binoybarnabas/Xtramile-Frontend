@@ -83,7 +83,7 @@ export class LoginComponent {
               //console.log("travel admin",data.role);
               switch (data.role) {
                 case 'Employee':
-                  this.router.navigate(['employee/dashboard']);
+                  this.router.navigate(['traveller/dashboard']);
                   break;
                 case 'Head':
                   this.router.navigate(['traveladmin/dashboard']);

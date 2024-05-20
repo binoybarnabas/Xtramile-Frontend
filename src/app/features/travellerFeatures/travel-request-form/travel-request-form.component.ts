@@ -9,7 +9,7 @@ import { SideNavBarService } from 'src/app/services/employeeServices/layoutServi
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
-import { EmployeeDetails } from '../../../components/layout/travel-request-information/request';
+import { EmployeeDetails } from '../../../components/ui/generalUIComponents/travel-request-information/request';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';

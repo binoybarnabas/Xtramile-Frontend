@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { TravelRequestDetails } from '../../interfaces/iTravelRequestDetails';
-import { PendingRequest } from 'src/app/features/employee/myRequests/employee-pending-requests/pending-request';
+import { TravelRequestDetails } from '../../../models/dtoModels/iTravelRequestDetails';
+//import { PendingRequest } from 'src/app/features/travellerFeatures/traveller-pending-requests/traveller-pending-requests.component';
 
 @Injectable({
   providedIn: 'root'

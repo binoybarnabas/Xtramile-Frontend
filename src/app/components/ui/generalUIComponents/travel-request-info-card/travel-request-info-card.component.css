@@ -1,0 +1,187 @@
+.main_container {
+  position: absolute;
+  border-radius: var(--normal-border-radius);
+  background-color: var(--card-bg-color);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.main_container .req_info_card {
+  width: 100%;
+  background-color: var(--card-bg-color);
+  padding: 0.8rem;
+  border-radius: var(--normal-border-radius) var(--normal-border-radius) 0 0;
+}
+
+.main_container .req_info_card .top_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed var(--ternary-text-color);
+  padding-bottom: 15px;
+}
+
+.main_container .req_info_card .title_text {
+  font-size: var(--extra-small-font-size);
+  color: var(--ternary-text-color);
+}
+
+.main_container .req_info_card .info_text {
+  font-size: var(--small-font-size);
+  font-weight: var(--active-font-weight);
+  margin-bottom: 0;
+}
+
+.main_container .req_info_card .origin_destination_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed var(--ternary-text-color);
+}
+
+.main_container .req_info_card .origin_destination_section .location_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 205px;
+}
+
+.main_container .req_info_card .origin_destination_section .location_card.left {
+  text-align: start;
+}
+
+.main_container
+  .req_info_card
+  .origin_destination_section
+  .location_card.right {
+  text-align: end;
+}
+
+.main_container
+  .req_info_card
+  .origin_destination_section
+  .location_card
+  .location_text {
+  font-size: var(--large-font-size);
+  font-weight: var(--active-font-weight);
+  margin: 0;
+}
+
+.main_container
+  .req_info_card
+  .origin_destination_section
+  .location_card
+  .country_text {
+  font-size: var(--extra-small-font-size);
+  margin: 0;
+  color: var(--secondary-text-color);
+}
+
+.main_container .req_info_card .travel_mode_card {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-cyan-color);
+  color: var(--second-color);
+  transition: 0.3s;
+  border-radius: 6px;
+  font-size: var(--medium-font-size);
+  transform: rotate(90deg);
+}
+
+.main_container .req_info_card .travel_mode_card:hover {
+  background-color: var(--second-color);
+  color: var(--card-bg-color);
+  transform: rotate(270deg);
+}
+
+.main_container .req_info_card .departure_return_section {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 15px 0;
+  border-bottom: 1px dashed var(--ternary-text-color);
+}
+
+.main_container .req_info_card .docs_attached_section {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main_container .req_info_card .docs_attached_section .doc_card {
+  font-size: var(--form-label-font-size);
+  color: var(--ternary-text-color);
+}
+
+.main_container .req_info_card .docs_attached_section .doc_card .link_text {
+  margin-bottom: 0;
+  cursor: pointer;
+  margin-left: 3px;
+}
+
+.main_container .req_info_card .docs_attached_section .doc_card:hover {
+  color: var(--second-color);
+}
+
+.main_container .action_section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-bg-color);
+  box-shadow: var(--normal-box-shadow);
+  padding: 0.5rem;
+  border-radius: 0 0 var(--normal-border-radius) var(--normal-border-radius);
+}
+
+.main_container .action_section .reject_btn,
+.main_container .action_section .forward_btn {
+  height: 40px;
+  width: 100px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--form-label-font-size);
+  font-weight: var(--active-font-weight);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.main_container .action_section .reject_btn {
+  border: 2px solid var(--primary-red-color);
+  color: var(--primary-red-color);
+}
+
+.main_container .action_section .reject_btn:hover {
+  background-color: var(--primary-red-color);
+  color: var(--card-bg-color);
+}
+
+.main_container .action_section .forward_btn {
+  color: var(--second-color);
+  border: 2px solid var(--second-color);
+}
+
+.main_container .action_section .forward_btn:hover {
+  background-color: var(--second-color);
+  color: var(--card-bg-color);
+}
+
+.main_container .action_section .see_more_btn {
+  font-size: var(--extra-small-font-size);
+  color: var(--ternary-text-color);
+  cursor: pointer;
+}
+
+.main_container .action_section .see_more_btn:hover {
+  color: var(--second-color);
+  font-weight: var(--active-font-weight);
+}
