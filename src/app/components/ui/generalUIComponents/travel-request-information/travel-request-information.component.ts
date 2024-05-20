@@ -49,6 +49,8 @@ export class NewTravelRequestComponent {
   backBtnTitle: string = 'Back';
   forwardBtnTitle: string = 'Next';
 
+  isForwardBtnVisible: boolean = true;
+
   totalNavCount: number = 0;
   currentNavIndex: number = 0;
 
@@ -171,7 +173,9 @@ export class NewTravelRequestComponent {
           this.totalNavCount = 4;
           this.newReqFormSubMenuValue = 4;
           this.currentNavIndex = 4;
-        } else {
+          this.forwardBtnTitle = 'Submit';
+        }
+        else {
           this.leftSectionNavItems = [
             'General Information',
             'Trip Information',
@@ -586,7 +590,9 @@ export class NewTravelRequestComponent {
             this.tabbedOptionViewer.selectedTravelOptionId
           );
         }
-      } else if (
+     
+      } 
+      else if (
         this.currentLoggedInUserRole === 'travelAdmin' &&
         this.status !== 'Open'
       ) {

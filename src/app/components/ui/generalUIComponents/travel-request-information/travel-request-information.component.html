@@ -168,7 +168,7 @@
         </button>
       </div>
 
-      <div class="forward_btn_card">
+      <div *ngIf="(currentLoggedInUserRole === 'manager' && status === 'Open' || status === 'Waiting' || ( (status === 'Approved by RM' || status === 'Selected' || status === 'Ongoing') && this.currentNavIndex !== this.totalNavCount))" class="forward_btn_card">
         <button (click)="onForwardBtnClick()" class="btn">
           {{ forwardBtnTitle }}
         </button>
