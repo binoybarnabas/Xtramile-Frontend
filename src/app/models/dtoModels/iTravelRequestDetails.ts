@@ -83,6 +83,7 @@ export interface TravelRequestDetailViewModel {
     employeeNameAndEmail : string
     from: string;
     to: string
+    ticketStatus: string;
 }
 
 

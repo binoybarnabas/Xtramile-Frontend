@@ -85,6 +85,10 @@
   color: var(--danger-color);
 }
 
+.data_table_container .dynamic_table .status_ongoing {
+  color: var(--primary-green-color);
+}
+
 .data_table_container .dynamic_table .mode_domestic {
   color: var(--primary-cyan-color);
 }

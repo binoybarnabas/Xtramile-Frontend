@@ -27,7 +27,6 @@ export class LoginComponent {
 
     // Subscribe to form value changes
     this.loginForm.valueChanges.subscribe((value) => {
-      console.log('Form values:', value);
     });
 
     //to check whether the user already authenticated is true then skip the login and redirect to the page

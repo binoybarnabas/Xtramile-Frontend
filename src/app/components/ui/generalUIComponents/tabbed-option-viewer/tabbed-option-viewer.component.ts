@@ -21,6 +21,7 @@ export class TabbedOptionViewerComponent {
   @Input() currentLoggedInUserRole : string = 'travelAdmin';
   @Input() requestId : number = -1;
   @Input() requestStatus: string = '';
+  @Input() ticketStatus: string = ''
   //fetch from calling component !!!!!!
 
   isActionBarVisible: boolean = false;
@@ -123,10 +124,10 @@ export class TabbedOptionViewerComponent {
         this.activeTabName = 'Ticket Details';
       }
 
-      // else if(requestStatus === 'Approved by TA' && ticketStatus ==='Sent'){
-      //   this.travelOptionViewerTabs = tabsWithLiveTicket;
-      //   this.isActionBarVisible = false;
-      // }
+      else if(requestStatus === 'Approved by TA' && this.ticketStatus ==='Attached'){
+        this.travelOptionViewerTabs = tabsWithLiveTicket;
+        this.isActionBarVisible = false;
+      }
 
     } 
 
@@ -154,19 +155,20 @@ export class TabbedOptionViewerComponent {
         this.activeTabName = 'Selected Option';
       }
       //approved by ta && ticket status not sent
-      else if(requestStatus === 'Ongoing'){
+      else if(requestStatus === 'Approved by TA' && this.ticketStatus === 'Not Attached'){
         this.travelOptionViewerTabs = tabsWithConfirmedOption;
         this.isActionBarVisible = true;
         this.actionBarTitle = 'Upload Ticket' 
         this.addBtnTitle = 'Upload';
         this.activeTabName = 'Ticket Details';
       }
+
       //TA sent ticket to traveller
-      // eles if(requestStatus === 'Approved by TA' && ticketStatus === 'Sent'){
-          //this.travelOptionViewerTabs = tabsWithLiveTicket;
-          //this.isActionBarVisible = true;
-          //this.actionBarTitle = 'Uploaded Ticket'
-      // }
+      else if(requestStatus === 'Approved by TA' && this.ticketStatus === 'Attached'){
+          this.travelOptionViewerTabs = tabsWithLiveTicket;
+          this.isActionBarVisible = true;
+          this.actionBarTitle = 'Uploaded Ticket'
+      }
     
     }
 
