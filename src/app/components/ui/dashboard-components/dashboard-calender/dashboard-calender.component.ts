@@ -107,7 +107,7 @@
 
 import { formatDate } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { CommonAPIService } from 'src/app/services/apiServices/commonAPIServices/common-api.service';
 
 @Component({
   selector: 'app-dashboard-calender',

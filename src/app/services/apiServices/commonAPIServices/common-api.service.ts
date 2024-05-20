@@ -4,8 +4,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { RequestStatus} from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
 import { LoginService } from '../loginService/login.service';
 // import { UserData } from '../interfaces/iuserData';
-import { UserData } from 'src/app/services/interfaces/iuserData';
-import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { UserData } from 'src/app/models/interfaces/iuserData';
 import { ResubmitRequest } from 'src/app/models/dtoModels/iResubmitRequest'
 
 @Injectable({

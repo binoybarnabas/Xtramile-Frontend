@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from 'src/app/services/loginService/login.service';
+import { LoginService } from 'src/app/services/apiServices/loginService/login.service';
 import { CredentialData } from 'src/app/components/ui/login/Credential';
-import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { CommonAPIService } from 'src/app/services/apiServices/commonAPIServices/common-api.service';
 import { Router } from '@angular/router';
-import { UserData } from 'src/app/services/interfaces/iuserData';
+import { UserData } from 'src/app/models/interfaces/iuserData';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
-
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

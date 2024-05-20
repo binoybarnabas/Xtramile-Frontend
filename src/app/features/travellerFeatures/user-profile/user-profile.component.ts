@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 import { ProfileService } from 'src/app/services/employeeServices/profileServices/profile.service';
 
 @Component({

@@ -1,15 +1,15 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DocumentsService } from 'src/app/services/documents/documents.service';
-import { countries } from 'src/app/services/commonAPIServices/countries';
+import { DocumentsService } from 'src/app/services/apiServices/travelDocumentAPIServices/documents.service';
+import { countries } from 'src/app/services/apiServices/commonAPIServices/countries';
 import { DatePipe } from '@angular/common';
-import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { CommonAPIService } from 'src/app/services/apiServices/commonAPIServices/common-api.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
-import { docCategories } from 'src/app/services/commonAPIServices/docCategories';
+import { docCategories } from 'src/app/services/apiServices/commonAPIServices/docCategories';
 import { Subscription } from 'rxjs';
-import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
+import { CustomToastService } from 'src/app/services/helperServices/toastServices/custom-toast.service';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 @Component({
   selector: 'app-traveller-documents',
   templateUrl: './traveller-documents.component.html',
@@ -260,26 +260,26 @@ export class TravellerDocumentsComponent {
 
     this.loaderService.show();
 
-    this.deleteSubscription = this.documentService.deleteDocument(documentId).subscribe(
-      (response) => {
+    // this.deleteSubscription = this.documentService.deleteDocument(documentId).subscribe(
+    //   (response) => {
 
-        this.loaderService.hide();
+    //     this.loaderService.hide();
 
-        // Handle successful deletion response
-        console.log('Document deleted successfully:', response);
-        this.selectedDocCardId = -1;
+    //     // Handle successful deletion response
+    //     console.log('Document deleted successfully:', response);
+    //     this.selectedDocCardId = -1;
 
-        this.toastService.showToast({ message: "Travel Document Deleted", toastType: "success", toastDuration: 3000 });
+    //     this.toastService.showToast({ message: "Travel Document Deleted", toastType: "success", toastDuration: 3000 });
 
-        //initialize components
-        this.initializeDocuments();
-      },
-      (error) => {
-        this.loaderService.hide();
-        // Handle error response
-        this.toastService.showToast({ message: "Error Deleting Document!", toastType: "fail", toastDuration: 6000 });
-      }
-    );
+    //     //initialize components
+    //     this.initializeDocuments();
+    //   },
+    //   (error) => {
+    //     this.loaderService.hide();
+    //     // Handle error response
+    //     this.toastService.showToast({ message: "Error Deleting Document!", toastType: "fail", toastDuration: 6000 });
+    //   }
+    // );
 
   }
 

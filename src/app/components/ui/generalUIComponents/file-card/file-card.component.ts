@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
-import { DocumentsService } from 'src/app/services/documents/documents.service';
-import { FileCard } from 'src/app/services/interfaces/iFileCard';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
+import { DocumentsService } from 'src/app/services/apiServices/travelDocumentAPIServices/documents.service';
+import { FileCard } from 'src/app/models/interfaces/iFileCard';
 
 @Component({
   selector: 'app-file-card',

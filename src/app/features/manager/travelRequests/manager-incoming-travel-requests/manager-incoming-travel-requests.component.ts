@@ -2,11 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { TravelRequestInfoCardComponent } from 'src/app/components/ui/generalUIComponents/travel-request-info-card/travel-request-info-card.component';
 import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-request-card-modal/travel-request-card-modal.component';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
-import { UserData } from 'src/app/services/interfaces/iuserData';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';import { UserData } from 'src/app/models/interfaces/iuserData';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
-import { StatusCodes } from 'src/app/utils/StatusEnum';
+import { StatusCodes } from 'src/app/models/utilityModels/utils/StatusEnum';
 
 @Component({
   selector: 'app-manager-incoming-travel-requests',
@@ -211,21 +211,22 @@ export class ManagerIncomingTravelRequestsComponent {
 
   // select an option
   handleSelectedRow(row: any) {
+    
     this.selectedRow = row;
-    console.log(this.selectedRow.requestId)
-    this.requestId = this.selectedRow.requestId
-    //const queryParams = { requestId: this.requestId }
-    //this.router.navigate(['manager/requestdetail'],{ queryParams: queryParams });
+    console.log(this.selectedRow.requestId);
+    this.requestId = this.selectedRow.requestId;
 
     const initialState = {
-      requestId: this.selectedRow.requestId
+      requestId: this.selectedRow.requestId,
     };
 
-    this.bsModalRef = this.modalService.show(TravelRequestCardModalComponent, { initialState });
+    //    this.bsModalRef = this.modalService.show(TravelRequestCardModalComponent, { initialState });
+    this.bsModalRef = this.modalService.show(TravelRequestInfoCardComponent, {
+      initialState,
+    });
+
     this.bsModalRef.content.onClose.subscribe((result: any) => {
-      // Handle the result from the modal if needed
-      console.log('Modal result:', result);
-      // You can perform actions with the result data here
+     
     });
 
   }

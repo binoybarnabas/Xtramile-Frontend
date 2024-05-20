@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TravelDocuments } from '../interfaces/iTravelDocuments';
+import { TravelDocuments } from '../../../models/interfaces/iTravelDocuments';
 
 @Injectable({
   providedIn: 'root'

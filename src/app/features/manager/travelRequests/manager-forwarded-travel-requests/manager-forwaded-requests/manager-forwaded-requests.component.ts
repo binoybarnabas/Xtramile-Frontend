@@ -2,8 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TravelRequestDetailViewModel } from 'src/app/services/interfaces/iTravelRequestDetails';
-import { UserData } from 'src/app/services/interfaces/iuserData';
-import { WaitingOrSelectedRequests } from 'src/app/services/interfaces/iwaiting-or-selected-requests';
+import { UserData } from 'src/app/models/interfaces/iuserData';
+import { WaitingOrSelectedRequests } from 'src/app/models/interfaces/iwaiting-or-selected-requests';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
 @Component({

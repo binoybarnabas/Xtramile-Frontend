@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-travel-admin-selected-requests',

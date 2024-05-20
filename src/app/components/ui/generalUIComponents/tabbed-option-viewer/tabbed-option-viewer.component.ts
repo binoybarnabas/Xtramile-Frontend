@@ -5,10 +5,9 @@ import { ModalComponent } from '../../modal/modal.component';
 import { Observable, forkJoin } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
-import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
+import { TravelOptionDetails } from 'src/app/models/interfaces/iTravelOptionDetails';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
-
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 @Component({
   selector: 'app-tabbed-option-viewer',
   templateUrl: './tabbed-option-viewer.component.html',

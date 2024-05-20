@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Subscription, firstValueFrom } from 'rxjs';
 import { RequestStatus } from './request-status';
-import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { CommonAPIService } from 'src/app/services/apiServices/commonAPIServices/common-api.service';
 
 @Component({
   selector: 'app-change-status-button',

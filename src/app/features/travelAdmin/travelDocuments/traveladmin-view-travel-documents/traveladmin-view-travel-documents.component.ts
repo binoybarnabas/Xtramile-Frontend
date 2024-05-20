@@ -1,9 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
-import { DocumentsService } from 'src/app/services/documents/documents.service';
-import { TravelDocuments } from 'src/app/services/interfaces/iTravelDocuments';
-import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
+import { DocumentsService } from 'src/app/services/apiServices/travelDocumentAPIServices/documents.service';
+import { TravelDocuments } from 'src/app/models/interfaces/iTravelDocuments';
+import { CustomToastService } from 'src/app/services/helperServices/toastServices/custom-toast.service';
 
 @Component({
   selector: 'app-traveladmin-view-travel-documents',

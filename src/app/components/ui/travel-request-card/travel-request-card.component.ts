@@ -1,12 +1,12 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { CommonAPIService } from 'src/app/services/apiServices/commonAPIServices/common-api.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { Subject, throwError } from 'rxjs';
 import { catchError, takeUntil } from 'rxjs/operators';
 
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
-import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { CustomToastService } from 'src/app/services/helperServices/toastServices/custom-toast.service';
 import { RejectionCardComponent } from '../rejection-card/rejection-card.component';
 
 @Component({
