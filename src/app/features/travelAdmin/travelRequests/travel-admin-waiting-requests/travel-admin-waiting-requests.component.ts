@@ -3,8 +3,8 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
-import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
+import { CommonAPIService } from 'src/app/services/apiServices/commonAPIServices/common-api.service';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-travel-admin-waiting-requests',

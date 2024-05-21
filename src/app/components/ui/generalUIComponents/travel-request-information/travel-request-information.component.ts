@@ -6,18 +6,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { CommonAPIService } from 'src/app/services/apiServices/commonAPIServices/common-api.service';
 import { RequestStatus } from 'src/app/components/ui/referenceComponents/change-status-button/request-status';
-import { UserData } from 'src/app/services/interfaces/iuserData';
+import { UserData } from 'src/app/models/interfaces/iuserData';
 import { DescriptionModalComponent } from 'src/app/components/ui/form-components/description-modal/description-modal.component';
-import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
-import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { TravelOptionDetails } from 'src/app/models/interfaces/iTravelOptionDetails';
+import { CustomToastService } from 'src/app/services/helperServices/toastServices/custom-toast.service';
 import { Subscription } from 'rxjs';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { TabbedOptionViewerComponent } from 'src/app/components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { TravelRequestDetailViewModel } from 'src/app/models/dtoModels/iTravelRequestDetails';
+import { TravelRequestUiService } from 'src/app/services/helperServices/requestServices/travel-request-ui.service';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -47,6 +48,9 @@ export class NewTravelRequestComponent {
   //action bar items
   backBtnTitle: string = 'Back';
   forwardBtnTitle: string = 'Next';
+
+  //isForwardBtnVisible: boolean = true;
+  isSubmitBtnActive: boolean = false;
 
   totalNavCount: number = 0;
   currentNavIndex: number = 0;
@@ -99,9 +103,7 @@ export class NewTravelRequestComponent {
     private modalService: BsModalService,
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
-    private travelAdminService: TravelAdminTravelRequestsService,
-    private sanitizer: DomSanitizer,
-    private modalservice: BsModalService
+    private travelRequestUIService: TravelRequestUiService
   ) {
     const storedUserData = localStorage.getItem('userData');
 
@@ -154,6 +156,9 @@ export class NewTravelRequestComponent {
   updateNavItemsBasedOnUserRole() {
     switch (this.currentLoggedInUserRole) {
       case 'manager':
+        if(this.status === 'Open'){
+          this.isSubmitBtnActive = true;
+        }
         if (
           this.status === 'Waiting' ||
           this.status === 'Selected' ||
@@ -169,6 +174,7 @@ export class NewTravelRequestComponent {
           this.totalNavCount = 4;
           this.newReqFormSubMenuValue = 4;
           this.currentNavIndex = 4;
+          this.forwardBtnTitle = 'Submit';
         } else {
           this.leftSectionNavItems = [
             'General Information',
@@ -201,6 +207,8 @@ export class NewTravelRequestComponent {
           if (this.status === 'Waiting' || this.status === 'Selected') {
             this.newReqFormSubMenuValue = 4;
             this.currentNavIndex = 4;
+            this.forwardBtnTitle = 'Confirm';
+            this.isSubmitBtnActive = true;
           }
         }
         break;
@@ -427,37 +435,6 @@ export class NewTravelRequestComponent {
 
   isLoading: boolean = false;
 
-  //Manager forwarding the travel request form
-  onManagerForwardTravelRequestForm() {
-    //Should call a PATCH method to set priority of the request
-    console.log(this.travelRequestForm.value.priority);
-
-    this.managerTravelRequest
-      .setRequestPriorityAndApprove(this.travelRequestDetailViewModel.requestId)
-      .subscribe({
-        next: (data) => {
-          console.log(data);
-          // window.alert(this.travelRequestDetailViewModel.requestId + "  " + this.travelRequestForm.value.priority);
-          console.log(
-            this.travelRequestDetailViewModel.requestId +
-              '  ' +
-              this.travelRequestForm.value.priority
-          );
-          // Redirect to another page
-          //alert("Approved");
-          this.router.navigate(['/manager/dashboard']);
-        },
-        complete: () => {
-          //this.toastr.success('Request approved!', 'Success');
-          this.toastService.showToast({
-            message: 'Travel Request Approved',
-            toastType: 'success',
-            toastDuration: 3000,
-          });
-        },
-      });
-  }
-
   //Travel Admin Send Options
   //There by status changes
   onTravelAdminOptionsSend() {
@@ -474,7 +451,7 @@ export class NewTravelRequestComponent {
         console.log(data);
         //Pop-up when options are submitted
         //Redirect to another page on submit click
-        this.router.navigate(['/traveladmin/waiting']);
+        this.router.navigate(['/traveladmin/requests/waiting']);
       },
       error: (error: Error) => {
         //console.log("Error in posting request status");
@@ -570,8 +547,17 @@ export class NewTravelRequestComponent {
     if (this.currentNavIndex === 0) {
       if (this.currentLoggedInUserRole === 'travelAdmin')
         this.router.navigate(['/traveladmin/incomingrequests']);
-      else if (this.currentLoggedInUserRole === 'manager')
-        this.router.navigate(['/manager/incoming']);
+      else if (this.currentLoggedInUserRole === 'manager') {
+        if (this.status === 'Open') {
+          this.router.navigate(['/manager/incoming-requests']);
+        } else if (
+          this.status === 'Approved by RM' ||
+          this.status === 'Waiting' ||
+          this.status === 'Selected'
+        ) {
+          this.router.navigate(['/manager/forwarded-requests']);
+        }
+      }
       return;
     }
 
@@ -593,6 +579,13 @@ export class NewTravelRequestComponent {
       if (this.currentLoggedInUserRole === 'manager') {
         if (this.status === 'Open') {
           //Forward Requests
+          //replace with actaul emp id
+          const managerId = 4;
+          this.travelRequestUIService.onManagerForwardTravelRequestForm(
+            this.requestId,
+            managerId
+          );
+          this.router.navigate(['manager/incoming-requests']);
         }
         //Options Sent by TA
         else if (this.status === 'Waiting') {
@@ -602,7 +595,8 @@ export class NewTravelRequestComponent {
             this.tabbedOptionViewer.selectedTravelOptionId
           );
         }
-      } else if (
+      } 
+      else if (
         this.currentLoggedInUserRole === 'travelAdmin' &&
         this.status !== 'Open'
       ) {
@@ -661,7 +655,7 @@ export class NewTravelRequestComponent {
                 toastType: 'success',
                 toastDuration: 3000,
               });
-              this.router.navigate(['/traveladmin/waiting']);
+              this.router.navigate(['/traveladmin/requests/incoming']);
               this.currentNavIndex = 0;
               this.newReqFormSubMenuValue = this.currentNavIndex;
               this.forwardBtnTitle = 'Next';
@@ -671,7 +665,7 @@ export class NewTravelRequestComponent {
           //Confirm / Edit Selcted Travel Option
           //this.openOptionConfirmationModal();
           this.openOptionConfirmationModal();
-          //this.ngOnInit();
+          
 
           this.initializeComponent();
         }
@@ -759,37 +753,15 @@ export class NewTravelRequestComponent {
           });
         },
         error: (error: any) => {},
-        complete: () => {},
+        complete: () => {
+          this.router.navigate(['/traveladmin/requests/selected-options']);
+        },
       });
   }
 
-  // disableSubmitBtn(): boolean {
-  //   if (this.currentNavIndex === this.totalNavCount) {
-  //     if (this.selectedImages.length === 0 && this.textOption.length === 0) {
-  //       return true;
-  //     } else {
-  //       return false; // Explicitly return false if conditions are not met
-  //     }
-  //   } else {
-  //     return false; // Explicitly return false if conditions are not met
-  //   }
-  // }
-
-  // saveTextTravelOption() {
-  //   this.travelAdminService.saveTravelOption(this.textOption, this.requestId)
-  //     .subscribe({
-  //       next: (response: any) => {
-  //         console.log('Post successful:', response);
-  //       },
-  //       error: (error: any) => {
-  //         console.error('Post failed:', error);
-  //       },
-  //       complete: () => {
-  //         this.toastService.showToast({ message: "Travel Option Added", toastType: "success", toastDuration: 3000 });
-  //         console.log('Post request completed.');
-  //       }
-  // });
-  // }
+  handleIsSubmitBtnActiveChange(newValue: boolean): void {
+    this.isSubmitBtnActive = newValue;
+  }
 
   //EOF
 }

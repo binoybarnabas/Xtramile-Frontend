@@ -1,0 +1,22 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TravelRequestApiService {
+
+  constructor(private http: HttpClient) { }
+
+  
+  forwardTravelRequestToTravelAdmin(requestId:number, managerId :number):Observable<any>{
+    const body = {
+      requestId: requestId,
+      managerId:managerId
+    };
+    return this.http.patch('http://localhost:5190/api/reportingmanager/travel/request/approve',body);
+  }
+
+  
+}

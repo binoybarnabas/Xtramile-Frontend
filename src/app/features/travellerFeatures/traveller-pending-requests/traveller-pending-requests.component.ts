@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UserData } from 'src/app/services/interfaces/iuserData';
+import { UserData } from 'src/app/models/interfaces/iuserData';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';

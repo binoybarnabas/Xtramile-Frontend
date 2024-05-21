@@ -3,16 +3,16 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { cities } from 'src/app/services/commonAPIServices/cities';
-import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
+import { cities } from 'src/app/services/apiServices/commonAPIServices/cities';
+import { CommonAPIService } from 'src/app/services/apiServices/commonAPIServices/common-api.service';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
-import { UserData } from 'src/app/services/interfaces/iuserData';
-import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { UserData } from 'src/app/models/interfaces/iuserData';
 import { EmployeeDetails } from '../../../components/ui/generalUIComponents/travel-request-information/request';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
+import { CustomToastService } from 'src/app/services/helperServices/toastServices/custom-toast.service';
 
 @Component({
   selector: 'app-travel-request-form',
@@ -622,7 +622,7 @@ export class TravelRequestFormComponent {
       this.loaderService.hide();
         console.log(response);
         this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
-        this.router.navigate(['employee/pending']);
+        this.router.navigate(['traveller/requests/pending']);
       },
       error: (error: Error) => {
       this.loaderService.hide();

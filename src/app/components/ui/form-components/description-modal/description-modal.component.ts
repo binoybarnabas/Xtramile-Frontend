@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
-import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { CustomToastService } from 'src/app/services/helperServices/toastServices/custom-toast.service';
 
 @Component({
   selector: 'app-description-modal',

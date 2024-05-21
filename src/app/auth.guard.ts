@@ -1,5 +1,5 @@
 import { inject } from "@angular/core"
-import { LoginService } from "./services/loginService/login.service";
+import { LoginService } from "./services/apiServices/loginService/login.service";
 import { Router } from "@angular/router";
 
 export const employeeAuthGuard = ()=>{

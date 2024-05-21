@@ -10,6 +10,7 @@
     opacity: 0;
     transition: opacity 0.5s ease;
     /* box-shadow: var(--normal-box-shadow); */
+    min-width: 300px;
     width: fit-content;
     z-index: 9999;
 

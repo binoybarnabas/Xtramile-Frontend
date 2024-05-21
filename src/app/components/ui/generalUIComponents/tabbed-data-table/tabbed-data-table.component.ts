@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { blob, filter } from 'd3';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
-
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 @Component({
   selector: 'app-tabbed-data-table',
   templateUrl: './tabbed-data-table.component.html',

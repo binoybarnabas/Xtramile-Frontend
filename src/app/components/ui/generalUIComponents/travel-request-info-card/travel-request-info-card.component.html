@@ -78,16 +78,16 @@
   </div>
 
   <div class="action_section">
-    <div class="reject_btn">
-      <span>Reject</span>
+    <div (click)="onRejectBtnClick()" class="reject_btn">
+      <span>{{rejectBtnTitle}}</span>
     </div>
 
-    <div (click)="navigateHandleUserSelection()" class="see_more_btn">
+    <div (click)="onSeeMoreBtnClick()" class="see_more_btn">
       <span>See More</span>
     </div>
 
-    <div (click)="onProceedButtonClick()" class="forward_btn">
-      <span>Proceed</span>
+    <div (click)="onProceedBtnClick()" class="forward_btn">
+      <span>{{forwardBtnTitle}}</span>
     </div>
   </div>
 </div>

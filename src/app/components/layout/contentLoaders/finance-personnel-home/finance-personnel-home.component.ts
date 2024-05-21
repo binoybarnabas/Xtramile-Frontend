@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonAPIService } from 'src/app/services/commonAPIServices/common-api.service';
-import { LoginService } from 'src/app/services/loginService/login.service';
+import { CommonAPIService } from 'src/app/services/apiServices/commonAPIServices/common-api.service';
+import { LoginService } from 'src/app/services/apiServices/loginService/login.service';
 
 @Component({
   selector: 'app-finance-personnel-home',

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { toTitleCase } from 'src/app/utils/TitleCasing';
+import { toTitleCase } from 'src/app/models/utilityModels/utils/TitleCasing';
 @Component({
   selector: 'app-table-filter',
   templateUrl: './table-filter.component.html',

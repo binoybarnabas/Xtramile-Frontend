@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DocumentsService } from 'src/app/services/documents/documents.service';
+import { DocumentsService } from 'src/app/services/apiServices/travelDocumentAPIServices/documents.service';
 
 @Component({
   selector: 'app-documents',

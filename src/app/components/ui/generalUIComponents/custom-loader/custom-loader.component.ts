@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
-
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 @Component({
   selector: 'app-custom-loader',
   templateUrl: './custom-loader.component.html',

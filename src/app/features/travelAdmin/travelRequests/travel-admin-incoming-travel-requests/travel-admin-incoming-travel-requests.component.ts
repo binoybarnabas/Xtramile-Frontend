@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TravelRequestInfoCardComponent } from 'src/app/components/ui/generalUIComponents/travel-request-info-card/travel-request-info-card.component';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
-
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 @Component({
   selector: 'app-travel-admin-incoming-travel-requests',
   templateUrl: './travel-admin-incoming-travel-requests.component.html',

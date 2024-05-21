@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { ModalComponent } from '../modal/modal.component';
-import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { CustomToastService } from 'src/app/services/helperServices/toastServices/custom-toast.service';
 
 @Component({
   selector: 'app-text-editor',
@@ -37,13 +37,13 @@ export class TextEditorComponent {
   //       }
   // });
   // }
-  openAddOptionModal() {
-    this.bsModalRef = this.modalService.show(ModalComponent);
-    this.bsModalRef.content.onClose.subscribe((result: any) => {
-      // Handle the result from the modal if needed
-      console.log('Modal result:', result);
-    });
-  }
+  // openAddOptionModal() {
+  //   this.bsModalRef = this.modalService.show(ModalComponent);
+  //   this.bsModalRef.content.onClose.subscribe((result: any) => {
+  //     // Handle the result from the modal if needed
+  //     console.log('Modal result:', result);
+  //   });
+  // }
   @Input()
   textOptions!: Function;
   selectTextOptions(): void {

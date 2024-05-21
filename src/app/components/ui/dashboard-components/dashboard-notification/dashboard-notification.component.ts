@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Notification } from 'src/app/services/interfaces/iNotification';
+import { Notification } from 'src/app/models/interfaces/iNotification';
 
 @Component({
   selector: 'app-dashboard-notification',

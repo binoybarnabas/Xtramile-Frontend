@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
-import { LoginService } from 'src/app/services/loginService/login.service';
+import { LoginService } from 'src/app/services/apiServices/loginService/login.service';
 
 @Component({
   selector: 'app-forgot-password-modal',

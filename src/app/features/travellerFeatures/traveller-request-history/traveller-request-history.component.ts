@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 
 @Component({

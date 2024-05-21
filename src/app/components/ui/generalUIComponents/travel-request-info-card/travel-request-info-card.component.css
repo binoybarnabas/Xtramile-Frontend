@@ -22,6 +22,11 @@
   padding-bottom: 15px;
 }
 
+.main_container .req_info_card .top_section .project_info_card{
+  text-align: end;
+}
+
+
 .main_container .req_info_card .title_text {
   font-size: var(--extra-small-font-size);
   color: var(--ternary-text-color);
@@ -46,7 +51,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 205px;
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* word-break: break-all; */
 }
 
 .main_container .req_info_card .origin_destination_section .location_card.left {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChatItem } from 'src/app/services/interfaces/iChatItem';
+import { ChatItem } from 'src/app/models/interfaces/iChatItem';
 
 @Component({
   selector: 'app-travel-messenger-full-screen',

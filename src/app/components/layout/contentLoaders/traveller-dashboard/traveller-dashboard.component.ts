@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { EmployeeDashboardService } from 'src/app/services/employeeServices/dashboardServices/employee-dashboard.service';
-import { Notification } from 'src/app/services/interfaces/iNotification';
+import { Notification } from 'src/app/models/interfaces/iNotification';
 
 @Component({
   selector: 'app-traveller-dashboard',

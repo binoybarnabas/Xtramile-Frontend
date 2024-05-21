@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
-import { ProgressCard } from 'src/app/services/interfaces/iProgressCard';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';import { ProgressCard } from 'src/app/models/interfaces/iProgressCard';
 import { TravelAdminDashboardService } from 'src/app/services/travelAdminServices/dashboardServices/travel-admin-dashboard.service';
 
 @Component({
