@@ -3,15 +3,19 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-request-card-modal/travel-request-card-modal.component';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
+import { StatusCodes } from 'src/app/utils/StatusEnum';
 
 @Component({
   selector: 'app-manager-incoming-travel-requests',
   templateUrl: './manager-incoming-travel-requests.component.html',
   styleUrls: ['./manager-incoming-travel-requests.component.css']
 })
+
 export class ManagerIncomingTravelRequestsComponent {
+
   pageHeading: string = 'Incoming Travel Requests'
 
   selectedDate!: Date;
@@ -22,9 +26,8 @@ export class ManagerIncomingTravelRequestsComponent {
   requestId: number = 0;
   bsModalRef!: BsModalRef
 
-  tableHeaders: string[] = ['Request Code', 'Employee', 'Project Code', 'Date', 'Status'];
-  fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
-
+  tableHeaders: string[] = ['Request Code', 'Requested By', 'Project Code', 'From', 'To', 'Requested On'];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to', 'date'];
 
   employeeRequest: any[] = [];
 
@@ -70,7 +73,7 @@ export class ManagerIncomingTravelRequestsComponent {
       this.fetchEmployeeRequest();
     }
 
-    this.apiservice.getEmployeeRequestByEmployeeName(searchByName, this.managerId, this.currentPage, this.itemsPerPage).subscribe({
+    this.apiservice.getEmployeeRequestByEmployeeName(searchByName, StatusCodes.Open,this.managerId, this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
         this.employeeRequest = data.employeeRequest.map((request: any) => {
           return {
@@ -114,18 +117,23 @@ export class ManagerIncomingTravelRequestsComponent {
   }
 
   // Constructor to inject services
-  constructor(private apiservice: ManagerTravelRequestsService, private router: Router, private datePipe: DatePipe, private modalService: BsModalService) {
+  constructor(private apiservice: ManagerTravelRequestsService, private router: Router, private datePipe: DatePipe, private modalService: BsModalService, private loaderService : CustomLoaderService) {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
     this.managerId = this.userData.empId;
     this.apiservice.managerId = this.managerId;
   }
 
-
   // Fetch all the employee requests
   fetchEmployeeRequest() {
-    this.apiservice.getEmployeeRequest(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
+
+    this.loaderService.show();
+
+    this.apiservice.getEmployeeRequest(this.managerId, StatusCodes.Open, this.currentPage, this.itemsPerPage).subscribe({
       next: (data: any) => {
+
+        this.loaderService.hide();
+
         this.employeeRequest = data.employeeRequest.map((request: any) => {
           return {
             ...request,
@@ -155,9 +163,15 @@ export class ManagerIncomingTravelRequestsComponent {
 
   //Sort employee requests based on the selected option
   sortData(option: string): void {
+
+    this.loaderService.show();
+
     if (option == "name") {
-      this.apiservice.getEmployeeRequestSortByEmployeeName(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
+      this.apiservice.getEmployeeRequestSortByEmployeeName(this.managerId,StatusCodes.Open, this.currentPage, this.itemsPerPage).subscribe({
         next: (data: any) => {
+
+          this.loaderService.hide();
+
           this.employeeRequest = data.employeeRequest.map((request: any) => {
             return {
               ...request,
@@ -173,8 +187,11 @@ export class ManagerIncomingTravelRequestsComponent {
       });
     }
     if (option == "date") {
-      this.apiservice.getEmployeeRequestSortByDate(this.managerId, this.currentPage, this.itemsPerPage).subscribe({
+      this.apiservice.getEmployeeRequestSortByDate(this.managerId,StatusCodes.Open, this.currentPage, this.itemsPerPage).subscribe({
         next: (data: any) => {
+
+          this.loaderService.hide();
+
           this.employeeRequest = data.employeeRequest.map((request: any) => {
             return {
               ...request,

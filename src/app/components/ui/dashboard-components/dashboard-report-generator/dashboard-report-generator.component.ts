@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { ProgressCard } from 'src/app/services/interfaces/iProgressCard';
 import { TravelAdminDashboardService } from 'src/app/services/travelAdminServices/dashboardServices/travel-admin-dashboard.service';
 
@@ -24,7 +25,7 @@ export class DashboardReportGeneratorComponent {
   selectedReportMonth: string;
   indexOfSelectedReportMonth: number;
 
-  constructor(private travelAdminService:TravelAdminDashboardService) {
+  constructor(private travelAdminService:TravelAdminDashboardService, private loaderService : CustomLoaderService) {
 
     this.selectedReportYear = new Date().getFullYear();
 
@@ -38,12 +39,18 @@ export class DashboardReportGeneratorComponent {
   }
 
   ngOnInit(): void {
+
+    this.loaderService.show();
+
     this.progressCards = [];
   
     this.travelAdminService.getDashboardCount().subscribe((data: any) => {
+
+      this.loaderService.hide()
+
       this.progressCards = [
-        new ProgressCard("Pending Requests", data.domesticTrips, "red", "icon ri-progress-5-line"),
-        new ProgressCard("Upcoming Trips", data.numberofProjects, "orange", "icon ri-suitcase-2-fill"),
+        new ProgressCard("Pending Requests", data.pendingRequest, "red", "icon ri-progress-5-line"),
+        new ProgressCard("Upcoming Trips", data.numberofUpcomingTrips, "orange", "icon ri-suitcase-2-fill"),
         new ProgressCard("Travellers", data.numberofTravellers, "cyan", "icon ri-user-line"),
         new ProgressCard("Total Trips", data.internationalTrips, "green", "icon ri-plane-line")
       ];
@@ -112,11 +119,17 @@ export class DashboardReportGeneratorComponent {
   }
 
   generateReport() {
+
+    this.loaderService.show();
+
     //api call to generate report
     //use selectedReportMonth, selectedReportYear variables to pass as arugments
     //download the report automatically once it is generated
     this.travelAdminService.generateMonthlyModeReport(this.selectedReportMonth, this.selectedReportYear).subscribe(
       (response: Blob) => {
+
+        this.loaderService.hide();
+
         // Handle the file download here
         const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         const downloadURL = window.URL.createObjectURL(blob);

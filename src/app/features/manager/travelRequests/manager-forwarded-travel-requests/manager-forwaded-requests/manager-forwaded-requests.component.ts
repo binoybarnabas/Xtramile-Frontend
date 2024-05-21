@@ -26,8 +26,8 @@ export class ManagerForwadedRequestsComponent {
   selectedTotalItems = 0
   totalItems: number[] = [this.forwardedTotalItems,this.waitingTotalItems, this.selectedTotalItems]
   currentPage = 1;
-  tableHeaders = ['RequestID', 'Employee', 'ProjectCode', 'Date', 'Status'];
-  dataHeaders = ['requestId', 'employeeNameAndEmail', 'projectCode', 'date', 'status'];
+  tableHeaders = ['Request Code', 'Requested By', 'Project Code','From','To','Departure Date','Travel Type', 'Travel Mode', 'Updated On'];
+  dataHeaders = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to','departureDate','travelType','TravelMode','updatedOn'];
   constructor(private apiService: ManagerTravelRequestsService, private router: Router, private datePipe: DatePipe,private activatedRoute:ActivatedRoute) {
     const storedUserData = localStorage.getItem('userData');
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
@@ -50,14 +50,16 @@ export class ManagerForwadedRequestsComponent {
       this.tabs = [
         {
           name: 'Forwarded',
-          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date', 'Status'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date', 'Forwarded On'],
           entries: forwardedRequests.map((item) => [
             item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
+            item.from,
+            item.to,
+            item.departureDate,
             item.date,
-            item.status,
           ])
         },
         // Placeholder objects for other tabs
@@ -70,13 +72,16 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Forwarded', headings: [], entries: [] },
         {
           name: 'Waiting',
-          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date' ,'Option Sent On'],
           entries: waitingOptions.map((item) => [
             item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
-            item.createdOn,
+            item.from,
+            item.to,
+            item.departureDate,
+            item.approvalDate,
           ])
         },
         { name: 'Selected', headings: [], entries: [] }
@@ -88,13 +93,16 @@ export class ManagerForwadedRequestsComponent {
         { name: 'Waiting', headings: [], entries: [] },
         {
           name: 'Selected',
-          headings: ['RequestId', 'Request Code', 'Employee', 'ProjectCode', 'Date'],
+          headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date', 'Updated On'],
           entries: selectedOptions.map((item) => [
             item.requestId,
             item.requestCode,
             item.employeeName,
             item.projectCode,
-            item.createdOn,
+            item.from,
+            item.to,
+            item.departureDate,
+            item.approvalDate,
           ])
         }
       ];
@@ -108,6 +116,7 @@ export class ManagerForwadedRequestsComponent {
           return {
             ...request,
             date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
           };
         });        
         this.forwardedTotalItems = data.totalCount;
@@ -129,7 +138,8 @@ export class ManagerForwadedRequestsComponent {
         this.waitingRequests[this.currentPage-1] = data.items.map((request: any) => {
           return {
             ...request,
-            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
+            approvalDate: this.datePipe.transform(request.approvalDate, 'dd/MM/yyyy')
           };
         });
         this.waitingTotalItems = data.totalCount;        
@@ -150,7 +160,8 @@ export class ManagerForwadedRequestsComponent {
         this.selectedRequests[this.currentPage-1] = data.items.map((request: any) => {
           return {
             ...request,
-            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy')
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
+            approvalDate: this.datePipe.transform(request.approvalDate, 'dd/MM/yyyy')
           };
         });
         this.selectedTotalItems = data.totalCount;        
@@ -218,6 +229,7 @@ export class ManagerForwadedRequestsComponent {
     //   }
     //   this.router.navigate(['view_options_travel'], { relativeTo: this.activatedRoute,queryParams: this.queryParams});
     // }
+    console.log('row details forward',row)
     this.requestId = row[1][0];
     this.queryParams = {requestId: this.requestId}
     this.router.navigate(['manager/requestdetail'], {queryParams: this.queryParams});

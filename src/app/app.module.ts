@@ -13,7 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SideNavBarComponent } from './components/layout/employee/employee-home/side-nav-bar/side-nav-bar.component';
 import { MiddleConsoleComponent } from './components/layout/employee/employee-home/middle-console/middle-console.component';
 import { EmployeeHomeComponent } from './components/layout/employee/employee-home/employee-home.component';
-import { NewTravelRequestComponent } from './features/travelRequest/travel-request-information/travel-request-information.component';
+import { NewTravelRequestComponent } from './components/layout/travel-request-information/travel-request-information.component';
 import { ManagerSideNavBarComponent } from './components/layout/manager/manager-home/manager-side-nav-bar/manager-side-nav-bar.component';
 import { ManagerMiddleConsoleComponent } from './components/layout/manager/manager-home/manager-middle-console/manager-middle-console.component';
 import { ManagerHomeComponent } from './components/layout/manager/manager-home/manager-home.component';
@@ -23,7 +23,6 @@ import { TravelAdminMiddleConsoleComponent } from './components/layout/travelAdm
 import { FinancePersonnelHomeComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-home.component';
 import { FinancePersonnelSideNavBarComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-side-nav-bar/finance-personnel-side-nav-bar.component';
 import { FinancePersonnelMiddleConsoleComponent } from './components/layout/financePersonnel/finance-personnel-home/finance-personnel-middle-console/finance-personnel-middle-console.component';
-import { EmployeeDashboardComponent } from './features/employee/employee-dashboard/employee-dashboard.component';
 import { EmployeeProfileComponent } from './features/employee/employee-profile/employee-profile.component';
 import { EmployeeClosedRequestsComponent } from './features/employee/myRequests/employee-closed-requests/employee-closed-requests.component';
 import { EmployeeOngoingRequestsComponent } from './features/employee/myRequests/employee-ongoing-requests/employee-ongoing-requests.component';
@@ -32,9 +31,7 @@ import { EmployeeNewBillComponent } from './features/employee/mySettlements/empl
 import { EmployeePendingBillComponent } from './features/employee/mySettlements/employee-pending-bill/employee-pending-bill.component';
 import { EmployeeClosedBillsComponent } from './features/employee/mySettlements/employee-closed-bills/employee-closed-bills.component';
 import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
-import { ManagerProfileComponent } from './features/manager/manager-profile/manager-profile.component';
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
-import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
 import { ManagerOngoingTravelRequestsComponent } from './features/manager/travelRequests/manager-ongoing-travel-requests/manager-ongoing-travel-requests.component';
 import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
 import { ManagerIncomingTravelSettlementsComponent } from './features/manager/travelSettlements/manager-incoming-travel-settlements/manager-incoming-travel-settlements.component';
@@ -44,10 +41,7 @@ import { ManagerNewBillComponent } from './features/manager/mySettlements/manage
 import { ManagerPendingBillsComponent } from './features/manager/mySettlements/manager-pending-bills/manager-pending-bills.component';
 import { ManagerClosedBillsComponent } from './features/manager/mySettlements/manager-closed-bills/manager-closed-bills.component';
 import { TravelAdminDashboardComponent } from './features/travelAdmin/travel-admin-dashboard/travel-admin-dashboard.component';
-import { TravelAdminProfileComponent } from './features/travelAdmin/travel-admin-profile/travel-admin-profile.component';
 import { TravelAdminIncomingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-incoming-travel-requests/travel-admin-incoming-travel-requests.component';
-import { TravelAdminWaitingOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-options-travel-requests.component';
-import { TravelAdminSelectedOptionsTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-options-travel-requests.component';
 import { TravelAdminOngoingTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-ongoing-travel-requests/travel-admin-ongoing-travel-requests.component';
 import { TravelAdminClosedTravelRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-closed-travel-requests/travel-admin-closed-travel-requests.component';
 import { TravelAdminIncomingTravelSettlementsComponent } from './features/travelAdmin/travelSettlements/travel-admin-incoming-travel-settlements/travel-admin-incoming-travel-settlements.component';
@@ -65,18 +59,14 @@ import { FinancePersonnelNewBillComponent } from './features/financePersonnel/my
 import { FinancePersonnelPendingBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-pending-bills/finance-personnel-pending-bills.component';
 import { FinancePersonnelClosedBillsComponent } from './features/financePersonnel/mySettlements/finance-personnel-closed-bills/finance-personnel-closed-bills.component';
 import { OptionCardComponent } from './components/ui/referenceComponents/option-card/option-card.component';
-import { OptionviewCardComponent } from './features/employee/myRequests/employee-pending-requests/optionview-card/optionview-card.component';
 import { DataTableComponent } from './components/ui/table-components/data-table/data-table.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TableFilterComponent } from './components/ui/table-components/table-filter/table-filter.component';
 import { ChangeStatusButtonComponent } from './components/ui/referenceComponents/change-status-button/change-status-button.component';
 import { ModalComponent } from './components/ui/modal/modal.component';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
-//import { ToastrModule } from 'ngx-toastr';
-import { ViewAvailableOptionsComponent } from './features/travelAdmin/travelRequests/view-available-options/view-available-options.component';
-import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-options-travel-requests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
-import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/travel-admin-selected-requests/travel-admin-selected-requests.component';
+import { TravelAdminWaitingRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-waiting-requests/travel-admin-waiting-requests.component';
+import { TravelAdminSelectedRequestsComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-requests/travel-admin-selected-requests.component';
 import { EmployeeViewCardComponent } from './components/ui/referenceComponents/employee-view-card/employee-view-card.component';
 import { LoginPageComponent } from './components/layout/login-page/login-page.component';
 import { TopBarUserComponent } from './components/ui/generalUIComponents/top-bar-user/top-bar-user.component';
@@ -98,13 +88,10 @@ import { StatusPipe } from './pipes/Status/status.pipe';
 import { NotificationsComponent } from './components/ui/referenceComponents/notifications/notifications.component';
 import { DashboardMapComponent } from './components/ui/referenceComponents/dashboard-map/dashboard-map.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-// import { BarChartComponent } from './components/ui/bar-chart/bar-chart.component';import { FileUploadComponent } from './file-upload/file-upload.component';
 import { TravelRequestCardModalComponent } from './components/ui/travel-request-card-modal/travel-request-card-modal.component';
-import { TravelOptionViewerComponent } from './features/employee/myRequests/employee-pending-requests/travel-option-viewer/travel-option-viewer.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { ConfirmationModalComponent } from './components/ui/travel-request-card/confirmation-modal/confirmation-modal.component';
 import { DashboardGaugeComponent } from './components/ui/referenceComponents/dashboard-gauge/dashboard-gauge.component';
-import { SelectedOptionTravelAdminComponent } from './features/travelAdmin/travelRequests/travel-admin-selected-options-travel-requests/selected-option-travel-admin/selected-option-travel-admin.component';
 
 import { DashboardCalenderComponent } from './components/ui/dashboard-components/dashboard-calender/dashboard-calender.component';
 import { CustomToastComponent } from './components/ui/generalUIComponents/custom-toast/custom-toast.component';
@@ -134,10 +121,7 @@ import { TravellerTravelHistoryComponent } from './features/travellerFeatures/tr
 import { TabbedDataTableComponent } from './components/ui/generalUIComponents/tabbed-data-table/tabbed-data-table.component';
 import { TextEditorComponent } from './components/ui/text-editor/text-editor.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { ManagerTravelOptionsViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-travel-options-viewer/manager-travel-options-viewer.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { FileOptionViewerComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/file-option-viewer/file-option-viewer.component';
-import { ManagerForwadedRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwaded-requests/manager-forwaded-requests.component';
 import { DashCalendarComponent } from './components/ui/dashboard-components/dash-calendar/dash-calendar.component';
 import { TravelMessengerModalComponent } from './components/ui/dashboard-components/travel-messenger-modal/travel-messenger-modal.component';
 import { TravelMessengerFullScreenComponent } from './features/travelAdmin/travel-messenger-full-screen/travel-messenger-full-screen.component';
@@ -146,7 +130,10 @@ import { ImageViewerComponent } from './components/ui/generalUIComponents/image-
 import { CustomConfirmationModalComponent } from './components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { CustomPdfViewerComponent } from './components/ui/generalUIComponents/custom-pdf-viewer/custom-pdf-viewer.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component'; // Import Ng2PdfViewerModule
+import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents/tabbed-option-viewer/tabbed-option-viewer.component';
+import { ManagerForwardedTravelRequestsComponent } from './features/manager/travelRequests/manager-forwarded-travel-requests/manager-forwarded-travel-requests.component';
+import { CustomLoaderComponent } from './components/ui/custom-loader/custom-loader.component'; // Import Ng2PdfViewerModule
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -165,7 +152,6 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     FinancePersonnelHomeComponent,
     FinancePersonnelSideNavBarComponent,
     FinancePersonnelMiddleConsoleComponent,
-    EmployeeDashboardComponent,
     EmployeeProfileComponent,
     EmployeeClosedRequestsComponent,
     EmployeePendingRequestsComponent,
@@ -174,9 +160,7 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     EmployeePendingBillComponent,
     EmployeeClosedBillsComponent,
     ManagerDashboardComponent,
-    ManagerProfileComponent,
     ManagerIncomingTravelRequestsComponent,
-    ManagerForwardedTravelRequestsComponent,
     ManagerOngoingTravelRequestsComponent,
     ManagerClosedTravelRequestsComponent,
     ManagerIncomingTravelSettlementsComponent,
@@ -186,10 +170,7 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     ManagerPendingBillsComponent,
     ManagerClosedBillsComponent,
     TravelAdminDashboardComponent,
-    TravelAdminProfileComponent,
     TravelAdminIncomingTravelRequestsComponent,
-    TravelAdminWaitingOptionsTravelRequestsComponent,
-    TravelAdminSelectedOptionsTravelRequestsComponent,
     TravelAdminOngoingTravelRequestsComponent,
     TravelAdminClosedTravelRequestsComponent,
     TravelAdminIncomingTravelSettlementsComponent,
@@ -207,7 +188,6 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     FinancePersonnelPendingBillsComponent,
     FinancePersonnelClosedBillsComponent,
     OptionCardComponent,
-    OptionviewCardComponent,
     DataTableComponent,
     TableFilterComponent,
     ChangeStatusButtonComponent,
@@ -216,7 +196,6 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     LoginComponent,
     ModalComponent,
     EmployeeViewCardComponent,
-    ViewAvailableOptionsComponent,
     TravelAdminWaitingRequestsComponent,
     TravelAdminSelectedRequestsComponent,
     LoginPageComponent,
@@ -227,9 +206,7 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     TimestampToDatePipe,
     FileUploadComponent,
     TravelRequestCardModalComponent,
-    TravelOptionViewerComponent,
     ForgotPasswordModalComponent,
-    // BarChartComponent,
     DashboardUpcomingTripComponent,
     DashboardProgressComponent,
     DashboardCardComponent,
@@ -240,7 +217,6 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     DashboardMapComponent,
     DashboardGaugeComponent,
     DashboardCalenderComponent,
-    SelectedOptionTravelAdminComponent,
     CustomToastComponent,
     TravelRequestFormComponent,
     TravellerDashboardComponent,
@@ -261,14 +237,11 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     TaskManagerComponent,
     DashboardReportGeneratorComponent,
     TextEditorComponent,
-    ManagerTravelOptionsViewerComponent,
-    FileOptionViewerComponent,
     TraveladminViewTravelDocumentsComponent,
     TravellerPendingRequestsComponent,
     TravellerOngoingTravelComponent,
     TravellerTravelHistoryComponent,
     TabbedDataTableComponent,
-    ManagerForwadedRequestsComponent,
     TabbedDataTableComponent,
     DashCalendarComponent,
     TravelMessengerModalComponent,
@@ -277,10 +250,10 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     ImageViewerComponent,
     CustomConfirmationModalComponent,
     CustomPdfViewerComponent,
-    TabbedOptionViewerComponent
-  ]
-  ,
-
+    TabbedOptionViewerComponent,
+    ManagerForwardedTravelRequestsComponent,
+    CustomLoaderComponent,
+  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -294,21 +267,16 @@ import { TabbedOptionViewerComponent } from './components/ui/generalUIComponents
     TimepickerModule.forRoot(),
     PaginationModule.forRoot(),
     TypeaheadModule.forRoot(),
-    // ToastrModule.forRoot({
-    //   timeOut: 3000,
-    //   positionClass: 'toast-center', // Set to center of the screen
-    //   preventDuplicates: true,
-    // }),
-
     ModalModule.forRoot(),
     ImageCropperModule,
     EditorModule,
     TabsModule.forRoot(),
-    PdfViewerModule
+    PdfViewerModule,
   ],
-  providers: [DatePipe,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [
+    DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptService, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

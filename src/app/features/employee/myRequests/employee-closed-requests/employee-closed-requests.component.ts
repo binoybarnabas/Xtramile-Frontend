@@ -1,4 +1,6 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 
 @Component({
@@ -8,7 +10,7 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
 })
 export class EmployeeClosedRequestsComponent {
 
-  constructor(private employeeService: RequestService) { }
+  constructor(private employeeService: RequestService, private datepipe: DatePipe, private loaderService : CustomLoaderService) { }
 
   requestData = []
 
@@ -17,8 +19,8 @@ export class EmployeeClosedRequestsComponent {
   pageIndex = 1;
   totalCount = 0;
   currentPage = 1;
-  tableHeaders = ['Request Code', 'Project Code', 'Project Name', 'Travel Type', 'Closed Date', 'Status']
-  dataHeaders = ['requestCode', 'projectCode', 'projectName', 'travelType', 'closedDate', 'status']
+  tableHeaders = ['Request Code', 'Project Code', 'From', 'To', 'Requested On', 'Closed On', 'Status']
+  dataHeaders = ['requestCode', 'projectCode', 'from', 'to', 'requestedOn', 'closedOn', 'status']
 
   pageHeading: string = 'Travel History'
 
@@ -32,9 +34,19 @@ export class EmployeeClosedRequestsComponent {
   }
 
   fetchRequestHistory() {
+
+    this.loaderService.show();
+    
     this.employeeService.getEmployeeRequestHisory(this.empId, this.pageIndex, this.pageSize).subscribe(
       {
         next: (data) => {
+
+          this.loaderService.hide();
+
+          data.employeeRequest.forEach((request: any) => {
+            request.requestedOn = this.datepipe.transform(request.requestedOn, "dd/MM/yyyy"),
+            request.closedOn = this.datepipe.transform(request.closedOn, "dd/MM/yyyy")
+          })
           this.requestData = data.employeeRequest;
           this.totalCount = data.totalCount;
         },

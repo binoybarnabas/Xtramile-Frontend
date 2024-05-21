@@ -1,1 +1,16 @@
-<router-outlet></router-outlet>
+<app-page-header [headingInputData]="pageHeading"> </app-page-header>
+
+<app-tabbed-data-table
+  [tabs]="tabs"
+  [filters]="filters"
+  (rowClick)="handleSelectedRow($event)"
+  (tabChange)="handleTabChange($event)"
+></app-tabbed-data-table>
+
+<pagination
+  *ngIf="totalItems[activeTabIndex] > 10"
+  [itemsPerPage]="itemsPerPage"
+  [totalItems]="totalItems[activeTabIndex]"
+  [(ngModel)]="currentPage"
+  (pageChanged)="pageChanged($event)"
+></pagination>

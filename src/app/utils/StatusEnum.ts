@@ -12,3 +12,8 @@ export enum Status{
     Selected = 11,
     Forwarded = 12
 }
+
+export enum StatusCodes{
+    Open = "OP",
+    Ongoing = "OG"
+}

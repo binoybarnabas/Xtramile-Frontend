@@ -9,15 +9,18 @@ import { SideNavBarService } from 'src/app/services/employeeServices/layoutServi
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { UserData } from 'src/app/services/interfaces/iuserData';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
-import { EmployeeDetails } from '../../travelRequest/travel-request-information/request';
+import { EmployeeDetails } from '../../../components/layout/travel-request-information/request';
 import { ShortYearDateFormatPipe } from 'src/app/pipes/ShortYearDate/short-year-date-format.pipe';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
+
 @Component({
   selector: 'app-travel-request-form',
   templateUrl: './travel-request-form.component.html',
   styleUrls: ['./travel-request-form.component.css'],
   providers: [ShortYearDateFormatPipe]
 })
+
 export class TravelRequestFormComponent {
 
   isSideNavBarOpen: any;
@@ -95,7 +98,8 @@ export class TravelRequestFormComponent {
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
     private modalservice:BsModalService,
-    private shortYearDateFormatPipe: ShortYearDateFormatPipe
+    private shortYearDateFormatPipe: ShortYearDateFormatPipe,
+    private loaderService : CustomLoaderService
   ) {
 
     // Get current date
@@ -121,11 +125,12 @@ export class TravelRequestFormComponent {
     this.selectedPrefDepTime = '12.00 - 01.00 AM';
     this.isPrefPickUpTimeDetailsSectionOpen = false;
     this.selectedPrefPickUpTime = '12 : 30 AM';
-
     this.isTravelAuthFileSelected = false;
 
   }
+
   @ViewChild(CustomConfirmationModalComponent) confirmationModal!: CustomConfirmationModalComponent;
+  
   //Format Date to 29 Feb' 24
   formatInputValue(date: Date): string {
     return this.shortYearDateFormatPipe.transform(date);
@@ -134,27 +139,27 @@ export class TravelRequestFormComponent {
   //method toggle project and travel purpose section
   toggleProjectDetailsSection(action: string, event: Event) {
     event.stopPropagation();
+    
     if (action === 'open') {
       this.isProjectDetailsSectionOpen = true;
-    } else if (action === 'close') {
-
+    }
+    else if (action === 'close') {
       this.selectedTravelPurpose = this.travelRequestForm.value.tripPurpose;
       this.isProjectDetailsSectionOpen = false;
-
     }
   }
 
   //to display selected file name
   displayFileName(event: any, fileItem: string) {
+
     const fileInput = event.target;
     // this.selectedPassportFileName = fileInput.files.length > 0 ? fileInput.files[0].name : '';
 
     if (fileItem === 'passport') {
       this.selectedPassportFileName = fileInput.files.length > 0 ? fileInput.files[0].name : '';
-    } else {
-
+    }
+    else {
       this.selectedTravelAuthMailFileName = fileInput.files.length > 0 ? fileInput.files[0].name : '';
-
     }
 
   }
@@ -187,14 +192,13 @@ export class TravelRequestFormComponent {
   //method toggle pref dep time container
   togglePrefDepTimeContainer(action: string, event: Event) {
     event.stopPropagation();
+
     if (action === 'open') {
       this.isPrefDepTimeDetailsSectionOpen = true;
     }
     else if (action === 'close') {
-
       this.selectedPrefDepTime = this.selectedPrefDepTimeSlot + " " + this.selectedPrefDepTimeUnit;
       this.isPrefDepTimeDetailsSectionOpen = false;
-
     }
 
   }
@@ -202,15 +206,13 @@ export class TravelRequestFormComponent {
   //method toggle pref pick time container
   togglePrefPickUpTimeContainer(action: string, event?: Event) {
     event?.stopPropagation();
+
     if (action === 'open') {
       this.isPrefPickUpTimeDetailsSectionOpen = true;
-
     }
     else if (action === 'close') {
-
       // this.selectedPrefDepTime = this.selectedPrefDepTimeSlot + " " + this.selectedPrefDepTimeUnit;
       this.isPrefPickUpTimeDetailsSectionOpen = false;
-
     }
 
   }
@@ -225,15 +227,20 @@ export class TravelRequestFormComponent {
 
     this.getAllDepartureTimes();
 
+    this.loaderService.show();
     //Get Employee Data
     this.requestService.getEmployeeDataById(this.empId).subscribe({
 
       next: (data) => {
+        this.loaderService.hide();
         this.employeeDetails = data;
         console.log(this.employeeDetails)
 
       },
-      error: (error: Error) => { console.log("problems in fetching data") },
+      error: (error: Error) => { 
+        
+        this.loaderService.hide();
+        console.log("problems in fetching data") },
       complete: () => { console.log("get employee by id is done") }
     });
 
@@ -332,14 +339,6 @@ export class TravelRequestFormComponent {
     return null;
   }
 
-  //Handling File Changes
-  // onFileChange(event: any, controlName: string): void {
-  //   const file = event.target.files[0];
-  //   this.travelRequestForm.get(controlName)?.setValue(file);
-  //   this.travelRequestForm.get(controlName)?.updateValueAndValidity();
-  //   console.log('Form Validity:', this.travelRequestForm.valid);
-  // }
-
   onFileSelected(event: any) {
     const fileInput = event.target;
     if (fileInput.files.length > 0) {
@@ -386,8 +385,14 @@ export class TravelRequestFormComponent {
   }
 
   getAllProjectCodes(empId: number): void {
+
+    this.loaderService.show();
+
     this.commonApiService.getAllProjectCodesByEmployeeId(empId)
       .subscribe((data: any) => {
+
+        this.loaderService.hide();
+
         // Assuming data is an array of project codes
         this.projectCodes = data;
         console.log(data);
@@ -399,8 +404,11 @@ export class TravelRequestFormComponent {
 
   getAllTravelModes(): void {
 
+    this.loaderService.show();
+
     this.commonApiService.getAllTravelModes()
       .subscribe((data: any) => {
+        this.loaderService.hide();
         // Assuming data is an array of project codes
         this.travelModes = data;
 
@@ -460,7 +468,6 @@ export class TravelRequestFormComponent {
     return Array.from(this.travelModeIconValueTripletMap.entries());
   }
 
-
   //listening to changes happening on origin and destination fields
   subscribeToOriginAndDestinationChanges() {
     const sourceCityControl = this.travelRequestForm.get('sourceCity');
@@ -486,7 +493,6 @@ export class TravelRequestFormComponent {
       this.travelRequestForm.get('destinationCity')?.valueChanges.subscribe((newCity: string) => {
         this.selectedDestination = newCity;
       });
-
 
     }
 
@@ -537,7 +543,6 @@ export class TravelRequestFormComponent {
     event.preventDefault();
   }
 
-
   //method to get available departure times
   //can be used to connect with any third party API to get realtime data of flight / train / bus timings
   getAllDepartureTimes(): void {
@@ -583,7 +588,8 @@ export class TravelRequestFormComponent {
 
   //travel req submit method
   submitTravelRequest() {
-    console.log("TEST SUBMITTED DATA");
+
+    this.loaderService.show();
 
     const formData = new FormData();
 
@@ -613,11 +619,13 @@ export class TravelRequestFormComponent {
 
     this.requestService.sendEmployeeNewTravelRequest(formData).subscribe({
       next: (response) => {
+      this.loaderService.hide();
         console.log(response);
         this.toastService.showToast({ message: "Travel request Submitted", toastType: "success", toastDuration: 3000 });
         this.router.navigate(['employee/pending']);
       },
       error: (error: Error) => {
+      this.loaderService.hide();
         console.log(error);
       },
       complete: () => {   
@@ -646,8 +654,14 @@ export class TravelRequestFormComponent {
   }
 
   getEmployeeRequestDetails(requestId: number) {
+
+    this.loaderService.show();
+
     this.commonApiService.getEmployeeRequestDetail(requestId).subscribe(
       (data: any) => {
+
+        this.loaderService.hide();
+        
         // Patch form values with the response data
         this.travelRequestForm.patchValue({
           tripType: data.tripType,

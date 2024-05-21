@@ -22,19 +22,10 @@
     <form [formGroup]="form">
       <div class="top_container">
         <div class="background_image">
-          <!-- <div class="action_btn_container">
-              <button class="action_btn">Edit</button>
-            </div> -->
-
+       
           <div class="cover_name_container">
             <h1 class="cover_name">{{ form.get("firstName")?.value }}</h1>
           </div>
-
-          <!-- bg -->
-          <!-- <img
-              class="img-fluid"
-              src="https://images.pexels.com/photos/315934/pexels-photo-315934.jpeg"
-            /> -->
 
           <img
             class="img-fluid"
@@ -71,11 +62,7 @@
             <div class="profile_picture" (click)="onProfilePictureClick()">
               <img
                 class="img-fluid"
-                src="{{
-                  profilePicture
-                    ? profilePicture
-                    : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjUlz1U0tD1XCrGV3h1cajmk1lhVFru9Qabg&usqp=CAU'
-                }}"
+                src="{{ profileImage ? croppedImage : profilePicture }}"
               />
               <i class="ri-pencil-fill" *ngIf="editMode"></i>
             </div>

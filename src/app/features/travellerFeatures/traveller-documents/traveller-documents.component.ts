@@ -9,6 +9,7 @@ import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalU
 import { docCategories } from 'src/app/services/commonAPIServices/docCategories';
 import { Subscription } from 'rxjs';
 import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 @Component({
   selector: 'app-traveller-documents',
   templateUrl: './traveller-documents.component.html',
@@ -34,7 +35,6 @@ export class TravellerDocumentsComponent {
   isPdfViewerOpen: boolean = false;
   loadedFileUrl : string = '';
 
-
   forwardBtnText : string = 'Add';
 
   employeeId: number = -1;
@@ -59,7 +59,8 @@ export class TravellerDocumentsComponent {
     private datepipe: DatePipe,
     private commonService:CommonAPIService,
     private modalService: BsModalService,
-    private toastService : CustomToastService
+    private toastService : CustomToastService,
+    private loaderService : CustomLoaderService
 
   ) {
     this.isDocUploadModalOpen = false;
@@ -93,29 +94,27 @@ export class TravellerDocumentsComponent {
   }
 
   initializeDocuments(){
-
     
     this.getDocuments();
-    
-    // this.isFileSubscription = this.commonService.isFile$.subscribe(isFile => {
-    //   if (isFile) {
-    //     this.getDocuments();
-    //   }
-    // });
 
   }
 
-  // ngOnDestroy() {
-  //   this.isFileSubscription.unsubscribe();
-  // }
-
   getDocuments() {
+
+    this.loaderService.show();
+
     this.commonService.getEmployeeDocuments(this.employeeId).subscribe(
       (data) => {
+
+        this.loaderService.hide();
+
         this.travellerDocuments = data;
         console.log('Fetched documents:', data);
       },
       (error) => {
+
+        this.loaderService.hide();
+
         console.error('Error fetching documents:', error);
       }
     );
@@ -164,13 +163,6 @@ export class TravellerDocumentsComponent {
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    // if(file.type !== 'application/pdf'){
-    //   event.target.value = '';
-    //   this.documentUploadForm.get('documentFile')?.setValue('');
-    //   this.fileErrorMessage = "* Select a PDF File";
-    //   return;
-    // }
-    // this.fileErrorMessage = ''
     this.documentUploadForm.patchValue({
       documentFile: file,
     });
@@ -206,13 +198,6 @@ export class TravellerDocumentsComponent {
     event.preventDefault();
     event.stopPropagation();
     const file = event.dataTransfer.files[0];
-    // if(file.type !== 'application/pdf'){
-    //   event.dataTransfer.value = '';
-    //   this.documentUploadForm.get('documentFile')?.setValue('');
-    //   this.fileErrorMessage = "* Select a PDF File";
-    //   return;
-    // }
-    // this.fileErrorMessage = ''
     this.documentUploadForm.patchValue({
       documentFile: file,
     });
@@ -273,8 +258,13 @@ export class TravellerDocumentsComponent {
 
   deleteDocument(documentId: number): void {
 
+    this.loaderService.show();
+
     this.deleteSubscription = this.documentService.deleteDocument(documentId).subscribe(
       (response) => {
+
+        this.loaderService.hide();
+
         // Handle successful deletion response
         console.log('Document deleted successfully:', response);
         this.selectedDocCardId = -1;
@@ -285,6 +275,7 @@ export class TravellerDocumentsComponent {
         this.initializeDocuments();
       },
       (error) => {
+        this.loaderService.hide();
         // Handle error response
         this.toastService.showToast({ message: "Error Deleting Document!", toastType: "fail", toastDuration: 6000 });
       }

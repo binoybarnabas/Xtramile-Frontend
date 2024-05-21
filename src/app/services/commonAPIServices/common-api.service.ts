@@ -46,6 +46,7 @@ export class CommonAPIService {
     return this.http.get<number>(this.apiURL + `status/staustId/${statusCode}`)
   }
 
+  //req status 
   updateRequestStatus(requestStatus: RequestStatus): Observable<RequestStatus> {
     return this.http.post<RequestStatus>(this.apiURL + 'requeststatus/add', requestStatus)
   }

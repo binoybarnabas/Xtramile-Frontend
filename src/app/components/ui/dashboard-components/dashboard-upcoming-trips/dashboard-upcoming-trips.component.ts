@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, interval, takeUntil } from 'rxjs';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { EmployeeDashboardService } from 'src/app/services/employeeServices/dashboardServices/employee-dashboard.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class DashboardUpcomingTripsComponent {
   trips: any[] = []; // Array to store upcoming trips
   currentIndex: number = 0;
   private destroy$ = new Subject<void>();
-  constructor(private service: EmployeeDashboardService, private router: Router) { }
+  constructor(private service: EmployeeDashboardService, private router: Router, private loaderService : CustomLoaderService) { }
 
   ngOnDestroy() {
     this.destroy$.next();
@@ -31,9 +32,15 @@ export class DashboardUpcomingTripsComponent {
   }
 
   ngOnInit() {
+
+    this.loaderService.show();
+
     // Fetch upcoming trip details using the employeeId
     this.service.getUpcomingTripDetails(this.employeeId).subscribe(
       (data: any[]) => {
+
+        this.loaderService.hide();
+
         // Log the fetched data
         console.log('upcoming trips:', data);
         
@@ -54,6 +61,7 @@ export class DashboardUpcomingTripsComponent {
         }
       },
       (error) => {
+        this.loaderService.hide();
         console.error('Error fetching upcoming trip details:', error);
       }
     );

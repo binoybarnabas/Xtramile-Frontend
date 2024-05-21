@@ -1,6 +1,4 @@
-.main_container{
-    /* padding: 0.5rem; */
-}
+
 
 .main_container .heading_section{
     display: flex;
@@ -67,6 +65,25 @@
     margin-bottom: auto;
     font-size: var(--small-font-size);
     font-weight: var(--active-font-weight);
+}
+
+
+.main_container .heading_section .action_bar .task_icon{
+    animation: rotateAnimation 2s linear infinite;
+}
+
+@keyframes rotateAnimation {
+    0%{
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+
+    100%{
+        transform: rotate(0deg);
+
+    }
 }
 
 .main_container .heading_section .tab_section{
@@ -147,6 +164,27 @@
     object-fit: cover;
 }
 
+
+.main_container .body_section .tab_body.selected_option{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main_container .body_section .tab_body.selected_option .file_card{
+    background-color: var(--card-bg-color);
+    padding: 2px;
+    box-shadow: var(--normal-box-shadow);
+    background-color: var(--second-color);
+}
+
+.main_container .body_section .tab_body.selected_option .file_card .img{
+    /* width: 450px; */
+    height: 220px;
+    max-width: 450px;
+}
+
+
 .main_container .body_section .expansion_panel_container {
     overflow-y: auto;
     display: flex;
@@ -175,9 +213,12 @@
 
 .main_container .body_section .expansion_panel_container .expansion_panel .expansion_panel_header.active{
     border-radius: 6px 6px 0 0;
-    background-color: var(--second-color);
-    color: var(--card-bg-color);
+    border: 1.5px solid var(--second-color);
+    /* background-color: var(--second-color); */
+    /* color: var(--card-bg-color); */
 }
+
+
 
 
 .main_container .body_section .expansion_panel_container .expansion_panel .expansion_panel_header .title{
@@ -185,6 +226,9 @@
     margin-bottom: auto;
     font-size: var(--form-label-font-size);
 }
+
+
+
 
 .main_container .body_section .expansion_panel_container .expansion_panel .expansion_panel_header .icon{
     margin-left: 10px;
@@ -197,4 +241,8 @@
     background-color: var(--secondary-cyan-color);
     border-top: 2px solid var(--card-bg-color);
     font-size: var(--small-font-size);
+}
+
+.main_container .body_section .expansion_panel_container .expansion_panel  .expansion_panel_content.active{
+    border: 1.5px solid var(--second-color);
 }

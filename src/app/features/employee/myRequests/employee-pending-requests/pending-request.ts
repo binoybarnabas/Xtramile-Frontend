@@ -6,5 +6,6 @@ export interface PendingRequest {
         departureDate: string;
         travelMode: string;
         statusModifiedBy:string;
-        returnDate: string
+        returnDate: string;
+        requestedOn: string;
 }

@@ -5,7 +5,8 @@
         <div *ngIf="isActionBarVisible" class="action_bar" [class.single_item]="!isDelBtnVisible && !isAddBtnVisible">
             <button *ngIf="isDelBtnVisible" (click)="deleteSelectedOption()" [disabled]="selectedImageOptionIndex === -1 && selectedTextOptionIndex === -1" class="del_btn"><i class="ri-delete-bin-5-fill"></i></button>
             <p class="main_title">{{actionBarTitle}}</p>
-            <button *ngIf="isAddBtnVisible" (click)="onAddBtnClick()" class="add_btn">Add</button>
+            <!-- <span class="task_icon"><i class="ri-donut-chart-line"></i></span> -->
+            <button *ngIf="isAddBtnVisible" (click)="onAddBtnClick()" class="add_btn">{{addBtnTitle}}</button>
         </div>
         <div class="tab_section">
             <div class="tab_container">
@@ -22,7 +23,7 @@
     <div class="body_section">
 
         <!-- Add Options -->
-        <div *ngIf="activeTabName === 'Files' && requestStatus === 'Approved by RM'" class="tab_body file">
+        <div *ngIf=" activeTabName === 'Files' && requestStatus === 'Approved by RM'" class="tab_body file">
             
           <ng-container *ngFor="let item of optionImageUrls; let i = index">
                 <div (click)="onOptionSelected('img',i)" [ngClass]=" selectedImageOptionIndex === i ? 'file_card active':'file_card'">
@@ -63,7 +64,7 @@
                   ></i>
                 </div>
                 <div
-                  class="expansion_panel_content"
+                  [ngClass]="selectedTextOptionIndex === i ? 'expansion_panel_content active':' expansion_panel_content'"
                   *ngIf="isPanelOpen(i)"
                   [innerHTML]="santizieHtml(htmlContent)"
                 ></div>
@@ -75,18 +76,18 @@
         </div>
 
         <!-- View Options from API -->
-        <div *ngIf="activeTabName === 'Files' && requestStatus === 'Waiting' " class="tab_body file">
+        <div *ngIf="activeTabName === 'Files' && requestStatus === 'Waiting' || activeTabName === 'Files' && requestStatus === 'Selected' " class="tab_body file">
           <ng-container *ngFor="let item of travelOptionsWithImagesData; let i = index">
             <div (click)="onOptionSelected('img',i)" [ngClass]=" selectedImageOptionIndex === i ? 'file_card active':'file_card'">
               <img class="img" [src]="item.optionFileURL" alt="">
-          </div>
+            </div>
           </ng-container>
           <div *ngIf="travelOptionsWithImagesData.length === 0" class="empty_option_container">
             <app-empty-data [mainTitle]="emptyOptionMessageTitle" [description]="emptyImageOptionMessage"></app-empty-data>
           </div>
         </div>
 
-        <div *ngIf="activeTabName === 'Texts' && requestStatus === 'Waiting' " class="tab_body text">
+        <div *ngIf="activeTabName === 'Texts' && requestStatus === 'Waiting' || activeTabName === 'Texts' && requestStatus === 'Selected' " class="tab_body text">
 
             <div class="expansion_panel_container">
                 <div
@@ -125,11 +126,54 @@
     
         </div>
 
-        <div *ngIf="activeTabName === 'Selected Option' || activeTabName === 'Confirmed Option'" class="tab_body text">
-            <div class="text_card">
-                <span>Selected Option</span>
+        <!-- Display Selected Option -->
+        <div *ngIf="activeTabName === 'Selected Option' || activeTabName === 'Confirmed Option'" class="tab_body selected_option">
+          
+          <ng-container *ngFor="let item of travelOptionsWithImagesData; let i = index">
+            <div *ngIf="item.optionId === managerSelectedOptionId || item.optionId === travelAdminConfirmedOptionId" class="file_card">
+              <img class="img" [src]="travelOptionsWithImagesData[i].optionFileURL" alt="alt">
+            </div>
+          </ng-container>
+
+          <div class="expansion_panel_container">
+            <div
+              (click)="onOptionSelected('text', i)"
+              *ngFor="let item of descriptions; let i = index"
+              class="expansion_panel"
+            >
+              <div *ngIf="descriptions[i].optionId === managerSelectedOptionId"
+                [ngClass]="
+                  selectedTextOptionIndex === i
+                    ? 'expansion_panel_header active'
+                    : 'expansion_panel_header'
+                "
+                (click)="togglePanel(i)"
+              >
+                <p class="title">Option {{ i + 1 }}</p>
+                <i
+                  class="icon ri-arrow-down-wide-line"
+                  *ngIf="!isPanelOpen(i)"
+                ></i>
+                <i
+                  class="icon ri-arrow-up-wide-line"
+                  *ngIf="isPanelOpen(i)"
+                ></i>
+              </div>
+              <div
+                class="expansion_panel_content"
+                *ngIf="isPanelOpen(i)"
+                [innerHTML]="item.htmlString"
+              ></div>
             </div>
         </div>
+
+        </div>
+
+        <!-- Display Selected Option -->
+        <div *ngIf="activeTabName === 'Ticket Details'" class="tab_body selected_option">
+          <p>Ticket Not Uploaded</p>  
+        </div>
+
 
     </div>
 

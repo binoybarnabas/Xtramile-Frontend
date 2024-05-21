@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { ProfileService } from 'src/app/services/employeeServices/profileServices/profile.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { ProfileService } from 'src/app/services/employeeServices/profileService
   templateUrl: './employee-profile.component.html',
   styleUrls: ['./employee-profile.component.css']
 })
+
 export class EmployeeProfileComponent {
   editMode: boolean = false;
   employeeId!: number;
@@ -18,20 +20,17 @@ export class EmployeeProfileComponent {
 
   profileImage: string | null = null;
   newImageSelected: boolean = false;
-
   profilePicture: string | null | undefined = null;
 
-
-
   @ViewChild('imageCropModal') imageCropModal: any; // Reference to the image cropping modal
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
   display: string = '';
   bsModalRef!: BsModalRef<unknown>;
   profileImageFile!: File;
 
-
-  constructor(private service: ProfileService) {
+  constructor(private service: ProfileService, private loaderService: CustomLoaderService) {
 
     const userData = localStorage.getItem('userData');
     if (userData) {
@@ -39,6 +38,7 @@ export class EmployeeProfileComponent {
       this.employeeId = parsedUserData.empId;
     }
   }
+
   form = new FormGroup({
     firstName: new FormControl({ value: '', disabled: true }, Validators.required),
     lastName: new FormControl({ value: '', disabled: true }, Validators.required),
@@ -56,6 +56,7 @@ export class EmployeeProfileComponent {
     address: new FormControl('', Validators.required),
     profilePicture: new FormControl('')
   });
+  
   ngOnInit() {
     this.form.disable();
     this.fetchEmployeeData();
@@ -71,11 +72,16 @@ export class EmployeeProfileComponent {
       this.form.disable();
     }
   }
+
   //get the employee details that needs to be shown in the profile page
   fetchEmployeeData() {
+    this.loaderService.show();
     this.service.getEmployeeData(this.employeeId).subscribe({
       next: (data: any) => {
-        console.log(data);
+
+        this.loaderService.hide();
+        
+    console.log('profile data',data);
         //store the initial data of the employee
         this.initialValue = { contactNumber: data.contactNumber, address: data.address }
         this.initialData = {
@@ -119,10 +125,6 @@ export class EmployeeProfileComponent {
       address: ''
     };
 
-    console.log('upadted Data', updatedData)
-    console.log('initial value', this.initialValue)
-    console.log(this.form.controls);
-
     //  check if the initially stored value is same as the value in the form after the user click on save button.
     //  if the value is same make updatedData value as undefined otherwise assign the new value to the updated.
 
@@ -133,8 +135,6 @@ export class EmployeeProfileComponent {
     this.initialValue['address'] === this.form.get('address')?.value
       ? (updatedData.address = undefined)
       : (updatedData.address = this.form.get('address')?.value ?? undefined);
-
-
 
     //store the values in form as the initial value, it is for to not to make API call.
     this.initialValue = { contactNumber: this.form.get('contactNumber')?.value, address: this.form.get('address')?.value }
@@ -251,6 +251,7 @@ export class EmployeeProfileComponent {
 
     this.closeModal();
   }
+
   // Method to close the modal
   closeModal() {
     this.display = 'none'; // Hide the modal
@@ -261,4 +262,5 @@ export class EmployeeProfileComponent {
       fileInput.value = ''; // Clear the file input after closing the modal
     }
   }
+  
 }

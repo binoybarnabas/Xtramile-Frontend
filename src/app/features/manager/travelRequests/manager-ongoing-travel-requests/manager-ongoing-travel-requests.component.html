@@ -1,8 +1,16 @@
 <app-page-header [headingInputData]="pageHeading"></app-page-header>
+<app-table-filter
+    (dateSelected)="handleDateSelection($event)"
+    (sortOptionSelected)="handleSortOptionSelection($event)"
+    (searchByName)="handleSearchByName($event)"
+    (seeAllClicked)="handleSeeAllClick()"
+  >
+  </app-table-filter>
 <app-data-table
   [headers]="tableHeaders"
   [data]="incomingRequestdata"
   [displayedProperties]="fieldsToDisplay"
+  (rowClick)="handleSelectedRow($event)"
 ></app-data-table>
 <pagination
   *ngIf="totalCount > 10"

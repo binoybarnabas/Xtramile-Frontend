@@ -81,7 +81,8 @@ export interface TravelRequestDetailViewModel {
     date : string;
     status: string
     employeeNameAndEmail : string
-
+    from: string;
+    to: string
 }
 
 

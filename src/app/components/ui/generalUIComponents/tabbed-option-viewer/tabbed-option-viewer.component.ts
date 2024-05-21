@@ -3,12 +3,11 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { TextEditorComponent } from '../../text-editor/text-editor.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { Observable, forkJoin } from 'rxjs';
-import { CustomToastService } from 'src/app/services/toastServices/custom-toast.service';
-import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
 import { TravelOptionDetails } from 'src/app/services/interfaces/iTravelOptionDetails';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 
 @Component({
   selector: 'app-tabbed-option-viewer',
@@ -29,6 +28,8 @@ export class TabbedOptionViewerComponent {
   isDelBtnVisible: boolean = false;
   isAddBtnVisible: boolean = false;
 
+  addBtnTitle : string = 'Add';
+
   activeTabIndex: number = 0;
   activeTabName : string = 'Files';
 
@@ -40,15 +41,29 @@ export class TabbedOptionViewerComponent {
   emptyTextOptionMessage : string = 'No Travel Options added as plain text. Click on Add to add an option'
 
 
-  bsModalRef!: BsModalRef;
+  managerSelectedOptionId : number = -1;
+  managerSelectedOptionType : string = '';
+  managerSelectedOptionIndex: number = -1;
 
+  travelAdminConfirmedOptionId : number =-1;
+  isSelectedOptionChanged: boolean = false;
+
+  bsModalRef!: BsModalRef;
+  
   constructor(private modalService: BsModalService, private requestService: RequestService, private managerService:ManagerTravelRequestsService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer, private loaderService : CustomLoaderService
   ){
 
   }
 
   ngOnInit(){
+    this.initializeComponent();
+  }
+
+
+  initializeComponent(){
+    this.getTravelOptionsWithImageByReqId(this.requestId)
+    this.getTravelOptionsWithoutImages();
     this.initializeTabs(this.requestStatus, this.currentLoggedInUserRole);
   }
 
@@ -76,34 +91,86 @@ export class TabbedOptionViewerComponent {
     ];
     
     let tabsWithConfirmedOption = [
-      { name: 'Confirmed Option' }
+      {name : 'Ticket Details'},
+      {name: 'Confirmed Option'}
+    ];
+
+    let tabsWithLiveTicket = [
+      {name : 'Ticket Details'}
     ];
     
-    if(currentLoggedInUserRole === 'manager' || currentLoggedInUserRole === 'travelAdmin') {
+    
+    if(requestStatus === 'Selected' || requestStatus === 'Ongoing'){
+      this.getManagerSelectedOptionIdByRequestId(this.requestId);
+    }
 
-      this.getTravelOptionsWithImageByReqId(this.requestId)
-      this.getTravelOptionsWithoutImages();
-
-      if (requestStatus === 'Waiting' || requestStatus === 'Approved by RM') {
+    //manager
+    if(currentLoggedInUserRole === 'manager') {
+      
+      if (requestStatus === 'Waiting') {
         this.travelOptionViewerTabs = commonTabs;
-      } else if (requestStatus === 'Selected') {
-        this.travelOptionViewerTabs = tabsWithSelectedOption;
-      } else if (requestStatus === 'Approved by TA') {
-        this.travelOptionViewerTabs = tabsWithConfirmedOption;
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Choose a Travel Option';
       }
+      else if (requestStatus === 'Selected') {
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Selected Travel Option';
+        this.travelOptionViewerTabs = tabsWithSelectedOption;
+        this.activeTabName = 'Selected Option';
+      }
+      //change status to Approved by TA
+      else if (requestStatus === 'Ongoing') {
+        this.travelOptionViewerTabs = tabsWithConfirmedOption;
+        this.activeTabName = 'Ticket Details';
+      }
+
+      // else if(requestStatus === 'Approved by TA' && ticketStatus ==='Sent'){
+      //   this.travelOptionViewerTabs = tabsWithLiveTicket;
+      //   this.isActionBarVisible = false;
+      // }
 
     } 
 
-    if(currentLoggedInUserRole === 'travelAdmin' && requestStatus === 'Approved by RM' ){
+    //travel admin
+    if(currentLoggedInUserRole === 'travelAdmin'){
+      
       this.isActionBarVisible = true;
       this.isDelBtnVisible = true;
       this.isAddBtnVisible = true;
-    }else if(currentLoggedInUserRole === 'manager' && requestStatus === 'Waiting'){
-      this.isActionBarVisible = true;
-      this.actionBarTitle = 'Select a Travel Option';
-      //this.getTravelOptionsWithImageByReqId(this.requestId)
-      //this.getTravelOptionsWithoutImages();
+
+      if(requestStatus === 'Approved by RM'){
+        this.travelOptionViewerTabs = commonTabs;
+      }
+
+      if(requestStatus === 'Waiting'){
+        this.travelOptionViewerTabs = commonTabs;
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Waiting Options';
+      }
+
+      else if(requestStatus === 'Selected'){
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Confirm a Travel Option';
+        this.travelOptionViewerTabs = tabsWithSelectedOption;
+        this.activeTabName = 'Selected Option';
+      }
+      //approved by ta && ticket status not sent
+      else if(requestStatus === 'Ongoing'){
+        this.travelOptionViewerTabs = tabsWithConfirmedOption;
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Upload Ticket' 
+        this.addBtnTitle = 'Upload';
+        this.activeTabName = 'Ticket Details';
+      }
+      //TA sent ticket to traveller
+      // eles if(requestStatus === 'Approved by TA' && ticketStatus === 'Sent'){
+          //this.travelOptionViewerTabs = tabsWithLiveTicket;
+          //this.isActionBarVisible = true;
+          //this.actionBarTitle = 'Uploaded Ticket'
+      // }
+    
     }
+
     
   }
 
@@ -178,8 +245,10 @@ export class TabbedOptionViewerComponent {
   selectedImageOptionIndex: number = -1;
   selectedTextOptionIndex: number = -1;
 
-  //to get the id of the selected option/ option chosen by manager
+  //to get the id of the selected option/ option chosen by manager 
+  //change name to ClickedOptionId
   selectedTravelOptionId : number = -1;
+
 
   //on options selected
   onOptionSelected(optionType:string, optionIndex: number){
@@ -187,29 +256,58 @@ export class TabbedOptionViewerComponent {
     if(optionType === 'img'){
         
         if(this.selectedImageOptionIndex === optionIndex){
+
           this.selectedImageOptionIndex = -1;
           this.selectedTravelOptionId = -1;
+
+          //Detecting Option Changes by TA
+          if(this.requestStatus === 'Selected'){
+            this.travelAdminConfirmedOptionId = this.managerSelectedOptionId;
+            this.isSelectedOptionChanged = false;
+          }
+
         }
         else{
+
           this.selectedImageOptionIndex = optionIndex;
           this.selectedTravelOptionId = this.travelOptionsWithImagesData[optionIndex].optionId;
+          
+          //Detecting option changes by TA
+          if(this.requestStatus === 'Selected' && this.selectedTravelOptionId !== this.managerSelectedOptionId){
+            this.travelAdminConfirmedOptionId = this.travelOptionsWithImagesData[optionIndex].optionId;
+            this.isSelectedOptionChanged = true;
+          }
+
         }
 
-    }
+    }//text options
     else{
 
       if(this.selectedTextOptionIndex === optionIndex){
         this.selectedTextOptionIndex = -1;
         this.selectedTravelOptionId = -1;
+
+        if(this.requestStatus === 'Selected'){
+          this.travelAdminConfirmedOptionId = this.managerSelectedOptionId;
+          this.isSelectedOptionChanged = false;
+        }
       }
       else{
+
         this.selectedTextOptionIndex = optionIndex;
         this.selectedTravelOptionId = this.descriptions[optionIndex].optionId;
+        
+        if(this.requestStatus === 'Selected' && this.selectedTravelOptionId !== this.managerSelectedOptionId){
+          this.travelAdminConfirmedOptionId = this.descriptions[optionIndex].optionId;
+          this.isSelectedOptionChanged = true;
+        }
+
       }
 
     }
 
   }
+
 
   //to remove selected option from the array
   deleteSelectedOption(){
@@ -257,22 +355,6 @@ export class TabbedOptionViewerComponent {
       this.textOptions.splice(index, 1);
     }
   }
-
-  //Deletion of Options
-  // selectedOptionIds: number[] = [];
-
-  // toggleOptionSelection(item: any) {
-  //     const index = this.selectedOptionIds.indexOf(item.optionId);
-  //     if (index === -1) {
-  //         this.selectedOptionIds.push(item.optionId);
-  //     } else {
-  //         this.selectedOptionIds.splice(index, 1);
-  //     }
-  // }
-  
-  // isSelected(item: any): boolean {
-  //     return this.selectedOptionIds.includes(item.optionId);
-  // }
   
   value?: string;
 
@@ -284,17 +366,20 @@ export class TabbedOptionViewerComponent {
    this.isImageViewerOpen = false;
   }
 
-  
   travelOptionsWithImagesData: TravelOptionDetails[] = [];
 
   //get uploaded travel options with images
   getTravelOptionsWithImageByReqId(reqId: number) {
 
+    this.loaderService.show();
+
     this.requestService.getTravelOptionsByReqId(reqId).subscribe({
       next: (data) => {
+        this.loaderService.hide();
         this.travelOptionsWithImagesData = data;
       },
       error: (error: Error) => {
+        this.loaderService.hide();
         console.log("Error has occurred, " + error.message);
       },
       complete: () => {
@@ -302,6 +387,7 @@ export class TabbedOptionViewerComponent {
         if(this.travelOptionsWithImagesData.length === 0){
           this.emptyImageOptionMessage = 'No Travel options added as image.'
         }
+        
       }
     });
   
@@ -314,8 +400,10 @@ export class TabbedOptionViewerComponent {
 
   //get text options
   getTravelOptionsWithoutImages(){
+    this.loaderService.show();
     this.managerService.getAvailableOptionsDescription(this.requestId).subscribe({
       next: (response: any) =>{
+        this.loaderService.hide();
         this.descriptions = response.map((item: { htmlString: SafeHtml; description: string; expanded:boolean; clicked:boolean }) => {
           item.htmlString = this.sanitizer.bypassSecurityTrustHtml(item.description);
           item.expanded = false;
@@ -326,33 +414,19 @@ export class TabbedOptionViewerComponent {
         
       },
       error: (error: any) => {
+        this.loaderService.hide();
         console.error('Post failed:', error);
       },
       complete: () => {
       if(this.descriptions.length === 0) {
         this.emptyTextOptionMessage = 'No Travel options added as plain text'
       }
+
+      
       }
    })
   }
 
-  getSelectedOption(){
-   this.requestService.selectedOptionFromEmployee(this.requestId).subscribe({
-    next: (data) =>{
-    this.receivingOptionId = data
-    console.log(this.receivingOptionId);
-    this.sortDescriptions();
-    this.selectedOption();
-  },
-  error: (error: any) => {
-    console.error('Post failed:', error);
-  },
-  complete: () => {
-    console.log('Post request completed.');
-  }
-
-  })
-  }
 
   sortDescriptions(): void {
     if (this.receivingOptionId) {
@@ -364,9 +438,35 @@ export class TabbedOptionViewerComponent {
     }
   }
 
-  selectedOption(): boolean {
-    return this.descriptions.some((item: { optionId: number; }) => item.optionId === this.receivingOptionId);
+
+
+  //To get the id of manager selected option
+  //Also used to get the option confirmed by the manager
+  //Temporary Solution Need Back End API Fixes
+  getManagerSelectedOptionIdByRequestId(requestId : number){
+
+    this.loaderService.show();
+
+    this.requestService.getSelectedTravelOptionDetailsByRequestId(this.requestId).subscribe({
+      next: (response: any) =>{
+        this.loaderService.hide();
+        this.managerSelectedOptionId = response.optionId;
+        this.travelAdminConfirmedOptionId = response.optionId;
+        //this.managerSelectedOptionType = response.optionFile === null ? 'text' : 'image';
+      },
+      error: (error: any) => {
+        this.loaderService.hide();
+      },
+      complete: () => {
+        
+      }
+   })
+
   }
+
+
+
+
 
 
 

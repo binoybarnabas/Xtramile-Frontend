@@ -17,8 +17,8 @@ export class EmployeePendingRequestsComponent {
   requestData: PendingRequest[] = [];
   empId: number;
   userData: UserData
-  tableHeaders = ['Request Code','Project Code','From','To', 'Departure Date','Return Date','Status'];
-  dataHeaders = ['requestCode', 'projectCode','sourceCity','destinationCity', 'departureDate','returnDate', 'statusName'];
+  tableHeaders = ['Request Code','Project Code','From','To', 'Departure Date','Return Date', 'Requested On', 'Status'];
+  dataHeaders = ['requestCode', 'projectCode','sourceCity','destinationCity', 'departureDate','returnDate', 'requestedOn', 'statusName'];
 
   pageHeading: string = 'Pending Approval';
   itemsPerPage: number = 10;
@@ -41,9 +41,10 @@ export class EmployeePendingRequestsComponent {
     this.subscription = this.requestService.getRequestsPendingStatus(this.empId, this.currentPage, this.itemsPerPage).subscribe({
       next: (data) => {
         data.items.forEach((request: PendingRequest) => {
-          (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName
+          request.statusName === 'Approved by RM' ? request.statusName = 'Approved' : request.statusName = request.statusName
           request.departureDate = this.datepipe.transform(request.departureDate, "dd/MM/yyyy") || ' '
           request.returnDate = this.datepipe.transform(request.returnDate, "dd/MM/yyyy") || ' '
+          request.requestedOn = this.datepipe.transform(request.requestedOn, "dd/MM/yyyy") || ' '
         })
         this.requestData = data.items;
         this.totalCount = data.totalCount

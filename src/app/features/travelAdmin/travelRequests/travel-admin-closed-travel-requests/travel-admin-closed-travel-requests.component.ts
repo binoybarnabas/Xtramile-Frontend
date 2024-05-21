@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { TravelRequestCardModalComponent } from 'src/app/components/ui/travel-request-card-modal/travel-request-card-modal.component';
+import { CustomLoaderService } from 'src/app/services/commonUIServices/custom-loader-service/custom-loader.service';
 import { TravelAdminTravelRequestsService } from 'src/app/services/travelAdminServices/travelRequestsServices/travel-admin-travel-requests.service';
 
 @Component({
@@ -21,22 +22,35 @@ export class TravelAdminClosedTravelRequestsComponent {
   selectedRow: any;
   bsModalRef: any;
 
-  constructor(private apiservice: TravelAdminTravelRequestsService, private modalService: BsModalService){}
+  constructor(private apiservice: TravelAdminTravelRequestsService, private modalService: BsModalService, private loaderService: CustomLoaderService){}
 
   ngOnInit(){
     this.fetchTravelRequest();
   }
 
   pageChanged(event: any): void {
+
+    this.loaderService.show();
+    
     this.currentPage = event.page;
+
     this.apiservice.getClosedTravel(this.currentPage, this.pageSize).subscribe((data: any) => {
+
+      this.loaderService.hide();
+
       this.requestData = data.ongoingTravel;
       this.totalItems = data.totalCount;
     });
   }
 
   fetchTravelRequest(){
+
+    this.loaderService.show();
+
     this.apiservice.getClosedTravel(this.currentPage, this.pageSize).subscribe((data: any) => {
+
+      this.loaderService.hide();
+
       this.requestData = data.closedTravel;
       this.totalItems = data.totalCount;
       console.log(this.requestData);
@@ -44,6 +58,7 @@ export class TravelAdminClosedTravelRequestsComponent {
   }
   
   handleSelectedRow(row: any) {
+
     this.selectedRow = row;
     console.log(this.selectedRow.requestId)
     this.requestId = this.selectedRow.requestId
