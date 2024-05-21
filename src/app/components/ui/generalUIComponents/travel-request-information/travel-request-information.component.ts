@@ -69,6 +69,8 @@ export class NewTravelRequestComponent {
 
   status: string = '';
 
+  ticketStatus : string ='';
+
   requestId: number = -1;
 
   // Function to convert the Map into an array of key-value pairs
@@ -175,7 +177,9 @@ export class NewTravelRequestComponent {
           this.newReqFormSubMenuValue = 4;
           this.currentNavIndex = 4;
           this.forwardBtnTitle = 'Submit';
-        } else {
+        }
+  
+        else {
           this.leftSectionNavItems = [
             'General Information',
             'Trip Information',
@@ -195,7 +199,13 @@ export class NewTravelRequestComponent {
             'Documents Attached',
           ];
           this.totalNavCount = 3;
-        } else {
+        }
+        else if(this.ticketStatus === 'Not Attached'){
+          this.newReqFormSubMenuValue = 4;
+          this.currentNavIndex = 4;
+          this.forwardBtnTitle = 'Send';
+        }
+        else {
           this.leftSectionNavItems = [
             'General Information',
             'Trip Information',
@@ -281,6 +291,7 @@ export class NewTravelRequestComponent {
           data.returnDate =
             this.datePipe.transform(data.returnDate, 'dd/MM/yyyy') || ' ';
           this.travelRequestDetailViewModel = data;
+          this.ticketStatus = data.ticketStatus;
           // Getting the employee profile info
 
           this.getTravelOptionsByReqId(data.requestId);

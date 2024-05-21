@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { CommonAPIService } from 'src/app/services/apiServices/commonAPIServices/common-api.service';
@@ -25,12 +25,17 @@ export class AddTicketModalComponent {
     }
   }
 
+
+
   travelTicketForm!: FormGroup;
 
-  constructor(public bsModalRef: BsModalRef, private travelAdminRequestService: TravelAdminTravelRequestsService, private toastService: CustomToastService, private commonService:CommonAPIService) {
+  constructor(public bsModalRef: BsModalRef, 
+
+    private travelAdminRequestService: TravelAdminTravelRequestsService, private toastService: CustomToastService, private commonService:CommonAPIService) {
 
   }
 
+  uploadFormTitle : string = 'Upload Ticket File'
 
   ngOnInit() {
 
@@ -98,5 +103,6 @@ export class AddTicketModalComponent {
   
     this.closeModal();
   }
+
 
 }

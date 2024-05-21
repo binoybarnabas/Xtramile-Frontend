@@ -36,7 +36,7 @@ export class TabbedOptionViewerComponent {
   private isSubmitBtnActive: boolean = false;
   @Output() isSubmitBtnActiveChange = new EventEmitter<boolean>();
 
-  addBtnTitle: string = 'Add';
+  addBtnTitle: string = 'Upload';
 
   activeTabIndex: number = 0;
   activeTabName: string = 'Files';
@@ -49,6 +49,9 @@ export class TabbedOptionViewerComponent {
     'No Travel Options added as an image. Click on Add to add an option';
   emptyTextOptionMessage: string =
     'No Travel Options added as plain text. Click on Add to add an option';
+
+  noTicketMessageTitle : string = 'No Tickets Added!';
+  noTicketMessageDescription : string = 'No Tickets Added yet. Click on Upload button to add ticket';
 
   managerSelectedOptionId: number = -1;
   managerSelectedOptionType: string = '';
@@ -113,7 +116,8 @@ export class TabbedOptionViewerComponent {
         this.travelOptionViewerTabs = commonTabs;
         this.isActionBarVisible = true;
         this.actionBarTitle = 'Choose a Travel Option';
-      } else if (requestStatus === 'Selected') {
+      }
+      else if (requestStatus === 'Selected') {
         this.isActionBarVisible = true;
         this.actionBarTitle = 'Selected Travel Option';
         this.travelOptionViewerTabs = tabsWithSelectedOption;
@@ -126,7 +130,9 @@ export class TabbedOptionViewerComponent {
       ) {
         this.travelOptionViewerTabs = tabsWithConfirmedOption;
         this.activeTabName = 'Ticket Details';
-      } else if (
+        this.noTicketMessageDescription = 'Ticket information is currently unavailable. Please check back later or contact your travel admin.'
+      } 
+      else if (
         requestStatus === 'Approved by TA' &&
         this.ticketStatus === 'Attached'
       ) {
@@ -218,7 +224,7 @@ export class TabbedOptionViewerComponent {
 
     this.ticketFileDescriptions.push(description);
 
-    //this.isAnyOptionArrayPopulated();
+    this.isAnyOptionArrayPopulated();
 
     const observables = tickets.map((ticket) => this.getImageUrl(ticket));
 
@@ -432,10 +438,11 @@ export class TabbedOptionViewerComponent {
   }
 
   //to check if images and texts option array are empty
+  //also used with tickets
   //to disable submit btn
   isAnyOptionArrayPopulated() {
     this.isSubmitBtnActive =
-      this.textOptions.length !== 0 || this.addedImageFiles.length !== 0
+      this.textOptions.length !== 0 || this.addedImageFiles.length !== 0 || this.addedTicketFiles.length !==0
         ? true
         : false;
     this.isSubmitBtnActiveChange.emit(this.isSubmitBtnActive);
