@@ -11,7 +11,7 @@ import { CustomLoaderService } from 'src/app/services/helperServices/commonUISer
 })
 export class TravelAdminOngoingTravelRequestsComponent {
 
-  pageHeading: string = 'Ongoing Travel';
+  pageHeading: string = 'Approved Trips';
   tableHeaders: string[] = ['Request Code','Requested By','Project Code','From','To','Departure Date', 'Return Date', 'Pickup', 'Ticket Status', 'Trip Status'];
   fieldsToDisplay: string[] = ['requestCode', 'name','projectCode', 'from','to','departureDate', 'returnDate', 'pickUpRequested', 'ticketStatus', 'tripStatus'];
   requestData: any[] = [];

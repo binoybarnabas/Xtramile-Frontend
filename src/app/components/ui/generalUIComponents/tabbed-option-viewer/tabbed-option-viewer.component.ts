@@ -8,6 +8,7 @@ import { RequestService } from 'src/app/services/employeeServices/requestService
 import { TravelOptionDetails } from 'src/app/models/interfaces/iTravelOptionDetails';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
+import { AddTicketModalComponent } from '../../form-components/add-ticket-modal/add-ticket-modal.component';
 @Component({
   selector: 'app-tabbed-option-viewer',
   templateUrl: './tabbed-option-viewer.component.html',
@@ -19,6 +20,12 @@ export class TabbedOptionViewerComponent {
   @Input() requestId: number = -1;
   @Input() requestStatus: string = '';
   @Input() ticketStatus: string = '';
+
+  @Input() requestCode: string = '';
+  @Input() sourceCity: string = '';
+  @Input() destinationCity: string = '';
+  @Input() sourceCountry: string = '';
+  @Input() destinationCountry: string = '';
 
   //fetch from calling component !!!!!!
 
@@ -96,7 +103,7 @@ export class TabbedOptionViewerComponent {
 
     let tabsWithLiveTicket = [{ name: 'Ticket Details' }];
 
-    if (requestStatus === 'Selected' || requestStatus === 'Ongoing') {
+    if (requestStatus === 'Selected' || requestStatus === 'Approved by TA') {
       this.getManagerSelectedOptionIdByRequestId(this.requestId);
     }
 
@@ -113,7 +120,10 @@ export class TabbedOptionViewerComponent {
         this.activeTabName = 'Selected Option';
       }
       //change status to Approved by TA
-      else if (requestStatus === 'Ongoing') {
+      else if (
+        requestStatus === 'Approved by TA' &&
+        this.ticketStatus === 'Not Attached'
+      ) {
         this.travelOptionViewerTabs = tabsWithConfirmedOption;
         this.activeTabName = 'Ticket Details';
       } else if (
@@ -170,12 +180,75 @@ export class TabbedOptionViewerComponent {
   }
 
   onAddBtnClick() {
+    //Add Ticket
+    if (
+      this.currentLoggedInUserRole === 'travelAdmin' &&
+      this.ticketStatus === 'Not Attached' &&
+      this.requestStatus === 'Approved by TA'
+    ) {
+      this.openAddTicketModal();
+    }
+
     if (this.activeTabName === 'Texts') {
       this.openAddTextOptionModal();
     } else if (this.activeTabName === 'Files') {
       this.openAddFileOptionModal();
     }
   }
+
+  //to open modal
+  openAddTicketModal() {
+    const initialState = {
+      requestId: this.requestId,
+      onTicketFileSelected: this.addTravelTicket.bind(this),
+    };
+    this.bsModalRef = this.modalService.show(AddTicketModalComponent, {
+      initialState,
+    });
+  }
+
+  //Stores Image File Temporarily
+  addedTicketFiles: File[] = [];
+  ticketFileUrls: string[] = [];
+  ticketFileDescriptions: string[] = [];
+
+  //to add image options
+  addTravelTicket(tickets: File[], description: string): void {
+    this.addedTicketFiles = [...this.addedTicketFiles, ...tickets];
+
+    this.ticketFileDescriptions.push(description);
+
+    //this.isAnyOptionArrayPopulated();
+
+    const observables = tickets.map((ticket) => this.getImageUrl(ticket));
+
+    forkJoin(observables).subscribe((urls: string[]) => {
+      this.ticketFileUrls = [...this.ticketFileUrls, ...urls];
+    });
+  }
+
+  //isTicketFileSelected : boolean = false;
+  selectedTicketFileIndex: number = -1;
+
+  onTicketFileSelected(fileIndex: number) {
+    if (this.selectedTicketFileIndex === fileIndex) {
+      this.selectedTicketFileIndex = -1;
+      return;
+    }
+    this.selectedTicketFileIndex = fileIndex;
+  }
+
+
+  //to remove images from the array
+  removeTicketFromArray(index: number): void {
+    if (index >= 0 && index < this.addedTicketFiles.length) {
+      this.addedTicketFiles.splice(index, 1);
+      this.ticketFileUrls.splice(index, 1);
+      this.ticketFileDescriptions.splice(index, 1);
+    }
+    this.selectedTicketFileIndex = -1;
+  }
+
 
   //to open modal
   openAddFileOptionModal() {
@@ -258,7 +331,7 @@ export class TabbedOptionViewerComponent {
         this.selectedImageOptionIndex = optionIndex;
         this.selectedTravelOptionId =
           this.travelOptionsWithImagesData[optionIndex].optionId;
-          this.isSubmitBtnActive = true;
+        this.isSubmitBtnActive = true;
 
         //Detecting option changes by TA
         if (
@@ -301,6 +374,13 @@ export class TabbedOptionViewerComponent {
 
   //to remove selected option from the array
   deleteSelectedOption() {
+    if (
+      this.requestStatus === 'Approved by TA' &&
+      this.ticketStatus === 'Not Attached'
+    ) {
+      this.removeTicketFromArray(this.selectedTicketFileIndex);
+    }
+
     if (this.selectedImageOptionIndex != -1) {
       this.removeImage(this.selectedImageOptionIndex);
       this.selectedImageOptionIndex = -1;

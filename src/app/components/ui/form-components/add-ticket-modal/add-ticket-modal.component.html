@@ -1,0 +1,63 @@
+<div class="modal-header">
+    <h4 class="modal-title">File Upload</h4>
+    <button type="button" class="exit_button" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true"><i class="ri-close-fill"></i></span>
+    </button>
+</div>
+
+  <div class="modal-body">
+
+    <div class="file_drop_container">
+
+        <div class="form_container">
+
+            <form (ngSubmit)="addImageFile()" [formGroup]="travelTicketForm" class="travelOptionForm">
+              
+              <div class="file_input_container">
+
+                <input type="hidden" formControlName="requestId">
+                <input type="file" class="file_input" (change)="onFileChange($event)" multiple required/>
+
+                <span class="form_error"
+                *ngIf="travelTicketForm.get('optionFile')?.invalid && travelTicketForm.get('optionFile')?.touched">
+                   No file selected!
+               </span>
+
+              </div>
+
+              <div class="form_input_container">
+
+                <input type="text" class="text_input" formControlName="description" placeholder="Description"/>
+<!-- 
+                <span class="form_error"
+                *ngIf="travelOptionForm.get('description')?.invalid && travelTicketForm.get('description')?.touched">
+                   Enter a description
+               </span> -->
+
+              </div>
+            
+              <!-- <div class="img_preview_container">
+                <div class="img_card">
+
+                  <img class="img" [src]="travelOptionForm.get('optionFile')?.value" alt="Choose an image">
+                </div>
+              </div> -->
+            
+              <div class="file_submit_container">
+                <div class="cancel_btn_container">
+                  <button class="cancel_btn" type="reset" (click)="closeModal()">Cancel</button>
+                </div>
+                <div class="submit_btn_container">
+                  <button class="submit_btn" type="submit" [disabled]="travelTicketForm.invalid">Add</button>
+                </div>
+              </div>
+
+            </form>
+            
+        </div>
+
+    </div>
+
+
+  </div>
+  

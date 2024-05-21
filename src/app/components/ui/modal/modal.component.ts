@@ -163,4 +163,6 @@ export class ModalComponent {
   
     this.closeModal();
   }
+
+  
 }

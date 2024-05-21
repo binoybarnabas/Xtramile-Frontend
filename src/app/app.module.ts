@@ -126,7 +126,8 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
 import { CustomLoaderComponent } from './components/ui/generalUIComponents/custom-loader/custom-loader.component';
 import { UserProfileComponent } from './features/travellerFeatures/user-profile/user-profile.component';
 import { TravellerRequestHistoryComponent } from './features/travellerFeatures/traveller-request-history/traveller-request-history.component';
-import { TravellerApprovedRequestsComponent } from './features/travellerFeatures/traveller-approved-requests/traveller-approved-requests.component'; // Import Ng2PdfViewerModule
+import { TravellerApprovedRequestsComponent } from './features/travellerFeatures/traveller-approved-requests/traveller-approved-requests.component';
+import { AddTicketModalComponent } from './components/ui/form-components/add-ticket-modal/add-ticket-modal.component'; // Import Ng2PdfViewerModule
 
 @NgModule({
   declarations: [
@@ -241,6 +242,7 @@ import { TravellerApprovedRequestsComponent } from './features/travellerFeatures
     UserProfileComponent,
     TravellerRequestHistoryComponent,
     TravellerApprovedRequestsComponent,
+    AddTicketModalComponent,
   ],
   imports: [
     CommonModule,
