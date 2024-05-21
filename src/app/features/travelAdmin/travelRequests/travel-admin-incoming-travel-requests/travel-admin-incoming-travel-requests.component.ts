@@ -11,24 +11,11 @@ import { CustomLoaderService } from 'src/app/services/helperServices/commonUISer
   styleUrls: ['./travel-admin-incoming-travel-requests.component.css'],
 })
 export class TravelAdminIncomingTravelRequestsComponent {
-  pageHeading: string = 'Incoming Requests';
 
-  tableHeaders: string[] = [
-    'Request Code',
-    'Employee',
-    'Project Code',
-    'Date',
-    'Mode',
-    'Status',
-  ];
-  fieldsToDisplay: string[] = [
-    'requestCode',
-    'employeeName',
-    'projectCode',
-    'createdOn',
-    'travelTypeName',
-    'statusName',
-  ];
+  pageHeading: string = "Incoming Requests";
+
+  tableHeaders: string[] = ['Request Code', 'Requested By', 'Project Code','From','To','Date Of Travel','Status'];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode', 'from', 'to','departureDate', 'statusName'];
   incomingRequestdata: any[] = [];
 
   requestData: any[] = [];
@@ -94,7 +81,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
           return {
             ...request,
             statusName: request.statusName === 'Approved by RM' ? request.statusName = 'Approved' : request.statusName = request.statusName,
-            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
             priorityName: priorityName,
           };
         });
@@ -124,7 +111,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
           return {
             ...request,
             statusName: request.statusName === 'Approved by RM' ? request.statusName = 'Approved' : request.statusName = request.statusName,
-            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
             priorityName: priorityName,
           };
         });
@@ -158,8 +145,8 @@ export class TravelAdminIncomingTravelRequestsComponent {
               return {
                 ...request,
                 statusName: request.statusName === 'Approved by RM' ? request.statusName = 'Approved' : request.statusName = request.statusName,
-                createdOn: this.datePipe.transform(
-                  request.createdOn,
+                departureDate: this.datePipe.transform(
+                  request.departureDate,
                   'dd/MM/yyyy'
                 ),
                 priorityName: priorityName,
@@ -186,8 +173,8 @@ export class TravelAdminIncomingTravelRequestsComponent {
               return {
                 ...request,
                 statusName: request.statusName === 'Approved by RM' ? request.statusName = 'Approved' : request.statusName = request.statusName,
-                createdOn: this.datePipe.transform(
-                  request.createdOn,
+                departureDate: this.datePipe.transform(
+                  request.departureDate,
                   'dd/MM/yyyy'
                 ),
                 priorityName: priorityName,
@@ -221,27 +208,21 @@ export class TravelAdminIncomingTravelRequestsComponent {
   ngOnInit() {
     //api service to receive all incoming requests.
 
-    this.loaderService.show();
+    this.apiservice.getIncomingRequests(this.currentPage, this.pageSize).subscribe((data: any) => {
+      this.requestData = data.travelRequest.map((request: any) => {
+        const priorityName = request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
+        return {
+          ...request,
+          statusName: (request.statusName === 'Approved by RM' || request.statusName === 'Approved by TA') ? request.statusName = 'Approved' : request.statusName = request.statusName,
+          departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
+          priorityName: priorityName
 
-    this.apiservice
-      .getIncomingRequests(this.currentPage, this.pageSize)
-      .subscribe((data: any) => {
-
-        this.loaderService.hide();
-
-        this.requestData = data.travelRequest.map((request: any) => {
-          const priorityName =
-            request.priorityName === 'Null' ? 'Not Set' : request.priorityName;
-          return {
-            ...request,
-            statusName: request.statusName === 'Approved by RM' ? request.statusName = 'Approved' : request.statusName = request.statusName,
-            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
-            priorityName: priorityName,
-          };
-        });
-        console.log(this.requestData);
-        this.totalItems = data.pageCount;
+        };
       });
+      console.log(this.requestData)
+      this.totalItems = data.pageCount;
+    });
+
   }
 
   pageChanged(event: any): void {
@@ -263,7 +244,7 @@ export class TravelAdminIncomingTravelRequestsComponent {
           return {
             ...request,
             statusName: request.statusName === 'Approved by RM' ? request.statusName = 'Approved' : request.statusName = request.statusName,
-            createdOn: this.datePipe.transform(request.createdOn, 'dd/MM/yyyy'),
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
             priorityName: priorityName,
           };
         });
