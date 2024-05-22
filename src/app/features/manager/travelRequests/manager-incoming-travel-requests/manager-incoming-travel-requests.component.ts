@@ -26,8 +26,8 @@ export class ManagerIncomingTravelRequestsComponent {
   requestId: number = 0;
   bsModalRef!: BsModalRef
 
-  tableHeaders: string[] = ['Request Code', 'Requested By', 'Project Code', 'From', 'To', 'Requested On'];
-  fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to', 'date'];
+  tableHeaders: string[] = ['Request Code', 'Requested By', 'Project Code', 'From', 'To', 'Departure Date', 'Requested On'];
+  fieldsToDisplay: string[] = ['requestCode', 'employeeNameAndEmail', 'projectCode', 'from', 'to', 'departureDate', 'date'];
 
   employeeRequest: any[] = [];
 
@@ -48,7 +48,8 @@ export class ManagerIncomingTravelRequestsComponent {
           return {
             ...request,
             date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
-            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`,
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
           };
         });
       },
@@ -79,7 +80,8 @@ export class ManagerIncomingTravelRequestsComponent {
           return {
             ...request,
             date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
-            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`,
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
           };
         });
         console.log("employee request search by name list");
@@ -138,7 +140,8 @@ export class ManagerIncomingTravelRequestsComponent {
           return {
             ...request,
             date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
-            employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+            employeeNameAndEmail: `${request.employeeName}\n${request.email}`,
+            departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
           };
         });
         console.log(this.employeeRequest)
@@ -176,7 +179,8 @@ export class ManagerIncomingTravelRequestsComponent {
             return {
               ...request,
               date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
-              employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+              employeeNameAndEmail: `${request.employeeName}\n${request.email}`,
+              departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
             };
           });
           this.totalItems = data.totalCount;
@@ -196,7 +200,8 @@ export class ManagerIncomingTravelRequestsComponent {
             return {
               ...request,
               date: this.datePipe.transform(request.date, 'dd/MM/yyyy'),
-              employeeNameAndEmail: `${request.employeeName}\n${request.email}`
+              employeeNameAndEmail: `${request.employeeName}\n${request.email}`,
+              departureDate: this.datePipe.transform(request.departureDate, 'dd/MM/yyyy'),
             };
           });
           this.totalItems = data.totalCount;
