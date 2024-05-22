@@ -127,7 +127,8 @@ import { CustomLoaderComponent } from './components/ui/generalUIComponents/custo
 import { UserProfileComponent } from './features/travellerFeatures/user-profile/user-profile.component';
 import { TravellerRequestHistoryComponent } from './features/travellerFeatures/traveller-request-history/traveller-request-history.component';
 import { TravellerApprovedRequestsComponent } from './features/travellerFeatures/traveller-approved-requests/traveller-approved-requests.component';
-import { AddTicketModalComponent } from './components/ui/form-components/add-ticket-modal/add-ticket-modal.component'; // Import Ng2PdfViewerModule
+import { AddTicketModalComponent } from './components/ui/form-components/add-ticket-modal/add-ticket-modal.component';
+import { CustomCalendarComponent } from './components/ui/generalUIComponents/custom-calendar/custom-calendar.component';
 
 @NgModule({
   declarations: [
@@ -243,6 +244,7 @@ import { AddTicketModalComponent } from './components/ui/form-components/add-tic
     TravellerRequestHistoryComponent,
     TravellerApprovedRequestsComponent,
     AddTicketModalComponent,
+    CustomCalendarComponent,
   ],
   imports: [
     CommonModule,

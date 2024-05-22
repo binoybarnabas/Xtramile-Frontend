@@ -6,7 +6,7 @@
             <button *ngIf="isDelBtnVisible" (click)="deleteSelectedOption()" [disabled]=" selectedImageOptionIndex === -1 && selectedTextOptionIndex === -1 && selectedTicketFileIndex === -1" class="del_btn"><i class="ri-delete-bin-5-fill"></i></button>
             <p class="main_title">{{actionBarTitle}}</p>
             <!-- <span class="task_icon"><i class="ri-donut-chart-line"></i></span> -->
-            <button *ngIf="isAddBtnVisible" (click)="onAddBtnClick()" class="add_btn">{{addBtnTitle}}</button>
+            <button *ngIf="isAddBtnVisible" (click)="onAddBtnClick()" class="add_btn"><i class="icon ri-upload-cloud-line"></i>{{addBtnTitle}}</button>
         </div>
         <div class="tab_section">
             <div class="tab_container">
@@ -213,6 +213,10 @@
             </div>
 
           </ng-container>
+
+          <div *ngIf="ticketFileUrls.length === 0" class="empty_option_container">
+            <app-empty-data [mainTitle]="noTicketMessageTitle" [description]="noTicketMessageDescription"></app-empty-data>
+          </div>
         
         </div>
 

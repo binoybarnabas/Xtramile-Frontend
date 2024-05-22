@@ -27,7 +27,7 @@ import { TravelRequestUiService } from 'src/app/services/helperServices/requestS
 })
 export class NewTravelRequestComponent {
   //Employee id
-  empId: number;
+  currentLoggedInUserId: number;
 
   //Employee details from api
   employeeDetails?: EmployeeDetails;
@@ -69,6 +69,8 @@ export class NewTravelRequestComponent {
 
   status: string = '';
 
+  ticketStatus : string ='';
+
   requestId: number = -1;
 
   // Function to convert the Map into an array of key-value pairs
@@ -109,7 +111,7 @@ export class NewTravelRequestComponent {
 
     this.userData = storedUserData !== null ? JSON.parse(storedUserData) : null;
 
-    this.empId = this.userData?.empId;
+    this.currentLoggedInUserId = this.userData?.empId;
 
     this.newReqFormSubMenuValue = 0;
 
@@ -175,7 +177,9 @@ export class NewTravelRequestComponent {
           this.newReqFormSubMenuValue = 4;
           this.currentNavIndex = 4;
           this.forwardBtnTitle = 'Submit';
-        } else {
+        }
+  
+        else {
           this.leftSectionNavItems = [
             'General Information',
             'Trip Information',
@@ -195,7 +199,13 @@ export class NewTravelRequestComponent {
             'Documents Attached',
           ];
           this.totalNavCount = 3;
-        } else {
+        }
+        else if(this.ticketStatus === 'Not Attached'){
+          this.newReqFormSubMenuValue = 4;
+          this.currentNavIndex = 4;
+          this.forwardBtnTitle = 'Send';
+        }
+        else {
           this.leftSectionNavItems = [
             'General Information',
             'Trip Information',
@@ -248,7 +258,7 @@ export class NewTravelRequestComponent {
   travelRequestForm!: FormGroup;
 
   ngOnInit() {
-    this.requestService.getEmployeeDataById(this.empId).subscribe({
+    this.requestService.getEmployeeDataById(this.currentLoggedInUserId).subscribe({
       next: (data) => {
         this.employeeDetails = data;
         console.log(this.employeeDetails);
@@ -281,6 +291,7 @@ export class NewTravelRequestComponent {
           data.returnDate =
             this.datePipe.transform(data.returnDate, 'dd/MM/yyyy') || ' ';
           this.travelRequestDetailViewModel = data;
+          this.ticketStatus = data.ticketStatus;
           // Getting the employee profile info
 
           this.getTravelOptionsByReqId(data.requestId);
@@ -440,7 +451,7 @@ export class NewTravelRequestComponent {
   onTravelAdminOptionsSend() {
     const requestStatus: RequestStatus = {
       requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
-      empId: this.empId, // Assign the employee ID
+      empId: this.currentLoggedInUserId, // Assign the employee ID
       primaryStatusId: 2, // Assign the primary status ID
       date: new Date(), // Assign the current date
       secondaryStatusId: 10, // Assign the secondary status ID
@@ -512,7 +523,7 @@ export class NewTravelRequestComponent {
     if (confirm('Do you want to close the request')) {
       const requestStatus: RequestStatus = {
         requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
-        empId: this.empId, // Assign the employee ID
+        empId: this.currentLoggedInUserId, // Assign the employee ID
         primaryStatusId: 3, // Assign the primary status ID
         date: new Date(), // Assign the current date
         secondaryStatusId: 10, // Assign the secondary status ID
@@ -603,6 +614,7 @@ export class NewTravelRequestComponent {
         //TA events
 
         if (this.status === 'Approved by RM') {
+
           const formData = new FormData();
 
           // Convert selectedImages to FormData
@@ -637,7 +649,7 @@ export class NewTravelRequestComponent {
             'requestId',
             String(this.travelRequestDetailViewModel.requestId)
           );
-          formData.append('empId', String(this.empId));
+          formData.append('empId', String(this.currentLoggedInUserId));
           formData.append('primaryStatusId', '2'); // Assign the primary status ID
           formData.append('date', new Date().toISOString()); // Assign the current date
           formData.append('secondaryStatusId', '10'); // Assign the secondary status ID
@@ -661,14 +673,22 @@ export class NewTravelRequestComponent {
               this.forwardBtnTitle = 'Next';
             },
           });
-        } else if (this.status === 'Selected') {
-          //Confirm / Edit Selcted Travel Option
-          //this.openOptionConfirmationModal();
+        } 
+        else if (this.status === 'Selected') {
+      
           this.openOptionConfirmationModal();
           
-
           this.initializeComponent();
         }
+        else if(this.status === 'Approved by TA'){
+          if(this.ticketStatus === 'Not Attached'){
+            
+            //Attach Tickets
+              this.onTravelAdminSendTravelTickets();
+      
+          }
+        }
+        
       }
     }
 
@@ -685,7 +705,7 @@ export class NewTravelRequestComponent {
   submitSelectedTravelOption(selectedTravelOptionId: number): void {
     console.log('Option confirmed:', selectedTravelOptionId);
     this.requestService
-      .submitSelectedOption(this.requestId, this.empId, selectedTravelOptionId)
+      .submitSelectedOption(this.requestId, this.currentLoggedInUserId, selectedTravelOptionId)
       .subscribe({
         next: (response: any) => {
           console.log('Post successful:', response);
@@ -737,7 +757,7 @@ export class NewTravelRequestComponent {
   onTravelAdminConfirmTravelOption(confirmedOptionId: number) {
     const confirmedOptionData = {
       requestId: this.requestId,
-      empId: this.empId,
+      empId: this.currentLoggedInUserId,
       optionId: confirmedOptionId,
     };
 
@@ -758,6 +778,51 @@ export class NewTravelRequestComponent {
         },
       });
   }
+
+
+  //Send Travel Tickets
+  onTravelAdminSendTravelTickets(){
+
+    const formData = new FormData();
+
+    // Convert selectedImages to FormData
+    for (
+      let i = 0;
+      i < this.tabbedOptionViewer.addedTicketFiles.length;
+      i++
+    ) {
+      formData.append(
+        'tickets',
+        this.tabbedOptionViewer.addedTicketFiles[i],
+        this.tabbedOptionViewer.addedTicketFiles[i].name
+      );
+    }
+
+    // Convert descriptions to JSON string and append to FormData
+    // Convert descriptions to FormData
+    this.tabbedOptionViewer.ticketFileDescriptions.forEach(
+      (desc, index) => {
+        formData.append(`description[${index}]`, desc);
+      }
+    );
+
+    // Append other fields to FormData
+    formData.append(
+      'requestId',
+      String(this.travelRequestDetailViewModel.requestId)
+    );
+
+    formData.append(
+      'empId',
+      String(this.currentLoggedInUserId)
+    );
+
+    this.travelRequestUIService.sendTravelTickets(formData);
+
+  }
+
+
+
 
   handleIsSubmitBtnActiveChange(newValue: boolean): void {
     this.isSubmitBtnActive = newValue;
