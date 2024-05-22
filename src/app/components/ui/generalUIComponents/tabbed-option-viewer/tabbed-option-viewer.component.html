@@ -3,7 +3,7 @@
     <div class="heading_section">
 
         <div *ngIf="isActionBarVisible" class="action_bar" [class.single_item]="!isDelBtnVisible && !isAddBtnVisible">
-            <button *ngIf="isDelBtnVisible" (click)="deleteSelectedOption()" [disabled]="selectedImageOptionIndex === -1 && selectedTextOptionIndex === -1" class="del_btn"><i class="ri-delete-bin-5-fill"></i></button>
+            <button *ngIf="isDelBtnVisible" (click)="deleteSelectedOption()" [disabled]=" selectedImageOptionIndex === -1 && selectedTextOptionIndex === -1 && selectedTicketFileIndex === -1" class="del_btn"><i class="ri-delete-bin-5-fill"></i></button>
             <p class="main_title">{{actionBarTitle}}</p>
             <!-- <span class="task_icon"><i class="ri-donut-chart-line"></i></span> -->
             <button *ngIf="isAddBtnVisible" (click)="onAddBtnClick()" class="add_btn">{{addBtnTitle}}</button>
@@ -170,10 +170,51 @@
         </div>
 
         <!-- Display Selected Option -->
-        <div *ngIf="activeTabName === 'Ticket Details'" class="tab_body selected_option">
-          <p>Ticket Not Uploaded</p>  
-        </div>
+        <div *ngIf="activeTabName === 'Ticket Details'" class="tab_body ticket_details">
+          <!-- <p>Ticket Not Uploaded</p>   -->
+          <ng-container *ngFor="let item of ticketFileUrls; let i = index">
+         
+            <div (click)="onTicketFileSelected(i)" class="ticket_card" [class.selected]="selectedTicketFileIndex === i">
 
+              <div class="dummy_space">
+              </div>
+  
+              <div class="top_section">
+  
+                <div class="req_code">
+                  <span class="title">Request Code</span>
+                  <p class="value">REQ0001</p>
+                </div>
+  
+                <div class="file_type">
+                  <img class="file_type_icon" src="../../../../assets/images/pdf_icon.png" alt="">
+                </div>
+  
+              </div>
+  
+              <div class="origin_destination_section">
+  
+                  <div class="value_card">
+                    <p class="city">{{sourceCity}}</p>
+                    <span class="country">{{sourceCountry}}</span>
+                  </div>
+  
+                  <div class="value_card right">
+                    <p class="city">{{destinationCity}}</p>
+                    <span class="country">{{destinationCountry}}</span>
+                  </div>
+  
+              </div>
+  
+              <div class="description_section">
+                <span class="text">file_name.pdf</span>
+              </div>
+  
+            </div>
+
+          </ng-container>
+        
+        </div>
 
     </div>
 

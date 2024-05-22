@@ -12,7 +12,8 @@ import { CustomLoaderService } from 'src/app/services/helperServices/commonUISer
 })
 export class TravelAdminSelectedRequestsComponent {
 
-    
+  pageHeading: string = 'Selected Options';
+
   private subscription : Subscription | any
 
   tableHeaders: string[] = ['Request Code', 'Requested By', 'Project Code', 'From','To','Date of Trip','Selected On'];

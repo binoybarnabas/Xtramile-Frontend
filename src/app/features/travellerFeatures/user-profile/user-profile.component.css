@@ -3,6 +3,7 @@
     box-shadow: var(--normal-box-shadow);
     border-radius: var(--normal-border-radius);
     border-bottom: 2px solid var(--secondary-text-color);
+    height: calc(100vh - 92px);
   }
   
   .main_container .inner_container .top_container {
@@ -213,13 +214,15 @@
   }
   
   .main_container .inner_container .bottom_section {
-    height: 60%;
+    /* height: 60%; */
+    height: calc(100vh - 280px);
+    overflow-y: auto;
     padding: 1.5rem 0.5rem;
   }
   
   .main_container .inner_container .bottom_section .form-row label {
     font-size: var(--form-label-font-size);
-    font-weight: var(--active-font-weight);
+    /* font-weight: var(--active-font-weight); */
     color: var(--ternary-text-color);
   }
   
@@ -246,9 +249,10 @@
     height: 42px;
     box-sizing: border-box;
     border: 1px solid var(--menu-hover-color);
-    border-radius: 6px;
+    border-radius: 4px;
     outline: none;
-    font-size: var(--small-font-size);
+    font-size: var(--form-label-font-size);
+    font-weight: var(--active-font-weight);
     color: var(--secondary-text-color);
   }
   

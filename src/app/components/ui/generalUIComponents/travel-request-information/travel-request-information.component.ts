@@ -162,7 +162,7 @@ export class NewTravelRequestComponent {
         if (
           this.status === 'Waiting' ||
           this.status === 'Selected' ||
-          this.status === 'Ongoing'
+          this.status === 'Approved by TA'
         ) {
           this.leftSectionNavItems = [
             'General Information',
@@ -310,7 +310,7 @@ export class NewTravelRequestComponent {
             this.userData.role == 'Manager' &&
             this.userData.department == 'TA'
           ) {
-            if (this.status === 'Ongoing') {
+            if (this.status === 'Approved by TA') {
               this.isCloseVisible = true;
             }
           }

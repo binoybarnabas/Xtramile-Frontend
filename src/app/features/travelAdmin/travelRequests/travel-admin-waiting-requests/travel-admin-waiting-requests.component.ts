@@ -15,8 +15,11 @@ export class TravelAdminWaitingRequestsComponent {
 
   private subscription : Subscription | any
 
+  pageHeading: string = 'Waiting Options';
+
   tableHeaders: string[] = ['Request Code', 'Requested By', 'Project Code','From','To','Date of Travel', 'Options sent on'];
   fieldsToDisplay: string[] = ['requestCode', 'employeeName', 'projectCode','from','to','departureDate','approvalDate'];
+
   incomingRequestdata:any[] = [];
   requestId: number = 0;
   row: any;
