@@ -168,6 +168,13 @@
 
   <!-- action bar -->
   <div class="action_section">
+   
+    <div *ngIf="status === 'Open' || status === 'Approved by RM' || status === 'Waiting' " class="close_reject_btn_container">
+        <button (click)="onRejectBtnClick()" class="btn">
+          {{rejectBtnText}}
+        </button>
+    </div>
+
     <div class="btn_container">
       <div class="back_btn_card">
         <button (click)="onBackBtnClick()" class="btn">

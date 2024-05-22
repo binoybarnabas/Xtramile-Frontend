@@ -14,8 +14,18 @@ export class CustomConfirmationModalComponent {
   @Input() confirmBtnText : string = 'Confirm';
   @Input() confirmBtnColor : string = '#9a4cfa';
 
+  @Input() isTextFieldEnabled : boolean = false;
+  @Input() textFieldLabel : string = '';
+  @Input() textFieldFormControlName : string ='';
+  @Input() textFieldPlaceHolder : string ='';
+
   @Output() cancel = new EventEmitter<void>();
   @Output() confirm = new EventEmitter<void>();
+
+  @Input()  onRejectionReasonEntered!: Function;
+  //to be called to return the entered text input
+
+  textFieldValue: string = '';
 
   constructor(public bsModalRef: BsModalRef){
     
@@ -31,8 +41,18 @@ export class CustomConfirmationModalComponent {
   }
 
   onConfirmBtnClick(){
-    this.confirm.emit();
-    this.onCloseIconClick();
+
+    if(this.isTextFieldEnabled){
+      
+      this.onRejectionReasonEntered(this.textFieldValue); // Calling the callback function
+      
+    }
+    else{
+      this.confirm.emit();
+    }
+   
+    this.bsModalRef.hide();
+  
   }
 
   

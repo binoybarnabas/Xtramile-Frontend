@@ -292,6 +292,27 @@
   padding: 10px;
 }
 
+.req_forms_main_container .action_section .close_reject_btn_container .btn{
+  height: 38px;
+  width: 100px;
+  background-color: transparent;
+  color: var(--primary-red-color);
+  font-size: var(--form-label-font-size);
+  font-weight: var(--active-font-weight);
+  border: 1.5px solid var(--primary-red-color);
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+.req_forms_main_container .action_section .close_reject_btn_container .btn:hover{
+
+  background-color: var(--primary-red-color);
+  color: var(--card-bg-color);
+
+}
+
+
+
 .req_forms_main_container .action_section .btn_container {
   display: flex;
   justify-content: flex-end;

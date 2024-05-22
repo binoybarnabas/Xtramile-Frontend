@@ -9,6 +9,11 @@
         <p class="desc">{{description}}</p>
     </div>
 
+    <div *ngIf="isTextFieldEnabled" class="input_field_container">
+        <label class="label">{{textFieldLabel}}</label>
+        <input type="text" [(ngModel)]="textFieldValue" class="text_input" placeholder="{{textFieldPlaceHolder}}">
+    </div>
+
     <div class="bottom_actions">
         <button (click)="onCancelBtnClick()" class="btn cancel">{{cancelBtnText}}</button>
         <button (click)="onConfirmBtnClick()" [style.background]="confirmBtnColor" [style.border]="confirmBtnColor"   class="btn confirm">{{confirmBtnText}}</button>

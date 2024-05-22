@@ -46,6 +46,8 @@ export class NewTravelRequestComponent {
   requestDetailsPageHeading: string = 'TRAVEL REQUEST INFORMATION';
 
   //action bar items
+  rejectBtnText : string = 'Reject'
+
   backBtnTitle: string = 'Back';
   forwardBtnTitle: string = 'Next';
 
@@ -827,6 +829,75 @@ export class NewTravelRequestComponent {
   handleIsSubmitBtnActiveChange(newValue: boolean): void {
     this.isSubmitBtnActive = newValue;
   }
+
+
+  onRejectBtnClick(){
+
+    if(this.currentLoggedInUserRole === 'manager' || this.currentLoggedInUserRole === 'travelAdmin'){
+      //open close modal
+      this.openRejectionConfirmationModal();
+    }
+
+    if(this.currentLoggedInUserRole === 'employee'){
+
+      //withdraw travel requests
+
+    }
+
+  }
+
+
+  openRejectionConfirmationModal(){
+    
+    const initialState = {
+      mainText: 'Reject Travel Request?',
+      description: 'Kindly specify the reason for declining the travel request',
+      cancelBtnText: 'Cancel',
+      confirmBtnText: 'Reject',
+      confirmBtnColor: '#ec0d0d',
+      isTextFieldEnabled : true,
+      textFieldLabel : 'Reason for Rejection',
+      textFieldPlaceHolder : 'enter the reason',
+
+      onRejectionReasonEntered: this.rejectTravelRequest.bind(this),
+
+    };
+
+    const modalRef = this.modalService.show(CustomConfirmationModalComponent, {
+      initialState,
+    });
+
+    modalRef.content?.cancel.subscribe(() => {
+      
+    });
+
+
+  }
+
+
+  rejectTravelRequest(reasonForRejection : string){
+  
+    const rejectionFormData = new FormData();
+
+    rejectionFormData.append(
+      'requestId',
+      String(this.travelRequestDetailViewModel.requestId)
+    );
+
+    rejectionFormData.append(
+      'rejectedBy',
+      String(this.currentLoggedInUserId)
+    );
+
+    rejectionFormData.append(
+      'rejectionReason',
+      String(reasonForRejection)
+    );
+
+    this.travelRequestUIService.rejectTravelRequest(rejectionFormData);
+
+  }
+
 
   //EOF
 }
