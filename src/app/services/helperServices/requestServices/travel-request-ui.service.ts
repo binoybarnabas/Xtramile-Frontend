@@ -1,9 +1,7 @@
 import { Injectable, ViewChild } from '@angular/core';
-import { ManagerTravelRequestsService } from '../../managerServices/travelRequestsServices/manager-travel-requests.service';
 import { CustomToastService } from '../toastServices/custom-toast.service';
 import { TravelRequestApiService } from '../../apiServices/travelRequestAPIServices/travel-request-api.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ManagerIncomingTravelRequestsComponent } from 'src/app/features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
 
 @Injectable({
   providedIn: 'root',
@@ -37,4 +35,27 @@ export class TravelRequestUiService {
         },
       });
   }
+
+  sendTravelTickets(travelTicketFormData : any){
+
+    this.travelRequestApiService.sendTravelTickets(travelTicketFormData).subscribe({
+      next: (data) => {
+        
+        this.toastService.showToast({
+          message: 'Travel Tickets Send',
+          toastType: 'success',
+          toastDuration: 3000,
+        });
+      },
+      complete: () => {
+        //this.bsModalRef.hide();
+        //refresh manager incoming travel requests
+
+      },
+    })
+
+  }
+
+  
+
 }

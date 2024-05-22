@@ -6,6 +6,13 @@
   padding: 1rem;
 }
 
+.modal_header.invalidForm{
+  border-bottom: 1px solid var(--primary-red-color);
+  background-color: var(--secondary-red-color);
+  border-radius:  8px 8px 0 0 ;
+}
+
+
 .modal_title {
   margin-top: auto;
   margin-bottom: auto;
@@ -51,8 +58,6 @@
 
 .file_drop_container .form_container {
   width: 100%;
-  /* background: var(--menu-hover-color); */
-  /* padding: 0.5rem; */
   border-radius: 5px;
 }
 
@@ -69,19 +74,22 @@
   outline: none;
   padding: 0.5rem;
   font-size: var(--form-label-font-size);
-  border: 1px solid var(--ternary-text-color);
+  border: 1.2px solid var(--menu-hover-color);
 }
 
 .file_drop_container .form_container .file_input {
-  /* Your styles here */
-  border: 1px solid var(--ternary-text-color);
+  border: 1.2px solid var(--menu-hover-color);
   padding: 10px;
   border-radius: 5px;
   height: 43px;
   font-size: var(--form-label-font-size);
   width: 100%;
   margin-bottom: 7px;
-  /* Add more styles as needed */
+}
+
+.file_drop_container .form_container .label_form_error_container{
+  display: flex;
+  justify-content: space-between;
 }
 
 .file_drop_container .form_container .form_error {
@@ -108,9 +116,23 @@
   border-radius: var(--normal-border-radius);
 }
 
+
+.file_drop_container .form_container .form_input_container .checkbox_container{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.file_drop_container .form_container .form_input_container .checkbox_container .form_control.checkbox{
+  margin-right: 6px;
+}
+
+
+
 .file_drop_container .form_container .submit_btn_container {
   width: 100%;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .file_drop_container

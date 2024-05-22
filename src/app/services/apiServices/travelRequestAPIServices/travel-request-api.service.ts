@@ -18,5 +18,11 @@ export class TravelRequestApiService {
     return this.http.patch('http://localhost:5190/api/reportingmanager/travel/request/approve',body);
   }
 
+
+  sendTravelTickets(travelTicketData: any):Observable<any>{
+    return this.http.post<any>('http://localhost:5190/api/traveladmin/send-travel-tickets',travelTicketData);
+  }
+  
+
   
 }

@@ -1,45 +1,61 @@
-<div class="modal_header">
-    <h6 class="modal_title">{{uploadFormTitle}}</h6>
-    <button type="button" class="exit_button" (click)="closeModal()">
-      <i class="icon ri-close-fill"></i></button>
+<div class="modal_header" [class.invalidForm]="!isFileSelected && isSubmitBtnClicked">
+  <h6 class="modal_title">{{ uploadFormTitle }}</h6>
+  <button type="button" class="exit_button" (click)="closeModal()">
+    <i class="icon ri-close-fill"></i>
+  </button>
 </div>
 
-  <div class="modal-body">
+<div class="modal-body">
+  <div class="file_drop_container">
+    <div class="form_container">
+      <form
+        (ngSubmit)="addImageFile()"
+        [formGroup]="travelTicketForm"
+        class="travelOptionForm"
+      >
+        <div class="form_input_container">
+          <input type="hidden" formControlName="requestId" />
+          <div class="label_form_error_container">
+            <label class="label" for="ticketFile">Ticket File</label>
+            <span *ngIf="!isFileSelected" class="form_error" >
+            No file selected!
+          </span>
+          </div>
+          
+          <input
+            type="file"
+            formControlName="ticketFile"
+            class="file_input"
+            (change)="onFileChange($event)"
+            multiple
+            required
+          />
 
-    <div class="file_drop_container">
+          <label class="label" for="description">Description</label>
+          <input
+            type="text"
+            class="text_input"
+            formControlName="description"
+            placeholder="enter description if any"
+          />
 
-        <div class="form_container">
-
-            <form (ngSubmit)="addImageFile()" [formGroup]="travelTicketForm" class="travelOptionForm">
-              
-              <div class="form_input_container">
-
-                <input type="hidden" formControlName="requestId">
-                <label class="label" for="ticketFile">Ticket File</label>
-                <input type="file" formControlName="ticketFile" class="file_input" (change)="onFileChange($event)" multiple required/>
-
-                <span class="form_error"
-                *ngIf="travelTicketForm.get('optionFile')?.invalid && travelTicketForm.get('optionFile')?.touched">
-                   No file selected!
-               </span>
-              
-                <label class="label" for="description">Description</label>
-                <input type="text" class="text_input" formControlName="description" placeholder="enter description if any"/>
-
-              </div>
-
-             
-                <div class="submit_btn_container">
-                  <button class="submit_btn" type="submit" [disabled]="travelTicketForm.invalid"> <i class="icon ri-upload-cloud-line"></i> Upload</button>
-                </div>
-              
-
-            </form>
-            
+          <div *ngIf="tripType === 'Round Trip'" class="checkbox_container">   
+            <input class="form_control checkbox" type="checkbox">
+            <label class="label">This is a return ticket</label>
+          </div>
+       
         </div>
 
+        <div class="submit_btn_container">
+          <button
+            class="submit_btn"
+            type="submit"
+            [disabled]="travelTicketForm.invalid"
+          >
+            <i class="icon ri-upload-cloud-line"></i> Upload
+          </button>
+        </div>
+      </form>
     </div>
-
-
   </div>
-  
+</div>

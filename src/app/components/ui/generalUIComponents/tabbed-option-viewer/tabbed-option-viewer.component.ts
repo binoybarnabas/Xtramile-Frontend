@@ -21,6 +21,7 @@ export class TabbedOptionViewerComponent {
   @Input() requestStatus: string = '';
   @Input() ticketStatus: string = '';
 
+  @Input() tripType : string ='';
   @Input() requestCode: string = '';
   @Input() sourceCity: string = '';
   @Input() destinationCity: string = '';
@@ -206,6 +207,7 @@ export class TabbedOptionViewerComponent {
   openAddTicketModal() {
     const initialState = {
       requestId: this.requestId,
+      tripType : this.tripType,
       onTicketFileSelected: this.addTravelTicket.bind(this),
     };
     this.bsModalRef = this.modalService.show(AddTicketModalComponent, {

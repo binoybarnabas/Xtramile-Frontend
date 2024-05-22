@@ -15,6 +15,8 @@ export class AddTicketModalComponent {
   //@Output() travelOptionAdded: EventEmitter<void> = new EventEmitter<void>();
   private _requestId!: number;
 
+  @Input() tripType !: string;
+
   @Input()
   set requestId(value: number) {
 
@@ -26,12 +28,14 @@ export class AddTicketModalComponent {
   }
 
 
-
   travelTicketForm!: FormGroup;
+
+  isFileSelected : boolean = false;
+  isSubmitBtnClicked : boolean = false;
 
   constructor(public bsModalRef: BsModalRef, 
 
-    private travelAdminRequestService: TravelAdminTravelRequestsService, private toastService: CustomToastService, private commonService:CommonAPIService) {
+    private toastService: CustomToastService) {
 
   }
 
@@ -63,19 +67,6 @@ export class AddTicketModalComponent {
     return { invalidImage: true }; // Invalid
   }
 
-  //not used - has bugs
-  previewImage(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.travelTicketForm.patchValue({
-          ticketFile: reader.result
-        });
-      };
-      reader.readAsDataURL(file);
-    }
-  }
 
   selectedFiles: File[] = [];
   onFileChange(event: any): void {
@@ -86,6 +77,7 @@ export class AddTicketModalComponent {
       for (let i = 0; i < files.length; i++) {
         this.selectedFiles.push(files[i]);
       }
+      this.isFileSelected = true;
     }
   }
 
@@ -94,6 +86,19 @@ export class AddTicketModalComponent {
   onTicketFileSelected!: Function;
 
   addImageFile(): void {
+
+    this.isSubmitBtnClicked = true;
+
+    if(this.selectedFiles.length === 0){
+      this.isFileSelected = false;
+      // this.toastService.showToast({
+      //   message: 'No Files Selected',
+      //   toastType: 'warning',
+      //   toastDuration: 3000,
+      // });
+      return;
+    }
+
     const tickets: File[] = this.selectedFiles;
     const descriptions: string[] = this.travelTicketForm.get('description')?.value;
   

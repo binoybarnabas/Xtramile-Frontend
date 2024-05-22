@@ -194,7 +194,7 @@
 }
 
 .main_container .body_section .tab_body.ticket_details .ticket_card {
-  width: 300px;
+  width: 280px;
   background-color: var(--card-bg-color);
   box-shadow: var(--normal-box-shadow);
   border-radius: 5px;
