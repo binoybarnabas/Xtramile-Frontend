@@ -7,7 +7,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./custom-confirmation-modal.component.css']
 })
 export class CustomConfirmationModalComponent {
-  
+
+  @Input() requestId : number = -1;
   @Input() mainText : string = 'Main';
   @Input() description: string = 'description';
   @Input() cancelBtnText : string = 'Cancel';
@@ -27,6 +28,7 @@ export class CustomConfirmationModalComponent {
 
   textFieldValue: string = '';
 
+
   constructor(public bsModalRef: BsModalRef){
     
   }
@@ -44,7 +46,7 @@ export class CustomConfirmationModalComponent {
 
     if(this.isTextFieldEnabled){
       
-      this.onRejectionReasonEntered(this.textFieldValue); // Calling the callback function
+      this.onRejectionReasonEntered(this.textFieldValue, this.requestId); // Calling the callback function
       
     }
     else{
