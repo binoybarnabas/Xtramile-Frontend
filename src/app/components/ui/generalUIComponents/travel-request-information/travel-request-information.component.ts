@@ -46,6 +46,8 @@ export class NewTravelRequestComponent {
   requestDetailsPageHeading: string = 'TRAVEL REQUEST INFORMATION';
 
   //action bar items
+  rejectBtnText : string = 'Reject'
+
   backBtnTitle: string = 'Back';
   forwardBtnTitle: string = 'Next';
 
@@ -827,6 +829,23 @@ export class NewTravelRequestComponent {
   handleIsSubmitBtnActiveChange(newValue: boolean): void {
     this.isSubmitBtnActive = newValue;
   }
+
+
+  onRejectBtnClick(){
+
+    if(this.currentLoggedInUserRole === 'manager' || this.currentLoggedInUserRole === 'travelAdmin'){
+      //open close modal
+      this.travelRequestUIService.openRejectionConfirmationModal(this.requestId);
+    }
+
+    if(this.currentLoggedInUserRole === 'employee'){
+
+      //withdraw travel requests
+
+    }
+
+  }
+
 
   //EOF
 }

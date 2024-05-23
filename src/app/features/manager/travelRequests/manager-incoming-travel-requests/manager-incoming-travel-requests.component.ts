@@ -223,6 +223,7 @@ export class ManagerIncomingTravelRequestsComponent {
 
     const initialState = {
       requestId: this.selectedRow.requestId,
+      forwardBtnTitle : 'Approve'
     };
 
     //    this.bsModalRef = this.modalService.show(TravelRequestCardModalComponent, { initialState });

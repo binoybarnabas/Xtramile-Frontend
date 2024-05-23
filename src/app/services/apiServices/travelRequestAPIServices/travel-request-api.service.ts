@@ -22,7 +22,11 @@ export class TravelRequestApiService {
   sendTravelTickets(travelTicketData: any):Observable<any>{
     return this.http.post<any>('http://localhost:5190/api/traveladmin/send-travel-tickets',travelTicketData);
   }
-  
+
+  rejectTravelRequest(rejectionFormData: any):Observable<any>{
+    console.log(rejectionFormData)
+    return this.http.post<any>('http://localhost:5190/api/requests/reject-travel-request',rejectionFormData);
+  }  
 
   
 }

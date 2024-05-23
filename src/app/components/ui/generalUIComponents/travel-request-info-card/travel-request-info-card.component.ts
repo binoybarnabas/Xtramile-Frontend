@@ -15,8 +15,8 @@ export class TravelRequestInfoCardComponent {
   private _requestId!: number;
   primaryStatus: string = 'Denied';
 
-  forwardBtnTitle: string = 'Proceed';
-  rejectBtnTitle: string = 'Reject';
+  @Input() forwardBtnTitle: string = 'Proceed';
+  @Input() rejectBtnTitle: string = 'Reject';
 
   status: string = '';
 
@@ -117,5 +117,8 @@ export class TravelRequestInfoCardComponent {
   //reject travel request
   onRejectBtnClick(){
     //body
+
+    this.travelRequestUIService.openRejectionConfirmationModal(this.requestId);
+
   }
 }
