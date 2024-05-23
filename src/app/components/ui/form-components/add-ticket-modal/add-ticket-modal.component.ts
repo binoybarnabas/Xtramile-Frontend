@@ -70,13 +70,9 @@ export class AddTicketModalComponent {
 
   selectedFiles: File[] = [];
   onFileChange(event: any): void {
-    const files = event.target.files;
-    this.selectedFiles = [];
-  
+    const files = event.target.files; 
     if (files) {
-      for (let i = 0; i < files.length; i++) {
-        this.selectedFiles.push(files[i]);
-      }
+      this.travelTicketForm.get('ticketFile')?.setValue(files[0]);
       this.isFileSelected = true;
     }
   }
@@ -89,7 +85,7 @@ export class AddTicketModalComponent {
 
     this.isSubmitBtnClicked = true;
 
-    if(this.selectedFiles.length === 0){
+    if(!this.travelTicketForm.get('ticketFile')?.value){
       this.isFileSelected = false;
       // this.toastService.showToast({
       //   message: 'No Files Selected',
@@ -98,12 +94,10 @@ export class AddTicketModalComponent {
       // });
       return;
     }
-
-    const tickets: File[] = this.selectedFiles;
-    const descriptions: string[] = this.travelTicketForm.get('description')?.value;
   
     if (this.onTicketFileSelected) {
-      this.onTicketFileSelected(tickets, descriptions); // Calling the callback function
+      this.onTicketFileSelected(this.travelTicketForm.get('ticketFile')?.value, 
+      this.travelTicketForm.get('description')?.value); // Calling the callback function
     }
   
     this.closeModal();
