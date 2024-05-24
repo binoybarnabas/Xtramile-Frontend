@@ -1,4 +1,7 @@
-<div class="modal_header" [class.invalidForm]="!isFileSelected && isSubmitBtnClicked">
+<div
+  class="modal_header"
+  [class.invalidForm]="!isFileSelected && isSubmitBtnClicked"
+>
   <h6 class="modal_title">{{ uploadFormTitle }}</h6>
   <button type="button" class="exit_button" (click)="closeModal()">
     <i class="icon ri-close-fill"></i>
@@ -17,17 +20,16 @@
           <input type="hidden" formControlName="requestId" />
           <div class="label_form_error_container">
             <label class="label" for="ticketFile">Ticket File</label>
-            <span *ngIf="!isFileSelected" class="form_error" >
-            No file selected!
-          </span>
+            <span *ngIf="!isFileSelected" class="form_error">
+              No file selected!
+            </span>
           </div>
-          
+
           <input
             type="file"
             formControlName="ticketFile"
             class="file_input"
             (change)="onFileChange($event)"
-            multiple
             required
           />
 
@@ -39,11 +41,10 @@
             placeholder="enter description if any"
           />
 
-          <div *ngIf="tripType === 'Round Trip'" class="checkbox_container">   
-            <input class="form_control checkbox" type="checkbox">
+          <div *ngIf="tripType === 'Round Trip'" class="checkbox_container">
+            <input class="form_control checkbox" type="checkbox" />
             <label class="label">This is a return ticket</label>
           </div>
-       
         </div>
 
         <div class="submit_btn_container">

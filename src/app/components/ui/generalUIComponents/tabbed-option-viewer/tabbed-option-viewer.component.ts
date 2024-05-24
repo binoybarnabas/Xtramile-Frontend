@@ -62,6 +62,7 @@ export class TabbedOptionViewerComponent {
   isSelectedOptionChanged: boolean = false;
 
   bsModalRef!: BsModalRef;
+  ticketFiles: {ticketFile: File, description: string }[] = []
 
   constructor(
     private modalService: BsModalService,
@@ -216,23 +217,18 @@ export class TabbedOptionViewerComponent {
   }
 
   //Stores Image File Temporarily
-  addedTicketFiles: File[] = [];
   ticketFileUrls: string[] = [];
-  ticketFileDescriptions: string[] = [];
 
   //to add image options
-  addTravelTicket(tickets: File[], description: string): void {
-    this.addedTicketFiles = [...this.addedTicketFiles, ...tickets];
+  addTravelTicket(ticket: File, description: string): void {
 
-    this.ticketFileDescriptions.push(description);
+    this.ticketFiles.push({ticketFile: ticket, description: description})
 
     this.isAnyOptionArrayPopulated();
 
-    const observables = tickets.map((ticket) => this.getImageUrl(ticket));
-
-    forkJoin(observables).subscribe((urls: string[]) => {
-      this.ticketFileUrls = [...this.ticketFileUrls, ...urls];
-    });
+    this.getImageUrl(ticket).subscribe((url: string) => {
+      this.ticketFileUrls.push(url);
+    })
   }
 
   //isTicketFileSelected : boolean = false;
@@ -249,10 +245,9 @@ export class TabbedOptionViewerComponent {
 
   //to remove images from the array
   removeTicketFromArray(index: number): void {
-    if (index >= 0 && index < this.addedTicketFiles.length) {
-      this.addedTicketFiles.splice(index, 1);
+    if (index >= 0 && index < this.ticketFiles.length) {
+      this.ticketFiles.splice(index, 1);
       this.ticketFileUrls.splice(index, 1);
-      this.ticketFileDescriptions.splice(index, 1);
     }
     this.selectedTicketFileIndex = -1;
   }
@@ -444,7 +439,7 @@ export class TabbedOptionViewerComponent {
   //to disable submit btn
   isAnyOptionArrayPopulated() {
     this.isSubmitBtnActive =
-      this.textOptions.length !== 0 || this.addedImageFiles.length !== 0 || this.addedTicketFiles.length !==0
+      this.textOptions.length !== 0 || this.addedImageFiles.length !== 0 || this.ticketFiles.length !==0
         ? true
         : false;
     this.isSubmitBtnActiveChange.emit(this.isSubmitBtnActive);

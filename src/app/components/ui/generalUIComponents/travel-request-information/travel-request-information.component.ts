@@ -787,40 +787,21 @@ export class NewTravelRequestComponent {
 
     const formData = new FormData();
 
-    // Convert selectedImages to FormData
-    for (
-      let i = 0;
-      i < this.tabbedOptionViewer.addedTicketFiles.length;
-      i++
-    ) {
-      formData.append(
-        'tickets',
-        this.tabbedOptionViewer.addedTicketFiles[i],
-        this.tabbedOptionViewer.addedTicketFiles[i].name
-      );
-    }
-
-    // Convert descriptions to JSON string and append to FormData
-    // Convert descriptions to FormData
-    this.tabbedOptionViewer.ticketFileDescriptions.forEach(
-      (desc, index) => {
-        formData.append(`description[${index}]`, desc);
-      }
-    );
-
+    this.tabbedOptionViewer.ticketFiles.forEach((ticket, index) => {
+      formData.append(`tickets[${index}].ticketFile`,ticket.ticketFile);
+      formData.append(`tickets[${index}].description`,ticket.description);      
+    })
     // Append other fields to FormData
     formData.append(
       'requestId',
       String(this.travelRequestDetailViewModel.requestId)
     );
-
     formData.append(
       'empId',
       String(this.currentLoggedInUserId)
     );
-
+    
     this.travelRequestUIService.sendTravelTickets(formData);
-
   }
 
 
