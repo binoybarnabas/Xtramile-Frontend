@@ -327,7 +327,7 @@
   .forward_btn_card
   .btn {
   height: 38px;
-  width: 100px;
+  min-width: 100px;
   background-color: transparent;
   color: var(--second-color);
   font-size: var(--form-label-font-size);

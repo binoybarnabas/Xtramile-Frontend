@@ -20,7 +20,8 @@ export class TravelRequestApiService {
 
 
   sendTravelTickets(travelTicketData: any):Observable<any>{
-    return this.http.post<any>('http://localhost:5190/api/traveladmin/send-travel-tickets',travelTicketData);
+    return this.http.post('http://localhost:5190/api/traveladmin/send-travel-tickets',travelTicketData,{responseType: 'text'});
+
   }
 
   rejectTravelRequest(rejectionFormData: any):Observable<any>{

@@ -66,7 +66,7 @@ export class TravelRequestUiService {
           this.toastService.showToast({
             message: error.message,
             toastType: 'fail',
-            toastDuration: 3000,
+            toastDuration: 6000,
           });
 
           //this.router.navigate(['traveladmin/requests/approved'])
