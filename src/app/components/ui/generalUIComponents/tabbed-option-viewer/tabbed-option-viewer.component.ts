@@ -9,6 +9,7 @@ import { TravelOptionDetails } from 'src/app/models/interfaces/iTravelOptionDeta
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 import { AddTicketModalComponent } from '../../form-components/add-ticket-modal/add-ticket-modal.component';
+import { TravelTicketDetails } from 'src/app/models/dtoModels/travelTicketDetails';
 @Component({
   selector: 'app-tabbed-option-viewer',
   templateUrl: './tabbed-option-viewer.component.html',
@@ -62,7 +63,14 @@ export class TabbedOptionViewerComponent {
   isSelectedOptionChanged: boolean = false;
 
   bsModalRef!: BsModalRef;
-  ticketFiles: {ticketFile: File, description: string }[] = []
+  
+  //To Keep Ticket Files When TA Adds them
+  ticketFiles: {ticketFile: File, description: string }[] = [];
+
+  //To Store Ticket Files Received from API
+  // receivedTicketFiles : {ticketFile : File, description: string} [] = [];
+  // receivedTicketFileUrls: string[] = [];
+
 
   constructor(
     private modalService: BsModalService,
@@ -80,6 +88,7 @@ export class TabbedOptionViewerComponent {
     this.getTravelOptionsWithImageByReqId(this.requestId);
     this.getTravelOptionsWithoutImages();
     this.initializeTabs(this.requestStatus, this.currentLoggedInUserRole);
+    this.getTravelTicketDetails(this.requestId);
   }
 
   onTabChange(index: number, tabName: string) {
@@ -181,8 +190,7 @@ export class TabbedOptionViewerComponent {
         this.ticketStatus === 'Attached'
       ) {
         this.travelOptionViewerTabs = tabsWithLiveTicket;
-        this.isActionBarVisible = true;
-        this.actionBarTitle = 'Uploaded Ticket';
+        this.isActionBarVisible = false;
       }
     }
   }
@@ -251,6 +259,31 @@ export class TabbedOptionViewerComponent {
     }
     this.selectedTicketFileIndex = -1;
   }
+
+
+  travelTicketDetails: TravelTicketDetails[] = [];
+  //getTickets From API
+  getTravelTicketDetails(requestId : number){
+    this.loaderService.show();
+
+    this.requestService.getTravelTicketDetailsByReqId(requestId).subscribe({
+      next: (data) => {
+        this.loaderService.hide();
+        this.travelTicketDetails = data;
+      },
+      error: (error: Error) => {
+        this.loaderService.hide();
+        console.log('Error has occurred, ' + error.message);
+      },
+      complete: () => {
+        //console.log("Completed");
+        // if (this.travelOptionsWithImagesData.length === 0) {
+        //   this.emptyImageOptionMessage = 'No Travel options added as image.';
+        // }
+      },
+    });
+  }
+
 
 
   //to open modal

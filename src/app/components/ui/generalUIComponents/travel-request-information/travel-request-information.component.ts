@@ -64,9 +64,6 @@ export class NewTravelRequestComponent {
 
   travelOptionsData: TravelOptionDetails[] = [];
 
-  //to identify if its travel admin close request screen
-  isCloseVisible: boolean = false;
-
   optionFileUrl: string = '';
 
   status: string = '';
@@ -150,6 +147,10 @@ export class NewTravelRequestComponent {
         this.forwardBtnTitle = 'Confirm';
       } else {
         this.forwardBtnTitle = 'Submit';
+        //tesing - change condition check to trip status - completed
+        if(this.ticketStatus === 'Attached'){
+          this.forwardBtnTitle = 'Close Request'
+        }
       }
     } else {
       this.forwardBtnTitle = 'Next';
@@ -206,6 +207,12 @@ export class NewTravelRequestComponent {
           this.newReqFormSubMenuValue = 4;
           this.currentNavIndex = 4;
           this.forwardBtnTitle = 'Send';
+        }
+        //if trip status === completed
+        else if(this.ticketStatus === 'Attached'){
+          this.newReqFormSubMenuValue = 0;
+          this.currentNavIndex = 0;
+          this.isSubmitBtnActive = true;
         }
         else {
           this.leftSectionNavItems = [
@@ -296,16 +303,16 @@ export class NewTravelRequestComponent {
           this.ticketStatus = data.ticketStatus;
           // Getting the employee profile info
 
-          this.getTravelOptionsByReqId(data.requestId);
-          this.isFileSubscription = this.commonApiService.isFile$.subscribe(
-            (isFile) => {
-              if (isFile) {
-                this.getTravelOptionsByReqId(
-                  this.travelRequestDetailViewModel.requestId
-                );
-              }
-            }
-          );
+          // this.getTravelOptionsByReqId(data.requestId);
+          // this.isFileSubscription = this.commonApiService.isFile$.subscribe(
+          //   (isFile) => {
+          //     if (isFile) {
+          //       this.getTravelOptionsByReqId(
+          //         this.travelRequestDetailViewModel.requestId
+          //       );
+          //     }
+          //   }
+          // );
 
           this.requestService.getStatusName(this.requestId).subscribe({
             next: (data) => {
@@ -319,14 +326,14 @@ export class NewTravelRequestComponent {
           });
 
           //if logged in user is travel admin and request status is ongoing, enable the close button
-          if (
-            this.userData.role == 'Manager' &&
-            this.userData.department == 'TA'
-          ) {
-            if (this.status === 'Approved by TA') {
-              this.isCloseVisible = true;
-            }
-          }
+          // if (
+          //   this.userData.role == 'Manager' &&
+          //   this.userData.department == 'TA'
+          // ) {
+          //   if (this.status === 'Approved by TA') {
+
+          //   }
+          // }
 
           this.requestService
             .getEmployeeDataById(
@@ -507,52 +514,21 @@ export class NewTravelRequestComponent {
   }
 
   //Get Travel Options By Req Id
-  getTravelOptionsByReqId(reqId: number) {
-    this.requestService.getTravelOptionsByReqId(reqId).subscribe({
-      next: (data) => {
-        this.travelOptionsData = data;
-      },
-      error: (error: Error) => {
-        console.log('Error has occurred, ' + error.message);
-      },
-      complete: () => {
-        console.log('Completed');
-      },
-    });
-  }
+  // getTravelOptionsByReqId(reqId: number) {
+  //   this.requestService.getTravelOptionsByReqId(reqId).subscribe({
+  //     next: (data) => {
+  //       this.travelOptionsData = data;
+  //     },
+  //     error: (error: Error) => {
+  //       console.log('Error has occurred, ' + error.message);
+  //     },
+  //     complete: () => {
+  //       console.log('Completed');
+  //     },
+  //   });
+  // }
 
-  onTravelAdminRequestClose() {
-    if (confirm('Do you want to close the request')) {
-      const requestStatus: RequestStatus = {
-        requestId: this.travelRequestDetailViewModel.requestId, // Assign the request ID
-        empId: this.currentLoggedInUserId, // Assign the employee ID
-        primaryStatusId: 3, // Assign the primary status ID
-        date: new Date(), // Assign the current date
-        secondaryStatusId: 10, // Assign the secondary status ID
-      };
 
-      this.commonApiService.updateRequestStatus(requestStatus).subscribe({
-        next: (data) => {
-          console.log(data);
-          //Redirect to another page on submit click
-          this.router.navigate(['/traveladmin/closed']);
-        },
-        error: (error: Error) => {
-          console.log('Error in posting request status');
-          console.log(error.message);
-        },
-        complete: () => {
-          console.log('Posting Request Status Closed');
-          // alert("Posting Request Status Complete");
-          this.toastService.showToast({
-            message: 'Travel Request Closed',
-            toastType: 'success',
-            toastDuration: 3000,
-          });
-        },
-      });
-    }
-  }
 
   //action bar methods
 
@@ -696,6 +672,10 @@ export class NewTravelRequestComponent {
 
     if (this.currentNavIndex + 1 === this.totalNavCount) {
       this.forwardBtnTitle = 'Submit';
+      //change to req status === 'Completed'  - testing
+      if(this.ticketStatus == 'Attached'){
+        this.forwardBtnTitle = 'Close Request'
+      }
     }
 
     this.currentNavIndex++;
