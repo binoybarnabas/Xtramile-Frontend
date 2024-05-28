@@ -129,6 +129,8 @@ import { TravellerRequestHistoryComponent } from './features/travellerFeatures/t
 import { TravellerApprovedRequestsComponent } from './features/travellerFeatures/traveller-approved-requests/traveller-approved-requests.component';
 import { AddTicketModalComponent } from './components/ui/form-components/add-ticket-modal/add-ticket-modal.component';
 import { CustomCalendarComponent } from './components/ui/generalUIComponents/custom-calendar/custom-calendar.component';
+import { CustomStepChartComponent } from './components/ui/generalUIComponents/custom-step-chart/custom-step-chart.component';
+import { TravellerRequestProgressDetailsComponent } from './features/travellerFeatures/traveller-request-progress-details/traveller-request-progress-details.component';
 
 @NgModule({
   declarations: [
@@ -245,6 +247,8 @@ import { CustomCalendarComponent } from './components/ui/generalUIComponents/cus
     TravellerApprovedRequestsComponent,
     AddTicketModalComponent,
     CustomCalendarComponent,
+    CustomStepChartComponent,
+    TravellerRequestProgressDetailsComponent,
   ],
   imports: [
     CommonModule,

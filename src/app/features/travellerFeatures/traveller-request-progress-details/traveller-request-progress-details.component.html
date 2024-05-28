@@ -1,0 +1,118 @@
+<app-page-header [headingInputData]="pageHeading"> </app-page-header>
+
+<div class="main_container">
+
+    <div class="step_chart_container">
+        <app-custom-step-chart [steps]="steps"></app-custom-step-chart>
+    </div>
+
+    <div class="request_details_container">
+
+        <div class="req_project_code_container">
+
+            <div class="req_code">
+                <span class="label">Request Code</span>
+                <p class="value">{{travelRequestDetails.requestCode}}</p>
+            </div>
+
+            <div class="project_code">
+                <span class="label">Project Code</span>
+                <p class="value">{{travelRequestDetails.projectCode}}</p>
+            </div>
+
+        </div>
+
+        <div class="origin_destination_container">
+
+          <div class="origin_card">
+            <!-- <span class="label">From</span> -->
+            <p class="city">{{travelRequestDetails.sourceCity}}</p>
+            <span class="country">{{travelRequestDetails.sourceCountry}}</span>
+          </div>
+
+          <div class="travel_mode_card">
+            <span><i class="icon ri-plane-fill"></i></span>
+          </div>
+
+          <div class="destination_card">
+            <!-- <span class="label">To</span> -->
+            <p class="city">{{travelRequestDetails.destinationCity}}</p>
+            <span class="country">{{travelRequestDetails.destinationCountry}}</span>
+          </div>
+
+        </div>
+
+        <div class="departure_return_container">
+
+          <div class="departure">
+            <span class="label">Departure Date</span>
+            <p class="value">{{travelRequestDetails.departureDate}}</p>            
+          </div>
+
+
+
+          <div class="return">
+            <span class="label">Return Date</span>
+            <p class="value">{{travelRequestDetails.returnDate}}</p>  
+          </div>
+
+        </div>
+
+        <div class="additional_info_container">
+
+          <div class="info_card pref_dep_time">
+            <span class="label">Preferred Departure Time</span>
+            <p class="value">{{travelRequestDetails.prefDepartureTime}}</p>
+          </div>
+
+          <div class="travel_mode">
+            <span class="label">Travel Mode</span>
+            <p class="value">{{travelRequestDetails.travelMode}}</p>
+          </div>
+
+          <div class="info_card accommodation">
+            <span class="label">Accommodation Requested</span>
+            <p class="value">{{travelRequestDetails.accommodationRequired}}</p>
+          </div>
+
+        </div>
+
+        <div class="additional_info_container">
+
+          <div class="info_card purpose">
+            <span class="label">Purpose of Travel</span>
+            <p class="value">{{travelRequestDetails.tripPurpose}}</p>
+          </div>
+
+          <div class="info_card cab_service">
+            <span class="label">PickUp Service Requested</span>
+            <p class="value">{{travelRequestDetails.cabRequired}}</p>
+          </div>
+
+          <div class="info_card pickup_time">
+            <span class="label">Preferred PickUp Time</span>
+            <p class="value">{{travelRequestDetails.prefPickUpTime}}</p>
+          </div>
+          
+        </div>
+
+        <div class="action_btn_container">
+
+          <div *ngIf="requestStatus === 'Open' || requestStatus === 'Approved by RM'" class="btn_card withdraw">
+            <button (click)="onWithDrawBtnClick()" class="btn withdraw">{{withdrawBtnText}}</button>
+          </div>
+
+          <div *ngIf="requestStatus === 'Ongoing'" class="btn_card extend">
+            <button (click)="onExtendBtnClick()" class="btn extend">{{extendBtnText}}</button>
+          </div>
+
+          <div *ngIf="requestStatus === 'Ongoing' || requestStatus === 'Completed' " class="btn_card close">
+            <button (click)="onCompleteBtnClick()" class="btn close">{{completeBtnText}}</button>
+          </div>
+
+
+        </div>
+
+    </div>
+
+</div>
