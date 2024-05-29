@@ -1,0 +1,189 @@
+.main_container{
+    display: flex;
+    justify-content: space-between;
+    height: calc(100vh - 134px);
+}
+
+.main_container .step_chart_container{
+    width: 30%;
+    border-right: 1px solid var(--menu-hover-color);
+    overflow-y: auto;
+}
+
+
+.main_container .request_details_container{
+    width: 70%;
+    padding: 1rem;
+    /* box-shadow: var(--normal-box-shadow); */
+}
+
+.main_container .request_details_container .req_project_code_container{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--menu-hover-color);
+}
+
+.main_container .request_details_container .req_project_code_container .label{
+  font-size: var(--form-label-font-size);
+  color: var(--ternary-text-color);
+}
+
+.main_container .request_details_container .req_project_code_container .value{
+  font-size: var(--form-label-font-size);
+  font-weight: var(--active-font-weight);
+}
+
+.main_container .request_details_container .req_project_code_container .project_code{
+  text-align: end;
+}
+
+.main_container .request_details_container .origin_destination_container{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.main_container .request_details_container .origin_destination_container .travel_mode_card{
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-cyan-color);
+  color: var(--second-color);
+  border-radius: 8px;
+  transform: rotate(90deg);
+  transition: 0.3s ease;
+}
+
+.main_container .request_details_container .origin_destination_container .travel_mode_card:hover{
+  transform: rotate(270deg);
+  background-color: var(--second-color);
+  color:var(--card-bg-color);
+}
+
+.main_container .request_details_container .origin_destination_container .origin_card{
+  width: 45%;
+}
+
+
+.main_container .request_details_container .origin_destination_container .destination_card{
+  text-align: end;
+  width: 45%;
+}
+
+.main_container .request_details_container .origin_destination_container .label{
+  font-size: var(--form-label-font-size);
+  color: var(--ternary-text-color);
+}
+
+
+.main_container .request_details_container .origin_destination_container .city{
+  font-size: var(--medium-font-size);
+  font-weight: var(--active-font-weight);
+  margin: 0;
+}
+
+.main_container .request_details_container .origin_destination_container .country{
+  font-size: var(--small-font-size);
+  color: var(--ternary-text-color);
+  margin: 0;
+}
+
+
+.main_container .request_details_container .departure_return_container{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  border-bottom: 1px solid var(--menu-hover-color);
+}
+
+.main_container .request_details_container .departure_return_container .return{
+  text-align: end;
+}
+
+
+.main_container .request_details_container .departure_return_container .label{
+  font-size: var(--form-label-font-size);
+  color: var(--ternary-text-color);
+}
+
+.main_container .request_details_container .departure_return_container .value{
+  font-size: var(--form-label-font-size);
+  font-weight: var(--active-font-weight);
+}
+
+.main_container .request_details_container .additional_info_container{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+
+.main_container .request_details_container .additional_info_container .label{
+  font-size: var(--form-label-font-size);
+  color: var(--ternary-text-color);
+}
+
+.main_container .request_details_container .additional_info_container .value{
+  font-size: var(--form-label-font-size);
+  font-weight: var(--active-font-weight);
+}
+
+.main_container .request_details_container .additional_info_container .accommodation,
+.main_container .request_details_container .additional_info_container .pickup_time
+  {
+  text-align: end;
+}
+
+.main_container .request_details_container .additional_info_container .travel_mode,
+.main_container .request_details_container .additional_info_container .cab_service{
+  text-align: center;
+}
+
+.main_container .request_details_container .action_btn_container{
+  border-top: 1.5px solid var(--menu-hover-color);
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main_container .request_details_container .action_btn_container .btn_card .btn{
+
+  min-width: 100px;
+  min-height: 35px;
+  border: 1.5px solid var(--second-color);
+  background-color: var(--second-color);
+  font-size: var(--extra-small-font-size);
+  font-weight: var(--active-font-weight);
+  border-radius: 20px;
+  color: var(--card-bg-color);
+  transition: 0.3s ease;
+
+}
+
+.main_container .request_details_container .action_btn_container .btn_card .btn.withdraw{
+  border: 1.5px solid var(--primary-red-color);
+  color: var(--primary-red-color);
+  background: none;
+}
+
+.main_container .request_details_container .action_btn_container .btn_card .btn.withdraw:hover{
+  background-color: var(--primary-red-color);
+  color: var(--card-bg-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

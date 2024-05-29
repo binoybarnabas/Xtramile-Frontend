@@ -76,4 +76,20 @@ export class TravellerPendingRequestsComponent {
     this.getRequests();
   }
 
+  selectedRow: any | null = null;
+  requestId: number = 0;
+
+    // select an option
+    handleSelectedRow(row: any) {
+    
+      this.selectedRow = row;
+      this.requestId = this.selectedRow.requestId;
+  
+      this.router.navigate(['requests/progress'], {
+        relativeTo: this.activatedRoute.parent,
+        queryParams: { requestId: this.requestId }
+      })
+
+    }
+
 }

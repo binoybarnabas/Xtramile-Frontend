@@ -29,5 +29,12 @@ export class TravelRequestApiService {
     return this.http.post<any>('http://localhost:5190/api/requests/reject-travel-request',rejectionFormData);
   }  
 
+
+  updateTravelCompletion(travelDetails: any):Observable<any>{
+
+    return this.http.post<any>('http://localhost:5190/api/requests/update-completed-travel',travelDetails);
+
+  }
+
   
 }

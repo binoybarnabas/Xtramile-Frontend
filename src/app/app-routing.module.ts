@@ -38,6 +38,8 @@ import { ManagerForwardedTravelRequestsComponent } from './features/manager/trav
 import { UserProfileComponent } from './features/travellerFeatures/user-profile/user-profile.component';
 import { TravellerRequestHistoryComponent } from './features/travellerFeatures/traveller-request-history/traveller-request-history.component';
 import { TravellerApprovedRequestsComponent } from './features/travellerFeatures/traveller-approved-requests/traveller-approved-requests.component';
+import { CustomStepChartComponent } from './components/ui/generalUIComponents/custom-step-chart/custom-step-chart.component';
+import { TravellerRequestProgressDetailsComponent } from './features/travellerFeatures/traveller-request-progress-details/traveller-request-progress-details.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -55,6 +57,7 @@ const routes: Routes = [
       { path: 'requests/pending', component: TravellerPendingRequestsComponent },
       { path: 'requests/ongoing', component: TravellerApprovedRequestsComponent },
       { path: 'requests/history', component: TravellerRequestHistoryComponent },
+      { path: 'requests/progress', component: TravellerRequestProgressDetailsComponent },
       { path: 'profile', component: UserProfileComponent },
       { path: 'documents', component: TravellerDocumentsComponent },
     ],

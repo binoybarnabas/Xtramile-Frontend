@@ -1,0 +1,77 @@
+.step_chart {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 0.5rem;
+  }
+  
+  .step {
+    display: flex;
+    height: 80px;
+  }
+
+  .dot_and_connector_container{
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    /* justify-content: baseline; */
+  }
+  
+  .dot {
+    margin-top: 3px;
+    width: 12px;
+    height: 12px;
+    border-radius:50%;
+    background-color: #e0e0e0;
+  }
+
+
+  .connector {
+    position: absolute;
+    bottom: -12px;
+    width: 2px;
+    min-height: 80px;
+    background-color: #ccc;
+  }
+  
+  .step:last-child .connector {
+    display: none;
+  }
+  
+  .text {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: baseline;
+    align-items: baseline; */
+    margin: 0;
+    width: 220px;
+    color: var(--ternary-text-color);
+  }
+
+  .text.active{
+    color: var(--primary-text-color);
+  }
+
+  
+  .label {
+    font-size: var(--form-label-font-size);
+    font-weight: var(--active-font-weight);
+    text-align: start;
+    align-self: baseline;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .description {
+    font-size: var(--extra-small-font-size);
+    color: var(--ternary-text-color);
+  }
+  
+  .time_stamp{
+    font-size: var(--tiny-font-size);
+    color: var(--ternary-text-color);
+  }
+
+  

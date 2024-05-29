@@ -22,6 +22,8 @@
   [headers]="tableHeaders"
   [data]="requestData"
   [displayedProperties]="dataHeaders"
+  (rowClick)="handleSelectedRow($event)"
+
 >
 </app-data-table>
 
