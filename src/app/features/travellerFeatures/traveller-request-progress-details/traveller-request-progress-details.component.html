@@ -106,7 +106,7 @@
             <button (click)="onExtendBtnClick()" class="btn extend">{{extendBtnText}}</button>
           </div>
 
-          <div *ngIf="requestStatus === 'Ongoing' || requestStatus === 'Completed' " class="btn_card close">
+          <div *ngIf="requestStatus === 'Ongoing' || requestStatus !== 'Completed' " class="btn_card close">
             <button (click)="onCompleteBtnClick()" class="btn close">{{completeBtnText}}</button>
           </div>
 

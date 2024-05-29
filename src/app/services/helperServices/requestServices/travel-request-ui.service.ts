@@ -133,4 +133,65 @@ export class TravelRequestUiService {
         complete: () => {},
       });
   }
+
+
+  openWithdrawalConfirmationModal(requestId: number) {
+    const initialState = {
+      requestid: requestId,
+      mainText: 'Withdraw Travel Request?',
+      description: 'Kindly specify the reason for withdrawing the travel request',
+      cancelBtnText: 'Cancel',
+      confirmBtnText: 'Withdraw',
+      confirmBtnColor: '#ec0d0d',
+      isTextFieldEnabled: true,
+      textFieldLabel: 'Reason for Withdrawal',
+      textFieldPlaceHolder: 'enter the reason',
+
+      onWithdrawalReasonEntered: this.withDrawTravelRequest.bind(this),
+    };
+
+    const modalRef = this.modalService.show(CustomConfirmationModalComponent, {
+      initialState,
+    });
+
+    modalRef.content?.cancel.subscribe(() => {});
+  }
+
+
+  //withdraw travel request
+  withDrawTravelRequest(reasonForWithdrawal: string, requestId: number){
+
+    //api calls
+  }
+
+
+  //mark as completed
+  completeTravelRequest(requestId:number){
+    //api
+
+    const travelDetailsFormData = new FormData();
+    travelDetailsFormData.append('requestId', String(requestId));
+  
+    this.travelRequestApiService
+      .updateTravelCompletion(travelDetailsFormData)
+      .subscribe({
+        next: (response) => {
+          this.toastService.showToast({
+            message: 'Travel Completed',
+            toastType: 'success',
+            toastDuration: 3000,
+          });
+        }
+        //handle error response
+      });
+
+
+  }
+
+  //req for extension of travel
+  requestForTravelExtension(){
+
+  }
+
+
 }

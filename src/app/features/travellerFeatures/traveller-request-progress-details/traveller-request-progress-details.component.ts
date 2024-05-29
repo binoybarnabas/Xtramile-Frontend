@@ -1,8 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { TravelRequestDetailViewModel } from 'src/app/models/dtoModels/iTravelRequestDetails';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
+import { TravelRequestUiService } from 'src/app/services/helperServices/requestServices/travel-request-ui.service';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
 @Component({
@@ -22,7 +25,9 @@ export class TravellerRequestProgressDetailsComponent {
     private datePipe: DatePipe,
     private route: ActivatedRoute,
     private managerTravelRequest: ManagerTravelRequestsService,
-    private requestService: RequestService
+    private requestService: RequestService,
+    private requestUiService : TravelRequestUiService,
+    private modalService: BsModalService
   ) {}
 
   travelRequestDetails!: TravelRequestDetailViewModel;
@@ -48,6 +53,7 @@ export class TravellerRequestProgressDetailsComponent {
           data.returnDate =
             this.datePipe.transform(data.returnDate, 'dd/MM/yyyy') || ' ';
           this.travelRequestDetails = data;
+          this.ticketStatus = data.ticketStatus;
 
           this.requestService.getStatusName(this.requestId).subscribe({
             next: (statusData) => {
@@ -99,6 +105,14 @@ export class TravellerRequestProgressDetailsComponent {
       this.steps[3] = { label: 'Travel Option Selected', description: 'Travel Options Selected by ManagerName', status: 'completed' , timestamp: '29th May 24' };
       this.steps[4] = { label: 'Approved by Travel Admin', description: 'Travel Request Approved by TravelAdmin Name', status: 'current' , timestamp: '29th May 24' };
     }
+    if(this.ticketStatus === 'Attached'){
+      this.steps[0] = { label: 'Request Initiated', description: 'Travel Request Initiated', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[1] = { label: 'Forwarded by Manager', description: 'Travel Request Forwarded by ManagerName', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[2] = { label: 'Travel Options Sent', description: 'Travel Options Sent to the Manager by TravelAdminNAme', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[3] = { label: 'Travel Option Selected', description: 'Travel Options Selected by ManagerName', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[4] = { label: 'Approved by Travel Admin', description: 'Travel Request Approved by TravelAdmin Name', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[5] = { label: 'Ticket Sent', description: 'Ticket Details Sent', status: 'current' , timestamp: '29th May 24' };
+    }
 
     
 
@@ -110,6 +124,8 @@ export class TravellerRequestProgressDetailsComponent {
   //withdraw travel request
   onWithDrawBtnClick(){
 
+    this.requestUiService.openWithdrawalConfirmationModal(this.requestId);
+
   }
 
   //request for extension
@@ -119,7 +135,26 @@ export class TravellerRequestProgressDetailsComponent {
 
   //mark as completed
   onCompleteBtnClick(){
+    
+    const initialState = {
+      mainText: 'Confirm Completion',
+      description: 'Are you sure you want to mark this travel as completed? This action cannot be undone. Please note that the request will be closed by the travel admin once all settlements are finalized.',
+      cancelBtnText: 'Cancel',
+      confirmBtnText: 'Submit',
+      confirmBtnColor: '#9a4cfa'
+    };
+  
+    const modalRef = this.modalService.show(CustomConfirmationModalComponent, {
+      initialState,
+    });  
+    modalRef.content?.cancel.subscribe(() => {
+      
 
+    });
+  
+    modalRef.content?.confirm.subscribe(() => {
+      this.requestUiService.completeTravelRequest(this.requestId);
+    });
   }
 
   //eof
