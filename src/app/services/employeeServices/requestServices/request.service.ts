@@ -105,7 +105,7 @@ export class RequestService {
   getTravelTicketDetailsByReqId(reqId: number): Observable<any> {
 
     return this.http.get<any>(
-      `http://localhost:5190/api/requests/get_ticket_details_by_request_id/${reqId}`
+      `http://localhost:5190/api/request/get_ticket_details_by_request_id/${reqId}`
     );
 
   }

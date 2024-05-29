@@ -143,12 +143,14 @@ export class TabbedOptionViewerComponent {
         this.activeTabName = 'Ticket Details';
         this.noTicketMessageDescription = 'Ticket information is currently unavailable. Please check back later or contact your travel admin.'
       } 
+
       else if (
         requestStatus === 'Approved by TA' &&
         this.ticketStatus === 'Attached'
       ) {
+        this.activeTabName = 'Ticket Details'
         this.travelOptionViewerTabs = tabsWithLiveTicket;
-        this.isActionBarVisible = false;
+        this.isActionBarVisible = true;
       }
     }
 
@@ -190,7 +192,9 @@ export class TabbedOptionViewerComponent {
         this.ticketStatus === 'Attached'
       ) {
         this.travelOptionViewerTabs = tabsWithLiveTicket;
-        this.isActionBarVisible = false;
+        this.isActionBarVisible = true;
+        this.actionBarTitle = 'Ticket Details'
+        this.activeTabName = 'Ticket Details'
       }
     }
   }
@@ -268,7 +272,7 @@ export class TabbedOptionViewerComponent {
 
     this.requestService.getTravelTicketDetailsByReqId(requestId).subscribe({
       next: (data) => {
-        this.loaderService.hide();
+        //this.loaderService.hide();
         this.travelTicketDetails = data;
       },
       error: (error: Error) => {
@@ -280,6 +284,7 @@ export class TabbedOptionViewerComponent {
         // if (this.travelOptionsWithImagesData.length === 0) {
         //   this.emptyImageOptionMessage = 'No Travel options added as image.';
         // }
+        console.log(this.travelTicketDetails);
       },
     });
   }
