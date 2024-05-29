@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-traveller-request-history',
@@ -12,6 +13,8 @@ export class TravellerRequestHistoryComponent {
   constructor(
     private employeeService: RequestService,
     private datepipe: DatePipe,
+    private router: Router,
+    private activatedRoute:ActivatedRoute,
     private loaderService: CustomLoaderService
   ) {}
 
@@ -85,4 +88,22 @@ export class TravellerRequestHistoryComponent {
     this.currentPage = event.pageIndex + 1;
     this.fetchRequestHistory();
   }
+
+
+
+  selectedRow: any | null = null;
+  requestId: number = 0;
+  handleSelectedRow(row: any) {
+    
+    this.selectedRow = row;
+    this.requestId = this.selectedRow.requestId;
+
+    this.router.navigate(['requests/progress'], {
+      relativeTo: this.activatedRoute.parent,
+      queryParams: { requestId: this.requestId }
+    })
+
+  }
+
+
 }

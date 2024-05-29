@@ -114,6 +114,19 @@ export class TravellerRequestProgressDetailsComponent {
       this.steps[5] = { label: 'Ticket Sent', description: 'Ticket Details Sent', status: 'current' , timestamp: '29th May 24' };
     }
 
+    if(this.requestStatus === 'Closed'){
+      this.steps[0] = { label: 'Request Initiated', description: 'Travel Request Initiated', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[1] = { label: 'Forwarded by Manager', description: 'Travel Request Forwarded by ManagerName', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[2] = { label: 'Travel Options Sent', description: 'Travel Options Sent to the Manager by TravelAdminNAme', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[3] = { label: 'Travel Option Selected', description: 'Travel Options Selected by ManagerName', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[4] = { label: 'Approved by Travel Admin', description: 'Travel Request Approved by TravelAdmin Name', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[5] = { label: 'Ticket Sent', description: 'Ticket Details Sent', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[6] = { label: 'Trip Started', description: 'Ticket Details Sent', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[7] = { label: 'Trip Completed', description: 'Ticket Details Sent', status: 'completed' , timestamp: '29th May 24' };
+      this.steps[8] = { label: 'Request Closed', description: 'Ticket Details Sent', status: 'completed' , timestamp: '29th May 24' };
+
+    }
+
     
 
   }
