@@ -4,7 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { TravelRequestDetailViewModel } from 'src/app/models/dtoModels/iTravelRequestDetails';
+import { TravelTicketDetails } from 'src/app/models/dtoModels/travelTicketDetails';
 import { RequestService } from 'src/app/services/employeeServices/requestServices/request.service';
+import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 import { TravelRequestUiService } from 'src/app/services/helperServices/requestServices/travel-request-ui.service';
 import { ManagerTravelRequestsService } from 'src/app/services/managerServices/travelRequestsServices/manager-travel-requests.service';
 
@@ -27,7 +29,8 @@ export class TravellerRequestProgressDetailsComponent {
     private managerTravelRequest: ManagerTravelRequestsService,
     private requestService: RequestService,
     private requestUiService : TravelRequestUiService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private loaderService: CustomLoaderService
   ) {}
 
   travelRequestDetails!: TravelRequestDetailViewModel;
@@ -39,6 +42,7 @@ export class TravellerRequestProgressDetailsComponent {
 
   ngOnInit() {
     this.getRequestDetails();
+    this.getTravelTicketDetails(this.requestId);
   }
 
   requestId: number = -1;
@@ -131,14 +135,30 @@ export class TravellerRequestProgressDetailsComponent {
 
   }
 
+  travelTicketDetails: TravelTicketDetails[] = [];
+  //getTickets From API
+  getTravelTicketDetails(requestId : number){
+    this.loaderService.show();
+
+    this.requestService.getTravelTicketDetailsByReqId(requestId).subscribe({
+      next: (data) => {
+        //this.loaderService.hide();
+        this.travelTicketDetails = data;
+      },
+      error: (error: Error) => {
+        this.loaderService.hide();
+      },
+      complete: () => {
+        this.loaderService.hide();
+      },
+    });
+  }
   
 
 
   //withdraw travel request
   onWithDrawBtnClick(){
-
     this.requestUiService.openWithdrawalConfirmationModal(this.requestId);
-
   }
 
   //request for extension

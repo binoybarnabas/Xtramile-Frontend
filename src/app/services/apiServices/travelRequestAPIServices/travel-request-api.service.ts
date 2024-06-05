@@ -9,6 +9,9 @@ export class TravelRequestApiService {
 
   constructor(private http: HttpClient) { }
 
+  withdrawTravelRequest(withdrawalFormData: any):Observable<any>{
+    return this.http.post<any>('http://localhost:5190/api/requests/withdraw-travel-request',withdrawalFormData);
+  }  
   
   forwardTravelRequestToTravelAdmin(requestId:number, managerId :number):Observable<any>{
     const body = {

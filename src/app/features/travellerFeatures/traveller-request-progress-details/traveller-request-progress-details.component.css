@@ -146,8 +146,13 @@
 
 
 .main_container .request_details_container .ticket_details_container{
-  padding-top: 1rem;
+  padding-top: 0.5rem;
+  /* padding-bottom: 0.5rem; */
   border-top: 1px solid var(--menu-hover-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -174,6 +179,14 @@
   margin-right: 10px;
   transition: 0.3s ease;
   cursor: pointer;
+  width: 200px;
+  height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .main_container .request_details_container .ticket_details_container .ticket_list .ticket:hover{
@@ -183,7 +196,7 @@
 
 
 .main_container .request_details_container .ticket_details_container .ticket_list .ticket .icon{
-  margin-left: 4px;
+  margin-right: 5px;
 }
 
 

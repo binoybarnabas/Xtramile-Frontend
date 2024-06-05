@@ -96,20 +96,18 @@
           
         </div>
 
-        <div class="ticket_details_container">
+        <div *ngIf="ticketStatus === 'Attached'" class="ticket_details_container">
 
           <span class="label">Travel Tickets</span>
 
           <div class="ticket_list">
 
+            <ng-container *ngFor="let item of travelTicketDetails">
             <div class="ticket">
-              <span class="file_name">FileName.pdf</span>
               <i class="icon ri-download-cloud-line"></i>
+              <span class="file_name">{{travelRequestDetails.sourceCity}} to {{travelRequestDetails.destinationCity}}</span>
             </div>
-            <div class="ticket">
-              <span class="file_name">FileName.pdf</span>
-              <i class="icon ri-download-cloud-line"></i>
-            </div>
+            </ng-container>
 
           </div>
 

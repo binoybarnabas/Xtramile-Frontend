@@ -80,7 +80,7 @@ export class TravelRequestUiService {
 
   openRejectionConfirmationModal(requestId: number) {
     const initialState = {
-      requestid: requestId,
+      requestId: requestId,
       mainText: 'Reject Travel Request?',
       description: 'Kindly specify the reason for declining the travel request',
       cancelBtnText: 'Cancel',
@@ -90,7 +90,7 @@ export class TravelRequestUiService {
       textFieldLabel: 'Reason for Rejection',
       textFieldPlaceHolder: 'enter the reason',
 
-      onRejectionReasonEntered: this.rejectTravelRequest.bind(this),
+      onConfirmBtnClicked: this.rejectTravelRequest.bind(this),
     };
 
     const modalRef = this.modalService.show(CustomConfirmationModalComponent, {
@@ -137,7 +137,7 @@ export class TravelRequestUiService {
 
   openWithdrawalConfirmationModal(requestId: number) {
     const initialState = {
-      requestid: requestId,
+      requestId: requestId,
       mainText: 'Withdraw Travel Request?',
       description: 'Kindly specify the reason for withdrawing the travel request',
       cancelBtnText: 'Cancel',
@@ -147,7 +147,7 @@ export class TravelRequestUiService {
       textFieldLabel: 'Reason for Withdrawal',
       textFieldPlaceHolder: 'enter the reason',
 
-      onWithdrawalReasonEntered: this.withDrawTravelRequest.bind(this),
+      onConfirmBtnClicked: this.withdrawTravelRequest.bind(this),
     };
 
     const modalRef = this.modalService.show(CustomConfirmationModalComponent, {
@@ -159,9 +159,38 @@ export class TravelRequestUiService {
 
 
   //withdraw travel request
-  withDrawTravelRequest(reasonForWithdrawal: string, requestId: number){
+  withdrawTravelRequest(reasonForWithdrawal: string, requestId: number){
 
-    //api calls
+    const withdrawalFormData = new FormData();
+
+    withdrawalFormData.append('requestId', String(requestId));
+
+    withdrawalFormData.append('withdrawnBy', String(this.currentLoggedInUserId));
+
+    withdrawalFormData.append('withdrawalReason', String(reasonForWithdrawal))
+
+    this.travelRequestApiService
+    .withdrawTravelRequest(withdrawalFormData)
+    .subscribe({
+      next: (response) => {
+        this.toastService.showToast({
+          message: 'Travel Request Withdrawn',
+          toastType: 'success',
+          toastDuration: 3000,
+        });
+
+        //this.router.navigate(['traveladmin/requests/approved']);
+      },
+      error: (error) => {
+        this.toastService.showToast({
+          message: error.message,
+          toastType: 'fail',
+          toastDuration: 3000,
+        });
+      },
+      complete: () => {},
+    });
+    
   }
 
 
