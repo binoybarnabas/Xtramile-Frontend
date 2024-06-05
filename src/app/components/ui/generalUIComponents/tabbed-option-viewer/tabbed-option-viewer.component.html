@@ -170,7 +170,7 @@
         </div>
 
         <!-- Display Ticket Details Option -->
-        <div *ngIf="activeTabName === 'Ticket Details'" class="tab_body ticket_details">
+        <div *ngIf="activeTabName === 'Ticket Details' && ticketStatus === 'Not Attached'" class="tab_body ticket_details">
 
           <ng-container *ngFor="let item of ticketFileUrls; let i = index">
          
@@ -222,7 +222,8 @@
 
         <!-- InProgress -->
         <!-- View Ticket Details from API -->
-        <div *ngIf="activeTabName === 'Ticket Details' && ticketStatus === 'Attached'" class="tab_body file">
+        <div *ngIf="activeTabName === 'Ticket Details' && ticketStatus === 'Attached'" class="tab_body ticket_details">
+
           <ng-container *ngFor="let item of travelTicketDetails; let i = index">
             <div class="ticket_card">
 
