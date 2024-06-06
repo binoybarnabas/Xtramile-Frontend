@@ -14,6 +14,7 @@ export class TabbedDataTableComponent {
 @Input() tabs: any[] = [];
 @Input() filters: any[] = [];
 @Input() isSearchFilterNeeded: string;
+@Input() hasMultipleTabs: boolean = true;
 // @Input() totalItems!: number
 
 @Output() filterToggled: EventEmitter<any> = new EventEmitter<any>();

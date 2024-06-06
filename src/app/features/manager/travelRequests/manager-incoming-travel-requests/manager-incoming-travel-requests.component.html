@@ -2,9 +2,13 @@
 
 </app-page-header>
 
-<div class="table_container">
+<!-- <app-tabbed-data-table
+  [tabs]="tabs"
+  [filters]="filters"
+  (rowClick)="handleSelectedRow($event)"
+></app-tabbed-data-table> -->
 
-  <app-table-filter
+<app-table-filter
     (dateSelected)="handleDateSelection($event)"
     (sortOptionSelected)="handleSortOptionSelection($event)"
     (searchByName)="handleSearchByName($event)"
@@ -12,7 +16,7 @@
   >
   </app-table-filter>
 
-  <app-data-table
+<app-data-table
     [headers]="tableHeaders"
     [data]="employeeRequest"
     [displayedProperties]="fieldsToDisplay"

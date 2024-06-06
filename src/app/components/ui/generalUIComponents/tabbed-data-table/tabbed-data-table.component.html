@@ -1,6 +1,6 @@
 <div class="main_container">
   <div class="header_section">
-    <div class="tab_container">
+    <div *ngIf="hasMultipleTabs" class="tab_container">
       <ng-container *ngFor="let tab of tabs; let i = index">
         <div
           (click)="onTabChange(i)"

@@ -116,6 +116,7 @@ export class ManagerIncomingTravelRequestsComponent {
   // Load all the employee request while initializing
   ngOnInit() {
     this.fetchEmployeeRequest();
+    this.initializeData();
   }
 
   // Constructor to inject services
@@ -213,7 +214,33 @@ export class ManagerIncomingTravelRequestsComponent {
     }
   }
 
+  // table component changes
+  tabs: any = [];
 
+  initializeData(){
+    this.tabs = [
+      {
+        name: 'Incoming Travel Requests',
+        headings: ['RequestId', 'Request Code', 'Requested By', 'Project Code','From','To','Departure Date', 'Forwarded On'],
+        // entries: forwardedRequests.map((item) => [
+        //   item.requestId,
+        //   item.requestCode,
+        //   item.employeeName,
+        //   item.projectCode,
+        //   item.from,
+        //   item.to,
+        //   item.departureDate,
+        //   item.date,
+        // ])
+      },
+  ];
+
+  }
+
+
+  filters = [{'filterId':'1','filterName':'Filter 1','isActive':'no'},
+            {'filterId':'2','filterName':'Filter 2','isActive':'no'},
+           {'filterId':'3','filterName':'Filter 3','isActive':'no'}];
   // select an option
   handleSelectedRow(row: any) {
     
