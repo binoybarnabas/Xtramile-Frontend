@@ -23,7 +23,7 @@ export class CustomConfirmationModalComponent {
   @Output() cancel = new EventEmitter<void>();
   @Output() confirm = new EventEmitter<void>();
 
-  @Input()  onRejectionReasonEntered!: Function;
+  @Input()  onConfirmBtnClicked!: Function;
   //to be called to return the entered text input
 
   textFieldValue: string = '';
@@ -46,7 +46,7 @@ export class CustomConfirmationModalComponent {
 
     if(this.isTextFieldEnabled){
       
-      this.onRejectionReasonEntered(this.textFieldValue, this.requestId); // Calling the callback function
+      this.onConfirmBtnClicked(this.textFieldValue, this.requestId); // Calling the callback function
       
     }
     else{

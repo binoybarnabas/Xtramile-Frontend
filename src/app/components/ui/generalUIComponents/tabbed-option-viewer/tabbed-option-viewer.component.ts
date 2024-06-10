@@ -277,14 +277,9 @@ export class TabbedOptionViewerComponent {
       },
       error: (error: Error) => {
         this.loaderService.hide();
-        console.log('Error has occurred, ' + error.message);
       },
       complete: () => {
-        //console.log("Completed");
-        // if (this.travelOptionsWithImagesData.length === 0) {
-        //   this.emptyImageOptionMessage = 'No Travel options added as image.';
-        // }
-        console.log(this.travelTicketDetails);
+
       },
     });
   }
