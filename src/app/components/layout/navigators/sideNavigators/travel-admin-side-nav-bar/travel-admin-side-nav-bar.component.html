@@ -4,8 +4,7 @@
   "
 >
   <div (click)="controlSideBar()" class="toggle">
-    <i class="close_icon ri-close-circle-line"></i>
-    <i class="icon ri-draggable"></i>
+    <i class="icon" [ngClass]="isSideNavBarCollapsed ? 'ri-arrow-right-s-line': 'ri-arrow-left-s-line'"></i>
   </div>
 
   <!-- Dashboard -->

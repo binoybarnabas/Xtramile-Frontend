@@ -1,0 +1,59 @@
+.main_container{
+    padding: 0;
+    margin: 0;
+    border-radius: var(--normal-border-radius);
+    min-height: calc(100vh - 91px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.main_container .top_section{
+    height: calc((100vh - 91px)/2);
+    width: 100%;
+    display: flex;
+}
+
+.main_container .top_section .top_left{
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main_container .top_section .top_left .task_manager_container{
+    width: 36%;
+    padding: 5px;
+}
+
+.main_container .top_section .top_left .upcoming_trips_container{
+    width: 32%;
+    padding: 5px;
+}
+
+.main_container .top_section .top_left .notification_container{
+    width: 32%;
+    /* padding: 5px; */
+}
+
+
+.main_container .top_section .top_right{
+    width: 25%;
+    padding: 5px;
+}
+
+.main_container .bottom_section{
+    width: 100%;
+    height: calc((100vh - 91px)/2);
+    display: flex;
+}
+
+.main_container .bottom_section .bottom_left{
+    width: 65%;
+    padding: 5px;
+}
+
+.main_container .bottom_section .bottom_right{
+    width: 35%;
+    padding: 5px;
+}
