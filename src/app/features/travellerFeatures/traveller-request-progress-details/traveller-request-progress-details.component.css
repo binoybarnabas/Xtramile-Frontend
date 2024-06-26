@@ -190,6 +190,14 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 200px;
+  height: 30px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
