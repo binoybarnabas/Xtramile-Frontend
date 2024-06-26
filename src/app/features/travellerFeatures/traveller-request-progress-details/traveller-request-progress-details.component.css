@@ -190,30 +190,16 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 200px;
-  height: 30px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
-
 
 .main_container .request_details_container .ticket_details_container .ticket_list .ticket:hover{
   background-color: var(--second-color);
   color: var(--card-bg-color);
 }
 
-
 .main_container .request_details_container .ticket_details_container .ticket_list .ticket .icon{
   margin-right: 5px;
 }
-
-
-
-
 
 .main_container .request_details_container .action_btn_container{
   border-top: 1.5px solid var(--menu-hover-color);
