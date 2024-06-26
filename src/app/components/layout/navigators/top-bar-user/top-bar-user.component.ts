@@ -123,5 +123,8 @@ export class TopBarUserComponent {
     this.isLogoutModalOpen = this.isLogoutModalOpen ? false : true;
   }
 
+  controlSideBar() {
+    this.sideNavBarService.controlSideBar();
+  }
 
 }

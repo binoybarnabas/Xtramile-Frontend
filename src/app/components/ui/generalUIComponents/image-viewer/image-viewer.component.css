@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  border-radius: 8px;
+  border-radius: 0;
   height: 100%;
   /* padding: 0.5rem; */
   position: relative;
@@ -22,7 +22,7 @@
 .main_container .close_btn .btn.close{
   color: var(--primary-text-color);
   background-color: var(--secondary-cyan-color);
-  border-radius: 6px;
+  border-radius: 3px;
   width: 30px;
   height: 30px;  
   display: flex;
@@ -51,7 +51,7 @@
 .main_container .image_wrapper {
   /* position: absolute; */
   /* overflow: hidden; */
-  border-radius: 8px;
+  border-radius: 4px;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -62,7 +62,7 @@
 }
   
 .main_container .image_wrapper .img{
-  border-radius: 8px;
+  border-radius: 4px;
   max-width: 960px;
   /* max-width: 1000px; */
 }
@@ -70,14 +70,13 @@
 .main_container .action_section{
     position: absolute;
     bottom: 0rem;
-    /* background-color: var(--card-bg-color); */
     box-shadow: var(--normal-box-shadow);
-    padding: 0.5rem ;
+    padding: 5px;
     width: 600px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 3px;
     width: 100%;
 }
 
@@ -85,7 +84,7 @@
   font-size: var(--form-label-font-size);
   color: var(--ternary-text-color);
   width: 80%;
-  height: 38px;
+  /* height: 38px; */
   overflow: hidden;
   white-space: no-wrap;
   text-overflow: ellipsis;
@@ -99,17 +98,17 @@
 .main_container .action_section .prev_next_actions{
     display: flex;
     justify-content: space-between;
-    width: 84px;
+    width: 65px;
 }
 
 .main_container .action_section .prev_next_actions{
-  width: 120px;
+  width: 100px;
 }
 
 
 .main_container .action_section .btn{
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -117,8 +116,8 @@
     color: var(--second-color);
     transition: 0.3s;
     border: none;
-    border-radius: 8px;
-    font-size: var(--medium-font-size);
+    border-radius: 3px;
+    font-size: var(--normal-font-size);
 }
 
 .main_container .action_section .btn:hover{

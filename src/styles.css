@@ -162,7 +162,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: var(--card-bg-color);
-  padding: 0rem 2rem;
+  padding: 0rem 1rem;
   position: fixed;
   width: 100%;
   z-index: 999;
@@ -173,18 +173,16 @@ body {
   margin-top: auto;
   margin-bottom: auto;
   display: flex;
-  /* background-color: #000000; */
   align-items: center;
   justify-content: center;
 }
 
-/* .top_bar_container .left_section .side_bar_controller {
+.top_bar_container .left_section .menu_icon{
   display: none;
-} */
+}
+
 
 .top_bar_container .left_section .top_bar_logo_container {
-  /* background-color: var(--primary-text-color); */
-  /* padding: 0.3rem 0.5rem 0rem 0.5rem; */
   border-radius: 0.3rem;
   transition: 0.3s;
   cursor: pointer;
@@ -205,9 +203,7 @@ body {
   .top_bar_logo
   .logo_no_bg {
   width: 30px;
-  /* background-color: var(--secondary-cyan-color); */
   padding: 4px;
-  /* border-radius: 5px 15px 5px 15px; */
 }
 
 .top_bar_container .left_section .top_bar_logo_container .top_bar_logo i {
@@ -387,7 +383,6 @@ body {
 }
 
 .top_bar_container .right_section .profile_photo .profile_img:hover {
-  /* border: 1px solid var(--third-color); */
   border: none;
 }
 
@@ -410,20 +405,51 @@ body {
 /* MOBILE */
 @media screen and (max-width: 460px) {
   .top_bar_container {
-    padding: 0.5rem 0.9rem;
+    padding: 0rem 0.5rem;
+  }
+  
+  .top_bar_container .left_section {
+    width: 55%;
+    display: flex;
+    justify-content: flex-start;
   }
 
-  .top_bar_container .left_section .top_bar_logo_container {
-    margin-left: 11vw;
+  .top_bar_container .left_section .menu_icon{
+    display: block;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .top_bar_container .right_section{
+    width: 45%;
   }
 
   .top_bar_container .right_section .calendar_section {
     display: none;
   }
-
+  
+  .top_bar_container .right_section .messenger_section {
+    margin-right: 0;
+  }
+    
+  .top_bar_container .right_section .profile_section {
+    width: fit-content;
+  }
+  
   .top_bar_container .right_section .profile_info {
     display: none;
   }
+
+  .top_bar_container .logout_modal {
+    right: 0.5rem;
+    bottom: -7.6rem;
+  }
+
+
 }
 
 /*=========================== Top Bar Styles Ends ==================================*/
@@ -434,8 +460,6 @@ body {
   width: fit-content;
   background-color: var(--card-bg-color);
   width: 45px;
-  /* padding: 1.5rem; */
-  /* position: relative; */
   height: 100vh;
   font-size: var(--small-font-size);
   transition: 0.6s;
@@ -475,10 +499,6 @@ body {
   color: var(--card-bg-color);
 }
 
-/* .side_bar_collapsed .toggle .close_icon {
-  display: none;
-} */
-
 .side_bar_collapsed .side_bar_logo_section {
   display: none;
 }
@@ -495,13 +515,11 @@ body {
 }
 
 .side_bar_collapsed .side_bar_main .collapsed_icon_card {
-  /* width: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 2px;
-  /* transition: 0.3s; */
   height: 30px;
   width: 30px;
   color: var(--secondary-text-color);
@@ -513,11 +531,6 @@ body {
   background-color: var(--first-color);
   color: var(--card-bg-color);
 }
-
-/* 
-.side_bar_collapsed .side_bar_main .collapsed_icon_card:hover .collapsed_icon {
-  font-size: 1.2rem;
-} */
 
 .side_bar_collapsed .side_bar_main .collapsed_icon {
   cursor: pointer;
@@ -551,7 +564,6 @@ body {
 }
 
 /* --------------------------- */
-
 .side_bar_container {
   background-color: var(--card-bg-color);
   width: 220px;
@@ -589,7 +601,6 @@ body {
 
 .side_bar_container .toggle .icon {
   font-weight: var(--active-font-weight);
-  /* margin-left: 5px; */
   font-size: var(--medium-font-size);
 }
 
@@ -602,15 +613,12 @@ body {
 }
 
 .side_bar_container .side_bar_main .main_title {
-  /* margin: 0.6rem 0.5rem; */
   position: relative;
   padding: 0.6rem;
-  /* width: 11.5rem; */
   width: 100%;
   position: relative;
   color: var(--secondary-text-color);
   font-size: var(--p-font-size);
-  /* font-weight: 520; */
 }
 
 .side_bar_container .side_bar_main .main_title .left_icon {
@@ -625,14 +633,9 @@ body {
   font-weight: var(--extra-font-weight);
 }
 
-/* .side_bar_main {
-  position: relative;
-} */
-
 .side_bar_container .side_bar_main .main_title.active {
   background-color: var(--third-color);
   color: var(--card-bg-color) !important;
-  /* width: 9rem; */
   flex-shrink: 0;
   border-radius: 4px;
   font-weight: var(--active-font-weight);
@@ -641,8 +644,6 @@ body {
 .side_bar_container .side_bar_main .main_title:hover {
   border-radius: 4px;
   cursor: pointer;
-  /* font-weight: var(--active-font-weight); */
-  /* background-color: var(--menu-hover-color); */
   color: var(--third-color);
   background-color: var(--secondary-cyan-color);
 }
@@ -655,7 +656,6 @@ body {
 .side_bar_logout_section {
   transition: 0.4s;
   position: absolute;
-  /* bottom: 0; */
 }
 
 .side_bar_container .side_bar_logout_section .main_title {
@@ -663,7 +663,6 @@ body {
   margin-top: 0;
   position: relative;
   padding: 0.5rem;
-  /* width: 11.5rem; */
   width: 100%;
   position: relative;
   color: var(--primary-text-color);
@@ -672,11 +671,9 @@ body {
 .side_bar_container .side_bar_logout_section .main_title .left_icon {
   font-size: var(--medium-font-size);
   font-weight: var(--extra-font-weight);
-  /* color: var(--second-color); */
 }
 
 .side_bar_container .side_bar_logout_section .main_title:hover {
-  /* background-color: var(--menu-hover-color); */
   border-radius: 0.3rem;
   cursor: pointer;
   color: var(--danger-color);
@@ -685,7 +682,6 @@ body {
 
 .side_bar_sub_list {
   margin-top: 0.5rem;
-  /* margin-left: 1rem; */
   list-style: none;
   transition: 0.6s;
 }
@@ -710,90 +706,42 @@ body {
 }
 
 
-/* .side_bar_sub_list .list_item .new .dot {
-
-  display: none;
-} */
-
-/* .side_bar_sub_list .list_item .dot {
-  width: 5px;
-  height: 5px;
-  background-color: var(--second-color);
-  border-radius: 50%;
-  display: inline-block;
-  position: absolute;
-  right: 0;
-
-} */
-
-/* TAB */
-@media only screen and (max-width: 869px) {
-  .side_bar_container {
-    /* display: none; */
-    background-color: var(--card-bg-color);
-    width: 30%;
-    padding: 1.5rem;
-    padding-top: 5vh;
-    position: relative;
-    height: 100vh;
-    font-size: var(--p-font-size);
-    transition: 0.6s;
-    position: fixed;
-    z-index: 9999;
-  }
-
-  .side_bar_collapsed {
-    /* width: fit-content; */
-    background-color: var(--card-bg-color);
-    /* width: 4%; */
-    padding: 1.5rem;
-    position: relative;
-    height: 100vh;
-    font-size: var(--normal-font-size);
-    transition: 0.6s;
-    position: fixed;
-    z-index: 9999;
-  }
-
-  .side_bar_collapsed .toggle {
-    position: absolute;
-    top: 1.5vh;
-    left: 1.5vh;
-    background-color: transparent;
-    padding: 0;
-  }
-
-  .side_bar_collapsed .toggle .icon {
-    display: block;
-    z-index: 99999;
-  }
-
-  .side_bar_container .toggle {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 5px 5px;
-    border-radius: 5px 0px 0px 5px;
-  }
-
-  .side_bar_container .toggle .icon {
-    display: none;
-  }
-
-  .side_bar_container .toggle .close_icon {
-    display: block;
-    font-size: var(--large-font-size);
-    font-weight: var(--extra-font-weight);
-  }
-}
-
 /* MOBILE */
 @media screen and (max-width: 460px) {
+
+  .side_bar_collapsed {
+    display: none;
+  }
+  
   .side_bar_container {
     width: 60%;
     padding: 1.3rem;
     padding-top: 6vh;
+    z-index: 9999999;
+    position: relative;
+    height: 100vh;
+    font-size: var(--small-font-size);
+    transition: 0.6s;
+    position: fixed;
   }
+  
+  .side_bar_container .toggle {
+    position: absolute;
+    top: 50vh;
+    right: -12.5px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--card-bg-color);
+    border-radius: 5px;
+    box-shadow: var(--normal-box-shadow);
+    color: var(--first-color);
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
 }
 
 /*=========================== Side Bar Styles Ends ==================================*/
@@ -801,25 +749,17 @@ body {
 /*=========================== Middle Console Styles Starts ==============================*/
 .middle_console_container {
   position: absolute;
-  /* background-color: vr(--card-bg-color); */
   width: calc(100vw - 220px);
   height: calc(100vh - 65px);
   margin-left: 220px;
   margin-top: 65px;
-  /* border-radius: 5px; */
   z-index: -100;
-  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 3px 0px; */
   transition: 0.6s;
   background-repeat: no-repeat;
   object-fit: cover;
-  /* overflow-y: scroll; */
-
   background-position: center;
   padding: 2px;
   background-color: var(--menu-hover-color);
-  /* background-color: #E5E5E5;
-  border-left: 1.5px solid var(--menu-hover-color);
-  border-top: 1.5px solid var(--menu-hover-color); */
 }
 
 .middle_console_container.collapsed {
@@ -844,11 +784,8 @@ body {
 
 .middle_console_container .body_section {
   background-color: var(--card-bg-color);
-  /* border-radius: var(--normal-border-radius); */
   box-shadow: var(--normal-box-shadow);
   transition: 0.6s;
-  /* padding: 1rem; */
-  /* background-size: contain; */
   height: calc(100vh - 68px);
   padding: 0.5rem;
   overflow-y: auto;
@@ -875,45 +812,25 @@ body {
 
 /* ---main ends */
 
-/* Tab Screen */
-
-@media screen and (max-width: 860px) {
-  .middle_console_container {
-    width: 91.5vw;
-    margin-left: 7vw;
-    margin-right: 1vw;
-    transition: 0.6s;
-    margin-top: 7vh;
-  }
-
-  .middle_console_container.collapsed {
-    margin-top: 7vh;
-    width: 91.5vw;
-    margin-left: 7vw;
-    margin-right: 1vw;
-    transition: 0.6s;
-  }
-}
-
 /* Mobile Screen */
 
 @media screen and (max-width: 460px) {
   .middle_console_container {
-    margin-top: 8vh;
-    width: 86.5vw;
-    margin-left: 12vw;
-    margin-right: 0.5vw;
+    margin-top: 65px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
     transition: 0.6s;
-    padding: 0.2rem;
+    padding: 4px;
   }
 
   .middle_console_container.collapsed {
-    margin-top: 8vh;
-    width: 86.5vw;
-    margin-left: 12vw;
-    margin-right: 0.5vw;
+    margin-top: 65px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
     transition: 0.6s;
-    padding: 0.2rem;
+    padding: 4px;
   }
 }
 

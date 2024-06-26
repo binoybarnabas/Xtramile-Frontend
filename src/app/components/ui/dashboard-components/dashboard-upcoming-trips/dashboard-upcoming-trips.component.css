@@ -3,6 +3,9 @@
     flex-direction: column;
     border-radius: var(--normal-border-radius);
     height: 100%;
+    background-color: var(--card-bg-color);
+    box-shadow: var(--normal-box-shadow);
+    border-radius: 5px;
 }
 
 .upcoming_trip_container .no_data_container{
@@ -16,9 +19,6 @@
     justify-content: center;
     align-items: center;
     font-size: var(--form-label-font-size);
-    background-color: var(--card-bg-color);
-    border-radius: var(--normal-border-radius);
-    box-shadow: var(--normal-box-shadow);
 }
 
 .upcoming_trip_container .trip_heading {
@@ -28,6 +28,7 @@
     align-items: center;
     padding: 0.5rem;
     color: var(--dark-gradient-color);
+    border-bottom: 1.5px solid var(--menu-hover-color);
 }
 
 .upcoming_trip_container .trip_heading .value {
