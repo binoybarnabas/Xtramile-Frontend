@@ -40,6 +40,7 @@ import { TravellerRequestHistoryComponent } from './features/travellerFeatures/t
 import { TravellerApprovedRequestsComponent } from './features/travellerFeatures/traveller-approved-requests/traveller-approved-requests.component';
 import { CustomStepChartComponent } from './components/ui/generalUIComponents/custom-step-chart/custom-step-chart.component';
 import { TravellerRequestProgressDetailsComponent } from './features/travellerFeatures/traveller-request-progress-details/traveller-request-progress-details.component';
+import { ManagerDashboardComponent } from './components/layout/contentLoaders/manager-dashboard/manager-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -67,7 +68,7 @@ const routes: Routes = [
     component: ManagerHomeComponent,
     canActivate: [managerAuthGuard],
     children: [
-      { path: 'dashboard', component: TravellerDashboardComponent },
+      { path: 'dashboard', component: ManagerDashboardComponent },
       { path: 'requestdetail', component: NewTravelRequestComponent },
       { path: 'incoming-requests', component: ManagerIncomingTravelRequestsComponent },
       { path: 'forwarded-requests', component: ManagerForwardedTravelRequestsComponent },

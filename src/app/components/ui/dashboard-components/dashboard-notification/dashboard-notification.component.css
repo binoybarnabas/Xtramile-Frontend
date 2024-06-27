@@ -4,14 +4,11 @@
     padding: 5px;
     overflow-y: auto;
     background-color: var(--card-bg-color);
-    /* height: 260px; */
     height: 100%;
-    border-radius: 0.5rem;
-    /* border-top: 3px solid var(--card-bg-color);
-    border-bottom: 3px solid var(--card-bg-color); */
- }
+    border-radius: 5px;
+}
 
- .notification_container .no_data_container{
+.notification_container .no_data_container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,29 +18,29 @@
     background-color: var(--secondary-cyan-color);
     border-radius: 5px;
     color: var(--primary-cyan-color);
- }
+}
 
- .notification_container .notification_card {
+.notification_container .notification_card {
      background-color: var(--secondary-cyan-color);
      padding: 10px;
-     border-radius: 5px;
+     border-radius: 3px;
      /* box-shadow: var(--normal-box-shadow); */
-     margin-bottom: 10px;
+     margin-bottom: 5px;
      transition: 0.3s;
 
- }
+}
 
- .notification_container .notification_card .date_time_section {
+.notification_container .notification_card .date_time_section {
      display: flex;
      justify-content: space-between;
      font-size: var(--extra-small-font-size);
      color: var(--ternary-text-color);
- }
+}
 
- .notification_container .notification_card .content_section {
+.notification_container .notification_card .content_section {
      font-size: var(--form-label-font-size);
      color: var(--secondary-text-color);
- }
+}
 
  /* .notification_container .notification_card:hover {
      transform: scale(1.02);

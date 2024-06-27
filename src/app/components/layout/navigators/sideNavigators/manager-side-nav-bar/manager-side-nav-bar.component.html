@@ -4,8 +4,7 @@
   "
 >
   <div (click)="controlSideBar()" class="toggle">
-    <i class="close_icon ri-close-circle-line"></i>
-    <i class="icon ri-draggable"></i>
+    <i class="icon" [ngClass]="isSideNavBarCollapsed ? 'ri-arrow-right-s-line': 'ri-arrow-left-s-line'"></i>
   </div>
 
   <!-- Dashboard -->
@@ -54,7 +53,7 @@
     >
       <ng-container *ngFor="let entry of travelRequestsMapEntries()">
         <li (click)="navigateToRequest(entry[1])" class="list_item">
-          <i [ngClass]="entry[0]"></i> {{ entry[1] }} <span class="dot"> </span>
+          <i class="left_icon" [ngClass]="entry[0]"></i> {{ entry[1] }} <span class="dot"></span>
         </li>
       </ng-container>
     </div>
@@ -124,7 +123,7 @@
     >
       <ng-container *ngFor="let entry of myRequestsMapEntries()">
         <li (click)="navigateToRequest(entry[1])" class="list_item">
-          <i [ngClass]="entry[0]"></i> {{ entry[1] }} <span class="dot"> </span>
+          <i class="left_icon" [ngClass]="entry[0]"></i> {{ entry[1] }} <span class="dot"> </span>
         </li>
       </ng-container>
     </div>

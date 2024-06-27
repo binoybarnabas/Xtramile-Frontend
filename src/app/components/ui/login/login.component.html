@@ -1,9 +1,7 @@
 <div class="login_container">
   <div class="left_section">
     <div class="logo_container">
-      <!-- <h3 class="logo"><i class="icon ri-git-pr-draft-fill"></i> XtraMile</h3> -->
       <h3 class="logo"><img class="logo_no_bg" src="../../../assets/images/v_logo_no_bg_1.png">XtraMile</h3>
-
     </div>
 
     <div class="login_form_container">
@@ -77,8 +75,19 @@
               >
                 LogIn
               </button>
-            </div>
 
+              <div class="border_line">
+                <span class="text">OR</span>
+              </div>
+
+              <div class="btn_microsoft">
+                  <img class="logo_microsoft" src="https://mailmeteor.com/logos/assets/PNG/Microsoft_Logo_512px.png" alt="">
+                  <div class="text_container">
+                    <p class="text">Sign in with Microsoft</p>
+                  </div>
+              </div>
+
+            </div>
             <span class="form_error" *ngIf="invalidCredentials">
               Invalid Credentials!
             </span>

@@ -23,7 +23,6 @@ import { FinancePersonnelSideNavBarComponent } from './components/layout/navigat
 import { EmployeeNewBillComponent } from './features/employee/mySettlements/employee-new-bill/employee-new-bill.component';
 import { EmployeePendingBillComponent } from './features/employee/mySettlements/employee-pending-bill/employee-pending-bill.component';
 import { EmployeeClosedBillsComponent } from './features/employee/mySettlements/employee-closed-bills/employee-closed-bills.component';
-import { ManagerDashboardComponent } from './features/manager/manager-dashboard/manager-dashboard.component';
 import { ManagerIncomingTravelRequestsComponent } from './features/manager/travelRequests/manager-incoming-travel-requests/manager-incoming-travel-requests.component';
 import { ManagerOngoingTravelRequestsComponent } from './features/manager/travelRequests/manager-ongoing-travel-requests/manager-ongoing-travel-requests.component';
 import { ManagerClosedTravelRequestsComponent } from './features/manager/travelRequests/manager-closed-travel-requests/manager-closed-travel-requests.component';
@@ -131,6 +130,8 @@ import { AddTicketModalComponent } from './components/ui/form-components/add-tic
 import { CustomCalendarComponent } from './components/ui/generalUIComponents/custom-calendar/custom-calendar.component';
 import { CustomStepChartComponent } from './components/ui/generalUIComponents/custom-step-chart/custom-step-chart.component';
 import { TravellerRequestProgressDetailsComponent } from './features/travellerFeatures/traveller-request-progress-details/traveller-request-progress-details.component';
+import { ManagerDashboardComponent } from './components/layout/contentLoaders/manager-dashboard/manager-dashboard.component';
+import { UpcomingTripCardComponent } from './components/ui/dashboard-components/upcoming-trip-card/upcoming-trip-card.component';
 
 @NgModule({
   declarations: [
@@ -249,6 +250,8 @@ import { TravellerRequestProgressDetailsComponent } from './features/travellerFe
     CustomCalendarComponent,
     CustomStepChartComponent,
     TravellerRequestProgressDetailsComponent,
+    ManagerDashboardComponent,
+    UpcomingTripCardComponent
   ],
   imports: [
     CommonModule,

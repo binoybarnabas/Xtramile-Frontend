@@ -1,6 +1,8 @@
 .done_trips_container{
   height: 100%;
-
+  background-color: var(--card-bg-color);
+  box-shadow: var(--normal-box-shadow);
+  border-radius: 5px;
 }
 
 .done_trips_container .heading_container {
@@ -11,13 +13,13 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  background-color: var(--second-color);
+  border-bottom: 1.5px solid var(--menu-hover-color);
 }
 
 .done_trips_container .heading_container .heading {
   margin-top: auto;
   margin-bottom: auto;
-  color: var(--card-bg-color);
+  color: var(--secondary-text-color);
   font-size: var(--small-font-size);
   font-weight: var(--active-font-weight);
 }
@@ -29,10 +31,10 @@
   display: flex;
   justify-content:center;
   align-items: center; 
-  border-radius: 50%;
+  border-radius: 5px;
   font-size: var(--extra-small-font-size);
   font-weight: var(--active-font-weight);
-  background-color: var(--card-bg-color);
+  background-color: var(--secondary-cyan-color);
   color: var(--second-color);
 }
 
