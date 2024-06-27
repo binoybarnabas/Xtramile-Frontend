@@ -1,0 +1,178 @@
+.main_container{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.main_container .calendar_date_section{
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--menu-hover-color);
+}
+
+.main_container .calendar_date_section .current_date_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.main_container .calendar_date_section .current_date_container .day_of_month{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: var(--large-font-size);
+    font-weight: var(--active-font-weight);
+    margin-right: 8px;
+}
+
+.main_container .calendar_date_section .current_date_container .day_month_year{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    font-size: var(--extra-small-font-size);
+    color: var(--ternary-text-color);
+}
+
+.main_container .calendar_date_section .current_week_container{
+    display: flex;
+    justify-content: space-evenly;
+    /* background-color: var(--card-bg-color);
+    border-radius: 5px;
+    box-shadow: var(--normal-box-shadow); */
+}
+
+.main_container .calendar_date_section .current_week_container .day_card{
+    width: 35px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: var(--secondary-cyan-color); */
+    border-radius: 6px;
+    margin-right: 5px;
+}
+
+.main_container .calendar_date_section .current_week_container .day_card.active{
+    background-color: var(--first-color);
+    color: var(--card-bg-color);
+}
+
+.main_container .calendar_date_section .current_week_container .day_card.active .day_of_week,
+.main_container .calendar_date_section .current_week_container .day_card.active .day_of_month{
+    color: var(--card-bg-color);
+}
+
+
+.main_container .calendar_date_section .current_week_container .day_card:last-child{
+    margin-right: 0;
+}
+
+
+.main_container .calendar_date_section .current_week_container .day_card .day_of_week{
+    font-size: var(--extra-small-font-size);
+    color: var(--ternary-text-color);
+}
+
+.main_container .calendar_date_section .current_week_container .day_card .day_of_month{
+    font-size: var(--extra-small-font-size);
+    font-weight: var(--active-font-weight);
+    color: var(--secondary-text-color);
+}
+
+.main_container .item_main{
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.main_container .calendar_items_section{
+    position: absolute;
+    display: flex;
+    justify-self: flex-start;
+    align-items: center;
+    padding: 5px;
+    padding-top: 10px;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.main_container .calendar_items_section .item_card{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-width: 150px;
+    min-height: 150px;
+    background-color: var(--secondary-cyan-color);
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+    border-left: 2px solid var(--primary-cyan-color);
+    margin-right: 10px;
+}
+
+.main_container .calendar_items_section .item_card:nth-child(4n-2){
+    background-color: var(--secondary-yellow-color);
+    border-left: 2px solid var(--primary-yellow-color);
+}
+
+.main_container .calendar_items_section .item_card:nth-child(4n-1){
+    background-color: var(--secondary-green-color);
+    border-left: 2px solid var(--primary-green-color);
+}
+
+.main_container .calendar_items_section .item_card:nth-child(4n){
+    background-color: var(--secondary-purple-color);
+    border-left: 2px solid var(--primary-purple-color);
+}
+
+.main_container .calendar_items_section .item_card:last-child{
+    margin-right: 0;
+}
+
+
+.main_container .calendar_items_section .item_card .main_title{
+    font-size: var(--p-font-size);
+    font-weight: var(--active-font-weight);
+    margin: 0;
+    color: var(--first-color);
+}
+
+.main_container .calendar_items_section .item_card .main_title .text{
+    margin: 0;
+}
+
+.main_container .calendar_items_section .item_card .location_container{
+    font-size: var(--extra-small-font-size);
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.main_container .calendar_items_section .item_card .location_container .icon{
+    margin-right: 5px;
+}
+
+.main_container .calendar_items_section .item_card .date_container{
+    font-size: var(--extra-small-font-size);
+}
+
+.main_container .calendar_items_section .item_card .date_container .title{
+    color: var(--ternary-text-color);
+}
+
+.main_container .calendar_items_section .item_card .date_container .value{
+    font-weight: var(--active-font-weight);
+}
+
+.main_container .calendar_items_section .item_card .project_code{
+    font-size: var(--extra-small-font-size);
+    color: var(--ternary-text-color);
+}
+
+.main_container .calendar_items_section .item_card .project_code .value{
+    color: var(--secondary-text-color);
+    font-weight: var(--active-font-weight);
+}
+

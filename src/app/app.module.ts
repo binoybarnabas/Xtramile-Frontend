@@ -132,6 +132,7 @@ import { CustomStepChartComponent } from './components/ui/generalUIComponents/cu
 import { TravellerRequestProgressDetailsComponent } from './features/travellerFeatures/traveller-request-progress-details/traveller-request-progress-details.component';
 import { ManagerDashboardComponent } from './components/layout/contentLoaders/manager-dashboard/manager-dashboard.component';
 import { UpcomingTripCardComponent } from './components/ui/dashboard-components/upcoming-trip-card/upcoming-trip-card.component';
+import { DashboardTravelCalendarComponent } from './components/ui/dashboard-components/dashboard-travel-calendar/dashboard-travel-calendar.component';
 
 @NgModule({
   declarations: [
@@ -251,7 +252,8 @@ import { UpcomingTripCardComponent } from './components/ui/dashboard-components/
     CustomStepChartComponent,
     TravellerRequestProgressDetailsComponent,
     ManagerDashboardComponent,
-    UpcomingTripCardComponent
+    UpcomingTripCardComponent,
+    DashboardTravelCalendarComponent
   ],
   imports: [
     CommonModule,

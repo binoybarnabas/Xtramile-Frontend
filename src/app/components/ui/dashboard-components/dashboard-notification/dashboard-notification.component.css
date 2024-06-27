@@ -47,18 +47,6 @@
  } */
 
 
- @media screen and (max-width: 860px) {
-
-     .main_container .top_section .top_middle_section .notification_container {
-         overflow-x: hidden;
-         overflow-y: scroll;
-         /* height: 40vh; */
-         margin: 0;
-         height: 300px;
-     }
-
- }
-
  @media screen and (max-width: 460px) {
      .main_container .top_section .top_middle_section .notification_container {
 

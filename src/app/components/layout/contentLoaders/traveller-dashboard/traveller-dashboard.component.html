@@ -1,23 +1,21 @@
 <div class="main_container">
+
   <div class="top_section">
-    <div class="top_left_section">
-      <app-dashboard-upcoming-trips
-        [employeeId]="employeeId"
-      ></app-dashboard-upcoming-trips>
+
+    <div class="top_middle_top_left_section">
+      <div class="top_left_section">
+        <app-upcoming-trip-card></app-upcoming-trip-card>
+      </div>
+      <div class="top_middle_section">
+        <app-dashboard-notification [notifications]="notifications"></app-dashboard-notification>
+      </div>
     </div>
 
-    <div class="top_middle_top_right_section">
-      <div class="top_middle_section">
-          <app-dashboard-notification [notifications]="notifications"></app-dashboard-notification>
-      </div>
-
-      <!-- Calendar -->
-      <div class="top_right_section">
-        <div class="calendar_container">
-          <app-dashboard-calender [empId]="employeeId"></app-dashboard-calender>
-          <!-- <app-dash-calendar></app-dash-calendar> -->
-        </div>
-      </div>
+    <div class="top_right_section">
+      <!-- <app-dashboard-upcoming-trips
+        [employeeId]="employeeId"
+      ></app-dashboard-upcoming-trips> -->
+      <app-dashboard-travel-calendar></app-dashboard-travel-calendar>
     </div>
   </div>
 
@@ -58,13 +56,13 @@
               <app-dashboard-table [employeeId]="employeeId"></app-dashboard-table>
             </div>
     
-            <!-- <div
+            <div
               *ngIf="dashboardTableBody === 'settlements'"
               class="travel_settlement_container"
             >
               <p>Travel Settlements</p>
               <app-dashboard-table></app-dashboard-table>
-            </div> -->
+            </div>
           </div>
         </div>
     
