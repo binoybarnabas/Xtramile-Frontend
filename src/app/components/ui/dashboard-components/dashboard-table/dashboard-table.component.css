@@ -4,9 +4,7 @@
     border-collapse: collapse;
     border-radius: var(--normal-border-radius);
     height: 100%;
-    /* overflow-y: scroll; */
 }
-
 
 .dashboard_table .heading {
     /* background-color: #f2f2f2; */
@@ -32,7 +30,6 @@
     color: var(--secondary-text-color);
     overflow-wrap: break-word;
     padding: 0 8px;
-
 }
 
 .dashboard_table .remarks {

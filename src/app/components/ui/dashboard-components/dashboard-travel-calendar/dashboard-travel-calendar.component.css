@@ -148,6 +148,8 @@
     font-size: var(--extra-small-font-size);
     margin: 0;
     margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1.5px solid var(--card-bg-color);
 }
 
 .main_container .calendar_items_section .item_card .location_container .icon{
