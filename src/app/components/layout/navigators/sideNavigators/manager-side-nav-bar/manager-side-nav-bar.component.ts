@@ -127,6 +127,7 @@ export class ManagerSideNavBarComponent {
 
   navigateToRequest(routeDestination: string) {
     this.activeSideNavItem = routeDestination;
+    this.sideNavBarService.closeSideNavBar();
 
     switch (routeDestination) {
       case 'dashboard':

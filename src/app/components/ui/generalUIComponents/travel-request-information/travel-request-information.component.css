@@ -5,9 +5,10 @@
   margin: 0;
   background-color: var(--card-bg-color);
   box-shadow: var(--normal-box-shadow);
-  min-height: calc(100vh - 88px);
-  max-height: calc(100vh - 88px);
-  border-radius: 10px;
+  /* min-height: calc(100vh - 88px);
+  max-height: calc(100vh - 88px); */
+  border-radius: 5px;
+  height: 100%;
 }
 
 .req_forms_main_container .heading_section {
@@ -286,7 +287,7 @@
   min-height: 55px;
   display: flex;
   justify-content: space-between;
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 5px 5px;
   background-color: var(--card-bg-color);
   box-shadow: var(--normal-box-shadow);
   padding: 10px;
@@ -409,12 +410,11 @@
 /* ------------------------------------------------ */
 
 @media screen and (max-width: 860px) {
-  .req_forms_main_container {
-    display: block;
-    position: relative;
+  /* .req_forms_main_container {
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    width: 100%;
-  }
+  } */
 
   .req_forms_main_container
     .right_section
@@ -438,24 +438,38 @@
 
 @media screen and (max-width: 460px) {
   .req_forms_main_container {
-    display: block;
     position: relative;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+  }
+
+  .req_forms_main_container .body_section {
+    flex: 1;
+  }
+
+  .req_forms_main_container .action_section .close_reject_btn_container{
+    display: none;
+  }
+
+  .req_forms_main_container .action_section .btn_container{
     justify-content: space-between;
   }
+
+
 
   .req_forms_main_container .left_section {
     display: none;
   }
 
   .req_forms_main_container .right_section {
+    height: fit-content;
     width: 100%;
-
-    /* position: absolute; */
     border: none;
   }
 
   .req_forms_main_container .right_section .form_container {
-    height: calc(100vh - 100px);
+    /* height: calc(100vh - 100px); */
     overflow-y: auto;
   }
 
@@ -467,14 +481,18 @@
     .form_input_group
     .form_data_view_container {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-row-gap: 10px;
     font-size: var(--form-label-font-size);
   }
+
 }
 
+
+
+
 /* Styles for loader */
-.loader {
+/* .loader {
   position: fixed;
   top: 0;
   left: 0;
@@ -494,9 +512,9 @@
   border-top: 6px solid #3498db;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-}
+} */
 
-@keyframes spin {
+/* @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
@@ -504,7 +522,7 @@
   100% {
     transform: rotate(360deg);
   }
-}
+} */
 
 /* delete */
 .option_card.selected {

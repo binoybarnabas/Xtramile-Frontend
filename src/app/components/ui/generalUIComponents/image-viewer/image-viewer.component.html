@@ -1,19 +1,17 @@
-<div class="main_container">
+<div class="main_container" [class.side_bar_open]="!isSideNavBarCollapsed">
   
   <div class="close_btn">
-    <button class="btn close" (click)="closeImageViewer()"><i class="ri-close-circle-fill"></i></button>
+    <button class="btn close" (click)="closeImageViewer()"><i class="ri-close-line"></i></button>
   </div>
 
   <div class="image_container">
-    <div *ngIf="images && images.length > 0" class="image_wrapper">
-      <img class="img" [src]="images[currentImageIndex]" alt="Image" [style.transform]="'scale(' + zoomLevel + ')'" />
+    <div *ngIf="image" class="image_wrapper">
+      <img class="img" [src]="image" alt="Image" [style.transform]="'scale(' + zoomLevel + ')'" />
     </div>
-    <div *ngIf="!images || images.length === 0">
+    <div *ngIf="!image">
       <p>No images to display.</p>
     </div>
   </div>
-
-
 
   <div class="action_section">
 
@@ -23,13 +21,13 @@
     </div>
 
     <div class="img_description">
-      <span>{{descriptions[currentImageIndex]}}</span>
+      <!-- <span>{{descriptions[currentImageIndex]}}</span> -->
     </div>
 
     <div class="prev_next_actions">
-      <button class="btn" (click)="prevImage()"><i class="ri-arrow-left-circle-line"></i></button>
+      <!-- <button class="btn" (click)="prevImage()"><i class="icon_right ri-arrow-left-s-fill"></i></button> -->
+      <!-- <button class="btn" (click)="nextImage()"><i class="icon_left ri-arrow-right-s-fill"></i></button> -->
       <button class="btn"><i class="ri-download-cloud-line"></i></button>
-      <button class="btn" (click)="nextImage()"><i class="ri-arrow-right-circle-line"></i></button>
     </div>
 
   </div>

@@ -2,7 +2,7 @@
 
     <div *ngFor="let item of fileCard" class="file_card">
 
-        <div class="file_heading_section" [class.no_file]="!item.fileURL">
+        <div class="file_heading_section" [class.no_file]="!item.fileURL" >
             <h4 class="file_type">{{item.fileType}} <i class="ri-checkbox-circle-fill"></i></h4>
             <span class="file_size">{{item.fileSize}}</span>
             
@@ -10,12 +10,12 @@
         </div>
 
         <div class="description_section">
-            <span class="file_name" [class.no_file]="!item.fileURL">{{item.fileName}}</span>
+            <span class="file_name"  [class.no_file]="!item.fileURL">{{item.fileName}}</span>
         </div>
 
-        <div *ngIf="item.fileURL" class="actions">
+        <div *ngIf="item.fileURL" class="actions" >
 
-            <div>
+            <div (click)="viewPdfFile(item.fileURL)">
                 <a class="action_btn" href="{{item.fileURL}}" target="_blank">
                 <span> <i class="icon ri-eye-line"></i></span>
                 </a>

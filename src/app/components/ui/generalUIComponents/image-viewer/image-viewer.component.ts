@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
+import { ImageViewerService } from 'src/app/services/helperServices/commonUIServices/image-viewer-service/image-viewer.service';
 
 @Component({
   selector: 'app-image-viewer',
@@ -7,15 +9,25 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ImageViewerComponent {
  
-  @Input() images: string[] = [];
-  @Input() descriptions: string[] = [];
-  @Input() currentImageIndex: number = 0;
+  // @Input() images: string[] = [];
+  // @Input() descriptions: string[] = [];
+  // @Input() currentImageIndex: number = 0;
   @Output() close = new EventEmitter<void>();
+  
+
+   
+  @Input() image: string = '';
+  @Input() description: string ='';
+  @Input() currentImageIndex: number = 0;
   
   zoomLevel = 1;
   //currentImageIndex = 0;
 
-  constructor(){
+  constructor(private imageViewerService: ImageViewerService, private sideNavBarService: SideNavBarService){
+
+  }
+
+  ngOnInit(): void {
 
   }
 
@@ -36,13 +48,19 @@ export class ImageViewerComponent {
   }
 
   nextImage() {
-    if (this.currentImageIndex < this.images.length - 1) {
-      this.currentImageIndex++;
-    }
+    // if (this.currentImageIndex < this.images.length - 1) {
+    //   this.currentImageIndex++;
+    // }
   }
 
   closeImageViewer() {
-   this.close.emit();
+   //this.close.emit();
+   this.imageViewerService.close();
+  }
+
+  // Getter to access the collapsed state from the service
+  get isSideNavBarCollapsed(): boolean {
+      return this.sideNavBarService.isSideNavBarCollapsed;
   }
 
 }

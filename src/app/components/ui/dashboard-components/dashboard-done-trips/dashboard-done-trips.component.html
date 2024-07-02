@@ -5,44 +5,54 @@
     <!-- Display the count of completed trips -->
   </div>
 
-  <div
+  <div class="trip_history_body">
+    <div
     *ngIf="completedTrips.length > 0; else noDataTemplate"
     class="trip_history_container"
   >
     <!-- Loop through each completed trip and display its details -->
     <div class="trip_history_card" *ngFor="let trip of completedTrips">
       <!-- Origin and destination section -->
+
       <div class="origin_destination_section" (click)="viewDoneTripDetails()">
         <div class="origin_card">
+          <i class="icon ri-map-pin-line"></i>
           <p class="origin">{{ trip.from }}</p>
-          <!-- Display the origin of the trip -->
         </div>
-        <i class="plane_icon ri-plane-line"></i>
+        <span class="plane_icon"><i class="icon ri-plane-line"></i></span>
         <div class="destination_card">
           <p class="destination">{{ trip.to }}</p>
-          <!-- Display the destination of the trip -->
+          <i class="icon ri-map-pin-line"></i>
         </div>
       </div>
 
       <!-- Date section -->
       <div class="date_section">
-        <span class="value">
-          <i class="cal_icon ri-calendar-schedule-line"></i>
-          {{ trip.departureDate | date : "shortDate" }} -
-          {{ trip.returnDate | date : "shortDate" }}
-        </span>
-        <!-- Display the start and end dates of the trip -->
-        <span class="value">
-          <i class="done_icon ri-check-double-line"></i>
-          {{ trip.completedDate | date : "shortDate" }}
-        </span>
-        <!-- Display the completion date of the trip -->
+
+        <div class="title_value_card">
+          <span class="title">Departure</span>
+          <p class="value">{{ trip.departureDate | date : "shortDate" }} </p>
+        </div>
+        <div class="title_value_card">
+          <span class="title">Return</span>
+          <p class="value">{{ trip.returnDate | date : "shortDate" }} </p>
+        </div>
+        <div class="title_value_card">
+          <span class="title">Closed On</span>
+          <p class="value">{{ trip.completedDate | date : "shortDate" }} </p>
+        </div>
+
         <span *ngIf="trip.count > 1" class="count_on_card">{{
           trip.count
         }}</span>
       </div>
+
     </div>
+
   </div>
+  </div>
+
+
 
   <!-- Template to display when there is no data -->
   <ng-template #noDataTemplate>

@@ -1,17 +1,24 @@
 .main_container{
+    background-color: var(--primary-text-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    border-radius: 8px;
+    border-radius: 0;
     height: 100%;
-    /* padding: 0.5rem; */
-    position: relative;
-    /* background-color: var(--secondary-cyan-color); */
     background-color: var(--primary-text-color);
+    position: absolute;
+    width: calc(100vw - 60px);
+    height: calc(100vh - 77px);
+    z-index: 9999;
+    top: 7px;
+    flex: 1;
 }
   
-
+.main_container.side_bar_open{
+    width: calc(100vw - 235px);
+}
+  
 .main_container .download_btn{
     position: absolute;
     top: 5px;
@@ -28,9 +35,9 @@
   
 .main_container .close_btn .btn.close,
 .main_container .download_btn .btn.download{
-    color: var(--primary-text-color);
-    background-color: var(--secondary-cyan-color);
-    border-radius: 6px;
+    color: var(--card-bg-color);
+    /* background-color: var(--secondary-cyan-color); */
+    border-radius: 4px;
     width: 30px;
     height: 30px;  
     display: flex;
@@ -41,11 +48,12 @@
   
 .main_container .close_btn .btn.close:hover{
     color: var(--primary-red-color);
-    background-color: var(--secondary-red-color);
+    background-color: #474545;
+    /* background-color: var(--secondary-red-color); */
 }
 
 .main_container .download_btn .btn.download:hover{
-    background-color: var(--second-color);
+    background-color: #474545;
     color: var(--card-bg-color);
 }
 
@@ -61,9 +69,7 @@
     height: 100%;
     padding: 0.5rem;
 }
-    
-
-    
+        
 .main_container .zoom_actions{
     position: absolute;
     left: 0.5rem;
@@ -80,17 +86,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--secondary-cyan-color);
-    color: var(--second-color);
+    /* background-color: var(--secondary-cyan-color); */
+    color: var(--card-bg-color);
     transition: 0.3s;
     border: none;
-    border-radius: 8px;
+    border-radius: 4px;
     font-size: var(--medium-font-size);
     margin-right: 0.5rem;
 }
   
 .main_container .zoom_actions .btn:hover{
-    background-color: var(--second-color);
+    background-color: #474545;
     color: var(--card-bg-color);
 }
   

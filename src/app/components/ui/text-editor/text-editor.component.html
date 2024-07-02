@@ -1,10 +1,12 @@
-<div class="modal-header">
-  <h4 class="modal-title">Add New Option</h4>
-  <button type="button" class="exit_button" aria-label="Close" (click)="closeModal()">
-    <span aria-hidden="true"><i class="ri-close-fill"></i></span>
+<div
+  class="modal_header">
+  <h6 class="modal_title">Add Travel Options</h6>
+  <button type="button" class="exit_button" (click)="closeModal()">
+    <i class="icon ri-close-fill"></i>
   </button>
 </div>
-<div class="option_body">
+
+<div class="modal_body">
   <div class="editor_container">
     <editor
   apiKey="6fbq26b4z6phet50bxxqc7w4ht11my7jsqlyfto1x8jk82pa"
@@ -17,13 +19,24 @@
     toolbar: 'undo redo | formatselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | wordcount'
   }"
 ></editor>
-  <!-- <div class="attachment_container">
-    <button (click)="openAddOptionModal()" class="btn btn-primary"><i class="ri-attachment-2"></i></button> 
-  </div> -->
 </div>
-<div class="text-center mt-3">
+
+<div class="submit_btn_container">
+  <button
+    class="submit_btn"
+    (click)="selectTextOptions()" 
+    [disabled]="htmlContent.trim() === ''"
+  >
+    <i class="icon ri-file-add-line"></i> Add
+  </button>
+</div>
+</div>
+
+
+
+<!-- <div class="text-center mt-3">
   <button class="confirm_button" (click)="selectTextOptions()" [disabled]="htmlContent.trim() === ''"  >Submit</button>
-</div>
+</div> -->
 
 
 

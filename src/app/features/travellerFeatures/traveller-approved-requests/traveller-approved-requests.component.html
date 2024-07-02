@@ -2,16 +2,24 @@
 
 </app-page-header>
 
-<app-data-table
+<div class="large_screen_view">
+  <app-data-table
   [headers]="tableHeaders"
   [data]="incomingRequestdata"
   [displayedProperties]="fieldsToDisplay"
   (rowClick)="handleSelectedRow($event)"
 ></app-data-table>
+</div>
 
-<pagination
+<div class="small_screen_view">
+  <app-travel-request-card-mobile-view></app-travel-request-card-mobile-view>
+</div>
+
+
+
+<!-- <pagination
 [totalItems]="totalCount"
 [(ngModel)]="currentPage"
 [itemsPerPage]="itemsPerPage"
 (pageChanged)="onPageChange($event)"
-></pagination>
+></pagination> -->

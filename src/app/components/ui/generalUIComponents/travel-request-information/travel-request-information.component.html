@@ -100,6 +100,7 @@
             <div class="files_section">
               <app-file-card
                 [requestId]="travelRequestDetailViewModel.requestId"
+                (loadPdfFileToViewer)="receivePdfFileForLoading($event)"
               >
               </app-file-card>
             </div>
@@ -125,7 +126,8 @@
               [destinationCity]="travelRequestDetailViewModel.destinationCity"
               [tripType]="travelRequestDetailViewModel.tripType"
               (isSubmitBtnActiveChange)="handleIsSubmitBtnActiveChange($event)"
-
+              (loadImagesToViewer)="receiveImagesForLoading($event)"
+              (loadPdfFileToViewer)="receivePdfFileForLoading($event)"
             ></app-tabbed-option-viewer>
 
             <!-- form input group ends -->
@@ -192,3 +194,8 @@
 
   <!-- req form main container ends -->
 </div>
+
+<app-image-viewer *ngIf="isImageViewerOpen" [image]="optionImageUrl" [description]="fileOptionDescription"></app-image-viewer>
+<!-- <app-image-viewer *ngIf="isImageViewerOpen" [images]="optionImageUrls" [descriptions]="fileOptionDescriptions" [currentImageIndex]="currentImageIndex"></app-image-viewer> -->
+
+<app-custom-pdf-viewer *ngIf="isPdfViewerOpen" [fileUrl]="pdfFileUrl"></app-custom-pdf-viewer>

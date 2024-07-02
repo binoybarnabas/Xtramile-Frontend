@@ -34,7 +34,6 @@
 
         <div class="travel_mode_container">
           <ng-container *ngFor="let entry of getTravelModeInfoMapEntries()">
-            <!-- <option [value]="mode.modeId">{{ mode.modeName }}</option> -->
             <div
               (click)="changeTravelMode(entry[1][0])"
               [ngClass]="
@@ -259,6 +258,7 @@
                   <span>Apply</span>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -295,6 +295,10 @@
               *ngIf="isPrefDepTimeDetailsSectionOpen"
               class="time_slot_container"
             >
+            <div class="title_container">
+              <i class="icon ri-timeline-view"></i>
+              <p class="title">Select a Time Slot</p>
+            </div>
               <div class="slot_selector">
                 <ng-container *ngFor="let item of availableDepartureTimes">
                   <div
@@ -381,6 +385,7 @@
                 </label>
               </div>
             </div>
+            
           </div>
 
           <!-- pref pickup time -->

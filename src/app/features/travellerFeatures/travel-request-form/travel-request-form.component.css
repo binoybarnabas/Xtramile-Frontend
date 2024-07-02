@@ -97,16 +97,18 @@
     display: flex;
     padding: 1rem;
     justify-content: space-between;
+    align-items: center;
     transition: 0.3s;
 }
 
 .main_container .req_form_container .top_section .travel_mode_container {
     display: flex;
+    align-items: center;
     background-color: var(--card-bg-color);
     box-shadow: var(--normal-box-shadow);
-    border-radius: var(--normal-border-radius);
-    padding: 6px;
-    padding-right: 0;
+    border-radius: 5px;
+    padding: 5px;
+    height: 46px;
 }
 
 .main_container .req_form_container .top_section .travel_mode_container .travel_mode_card {
@@ -115,10 +117,16 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 5.5px;
     cursor: pointer;
-    margin-right: 6px;
+    margin-right: 5px;
+    height: 38px;
 }
+
+.main_container .req_form_container .top_section .travel_mode_container .travel_mode_card:last-child{
+    margin-right: 0;
+}
+
 
 .main_container .req_form_container .top_section .travel_mode_container .travel_mode_card .icon {
     font-size: 1.5rem;
@@ -160,12 +168,12 @@
 .main_container .req_form_container .top_section .trip_type_section .trip_type_card {
     display: flex;
     margin: 5px;
-    padding: 1px 10px;
+    padding: 5px 10px;
     border-radius: 20px;
     align-items: center;
     cursor: pointer;
     color: var(--ternary-text-color);
-    transition: 0.3s;
+    /* transition: 0.3s; */
 }
 
 .main_container .req_form_container .top_section .trip_type_section .trip_type_card:hover {
@@ -650,6 +658,26 @@
     color: var(--first-color);
 }
 
+
+.main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .title_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--menu-hover-color);
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .title_container .title{
+    font-size: var(--form-label-font-size);
+    font-weight: var(--active-font-weight);
+    color: var(--secondary-text-color);
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 3px;
+}
+
+
 .main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .time_slot_container {
     position: absolute;
     background-color: var(--card-bg-color);
@@ -837,6 +865,10 @@
     transform: translateX(20px);
 }
 
+.main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section{
+    position: relative;
+}
+
 .main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section .time_picker_container {
     position: absolute;
     background-color: var(--card-bg-color);
@@ -844,7 +876,7 @@
     border-radius: var(--normal-border-radius);
     z-index: 9999;
     width: fit-content;
-    top: 10px;
+    top: 25px;
 }
 
 .main_container .req_form_container .bottom_section .second_row .file_container {
@@ -933,18 +965,17 @@
 @media screen and (max-width: 860px) {
 
     .main_container .req_form_container .top_section {
+        margin-top: 0.5rem;
         display: flex;
-        flex-direction: column-reverse;
+        align-items: center;
+        /* flex-direction: column-reverse; */
     }
 
     .main_container .req_form_container .top_section .travel_mode_container {
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }
-
-    .main_container .req_form_container .top_section .trip_type_section {
-        margin-top: 1rem;
+        width: fit-content;
     }
 
     .main_container .req_form_container .bottom_section .first_row {
@@ -977,18 +1008,34 @@
         margin-top: 1rem;
         border: 1px solid var(--menu-hover-color);
         border-radius: 5px;
+        position: relative;
     }
 
     .main_container .req_form_container .bottom_section .first_row .other_info_section .project_code_travel_purpose_container {
-        top: 37.5rem;
-        right: 2rem;
-        z-index: 9999;
-        width: 80%;
+        position: absolute;
+        background-color: var(--card-bg-color);
+        width: 100%;
+        left: 0;
+        top:35px;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main_container .req_form_container .bottom_section .first_row .other_info_section .project_code_travel_purpose_container .project_code_section,
+    .main_container .req_form_container .bottom_section .first_row .other_info_section .project_code_travel_purpose_container .travel_purpose_section,
+    .main_container .req_form_container .bottom_section .first_row .other_info_section .project_code_travel_purpose_container .btn_container
+
+    {
+        width: 100%;
     }
 
     .main_container .req_form_container .bottom_section .second_row {
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
 
     .main_container .req_form_container .bottom_section .second_row .pref_dep_time_section {
@@ -1004,14 +1051,19 @@
     .main_container .req_form_container .bottom_section .second_row .pref_dep_time_section .time_slot_container {
         width: 100%;
         left: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .main_container .req_form_container .bottom_section .second_row .accommodation_cab_section {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 60px;
-        margin: 10px 0;
+        height: 65px;
+        margin: 15px 0;
     }
 
     .main_container .req_form_container .bottom_section .second_row .accommodation_service_section {
@@ -1027,10 +1079,7 @@
         justify-content: space-between;
         position: absolute;
         bottom: 0;
-    }
-
-    .main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section {
-        width: 100%;
+        margin: 0;
     }
 
     .main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section .label_and_view_section {
@@ -1044,50 +1093,40 @@
         margin: 0;
     }
 
+    .main_container .req_form_container .bottom_section .second_row .pref_pick_up_time_section .time_picker_container{
+        position: absolute;
+        top: 30px;
+    }
+
     .main_container .req_form_container .bottom_section .second_row .file_container {
         width: 100%;
         justify-content: space-between;
+        margin-top: 15px;
     }
 
     /* end     */
 }
 
 
+
 @media screen and (max-width: 460px) {
 
-    .main_container {
-        justify-content: center;
+    .main_container{
+        height: fit-content;
     }
 
-    .main_container .req_form_container {
-        margin-left: 6rem;
-    }
-
-    .main_container .req_form_container .top_section .travel_mode_container {
-        width: 100%;
-    }
-
-    .main_container .req_form_container .top_section .travel_mode_container .travel_mode_card {
-        display: flex;
+    .main_container .req_form_container .top_section {
+        margin-top: 0; 
         flex-direction: column;
     }
 
-    .main_container .req_form_container .top_section .travel_mode_container .travel_mode_card .icon {
-        margin: 0
+    .main_container .req_form_container .top_section .travel_mode_container {
+        display: none;
     }
 
-    .main_container .req_form_container .top_section .trip_type_section {
-        border-radius: 5px;
-    }
-
-    .main_container .req_form_container .top_section .trip_type_section .trip_type_card {
-        border-radius: 5px;
-        font-size: var(--form-label-font-size);
-        margin-left: 3px;
-    }
-
-    .main_container .req_form_container .top_section .trip_type_section {
-        margin-top: 1rem;
+    .main_container .req_form_container .bottom_section .first_row {
+        display: flex;
+        flex-direction: column;
     }
 
     .main_container .req_form_container .bottom_section .first_row {
@@ -1150,4 +1189,6 @@
         flex-direction: column;
     }
 
-}
+
+
+} 
