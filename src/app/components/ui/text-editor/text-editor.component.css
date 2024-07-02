@@ -1,43 +1,82 @@
-.editor_container{
-    position: relative;
-}
-.attachment_container{
-    position: absolute;
-    top:7px;
-    z-index: 999;
-    left: 345px;
-}
-.option_body{
-    padding-inline: 50px;
-    padding-block: 30px;
-}
-.modal-header {
-    background-color: var(--second-color);
-    color: var(--card-bg-color);
-    border-bottom: none;
-}
-  
-.modal-header .exit_button {
-    background-color: var(--second-color);
-    border-radius: 1rem;
-    border-color: #fff;
-    color: var(--card-bg-color);
-}
-.confirm_button{
-    justify-content: center;
+.modal_header {
+    border-bottom: 1px solid var(--menu-hover-color);
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    border: 2px solid var(--second-color);
-    background-color: var(--second-color);
-    padding: 0.4rem;
-    width: 6rem;
-    font-size: var(--form-label-font-size);
-    border-radius: 5px;
-    color: var(--card-bg-color);
+    padding: 1rem;
+}
+
+.modal_header .modal_title{
+    margin-top: auto;
+    margin-bottom: auto;
     font-weight: var(--active-font-weight);
 }
-.confirm_button:disabled:hover {
-    background-color: var(--error-color);
-    cursor: not-allowed;
-    border: var(--normal-button-border-size) solid var(--error-color);
-  
+
+.modal_header .exit_button {
+    background-color: var(--secondary-cyan-color);
+    color: var(--second-color);
+    border-radius: 2px;
+    height: 25px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    transition: 0.3s ease;
   }
+  
+  .modal_header .exit_button:hover {
+    background-color: var(--second-color);
+    color: var(--card-bg-color);
+    transform: rotate(180deg);
+  }
+
+.modal_body{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal_body .editor_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.submit_btn_container{
+    margin-top: 1rem;
+}
+
+.submit_btn_container
+.icon {
+margin-right: 4px;
+}
+
+
+.submit_btn_container
+.submit_btn {
+display: flex;
+justify-content: center;
+align-items: center;
+border: 2px solid var(--second-color);
+background-color: var(--second-color);
+padding: 0.4rem;
+width: 100%;
+font-size: var(--form-label-font-size);
+border-radius: 5px;
+color: var(--card-bg-color);
+font-weight: var(--active-font-weight);
+}
+
+.submit_btn_container
+.submit_btn:disabled {
+/* background-color: var(--error-color); */
+cursor: not-allowed;
+opacity: 0.6;
+/* border: var(--normal-button-border-size) solid var(--error-color); */
+}
+
