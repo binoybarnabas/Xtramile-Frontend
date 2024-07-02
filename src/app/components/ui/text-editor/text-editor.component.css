@@ -23,13 +23,13 @@
     align-items: center;
     border: none;
     transition: 0.3s ease;
-  }
+}
   
-  .modal_header .exit_button:hover {
+.modal_header .exit_button:hover {
     background-color: var(--second-color);
     color: var(--card-bg-color);
     transform: rotate(180deg);
-  }
+}
 
 .modal_body{
     padding: 1rem;
