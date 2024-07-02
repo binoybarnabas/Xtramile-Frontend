@@ -26,7 +26,7 @@
         <div *ngIf=" activeTabName === 'Files' && requestStatus === 'Approved by RM'" class="tab_body file">
             
           <ng-container *ngFor="let item of optionImageUrls; let i = index">
-                <div (click)="onOptionSelected('img',i)" [ngClass]=" selectedImageOptionIndex === i ? 'file_card active':'file_card'">
+                <div (click)="onOptionSelected('img',i)" (dblclick)="viewImage(item,'')"  [ngClass]=" selectedImageOptionIndex === i ? 'file_card active':'file_card'">
                     <img class="img" [src]="item" alt="">
                 </div>
           </ng-container>
@@ -78,7 +78,7 @@
         <!-- View Options from API -->
         <div *ngIf="activeTabName === 'Files' && requestStatus === 'Waiting' || activeTabName === 'Files' && requestStatus === 'Selected' " class="tab_body file">
           <ng-container *ngFor="let item of travelOptionsWithImagesData; let i = index">
-            <div (click)="onOptionSelected('img',i)" [ngClass]=" selectedImageOptionIndex === i ? 'file_card active':'file_card'">
+            <div (click)="onOptionSelected('img',i)" (dblclick)="viewImage(item.optionFileURL,item.description)" [ngClass]=" selectedImageOptionIndex === i ? 'file_card active':'file_card'">
               <img class="img" [src]="item.optionFileURL" alt="">
             </div>
           </ng-container>
@@ -269,10 +269,10 @@
 
 </div>
 
-<app-image-viewer
+<!-- <app-image-viewer
   *ngIf="isImageViewerOpen"
   [images]="optionImageUrls"
   [descriptions]="fileOptionDescriptions"
   [currentImageIndex]="selectedImageOptionIndex"
   (close)="closeImageViewer()"
-></app-image-viewer>
+></app-image-viewer> -->

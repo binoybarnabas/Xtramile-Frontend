@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
 import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
+import { CustomPdfViewerService } from 'src/app/services/helperServices/commonUIServices/custom-pdf-viewer-service/custom-pdf-viewer.service';
 @Component({
   selector: 'app-custom-pdf-viewer',
   templateUrl: './custom-pdf-viewer.component.html',
@@ -14,7 +16,7 @@ export class CustomPdfViewerComponent {
 
   zoomLevel = 1; // Initial zoom level
 
-  constructor(private http: HttpClient, private loaderService : CustomLoaderService){}
+  constructor(private http: HttpClient, private loaderService : CustomLoaderService, private sideNavBarService: SideNavBarService, private customPdfViewer: CustomPdfViewerService){}
 
   onDownloadFileClick(url: string){
 
@@ -59,7 +61,13 @@ export class CustomPdfViewerComponent {
   }
 
   closePdfViewer() {
-    this.close.emit();
+    //this.close.emit();
+    this.customPdfViewer.close();
   }
+
+   // Getter to access the collapsed state from the service
+   get isSideNavBarCollapsed(): boolean {
+    return this.sideNavBarService.isSideNavBarCollapsed;
+}
 
 }

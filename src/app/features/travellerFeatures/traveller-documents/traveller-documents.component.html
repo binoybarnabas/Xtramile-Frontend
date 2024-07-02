@@ -1,14 +1,12 @@
 
 <div *ngIf="!isPdfViewerOpen" class="main_container">
 
-  <app-page-header *ngIf="!isPdfViewerOpen"  [headingInputData]="pageHeading"></app-page-header>
+  <app-page-header class="page_heading" *ngIf="!isPdfViewerOpen"  [headingInputData]="pageHeading"></app-page-header>
 
   <div  class="btn_container">
 
     <button *ngIf="!isDocUploadModalOpen" [disabled]="selectedDocCardId === -1 ? 'true' : null " (click)="onDeleteBtnClick()" class="del_btn"> <i class="ri-delete-bin-line"></i></button>
-    <button *ngIf="isDocUploadModalOpen" (click)="onCancelBtnClick()" class="cancel_btn"> Cancel </button>
-    <button (click)="onForwardBtnClick()" class="add_btn">{{forwardBtnText}}</button>
-
+    <button *ngIf="!isDocUploadModalOpen" (click)="onForwardBtnClick()" class="add_btn">{{forwardBtnText}}</button>
   </div>
 
   <div *ngIf="!isDocUploadModalOpen" class="doc_container">
@@ -18,8 +16,7 @@
   <!-- Upload Form -->
   <div *ngIf="isDocUploadModalOpen" class="upload_form_container">
 
-
-          <form [formGroup]="documentUploadForm" class="upload_form" (ngSubmit)="saveForm()">
+        <form [formGroup]="documentUploadForm" class="upload_form" (ngSubmit)="saveForm()">
 
               <div class="left_section">
 
@@ -237,13 +234,18 @@
 
                 </div>
 
+                <div class="form_btn_container">
+                  <button *ngIf="isDocUploadModalOpen" (click)="onCancelBtnClick()" class="cancel_btn"> Cancel </button>
+                  <button (click)="onForwardBtnClick()" class="add_btn">{{forwardBtnText}}</button>
+                </div>
+
               </div>
 
-          </form>
+        </form>
         
   </div>
 
 </div>
 
-<app-custom-pdf-viewer *ngIf="isPdfViewerOpen" [fileUrl]="loadedFileUrl" (close)="closePdfViewer()"></app-custom-pdf-viewer>
+<app-custom-pdf-viewer *ngIf="isPdfViewerOpen" [fileUrl]="loadedFileUrl" ></app-custom-pdf-viewer>
 

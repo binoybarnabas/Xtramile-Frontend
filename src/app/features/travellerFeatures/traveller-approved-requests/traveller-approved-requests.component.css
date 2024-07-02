@@ -1,0 +1,14 @@
+.small_screen_view{
+    display: none;
+}
+
+@media screen and (max-width: 460px) {
+    .small_screen_view{
+        display: block;
+    }
+
+    .large_screen_view{
+        display: none;
+        background-color: rgb(28, 79, 123);
+    }
+}

@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 import { DocumentsService } from 'src/app/services/apiServices/travelDocumentAPIServices/documents.service';
 import { FileCard } from 'src/app/models/interfaces/iFileCard';
@@ -17,6 +17,8 @@ export class FileCardComponent {
   passportDocument!: FileCard
   visaDocument!: FileCard
   @Input() requestId!: number
+
+  @Output() loadPdfFileToViewer = new EventEmitter<string>();
 
   constructor( private documentService: DocumentsService, private http: HttpClient , private loaderService : CustomLoaderService) {}
 
@@ -109,6 +111,10 @@ export class FileCardComponent {
       complete: () => {
       }
     })
+  }
+
+  viewPdfFile(fileUrl : string){
+    this.loadPdfFileToViewer.emit(fileUrl)
   }
 
 }

@@ -10,6 +10,7 @@ import { docCategories } from 'src/app/services/apiServices/commonAPIServices/do
 import { Subscription } from 'rxjs';
 import { CustomToastService } from 'src/app/services/helperServices/toastServices/custom-toast.service';
 import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
+import { CustomPdfViewerService } from 'src/app/services/helperServices/commonUIServices/custom-pdf-viewer-service/custom-pdf-viewer.service';
 @Component({
   selector: 'app-traveller-documents',
   templateUrl: './traveller-documents.component.html',
@@ -32,7 +33,7 @@ export class TravellerDocumentsComponent {
   countryData: string[] = [];
   fileErrorMessage: string = '';
 
-  isPdfViewerOpen: boolean = false;
+  //isPdfViewerOpen: boolean = false;
   loadedFileUrl : string = '';
 
   forwardBtnText : string = 'Add';
@@ -60,7 +61,8 @@ export class TravellerDocumentsComponent {
     private commonService:CommonAPIService,
     private modalService: BsModalService,
     private toastService : CustomToastService,
-    private loaderService : CustomLoaderService
+    private loaderService : CustomLoaderService,
+    private customPdfViewerService: CustomPdfViewerService
 
   ) {
     this.isDocUploadModalOpen = false;
@@ -289,13 +291,15 @@ export class TravellerDocumentsComponent {
 
   openPdfViewer(fileUrl: string) {
     this.loadedFileUrl = fileUrl;
-    this.isPdfViewerOpen = true;
+    this.customPdfViewerService.open()
+    //this.isPdfViewerOpen = true;
   }
 
-  closePdfViewer() {
-   this.isPdfViewerOpen = false;
-   this.selectedDocCardId = -1;
-   //this.initializeComponent();
+  // closePdfViewer() {
+  //  this.isPdfViewerOpen = false;
+  //  this.selectedDocCardId = -1;
+  // }
+  get isPdfViewerOpen(): boolean {
+    return this.customPdfViewerService.isPdfViewerOpen;
   }
-
 }

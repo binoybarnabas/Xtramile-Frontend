@@ -86,6 +86,9 @@ export class SideNavBarComponent {
 
   /// routing based on the values from the keys in myRequest map
   navigateToRequest(destination: string) {
+
+    this.sideNavBarService.closeSideNavBar();
+
     this.activeSideNavItem = destination; // Update activeItem when an item is clicked
     console.log('inside navigate' + destination);
     switch (destination) {

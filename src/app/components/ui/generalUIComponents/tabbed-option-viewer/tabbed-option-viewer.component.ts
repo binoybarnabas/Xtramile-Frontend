@@ -10,6 +10,7 @@ import { ManagerTravelRequestsService } from 'src/app/services/managerServices/t
 import { CustomLoaderService } from 'src/app/services/helperServices/commonUIServices/custom-loader-service/custom-loader.service';
 import { AddTicketModalComponent } from '../../form-components/add-ticket-modal/add-ticket-modal.component';
 import { TravelTicketDetails } from 'src/app/models/dtoModels/travelTicketDetails';
+import { ImageViewerData } from 'src/app/models/dtoModels/iImageViewerData';
 @Component({
   selector: 'app-tabbed-option-viewer',
   templateUrl: './tabbed-option-viewer.component.html',
@@ -28,6 +29,9 @@ export class TabbedOptionViewerComponent {
   @Input() destinationCity: string = '';
   @Input() sourceCountry: string = '';
   @Input() destinationCountry: string = '';
+
+  @Output() loadImagesToViewer = new EventEmitter<ImageViewerData>();
+  @Output() loadPdfFileToViewer = new EventEmitter<string>();
 
   //fetch from calling component !!!!!!
 
@@ -481,11 +485,37 @@ export class TabbedOptionViewerComponent {
   value?: string;
 
   openImageViewer() {
-    this.isImageViewerOpen = true;
+    
+    //this.isImageViewerOpen = true;
+
+      // const viewerData: ImageViewerData = {
+      //   images: this.optionImageUrls,
+      //   descriptions: this.fileOptionDescriptions,
+      //   currentImageIndex: this.selectedImageOptionIndex
+
+      // };
+      // this.loadImagesToViewer.emit(viewerData);
+  }
+
+  viewImage(imgUrl:string, description: string){
+    
+    const viewerData: ImageViewerData = {
+      image: imgUrl,
+      description: description
+    };
+    console.log("TES")
+    console.log(viewerData)
+
+    this.loadImagesToViewer.emit(viewerData);
   }
 
   closeImageViewer() {
-    this.isImageViewerOpen = false;
+    //this.isImageViewerOpen = false;
+  }
+
+
+  viewPdfFile(fileUrl:string){
+    this.loadPdfFileToViewer.emit(fileUrl)
   }
 
   travelOptionsWithImagesData: TravelOptionDetails[] = [];

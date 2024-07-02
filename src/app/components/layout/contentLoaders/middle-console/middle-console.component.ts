@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { SideNavBarService } from 'src/app/services/employeeServices/layoutServices/side-nav-bar.service';
+import { ImageViewerService } from 'src/app/services/helperServices/commonUIServices/image-viewer-service/image-viewer.service';
 
 
 @Component({
@@ -47,6 +49,8 @@ export class MiddleConsoleComponent {
   get isSideNavBarCollapsed(): boolean {
     return this.sideNavBarService.isSideNavBarCollapsed;
   }
+
+
 
 
 }

@@ -1,13 +1,13 @@
-<div class="main_container">
+<div class="main_container" [class.side_bar_open]="!isSideNavBarCollapsed">
   <div class="download_btn">
     <button class="btn download" (click)="onDownloadFileClick(fileUrl)">
-      <i class="ri-download-cloud-line"></i>
+      <i class="ri-file-download-line"></i>
     </button>
   </div>
 
   <div class="close_btn">
     <button class="btn close" (click)="closePdfViewer()">
-      <i class="ri-close-circle-fill"></i>
+      <i class="ri-close-line"></i>
     </button>
   </div>
 

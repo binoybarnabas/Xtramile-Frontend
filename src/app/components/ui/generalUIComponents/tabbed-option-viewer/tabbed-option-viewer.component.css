@@ -1,7 +1,14 @@
+.main_container{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
 .main_container .heading_section {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  height: 20%;
+  /* height: 20%; */
 }
 
 .main_container .heading_section .action_bar {
@@ -131,7 +138,6 @@
 }
 
 .main_container .body_section {
-  height: 46.5vh;
   overflow-y: auto;
   background-color: transparent;
   box-shadow: none;

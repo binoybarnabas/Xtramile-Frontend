@@ -12,5 +12,9 @@ controlSideBar() {
     this.isSideNavBarCollapsed = this.isSideNavBarCollapsed ? false : true;
 }
 
+closeSideNavBar(){
+  this.isSideNavBarCollapsed = true;
+}
+
 
 }

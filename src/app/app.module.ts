@@ -133,6 +133,7 @@ import { TravellerRequestProgressDetailsComponent } from './features/travellerFe
 import { ManagerDashboardComponent } from './components/layout/contentLoaders/manager-dashboard/manager-dashboard.component';
 import { UpcomingTripCardComponent } from './components/ui/dashboard-components/upcoming-trip-card/upcoming-trip-card.component';
 import { DashboardTravelCalendarComponent } from './components/ui/dashboard-components/dashboard-travel-calendar/dashboard-travel-calendar.component';
+import { TravelRequestCardMobileViewComponent } from './components/ui/travel-request-card-mobile-view/travel-request-card-mobile-view.component';
 
 @NgModule({
   declarations: [
@@ -253,7 +254,8 @@ import { DashboardTravelCalendarComponent } from './components/ui/dashboard-comp
     TravellerRequestProgressDetailsComponent,
     ManagerDashboardComponent,
     UpcomingTripCardComponent,
-    DashboardTravelCalendarComponent
+    DashboardTravelCalendarComponent,
+    TravelRequestCardMobileViewComponent
   ],
   imports: [
     CommonModule,

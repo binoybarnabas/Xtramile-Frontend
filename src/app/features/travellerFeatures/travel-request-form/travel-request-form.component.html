@@ -34,7 +34,6 @@
 
         <div class="travel_mode_container">
           <ng-container *ngFor="let entry of getTravelModeInfoMapEntries()">
-            <!-- <option [value]="mode.modeId">{{ mode.modeName }}</option> -->
             <div
               (click)="changeTravelMode(entry[1][0])"
               [ngClass]="

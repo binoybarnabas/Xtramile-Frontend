@@ -19,6 +19,11 @@ import { TabbedOptionViewerComponent } from 'src/app/components/ui/generalUIComp
 import { CustomConfirmationModalComponent } from 'src/app/components/ui/generalUIComponents/custom-confirmation-modal/custom-confirmation-modal.component';
 import { TravelRequestDetailViewModel } from 'src/app/models/dtoModels/iTravelRequestDetails';
 import { TravelRequestUiService } from 'src/app/services/helperServices/requestServices/travel-request-ui.service';
+import { ImageViewerComponent } from '../image-viewer/image-viewer.component';
+import { ImageViewerService } from 'src/app/services/helperServices/commonUIServices/image-viewer-service/image-viewer.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageViewerData } from 'src/app/models/dtoModels/iImageViewerData';
+import { CustomPdfViewerService } from 'src/app/services/helperServices/commonUIServices/custom-pdf-viewer-service/custom-pdf-viewer.service';
 
 @Component({
   selector: 'app-new-travel-request',
@@ -104,7 +109,9 @@ export class NewTravelRequestComponent {
     private modalService: BsModalService,
     private commonApiService: CommonAPIService,
     private toastService: CustomToastService,
-    private travelRequestUIService: TravelRequestUiService
+    private travelRequestUIService: TravelRequestUiService,
+    private imageViewerService: ImageViewerService,
+    private customPdfViewerService: CustomPdfViewerService
   ) {
     const storedUserData = localStorage.getItem('userData');
 
@@ -784,9 +791,6 @@ export class NewTravelRequestComponent {
     this.travelRequestUIService.sendTravelTickets(formData);
   }
 
-
-
-
   handleIsSubmitBtnActiveChange(newValue: boolean): void {
     this.isSubmitBtnActive = newValue;
   }
@@ -805,6 +809,34 @@ export class NewTravelRequestComponent {
 
     }
 
+  }
+
+  get isImageViewerOpen(): boolean {
+      return this.imageViewerService.isImageViewerOpen;
+  }
+
+  optionImageUrl: string = '';
+  fileOptionDescription: string =' ';
+  currentImageIndex : number = 0;
+  receiveImagesForLoading(viewerData: ImageViewerData){
+    //this.optionImageUrls.push(viewerData.images);
+    //this.fileOptionDescriptions = viewerData.descriptions;
+    //this.currentImageIndex = viewerData.currentImageIndex;
+    this.optionImageUrl = viewerData.image;
+    this.fileOptionDescription = viewerData.description;
+    this.imageViewerService.open();
+  
+  }
+
+  pdfFileUrl : string = ''
+
+  get isPdfViewerOpen(): boolean {
+    return this.customPdfViewerService.isPdfViewerOpen;
+  }
+
+  receivePdfFileForLoading(fileUrl: string){
+    this.pdfFileUrl = fileUrl;
+    this.customPdfViewerService.open();
   }
 
 
